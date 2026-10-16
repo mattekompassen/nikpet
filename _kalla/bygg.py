@@ -102,9 +102,9 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 @keyframes skak{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .valj button.spec{background:var(--ink);color:#fff;border-color:var(--ink)}.valj button.spec b{color:var(--hi)}
 .match-kort{max-width:860px}.match>div{min-width:0}.mb{overflow-wrap:anywhere}
-.typer{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;max-width:620px}
+.typer{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1100px}@media (max-width:900px){.typer{grid-template-columns:1fr 1fr}}
 .typ{display:block;background:var(--ink);border-radius:16px;padding:20px 24px;text-decoration:none;color:#fff;font-weight:700;font-size:19px;transition:transform .15s}
-.typ:hover{transform:translateY(-3px)}.typ b{display:block;color:var(--hi);font-size:14px}
+.typ:hover{transform:translateY(-3px)}.kapblock{margin-bottom:30px}.kapblock h2{margin-bottom:12px}.tab{border-collapse:collapse;margin:14px 0;font-size:17px;font-weight:600}.tab th,.tab td{border:1.5px solid var(--l);padding:6px 12px;text-align:center;background:#fff}.tab th{background:var(--l)}.typ b{display:block;color:var(--hi);font-size:14px}
 a.knapp2{text-decoration:none;display:inline-block}
 .alt{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:620px}.alt .mb{font-size:19px;font-weight:700;color:var(--ink);text-align:center;padding:14px}
 .mb.kvar{animation:none;opacity:1}.forkl{color:#292A28;font-weight:500;font-size:16px}.fb.ok .forkl{display:block;margin-top:4px}
@@ -221,21 +221,22 @@ def bygg():
                      ('trana-quiz.html', '❓', 'Quiz', 'Flervalsfrågor'),
                      ('trana-fyll.html', '✏️', 'Fyll i svaret', 'Skriv in svaret')]
             snart = []
-            rutor = ''.join(f'<a class="typ" href="{h}"><b>{p}</b>{e} {t}</a>' for h, e, t, p in typer)
+            kapitel = ''.join(f'<div class="kapblock" id="kap{nr}"><h2>Kapitel {nr} <span style="font-weight:500;opacity:.7">{html.escape(namn)}</span></h2><div class="typer">'
+                              + ''.join(f'<a class="typ" href="{h}?kap={nr}"><b>{p}</b>{e} {t}</a>' for h, e, t, p in typer) + '</div></div>'
+                              for nr, namn in LANKAR['7']['kapitel'])
             tillbaka = '<a class="knapp" href="trana.html">← Alla övningar</a>'
             sida('ak7/trana.html', 'Träna extra – åk 7', 'Åk 7', c, hero('Träna extra', 'Välj en typ av övning. Inget sparas, det är bara du som tränar.') + f"""
-<main><section><div class="wrap"><h2>Kapitel 1 <span style="font-weight:500;opacity:.7">Taluppfattning</span></h2><p class="sub">Fler kapitel kommer.</p>
-<div class="typer">{rutor}</div>
+<main><section><div class="wrap">{kapitel}
 <a class="knapp" href="../ak7.html">← Tillbaka till åk 7</a></div></section></main>""", rot='../')
             for fil, lage, t, p in [('trana-rakna.html', 'rakna', 'Räkneträning', 'Korta övningar med nya tal varje gång.'),
                                     ('trana-begrepp.html', 'begrepp', 'Matcha begrepp', 'Para ihop begrepp med rätt förklaring.'),
                                     ('trana-quiz.html', 'quiz', 'Quiz', 'Välj rätt svar bland fyra alternativ.'),
                                     ('trana-fyll.html', 'fyll', 'Fyll i svaret', 'Skriv in det som saknas i meningen.')]:
                 sida(f'ak7/{fil}', f'{t} – åk 7', 'Åk 7', c, hero(t, p) + f"""
-<main><section><div class="wrap"><h2>Kapitel 1 <span style="font-weight:500;opacity:.7">Taluppfattning</span></h2>
+<main><section><div class="wrap"><h2 id="kaprubrik">Kapitel</h2>
 <div id="trana" data-lage="{lage}"></div>
 {tillbaka}</div></section></main>
-<script src="../trana.js"></script>""", rot='../')
+<script src="../trana-ak7.js"></script><script src="../trana.js"></script>""", rot='../')
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><img src="../bilder/ak{k}/{f}.png" alt="" style="width:110px;border-radius:20px">
@@ -267,7 +268,8 @@ def bygg():
 <h2>Välj årskurs</h2>
 <div class="arlank">{arl}</div>
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
-    shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'trana.js'), UT)
+    for js in ('trana.js', 'trana-ak7.js'):
+        shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), js), UT)
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
 
 if __name__ == '__main__':
