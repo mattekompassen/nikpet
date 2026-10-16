@@ -102,12 +102,9 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 @keyframes skak{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .valj button.spec{background:var(--ink);color:#fff;border-color:var(--ink)}.valj button.spec b{color:var(--hi)}
 .match-kort{max-width:860px}.match>div{min-width:0}.mb{overflow-wrap:anywhere}
-.typer{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;max-width:1000px}
-.typ{position:relative;display:block;background:var(--vl);border:2px solid var(--l);border-radius:22px;padding:22px 22px 20px;text-decoration:none;transition:transform .15s}
-a.typ{background:var(--ink);border-color:var(--ink)}a.typ h3,a.typ .pil{color:#fff}a.typ p{color:#fff;opacity:.85}a.typ:hover{transform:translateY(-4px)}
-.typ .em{font-size:40px;line-height:1}.typ h3{margin:10px 0 4px;color:var(--ink);font-size:21px}.typ p{margin:0;color:#4A4E52;font-size:15px}
-.typ .pil{position:absolute;top:20px;right:22px;font-size:24px;font-weight:700;color:var(--ink)}
-.typ.tom{opacity:.55;border-style:dashed}.typ small{display:inline-block;margin-top:10px;font-weight:700;color:var(--ink);font-size:13px}
+.typer{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;max-width:620px}
+.typ{display:block;background:var(--ink);border-radius:16px;padding:20px 24px;text-decoration:none;color:#fff;font-weight:700;font-size:19px;transition:transform .15s}
+.typ:hover{transform:translateY(-3px)}.typ b{display:block;color:var(--hi);font-size:14px}
 a.knapp2{text-decoration:none;display:inline-block}
 .alt{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:620px}.alt .mb{font-size:19px;font-weight:700;color:var(--ink);text-align:center;padding:14px}
 .mb.kvar{animation:none;opacity:1}.forkl{color:#292A28;font-weight:500;font-size:16px}.fb.ok .forkl{display:block;margin-top:4px}
@@ -219,13 +216,12 @@ def bygg():
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">7</div>
 <div><div class="etikett">ÅK 7 · MATEMATIK X · TRÄNA EXTRA</div><h1>{t}</h1><p>{p}</p></div></div></div>
 {wave(c['ink'], c['w'])}"""
-            typer = [('trana-rakna.html', '🔢', 'Räkneträning', 'Tio uppgifter per avsnitt med nya tal varje gång. Rätta direkt och samla stjärnor.'),
-                     ('trana-begrepp.html', '🧩', 'Matcha begrepp', 'Para ihop matteord med rätt förklaring. Nya ord varje omgång.'),
-                     ('trana-quiz.html', '❓', 'Quiz', 'Flervalsfrågor med rätt eller fel direkt och en förklaring.'),
-                     ('trana-fyll.html', '✏️', 'Fyll i svaret', 'Skriv in det som saknas. Svaret kontrolleras direkt.')]
+            typer = [('trana-rakna.html', '🔢', 'Räkneträning', 'Per avsnitt'),
+                     ('trana-begrepp.html', '🧩', 'Matcha begrepp', 'Hela kapitlet'),
+                     ('trana-quiz.html', '❓', 'Quiz', 'Flervalsfrågor'),
+                     ('trana-fyll.html', '✏️', 'Fyll i svaret', 'Skriv in svaret')]
             snart = []
-            rutor = ''.join(f'<a class="typ" href="{h}"><span class="em">{e}</span><h3>{t}</h3><p>{p}</p><span class="pil">→</span></a>' for h, e, t, p in typer)
-            rutor += ''.join(f'<div class="typ tom"><span class="em">{e}</span><h3>{t}</h3><p>{p}</p><small>Kommer snart</small></div>' for e, t, p in snart)
+            rutor = ''.join(f'<a class="typ" href="{h}"><b>{p}</b>{e} {t}</a>' for h, e, t, p in typer)
             tillbaka = '<a class="knapp" href="trana.html">← Alla övningar</a>'
             sida('ak7/trana.html', 'Träna extra – åk 7', 'Åk 7', c, hero('Träna extra', 'Välj en typ av övning. Inget sparas, det är bara du som tränar.') + f"""
 <main><section><div class="wrap"><h2>Kapitel 1 <span style="font-weight:500;opacity:.7">Taluppfattning</span></h2><p class="sub">Fler kapitel kommer.</p>
