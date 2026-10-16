@@ -162,7 +162,7 @@ def trana_ruta(k):
     if k != 7:
         return ''
     return ('<a class="info trana-ruta" href="ak7/trana.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">'
-            '<path d="M24 8l4.7 9.6 10.6 1.5-7.7 7.5 1.8 10.5L24 32.1l-9.4 5 1.8-10.5-7.7-7.5 10.6-1.5z"/></svg></span><span><h3>Interaktiva övningar</h3><p>Klicka, dra och få svar direkt. Öva på räkning och matteord.</p></span><span class="pil">→</span></a>')
+            '<rect x="9" y="9" width="30" height="21" rx="2.5"/><path d="M4 35h40l-3 4H7z"/><path d="M18 20l4 4 8-8" stroke="#F2CD69"/></svg></span><span><h3>Interaktiva övningar</h3><p>Klicka, dra och få svar direkt. Öva på räkning och matteord.</p></span><span class="pil">→</span></a>')
 
 def innehall(k, s, t):
     d = LANKAR.get(str(k), {})
