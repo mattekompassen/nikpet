@@ -58,6 +58,12 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .ikoner{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:640px;margin:0 auto}
 .ikoner img{filter:drop-shadow(0 6px 14px rgba(0,0,0,.10));transition:transform .15s}
 .center{text-align:center}
+.pl h2{font-size:26px;margin:36px 0 12px;color:var(--ink)}.pl p.ingress{font-size:18px;max-width:760px;line-height:1.6}
+.niva{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;max-width:960px}
+.niva div,.strat div{background:#fff8;border:2px solid var(--l);border-radius:18px;padding:18px 20px}.niva b{display:inline-block;background:var(--ink);color:#fff;border-radius:999px;padding:3px 12px;font-size:14px;margin-bottom:8px}.niva p,.strat p{margin:6px 0 0;line-height:1.5}
+.strat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;max-width:960px}.strat h3{margin:0;font-size:18px}
+.arlank{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:960px}.arlank a{display:block;border-radius:20px;padding:22px 24px;color:#fff;text-decoration:none;font-weight:800;font-size:22px}.arlank a small{display:block;font-weight:500;font-size:15px;opacity:.9;margin-top:4px}
+.omlank{display:inline-block;margin:0 0 20px;font-weight:700;color:var(--ink)}
 .ruta{background:var(--vl);border:2px solid var(--l);border-radius:24px;padding:28px 32px;max-width:800px}
 .ruta h3{margin:0 0 6px;color:var(--ink)}
 .kap{background:var(--vl);border:2px solid var(--l);border-radius:20px;margin:0 0 14px;max-width:860px}
@@ -168,7 +174,7 @@ def bygg():
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><img src="../bilder/ak{k}/{f}.png" alt="" style="width:110px;border-radius:20px">
 <div><div class="etikett">ÅK {k} · MATEMATIK {c['bok']}</div><h1>{t}</h1></div></div></div>
 {wave(c['ink'], c['w'])}
-<main><section><div class="wrap">{innehall(k, s, t)}
+<main><section><div class="wrap">{'<a class="omlank" href="../problemlosning.html">Så arbetar vi med problemlösning: nivåer och strategier →</a>' if s == 'problemlosning' else ''}{innehall(k, s, t)}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
@@ -177,6 +183,21 @@ def bygg():
 <div class="hero"><div class="wrap"><div><h1>{t}</h1><p>{text}</p></div></div></div>
 {wave(NEUTRAL['ink'], NEUTRAL['w'])}
 <main><section><div class="wrap">{extra(fil)}
+<a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
+    # Gemensam sida om problemlösning (länkas från årskursernas problemlösningssidor)
+    arl = ''.join(f'<a href="ak{k}/problemlosning.html" style="background:{AR[k]["ink"]}">Åk {k}<small>Matematik {AR[k]["bok"]} · problemlösning per kapitel</small></a>' for k in AR)
+    sida('problemlosning.html', 'Problemlösning', '', NEUTRAL, f"""
+<div class="hero"><div class="wrap"><div><h1>Problemlösning</h1><p>Att lösa problem är att hitta en väg när du inte direkt vet hur du ska göra.</p></div></div></div>
+{wave(NEUTRAL['ink'], NEUTRAL['w'])}
+<main><section><div class="wrap pl">
+<p class="ingress">Till varje avsnitt i boken finns ett problemlösningspass. Uppgifterna blir svårare steg för steg, så att alla kan börja och alla kan utmanas. Svar och förklaringar visas efter hand, så att du kan jämföra med hur du själv tänkte.</p>
+<h2>Progression: tre nivåer</h2>
+<div class="niva"><div><b>Nivå 1</b><h3 style="margin:0">Kom igång</h3><p>Problem som liknar det du just lärt dig. Du använder metoden från lektionen i en ny situation.</p></div><div><b>Nivå 2</b><h3 style="margin:0">Utmana dig</h3><p>Problem i flera steg. Du behöver välja metod själv och kanske kombinera det du kan.</p></div><div><b>Nivå 3</b><h3 style="margin:0">Fördjupa dig</h3><p>Öppnare och klurigare problem. Det finns ofta flera vägar till svaret, och du behöver förklara hur du tänker.</p></div></div>
+<p class="ingress" style="margin-top:16px">Problemen växer också genom årskurserna. I åk 7 lägger vi grunden med tal, mönster och enkla ekvationer. I åk 8 och åk 9 blir problemen längre och mer abstrakta, och du förväntas oftare välja strategi själv och motivera dina slutsatser.</p>
+<h2>Strategier som hjälper dig</h2>
+<div class="strat"><div><h3>Rita en bild</h3><p>En skiss gör problemet tydligare och visar vad du vet och vad du söker.</p></div><div><h3>Gör en tabell</h3><p>Ordna informationen i en tabell så att du ser samband och mönster.</p></div><div><h3>Leta efter mönster</h3><p>Undersök några fall och se vad som upprepas. Använd mönstret för att hitta svaret.</p></div><div><h3>Gissa och pröva</h3><p>Gör en rimlig gissning, testa den och förbättra den tills den stämmer.</p></div><div><h3>Arbeta baklänges</h3><p>Börja i slutet. Vad måste ha hänt innan? Räkna dig tillbaka till starten.</p></div><div><h3>Förenkla problemet</h3><p>Prova med mindre eller enklare tal först. Använd sedan samma idé på det riktiga problemet.</p></div><div><h3>Ställ upp en ekvation</h3><p>Kalla det okända för x, skriv en ekvation och lös den.</p></div><div><h3>Kontrollera svaret</h3><p>Är svaret rimligt? Svarar du på frågan? Pröva svaret i problemet.</p></div></div>
+<h2>Välj årskurs</h2>
+<div class="arlank">{arl}</div>
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
 
