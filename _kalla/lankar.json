@@ -454,5 +454,279 @@
     ]
    ]
   }
+ },
+ "8": {
+  "kapitel": [
+   [
+    "1",
+    "Tal"
+   ],
+   [
+    "2",
+    "Procent"
+   ],
+   [
+    "3",
+    "Geometri"
+   ],
+   [
+    "4",
+    "Algebra"
+   ],
+   [
+    "5",
+    "Statistik och sannolikhet"
+   ]
+  ],
+  "mal-och-framgangskriterier": {
+   "1": [
+    [
+     "1.1 Räkna med bråk",
+     "1f3I06l_MF-A4dkTHH5N-dQ_jrlnOwTdr"
+    ],
+    [
+     "1.2 Addition och subtraktion av bråk",
+     "1m9_2Bz4CV0nU_ogvRzOslTs3-oqkvWH0"
+    ],
+    [
+     "1.3 Multiplikation av bråk",
+     "1QOaZ7S3Xw48g7AJejMH34vcP9x8EKt33"
+    ],
+    [
+     "1.4 Division av bråk",
+     "1zPMqC5T5WiNR502DWTGeTDo54U-0HHDY"
+    ],
+    [
+     "1.5 Potenser",
+     "1LWzphRBQdZMqQN5Opzpw8rlxDiBWEnvc"
+    ],
+    [
+     "1.6 Tiopotenser",
+     "1daibaVd8-iXU2afr1AjiUAB7U_Jru8ZQ"
+    ]
+   ],
+   "2": [
+    [
+     "2.1 Andelen",
+     "176TibPY1ybftxmyRFmNzv-R_ttilkGXR"
+    ],
+    [
+     "2.2 Jämförelser och förändringar",
+     "1m30p0J1bH8NwAoBb6b1LhTxKhgQxSsOf"
+    ],
+    [
+     "2.3 Det hela",
+     "1KO6sVTqyg5kedCQgUDTS0BM-lVJzYQta"
+    ],
+    [
+     "2.4 Delen",
+     "1h59ZQUn-yYfZlVARa6gcjbkSum5lUJOW"
+    ],
+    [
+     "2.5 Ränta",
+     "19hCuihpEuOGU2S04ohIjSPuFSHVbE8Sq"
+    ]
+   ],
+   "3": [
+    [
+     "3.1 Omkrets och area",
+     "1ihkDOcXUH5aSVuFOOPV9Y4osc6_hDe1E"
+    ],
+    [
+     "3.2 Cirkelns area",
+     "1wZ-Rwz6HnOAVQ-As5IIQbjLWtbXIhi-4"
+    ],
+    [
+     "3.3 Volym och begränsningsarea",
+     "1h7oNlYshPDM1N0g2WhGOvki7tymPe9Qv"
+    ],
+    [
+     "3.4 Enheter för volym",
+     "1gCdbspyxmnG5CyT-yCOgaSHwaOcxL17P"
+    ],
+    [
+     "3.5 Prisma och pyramid",
+     "191lxyAibfJWGm1lE4RFAZ0AvXEyQr4cu"
+    ],
+    [
+     "3.6 Cylinder, kon och klot",
+     "1LbGEJs4YDdy-0psicd8Mp6XJ8QZY-rsi"
+    ]
+   ],
+   "4": [
+    [
+     "4.1 Algebraiska uttryck",
+     "15LbGrn72JsiMPqwdQLnXTF3ZZQmxJMgW"
+    ],
+    [
+     "4.2 Mönster",
+     "1qRAoACbJ-_pjqbMG1Cy51KOyDAEXHx9A"
+    ],
+    [
+     "4.3 Uttryck med parenteser",
+     "1wnKfq0JhXsA-rRRXU5vsDonbbcm_tu9H"
+    ],
+    [
+     "4.4 Multiplikation av parenteser",
+     "1d8MAfuJNeseTejrnDiIucx4Au9afyR3l"
+    ],
+    [
+     "4.5 Uttryck med potenser",
+     "1P4qRlDuM1EhjhTKVm7Fo3maVncs6h5Gg"
+    ],
+    [
+     "4.6 Ekvationer",
+     "1GbDwGBPjwI65UKivAcTDVLOqdIiop73A"
+    ],
+    [
+     "4.7 Ekvationer med parenteser",
+     "1g3WPYLUezTNI28S1nNP_EUZ_oEvckN8D"
+    ],
+    [
+     "4.8 Problemlösning med ekvationer",
+     "100jQB3f97I1KdEPdpqcM-5ZnsA90wyhp"
+    ]
+   ],
+   "5": [
+    [
+     "5.1 Hur stor är sannolikheten",
+     "1_nzdCi9jhQmjvt4Q8towjCsDXvGKXoMH"
+    ],
+    [
+     "5.2 Oberoende och beroende händelser",
+     "1jCB4BUOlDC-QQH01SXyHtnh9dEmCGZeL"
+    ],
+    [
+     "5.3 Kombinatorik",
+     "1iCYCnpIZjjF8e1V4qanVz5B4TNHtg1ch"
+    ],
+    [
+     "5.4 Tabeller och diagram",
+     "1eKMcagNwP0Zop7nFdpfFdTZebF7-CKDk"
+    ]
+   ]
+  }
+ },
+ "9": {
+  "kapitel": [
+   [
+    "1",
+    "Tal"
+   ],
+   [
+    "2",
+    "Samband och förändring"
+   ],
+   [
+    "3",
+    "Algebra"
+   ],
+   [
+    "4",
+    "Geometri"
+   ]
+  ],
+  "mal-och-framgangskriterier": {
+   "1": [
+    [
+     "1.1 Tal och beräkningar",
+     "1L6GsowKMl_0WOjjED361YzZXj-1MnbUp"
+    ],
+    [
+     "1.2 Räkna med bråk",
+     "1uTmxWs6y7QDzDEgY3sLv8xnMLzy6Px4h"
+    ],
+    [
+     "1.3 Räkna med negativa tal",
+     "19xFbvAJLzmuwBFpDjpmLf3fIv_7RVsTj"
+    ],
+    [
+     "1.4 Räkna med potenser",
+     "1MPGz9WMXQY7Care9Y58CGKgGY0rv4nrz"
+    ],
+    [
+     "1.5 Små tal och tiopotenser",
+     "1fTVTjZjOQ8_D3CFjWdAOKoJxR6ZfMZX3"
+    ],
+    [
+     "1.6 Räkna med tal i grundpotensform",
+     "1orzoDbs9Wc60TZgm1zzA_nZwUsLsrcF7"
+    ],
+    [
+     "1.7 Kvadrater och kvadratrötter",
+     "1aCa6rcyqyaUlQhH9ntCc7B6F0pv94FpF"
+    ]
+   ],
+   "2": [
+    [
+     "2.1 Procent",
+     "1IPtFYOxrArr8Q2-NPdu3R3MR8pVePO-8"
+    ],
+    [
+     "2.2 Förändringsfaktor",
+     "1rO5921Ndv07jh4HoTIkz91hVwaTcsmhv"
+    ],
+    [
+     "2.3 Funktioner",
+     "1pa6UDKHojWYWYmvsHvJAfzoMSCP73AG5"
+    ],
+    [
+     "2.4 Linjära funktioner",
+     "1ovT-gnw8dD2rUSHcH_eqTFzdd_Ov8jEj"
+    ],
+    [
+     "2.5 Tillämpning av linjära funktioner",
+     "1ugP-FuPkK846lZUf0OGAjwI0HU4zohvD"
+    ]
+   ],
+   "3": [
+    [
+     "3.1 Uttryck och mönster",
+     "1_NHwrYGg_Qxq2ny1UFtDOEW05VXRMlSE"
+    ],
+    [
+     "3.2 Förenkling av uttryck",
+     "1qggYRx80hawWvi9oswVEvkdPCaNRvoFd"
+    ],
+    [
+     "3.3 Ekvationer",
+     "1rsUfTRqq0ZuScBaOuAeUXEBhwx7nJHxb"
+    ],
+    [
+     "3.4 Procent och ekvationer",
+     "1jPFAWAIOLHfAwB6_Z5vkjs9Yu2QhrkDJ"
+    ],
+    [
+     "3.5 Proportion",
+     "1B7BJUOQP4UsQsRG0YDmHxdz7Wgfix_Te"
+    ],
+    [
+     "3.6 Ekvationssystem",
+     "1fAp2AeKwCijnN0O7eJGs6Gz2KpQnmbEc"
+    ]
+   ],
+   "4": [
+    [
+     "4.1 Spegling och symmetri",
+     "1rnbq2G2HOvJEgErtJ9ONrzk0Vzi364Cb"
+    ],
+    [
+     "4.2 Skala",
+     "1v6aYrz2VO51gCASLIJT9044mIfbB70GS"
+    ],
+    [
+     "4.3 Ekvationer med flera nämnare",
+     "1CWuHMr6KUTWVc9I4hDjXQ2iOMBtiBrdU"
+    ],
+    [
+     "4.4 Likformighet",
+     "1fQXwk7gwP734oz9gSAP5X-n2pRB0zFcv"
+    ],
+    [
+     "4.5 Pythagoras sats",
+     "1h7y819khdQIRyUGJKTlrKCs3tRLBSlfz"
+    ]
+   ]
+  }
  }
 }
