@@ -10,15 +10,15 @@ AR = {
 }
 # Nio ikoner på årskurssidan: (filnamn, sidnamn, rubrik)
 MATERIAL = [
- ('06_Problemlosning', 'problemlosning', 'Problemlösning'),
+ ('14_Tidsplan_och_arbetsgang', 'tidsplan-och-arbetsgang', 'Tidsplan och arbetsgång'),
  ('07_Lektioner', 'lektioner', 'Lektioner'),
- ('08_Tillbakablick', 'tillbakablick', 'Tillbakablick'),
  ('09_Mal_och_framgangskriterier', 'mal-och-framgangskriterier', 'Mål och framgångskriterier'),
+ ('08_Tillbakablick', 'tillbakablick', 'Tillbakablick'),
  ('10_Trygg_start', 'trygg-start', 'Trygg start'),
+ ('06_Problemlosning', 'problemlosning', 'Problemlösning'),
  ('11_Repetition', 'repetition', 'Repetition'),
  ('12_Diagnos', 'diagnos', 'Diagnos'),
  ('13_Test', 'test', 'Test'),
- ('14_Tidsplan_och_arbetsgang', 'tidsplan-och-arbetsgang', 'Tidsplan och arbetsgång'),
 ]
 MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html')]
 NEUTRAL = dict(ink='#2C4152', hi='#F2CD69', w='#F3EEE4', vl='#E9E2D4', l='#D9D4C8', mid='#5F6368')
