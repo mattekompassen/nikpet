@@ -63,7 +63,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .kap{background:var(--vl);border:2px solid var(--l);border-radius:20px;margin:0 0 14px;max-width:860px}
 .kap summary{cursor:pointer;padding:16px 24px;font-weight:700;font-size:19px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center}
 .kap summary::-webkit-details-marker{display:none}
-.kap summary::after{content:'+';font-size:26px;line-height:1}.kap[open] summary::after{content:'–'}
+.kap summary::after{content:'+';font-size:26px;line-height:1}.kap[open] summary::after{content:'–'}.kap.tom summary{cursor:default;opacity:.7}.kap.tom summary::after{content:''}
 .kap summary small{font-weight:500;opacity:.7;font-size:15px;margin-left:8px}
 .lankar{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;padding:0 24px 20px}
 .lankar a{display:block;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:11px 14px;text-decoration:none;color:var(--ink);font-weight:600}
