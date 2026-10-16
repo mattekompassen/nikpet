@@ -158,10 +158,13 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, 'w').write(doc)
 
+TRANA_AR = (7, 8)
+TRANA_FARG = {8: '<style>.kapblock{background:#DCEBEE}.kapblock:nth-child(even){background:#E4EFF1}.typ:nth-child(1){background:#3F6470}.typ:nth-child(2){background:#4A6E78}.typ:nth-child(3){background:#4E7270}.typ:nth-child(4){background:#5A727D}.typ:nth-child(5){background:#557883}.typ b{color:#E6F2F4}</style>'}
+
 def trana_ruta(k):
-    if k != 7:
+    if k not in TRANA_AR:
         return ''
-    return ('<a class="info trana-ruta" href="ak7/trana.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">'
+    return (f'<a class="info trana-ruta" href="ak{k}/trana.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">'
             '<rect x="9" y="9" width="30" height="21" rx="2.5"/><path d="M4 35h40l-3 4H7z"/><path d="M18 20l4 4 8-8" stroke="#F2CD69"/></svg></span><span><h3>Interaktiva övningar</h3><p>Klicka, dra och få svar direkt. Öva på räkning och matteord.</p></span><span class="pil">→</span></a>')
 
 def innehall(k, s, t):
@@ -211,11 +214,11 @@ def bygg():
 {wave(c['ink'], c['w'])}
 <main><section class="center"><div class="wrap"><h2>Lektionsmaterial</h2><p class="sub">Allt du behöver till lektionerna i åk {k}.</p>
 <div class="ikoner">{ikoner}</div>{trana_ruta(k)}</div></section></main>""")
-        if k == 7:
+        if k in TRANA_AR:
             hero = lambda t, p: f"""
-<div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">7</div>
-<div><div class="etikett">ÅK 7 · MATEMATIK X · INTERAKTIVA ÖVNINGAR</div><h1>{t}</h1><p>{p}</p></div></div></div>
-{wave(c['ink'], c['w'])}"""
+<div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">{k}</div>
+<div><div class="etikett">ÅK {k} · MATEMATIK {c['bok']} · INTERAKTIVA ÖVNINGAR</div><h1>{t}</h1><p>{p}</p></div></div></div>
+{wave(c['ink'], c['w'])}{TRANA_FARG.get(k, '')}"""
             typer = [('trana-rakna.html', '🔢', 'Räkneträning', 'Per avsnitt'),
                      ('trana-exempel.html', '🔍', 'Från exempel till ord', 'Titta och välj'),
                      ('trana-dra.html', '🧲', 'Dra ordet', 'Ord i mening'),
@@ -224,21 +227,21 @@ def bygg():
             snart = []
             kapitel = ''.join(f'<div class="kapblock" id="kap{nr}"><h2>Kapitel {nr} <span style="font-weight:500;opacity:.7">{html.escape(namn)}</span></h2><div class="typer">'
                               + ''.join(f'<a class="typ" href="{h}?kap={nr}"><b>{p}</b>{e} {t}</a>' for h, e, t, p in typer) + '</div></div>'
-                              for nr, namn in LANKAR['7']['kapitel'])
+                              for nr, namn in LANKAR[str(k)]['kapitel'])
             tillbaka = '<a class="knapp" href="trana.html">← Alla övningar</a>'
-            sida('ak7/trana.html', 'Interaktiva övningar – åk 7', 'Åk 7', c, hero('Interaktiva övningar', 'Klicka, dra och få svar direkt. Välj kapitel och typ av övning.') + f"""
+            sida(f'ak{k}/trana.html', f'Interaktiva övningar – åk {k}', f'Åk {k}', c, hero('Interaktiva övningar', 'Klicka, dra och få svar direkt. Välj kapitel och typ av övning.') + f"""
 <main><section><div class="wrap">{kapitel}
-<a class="knapp" href="../ak7.html">← Tillbaka till åk 7</a></div></section></main>""", rot='../')
+<a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
             for fil, lage, t, p in [('trana-rakna.html', 'rakna', 'Räkneträning', 'Korta övningar med nya tal varje gång.'),
                                     ('trana-exempel.html', 'exempel', 'Från exempel till ord', 'Titta på exemplet och välj rätt ord.'),
                                     ('trana-dra.html', 'dra', 'Dra ordet till rätt lucka', 'Sätt in rätt matteord i meningen.'),
                                     ('trana-begrepp.html', 'begrepp', 'Matcha begrepp', 'Para ihop begrepp med rätt förklaring.'),
                                     ('trana-quiz.html', 'quiz', 'Quiz', 'Välj rätt svar bland fyra alternativ.')]:
-                sida(f'ak7/{fil}', f'{t} – åk 7', 'Åk 7', c, hero(t, p) + f"""
+                sida(f'ak{k}/{fil}', f'{t} – åk {k}', f'Åk {k}', c, hero(t, p) + f"""
 <main><section><div class="wrap"><h2 id="kaprubrik">Kapitel</h2>
 <div id="trana" data-lage="{lage}"></div>
 {tillbaka}</div></section></main>
-<script src="../trana-ak7.js"></script><script src="../trana.js"></script>""", rot='../')
+<script src="../trana-ak{k}.js"></script><script src="../trana.js"></script>""", rot='../')
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><img src="../bilder/ak{k}/{f}.png" alt="" style="width:110px;border-radius:20px">
@@ -270,7 +273,7 @@ def bygg():
 <h2>Välj årskurs</h2>
 <div class="arlank">{arl}</div>
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
-    for js in ('trana.js', 'trana-ak7.js'):
+    for js in ('trana.js', 'trana-ak7.js', 'trana-ak8.js'):
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), js), UT)
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
 

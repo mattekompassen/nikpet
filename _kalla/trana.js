@@ -210,7 +210,7 @@
       e.preventDefault();
       const g = tal(inp.value), f = tal(fraga.svar);
       if (isNaN(g)) { fb.className = 'fb'; fb.textContent = 'Skriv ett tal, till exempel 12 eller 0,5.'; return; }
-      if (Math.abs(g - f) < 1e-9) {
+      if (Math.abs(g - f) < 1e-9 || (fraga.tol && Math.abs(g - f) <= fraga.tol)) {
         if (!fel) { ratt++; svit++; } else svit = 0;
         fb.className = 'fb ok'; fb.textContent = val(['Rätt! 🎉', 'Snyggt! ✅', 'Precis! 👏', 'Helt rätt! 💪']);
         inp.disabled = true; setTimeout(ny, 900);
