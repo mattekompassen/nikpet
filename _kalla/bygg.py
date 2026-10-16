@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Bygger Mattekompassens webbplats till /mnt/project-files/webbplats/. Kör: python3 bygg.py
-import os, html, json
+import os, html, json, shutil
 UT = '/mnt/project-files/webbplats'
 # Drive-länkar per årskurs och sida (lektioner, tillbakablick), se lankar.json
 LANKAR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lankar.json'), encoding='utf-8'))
@@ -67,6 +67,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .kap summary small{font-weight:500;opacity:.7;font-size:15px;margin-left:8px}
 .lankar{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;padding:0 24px 20px}
 .lankar a{display:block;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:11px 14px;text-decoration:none;color:var(--ink);font-weight:600}
+.lankar a.sprak{display:flex;align-items:center;gap:10px}.lankar a.sprak img{width:24px;height:18px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
 .lankar a:hover{border-color:var(--mid)}.lankar a b{color:var(--mid);margin-right:6px}
 .knapp{display:inline-block;margin-top:24px;padding:14px 26px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700}
 
@@ -132,7 +133,8 @@ def innehall(k, s, t):
 
 def extra(fil):
     if fil == 'amnesord.html' and LANKAR.get('amnesord'):
-        lank = ''.join(f'<a href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener">{html.escape(n)}</a>' for n, i in LANKAR['amnesord'])
+        shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flaggor'), os.path.join(UT, 'bilder', 'flaggor'), dirs_exist_ok=True)
+        lank = ''.join(f'<a class="sprak" href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener"><img src="bilder/flaggor/{f}.svg" alt="">{html.escape(n)}</a>' for n, i, f in LANKAR['amnesord'])
         return f'<div class="ruta"><h3>Termer för matematikundervisning</h3><p style="margin:0 0 14px">Klicka på ditt språk för att öppna ordlistan (PDF).</p><div class="lankar" style="padding:0">{lank}</div></div>'
     return '<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Sidan fylls på under läsåret.</p></div>'
 

@@ -732,59 +732,73 @@
  "amnesord": [
   [
    "Albanska",
-   "1F53D4xg2UIcVuVoqmE_M6AEHRe0AVu6T"
+   "1F53D4xg2UIcVuVoqmE_M6AEHRe0AVu6T",
+   "al"
   ],
   [
    "Arabiska",
-   "1_VJSuXFX66avZ_y2ojW9b2s-UsfNgaEV"
+   "1_VJSuXFX66avZ_y2ojW9b2s-UsfNgaEV",
+   "arab"
   ],
   [
    "Bosniska",
-   "1CBvDIKhMNMmZo2KTdB8g2v5G3DLRh-If"
+   "1CBvDIKhMNMmZo2KTdB8g2v5G3DLRh-If",
+   "ba"
   ],
   [
    "Dari",
-   "1iSq_SyeunXGng7j9m8u453floUTqBg5k"
+   "1iSq_SyeunXGng7j9m8u453floUTqBg5k",
+   "af"
   ],
   [
    "Engelska",
-   "1KRBJSBgtG4vYwduH3hxKoKicxtTiirH6"
+   "1KRBJSBgtG4vYwduH3hxKoKicxtTiirH6",
+   "gb"
   ],
   [
    "Pashto",
-   "13jSZIqQLMUBpPex8pIPUUoQ5L4ZJ7MFA"
+   "13jSZIqQLMUBpPex8pIPUUoQ5L4ZJ7MFA",
+   "af"
   ],
   [
    "Persiska",
-   "1JK_X7b_0674t6IxEERyoX418cL5jG2jX"
+   "1JK_X7b_0674t6IxEERyoX418cL5jG2jX",
+   "ir"
   ],
   [
    "Romani chib arli",
-   "1dQB8rqBwbLW5gxUpttLcXTabLxWlu02Z"
+   "1dQB8rqBwbLW5gxUpttLcXTabLxWlu02Z",
+   "rom"
   ],
   [
    "Somaliska",
-   "17BetSpntMUbsMa_RfzW9Va8v8YU9Y9oV"
+   "17BetSpntMUbsMa_RfzW9Va8v8YU9Y9oV",
+   "so"
   ],
   [
    "Spanska",
-   "1lukOyKaHCXXmUMqm9gSFfx8eUhnLx8V2"
+   "1lukOyKaHCXXmUMqm9gSFfx8eUhnLx8V2",
+   "es"
   ],
   [
    "Sydkurdiska",
-   "18F3K1n00Z8iDWz-YkGzmEnEvknXcq16X"
+   "18F3K1n00Z8iDWz-YkGzmEnEvknXcq16X",
+   "ku"
   ],
   [
    "Turkiska",
-   "1GB8GSILPf3pJczru5aodhiTugzc-wlDG"
+   "1GB8GSILPf3pJczru5aodhiTugzc-wlDG",
+   "tr"
   ],
   [
    "Tyska",
-   "1BiA238_hJQ7T4ZfKUGQCKOvEOILLVoEi"
+   "1BiA238_hJQ7T4ZfKUGQCKOvEOILLVoEi",
+   "de"
   ],
   [
    "Urdu",
-   "105Bzagu8i56kLJdo0nc1f6hMDQkzQVtr"
+   "105Bzagu8i56kLJdo0nc1f6hMDQkzQVtr",
+   "pk"
   ]
  ]
 }
