@@ -102,9 +102,9 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 @keyframes skak{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .valj button.spec{background:var(--ink);color:#fff;border-color:var(--ink)}.valj button.spec b{color:var(--hi)}
 .match-kort{max-width:860px}.match>div{min-width:0}.mb{overflow-wrap:anywhere}
-.typer{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1100px}@media (max-width:900px){.typer{grid-template-columns:1fr 1fr}}
+.typer{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:1150px}@media (max-width:1000px){.typer{grid-template-columns:1fr 1fr}}
 .typ{display:block;background:var(--ink);border-radius:16px;padding:20px 24px;text-decoration:none;color:#fff;font-weight:700;font-size:19px;transition:transform .15s}
-.typ:hover{transform:translateY(-3px)}.kapblock{margin-bottom:22px;background:#DFE9D8;border-radius:22px;padding:20px 24px 24px;max-width:1150px}.kapblock:nth-child(even){background:#E4EDE6}.kapblock h2{margin:0 0 14px}.typ:nth-child(1){background:#3E5A3A}.typ:nth-child(2){background:#2D6B5E}.typ:nth-child(3){background:#5B6E2B}.typ:nth-child(4){background:#557A3D}.tab{border-collapse:collapse;margin:14px 0;font-size:17px;font-weight:600}.tab th,.tab td{border:1.5px solid var(--l);padding:6px 12px;text-align:center;background:#fff}.tab th{background:var(--l)}.typ b{display:block;color:var(--hi);font-size:14px}
+.typ:hover{transform:translateY(-3px)}.kapblock{margin-bottom:22px;background:#DFE9D8;border-radius:22px;padding:20px 24px 24px;max-width:1150px}.kapblock:nth-child(even){background:#E4EDE6}.kapblock h2{margin:0 0 14px}.typ:nth-child(1){background:#3E5A3A}.typ:nth-child(2){background:#2F6B4F}.typ:nth-child(3){background:#2D6B5E}.typ:nth-child(4){background:#5B6E2B}.typ:nth-child(5){background:#557A3D}.exempel{background:#fff;border:2px solid var(--l);border-radius:18px;padding:22px;margin:16px 0 4px;text-align:center;font-size:clamp(28px,5vw,42px);font-weight:800;color:#292A28}.exempel mark{white-space:nowrap;background:#F8E7A3;color:inherit;border-radius:8px;padding:0 6px;box-shadow:inset 0 -5px #E5AD45}.exempel .fig{max-width:100%;height:auto;display:inline-block}.exempel .tab{margin:0 auto;font-size:24px}.br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 4px}.br>span+span{border-top:3px solid currentColor}.fraga.liten{font-size:22px;margin:12px 0}.fraga.mening{font-size:clamp(22px,3.4vw,30px);line-height:1.6}.hj{color:#5F6368;margin:6px 0 10px}.ordbank{display:flex;flex-wrap:wrap;gap:10px}.ordk{font:inherit;font-size:20px;font-weight:700;padding:10px 18px;border-radius:12px;background:#fff;border:2px solid var(--l);color:var(--ink);cursor:grab;touch-action:manipulation}.ordk:hover{border-color:var(--mid)}.ordk.fel{background:#F6DADA;border-color:#B95E52;opacity:.55;text-decoration:line-through}.ordk.par{background:#DDEFD9;border-color:#2E7D32}.lucka.drop{min-width:150px;min-height:1.3em;vertical-align:bottom;border-bottom-style:dashed;background:#ffffff80;border-radius:6px 6px 0 0}.lucka.drop.over{background:#fff}.lucka.fylld{border-bottom-style:solid}.tab{border-collapse:collapse;margin:14px 0;font-size:17px;font-weight:600}.tab th,.tab td{border:1.5px solid var(--l);padding:6px 12px;text-align:center;background:#fff}.tab th{background:var(--l)}.typ b{display:block;color:var(--hi);font-size:14px}
 a.knapp2{text-decoration:none;display:inline-block}
 .alt{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:620px}.alt .mb{font-size:19px;font-weight:700;color:var(--ink);text-align:center;padding:14px}
 .mb.kvar{animation:none;opacity:1}.forkl{color:#292A28;font-weight:500;font-size:16px}.fb.ok .forkl{display:block;margin-top:4px}
@@ -217,9 +217,10 @@ def bygg():
 <div><div class="etikett">ÅK 7 · MATEMATIK X · TRÄNA EXTRA</div><h1>{t}</h1><p>{p}</p></div></div></div>
 {wave(c['ink'], c['w'])}"""
             typer = [('trana-rakna.html', '🔢', 'Räkneträning', 'Per avsnitt'),
+                     ('trana-exempel.html', '🔍', 'Från exempel till ord', 'Titta och välj'),
+                     ('trana-dra.html', '🧲', 'Dra ordet', 'Ord i mening'),
                      ('trana-begrepp.html', '🧩', 'Matcha begrepp', 'Hela kapitlet'),
-                     ('trana-quiz.html', '❓', 'Quiz', 'Flervalsfrågor'),
-                     ('trana-fyll.html', '✏️', 'Fyll i svaret', 'Skriv in svaret')]
+                     ('trana-quiz.html', '❓', 'Quiz', 'Flervalsfrågor')]
             snart = []
             kapitel = ''.join(f'<div class="kapblock" id="kap{nr}"><h2>Kapitel {nr} <span style="font-weight:500;opacity:.7">{html.escape(namn)}</span></h2><div class="typer">'
                               + ''.join(f'<a class="typ" href="{h}?kap={nr}"><b>{p}</b>{e} {t}</a>' for h, e, t, p in typer) + '</div></div>'
@@ -229,9 +230,10 @@ def bygg():
 <main><section><div class="wrap">{kapitel}
 <a class="knapp" href="../ak7.html">← Tillbaka till åk 7</a></div></section></main>""", rot='../')
             for fil, lage, t, p in [('trana-rakna.html', 'rakna', 'Räkneträning', 'Korta övningar med nya tal varje gång.'),
+                                    ('trana-exempel.html', 'exempel', 'Från exempel till ord', 'Titta på exemplet och välj rätt ord.'),
+                                    ('trana-dra.html', 'dra', 'Dra ordet till rätt lucka', 'Sätt in rätt matteord i meningen.'),
                                     ('trana-begrepp.html', 'begrepp', 'Matcha begrepp', 'Para ihop begrepp med rätt förklaring.'),
-                                    ('trana-quiz.html', 'quiz', 'Quiz', 'Välj rätt svar bland fyra alternativ.'),
-                                    ('trana-fyll.html', 'fyll', 'Fyll i svaret', 'Skriv in det som saknas i meningen.')]:
+                                    ('trana-quiz.html', 'quiz', 'Quiz', 'Välj rätt svar bland fyra alternativ.')]:
                 sida(f'ak7/{fil}', f'{t} – åk 7', 'Åk 7', c, hero(t, p) + f"""
 <main><section><div class="wrap"><h2 id="kaprubrik">Kapitel</h2>
 <div id="trana" data-lage="{lage}"></div>

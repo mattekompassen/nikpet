@@ -18,7 +18,7 @@
   if (!el) return;
   const ALLA = TRANA_DATA({r, val, sv, tus, sgn, blanda: a => blanda(a)});
   const kap = ALLA[new URLSearchParams(location.search).get('kap')] ? new URLSearchParams(location.search).get('kap') : '1';
-  const D = ALLA[kap], AVSNITT = D.avsnitt, BEGREPP = D.begrepp, QUIZ = D.quiz, FYLL = D.fyll;
+  const D = ALLA[kap], AVSNITT = D.avsnitt, BEGREPP = D.begrepp, QUIZ = D.quiz, FYLL = D.fyll, EX = D.exempel || [], DRA = D.dra || [];
   const rub = document.getElementById('kaprubrik');
   if (rub) rub.innerHTML = `Kapitel ${kap} <span style="font-weight:500;opacity:.7">${D.namn}</span>`;
   const TILLBAKA = 'trana.html#kap' + kap;
@@ -89,6 +89,69 @@
           fb.querySelector('button').onclick = visa; fb.querySelector('button').focus();
         }
       };
+    })();
+  }
+
+  const andra = (lista, svar, n) => blanda([...new Set(lista.filter(x => x !== svar))]).slice(0, n);
+  function exempel() {
+    const fr = blanda(EX).slice(0, RUNDA_Q); let i = 0, ratt = 0;
+    (function visa() {
+      if (i === fr.length) return slut(ratt, fr.length, exempel, ' på första försöket');
+      const [ex, svar, forkl, fraga] = fr[i++]; let fel = 0;
+      const alt = blanda([svar, ...andra(EX.map(e => e[1]), svar, 3)]);
+      el.innerHTML = `<div class="kort-t"><div class="topp"><span>🔍 Från exempel till ord</span><span>Uppgift ${i} av ${fr.length} · ⭐ ${ratt}</span></div>
+        <div class="bar"><i style="width:${(i - 1) / fr.length * 100}%"></i></div>
+        <div class="exempel">${ex}</div><p class="fraga liten">${fraga || 'Vad kallas det markerade?'}</p>
+        <div class="alt">${alt.map(a => `<button class="mb">${a}</button>`).join('')}</div>
+        <p class="fb" aria-live="polite"></p></div>`;
+      const fb = el.querySelector('.fb');
+      el.querySelectorAll('.alt .mb').forEach(b => b.onclick = () => {
+        if (b.textContent === svar) {
+          if (!fel) ratt++;
+          el.querySelectorAll('.alt .mb').forEach(x => x.disabled = true); b.classList.add('par');
+          fb.className = 'fb ok';
+          fb.innerHTML = `${val(['Rätt! 🎉', 'Snyggt! ✅', 'Precis! 👏'])} <span class="forkl">${forkl}</span> <button class="lank" type="button">Nästa →</button>`;
+          fb.querySelector('button').onclick = visa; fb.querySelector('button').focus();
+        } else {
+          fel++; b.disabled = true; b.classList.add('fel', 'kvar');
+          fb.className = 'fb nej'; fb.textContent = 'Inte rätt ord. Försök igen!';
+        }
+      });
+    })();
+  }
+  function dra() {
+    const fr = blanda(DRA).slice(0, RUNDA_Q); let i = 0, ratt = 0;
+    (function visa() {
+      if (i === fr.length) return slut(ratt, fr.length, dra, ' på första försöket');
+      const [q, svar] = fr[i++]; let fel = 0, drar = null, klar = false;
+      const ord = blanda([svar, ...andra(DRA.map(d => d[1]), svar, 3)]);
+      el.innerHTML = `<div class="kort-t"><div class="topp"><span>🧲 Dra ordet till rätt lucka</span><span>Mening ${i} av ${fr.length} · ⭐ ${ratt}</span></div>
+        <div class="bar"><i style="width:${(i - 1) / fr.length * 100}%"></i></div>
+        <div class="fraga mening">${q.replace('___', '<span class="lucka drop"></span>')}</div>
+        <p class="hj">Dra ordet till luckan, eller tryck på ordet.</p>
+        <div class="ordbank">${ord.map(o => `<button class="ordk" draggable="true">${o}</button>`).join('')}</div>
+        <p class="fb" aria-live="polite"></p></div>`;
+      const lucka = el.querySelector('.drop'), fb = el.querySelector('.fb');
+      const prova = b => {
+        if (b.disabled || klar) return;
+        if (b.textContent === svar) {
+          klar = true; if (!fel) ratt++;
+          lucka.textContent = svar; lucka.classList.add('fylld'); b.classList.add('par');
+          el.querySelectorAll('.ordk').forEach(x => x.disabled = true);
+          fb.className = 'fb ok'; fb.textContent = val(['Rätt! 🎉', 'Snyggt! ✅', 'Precis! 👏', 'Helt rätt! 💪']);
+          setTimeout(visa, 1300);
+        } else {
+          fel++; b.disabled = true; b.classList.add('fel');
+          fb.className = 'fb nej'; fb.textContent = `”${b.textContent}” passar inte här. Försök igen!`;
+        }
+      };
+      el.querySelectorAll('.ordk').forEach(b => {
+        b.onclick = () => prova(b);
+        b.ondragstart = e => { drar = b; e.dataTransfer.setData('text/plain', b.textContent); };
+      });
+      lucka.ondragover = e => { e.preventDefault(); lucka.classList.add('over'); };
+      lucka.ondragleave = () => lucka.classList.remove('over');
+      lucka.ondrop = e => { e.preventDefault(); lucka.classList.remove('over'); if (drar) prova(drar); };
     })();
   }
   const PAR = 6;
@@ -168,5 +231,5 @@
     el.querySelector('[data-a=om]').onclick = () => start(avs);
     el.querySelector('[data-a=meny]').onclick = meny;
   }
-  ({begrepp: matcha, quiz, fyll}[el.dataset.lage] || meny)();
+  ({begrepp: matcha, quiz, fyll, exempel, dra}[el.dataset.lage] || meny)();
 })();

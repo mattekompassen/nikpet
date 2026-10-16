@@ -1,5 +1,27 @@
 // Övningsdata för åk 7, per kapitel. Läses av trana.js.
-var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => ({
+var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
+  const M = '#E5AD45', I = '#3E5A3A', G = '#C9D3C5';
+  const br = (t, n) => `<span class="br"><span>${t}</span><span>${n}</span></span>`;
+  const svg = (w, h, inner) => `<svg class="fig" viewBox="0 0 ${w} ${h}" width="${Math.round(w * 1.5)}" aria-hidden="true">${inner}</svg>`;
+  const f1 = x => x.toFixed(1);
+  const vinkel = d => {
+    const a = d * Math.PI / 180, x = 90 + 80 * Math.cos(a), y = 100 - 80 * Math.sin(a), ax = 90 + 24 * Math.cos(a), ay = 100 - 24 * Math.sin(a);
+    const bage = d === 90 ? `<path d="M110 100 V80 H90" fill="none" stroke="${M}" stroke-width="5"/>` : `<path d="M114 100 A24 24 0 0 0 ${f1(ax)} ${f1(ay)}" fill="none" stroke="${M}" stroke-width="6"/>`;
+    return svg(180, 110, `${bage}<path d="M170 100 H90 L${f1(x)} ${f1(y)}" fill="none" stroke="${I}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="90" cy="100" r="4" fill="${I}"/>`);
+  };
+  const txt = (x, y, t) => `<text x="${x}" y="${y}" font-size="13" font-weight="700" fill="${I}" font-family="Inter,sans-serif">${t}</text>`;
+  const paj = (delar, mark) => {
+    let v = 0, ut = '';
+    delar.forEach((d, i) => {
+      const a1 = v / 100 * 2 * Math.PI - Math.PI / 2; v += d; const a2 = v / 100 * 2 * Math.PI - Math.PI / 2;
+      const p = (a) => `${f1(80 + 45 * Math.cos(a))} ${f1(55 + 45 * Math.sin(a))}`;
+      const farg = mark === undefined ? ['#3E5A3A', '#82B8D4', '#E5AD45', '#D97870'][i] : (i === mark ? M : G);
+      ut += `<path d="M80 55 L${p(a1)} A45 45 0 ${d > 50 ? 1 : 0} 1 ${p(a2)} Z" fill="${farg}" stroke="#fff" stroke-width="2"/>`;
+    });
+    return svg(160, 110, ut);
+  };
+  const axlar = `<path d="M20 95 H150 M30 105 V10" stroke="${I}" stroke-width="2.5"/>`;
+  return ({
   '1': {namn: 'Taluppfattning',
   avsnitt: {
     '1.1': {namn: 'Naturliga tal', gen() {
@@ -80,6 +102,35 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => ({
     ['Avrunda', 'Ändra ett tal till ett närmevärde som är lättare att räkna med'],
     ['Överslagsräkning', 'Räkna ungefär för att se om svaret är rimligt'],
     ['Procent', 'Hundradelar, t.ex. 25 % = 25/100'],
+  ],
+  exempel: [
+    ['3 + 4 = <mark>7</mark>', 'summa', 'Svaret i en addition heter summa.'],
+    ['9 − 5 = <mark>4</mark>', 'differens', 'Svaret i en subtraktion heter differens.'],
+    ['6 · 3 = <mark>18</mark>', 'produkt', 'Svaret i en multiplikation heter produkt.'],
+    ['20 / 4 = <mark>5</mark>', 'kvot', 'Svaret i en division heter kvot.'],
+    [br('<mark>3</mark>', '4'), 'täljare', 'Talet ovanför bråkstrecket heter täljare.'],
+    [br('3', '<mark>4</mark>'), 'nämnare', 'Talet under bråkstrecket heter nämnare.'],
+    ['<mark>−6</mark>', 'negativt tal', '−6 är mindre än noll. Det är ett negativt tal.'],
+    ['<mark>5</mark> och <mark>−5</mark>', 'motsatta tal', '5 och −5 ligger lika långt från noll. De är motsatta tal.'],
+    ['<mark>3,75</mark>', 'decimaltal', 'Ett tal med decimaltecken heter decimaltal.'],
+    ['<mark>8</mark> + 2', 'term', 'Tal som adderas heter termer.'],
+    ['<mark>4</mark> · 7', 'faktor', 'Tal som multipliceras heter faktorer.'],
+    ['<mark>25 %</mark>', 'procent', 'Procent betyder hundradelar.'],
+    ['3 487 ≈ <mark>3 500</mark>', 'avrundning', '3 487 är avrundat till närmaste hundratal.'],
+  ],
+  dra: [
+    ['I 4 + 5 = 9 kallas 9 för ___.', 'summa'],
+    ['I 7 · 3 = 21 kallas 21 för ___.', 'produkt'],
+    ['I 10 − 4 = 6 kallas 6 för ___.', 'differens'],
+    ['I 12 / 3 = 4 kallas 4 för ___.', 'kvot'],
+    ['I bråket 2/5 är 5 bråkets ___.', 'nämnare'],
+    ['I bråket 2/5 är 2 bråkets ___.', 'täljare'],
+    ['−8 är ett ___ tal.', 'negativt'],
+    ['5 och −5 är ___ tal.', 'motsatta'],
+    ['Talen 0, 1, 2, 3 … kallas ___ tal.', 'naturliga'],
+    ['I 3 · 8 är 3 och 8 ___.', 'faktorer'],
+    ['I 6 + 9 är 6 och 9 ___.', 'termer'],
+    ['3 482 ≈ 3 500. Vi har ___ till närmaste hundratal.', 'avrundat'],
   ],
   quiz: [
     ['Vilket värde har siffran 7 i talet 3 724?', ['700', '7', '70', '7 000'], '7 står på hundratalsplatsen, alltså 700.'],
@@ -188,6 +239,34 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => ({
     ['Formel', 'En regel skriven med variabler, t.ex. A = b · h'],
     ['Balansmetoden', 'Göra samma sak i båda leden för att lösa en ekvation'],
   ],
+  exempel: [
+    ['<mark>x</mark> + 5', 'variabel', 'En bokstav som står för ett tal heter variabel.'],
+    ['<mark>7</mark>x', 'koefficient', 'Talet framför variabeln heter koefficient.'],
+    ['<mark>x + 3 = 8</mark>', 'ekvation', 'Det finns ett likhetstecken. Det är en ekvation.'],
+    ['<mark>2x + 5</mark>', 'uttryck', 'Det finns inget likhetstecken. Det är ett uttryck.'],
+    ['<mark>3x</mark> + 4', 'term', 'Delarna som adderas heter termer.'],
+    ['x + 3 = 8 &nbsp;→&nbsp; <mark>x = 5</mark>', 'lösning', 'x = 5 gör att ekvationen stämmer. Det är lösningen.'],
+    ['<mark>2x + 1</mark> = 9', 'vänster led', 'Det som står till vänster om likhetstecknet är vänster led.'],
+    ['2x + 1 = <mark>9</mark>', 'höger led', 'Det som står till höger om likhetstecknet är höger led.'],
+    ['<mark>2, 5, 8, 11 …</mark>', 'mönster', 'Talen ökar med 3 varje gång. Det är ett mönster.'],
+    ['3<mark>(</mark>x + 2<mark>)</mark>', 'parentes', 'Parentesen visar vad som hör ihop.'],
+    ['<mark>A = b · h</mark>', 'formel', 'En regel skriven med bokstäver heter formel.'],
+    ['x + 1 <mark>=</mark> 4', 'likhetstecken', 'Likhetstecknet visar att båda leden är lika mycket värda.'],
+  ],
+  dra: [
+    ['I uttrycket 4x + 2 är x en ___.', 'variabel'],
+    ['I 4x är 4 en ___.', 'koefficient'],
+    ['x + 3 = 10 är en ___.', 'ekvation'],
+    ['Det som står till vänster om likhetstecknet kallas vänster ___.', 'led'],
+    ['x = 7 är ___ till ekvationen x + 3 = 10.', 'lösningen'],
+    ['2x + 5x kan vi ___ till 7x.', 'förenkla'],
+    ['I 3x + 4 är 3x och 4 två ___.', 'termer'],
+    ['5, 10, 15, 20 … är ett ___.', 'mönster'],
+    ['Vi sätter in svaret i ekvationen för att ___ om det stämmer.', 'kontrollera'],
+    ['I 2(x + 1) visar ___ vad som hör ihop.', 'parentesen'],
+    ['A = b · h är en ___ för arean.', 'formel'],
+    ['3x + 1 är ett ___. Det har inget likhetstecken.', 'uttryck'],
+  ],
   quiz: [
     ['Vad är värdet av 3x + 2 om x = 4?', ['14', '34', '9', '20'], '3 · 4 = 12 och 12 + 2 = 14.'],
     ['Förenkla 5a + 2a − a.', ['6a', '7a', '8a', '6'], '5 + 2 − 1 = 6, alltså 6a.'],
@@ -295,6 +374,34 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => ({
     ['Likbent triangel', 'En triangel med två lika långa sidor'],
     ['Liksidig triangel', 'En triangel där alla sidor är lika långa'],
   ],
+  exempel: [
+    ['<mark>kilo</mark>meter', 'prefix', 'Kilo är ett prefix. Det betyder tusen.'],
+    [vinkel(90), 'rät vinkel', 'Vinkeln är 90°. Det är en rät vinkel.', 'Vad heter vinkeln?'],
+    [vinkel(40), 'spetsig vinkel', 'Vinkeln är mindre än 90°. Det är en spetsig vinkel.', 'Vad heter vinkeln?'],
+    [vinkel(130), 'trubbig vinkel', 'Vinkeln är mellan 90° och 180°. Det är en trubbig vinkel.', 'Vad heter vinkeln?'],
+    [vinkel(180), 'rak vinkel', 'Vinkeln är 180°. Det är en rak vinkel.', 'Vad heter vinkeln?'],
+    [svg(160, 100, `<rect x="20" y="15" width="120" height="70" fill="${M}" stroke="${I}" stroke-width="3"/>`), 'area', 'Ytan inuti figuren är arean.'],
+    [svg(160, 100, `<rect x="20" y="15" width="120" height="70" fill="#fff" stroke="${M}" stroke-width="8"/>`), 'omkrets', 'Längden runt figuren är omkretsen.'],
+    [svg(160, 125, `<polygon points="80,12 30,105 130,105" fill="#fff" stroke="${I}" stroke-width="3"/><path d="M80 12 L30 105 M80 12 L130 105" stroke="${M}" stroke-width="6" stroke-linecap="round"/>${txt(14, 60, '5 cm')}${txt(112, 60, '5 cm')}${txt(64, 122, '3 cm')}`), 'likbent triangel', 'Två sidor är lika långa. Det är en likbent triangel.', 'Vad heter triangeln?'],
+    [svg(160, 125, `<polygon points="80,10 25,105 135,105" fill="#fff" stroke="${M}" stroke-width="6" stroke-linejoin="round"/>${txt(14, 60, '4 cm')}${txt(114, 60, '4 cm')}${txt(64, 122, '4 cm')}`), 'liksidig triangel', 'Alla sidor är lika långa. Det är en liksidig triangel.', 'Vad heter triangeln?'],
+    ['Skala <mark>1:50</mark>', 'förminskning', 'Bilden är 50 gånger mindre än verkligheten. Det är en förminskning.', 'Vad visar skalan?'],
+    ['Skala <mark>5:1</mark>', 'förstoring', 'Bilden är 5 gånger större än verkligheten. Det är en förstoring.', 'Vad visar skalan?'],
+    ['30° + 70° + 80° = <mark>180°</mark>', 'vinkelsumma', 'Alla vinklar i triangeln tillsammans är vinkelsumman.'],
+  ],
+  dra: [
+    ['En vinkel som är 90° kallas en ___ vinkel.', 'rät'],
+    ['En vinkel som är mindre än 90° kallas en ___ vinkel.', 'spetsig'],
+    ['En vinkel mellan 90° och 180° kallas en ___ vinkel.', 'trubbig'],
+    ['Längden runt en figur kallas ___.', 'omkrets'],
+    ['Hur stor yta en figur har kallas ___.', 'area'],
+    ['Vinklarna i en triangel har ___ 180°.', 'vinkelsumman'],
+    ['Vi mäter vinklar med en ___.', 'gradskiva'],
+    ['Kilo, centi och milli är ___.', 'prefix'],
+    ['En karta i skala 1:10 000 är en ___.', 'förminskning'],
+    ['En bild i skala 5:1 är en ___.', 'förstoring'],
+    ['En triangel med två lika långa sidor är ___.', 'likbent'],
+    ['När två linjer korsar varandra är ___ lika stora.', 'vertikalvinklarna'],
+  ],
   quiz: [
     ['Hur många cm är 2,5 m?', ['250', '25', '2 500', '0,25'], '1 m = 100 cm, så 2,5 · 100 = 250.'],
     ['Vad betyder prefixet milli?', ['En tusendel', 'En tiondel', 'En hundradel', 'Tusen'], '1 mm = 0,001 m.'],
@@ -401,6 +508,33 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => ({
     ['Graf', 'En linje eller kurva som visar ett samband i ett koordinatsystem'],
     ['Koordinatsystem', 'En x-axel och en y-axel som korsar varandra'],
     ['Origo', 'Punkten (0, 0) där axlarna möts'],
+  ],
+  exempel: [
+    ['Bilen kör i <mark>60 km/h</mark>.', 'hastighet', '60 km/h visar hur fort bilen kör. Det är hastigheten.'],
+    ['Hon cyklade <mark>12 km</mark>.', 'sträcka', '12 km visar hur långt hon cyklade. Det är sträckan.'],
+    ['Resan tog <mark>2 h</mark>.', 'tid', '2 h (två timmar) är tiden.'],
+    ['<mark>y = 3x</mark>', 'proportionalitet', 'y = kx visar att y och x är proportionella.'],
+    ['y = <mark>3</mark>x', 'proportionalitetskonstant', 'Talet k i y = kx heter proportionalitetskonstant.'],
+    [br('<mark>3</mark>', '<mark>4</mark>') + ' av klassen', 'andel', '3/4 visar hur stor del av klassen det är. Det är en andel.'],
+    ['<mark>25 %</mark>', 'procent', 'Procent betyder hundradelar.'],
+    ['Pris 200 kr &nbsp; <mark>−50 kr</mark>', 'rabatt', 'Priset sänks med 50 kr. Det är rabatten.'],
+    [svg(160, 115, `${axlar}<circle cx="30" cy="95" r="8" fill="${M}"/>${txt(38, 112, '(0, 0)')}`), 'origo', 'Punkten (0, 0) där axlarna möts heter origo.', 'Vad heter den markerade punkten?'],
+    [svg(160, 115, `${axlar}<path d="M30 95 L140 20" stroke="${M}" stroke-width="5" stroke-linecap="round"/>`), 'graf', 'Linjen visar ett samband. Den heter graf.', 'Vad heter den markerade linjen?'],
+    ['<table class="tab"><tr><th>x</th><td>1</td><td>2</td><td>3</td></tr><tr><th>y</th><td>3</td><td>6</td><td>9</td></tr></table>', 'tabell', 'Värdena står i rader och kolumner. Det är en tabell.', 'Vad heter det här?'],
+  ],
+  dra: [
+    ['Hur fort något rör sig kallas ___.', 'hastighet'],
+    ['Hur långt något har rört sig kallas ___.', 'sträcka'],
+    ['Om priset ökar lika mycket för varje kilo är priset ___ mot vikten.', 'proportionellt'],
+    ['Hela sträckan delat med hela tiden ger ___.', 'medelhastigheten'],
+    ['Hur stor del något är av det hela kallas ___.', 'andel'],
+    ['Procent betyder ___.', 'hundradelar'],
+    ['När priset sänks får man ___.', 'rabatt'],
+    ['Punkten (0, 0) kallas ___.', 'origo'],
+    ['En linje i ett koordinatsystem som visar ett samband kallas en ___.', 'graf'],
+    ['I en ___ ordnar vi värden i rader och kolumner.', 'tabell'],
+    ['Sträcka = hastighet · ___', 'tid'],
+    ['I y = 3x är 3 ___.', 'proportionalitetskonstanten'],
   ],
   quiz: [
     ['3 kg äpplen kostar 60 kr. Vad kostar 5 kg?', ['100 kr', '120 kr', '80 kr', '300 kr'], '1 kg kostar 20 kr. 5 · 20 = 100 kr.'],
@@ -516,6 +650,34 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => ({
     ['Linjediagram', 'Diagram som visar hur något förändras över tid'],
     ['Frekvenstabell', 'Tabell som visar hur många gånger varje värde förekommer'],
   ],
+  exempel: [
+    ['Du kastar en tärning och får <mark>4</mark>.', 'utfall', '4 är ett av sex möjliga resultat. Det är ett utfall.'],
+    ['Chansen att få en sexa är <mark>' + br('1', '6') + '</mark>', 'sannolikhet', '1/6 visar hur troligt det är. Det är sannolikheten.'],
+    ['2, 3, <mark>5</mark>, 8, 9', 'median', '5 står i mitten när talen är sorterade. Det är medianen.'],
+    ['3, <mark>7</mark>, 2, <mark>7</mark>, <mark>7</mark>', 'typvärde', '7 är det vanligaste talet. Det är typvärdet.'],
+    ['(2 + 4 + 9) / 3 = <mark>5</mark>', 'medelvärde', 'Summan delat med antalet ger medelvärdet.'],
+    ['Största 12, minsta 4: &nbsp;<mark>12 − 4 = 8</mark>', 'variationsbredd', 'Största minus minsta värdet är variationsbredden.'],
+    ['Sexa kom <mark>9 gånger</mark>.', 'frekvens', 'Hur många gånger något kommer är frekvensen.'],
+    ['Sexa 9 gånger av 50: &nbsp;<mark>9/50 = 18 %</mark>', 'relativ frekvens', 'Frekvensen delat med totala antalet är den relativa frekvensen.'],
+    [svg(160, 115, `${axlar}<rect x="42" y="45" width="18" height="50" fill="${M}"/><rect x="70" y="25" width="18" height="70" fill="${M}"/><rect x="98" y="60" width="18" height="35" fill="${M}"/><rect x="126" y="38" width="18" height="57" fill="${M}"/>`), 'stapeldiagram', 'Staplarnas höjd visar antalet. Det är ett stapeldiagram.', 'Vad heter diagrammet?'],
+    [paj([45, 30, 25]), 'cirkeldiagram', 'Cirkeln är delad i delar som visar andelar. Det är ett cirkeldiagram.', 'Vad heter diagrammet?'],
+    [paj([45, 30, 25], 2), 'sektor', 'En del av ett cirkeldiagram heter sektor.', 'Vad heter den markerade delen?'],
+    [svg(160, 115, `${axlar}<polyline points="35,80 60,60 85,70 110,35 140,45" fill="none" stroke="${M}" stroke-width="5" stroke-linejoin="round"/>`), 'linjediagram', 'En linje visar hur något förändras. Det är ett linjediagram.', 'Vad heter diagrammet?'],
+  ],
+  dra: [
+    ['Hur troligt något är kallas ___.', 'sannolikhet'],
+    ['När du kastar en tärning finns sex möjliga ___.', 'utfall'],
+    ['Värdet i mitten när talen är sorterade kallas ___.', 'median'],
+    ['Det vanligaste värdet kallas ___.', 'typvärde'],
+    ['Summan delat med antalet kallas ___.', 'medelvärde'],
+    ['Största värdet minus minsta värdet kallas ___.', 'variationsbredd'],
+    ['Hur många gånger något förekommer kallas ___.', 'frekvens'],
+    ['Medelvärde, median och typvärde kallas ___.', 'lägesmått'],
+    ['I ett ___ visar sektorerna andelar av en helhet.', 'cirkeldiagram'],
+    ['I ett ___ visar staplarnas höjd antalet.', 'stapeldiagram'],
+    ['Ett ___ visar hur något förändras över tid.', 'linjediagram'],
+    ['En tårtbit i ett cirkeldiagram kallas en ___.', 'sektor'],
+  ],
   quiz: [
     ['Du kastar en tärning. Vad är sannolikheten att få en fyra?', ['1/6', '1/4', '4/6', '1/2'], 'Ett gynnsamt utfall av sex möjliga.'],
     ['I en påse finns 3 röda och 7 gröna kulor. Vad är sannolikheten att dra en röd?', ['3/10', '3/7', '7/10', '1/3'], '3 gynnsamma av 10 möjliga.'],
@@ -551,3 +713,4 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => ({
     ['Typvärdet av 7, 2, 7, 4, 2, 7 är ___', ['7'], '7 förekommer tre gånger.'],
   ]},
 });
+};
