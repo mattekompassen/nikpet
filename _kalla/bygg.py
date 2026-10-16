@@ -77,6 +77,24 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .lankar a:hover{border-color:var(--mid)}.lankar a b{color:var(--mid);margin-right:6px}
 .knapp{display:inline-block;margin-top:24px;padding:14px 26px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700}
 
+.valj{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;max-width:860px}
+.valj button,.knapp2,#trana form button{font:inherit;cursor:pointer;border:0;border-radius:14px}
+.valj button{background:var(--vl);border:2px solid var(--l);padding:16px 18px;text-align:left;font-weight:700;color:var(--ink);font-size:17px;transition:transform .15s}
+.valj button:hover{transform:translateY(-3px);border-color:var(--mid)}.valj button b{display:block;color:var(--mid);font-size:14px}
+.ingress{font-size:18px;max-width:760px}
+.kort-t{background:var(--vl);border:2px solid var(--l);border-radius:24px;padding:24px 28px;max-width:700px}
+.topp{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-weight:700;color:var(--ink);font-size:15px}
+.bar{height:10px;background:#fff;border-radius:99px;margin:12px 0 4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--mid);border-radius:99px;transition:width .3s}
+.fraga{font-size:clamp(24px,4vw,34px);font-weight:800;color:var(--ink);margin:18px 0}
+#trana form{display:flex;gap:10px;flex-wrap:wrap}
+#trana input{font:inherit;font-size:22px;padding:10px 14px;border:2px solid var(--l);border-radius:14px;width:220px;max-width:100%}
+#trana input:focus{outline:3px solid var(--mid);outline-offset:1px}
+#trana form button,.knapp2{background:var(--ink);color:#fff;font-weight:700;padding:12px 24px;font-size:18px}
+.knapp2.sek{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+.fb{min-height:28px;font-size:17px;margin:14px 0 6px}.fb.ok{color:#2E7D32;font-weight:800;font-size:22px}.fb.nej{color:#96505A}.fb.tipsrad{color:#5F4B12}
+.lank{background:none;border:0;font:inherit;color:var(--ink);font-weight:700;text-decoration:underline;cursor:pointer;padding:0}
+.fb .lank{margin-left:8px}
+.trana-ruta{max-width:640px;margin:34px auto 0;text-align:left}
 .rutor .info{gap:16px;padding:20px 20px}.rutor .info .ik{width:60px;height:60px;flex:0 0 60px}.rutor .info .ik svg{width:32px;height:32px}.rutor .info h3{font-size:19px;line-height:1.25;margin:0 0 6px}.rutor .info p{font-size:15px;line-height:1.45;margin:0}.rutor .info .pil{margin-left:auto}
 .rutor{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}
 .info{display:flex;align-items:center;gap:24px;background:var(--vl);border:2px solid var(--l);border-radius:24px;padding:22px 26px;text-decoration:none;transition:transform .15s}
@@ -124,6 +142,12 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, 'w').write(doc)
 
+def trana_ruta(k):
+    if k != 7:
+        return ''
+    return ('<a class="info trana-ruta" href="ak7/trana.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">'
+            '<path d="M24 8l4.7 9.6 10.6 1.5-7.7 7.5 1.8 10.5L24 32.1l-9.4 5 1.8-10.5-7.7-7.5 10.6-1.5z"/></svg></span><span><h3>Träna extra</h3><p>Korta övningar med nya tal varje gång. Rätta direkt och samla stjärnor.</p></span><span class="pil">→</span></a>')
+
 def innehall(k, s, t):
     d = LANKAR.get(str(k), {})
     if s not in d:
@@ -170,7 +194,16 @@ def bygg():
 <p>Planering, lektioner, problemlösning, repetitionsuppgifter och mycket mer för Matematik {c['bok']}.</p></div></div></div>
 {wave(c['ink'], c['w'])}
 <main><section class="center"><div class="wrap"><h2>Lektionsmaterial</h2><p class="sub">Allt du behöver till lektionerna i åk {k}.</p>
-<div class="ikoner">{ikoner}</div></div></section></main>""")
+<div class="ikoner">{ikoner}</div>{trana_ruta(k)}</div></section></main>""")
+        if k == 7:
+            sida('ak7/trana.html', 'Träna extra – åk 7', 'Åk 7', c, f"""
+<div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">7</div>
+<div><div class="etikett">ÅK 7 · MATEMATIK X</div><h1>Träna extra</h1><p>Korta övningar med nya tal varje gång. Inget sparas, det är bara du som tränar.</p></div></div></div>
+{wave(c['ink'], c['w'])}
+<main><section><div class="wrap"><h2>Kapitel 1 <span style="font-weight:500;opacity:.7">Taluppfattning</span></h2><p class="sub">Fler kapitel kommer.</p>
+<div id="trana"></div>
+<a class="knapp" href="../ak7.html">← Tillbaka till åk 7</a></div></section></main>
+<script src="../trana.js"></script>""", rot='../')
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><img src="../bilder/ak{k}/{f}.png" alt="" style="width:110px;border-radius:20px">
@@ -202,6 +235,7 @@ def bygg():
 <h2>Välj årskurs</h2>
 <div class="arlank">{arl}</div>
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
+    shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'trana.js'), UT)
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
 
 if __name__ == '__main__':
