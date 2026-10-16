@@ -77,7 +77,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .match-kort{max-width:860px}.match>div{min-width:0}.mb{overflow-wrap:anywhere}
 .typer{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;max-width:1000px}
 .typ{position:relative;display:block;background:var(--vl);border:2px solid var(--l);border-radius:22px;padding:22px 22px 20px;text-decoration:none;transition:transform .15s}
-a.typ:hover{transform:translateY(-4px);border-color:var(--mid)}
+a.typ{background:var(--ink);border-color:var(--ink)}a.typ h3,a.typ .pil{color:#fff}a.typ p{color:#fff;opacity:.85}a.typ:hover{transform:translateY(-4px)}
 .typ .em{font-size:40px;line-height:1}.typ h3{margin:10px 0 4px;color:var(--ink);font-size:21px}.typ p{margin:0;color:#4A4E52;font-size:15px}
 .typ .pil{position:absolute;top:20px;right:22px;font-size:24px;font-weight:700;color:var(--ink)}
 .typ.tom{opacity:.55;border-style:dashed}.typ small{display:inline-block;margin-top:10px;font-weight:700;color:var(--ink);font-size:13px}
