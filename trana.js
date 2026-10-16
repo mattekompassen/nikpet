@@ -73,13 +73,71 @@
   };
 
   const el = document.getElementById('trana');
+  const BEGREPP = [
+    ['Siffra', 'Tecknen 0–9 som vi skriver tal med'],
+    ['Positionssystem', 'Siffrans värde beror på var i talet den står'],
+    ['Naturliga tal', '0, 1, 2, 3, 4 …'],
+    ['Heltal', '… −2, −1, 0, 1, 2 …'],
+    ['Negativt tal', 'Ett tal som är mindre än noll'],
+    ['Motsatta tal', 'Tal på samma avstånd från noll, t.ex. 5 och −5'],
+    ['Rationellt tal', 'Ett tal som kan skrivas som ett bråk'],
+    ['Decimaltal', 'Ett tal med decimaltecken, t.ex. 3,75'],
+    ['Summa', 'Svaret i en addition'],
+    ['Differens', 'Svaret i en subtraktion'],
+    ['Produkt', 'Svaret i en multiplikation'],
+    ['Kvot', 'Svaret i en division'],
+    ['Term', 'Ett tal som adderas eller subtraheras'],
+    ['Faktor', 'Ett tal som multipliceras'],
+    ['Täljare', 'Talet ovanför bråkstrecket'],
+    ['Nämnare', 'Talet under bråkstrecket'],
+    ['Prioriteringsregler', 'Regler för i vilken ordning man räknar'],
+    ['Avrunda', 'Ändra ett tal till ett närmevärde som är lättare att räkna med'],
+    ['Överslagsräkning', 'Räkna ungefär för att se om svaret är rimligt'],
+    ['Procent', 'Hundradelar, t.ex. 25 % = 25/100'],
+  ];
+  const blanda = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = r(0, i); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const PAR = 6;
+  function matcha() {
+    const par = blanda(BEGREPP).slice(0, PAR);
+    let forsok = 0, klara = 0, vald = null;
+    const knapp = (i, t, sida) => `<button class="mb" data-i="${i}" data-s="${sida}">${t}</button>`;
+    el.innerHTML = `<div class="kort-t match-kort"><div class="topp"><span>🧩 Matcha begrepp</span><span class="stat">Par 0 av ${PAR}</span></div>
+      <p>Klicka på ett begrepp och sedan på förklaringen som hör ihop med det.</p>
+      <div class="match"><div>${par.map((p, i) => knapp(i, p[0], 'b')).join('')}</div><div>${blanda(par.map((p, i) => [i, p[1]])).map(([i, t]) => knapp(i, t, 'f')).join('')}</div></div>
+      <p class="fb" aria-live="polite"></p></div>`;
+    const fb = el.querySelector('.fb'), stat = el.querySelector('.stat');
+    el.querySelectorAll('.mb').forEach(b => b.onclick = () => {
+      if (b.disabled) return;
+      if (!vald || vald.dataset.s === b.dataset.s) { if (vald) vald.classList.remove('vald'); vald = b; b.classList.add('vald'); return; }
+      forsok++;
+      const a = vald; vald = null; a.classList.remove('vald');
+      if (a.dataset.i === b.dataset.i) {
+        [a, b].forEach(x => { x.classList.add('par'); x.disabled = true; });
+        klara++; stat.textContent = `Par ${klara} av ${PAR}`;
+        fb.className = 'fb ok'; fb.textContent = val(['Rätt! 🎉', 'Snyggt! ✅', 'Precis! 👏']);
+        if (klara === PAR) setTimeout(() => {
+          const m = forsok === PAR ? 'Felfritt! 🏆' : forsok <= PAR + 3 ? 'Bra jobbat! 🌟' : 'Bra kämpat! 💪';
+          el.innerHTML = `<div class="kort-t"><p class="fraga">${m}</p><p>Du hittade alla ${PAR} par på ${forsok} försök.</p>
+            <button class="knapp2" data-a="om">Nya begrepp</button> <button class="knapp2 sek" data-a="meny">Tillbaka</button></div>`;
+          el.querySelector('[data-a=om]').onclick = matcha;
+          el.querySelector('[data-a=meny]').onclick = meny;
+        }, 900);
+      } else {
+        [a, b].forEach(x => { x.classList.add('fel'); setTimeout(() => x.classList.remove('fel'), 600); });
+        fb.className = 'fb nej'; fb.textContent = 'De hör inte ihop. Försök igen!';
+      }
+    });
+  }
+
   const RUNDA = 10;
   let avs = null, nr = 0, ratt = 0, svit = 0, fraga = null, fel = 0;
 
   function meny() {
     el.innerHTML = '<p class="ingress">Välj ett avsnitt. Du får ' + RUNDA + ' uppgifter med nya tal varje gång.</p><div class="valj">' +
-      Object.entries(AVSNITT).map(([k, a]) => `<button data-k="${k}"><b>${k}</b>${a.namn}</button>`).join('') + '</div>';
-    el.querySelectorAll('button').forEach(b => b.onclick = () => start(b.dataset.k));
+      Object.entries(AVSNITT).map(([k, a]) => `<button data-k="${k}"><b>${k}</b>${a.namn}</button>`).join('') + '</div>' +
+      '<p class="ingress" style="margin-top:28px">Kan du orden? Para ihop begrepp med rätt förklaring.</p><div class="valj"><button class="spec" data-m="1"><b>Hela kapitlet</b>🧩 Matcha begrepp</button></div>';
+    el.querySelectorAll('button[data-k]').forEach(b => b.onclick = () => start(b.dataset.k));
+    el.querySelector('[data-m]').onclick = matcha;
   }
   function start(k) { avs = k; nr = 0; ratt = 0; svit = 0; ny(); }
   function ny() {

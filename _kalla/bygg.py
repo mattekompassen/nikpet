@@ -94,6 +94,14 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .fb{min-height:28px;font-size:17px;margin:14px 0 6px}.fb.ok{color:#2E7D32;font-weight:800;font-size:22px}.fb.nej{color:#96505A}.fb.tipsrad{color:#5F4B12}
 .lank{background:none;border:0;font:inherit;color:var(--ink);font-weight:700;text-decoration:underline;cursor:pointer;padding:0}
 .fb .lank{margin-left:8px}
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:12px;margin-top:8px}.match>div{display:flex;flex-direction:column;gap:10px}
+.mb{font:inherit;font-size:16px;text-align:left;background:#fff;border:2px solid var(--l);border-radius:12px;padding:12px 14px;cursor:pointer;color:#292A28;transition:transform .1s,background .2s}
+.match>div:first-child .mb{font-weight:700;color:var(--ink)}
+.mb:hover{border-color:var(--mid)}.mb.vald{border-color:var(--ink);background:var(--l);transform:scale(1.02)}
+.mb.par{background:#DDEFD9;border-color:#2E7D32;color:#2E5E30;cursor:default;opacity:.75}.mb.fel{background:#F6DADA;border-color:#B95E52;animation:skak .3s}
+@keyframes skak{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.valj button.spec{background:var(--ink);color:#fff;border-color:var(--ink)}.valj button.spec b{color:var(--hi)}
+.match-kort{max-width:860px}.match>div{min-width:0}.mb{overflow-wrap:anywhere}
 .trana-ruta{max-width:640px;margin:34px auto 0;text-align:left}
 .rutor .info{gap:16px;padding:20px 20px}.rutor .info .ik{width:60px;height:60px;flex:0 0 60px}.rutor .info .ik svg{width:32px;height:32px}.rutor .info h3{font-size:19px;line-height:1.25;margin:0 0 6px}.rutor .info p{font-size:15px;line-height:1.45;margin:0}.rutor .info .pil{margin-left:auto}
 .rutor{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}
@@ -114,6 +122,7 @@ footer span{opacity:.8}
  .num{display:none}
  .kort{grid-template-columns:1fr}
  .rutor{grid-template-columns:1fr}
+ .kort-t{padding:18px 14px}.match{gap:8px}.mb{font-size:14px;padding:10px}
  .ikoner{grid-template-columns:repeat(2,1fr);gap:18px}
 }
 """
