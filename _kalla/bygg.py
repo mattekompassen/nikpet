@@ -162,7 +162,7 @@ def trana_ruta(k):
     if k != 7:
         return ''
     return ('<a class="info trana-ruta" href="ak7/trana.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">'
-            '<path d="M24 8l4.7 9.6 10.6 1.5-7.7 7.5 1.8 10.5L24 32.1l-9.4 5 1.8-10.5-7.7-7.5 10.6-1.5z"/></svg></span><span><h3>Träna extra</h3><p>Korta övningar med nya tal varje gång. Rätta direkt och samla stjärnor.</p></span><span class="pil">→</span></a>')
+            '<path d="M24 8l4.7 9.6 10.6 1.5-7.7 7.5 1.8 10.5L24 32.1l-9.4 5 1.8-10.5-7.7-7.5 10.6-1.5z"/></svg></span><span><h3>Interaktiva övningar</h3><p>Klicka, dra och få svar direkt. Öva på räkning och matteord.</p></span><span class="pil">→</span></a>')
 
 def innehall(k, s, t):
     d = LANKAR.get(str(k), {})
@@ -214,7 +214,7 @@ def bygg():
         if k == 7:
             hero = lambda t, p: f"""
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">7</div>
-<div><div class="etikett">ÅK 7 · MATEMATIK X · TRÄNA EXTRA</div><h1>{t}</h1><p>{p}</p></div></div></div>
+<div><div class="etikett">ÅK 7 · MATEMATIK X · INTERAKTIVA ÖVNINGAR</div><h1>{t}</h1><p>{p}</p></div></div></div>
 {wave(c['ink'], c['w'])}"""
             typer = [('trana-rakna.html', '🔢', 'Räkneträning', 'Per avsnitt'),
                      ('trana-exempel.html', '🔍', 'Från exempel till ord', 'Titta och välj'),
@@ -226,7 +226,7 @@ def bygg():
                               + ''.join(f'<a class="typ" href="{h}?kap={nr}"><b>{p}</b>{e} {t}</a>' for h, e, t, p in typer) + '</div></div>'
                               for nr, namn in LANKAR['7']['kapitel'])
             tillbaka = '<a class="knapp" href="trana.html">← Alla övningar</a>'
-            sida('ak7/trana.html', 'Träna extra – åk 7', 'Åk 7', c, hero('Träna extra', 'Välj en typ av övning. Inget sparas, det är bara du som tränar.') + f"""
+            sida('ak7/trana.html', 'Interaktiva övningar – åk 7', 'Åk 7', c, hero('Interaktiva övningar', 'Klicka, dra och få svar direkt. Välj kapitel och typ av övning.') + f"""
 <main><section><div class="wrap">{kapitel}
 <a class="knapp" href="../ak7.html">← Tillbaka till åk 7</a></div></section></main>""", rot='../')
             for fil, lage, t, p in [('trana-rakna.html', 'rakna', 'Räkneträning', 'Korta övningar med nya tal varje gång.'),
