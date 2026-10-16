@@ -20,8 +20,7 @@ MATERIAL = [
  ('13_Test', 'test', 'Test'),
  ('14_Tidsplan_och_arbetsgang', 'tidsplan-och-arbetsgang', 'Tidsplan och arbetsgång'),
 ]
-MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html'),
-        ('Ämnesord på olika språk', 'amnesord.html'), ('Bedömning', 'bedomning.html')]
+MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html')]
 NEUTRAL = dict(ink='#2C4152', hi='#F2CD69', w='#F3EEE4', vl='#E9E2D4', l='#D9D4C8', mid='#5F6368')
 
 CSS = """
@@ -40,21 +39,21 @@ nav a{text-decoration:none;opacity:.85;padding:4px 0;border-bottom:3px solid tra
 nav a:hover{opacity:1}
 nav a.on{opacity:1;font-weight:700;border-bottom-color:var(--hi)}
 .hero{background:var(--ink);color:#fff}
-.hero .wrap{display:flex;align-items:center;justify-content:space-between;gap:40px;padding-top:40px;padding-bottom:50px}
-.hero h1{font-size:clamp(38px,6vw,64px);line-height:1.08;margin:0 0 18px;letter-spacing:-1px}
+.hero .wrap{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-top:6px;padding-bottom:10px}
+.hero h1{font-size:clamp(30px,4vw,46px);line-height:1.1;margin:0 0 10px;letter-spacing:-1px}
 .hero h1 span{color:var(--hi)}
-.hero p{font-size:clamp(17px,2vw,21px);opacity:.9;margin:0;max-width:640px}
-.hero .bild{width:min(420px,40vw);flex:none}
-.wave{display:block;width:100%;height:70px}
-main section{padding:20px 0 80px}
-h2{font-size:clamp(28px,4vw,40px);margin:0 0 6px;color:var(--ink)}
-p.sub{color:#4A4E52;font-size:18px;margin:0 0 30px}
-.kort{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.hero p{font-size:clamp(16px,1.6vw,19px);opacity:.9;margin:0;max-width:640px}
+.hero .bild{width:min(185px,26vw);flex:none}
+.wave{display:block;width:100%;height:40px}
+main section{padding:6px 0 60px}
+h2{font-size:clamp(24px,3vw,32px);margin:0 0 4px;color:var(--ink)}
+p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
+.kort{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .kort a img{filter:drop-shadow(0 8px 18px rgba(0,0,0,.12));transition:transform .15s}
 .kort a:hover img,.ikoner a:hover img{transform:translateY(-4px)}
-.num{width:200px;height:200px;border-radius:40px;background:var(--vl);color:var(--ink);font-weight:900;font-size:150px;display:flex;align-items:center;justify-content:center;flex:none;line-height:1}
-.etikett{font-weight:700;color:var(--hi);font-size:20px;letter-spacing:2px}
-.ikoner{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:900px;margin:0 auto}
+.num{width:120px;height:120px;border-radius:26px;background:var(--vl);color:var(--ink);font-weight:900;font-size:88px;display:flex;align-items:center;justify-content:center;flex:none;line-height:1}
+.etikett{font-weight:700;color:var(--hi);font-size:16px;letter-spacing:2px}
+.ikoner{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:640px;margin:0 auto}
 .ikoner img{filter:drop-shadow(0 6px 14px rgba(0,0,0,.10));transition:transform .15s}
 .center{text-align:center}
 .ruta{background:var(--vl);border:2px solid var(--l);border-radius:24px;padding:28px 32px;max-width:800px}
@@ -66,7 +65,7 @@ footer span{opacity:.8}
 .sr{position:absolute;left:-9999px}
 @media (max-width:800px){
  .hero .wrap{flex-direction:column-reverse;align-items:flex-start}
- .hero .bild{width:260px}
+ .hero .bild{width:150px}
  .num{display:none}
  .kort{grid-template-columns:1fr}
  .ikoner{grid-template-columns:repeat(2,1fr);gap:18px}
@@ -120,20 +119,12 @@ def bygg():
 <div class="ikoner">{ikoner}</div></div></section></main>""")
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""
-<div class="hero"><div class="wrap" style="justify-content:flex-start"><img src="../bilder/ak{k}/{f}.png" alt="" style="width:170px;border-radius:28px">
+<div class="hero"><div class="wrap" style="justify-content:flex-start"><img src="../bilder/ak{k}/{f}.png" alt="" style="width:110px;border-radius:20px">
 <div><div class="etikett">ÅK {k} · MATEMATIK {c['bok']}</div><h1>{t}</h1></div></div></div>
 {wave(c['ink'], c['w'])}
 <main><section><div class="wrap"><div class="ruta"><h3>Materialet kommer snart</h3>
 <p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
-    # Ämnesord och Bedömning
-    for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Här kommer viktiga matteord förklarade på olika språk.'),
-                         ('bedomning.html', 'Bedömning', 'Här kommer information om hur du visar vad du kan i matematik.')]:
-        sida(fil, t, t, NEUTRAL, f"""
-<div class="hero"><div class="wrap"><div><h1>{t}</h1><p>{text}</p></div></div></div>
-{wave(NEUTRAL['ink'], NEUTRAL['w'])}
-<main><section><div class="wrap"><div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Sidan fylls på under läsåret.</p></div>
-<a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
 
 if __name__ == '__main__':
