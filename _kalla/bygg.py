@@ -6,9 +6,9 @@ UT = '/mnt/project-files/webbplats'
 LANKAR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lankar.json'), encoding='utf-8'))
 
 AR = {
- 7: dict(bok='X', ink='#3E5A3A', mid='#6F9477', l='#C9D8C2', vl='#E3ECDD', w='#EEF3EA', hi='#C9E3A0'),
- 8: dict(bok='Y', ink='#164E63', mid='#2E8FA3', l='#BFE4EA', vl='#DDF1F4', w='#EAF6F8', hi='#A8E0EA'),
- 9: dict(bok='Z', ink='#4E3A5E', mid='#8A6FA0', l='#DCD0E6', vl='#ECE5F1', w='#F6F2F9', hi='#D6C3E8'),
+ 7: dict(bok='X', ink='#3E5A3A', mid='#6F9477', l='#C9D8C2', vl='#E3ECDD', w='#F3EEE4', hi='#C9E3A0'),
+ 8: dict(bok='Y', ink='#164E63', mid='#2E8FA3', l='#BFE4EA', vl='#DDF1F4', w='#F3EEE4', hi='#A8E0EA'),
+ 9: dict(bok='Z', ink='#4E3A5E', mid='#8A6FA0', l='#DCD0E6', vl='#ECE5F1', w='#F3EEE4', hi='#D6C3E8'),
 }
 # Nio ikoner på årskurssidan: (filnamn, sidnamn, rubrik)
 MATERIAL = [
@@ -44,6 +44,7 @@ nav a.on{opacity:1;font-weight:700;border-bottom-color:var(--hi)}
 .hero .wrap{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-top:6px;padding-bottom:10px}
 .hero h1{font-size:clamp(30px,4vw,46px);line-height:1.1;margin:0 0 10px;letter-spacing:-1px}
 .hero h1 span{color:var(--hi)}
+.hero h1.streck::after{content:"";display:block;width:90px;height:6px;border-radius:3px;background:#F2CD69;margin-top:10px}
 .hero p{font-size:clamp(16px,1.6vw,19px);opacity:.9;margin:0;max-width:640px}
 .hero .bild{width:min(185px,26vw);flex:none}
 .wave{display:block;width:100%;height:40px}
@@ -209,7 +210,7 @@ def bygg():
         ikoner = ''.join(f'<a href="ak{k}/{s}.html"><img src="bilder/ak{k}/{f}.png" alt="{t}"></a>' for f, s, t in MATERIAL)
         sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, f"""
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">{k}</div>
-<div><div class="etikett">MATEMATIK {c['bok']}</div><h1>Åk {k}</h1>
+<div><div class="etikett">MATEMATIK {c['bok']}</div><h1 class="streck">Åk {k}</h1>
 <p>Planering, lektioner, problemlösning, repetitionsuppgifter och mycket mer för Matematik {c['bok']}.</p></div></div></div>
 {wave(c['ink'], c['w'])}
 <main><section class="center"><div class="wrap"><h2>Lektionsmaterial</h2><p class="sub">Allt du behöver till lektionerna i åk {k}.</p>
