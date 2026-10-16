@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 # Bygger Mattekompassens webbplats till /mnt/project-files/webbplats/. Kör: python3 bygg.py
-import os, html
+import os, html, json
 UT = '/mnt/project-files/webbplats'
+# Drive-länkar per årskurs och sida (lektioner, tillbakablick), se lankar.json
+LANKAR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lankar.json'), encoding='utf-8'))
 
 AR = {
  7: dict(bok='X', ink='#3E5A3A', mid='#6F9477', l='#C9D8C2', vl='#E3ECDD', w='#EEF3EA', hi='#C9E3A0'),
@@ -58,6 +60,14 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .center{text-align:center}
 .ruta{background:var(--vl);border:2px solid var(--l);border-radius:24px;padding:28px 32px;max-width:800px}
 .ruta h3{margin:0 0 6px;color:var(--ink)}
+.kap{background:var(--vl);border:2px solid var(--l);border-radius:20px;margin:0 0 14px;max-width:860px}
+.kap summary{cursor:pointer;padding:16px 24px;font-weight:700;font-size:19px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center}
+.kap summary::-webkit-details-marker{display:none}
+.kap summary::after{content:'+';font-size:26px;line-height:1}.kap[open] summary::after{content:'–'}
+.kap summary small{font-weight:500;opacity:.7;font-size:15px;margin-left:8px}
+.lankar{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;padding:0 24px 20px}
+.lankar a{display:block;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:11px 14px;text-decoration:none;color:var(--ink);font-weight:600}
+.lankar a:hover{border-color:var(--mid)}.lankar a b{color:var(--mid);margin-right:6px}
 .knapp{display:inline-block;margin-top:24px;padding:14px 26px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700}
 
 .rutor{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:34px}
@@ -106,6 +116,20 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, 'w').write(doc)
 
+def innehall(k, s, t):
+    d = LANKAR.get(str(k), {})
+    if s not in d:
+        return f'<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>'
+    ut = []
+    for nr, namn in d['kapitel']:
+        filer = d[s].get(nr)
+        if filer:
+            lank = ''.join(f'<a href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener"><b>{html.escape(a.split(' ',1)[0])}</b>{html.escape(a.split(' ',1)[1])}</a>' for a, i in filer)
+            ut.append(f'<details class="kap"><summary><span>Kapitel {nr}<small>{html.escape(namn)}</small></span></summary><div class="lankar">{lank}</div></details>')
+        else:
+            ut.append(f'<details class="kap tom"><summary><span>Kapitel {nr}<small>{html.escape(namn)} · kommer snart</small></span></summary></details>')
+    return ''.join(ut)
+
 def bygg():
     open(os.path.join(UT, 'stil.css'), 'w').write(CSS)
     # Startsida
@@ -136,8 +160,7 @@ def bygg():
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><img src="../bilder/ak{k}/{f}.png" alt="" style="width:110px;border-radius:20px">
 <div><div class="etikett">ÅK {k} · MATEMATIK {c['bok']}</div><h1>{t}</h1></div></div></div>
 {wave(c['ink'], c['w'])}
-<main><section><div class="wrap"><div class="ruta"><h3>Materialet kommer snart</h3>
-<p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>
+<main><section><div class="wrap">{innehall(k, s, t)}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Här kommer viktiga matteord förklarade på olika språk.'),
