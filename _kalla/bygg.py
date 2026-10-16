@@ -158,8 +158,8 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, 'w').write(doc)
 
-TRANA_AR = (7, 8)
-TRANA_FARG = {8: '<style>.kapblock{background:#DCEBEE}.kapblock:nth-child(even){background:#E4EFF1}.typ:nth-child(1){background:#3F6470}.typ:nth-child(2){background:#4A6E78}.typ:nth-child(3){background:#4E7270}.typ:nth-child(4){background:#5A727D}.typ:nth-child(5){background:#557883}.typ b{color:#E6F2F4}</style>'}
+TRANA_AR = (7, 8, 9)
+TRANA_FARG = {8: '<style>.kapblock{background:#DCEBEE}.kapblock:nth-child(even){background:#E4EFF1}.typ:nth-child(1){background:#3F6470}.typ:nth-child(2){background:#4A6E78}.typ:nth-child(3){background:#4E7270}.typ:nth-child(4){background:#5A727D}.typ:nth-child(5){background:#557883}.typ b{color:#E6F2F4}</style>', 9: '<style>.kapblock{background:#EAE2EF}.kapblock:nth-child(even){background:#F0EAF3}.typ:nth-child(1){background:#5E4A6E}.typ:nth-child(2){background:#6A5478}.typ:nth-child(3){background:#5A4F70}.typ:nth-child(4){background:#6E5A72}.typ:nth-child(5){background:#66506E}.typ b{color:#F1E9F5}</style>'}
 
 def trana_ruta(k):
     if k not in TRANA_AR:
@@ -273,7 +273,7 @@ def bygg():
 <h2>Välj årskurs</h2>
 <div class="arlank">{arl}</div>
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
-    for js in ('trana.js', 'trana-ak7.js', 'trana-ak8.js'):
+    for js in ('trana.js', 'trana-ak7.js', 'trana-ak8.js', 'trana-ak9.js'):
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), js), UT)
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
 
