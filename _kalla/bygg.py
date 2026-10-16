@@ -130,6 +130,12 @@ def innehall(k, s, t):
             ut.append(f'<details class="kap tom"><summary><span>Kapitel {nr}<small>{html.escape(namn)} · kommer snart</small></span></summary></details>')
     return ''.join(ut)
 
+def extra(fil):
+    if fil == 'amnesord.html' and LANKAR.get('amnesord'):
+        lank = ''.join(f'<a href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener">{html.escape(n)}</a>' for n, i in LANKAR['amnesord'])
+        return f'<div class="ruta"><h3>Termer för matematikundervisning</h3><p style="margin:0 0 14px">Klicka på ditt språk för att öppna ordlistan (PDF).</p><div class="lankar" style="padding:0">{lank}</div></div>'
+    return '<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Sidan fylls på under läsåret.</p></div>'
+
 def bygg():
     open(os.path.join(UT, 'stil.css'), 'w').write(CSS)
     # Startsida
@@ -163,12 +169,12 @@ def bygg():
 <main><section><div class="wrap">{innehall(k, s, t)}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
-    for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Här kommer viktiga matteord förklarade på olika språk.'),
+    for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
                          ('bedomning.html', 'Bedömning', 'Här kommer information om hur du visar vad du kan i matematik.')]:
         sida(fil, t, '', NEUTRAL, f"""
 <div class="hero"><div class="wrap"><div><h1>{t}</h1><p>{text}</p></div></div></div>
 {wave(NEUTRAL['ink'], NEUTRAL['w'])}
-<main><section><div class="wrap"><div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Sidan fylls på under läsåret.</p></div>
+<main><section><div class="wrap">{extra(fil)}
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
 
