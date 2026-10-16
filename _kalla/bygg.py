@@ -8,7 +8,7 @@ LANKAR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 AR = {
  7: dict(bok='X', ink='#3E5A3A', mid='#6F9477', l='#C9D8C2', vl='#E3ECDD', w='#F3EEE4', hi='#C9E3A0'),
  8: dict(bok='Y', ink='#164E63', mid='#2E8FA3', l='#BFE4EA', vl='#DDF1F4', w='#F3EEE4', hi='#A8E0EA'),
- 9: dict(bok='Z', ink='#4E3A5E', mid='#8A6FA0', l='#DCD0E6', vl='#ECE5F1', w='#F3EEE4', hi='#D6C3E8'),
+ 9: dict(bok='Z', ink='#5C2A45', mid='#9A5A7A', l='#E3C8D5', vl='#F2E3EA', w='#F3EEE4', hi='#EBC6D6'),
 }
 # Nio ikoner på årskurssidan: (filnamn, sidnamn, rubrik)
 MATERIAL = [
@@ -160,7 +160,7 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
     open(p, 'w').write(doc)
 
 TRANA_AR = (7, 8, 9)
-TRANA_FARG = {8: '<style>.kapblock{background:#DCEBEE}.kapblock:nth-child(even){background:#E4EFF1}.typ:nth-child(1){background:#3F6470}.typ:nth-child(2){background:#4A6E78}.typ:nth-child(3){background:#4E7270}.typ:nth-child(4){background:#5A727D}.typ:nth-child(5){background:#557883}.typ b{color:#E6F2F4}</style>', 9: '<style>.kapblock{background:#EAE2EF}.kapblock:nth-child(even){background:#F0EAF3}.typ:nth-child(1){background:#5E4A6E}.typ:nth-child(2){background:#6A5478}.typ:nth-child(3){background:#5A4F70}.typ:nth-child(4){background:#6E5A72}.typ:nth-child(5){background:#66506E}.typ b{color:#F1E9F5}</style>'}
+TRANA_FARG = {8: '<style>.kapblock{background:#DCEBEE}.kapblock:nth-child(even){background:#E4EFF1}.typ:nth-child(1){background:#3F6470}.typ:nth-child(2){background:#4A6E78}.typ:nth-child(3){background:#4E7270}.typ:nth-child(4){background:#5A727D}.typ:nth-child(5){background:#557883}.typ b{color:#E6F2F4}</style>', 9: '<style>.kapblock{background:#F2E3EA}.kapblock:nth-child(even){background:#F6ECF0}.typ:nth-child(1){background:#6A3A54}.typ:nth-child(2){background:#74445E}.typ:nth-child(3){background:#6B4258}.typ:nth-child(4){background:#7A4C63}.typ:nth-child(5){background:#704860}.typ b{color:#F7E9F0}</style>'}
 
 def trana_ruta(k):
     if k not in TRANA_AR:

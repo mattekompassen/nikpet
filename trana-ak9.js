@@ -1,6 +1,6 @@
 // Övningsdata för åk 9, per kapitel. Läses av trana.js.
 var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
-  const M = '#E5AD45', I = '#4E3A5E', G = '#C9D3C5';
+  const M = '#E5AD45', I = '#5C2A45', G = '#C9D3C5';
   const br = (t, n) => `<span class="br"><span>${t}</span><span>${n}</span></span>`;
   const svg = (w, h, inner) => `<svg class="fig" viewBox="0 0 ${w} ${h}" width="${Math.round(w * 1.5)}" aria-hidden="true">${inner}</svg>`;
   const f1 = x => x.toFixed(1);
