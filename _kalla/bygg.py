@@ -59,6 +59,15 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .ruta{background:var(--vl);border:2px solid var(--l);border-radius:24px;padding:28px 32px;max-width:800px}
 .ruta h3{margin:0 0 6px;color:var(--ink)}
 .knapp{display:inline-block;margin-top:24px;padding:14px 26px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700}
+
+.rutor{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:34px}
+.info{display:flex;align-items:center;gap:24px;background:var(--vl);border:2px solid var(--l);border-radius:24px;padding:22px 26px;text-decoration:none;transition:transform .15s}
+.info:hover{transform:translateY(-3px)}
+.info .ik{width:84px;height:84px;border-radius:50%;background:var(--ink);flex:none;display:flex;align-items:center;justify-content:center}
+.info .ik svg{width:48px;height:48px}
+.info h3{margin:0 0 4px;font-size:22px;color:var(--ink)}
+.info p{margin:0;color:#4A4E52;font-size:16px}
+.info .pil{margin-left:auto;font-size:26px;color:var(--ink);font-weight:700}
 footer{background:var(--ink);color:#fff}
 footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:34px;padding-bottom:34px;font-size:15px}
 footer span{opacity:.8}
@@ -68,6 +77,7 @@ footer span{opacity:.8}
  .hero .bild{width:150px}
  .num{display:none}
  .kort{grid-template-columns:1fr}
+ .rutor{grid-template-columns:1fr}
  .ikoner{grid-template-columns:repeat(2,1fr);gap:18px}
 }
 """
@@ -106,7 +116,11 @@ def bygg():
 <img class="bild" src="bilder/kompass-matte.png" alt="Kompass med räknesätten plus, gånger, minus och delat med"></div></div>
 {wave(NEUTRAL['ink'], NEUTRAL['w'])}
 <main><section><div class="wrap"><h2>Välj din årskurs</h2><p class="sub">Allt för din årskurs och din bok samlat på ett ställe.</p>
-<div class="kort">{kort}</div></div></section></main>""")
+<div class="kort">{kort}</div>
+<div class="rutor">
+<a class="info" href="amnesord.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke-linejoin="round" stroke-linecap="round"><path d="M6 8h22a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H15l-6 5v-5H6a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z" stroke="#fff" stroke-width="3.5"/><path d="M24 20h17a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-1v5l-6-5H24a3 3 0 0 1-3-3V23a3 3 0 0 1 3-3z" fill="#F2CD69"/></svg></span><span><h3>Förstår du inte ett ord?</h3><p>Titta i Ämnesord på olika språk. Där finns viktiga matteord förklarade på ditt språk.</p></span><span class="pil">→</span></a>
+<a class="info" href="bedomning.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke-linejoin="round" stroke-linecap="round"><rect x="9" y="7" width="30" height="36" rx="4" stroke="#fff" stroke-width="3.5"/><rect x="17" y="3" width="14" height="8" rx="3" fill="#F2CD69"/><path d="M15 21l3 3 6-6M15 33l3 3 6-6" stroke="#F2CD69" stroke-width="3.5"/><path d="M28 22h6M28 34h6" stroke="#fff" stroke-width="3.5"/></svg></span><span><h3>Hur bedöms du?</h3><p>Läs om hur du visar vad du kan i matematik och vad som krävs för olika betyg.</p></span><span class="pil">→</span></a>
+</div></div></section></main>""")
     # Årskurssidor och undersidor
     for k, c in AR.items():
         ikoner = ''.join(f'<a href="ak{k}/{s}.html"><img src="bilder/ak{k}/{f}.png" alt="{t}"></a>' for f, s, t in MATERIAL)
@@ -125,6 +139,14 @@ def bygg():
 <main><section><div class="wrap"><div class="ruta"><h3>Materialet kommer snart</h3>
 <p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
+    # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
+    for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Här kommer viktiga matteord förklarade på olika språk.'),
+                         ('bedomning.html', 'Bedömning', 'Här kommer information om hur du visar vad du kan i matematik.')]:
+        sida(fil, t, '', NEUTRAL, f"""
+<div class="hero"><div class="wrap"><div><h1>{t}</h1><p>{text}</p></div></div></div>
+{wave(NEUTRAL['ink'], NEUTRAL['w'])}
+<main><section><div class="wrap"><div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Sidan fylls på under läsåret.</p></div>
+<a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
 
 if __name__ == '__main__':
