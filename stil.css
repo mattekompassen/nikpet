@@ -82,6 +82,9 @@ a.typ{background:var(--ink);border-color:var(--ink)}a.typ h3,a.typ .pil{color:#f
 .typ .pil{position:absolute;top:20px;right:22px;font-size:24px;font-weight:700;color:var(--ink)}
 .typ.tom{opacity:.55;border-style:dashed}.typ small{display:inline-block;margin-top:10px;font-weight:700;color:var(--ink);font-size:13px}
 a.knapp2{text-decoration:none;display:inline-block}
+.alt{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:620px}.alt .mb{font-size:19px;font-weight:700;color:var(--ink);text-align:center;padding:14px}
+.mb.kvar{animation:none;opacity:1}.forkl{color:#292A28;font-weight:500;font-size:16px}.fb.ok .forkl{display:block;margin-top:4px}
+.lucka{display:inline-block;min-width:80px;border-bottom:4px solid var(--mid);color:var(--mid);text-align:center;padding:0 8px}.lucka.fylld{color:#2E7D32;border-color:#2E7D32}
 .trana-ruta{max-width:640px;margin:34px auto 0;text-align:left}
 .rutor .info{gap:16px;padding:20px 20px}.rutor .info .ik{width:60px;height:60px;flex:0 0 60px}.rutor .info .ik svg{width:32px;height:32px}.rutor .info h3{font-size:19px;line-height:1.25;margin:0 0 6px}.rutor .info p{font-size:15px;line-height:1.45;margin:0}.rutor .info .pil{margin-left:auto}
 .rutor{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}

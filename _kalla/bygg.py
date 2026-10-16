@@ -109,6 +109,9 @@ a.typ{background:var(--ink);border-color:var(--ink)}a.typ h3,a.typ .pil{color:#f
 .typ .pil{position:absolute;top:20px;right:22px;font-size:24px;font-weight:700;color:var(--ink)}
 .typ.tom{opacity:.55;border-style:dashed}.typ small{display:inline-block;margin-top:10px;font-weight:700;color:var(--ink);font-size:13px}
 a.knapp2{text-decoration:none;display:inline-block}
+.alt{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:620px}.alt .mb{font-size:19px;font-weight:700;color:var(--ink);text-align:center;padding:14px}
+.mb.kvar{animation:none;opacity:1}.forkl{color:#292A28;font-weight:500;font-size:16px}.fb.ok .forkl{display:block;margin-top:4px}
+.lucka{display:inline-block;min-width:80px;border-bottom:4px solid var(--mid);color:var(--mid);text-align:center;padding:0 8px}.lucka.fylld{color:#2E7D32;border-color:#2E7D32}
 .trana-ruta{max-width:640px;margin:34px auto 0;text-align:left}
 .rutor .info{gap:16px;padding:20px 20px}.rutor .info .ik{width:60px;height:60px;flex:0 0 60px}.rutor .info .ik svg{width:32px;height:32px}.rutor .info h3{font-size:19px;line-height:1.25;margin:0 0 6px}.rutor .info p{font-size:15px;line-height:1.45;margin:0}.rutor .info .pil{margin-left:auto}
 .rutor{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}
@@ -217,8 +220,10 @@ def bygg():
 <div><div class="etikett">ÅK 7 · MATEMATIK X · TRÄNA EXTRA</div><h1>{t}</h1><p>{p}</p></div></div></div>
 {wave(c['ink'], c['w'])}"""
             typer = [('trana-rakna.html', '🔢', 'Räkneträning', 'Tio uppgifter per avsnitt med nya tal varje gång. Rätta direkt och samla stjärnor.'),
-                     ('trana-begrepp.html', '🧩', 'Matcha begrepp', 'Para ihop matteord med rätt förklaring. Nya ord varje omgång.')]
-            snart = [('✅', 'Sant eller falskt', 'Avgör snabbt om påståendet stämmer.'), ('⏱️', 'Tidsutmaning', 'Hur många hinner du på en minut?')]
+                     ('trana-begrepp.html', '🧩', 'Matcha begrepp', 'Para ihop matteord med rätt förklaring. Nya ord varje omgång.'),
+                     ('trana-quiz.html', '❓', 'Quiz', 'Flervalsfrågor med rätt eller fel direkt och en förklaring.'),
+                     ('trana-fyll.html', '✏️', 'Fyll i svaret', 'Skriv in det som saknas. Svaret kontrolleras direkt.')]
+            snart = []
             rutor = ''.join(f'<a class="typ" href="{h}"><span class="em">{e}</span><h3>{t}</h3><p>{p}</p><span class="pil">→</span></a>' for h, e, t, p in typer)
             rutor += ''.join(f'<div class="typ tom"><span class="em">{e}</span><h3>{t}</h3><p>{p}</p><small>Kommer snart</small></div>' for e, t, p in snart)
             tillbaka = '<a class="knapp" href="trana.html">← Alla övningar</a>'
@@ -227,7 +232,9 @@ def bygg():
 <div class="typer">{rutor}</div>
 <a class="knapp" href="../ak7.html">← Tillbaka till åk 7</a></div></section></main>""", rot='../')
             for fil, lage, t, p in [('trana-rakna.html', 'rakna', 'Räkneträning', 'Korta övningar med nya tal varje gång.'),
-                                    ('trana-begrepp.html', 'begrepp', 'Matcha begrepp', 'Para ihop begrepp med rätt förklaring.')]:
+                                    ('trana-begrepp.html', 'begrepp', 'Matcha begrepp', 'Para ihop begrepp med rätt förklaring.'),
+                                    ('trana-quiz.html', 'quiz', 'Quiz', 'Välj rätt svar bland fyra alternativ.'),
+                                    ('trana-fyll.html', 'fyll', 'Fyll i svaret', 'Skriv in det som saknas i meningen.')]:
                 sida(f'ak7/{fil}', f'{t} – åk 7', 'Åk 7', c, hero(t, p) + f"""
 <main><section><div class="wrap"><h2>Kapitel 1 <span style="font-weight:500;opacity:.7">Taluppfattning</span></h2>
 <div id="trana" data-lage="{lage}"></div>
