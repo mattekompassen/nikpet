@@ -102,6 +102,13 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 @keyframes skak{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .valj button.spec{background:var(--ink);color:#fff;border-color:var(--ink)}.valj button.spec b{color:var(--hi)}
 .match-kort{max-width:860px}.match>div{min-width:0}.mb{overflow-wrap:anywhere}
+.typer{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;max-width:1000px}
+.typ{position:relative;display:block;background:var(--vl);border:2px solid var(--l);border-radius:22px;padding:22px 22px 20px;text-decoration:none;transition:transform .15s}
+a.typ:hover{transform:translateY(-4px);border-color:var(--mid)}
+.typ .em{font-size:40px;line-height:1}.typ h3{margin:10px 0 4px;color:var(--ink);font-size:21px}.typ p{margin:0;color:#4A4E52;font-size:15px}
+.typ .pil{position:absolute;top:20px;right:22px;font-size:24px;font-weight:700;color:var(--ink)}
+.typ.tom{opacity:.55;border-style:dashed}.typ small{display:inline-block;margin-top:10px;font-weight:700;color:var(--ink);font-size:13px}
+a.knapp2{text-decoration:none;display:inline-block}
 .trana-ruta{max-width:640px;margin:34px auto 0;text-align:left}
 .rutor .info{gap:16px;padding:20px 20px}.rutor .info .ik{width:60px;height:60px;flex:0 0 60px}.rutor .info .ik svg{width:32px;height:32px}.rutor .info h3{font-size:19px;line-height:1.25;margin:0 0 6px}.rutor .info p{font-size:15px;line-height:1.45;margin:0}.rutor .info .pil{margin-left:auto}
 .rutor{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:34px}
@@ -205,13 +212,26 @@ def bygg():
 <main><section class="center"><div class="wrap"><h2>Lektionsmaterial</h2><p class="sub">Allt du behöver till lektionerna i åk {k}.</p>
 <div class="ikoner">{ikoner}</div>{trana_ruta(k)}</div></section></main>""")
         if k == 7:
-            sida('ak7/trana.html', 'Träna extra – åk 7', 'Åk 7', c, f"""
+            hero = lambda t, p: f"""
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">7</div>
-<div><div class="etikett">ÅK 7 · MATEMATIK X</div><h1>Träna extra</h1><p>Korta övningar med nya tal varje gång. Inget sparas, det är bara du som tränar.</p></div></div></div>
-{wave(c['ink'], c['w'])}
+<div><div class="etikett">ÅK 7 · MATEMATIK X · TRÄNA EXTRA</div><h1>{t}</h1><p>{p}</p></div></div></div>
+{wave(c['ink'], c['w'])}"""
+            typer = [('trana-rakna.html', '🔢', 'Räkneträning', 'Tio uppgifter per avsnitt med nya tal varje gång. Rätta direkt och samla stjärnor.'),
+                     ('trana-begrepp.html', '🧩', 'Matcha begrepp', 'Para ihop matteord med rätt förklaring. Nya ord varje omgång.')]
+            snart = [('✅', 'Sant eller falskt', 'Avgör snabbt om påståendet stämmer.'), ('⏱️', 'Tidsutmaning', 'Hur många hinner du på en minut?')]
+            rutor = ''.join(f'<a class="typ" href="{h}"><span class="em">{e}</span><h3>{t}</h3><p>{p}</p><span class="pil">→</span></a>' for h, e, t, p in typer)
+            rutor += ''.join(f'<div class="typ tom"><span class="em">{e}</span><h3>{t}</h3><p>{p}</p><small>Kommer snart</small></div>' for e, t, p in snart)
+            tillbaka = '<a class="knapp" href="trana.html">← Alla övningar</a>'
+            sida('ak7/trana.html', 'Träna extra – åk 7', 'Åk 7', c, hero('Träna extra', 'Välj en typ av övning. Inget sparas, det är bara du som tränar.') + f"""
 <main><section><div class="wrap"><h2>Kapitel 1 <span style="font-weight:500;opacity:.7">Taluppfattning</span></h2><p class="sub">Fler kapitel kommer.</p>
-<div id="trana"></div>
-<a class="knapp" href="../ak7.html">← Tillbaka till åk 7</a></div></section></main>
+<div class="typer">{rutor}</div>
+<a class="knapp" href="../ak7.html">← Tillbaka till åk 7</a></div></section></main>""", rot='../')
+            for fil, lage, t, p in [('trana-rakna.html', 'rakna', 'Räkneträning', 'Korta övningar med nya tal varje gång.'),
+                                    ('trana-begrepp.html', 'begrepp', 'Matcha begrepp', 'Para ihop begrepp med rätt förklaring.')]:
+                sida(f'ak7/{fil}', f'{t} – åk 7', 'Åk 7', c, hero(t, p) + f"""
+<main><section><div class="wrap"><h2>Kapitel 1 <span style="font-weight:500;opacity:.7">Taluppfattning</span></h2>
+<div id="trana" data-lage="{lage}"></div>
+{tillbaka}</div></section></main>
 <script src="../trana.js"></script>""", rot='../')
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""

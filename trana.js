@@ -118,9 +118,8 @@
         if (klara === PAR) setTimeout(() => {
           const m = forsok === PAR ? 'Felfritt! 🏆' : forsok <= PAR + 3 ? 'Bra jobbat! 🌟' : 'Bra kämpat! 💪';
           el.innerHTML = `<div class="kort-t"><p class="fraga">${m}</p><p>Du hittade alla ${PAR} par på ${forsok} försök.</p>
-            <button class="knapp2" data-a="om">Nya begrepp</button> <button class="knapp2 sek" data-a="meny">Tillbaka</button></div>`;
+            <button class="knapp2" data-a="om">Nya begrepp</button> <a class="knapp2 sek" href="trana.html">Andra övningar</a></div>`;
           el.querySelector('[data-a=om]').onclick = matcha;
-          el.querySelector('[data-a=meny]').onclick = meny;
         }, 900);
       } else {
         [a, b].forEach(x => { x.classList.add('fel'); setTimeout(() => x.classList.remove('fel'), 600); });
@@ -134,10 +133,8 @@
 
   function meny() {
     el.innerHTML = '<p class="ingress">Välj ett avsnitt. Du får ' + RUNDA + ' uppgifter med nya tal varje gång.</p><div class="valj">' +
-      Object.entries(AVSNITT).map(([k, a]) => `<button data-k="${k}"><b>${k}</b>${a.namn}</button>`).join('') + '</div>' +
-      '<p class="ingress" style="margin-top:28px">Kan du orden? Para ihop begrepp med rätt förklaring.</p><div class="valj"><button class="spec" data-m="1"><b>Hela kapitlet</b>🧩 Matcha begrepp</button></div>';
+      Object.entries(AVSNITT).map(([k, a]) => `<button data-k="${k}"><b>${k}</b>${a.namn}</button>`).join('') + '</div>';
     el.querySelectorAll('button[data-k]').forEach(b => b.onclick = () => start(b.dataset.k));
-    el.querySelector('[data-m]').onclick = matcha;
   }
   function start(k) { avs = k; nr = 0; ratt = 0; svit = 0; ny(); }
   function ny() {
@@ -176,5 +173,5 @@
     el.querySelector('[data-a=om]').onclick = () => start(avs);
     el.querySelector('[data-a=meny]').onclick = meny;
   }
-  meny();
+  el.dataset.lage === 'begrepp' ? matcha() : meny();
 })();
