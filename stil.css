@@ -29,7 +29,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .kort a:hover img,.ikoner a:hover img{transform:translateY(-4px)}
 .num{width:120px;height:120px;border-radius:26px;background:var(--vl);color:var(--ink);font-weight:900;font-size:88px;display:flex;align-items:center;justify-content:center;flex:none;line-height:1}
 .etikett{font-weight:700;color:var(--hi);font-size:16px;letter-spacing:2px}
-.ikoner{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:640px;margin:0 auto}
+.ikoner{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:860px;margin:0 auto}
 .ikoner img{filter:drop-shadow(0 6px 14px rgba(0,0,0,.10));transition:transform .15s}
 .center{text-align:center}
 .pl h2{font-size:26px;margin:36px 0 12px;color:var(--ink)}.pl p.ingress{font-size:18px;max-width:760px;line-height:1.6}

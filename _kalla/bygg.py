@@ -54,7 +54,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .kort a:hover img,.ikoner a:hover img{transform:translateY(-4px)}
 .num{width:120px;height:120px;border-radius:26px;background:var(--vl);color:var(--ink);font-weight:900;font-size:88px;display:flex;align-items:center;justify-content:center;flex:none;line-height:1}
 .etikett{font-weight:700;color:var(--hi);font-size:16px;letter-spacing:2px}
-.ikoner{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:640px;margin:0 auto}
+.ikoner{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:860px;margin:0 auto}
 .ikoner img{filter:drop-shadow(0 6px 14px rgba(0,0,0,.10));transition:transform .15s}
 .center{text-align:center}
 .pl h2{font-size:26px;margin:36px 0 12px;color:var(--ink)}.pl p.ingress{font-size:18px;max-width:760px;line-height:1.6}
@@ -227,13 +227,15 @@ def bygg():
     # Årskurssidor och undersidor
     for k, c in AR.items():
         ikoner = ''.join(f'<a href="ak{k}/{s}.html"><img src="bilder/ak{k}/{f}.png" alt="{t}"></a>' for f, s, t in MATERIAL)
+        if k in TRANA_AR:
+            ikoner += f'<a href="ak{k}/trana.html"><img src="bilder/ak{k}/16_Interaktiva_ovningar.png" alt="Interaktiva övningar"></a>'
         sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, f"""
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">{k}</div>
 <div><div class="etikett">MATEMATIK {c['bok']}</div><h1 class="streck">Åk {k}</h1>
 <p>Planering, lektioner, problemlösning, repetitionsuppgifter och mycket mer för Matematik {c['bok']}.</p></div></div></div>
 {wave(c['ink'], c['w'])}
 <main><section class="center"><div class="wrap"><h2>Lektionsmaterial</h2><p class="sub">Allt du behöver till lektionerna i åk {k}.</p>
-<div class="ikoner">{ikoner}</div>{trana_ruta(k)}</div></section></main>""")
+<div class="ikoner">{ikoner}</div></div></section></main>""")
         if k in TRANA_AR:
             hero = lambda t, p: f"""
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">{k}</div>
