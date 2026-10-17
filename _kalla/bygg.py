@@ -174,6 +174,7 @@ def innehall(k, s, t):
     # Under Lektioner visas även Mål och framgångskriterier (per avsnitt) och Tidsplan och arbetsgång (sist i kapitlet)
     tp = d.get('tidsplan-och-arbetsgang', {}) if lek else {}
     tu = d.get('testuppgifter', {}) if lek else {}
+    ru = d.get('repetitionsuppgifter', {}) if lek else {}
     mal = d.get('mal-och-framgangskriterier', {}) if lek else {}
     if s not in d and not tp and not mal:
         return f'<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>'
@@ -196,7 +197,7 @@ def innehall(k, s, t):
                     lank += (f'<a class="mal" href="{drive(mi)}" target="_blank" rel="noopener">Mål</a>' if mi else '') + '</div>'
             else:
                 lank = ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener"><b>{html.escape(a.split(' ',1)[0])}</b>{html.escape(a.split(' ',1)[1])}</a>' for a, i in filer)
-            lank += ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener">{html.escape(a)}</a>' for a, i in tp.get(nr, []) + tu.get(nr, []))
+            lank += ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener">{html.escape(a)}</a>' for a, i in tp.get(nr, []) + ru.get(nr, []) + tu.get(nr, []))
             ut.append(f'<details class="kap"><summary><span>Kapitel {nr}<small>{html.escape(namn)}</small></span></summary><div class="lankar">{lank}</div></details>')
         else:
             ut.append(f'<details class="kap tom"><summary><span>Kapitel {nr}<small>{html.escape(namn)} · kommer snart</small></span></summary></details>')
