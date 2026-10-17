@@ -216,7 +216,7 @@ def bygg():
     kort = ''.join(f'<a href="ak{k}.html"><img src="bilder/arskurs-{k}.png" alt="Åk {k}, Matematik {AR[k]["bok"]}: planering, lektioner, problemlösning, repetitionsuppgifter och mycket mer"></a>' for k in AR)
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
 <div class="hero"><div class="wrap"><div><h1>Hitta rätt i <span>matematiken</span></h1>
-<p>Här hittar du planering, lektioner, problemlösning och repetition för åk 7–9. Välj din årskurs nedan för att börja.</p></div>
+</div>
 <img class="bild" src="bilder/kompass-matte.png" alt="Kompass med räknesätten plus, gånger, minus och delat med"></div></div>
 {wave(NEUTRAL['ink'], NEUTRAL['w'])}
 <main><section><div class="wrap"><h2>Välj din årskurs</h2><p class="sub">Allt för din årskurs och din bok samlat på ett ställe.</p>
