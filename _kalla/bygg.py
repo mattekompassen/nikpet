@@ -45,6 +45,7 @@ nav a.on{opacity:1;font-weight:700;border-bottom-color:var(--hi)}
 .hero h1.streck::after{content:"";display:block;width:90px;height:6px;border-radius:3px;background:#F2CD69;margin-top:10px}
 .hero p{font-size:clamp(16px,1.6vw,19px);opacity:.9;margin:0;max-width:640px}
 .hero .bild{width:min(185px,26vw);flex:none}
+.hero.start .wrap{flex-direction:row;justify-content:flex-start;align-items:center;gap:28px;padding-top:14px;padding-bottom:18px}.hero.start .bild{width:150px}.hero.start h1{margin:0}
 .wave{display:block;width:100%;height:40px}
 main section{padding:6px 0 60px}
 h2{font-size:clamp(24px,3vw,32px);margin:0 0 4px;color:var(--ink)}
@@ -125,6 +126,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 footer span{opacity:.8}
 .sr{position:absolute;left:-9999px}
 @media (max-width:800px){
+ .hero.start .wrap{flex-direction:row;align-items:center;gap:16px;padding-top:6px;padding-bottom:14px}.hero.start .bild{width:92px}.hero.start h1{font-size:28px}
  .hero .wrap{flex-direction:column-reverse;align-items:flex-start}
  .hero .bild{width:150px}
  .num{display:none}
@@ -215,9 +217,8 @@ def bygg():
     # Startsida
     kort = ''.join(f'<a href="ak{k}.html"><img src="bilder/arskurs-{k}.png" alt="Åk {k}, Matematik {AR[k]["bok"]}: planering, lektioner, problemlösning, repetitionsuppgifter och mycket mer"></a>' for k in AR)
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
-<div class="hero"><div class="wrap"><div><h1>Hitta rätt i <span>matematiken</span></h1>
-</div>
-<img class="bild" src="bilder/kompass-matte.png" alt="Kompass med räknesätten plus, gånger, minus och delat med"></div></div>
+<div class="hero start"><div class="wrap"><img class="bild" src="bilder/kompass-matte.png" alt="Kompass med räknesätten plus, gånger, minus och delat med">
+<h1>Hitta rätt i <span>matematiken</span></h1></div></div>
 {wave(NEUTRAL['ink'], NEUTRAL['w'])}
 <main><section><div class="wrap"><h2>Välj din årskurs</h2><p class="sub">Allt för din årskurs och din bok samlat på ett ställe.</p>
 <div class="kort">{kort}</div>
