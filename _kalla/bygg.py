@@ -12,7 +12,6 @@ AR = {
 }
 # Nio ikoner på årskurssidan: (filnamn, sidnamn, rubrik)
 MATERIAL = [
- ('14_Tidsplan_och_arbetsgang', 'tidsplan-och-arbetsgang', 'Tidsplan och arbetsgång'),
  ('07_Lektioner', 'lektioner', 'Lektioner'),
  ('09_Mal_och_framgangskriterier', 'mal-och-framgangskriterier', 'Mål och framgångskriterier'),
  ('08_Tillbakablick', 'tillbakablick', 'Tillbakablick'),
@@ -170,13 +169,16 @@ def trana_ruta(k):
 
 def innehall(k, s, t):
     d = LANKAR.get(str(k), {})
-    if s not in d:
+    tp = d.get('tidsplan-och-arbetsgang', {}) if s == 'lektioner' else {}
+    if s not in d and not tp:
         return f'<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>'
     ut = []
     for nr, namn in d['kapitel']:
-        filer = d[s].get(nr)
-        if filer:
-            lank = ''.join(f'<a href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener"><b>{html.escape(a.split(' ',1)[0])}</b>{html.escape(a.split(' ',1)[1])}</a>' for a, i in filer)
+        filer = d.get(s, {}).get(nr)
+        if filer or tp.get(nr):
+            lank = ''.join(f'<a href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener"><b>{html.escape(a.split(' ',1)[0])}</b>{html.escape(a.split(' ',1)[1])}</a>' for a, i in filer or [])
+            # Tidsplan och arbetsgång ligger sist i kapitlet under Lektioner
+            lank += ''.join(f'<a href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener">{html.escape(a)}</a>' for a, i in tp.get(nr, []))
             ut.append(f'<details class="kap"><summary><span>Kapitel {nr}<small>{html.escape(namn)}</small></span></summary><div class="lankar">{lank}</div></details>')
         else:
             ut.append(f'<details class="kap tom"><summary><span>Kapitel {nr}<small>{html.escape(namn)} · kommer snart</small></span></summary></details>')
