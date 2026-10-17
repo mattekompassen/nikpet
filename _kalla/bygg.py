@@ -13,7 +13,6 @@ AR = {
 # Nio ikoner på årskurssidan: (filnamn, sidnamn, rubrik)
 MATERIAL = [
  ('07_Lektioner', 'lektioner', 'Lektioner'),
- ('09_Mal_och_framgangskriterier', 'mal-och-framgangskriterier', 'Mål och framgångskriterier'),
  ('08_Tillbakablick', 'tillbakablick', 'Tillbakablick'),
  ('10_Trygg_start', 'trygg-start', 'Trygg start'),
  ('06_Problemlosning', 'problemlosning', 'Problemlösning'),
@@ -74,7 +73,9 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .lankar{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;padding:0 24px 20px}
 .lankar a{display:block;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:11px 14px;text-decoration:none;color:var(--ink);font-weight:600}
 .lankar a.sprak{display:flex;align-items:center;gap:10px}.lankar a.sprak img{width:24px;height:18px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
-.lankar a:hover{border-color:var(--mid)}.lankar a b{color:var(--mid);margin-right:6px}
+.lankar a:hover{border-color:var(--mid)}
+.lankar .rad{display:flex;gap:6px}.lankar .rad>a:first-child,.lankar .rad>span{flex:1;display:block;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:11px 14px;color:var(--ink);font-weight:600}.lankar .rad>span{opacity:.75}.lankar .rad b{color:var(--mid);margin-right:6px}
+.lankar a.mal{flex:none;display:flex;align-items:center;background:var(--ink);border-color:var(--ink);color:#fff;font-size:14px;padding:0 14px}.lankar a.mal:hover{opacity:.85}.lankar a b{color:var(--mid);margin-right:6px}
 .knapp{display:inline-block;margin-top:24px;padding:14px 26px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700}
 
 .valj{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;max-width:860px}
@@ -169,16 +170,32 @@ def trana_ruta(k):
 
 def innehall(k, s, t):
     d = LANKAR.get(str(k), {})
-    tp = d.get('tidsplan-och-arbetsgang', {}) if s == 'lektioner' else {}
-    if s not in d and not tp:
+    lek = s == 'lektioner'
+    # Under Lektioner visas även Mål och framgångskriterier (per avsnitt) och Tidsplan och arbetsgång (sist i kapitlet)
+    tp = d.get('tidsplan-och-arbetsgang', {}) if lek else {}
+    mal = d.get('mal-och-framgangskriterier', {}) if lek else {}
+    if s not in d and not tp and not mal:
         return f'<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>'
+    drive = lambda i: f'https://drive.google.com/file/d/{i}/view'
     ut = []
     for nr, namn in d['kapitel']:
-        filer = d.get(s, {}).get(nr)
-        if filer or tp.get(nr):
-            lank = ''.join(f'<a href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener"><b>{html.escape(a.split(' ',1)[0])}</b>{html.escape(a.split(' ',1)[1])}</a>' for a, i in filer or [])
-            # Tidsplan och arbetsgång ligger sist i kapitlet under Lektioner
-            lank += ''.join(f'<a href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener">{html.escape(a)}</a>' for a, i in tp.get(nr, []))
+        filer = d.get(s, {}).get(nr) or []
+        if filer or tp.get(nr) or mal.get(nr):
+            if lek:
+                rader = {}
+                for a, i in filer:
+                    rader.setdefault(a.split(' ', 1)[0], [a, None, None])[1] = i
+                for a, i in mal.get(nr, []):
+                    rader.setdefault(a.split(' ', 1)[0], [a, None, None])[2] = i
+                lank = ''
+                for a, li, mi in sorted(rader.values(), key=lambda r: [int(x) for x in r[0].split(' ', 1)[0].split('.')]):
+                    n, rest = a.split(' ', 1)
+                    namnet = f'<b>{html.escape(n)}</b>{html.escape(rest)}'
+                    lank += '<div class="rad">' + (f'<a href="{drive(li)}" target="_blank" rel="noopener">{namnet}</a>' if li else f'<span>{namnet}</span>')
+                    lank += (f'<a class="mal" href="{drive(mi)}" target="_blank" rel="noopener">Mål</a>' if mi else '') + '</div>'
+            else:
+                lank = ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener"><b>{html.escape(a.split(' ',1)[0])}</b>{html.escape(a.split(' ',1)[1])}</a>' for a, i in filer)
+            lank += ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener">{html.escape(a)}</a>' for a, i in tp.get(nr, []))
             ut.append(f'<details class="kap"><summary><span>Kapitel {nr}<small>{html.escape(namn)}</small></span></summary><div class="lankar">{lank}</div></details>')
         else:
             ut.append(f'<details class="kap tom"><summary><span>Kapitel {nr}<small>{html.escape(namn)} · kommer snart</small></span></summary></details>')
