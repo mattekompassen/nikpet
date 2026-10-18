@@ -1,6 +1,7 @@
 # Elevsida om nationella provet i matematik åk 9 (info från Skolverket, lärarinformation VT 2027), för nationella-prov.html
 # OBS: originalproven är sekretessbelagda. Övningsuppgifter här ska ha egna tal.
 import html
+VISA_OVNINGSPROV = False  # Nikola: övningsproven publiceras senare (PDF:er sparas i webbplats-kalla/np-pdf)
 DAGAR = [('Onsdag 12 maj 2027', 'Delprov A och B'), ('Fredag 14 maj 2027', 'Delprov C och D')]
 DELPROV = [  # bokstav, färg, ljus, tid, räknare?, typ, var svaren skrivs
  ('A', '#B95E52', '#F7E3DE', '40 min', False, 'Korta svar och flervalsfrågor.', 'Du skriver svaren i provhäftet.'),
@@ -86,12 +87,15 @@ def sida():
         ut.append(f'<div><h3>{e(t)}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in li) + '</ul></div>')
     ut.append('</div>')
     ut.append('<div class="info2"><h3>Behöver du anpassningar?</h3>Skolan kan anpassa hur provet genomförs, till exempel med mer tid eller ett lugnare rum. Kraven är desamma för alla. Prata med din mattelärare i god tid före provet.</div>')
-    ut.append('<h2 class="grupp" style="--g:#426B89">Så kan uppgifterna se ut</h2><p class="under">Så här kan uppgifterna i varje delprov se ut. Uppgifterna är egna och kommer inte från några riktiga prov. Skriv ut eller öppna uppgifterna, lös dem själv och rätta sedan med facit.</p>')
-    ut.append('<div class="pdfer">')
-    for b, g, gl, tid, rk, typ, var in DELPROV:
-        ut.append(f'<div style="--g:{g};--gl:{gl}"><h3><span>{b}</span>Delprov {b}</h3><p>{tid}</p>' + ''.join(f'<b class="ov">Övningsprov {n}</b><div class="par"><a class="pk" href="np/delprov-{b.lower()}{suf}.pdf" target="_blank">Uppgifter</a><a class="pf" href="np/delprov-{b.lower()}{suf}-facit.pdf" target="_blank">Facit</a></div>' for n, (suf, _) in enumerate(VERSIONER, 1)) + '</div>')
-    ut.append('</div>')
-    ut.append('<div class="kommer">Under läsåret kommer fler övningsprov att läggas upp här.</div>')
+    if VISA_OVNINGSPROV:
+        ut.append('<h2 class="grupp" style="--g:#426B89">Så kan uppgifterna se ut</h2><p class="under">Så här kan uppgifterna i varje delprov se ut. Uppgifterna är egna och kommer inte från några riktiga prov. Skriv ut eller öppna uppgifterna, lös dem själv och rätta sedan med facit.</p>')
+        ut.append('<div class="pdfer">')
+        for b, g, gl, tid, rk, typ, var in DELPROV:
+            ut.append(f'<div style="--g:{g};--gl:{gl}"><h3><span>{b}</span>Delprov {b}</h3><p>{tid}</p>' + ''.join(f'<b class="ov">Övningsprov {n}</b><div class="par"><a class="pk" href="np/delprov-{b.lower()}{suf}.pdf" target="_blank">Uppgifter</a><a class="pf" href="np/delprov-{b.lower()}{suf}-facit.pdf" target="_blank">Facit</a></div>' for n, (suf, _) in enumerate(VERSIONER, 1)) + '</div>')
+        ut.append('</div>')
+    else:
+        ut.append('<h2 class="grupp" style="--g:#426B89">Träna inför provet</h2>')
+    ut.append('<div class="kommer">Under läsåret kommer övningsprov för de fyra delproven att läggas upp här.</div>')
     ut.append('</div>')
     return ''.join(ut)
 
