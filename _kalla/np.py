@@ -75,11 +75,11 @@ def sida():
           '<p class="ingress">I åk 9 skriver alla elever i Sverige nationellt prov i matematik. Provet visar vad du kan och hjälper läraren när betyget sätts. Provet har fyra delar och skrivs på papper i skolan.</p>',
           '<h2 class="grupp" style="--g:#F2CD69">När är provet?</h2><p class="under">Vårterminen 2027. Provet börjar klockan 9.00 båda dagarna.</p><div class="dagar">']
     ut += [f'<div><b>{e(d)}</b>{e(t)}</div>' for d, t in DAGAR]
-    ut.append('</div><h2 class="grupp" style="--g:#2C4152">Fyra delprov</h2><p class="under">Varje delprov har en egen tid och egna regler för räknare och formelblad.</p><div class="dp">')
+    ut.append('</div><h2 class="grupp" style="--g:#2C4152">Fyra delprov</h2><p class="under">Varje delprov har en egen tid och egna regler för räknare och formelblad. Provet har inget muntligt delprov.</p><div class="dp">')
     for b, g, gl, tid, rk, typ, var in DELPROV:
         r = 'Räknare och formelblad' if rk else 'Utan räknare och formelblad'
         ut.append(f'<div class="dk" style="--g:{g};--gl:{gl}"><div class="bok"><span>{b}</span><div><h3>Delprov {b}</h3><div class="tid">{tid}</div></div></div><p>{e(typ)}</p><p>{e(var)}</p><span class="rk">{r}</span><span class="tp">Tänk på</span><ul>' + ''.join(f'<li>{e(x)}</li>' for x in TANK[b]) + '</ul></div>')
-    ut.append('</div><h2 class="grupp" style="--g:#5A7552">Vad får du ha med dig?</h2><p class="under">Kladdpapper finns i skolan. Provet har inget muntligt delprov.</p><div class="hm">')
+    ut.append('</div><h2 class="grupp" style="--g:#5A7552">Vad får du ha med dig?</h2><div class="hm">')
     ut.append('<div class="ja"><h3>Det här får du använda</h3><ul>' + ''.join(f'<li>{e(t)}</li>' for t in TA_MED) + '<li>Formelblad (delprov B, C och D)</li></ul></div>')
     ut.append('<div class="nej"><h3>Det här får du inte använda</h3><ul>' + ''.join(f'<li>{e(t)}</li>' for t in FAR_EJ) + '</ul></div></div>')
     ut.append('<h2 class="grupp" style="--g:#B95E52">Tips</h2><div class="tipsg">')
