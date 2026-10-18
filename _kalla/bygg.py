@@ -285,7 +285,7 @@ def bygg():
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
                          ('bedomning.html', 'Hur bedöms du?', 'Vad bedöms i matematik, och hur visar du vad du kan?'),
-                         ('hjalp.html', 'Så får du hjälp i matte', 'Vad gör vi för att alla ska lära sig, och vilken extra hjälp kan du få?'),
+                         ('hjalp.html', 'Så får du hjälp i matte', 'Så gör vi för att alla ska lära sig matte.'),
                          ('nationella-prov.html', 'Träna inför nationella prov', 'Här kommer uppgifter att öva på inför de nationella proven.')]:
         sida(fil, t, '', NEUTRAL, f"""
 <div class="hero"><div class="wrap"><div><h1>{t}</h1><p>{text}</p></div></div></div>
