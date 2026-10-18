@@ -207,6 +207,9 @@ def innehall(k, s, t):
     return ''.join(ut)
 
 def extra(fil):
+    if fil == 'hjalp.html':
+        import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import hjalp
+        return hjalp.sida()
     if fil == 'amnesord.html' and LANKAR.get('amnesord'):
         shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flaggor'), os.path.join(UT, 'bilder', 'flaggor'), dirs_exist_ok=True)
         lank = ''.join(f'<a class="sprak" href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener"><img src="bilder/flaggor/{f}.svg" alt="">{html.escape(n)}</a>' for n, i, f in LANKAR['amnesord'])
@@ -279,7 +282,7 @@ def bygg():
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
                          ('bedomning.html', 'Bedömning', 'Här kommer information om hur du visar vad du kan i matematik.'),
-                         ('hjalp.html', 'Så får du hjälp i matte', 'Här kommer information om vilket stöd du kan få i matematik.'),
+                         ('hjalp.html', 'Så får du hjälp i matte', 'Vad gör vi för att alla ska lära sig, och vilken extra hjälp kan du få?'),
                          ('nationella-prov.html', 'Träna inför nationella prov', 'Här kommer uppgifter att öva på inför de nationella proven.')]:
         sida(fil, t, '', NEUTRAL, f"""
 <div class="hero"><div class="wrap"><div><h1>{t}</h1><p>{text}</p></div></div></div>
