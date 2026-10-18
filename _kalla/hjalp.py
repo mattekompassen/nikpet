@@ -4,19 +4,19 @@ GRUPPER = [
   ('01', 'Du vet vad du ska lära dig', 'Varje lektion börjar med mål och framgångskriterier. Lektionerna har samma ordning: startuppgift, genomgång, arbete i par och arbete själv.', 'En checklista eller ett bildschema som visar vad du ska göra först, sedan och sist.'),
   ('02', 'Genomgångar steg för steg', 'Vi börjar med en tillbakablick på förra lektionen. Läraren visar med exempel steg för steg, ibland med en kort film.', 'En extra genomgång, en kopia av lektionsanteckningarna eller genomgången en gång till.'),
   ('03', 'Matteord och begrepp', 'Vi använder bilder, tallinjer och modeller. Svåra ord förklaras, och det finns ämnesord på olika språk.', 'Ett eget begreppshäfte, bilder och symboler som stöd, eller hjälp att förstå textuppgifter.'),
-  ('04', 'Uppgifter på din nivå', 'Uppgifterna går från lättare till svårare. Matematik BAS är grundträning, och fördjupningen ger mer utmaning.', 'Svårare uppgifter som utmanar dig, eller Trygg start som går steg för steg mot samma mål som klassen.'),
-  ('05', 'Problemlösning', 'Vi läser uppgiften tillsammans och stryker under det viktiga. Fråga dig: Vad vet jag? Vad ska jag ta reda på?', 'Klurigare problem att lösa på flera sätt, ett liknande exempel att utgå från eller uppgiften uppdelad i mindre steg.'),
+  ('04', 'Uppgifter på din nivå', 'Uppgifterna går från lättare till svårare. Matematik BAS är grundträning, och fördjupningen ger mer utmaning.', 'Färre uppgifter, eller Trygg start som går steg för steg mot samma mål som klassen.'),
+  ('05', 'Problemlösning', 'Vi läser uppgiften tillsammans och stryker under det viktiga. Fråga dig: Vad vet jag? Vad ska jag ta reda på?', 'Ett liknande exempel att utgå från, eller uppgiften uppdelad i mindre steg.'),
  ]),
  ('I klassrummet', '#426B89', '#DDEBF3', [
   ('06', 'Arbetsro och fokus', 'Vi arbetar i korta pass, ibland med en timer. Stödmaterial finns så att du kan komma igång själv.', 'En bra plats, hörlurar eller hörselkåpor, en kort paus eller ett lugnare rum att arbeta i.'),
-  ('07', 'Trygghet', 'Alla ska våga fråga och vara med. Det är okej att göra fel, det är så vi lär oss.', 'Läraren pratar gärna med dig om du känner dig osäker, och kan hålla kontakt med dina vårdnadshavare.'),
+  ('07', 'Trygghet', 'Alla ska våga fråga och vara med. Det är okej att göra fel, det är så vi lär oss.', 'Fler samtal med läraren, och kontakt med dina vårdnadshavare.'),
   ('08', 'Tid', 'Du får rimlig tid. En timer visar hur mycket tid som är kvar.', 'Längre tid, mer tid att läsa uppgifterna eller ett annat tillfälle att göra klart.'),
   ('09', 'Hjälpmedel', 'Vi använder konkret material och bilder på tavlan för att förstå bättre.', 'Miniräknare, talsyntes, matteboken som ljudbok eller iPad i stället för boken.'),
  ]),
  ('När vi ser hur det går', '#5A7552', '#E3ECDD', [
   ('10', 'Prov och bedömning', 'Innan provet vet du vad som bedöms. Du kan visa vad du kan på olika sätt.', 'Längre tid, ett lugnare rum eller att förklara muntligt. Kraven är desamma för alla.'),
-  ('11', 'Återkoppling', 'Läraren kollar hur det går med frågor och korta avstämningar, och visar vad ditt nästa steg är.', 'Fler avstämningar, så att du vet att du är på rätt väg, eller tips på hur du når nästa nivå.'),
-  ('12', 'Mattekompassen', 'Här finns lektioner, mål, tillbakablickar, repetition och övningar för din årskurs.', 'Tips på vad som passar dig, till exempel Tillbakablick för att repetera eller Interaktiva övningar för att träna mer.'),
+  ('11', 'Återkoppling', 'Läraren kollar hur det går med frågor och korta avstämningar, och visar vad ditt nästa steg är.', 'Fler avstämningar med läraren, så att du vet att du är på rätt väg.'),
+  ('12', 'Mattekompassen', 'Här finns lektioner, mål, tillbakablickar, repetition och övningar för din årskurs.', 'Hjälp att hitta det som passar dig, till exempel Tillbakablick eller Repetitionsuppgifter.'),
  ]),
 ]
 STEG = [('Tänk själv', 'Läs uppgiften igen. Vad vet du? Vad ska du ta reda på?'),
@@ -56,7 +56,7 @@ def sida():
     for namn, g, gl, kort in GRUPPER:
         ut.append(f'<h2 class="grupp" style="--g:{g}">{html.escape(namn)}</h2><div class="kortrad">')
         for nr, t, alla, mer in kort:
-            ut.append(f'<div class="hk" style="--g:{g};--gl:{gl}"><span class="nr">{nr}</span><h3>{html.escape(t)}</h3><p>{html.escape(alla)}</p><div class="mer"><b>Det här kan du också få</b>{html.escape(mer)}</div></div>')
+            ut.append(f'<div class="hk" style="--g:{g};--gl:{gl}"><span class="nr">{nr}</span><h3>{html.escape(t)}</h3><p>{html.escape(alla)}</p><div class="mer"><b>Om du har svårt kan du få</b>{html.escape(mer)}</div></div>')
         ut.append('</div>')
     ut.append('<h2 class="grupp" style="--g:#F2CD69">När du kör fast</h2><div class="steg">')
     ut += [f'<div><h3>{t}</h3><p>{p}</p></div>' for t, p in STEG]
