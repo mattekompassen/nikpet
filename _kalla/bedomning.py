@@ -28,7 +28,7 @@ FORMAGOR = [  # namn, färg, ljus, vad det är, så visar du det, E, C, A
   'Du redovisar tydligt och strukturerat med rätt symboler och matteord.'),
 ]
 TILLFALLEN = [('På lektionerna', 'När du diskuterar, förklarar för en kompis eller visar din lösning på tavlan.'),
-              ('Exit ticket och loggbok', 'I slutet av lektionen visar du vad du har lärt dig och vad du behöver öva mer på.'),
+              ('I räknehäftet', 'När läraren går runt visar du hur du har räknat i ditt räknehäfte och berättar hur du tänkte.'),
               ('Prov och diagnoser', 'Skriftliga prov efter varje kapitel och korta diagnoser som visar var du är.'),
               ('Muntligt', 'Ibland får du förklara hur du har tänkt, ensam med läraren eller i en liten grupp.'),
               ('Nationella prov', 'I åk 9 skriver alla nationella prov. Proven hjälper läraren när betyget sätts.')]
