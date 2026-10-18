@@ -178,13 +178,14 @@ def innehall(k, s, t):
     # Uppgifterna (PDF) ligger först i kapitlet på Test- och Repetition-sidan, före genomgången
     extra_upg = d.get({'test': 'testuppgifter', 'repetition': 'repetitionsuppgifter'}.get(s, ''), {})
     mal = d.get('mal-och-framgangskriterier', {}) if lek else {}
-    if s not in d and not tp and not mal:
+    sm = d.get('sammanfattning', {}) if lek else {}  # en sammanfattning per kapitel, efter avsnitten
+    if s not in d and not tp and not mal and not sm:
         return f'<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>'
     drive = lambda i: f'https://drive.google.com/file/d/{i}/view'
     ut = []
     for nr, namn in d['kapitel']:
         filer = extra_upg.get(nr, []) + (d.get(s, {}).get(nr) or [])
-        if filer or tp.get(nr) or mal.get(nr):
+        if filer or tp.get(nr) or mal.get(nr) or sm.get(nr):
             if lek:
                 rader = {}
                 for a, i in filer:
@@ -199,7 +200,7 @@ def innehall(k, s, t):
                     lank += (f'<a class="mal" href="{drive(mi)}" target="_blank" rel="noopener">Mål</a>' if mi else '') + '</div>'
             else:
                 lank = ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener"><b>{html.escape(a.split(' ',1)[0])}</b>{html.escape(a.split(' ',1)[1])}</a>' for a, i in filer)
-            lank += ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener">{html.escape(a)}</a>' for a, i in tp.get(nr, []))
+            lank += ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener">{html.escape(a)}</a>' for a, i in sm.get(nr, []) + tp.get(nr, []))
             ut.append(f'<details class="kap"><summary><span>Kapitel {nr}<small>{html.escape(namn)}</small></span></summary><div class="lankar">{lank}</div></details>')
         else:
             ut.append(f'<details class="kap tom"><summary><span>Kapitel {nr}<small>{html.escape(namn)} · kommer snart</small></span></summary></details>')
