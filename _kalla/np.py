@@ -19,7 +19,7 @@ TA_MED = ['Penna och sudd', 'Linjal', 'Räknare (delprov B, C och D)']
 FAR_EJ = ['Mobiltelefon', 'Smartklocka', 'Räknare och formelblad på delprov A']
 TIPS = [('Före provet', ['Öva huvudräkning och skriftlig räkning, för delprov A görs utan räknare.',
                          'Titta på formelbladet i förväg så att du vet vad som står där.',
-                         'Repetera med Repetition och Interaktiva övningar här på Mattekompassen.',
+                         'Träna med övningsproven längre ner på den här sidan.',
                          'Sov ordentligt och ät frukost.']),
         ('Under provet', ['Läs varje uppgift noga. Vad ska du ta reda på?',
                           'Börja med det du kan. Hoppa över och kom tillbaka sedan.',
