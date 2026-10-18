@@ -86,7 +86,6 @@ def sida():
     for t, li in TIPS:
         ut.append(f'<div><h3>{e(t)}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in li) + '</ul></div>')
     ut.append('</div>')
-    ut.append('<div class="info2"><h3>Behöver du anpassningar?</h3>Skolan kan anpassa hur provet genomförs, till exempel med mer tid eller ett lugnare rum. Kraven är desamma för alla. Prata med din mattelärare i god tid före provet.</div>')
     if VISA_OVNINGSPROV:
         ut.append('<h2 class="grupp" style="--g:#426B89">Så kan uppgifterna se ut</h2><p class="under">Så här kan uppgifterna i varje delprov se ut. Uppgifterna är egna och kommer inte från några riktiga prov. Skriv ut eller öppna uppgifterna, lös dem själv och rätta sedan med facit.</p>')
         ut.append('<div class="pdfer">')
