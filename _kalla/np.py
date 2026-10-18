@@ -8,6 +8,12 @@ DELPROV = [  # bokstav, färg, ljus, tid, räknare?, typ, var svaren skrivs
  ('C', '#8A5E22', '#F8EBC9', '40 min', True, 'Korta svar och flervalsfrågor.', 'Du skriver svaren i provhäftet.'),
  ('D', '#5A7552', '#E3ECDD', '80 min', True, 'Uppgifter där du visar hela lösningen.', 'Du skriver lösningarna på separat papper.'),
 ]
+TANK = {
+ 'A': ['Räkna i huvudet eller med skriftlig räkning på kladdpapperet.', 'Bara svaret räknas, så skriv det tydligt på rätt plats.', 'Vid flerval: läs alla alternativ innan du väljer.'],
+ 'B': ['Visa hela lösningen: uträkning, förklaring och svar.', 'Även en del av lösningen kan ge poäng, så skriv det du kommer fram till.', 'Läs formelbladet om du behöver en formel.'],
+ 'C': ['Använd räknaren, men tänk efter om svaret är rimligt.', 'Bara svaret räknas, så skriv det tydligt med rätt enhet.', 'Fastnar du? Hoppa vidare och kom tillbaka.'],
+ 'D': ['Visa hela lösningen, även när du använder räknare.', 'Skriv vad du räknar ut, till exempel "Arean är …".', 'Avsluta med ett tydligt svar och kontrollera att det är rimligt.'],
+}
 TA_MED = ['Penna och sudd', 'Linjal', 'Räknare (delprov B, C och D)']
 FAR_EJ = ['Mobiltelefon', 'Smartklocka', 'Räknare och formelblad på delprov A']
 TIPS = [('Före provet', ['Öva huvudräkning och skriftlig räkning, för delprov A görs utan räknare.',
@@ -34,6 +40,9 @@ CSS = """<style>
 .np .dk .bok h3{margin:0;font-size:19px;color:var(--g)}
 .np .dk .tid{font-size:15px;color:#5F6368}
 .np .dk p{margin:0 0 8px;line-height:1.45;font-size:15.5px}
+.np .dk ul{margin:10px 0 0;padding:10px 12px 10px 28px;background:var(--gl);border-radius:12px;font-size:14.5px;line-height:1.45}.np .dk .tp{display:block;margin-top:12px;font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--g)}
+.np .ex{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}.np .ex div{background:#FBF8F2;border:2px dashed #D9D4C8;border-radius:18px;padding:16px 18px}.np .ex b{color:var(--g)}.np .ex p{margin:6px 0 0;font-size:15px;color:#5F6368}
+@media(max-width:1000px){.np .ex{grid-template-columns:1fr 1fr}}@media(max-width:620px){.np .ex{grid-template-columns:1fr}}
 .np .dk .rk{display:inline-block;margin-top:4px;background:var(--gl);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:600;color:#292A28}
 .np .hm{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:760px}
 .np .hm div{background:#FBF8F2;border:2px solid #E6E1D7;border-radius:20px;padding:16px 20px}
@@ -59,7 +68,7 @@ def sida():
     ut.append('</div><h2 class="grupp" style="--g:#2C4152">Fyra delprov</h2><p class="under">Varje delprov har en egen tid och egna regler för räknare och formelblad.</p><div class="dp">')
     for b, g, gl, tid, rk, typ, var in DELPROV:
         r = 'Räknare och formelblad' if rk else 'Utan räknare och formelblad'
-        ut.append(f'<div class="dk" style="--g:{g};--gl:{gl}"><div class="bok"><span>{b}</span><div><h3>Delprov {b}</h3><div class="tid">{tid}</div></div></div><p>{e(typ)}</p><p>{e(var)}</p><span class="rk">{r}</span></div>')
+        ut.append(f'<div class="dk" style="--g:{g};--gl:{gl}"><div class="bok"><span>{b}</span><div><h3>Delprov {b}</h3><div class="tid">{tid}</div></div></div><p>{e(typ)}</p><p>{e(var)}</p><span class="rk">{r}</span><span class="tp">Tänk på</span><ul>' + ''.join(f'<li>{e(x)}</li>' for x in TANK[b]) + '</ul></div>')
     ut.append('</div><h2 class="grupp" style="--g:#5A7552">Vad får du ha med dig?</h2><p class="under">Kladdpapper finns i skolan. Provet har inget muntligt delprov.</p><div class="hm">')
     ut.append('<div class="ja"><h3>Det här får du använda</h3><ul>' + ''.join(f'<li>{e(t)}</li>' for t in TA_MED) + '<li>Formelblad (delprov B, C och D)</li></ul></div>')
     ut.append('<div class="nej"><h3>Det här får du inte använda</h3><ul>' + ''.join(f'<li>{e(t)}</li>' for t in FAR_EJ) + '</ul></div></div>')
@@ -68,6 +77,8 @@ def sida():
         ut.append(f'<div><h3>{e(t)}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in li) + '</ul></div>')
     ut.append('</div>')
     ut.append('<div class="info2"><h3>Behöver du anpassningar?</h3>Skolan kan anpassa hur provet genomförs, till exempel med mer tid eller ett lugnare rum. Kraven är desamma för alla. Prata med din mattelärare i god tid före provet.</div>')
-    ut.append('<h2 class="grupp" style="--g:#426B89">Träna inför provet</h2><div class="kommer">Här kommer övningsuppgifter som liknar de fyra delproven. Uppgifterna är egna, med andra tal än i de riktiga proven.</div>')
+    ut.append('<h2 class="grupp" style="--g:#426B89">Så kan uppgifterna se ut</h2><p class="under">Här ser du exempel på hur uppgifterna i varje delprov kan se ut. Uppgifterna är egna och har andra tal än de riktiga proven.</p><div class="ex">')
+    ut += [f'<div style="--g:{g}"><b>Delprov {b}</b><p>Exempeluppgifter kommer snart.</p></div>' for b, g, *_ in DELPROV]
+    ut.append('</div><div class="kommer">Under läsåret kommer fler övningsprov att läggas upp här.</div>')
     ut.append('</div>')
     return ''.join(ut)
