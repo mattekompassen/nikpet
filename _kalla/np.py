@@ -56,6 +56,14 @@ CSS = """<style>
 .np .info2{background:#E8E1D6;border:2px solid #D9D4C8;border-radius:20px;padding:20px 24px;margin:30px 0;max-width:900px;line-height:1.55}
 .np .info2 h3{margin:0 0 6px;font-size:19px;color:#2C4152}
 .np .kommer{background:#FBF8F2;border:2px dashed #D9D4C8;border-radius:20px;padding:20px 24px;max-width:900px;line-height:1.55}
+.np .pdfer{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
+.np .pdfer>div{background:#FBF8F2;border:2px solid #E6E1D7;border-top:8px solid var(--g);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.np .pdfer h3{display:flex;align-items:center;gap:10px;margin:0;font-size:19px;color:var(--g)}
+.np .pdfer h3 span{width:36px;height:36px;border-radius:10px;background:var(--g);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800}
+.np .pdfer p{margin:0 0 4px;color:#5F6368;font-size:15px}
+.np .pdfer a{display:block;text-align:center;border-radius:999px;padding:9px 12px;font-weight:700;text-decoration:none}
+.np .pdfer a.pk{background:var(--g);color:#fff}.np .pdfer a.pf{background:var(--gl);color:#292A28}
+@media(max-width:1000px){.np .pdfer{grid-template-columns:1fr 1fr}}@media(max-width:620px){.np .pdfer{grid-template-columns:1fr}}
 @media(max-width:1000px){.np .dp{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.np .dp,.np .dagar,.np .hm,.np .tipsg{grid-template-columns:1fr}}
 </style>"""
@@ -77,8 +85,67 @@ def sida():
         ut.append(f'<div><h3>{e(t)}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in li) + '</ul></div>')
     ut.append('</div>')
     ut.append('<div class="info2"><h3>Behöver du anpassningar?</h3>Skolan kan anpassa hur provet genomförs, till exempel med mer tid eller ett lugnare rum. Kraven är desamma för alla. Prata med din mattelärare i god tid före provet.</div>')
-    ut.append('<h2 class="grupp" style="--g:#426B89">Så kan uppgifterna se ut</h2><p class="under">Här ser du exempel på hur uppgifterna i varje delprov kan se ut. Uppgifterna är egna och har andra tal än de riktiga proven.</p><div class="ex">')
-    ut += [f'<div style="--g:{g}"><b>Delprov {b}</b><p>Exempeluppgifter kommer snart.</p></div>' for b, g, *_ in DELPROV]
-    ut.append('</div><div class="kommer">Under läsåret kommer fler övningsprov att läggas upp här.</div>')
+    ut.append('<h2 class="grupp" style="--g:#426B89">Så kan uppgifterna se ut</h2><p class="under">Så här kan uppgifterna i varje delprov se ut. Uppgifterna är egna och kommer inte från några riktiga prov. Skriv ut eller öppna uppgifterna, lös dem själv och rätta sedan med facit.</p>')
+    ut.append('<div class="pdfer">')
+    for b, g, gl, tid, rk, typ, var in DELPROV:
+        ut.append(f'<div style="--g:{g};--gl:{gl}"><h3><span>{b}</span>Delprov {b}</h3><p>{len(EXEMPEL[b])} uppgifter, {tid}</p><a class="pk" href="np/delprov-{b.lower()}.pdf" target="_blank">Uppgifter (PDF)</a><a class="pf" href="np/delprov-{b.lower()}-facit.pdf" target="_blank">Facit (PDF)</a></div>')
     ut.append('</div>')
+    ut.append('<div class="kommer">Under läsåret kommer fler övningsprov att läggas upp här.</div>')
+    ut.append('</div>')
+    return ''.join(ut)
+
+# Exempeluppgifter (egna, med nya tal – INTE originaluppgifter). (text, alternativ, poäng, svar)
+EXEMPEL = {
+ 'A': [('Vilket tal är störst?', ['0,307', '0,37', '0,3', '0,073'], 1, '0,37'),
+       ('Beräkna 7 − 3 · (−2)', None, 1, '13'),
+       ('Skriv 0,25 i procent och som ett bråk i enklaste form.', None, 2, '25 % och 1/4'),
+       ('En tröja kostar 400 kr. Priset sänks med 25 %. Vad kostar tröjan nu?', None, 1, '300 kr'),
+       ('Beräkna 2<sup>3</sup> + 3<sup>2</sup>', None, 1, '17'),
+       ('Lös ekvationen x/4 + 3 = 8', None, 1, 'x = 20'),
+       ('En rektangel har omkretsen 30 cm. En av sidorna är 6 cm. Vilken area har rektangeln?', None, 1, '54 cm² (den andra sidan är 9 cm)'),
+       ('Vilket uttryck betyder "dubbla summan av a och 5"?', ['2a + 5', '2(a + 5)', 'a + 10', '2 · a · 5'], 1, '2(a + 5)'),
+       ('Skriv 3,2 · 10<sup>−2</sup> som ett decimaltal.', None, 1, '0,032')],
+ 'B': [('Elin ska köpa 18 glassar. Ett paket med 4 glassar kostar 52 kr. En glass kostar 15 kr styck. Vad är det billigaste sättet att köpa precis 18 glassar, och vad kostar det?', None, 2, '4 paket och 2 styck: 4 · 52 + 2 · 15 = 238 kr'),
+       ('Tabellen visar lägsta temperaturen varje dag under en vecka.<table class="tb"><tr><th>Dag</th><td>mån</td><td>tis</td><td>ons</td><td>tor</td><td>fre</td><td>lör</td><td>sön</td></tr><tr><th>°C</th><td>4</td><td>−2</td><td>0</td><td>3</td><td>−1</td><td>5</td><td>5</td></tr></table>a) Vilken är medianen? Endast svar krävs.<br>b) Vilket är medelvärdet?', None, 3, 'a) 3 °C<br>b) 14 / 7 = 2 °C'),
+       ('En triangel har vinklarna x, 2x och 3x. Hur stor är den största vinkeln?', None, 2, 'x + 2x + 3x = 180°, x = 30°. Den största vinkeln är 90°.'),
+       ('En taxiresa kostar 45 kr i startavgift och 12 kr per km.<br>a) Skriv en formel för kostnaden K kr för en resa på x km.<br>b) Hur långt kan man åka för 285 kr?', None, 3, 'a) K = 45 + 12x<br>b) 45 + 12x = 285 ger x = 20, alltså 20 km'),
+       ('En bil kostar 200 000 kr när den är ny. Bilens värde minskar med 15 % varje år. Vad är bilen värd efter 2 år?', None, 3, '200 000 · 0,85 · 0,85 = 144 500 kr')],
+ 'C': [('En cykel kostar 4 800 kr. Priset höjs med 12 %. Vad kostar cykeln nu?', None, 1, '5 376 kr'),
+       ('Lös ekvationen 5(x − 2) = 3x + 6', None, 1, 'x = 8'),
+       ('Hur många minuter är 2,4 timmar?', None, 1, '144 minuter'),
+       ('En cirkel har diametern 10 cm. Hur stor är cirkelns area? Avrunda till hela cm².', None, 1, '79 cm²'),
+       ('En karta har skalan 1:50 000. Hur långt är det i verkligheten om avståndet på kartan är 6 cm?', None, 1, '3 km'),
+       ('Du kastar en vanlig tärning. Hur stor är sannolikheten att du får ett tal som är större än 4?', None, 1, '2/6 = 1/3'),
+       ('Vilket värde har uttrycket 3x<sup>2</sup> − 2x om x = −2?', None, 1, '16'),
+       ('En kvadrat har arean 50 cm². Hur lång är sidan? Avrunda till en decimal.', None, 1, '7,1 cm')],
+ 'D': [('Ett gym har två sorters kort. Kort A kostar 300 kr i månaden. Kort B kostar 100 kr i månaden och 40 kr för varje besök. Hur många besök i månaden behöver man göra för att kort A ska vara billigast?', None, 3, '100 + 40n > 300 ger n > 5. Minst 6 besök.'),
+       ('En stege som är 5,0 m lång står lutad mot en vägg. Stegens fot står 1,4 m från väggen. Hur högt upp på väggen når stegen?', None, 2, '√(5,0² − 1,4²) = √23,04 = 4,8 m'),
+       ('Två vuxna och tre barn betalar 410 kr för bio. En vuxen och ett barn betalar 170 kr. Vad kostar en biljett för barn och en för vuxna?', None, 3, 'Barn 70 kr, vuxen 100 kr'),
+       ('En burk har formen av en cylinder. Diametern är 8 cm och höjden 12 cm. Rymmer burken en halv liter? Motivera.', None, 2, 'Ja. V = π · 4² · 12 ≈ 603 cm³ ≈ 0,6 liter'),
+       ('Linnea sätter in 5 000 kr på ett konto med 3 % ränta per år. Hur mycket finns på kontot efter 4 år?', None, 2, '5 000 · 1,03<sup>4</sup> ≈ 5 628 kr'),
+       ('Du kastar två vanliga tärningar. Hur stor är sannolikheten att summan blir 7?', None, 2, '6/36 = 1/6')],
+}
+EX_CSS = """<style>
+.np .exd{margin:0 0 26px}
+.np .exd h3.rub{display:flex;align-items:center;gap:10px;margin:22px 0 4px;font-size:20px;color:var(--g)}
+.np .exd h3.rub span{width:36px;height:36px;border-radius:10px;background:var(--g);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800}
+.np .exd .om{margin:0 0 12px;color:#3a3a3a}
+.np .upg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.np .u{background:#FBF8F2;border:2px solid #E6E1D7;border-left:6px solid var(--g);border-radius:16px;padding:14px 16px;line-height:1.5}
+.np .u .top{display:flex;justify-content:space-between;gap:10px;font-weight:700;color:var(--g);font-size:14px;margin-bottom:4px}
+.np .u ul.alt{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.np .u ul.alt li{border:2px solid #D9D4C8;border-radius:10px;padding:3px 12px;background:#fff}
+.np .u details{margin-top:10px}.np .u summary{cursor:pointer;font-weight:600;color:var(--g)}
+.np .u details div{margin-top:6px;background:var(--gl);border-radius:10px;padding:8px 12px}
+@media(max-width:760px){.np .upg{grid-template-columns:1fr}}
+</style>"""
+def exempel():
+    ut = [EX_CSS]
+    for b, g, gl, tid, rk, typ, var in DELPROV:
+        r = 'med räknare och formelblad' if rk else 'utan räknare och formelblad'
+        ut.append(f'<div class="exd" style="--g:{g};--gl:{gl}"><h3 class="rub"><span>{b}</span>Delprov {b}</h3><p class="om">{tid}, {r}. {typ} {var}</p><div class="upg">')
+        for i, (t, alt, p, svar) in enumerate(EXEMPEL[b], 1):
+            a = '<ul class="alt">' + ''.join(f'<li>□ {x}</li>' for x in alt) + '</ul>' if alt else ''
+            ut.append(f'<div class="u"><div class="top"><span>Uppgift {i}</span><span>{p} p</span></div>{t}{a}<details><summary>Visa svar</summary><div>{svar}</div></details></div>')
+        ut.append('</div></div>')
     return ''.join(ut)
