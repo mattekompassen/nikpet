@@ -207,6 +207,9 @@ def innehall(k, s, t):
     return ''.join(ut)
 
 def extra(fil):
+    if fil == 'bedomning.html':
+        import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import bedomning
+        return bedomning.sida()
     if fil == 'hjalp.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import hjalp
         return hjalp.sida()
@@ -281,7 +284,7 @@ def bygg():
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
-                         ('bedomning.html', 'Bedömning', 'Här kommer information om hur du visar vad du kan i matematik.'),
+                         ('bedomning.html', 'Hur bedöms du?', 'Vad bedöms i matematik, och hur visar du vad du kan?'),
                          ('hjalp.html', 'Så får du hjälp i matte', 'Vad gör vi för att alla ska lära sig, och vilken extra hjälp kan du få?'),
                          ('nationella-prov.html', 'Träna inför nationella prov', 'Här kommer uppgifter att öva på inför de nationella proven.')]:
         sida(fil, t, '', NEUTRAL, f"""
