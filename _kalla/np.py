@@ -62,6 +62,7 @@ CSS = """<style>
 .np .pdfer h3 span{width:36px;height:36px;border-radius:10px;background:var(--g);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-weight:800}
 .np .pdfer p{margin:0 0 4px;color:#5F6368;font-size:15px}
 .np .pdfer a{display:block;text-align:center;border-radius:999px;padding:9px 12px;font-weight:700;text-decoration:none}
+.np .pdfer .ov{font-size:14px;color:#292A28;margin-top:4px}.np .pdfer .par{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .np .pdfer a.pk{background:var(--g);color:#fff}.np .pdfer a.pf{background:var(--gl);color:#292A28}
 @media(max-width:1000px){.np .pdfer{grid-template-columns:1fr 1fr}}@media(max-width:620px){.np .pdfer{grid-template-columns:1fr}}
 @media(max-width:1000px){.np .dp{grid-template-columns:1fr 1fr}}
@@ -88,7 +89,7 @@ def sida():
     ut.append('<h2 class="grupp" style="--g:#426B89">Så kan uppgifterna se ut</h2><p class="under">Så här kan uppgifterna i varje delprov se ut. Uppgifterna är egna och kommer inte från några riktiga prov. Skriv ut eller öppna uppgifterna, lös dem själv och rätta sedan med facit.</p>')
     ut.append('<div class="pdfer">')
     for b, g, gl, tid, rk, typ, var in DELPROV:
-        ut.append(f'<div style="--g:{g};--gl:{gl}"><h3><span>{b}</span>Delprov {b}</h3><p>{len(EXEMPEL[b])} uppgifter, {tid}</p><a class="pk" href="np/delprov-{b.lower()}.pdf" target="_blank">Uppgifter (PDF)</a><a class="pf" href="np/delprov-{b.lower()}-facit.pdf" target="_blank">Facit (PDF)</a></div>')
+        ut.append(f'<div style="--g:{g};--gl:{gl}"><h3><span>{b}</span>Delprov {b}</h3><p>{tid}</p>' + ''.join(f'<b class="ov">Övningsprov {n}</b><div class="par"><a class="pk" href="np/delprov-{b.lower()}{suf}.pdf" target="_blank">Uppgifter</a><a class="pf" href="np/delprov-{b.lower()}{suf}-facit.pdf" target="_blank">Facit</a></div>' for n, (suf, _) in enumerate(VERSIONER, 1)) + '</div>')
     ut.append('</div>')
     ut.append('<div class="kommer">Under läsåret kommer fler övningsprov att läggas upp här.</div>')
     ut.append('</div>')
@@ -149,3 +150,36 @@ def exempel():
             ut.append(f'<div class="u"><div class="top"><span>Uppgift {i}</span><span>{p} p</span></div>{t}{a}<details><summary>Visa svar</summary><div>{svar}</div></details></div>')
         ut.append('</div></div>')
     return ''.join(ut)
+
+EXEMPEL2 = {
+ 'A': [('Vilket tal är minst?', ['−0,5', '−1/4', '−0,45', '−2/3'], 1, '−2/3'),
+       ('Beräkna (−3)<sup>2</sup> − 4', None, 1, '5'),
+       ('Hur mycket är 20 % av 45?', None, 1, '9'),
+       ('Skriv 3/8 som ett decimaltal.', None, 1, '0,375'),
+       ('Beräkna 0,6 · 0,3', None, 1, '0,18'),
+       ('Lös ekvationen 3x − 7 = 11', None, 1, 'x = 6'),
+       ('Förenkla uttrycket så långt som möjligt: 3(2a − 1) − 4a', None, 1, '2a − 3'),
+       ('Ungefär hur mycket är 498 · 0,21?', ['10', '100', '1 000', '10 000'], 1, '100 (ungefär 500 · 0,2)'),
+       ('En kvadrat har arean 64 cm². Hur stor är kvadratens omkrets?', None, 1, '32 cm'),
+       ('Vilket tal ska stå i rutan? 1/3 + □ = 5/6', None, 1, '1/2')],
+ 'B': [('Ett gympass kostar 60 kr. Ett klippkort med 10 pass kostar 480 kr. Hur många procent billigare är ett pass med klippkortet?', None, 2, 'Med kortet kostar ett pass 48 kr. 12 / 60 = 0,2, alltså 20 % billigare.'),
+       ('Tio elever svarade på hur många timmar de sov natten innan: 7, 8, 6, 9, 8, 7, 8, 10, 6, 8.<br>a) Vilket är typvärdet? Endast svar krävs.<br>b) Vilken är medianen? Endast svar krävs.<br>c) Vilket är medelvärdet?', None, 4, 'a) 8 timmar<br>b) 8 timmar<br>c) 77 / 10 = 7,7 timmar'),
+       ('En rektangel är 3 cm längre än den är bred. Omkretsen är 34 cm. Vilken area har rektangeln?', None, 3, '2(b + b + 3) = 34 ger b = 7. Sidorna är 7 cm och 10 cm, arean är 70 cm².'),
+       ('Figur 1 består av 3 kvadrater, figur 2 av 5 kvadrater och figur 3 av 7 kvadrater. Mönstret fortsätter på samma sätt.<br>a) Hur många kvadrater har figur 10? Endast svar krävs.<br>b) Skriv en formel för antalet kvadrater K i figur n.<br>c) Kan en figur bestå av 100 kvadrater? Motivera.', None, 4, 'a) 21<br>b) K = 2n + 1<br>c) Nej. 2n + 1 är alltid udda, och 100 är jämnt.'),
+       ('Priset på en vara höjs med 10 %. Sedan sänks det nya priset med 10 %. Är priset då samma som från början? Motivera.', None, 2, 'Nej. 1,10 · 0,90 = 0,99, så priset blir 1 % lägre än från början.')],
+ 'C': [('Hur mycket är 35 % av 2 400 kr?', None, 1, '840 kr'),
+       ('Lös ekvationen 2(3x + 4) = 4x + 20', None, 1, 'x = 6'),
+       ('En bil kör 240 km på 3 timmar och 12 minuter. Vilken är bilens medelhastighet?', None, 1, '75 km/h (3 h 12 min = 3,2 h)'),
+       ('En rätvinklig triangel har kateterna 6 cm och 8 cm. Hur lång är hypotenusan?', None, 1, '10 cm'),
+       ('Ett glasskafé har 4 smaker och 3 sorters strutar. Hur många olika kombinationer av en smak och en strut finns det?', None, 1, '12'),
+       ('Ett rätblock är 0,5 m långt, 0,4 m brett och 0,3 m högt. Hur många liter rymmer det?', None, 1, '60 liter'),
+       ('Lös ekvationen x<sup>2</sup> = 49', None, 1, 'x = 7 eller x = −7'),
+       ('När ett tal ökas med 25 % blir det 150. Vilket är talet?', None, 1, '120')],
+ 'D': [('Mobilabonnemang A kostar 99 kr i månaden och 0,50 kr per samtalsminut. Abonnemang B kostar 199 kr i månaden och samtal ingår. Hur många minuter ska man ringa i månaden för att abonnemangen ska kosta lika mycket?', None, 2, '99 + 0,5x = 199 ger x = 200 minuter'),
+       ('En pizzeria säljer en stor pizza med diametern 30 cm för 120 kr, eller två små pizzor med diametern 20 cm för sammanlagt 110 kr. Vilket köp ger mest pizza per krona? Motivera med beräkningar.', None, 3, 'Stor: π · 15² ≈ 707 cm², 707 / 120 ≈ 5,9 cm² per kr.<br>Två små: 2 · π · 10² ≈ 628 cm², 628 / 110 ≈ 5,7 cm² per kr.<br>Den stora pizzan ger mest per krona.'),
+       ('Lös ekvationen 2x/3 − 4 = x/6 + 5', None, 2, 'Multiplicera med 6: 4x − 24 = x + 30, 3x = 54, x = 18'),
+       ('En stad har 80 000 invånare. Antalet invånare ökar med 2 % per år.<br>a) Skriv en formel för antalet invånare I efter t år.<br>b) Hur många invånare finns det efter 5 år?', None, 3, 'a) I = 80 000 · 1,02<sup>t</sup><br>b) 80 000 · 1,02<sup>5</sup> ≈ 88 300 invånare'),
+       ('En tv-skärm har diagonalen 55 tum. Förhållandet mellan skärmens bredd och höjd är 16:9. Hur bred är skärmen? Avrunda till hela tum.', None, 3, '(16k)² + (9k)² = 55² ger k ≈ 3,0. Bredden är 16 · 3,0 ≈ 48 tum.'),
+       ('Sannolikheten att det regnar på lördag är 0,3 och på söndag 0,4. Vädret de två dagarna beror inte på varandra. Hur stor är sannolikheten att det inte regnar någon av dagarna?', None, 2, '0,7 · 0,6 = 0,42')],
+}
+VERSIONER = [('', EXEMPEL), ('-2', EXEMPEL2)]
