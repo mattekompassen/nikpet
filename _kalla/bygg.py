@@ -230,7 +230,7 @@ def bygg():
 <div class="hero start"><div class="wrap"><img class="bild" src="bilder/kompass-matte.png" alt="Kompass med räknesätten plus, gånger, minus och delat med">
 <h1>Hitta rätt i <span>matematiken</span></h1></div></div>
 {wave(NEUTRAL['ink'], NEUTRAL['w'])}
-<main><section><div class="wrap"><h2>Välj din årskurs</h2><p class="sub">Allt för din årskurs och din bok samlat på ett ställe.</p>
+<main><section><div class="wrap"><h2>Välj din årskurs</h2><p class="sub">Allt du behöver i matte, samlat på ett ställe.</p>
 <div class="kort">{kort}</div>
 <div class="rutor">
 <a class="info" href="bedomning.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke-linejoin="round" stroke-linecap="round"><rect x="9" y="7" width="30" height="36" rx="4" stroke="#fff" stroke-width="3.5"/><rect x="17" y="3" width="14" height="8" rx="3" fill="#F2CD69"/><path d="M15 21l3 3 6-6M15 33l3 3 6-6" stroke="#F2CD69" stroke-width="3.5"/><path d="M28 22h6M28 34h6" stroke="#fff" stroke-width="3.5"/></svg></span><span><h3>Hur bedöms du?</h3><p>Läs om hur du visar vad du kan i matematik och vad som krävs för olika betyg.</p></span><span class="pil">→</span></a>
