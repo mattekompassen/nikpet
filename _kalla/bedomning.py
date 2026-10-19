@@ -78,8 +78,7 @@ def sida():
     ut.append('<div class="tom"></div><div class="h" style="background:#8A8F98">E</div><div class="h" style="background:#5F6368">C</div><div class="h" style="background:#2C4152">A</div>')
     for n, g, gl, vad, visa, E, C, A in FORMAGOR:
         ut.append(f'<div class="f" style="--g:{g}">{e(n)}</div><div class="c e" style="--gl:{gl}">{e(E)}</div><div class="c cc" style="--gl:{gl}">{e(C)}</div><div class="c a" style="--gl:{gl}">{e(A)}</div>')
-    ut.append('</div><div class="not"><div><b>D och B?</b> D betyder att du visar allt för E och det mesta för C. B betyder att du visar allt för C och det mesta för A.</div>'
-              '<div><b>Förenklad text.</b> Texten är skriven för elever. Läraren bedömer efter Skolverkets betygskriterier, och betyget sätts i slutet av åk 8 och åk 9.</div></div>')
+    ut.append('</div><div class="not" style="grid-template-columns:1fr"><div><b>Betygen D och B.</b> D och B får du bara när läraren sätter betyg: som terminsbetyg i slutet av en termin, eller som slutbetyg i slutet av åk 9. Läraren gör då en helhetsbedömning av allt du har visat. D får du om du visar allt som krävs för E och det mesta av det som krävs för C. B får du om du visar allt som krävs för C och det mesta av det som krävs för A.</div></div>')
     ut.append('<h2 class="grupp" style="--g:#426B89">Så visar du vad du kan</h2><p class="under">Läraren samlar det du visar under hela terminen, inte bara på provet.</p><div class="tf">')
     ut += [f'<div><h3>{e(t)}</h3><p>{e(p)}</p></div>' for t, p in TILLFALLEN]
     ut.append('</div>')
