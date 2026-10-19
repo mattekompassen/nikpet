@@ -30,7 +30,7 @@ FORMAGOR = [  # namn, färg, ljus, vad det är, så visar du det, E, C, A
 TILLFALLEN = [('På lektionerna', 'När du diskuterar, förklarar för en kompis eller visar din lösning på tavlan.'),
               ('I räknehäftet', 'När läraren går runt visar du hur du har räknat i ditt räknehäfte och berättar hur du tänkte.'),
               ('Prov och diagnoser', 'Skriftliga prov efter varje kapitel och korta diagnoser som visar var du är.'),
-              ('Muntligt', 'Ibland får du förklara hur du har tänkt, ensam med läraren eller i en liten grupp.'),
+              ('Muntligt', 'Ibland får du förklara hur du har tänkt, ensam med läraren, i en liten grupp eller inför hela klassen.'),
               ('Nationella prov', 'I åk 9 skriver alla nationella prov. Proven hjälper läraren när betyget sätts.')]
 TIPS = ['Läs uppgiften noga. Vad ska du ta reda på?', 'Skriv ut alla steg, inte bara svaret.',
         'Använd likhetstecknet rätt: båda sidor ska vara lika mycket värda.', 'Skriv enhet, till exempel cm, kr eller min.',
