@@ -232,11 +232,11 @@ def innehall(k, s, t):
     lek = s == 'lektioner'
     # Under Lektioner visas även Mål och framgångskriterier (per avsnitt) och Tidsplan och arbetsgång (sist i kapitlet)
     tp = d.get('tidsplan-och-arbetsgang', {}) if lek else {}
-    # Uppgifterna (PDF) ligger först i kapitlet på Test- och Repetition-sidan, före genomgången
-    extra_upg = d.get({'test': 'testuppgifter', 'repetition': 'repetitionsuppgifter'}.get(s, ''), {})
+    # Uppgifterna (PDF) ligger först i kapitlet på Test-, Repetition- och Diagnos-sidan, före genomgången
+    extra_upg = d.get({'test': 'testuppgifter', 'repetition': 'repetitionsuppgifter', 'diagnos': 'diagnosuppgifter'}.get(s, ''), {})
     mal = d.get('mal-och-framgangskriterier', {}) if lek else {}
     sm = d.get('sammanfattning', {}) if lek else {}  # en sammanfattning per kapitel, efter avsnitten
-    if s not in d and not tp and not mal and not sm:
+    if s not in d and not extra_upg and not tp and not mal and not sm:
         return f'<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>'
     drive = lambda i: f'https://drive.google.com/file/d/{i}/view'
     ut = []
