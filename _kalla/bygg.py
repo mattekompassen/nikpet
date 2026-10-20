@@ -236,6 +236,8 @@ def innehall(k, s, t):
     extra_upg = d.get({'test': 'testuppgifter', 'repetition': 'repetitionsuppgifter', 'diagnos': 'diagnosuppgifter'}.get(s, ''), {})
     mal = d.get('mal-och-framgangskriterier', {}) if lek else {}
     sm = d.get('sammanfattning', {}) if lek else {}  # en sammanfattning per kapitel, efter avsnitten
+    if s == 'trygg-start':  # t.ex. övningsprov sist i kapitlet
+        sm = d.get('trygg-start-extra', {})
     if s not in d and not extra_upg and not tp and not mal and not sm:
         return f'<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>'
     drive = lambda i: f'https://drive.google.com/file/d/{i}/view'
