@@ -77,6 +77,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .lankar a:hover{border-color:var(--mid)}
 .lankar .rad{display:flex;gap:6px}.lankar .rad>a:first-child,.lankar .rad>span{flex:1;display:block;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:11px 14px;color:var(--ink);font-weight:600}.lankar .rad>span{opacity:.75}.lankar .rad b{color:var(--mid);margin-right:6px}
 .lankar a.mal{flex:none;display:flex;align-items:center;background:var(--ink);border-color:var(--ink);color:#fff;font-size:14px;padding:0 14px}.lankar a.mal:hover{opacity:.85}.lankar a b{color:var(--mid);margin-right:6px}
+.las form{display:flex;gap:10px;flex-wrap:wrap}.las input{font:inherit;font-size:18px;padding:10px 14px;border:2px solid var(--l);border-radius:14px;flex:1 1 200px;min-width:0;max-width:320px}.las input:focus{outline:3px solid var(--mid);outline-offset:1px}.las button{font:inherit;font-weight:700;font-size:17px;cursor:pointer;border:0;border-radius:14px;background:var(--ink);color:#fff;padding:12px 24px}.lasfel{min-height:24px;margin:10px 0 0;color:#96505A;font-weight:600}
 .knapp{display:inline-block;margin-top:24px;padding:14px 26px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700}
 
 .valj{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;max-width:860px}
@@ -136,6 +137,62 @@ footer span{opacity:.8}
  .ikoner{grid-template-columns:repeat(2,1fr);gap:18px}
 }
 """
+
+# Lösenordsskydd för Lektioner-sidorna. Lösenordet läses från en fil utanför webbplatsen och repot.
+# Innehållet krypteras med AES-GCM; nyckeln tas fram med PBKDF2 (samma salt för alla årskurser,
+# så att eleven bara behöver skriva lösenordet en gång per webbläsare).
+LOSEN_FIL = '/mnt/project-files/webbplats-hemligt/losenord.txt'
+LOSEN_SALT = b'mattekompassen-lektioner'
+LOSEN_VARV = 250000
+
+def losen_nyckel():
+    import hashlib
+    rad = open(LOSEN_FIL, encoding='utf-8').read().strip()
+    if not rad:
+        raise SystemExit(f'Lösenordet saknas i {LOSEN_FIL}')
+    norm = ' '.join(rad.lower().split())  # samma normalisering som i webbläsaren
+    return hashlib.pbkdf2_hmac('sha256', norm.encode('utf-8'), LOSEN_SALT, LOSEN_VARV, 32)
+
+def krypterad(innehall_html):
+    import base64, hashlib
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    nyckel = losen_nyckel()
+    # IV från innehållet: samma innehåll ger samma fil (inga onödiga ändringar vid varje bygge)
+    iv = hashlib.sha256(nyckel + innehall_html.encode('utf-8')).digest()[:12]
+    data = base64.b64encode(iv + AESGCM(nyckel).encrypt(iv, innehall_html.encode('utf-8'), None)).decode()
+    salt = base64.b64encode(LOSEN_SALT).decode()
+    return f"""<div id="las" class="ruta las" data-salt="{salt}" data-varv="{LOSEN_VARV}" data-krypto="{data}">
+<h3>Skriv lösenordet</h3><p style="margin:0 0 14px">Lektionerna är skyddade med lösenord. Du får lösenordet av din mattelärare.</p>
+<form id="lasform" autocomplete="off"><label class="sr" for="losen">Lösenord</label>
+<input id="losen" type="password" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Lösenord" required>
+<button type="submit">Öppna</button></form><p id="lasfel" class="lasfel" role="alert"></p>
+<noscript><p>Sidan behöver JavaScript för att visa lektionerna.</p></noscript></div>
+<div id="olast"></div>
+<script>
+(function(){{
+var las=document.getElementById('las'),ut=document.getElementById('olast'),fel=document.getElementById('lasfel'),NYCKEL='mk-lektioner-nyckel';
+var b64=function(s){{return Uint8Array.from(atob(s),function(c){{return c.charCodeAt(0)}})}};
+var u8b64=function(a){{var s='';a.forEach(function(x){{s+=String.fromCharCode(x)}});return btoa(s)}};
+var allt=b64(las.dataset.krypto),iv=allt.slice(0,12),chiffer=allt.slice(12);
+function visa(raa){{
+ return crypto.subtle.importKey('raw',raa,'AES-GCM',false,['decrypt'])
+ .then(function(k){{return crypto.subtle.decrypt({{name:'AES-GCM',iv:iv}},k,chiffer)}})
+ .then(function(b){{ut.innerHTML=new TextDecoder().decode(b);las.remove();return true}});
+}}
+function spara(raa){{try{{localStorage.setItem(NYCKEL,u8b64(raa))}}catch(e){{}}}}
+if(!window.crypto||!crypto.subtle){{fel.textContent='Din webbläsare kan inte öppna sidan. Prova en annan webbläsare.';return}}
+var sparad=null;try{{sparad=localStorage.getItem(NYCKEL)}}catch(e){{}}
+if(sparad){{las.style.visibility='hidden';visa(b64(sparad)).catch(function(){{try{{localStorage.removeItem(NYCKEL)}}catch(e){{}}las.style.visibility=''}})}}
+document.getElementById('lasform').addEventListener('submit',function(e){{
+ e.preventDefault();fel.textContent='Öppnar …';
+ var ord=document.getElementById('losen').value.trim().toLowerCase().split(/\\s+/).join(' ');
+ crypto.subtle.importKey('raw',new TextEncoder().encode(ord),'PBKDF2',false,['deriveBits'])
+ .then(function(k){{return crypto.subtle.deriveBits({{name:'PBKDF2',hash:'SHA-256',salt:b64(las.dataset.salt),iterations:+las.dataset.varv}},k,256)}})
+ .then(function(bits){{var raa=new Uint8Array(bits);return visa(raa).then(function(){{spara(raa)}})}})
+ .catch(function(){{fel.textContent='Fel lösenord. Försök igen.';document.getElementById('losen').select()}});
+}});
+}})();
+</script>"""
 
 def wave(top, bottom):
     return (f'<svg class="wave" style="background:{bottom}" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true">'
@@ -283,7 +340,7 @@ def bygg():
 <div class="hero"><div class="wrap" style="justify-content:flex-start"><img src="../bilder/ak{k}/{f}.png" alt="" style="width:110px;border-radius:20px">
 <div><div class="etikett">ÅK {k} · MATEMATIK {c['bok']}</div><h1>{t}</h1></div></div></div>
 {wave(c['ink'], c['w'])}
-<main><section><div class="wrap">{'<a class="omlank" href="../problemlosning.html">Så arbetar vi med problemlösning: nivåer och strategier →</a>' if s == 'problemlosning' else ''}{innehall(k, s, t)}
+<main><section><div class="wrap">{'<a class="omlank" href="../problemlosning.html">Så arbetar vi med problemlösning: nivåer och strategier →</a>' if s == 'problemlosning' else ''}{krypterad(innehall(k, s, t)) if s == 'lektioner' else innehall(k, s, t)}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
