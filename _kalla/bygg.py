@@ -150,7 +150,7 @@ def losen_nyckel():
     rad = open(LOSEN_FIL, encoding='utf-8').read().strip()
     if not rad:
         raise SystemExit(f'Lösenordet saknas i {LOSEN_FIL}')
-    norm = ' '.join(rad.lower().split())  # samma normalisering som i webbläsaren
+    norm = ''.join(rad.lower().split())  # samma normalisering som i webbläsaren
     return hashlib.pbkdf2_hmac('sha256', norm.encode('utf-8'), LOSEN_SALT, LOSEN_VARV, 32)
 
 def krypterad(innehall_html):
@@ -185,7 +185,7 @@ var sparad=null;try{{sparad=localStorage.getItem(NYCKEL)}}catch(e){{}}
 if(sparad){{las.style.visibility='hidden';visa(b64(sparad)).catch(function(){{try{{localStorage.removeItem(NYCKEL)}}catch(e){{}}las.style.visibility=''}})}}
 document.getElementById('lasform').addEventListener('submit',function(e){{
  e.preventDefault();fel.textContent='Öppnar …';
- var ord=document.getElementById('losen').value.trim().toLowerCase().split(/\\s+/).join(' ');
+ var ord=document.getElementById('losen').value.trim().toLowerCase().split(/\\s+/).join('');
  crypto.subtle.importKey('raw',new TextEncoder().encode(ord),'PBKDF2',false,['deriveBits'])
  .then(function(k){{return crypto.subtle.deriveBits({{name:'PBKDF2',hash:'SHA-256',salt:b64(las.dataset.salt),iterations:+las.dataset.varv}},k,256)}})
  .then(function(bits){{var raa=new Uint8Array(bits);return visa(raa).then(function(){{spara(raa)}})}})
