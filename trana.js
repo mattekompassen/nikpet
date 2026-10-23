@@ -14,6 +14,7 @@
     return s === '' ? NaN : Number(s);
   };
 
+  const sgd = (a, b) => b ? sgd(b, a % b) : a;
   const el = document.getElementById('trana');
   if (!el) return;
   const ALLA = TRANA_DATA({r, val, sv, tus, sgn, blanda: a => blanda(a)});
@@ -202,14 +203,29 @@
       <div class="bar"><i style="width:${(nr - 1) / RUNDA * 100}%"></i></div>
       <div class="fraga">${fraga.q}</div>
       <form><input inputmode="decimal" autocomplete="off" aria-label="Ditt svar" placeholder="Ditt svar"><button>Svara</button></form>
+      <div class="tecken"><button type="button" data-t="/" aria-label="Bråkstreck">/</button><button type="button" data-t="−" aria-label="Minustecken">−</button><span>Bråk skrivs 3/4</span></div>
       <p class="fb" aria-live="polite"></p><button class="lank tips" type="button">Visa ledtråd</button></div>`;
     const inp = el.querySelector('input'), fb = el.querySelector('.fb');
     inp.focus();
+    // Mobilens sifferknappsats saknar / och −, så de finns som egna knappar.
+    el.querySelectorAll('.tecken button').forEach(b => {
+      b.onpointerdown = e => e.preventDefault();
+      b.onclick = () => {
+        if (inp.disabled) return;
+        const a = inp.selectionStart ?? inp.value.length, z = inp.selectionEnd ?? a;
+        inp.value = inp.value.slice(0, a) + b.dataset.t + inp.value.slice(z);
+        inp.focus(); inp.setSelectionRange(a + 1, a + 1);
+      };
+    });
     el.querySelector('.tips').onclick = () => { fb.className = 'fb tipsrad'; fb.textContent = '💡 ' + fraga.ledtrad; };
     el.querySelector('form').onsubmit = e => {
       e.preventDefault();
       const g = tal(inp.value), f = tal(fraga.svar);
-      if (isNaN(g)) { fb.className = 'fb'; fb.textContent = 'Skriv ett tal, till exempel 12 eller 0,5.'; return; }
+      if (isNaN(g)) { fb.className = 'fb'; fb.textContent = 'Skriv ett tal, till exempel 12, 0,5 eller 3/4.'; return; }
+      const delar = inp.value.replace(/\s/g, '').replace('−', '-').match(/^-?(\d+)\/(\d+)$/);
+      if (/så långt det går/.test(fraga.q) && Math.abs(g - f) < 1e-9 && delar && sgd(+delar[1], +delar[2]) > 1) {
+        fb.className = 'fb'; fb.textContent = 'Rätt värde, men det går att förkorta mer. Försök igen!'; inp.select(); return;
+      }
       if (Math.abs(g - f) < 1e-9 || (fraga.tol && Math.abs(g - f) <= fraga.tol)) {
         if (!fel) { ratt++; svit++; } else svit = 0;
         fb.className = 'fb ok'; fb.textContent = val(['Rätt! 🎉', 'Snyggt! ✅', 'Precis! 👏', 'Helt rätt! 💪']);

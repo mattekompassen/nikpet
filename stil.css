@@ -65,6 +65,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .bar{height:10px;background:#fff;border-radius:99px;margin:12px 0 4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--mid);border-radius:99px;transition:width .3s}
 .fraga{font-size:clamp(24px,4vw,34px);font-weight:800;color:var(--ink);margin:18px 0}
 #trana form{display:flex;gap:10px;flex-wrap:wrap}
+#trana .tecken{display:flex;gap:8px;align-items:center;margin-top:10px}#trana .tecken button{font:inherit;font-size:24px;font-weight:800;width:56px;height:48px;border:2px solid var(--l);border-radius:12px;background:#fff;color:var(--ink,#292A28);cursor:pointer}#trana .tecken button:active{background:var(--l)}#trana .tecken span{font-size:15px;color:#5F6368;margin-left:4px}
 #trana input{font:inherit;font-size:22px;padding:10px 14px;border:2px solid var(--l);border-radius:14px;width:220px;max-width:100%}
 #trana input:focus{outline:3px solid var(--mid);outline-offset:1px}
 #trana form button,.knapp2{background:var(--ink);color:#fff;font-weight:700;padding:12px 24px;font-size:18px}
