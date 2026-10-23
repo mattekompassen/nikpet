@@ -209,15 +209,21 @@
       Object.entries(AVSNITT).map(([k, a]) => `<button data-k="${k}"><b>${k}</b>${a.namn}</button>`).join('') + '</div>';
     el.querySelectorAll('button[data-k]').forEach(b => b.onclick = () => start(b.dataset.k));
   }
-  function start(k) { avs = k; nr = 0; ratt = 0; svit = 0; ny(); }
+  // Minusknappen visas i avsnitt där svaret kan bli negativt (provas fram), så den avslöjar inte svaret på en enskild uppgift.
+  const MINUS = {};
+  function start(k) {
+    if (!(k in MINUS)) { MINUS[k] = false; for (let i = 0; i < 300 && !MINUS[k]; i++) MINUS[k] = tal(AVSNITT[k].gen.call({}).svar) < 0; }
+    avs = k; nr = 0; ratt = 0; svit = 0; ny();
+  }
   function ny() {
     if (nr === RUNDA) return klar();
     nr++; fel = 0; fraga = AVSNITT[avs].gen.call({});
+    const brak = String(fraga.svar).includes('/'), minus = MINUS[avs];
     el.innerHTML = `<div class="kort-t"><div class="topp"><span>${avs} ${AVSNITT[avs].namn}</span><span>Uppgift ${nr} av ${RUNDA} · ⭐ ${ratt}${svit >= 3 ? ' · 🔥 ' + svit + ' i rad' : ''}</span></div>
       <div class="bar"><i style="width:${(nr - 1) / RUNDA * 100}%"></i></div>
       <div class="fraga">${fraga.q}</div>
       <form><input inputmode="decimal" autocomplete="off" aria-label="Ditt svar" placeholder="Ditt svar"><button>Svara</button></form>
-      <div class="tecken"><button type="button" data-t="/" aria-label="Bråkstreck">/</button><button type="button" data-t="−" aria-label="Minustecken">−</button><span>Bråk skrivs 3/4</span></div>
+      ${brak || minus ? `<div class="tecken">${brak ? '<button type="button" data-t="/" aria-label="Bråkstreck">/</button>' : ''}${minus ? '<button type="button" data-t="−" aria-label="Minustecken">−</button>' : ''}${brak ? '<span>Bråk skrivs 3/4</span>' : ''}</div>` : ''}
       <p class="fb" aria-live="polite"></p><button class="lank tips" type="button">Visa ledtråd</button></div>`;
     const inp = el.querySelector('input'), fb = el.querySelector('.fb');
     inp.focus();
