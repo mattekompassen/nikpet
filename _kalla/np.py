@@ -1,7 +1,63 @@
 # Elevsida om nationella provet i matematik åk 9 (info från Skolverket, lärarinformation VT 2027), för nationella-prov.html
 # OBS: originalproven är sekretessbelagda. Övningsuppgifter här ska ha egna tal.
 import html
-VISA_OVNINGSPROV = False  # Nikola: övningsproven publiceras senare (PDF:er sparas i webbplats-kalla/np-pdf)
+VISA_OVNINGSPROV = True  # Nikola 2026-10-23: övningsproven publiceras, facit bakom Lektioner-lösenordet
+# Övningsprovens PDF:er i Nikolas Drive (mappen 1ij0HXMmVWcTxLg8tFxyxbrprxZps7ILP, delad: alla med länken kan se).
+# Byts filerna ut i Drive får de nya id:n, och då måste de bytas här.
+DRIVE = {
+ 'delprov-a.pdf': '13T3lyGl8qB5F30lvw6HglEMevOY3nCPD', 'delprov-a-facit.pdf': '19agcHTuMRlgc1WYDkwaHJclauF8rQYOK',
+ 'delprov-a-2.pdf': '1sRXWLfnOnm_dfy3scnf2LzgSp86cqTJS', 'delprov-a-2-facit.pdf': '1VnEqhPrtOkOAGg6xmc0oQ8_MkrIrc_rr',
+ 'delprov-b.pdf': '1ON_8v926YyZ6TnR7C8kNLGDbl43TfUER', 'delprov-b-facit.pdf': '1WzQu1vVN-Jk47dp-hq1UIvJhI3qlk_Ry',
+ 'delprov-b-2.pdf': '147FiHjA0_Rs0x9BzLyZBenNMAoNpG6J_', 'delprov-b-2-facit.pdf': '1G4PNR0EPhqTe9lZ_p6r7IG7tch5mOtom',
+ 'delprov-c.pdf': '1MKY2xM7dO9niPYFm-A4cQ6K5BaWzidTY', 'delprov-c-facit.pdf': '1SUrhjdpprifH5-dJXGDdAozoH2DMiJ85',
+ 'delprov-c-2.pdf': '1aC-W17cIMpg5tUZ8GiDzjAqiX7BFlmlk', 'delprov-c-2-facit.pdf': '10Yrmn1Bnc20AM-mh7dB87nDG_TIC9shy',
+ 'delprov-d.pdf': '1D-43X-lFQEjnzOGNmw9jYvko_X9pHP3d', 'delprov-d-facit.pdf': '1a5PqPRe1t1y62EWRCwD2j3KqAN1flY7S',
+ 'delprov-d-2.pdf': '1nrNbk4b2kqmuoF6Ksp-AeR-UWw-69-10', 'delprov-d-2-facit.pdf': '1EctOplFe5QwHEEjtzlfBXKFvE8_RbKDl',
+}
+def drive(fil):
+    return f'https://drive.google.com/file/d/{DRIVE[fil]}/view'
+LAS_SVG = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" style="vertical-align:-2px;margin-right:5px"><rect x="5" y="11" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>'
+
+def facitlas(krypt):
+    """Låsruta för facit. Facitlänkarna ligger krypterade med Lektioner-lösenordet och samma sparade nyckel används."""
+    import json
+    lankar = {f: drive(f) for f in DRIVE if f.endswith('-facit.pdf')}
+    salt, varv, data = krypt(json.dumps(lankar, sort_keys=True))
+    return f"""<div id="facitlas" class="ruta las" data-salt="{salt}" data-varv="{varv}" data-krypto="{data}" style="max-width:760px;margin-top:8px">
+<h3>{LAS_SVG}Facit är låst</h3><p style="margin:0 0 14px">Facit är skyddat med samma lösenord som Lektioner. Du får lösenordet av din mattelärare. Har du redan skrivit lösenordet på Lektioner i den här webbläsaren, är facit redan öppet.</p>
+<form id="facitform" autocomplete="off"><label class="sr" for="facitlosen">Lösenord</label>
+<input id="facitlosen" type="password" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Lösenord" required>
+<button type="submit">Öppna facit</button></form><p id="facitfel" class="lasfel" role="alert"></p>
+<noscript><p>Sidan behöver JavaScript för att visa facit.</p></noscript></div>
+<script>
+(function(){{
+var las=document.getElementById('facitlas'),fel=document.getElementById('facitfel'),NYCKEL='mk-lektioner-nyckel';
+var b64=function(s){{return Uint8Array.from(atob(s),function(c){{return c.charCodeAt(0)}})}};
+var u8b64=function(a){{var s='';a.forEach(function(x){{s+=String.fromCharCode(x)}});return btoa(s)}};
+var allt=b64(las.dataset.krypto),iv=allt.slice(0,12),chiffer=allt.slice(12);
+var knappar=document.querySelectorAll('a.facit');
+knappar.forEach(function(a){{a.addEventListener('click',function(e){{if(a.dataset.oppen)return;e.preventDefault();las.scrollIntoView({{behavior:'smooth',block:'center'}});document.getElementById('facitlosen').focus({{preventScroll:true}})}})}});
+function visa(raa){{
+ return crypto.subtle.importKey('raw',raa,'AES-GCM',false,['decrypt'])
+ .then(function(k){{return crypto.subtle.decrypt({{name:'AES-GCM',iv:iv}},k,chiffer)}})
+ .then(function(b){{var l=JSON.parse(new TextDecoder().decode(b));
+  knappar.forEach(function(a){{a.href=l[a.dataset.fil];a.target='_blank';a.rel='noopener';a.dataset.oppen='1';a.textContent='Facit'}});
+  las.remove();return true}});
+}}
+function spara(raa){{try{{localStorage.setItem(NYCKEL,u8b64(raa))}}catch(e){{}}}}
+if(!window.crypto||!crypto.subtle){{fel.textContent='Din webbläsare kan inte öppna facit. Prova en annan webbläsare.';return}}
+var sparad=null;try{{sparad=localStorage.getItem(NYCKEL)}}catch(e){{}}
+if(sparad){{visa(b64(sparad)).catch(function(){{try{{localStorage.removeItem(NYCKEL)}}catch(e){{}}}})}}
+document.getElementById('facitform').addEventListener('submit',function(e){{
+ e.preventDefault();fel.textContent='Öppnar …';
+ var ord=document.getElementById('facitlosen').value.trim().toLowerCase().split(/\\s+/).join('');
+ crypto.subtle.importKey('raw',new TextEncoder().encode(ord),'PBKDF2',false,['deriveBits'])
+ .then(function(k){{return crypto.subtle.deriveBits({{name:'PBKDF2',hash:'SHA-256',salt:b64(las.dataset.salt),iterations:+las.dataset.varv}},k,256)}})
+ .then(function(bits){{var raa=new Uint8Array(bits);return visa(raa).then(function(){{spara(raa)}})}})
+ .catch(function(){{fel.textContent='Fel lösenord. Försök igen.';document.getElementById('facitlosen').select()}});
+}});
+}})();
+</script>"""
 DAGAR = [('Onsdag 12 maj 2027', 'Delprov A och B'), ('Fredag 14 maj 2027', 'Delprov C och D')]
 DELPROV = [  # bokstav, färg, ljus, tid, räknare?, typ, var svaren skrivs
  ('A', '#B95E52', '#F7E3DE', '40 min', False, 'Korta svar och flervalsfrågor.', 'Du skriver svaren i provhäftet.'),
@@ -69,7 +125,7 @@ CSS = """<style>
 @media(max-width:1000px){.np .dp{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.np .dp,.np .dagar,.np .hm,.np .tipsg{grid-template-columns:1fr}}
 </style>"""
-def sida():
+def sida(krypt=None):
     e = html.escape
     ut = [CSS, '<div class="np">',
           '<p class="ingress">I åk 9 skriver alla elever i Sverige nationellt prov i matematik. Provet visar vad du kan och hjälper läraren när betyget sätts. Provet har fyra delar och skrivs på papper i skolan.</p>',
@@ -87,14 +143,17 @@ def sida():
         ut.append(f'<div><h3>{e(t)}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in li) + '</ul></div>')
     ut.append('</div>')
     if VISA_OVNINGSPROV:
-        ut.append('<h2 class="grupp" style="--g:#426B89">Så kan uppgifterna se ut</h2><p class="under">Så här kan uppgifterna i varje delprov se ut. Uppgifterna är egna och kommer inte från några riktiga prov. Skriv ut eller öppna uppgifterna, lös dem själv och rätta sedan med facit.</p>')
+        ut.append('<h2 class="grupp" style="--g:#426B89">Så kan uppgifterna se ut</h2><p class="under">Så här kan uppgifterna i varje delprov se ut. Uppgifterna är egna och kommer inte från några riktiga prov. Skriv ut eller öppna uppgifterna, lös dem själv och rätta sedan med facit. Facit är låst med samma lösenord som Lektioner.</p>')
         ut.append('<div class="pdfer">')
         for b, g, gl, tid, rk, typ, var in DELPROV:
-            ut.append(f'<div style="--g:{g};--gl:{gl}"><h3><span>{b}</span>Delprov {b}</h3><p>{tid}</p>' + ''.join(f'<b class="ov">Övningsprov {n}</b><div class="par"><a class="pk" href="np/delprov-{b.lower()}{suf}.pdf" target="_blank">Uppgifter</a><a class="pf" href="np/delprov-{b.lower()}{suf}-facit.pdf" target="_blank">Facit</a></div>' for n, (suf, _) in enumerate(VERSIONER, 1)) + '</div>')
+            ut.append(f'<div style="--g:{g};--gl:{gl}"><h3><span>{b}</span>Delprov {b}</h3><p>{tid}</p>' + ''.join(f'<b class="ov">Övningsprov {n}</b><div class="par"><a class="pk" href="{drive(f'delprov-{b.lower()}{suf}.pdf')}" target="_blank" rel="noopener">Uppgifter</a><a class="pf facit" href="#facitlas" data-fil="delprov-{b.lower()}{suf}-facit.pdf">{LAS_SVG}Facit</a></div>' for n, (suf, _) in enumerate(VERSIONER, 1)) + '</div>')
         ut.append('</div>')
+        if krypt is None:
+            raise SystemExit('np.sida behöver krypteringen från bygg.py för att låsa facit')
+        ut.append(facitlas(krypt))
     else:
         ut.append('<h2 class="grupp" style="--g:#426B89">Träna inför provet</h2>')
-    ut.append('<div class="kommer">Under läsåret kommer övningsprov för de fyra delproven att läggas upp här.</div>')
+        ut.append('<div class="kommer">Under läsåret kommer övningsprov för de fyra delproven att läggas upp här.</div>')
     ut.append('</div>')
     return ''.join(ut)
 

@@ -154,14 +154,18 @@ def losen_nyckel():
     norm = ''.join(rad.lower().split())  # samma normalisering som i webbläsaren
     return hashlib.pbkdf2_hmac('sha256', norm.encode('utf-8'), LOSEN_SALT, LOSEN_VARV, 32)
 
-def krypterad(innehall_html):
+def krypterad_data(text):
+    """Krypterar text med Lektioner-lösenordet. Ger (salt, varv, data) som base64 för webbläsaren."""
     import base64, hashlib
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
     nyckel = losen_nyckel()
     # IV från innehållet: samma innehåll ger samma fil (inga onödiga ändringar vid varje bygge)
-    iv = hashlib.sha256(nyckel + innehall_html.encode('utf-8')).digest()[:12]
-    data = base64.b64encode(iv + AESGCM(nyckel).encrypt(iv, innehall_html.encode('utf-8'), None)).decode()
-    salt = base64.b64encode(LOSEN_SALT).decode()
+    iv = hashlib.sha256(nyckel + text.encode('utf-8')).digest()[:12]
+    data = base64.b64encode(iv + AESGCM(nyckel).encrypt(iv, text.encode('utf-8'), None)).decode()
+    return base64.b64encode(LOSEN_SALT).decode(), LOSEN_VARV, data
+
+def krypterad(innehall_html):
+    salt, _, data = krypterad_data(innehall_html)
     return f"""<div id="las" class="ruta las" data-salt="{salt}" data-varv="{LOSEN_VARV}" data-krypto="{data}">
 <h3>Skriv lösenordet</h3><p style="margin:0 0 14px">Lektionerna är skyddade med lösenord. Du får lösenordet av din mattelärare.</p>
 <form id="lasform" autocomplete="off"><label class="sr" for="losen">Lösenord</label>
@@ -272,7 +276,7 @@ def extra(fil):
         return bedomning.sida()
     if fil == 'nationella-prov.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import np as npsida
-        return npsida.sida()
+        return npsida.sida(krypterad_data)
     if fil == 'hjalp.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import hjalp
         return hjalp.sida()
