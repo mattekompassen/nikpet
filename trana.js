@@ -190,6 +190,20 @@
   const RUNDA = 10;
   let avs = null, nr = 0, ratt = 0, svit = 0, fraga = null, fel = 0;
 
+  // Om frågan bara efterfrågar en del (? i ett bråk, ▢x) godkänns även hela uttrycket, t.ex. 12/15 eller 7x.
+  function bara(v, q) {
+    v = String(v).trim().replace(/\s/g, '').replace('−', '-');
+    const d = v.match(/^(-?\d+(?:[.,]\d+)?)\/(-?\d+(?:[.,]\d+)?)$/);
+    if (d) {
+      let m = q.match(/<span class="br"><span>\?<\/span><span>([^<]+)<\/span><\/span>/);
+      if (m && tal(m[1]) === tal(d[2])) return d[1];
+      m = q.match(/<span class="br"><span>([^<]+)<\/span><span>\?<\/span><\/span>/);
+      if (m && tal(m[1]) === tal(d[1])) return d[2];
+    }
+    const e = q.match(/▢([a-zx²³]+)/);
+    if (e && v.endsWith(e[1]) && v.length > e[1].length) return v.slice(0, -e[1].length);
+    return v;
+  }
   function meny() {
     el.innerHTML = '<p class="ingress">Välj ett avsnitt. Du får ' + RUNDA + ' uppgifter med nya tal varje gång.</p><div class="valj">' +
       Object.entries(AVSNITT).map(([k, a]) => `<button data-k="${k}"><b>${k}</b>${a.namn}</button>`).join('') + '</div>';
@@ -220,7 +234,7 @@
     el.querySelector('.tips').onclick = () => { fb.className = 'fb tipsrad'; fb.textContent = '💡 ' + fraga.ledtrad; };
     el.querySelector('form').onsubmit = e => {
       e.preventDefault();
-      const g = tal(inp.value), f = tal(fraga.svar);
+      const g = tal(bara(inp.value, fraga.q)), f = tal(fraga.svar);
       if (isNaN(g)) { fb.className = 'fb'; fb.textContent = 'Skriv ett tal, till exempel 12, 0,5 eller 3/4.'; return; }
       const delar = inp.value.replace(/\s/g, '').replace('−', '-').match(/^-?(\d+)\/(\d+)$/);
       if (/så långt det går/.test(fraga.q) && Math.abs(g - f) < 1e-9 && delar && sgd(+delar[1], +delar[2]) > 1) {
