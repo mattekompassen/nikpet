@@ -56,6 +56,11 @@ CSS = """<style>
 .np .tipsg ul{margin:0;padding-left:20px;line-height:1.6}
 .np .info2{background:#E8E1D6;border:2px solid #D9D4C8;border-radius:20px;padding:20px 24px;margin:30px 0;max-width:900px;line-height:1.55}
 .np .info2 h3{margin:0 0 6px;font-size:19px;color:#2C4152}
+.np .ovlank{display:flex;align-items:center;gap:20px;flex-wrap:wrap;background:#DDBE88;border-radius:24px;padding:24px 28px;max-width:900px;text-decoration:none;color:#3A2C12;box-shadow:0 6px 18px #6E512033;transition:transform .15s}
+.np .ovlank:hover{transform:translateY(-3px)}
+.np .ovik{font-size:40px;width:68px;height:68px;border-radius:18px;background:#FFF8EA;display:flex;align-items:center;justify-content:center;flex:none}
+.np .ovtxt{flex:1 1 280px;font-size:16px;line-height:1.5}.np .ovtxt b{display:block;font-family:Fraunces,Georgia,serif;font-size:23px;margin-bottom:4px}
+.np .ovknapp{background:#5A4219;color:#fff;font-weight:700;font-size:17px;border-radius:999px;padding:13px 24px;white-space:nowrap}
 .np .kommer{background:#FBF8F2;border:2px dashed #D9D4C8;border-radius:20px;padding:20px 24px;max-width:900px;line-height:1.55}
 .np .pdfer{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:14px}
 .np .pdfer>div{background:#FBF8F2;border:2px solid #E6E1D7;border-top:8px solid var(--g);border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
@@ -94,8 +99,8 @@ def sida():
         ut.append('</div>')
     else:
         ut.append('<h2 class="grupp" style="--g:#426B89">Träna inför provet</h2>')
-        ut.append('<div class="kommer">Det finns sex övningsprov med samma upplägg som det riktiga provet: fyra delprov A–D med uppgifter och facit. '
-                  '<a href="ak9/ovningsprov.html" style="font-weight:700;color:inherit">Gå till övningsproven →</a></div>')
+        ut.append('<a class="ovlank" href="ak9/ovningsprov.html"><span class="ovik" aria-hidden="true">📝</span><span class="ovtxt"><b>Sex övningsprov inför nationella provet</b>'
+                  'Samma upplägg som det riktiga provet: fyra delprov A–D med uppgifter och facit.</span><span class="ovknapp">Gå till övningsproven →</span></a>')
     ut.append('</div>')
     return ''.join(ut)
 
