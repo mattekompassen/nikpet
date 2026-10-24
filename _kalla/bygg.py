@@ -247,6 +247,7 @@ footer{background:#1E2B3A;color:#DDE3EA}footer .wrap{color:#DDE3EA}
 .panel .formler{position:absolute!important;inset:0;width:100%;height:100%;opacity:.28;z-index:0!important}
 .nrc{width:150px;height:150px;flex:none;border-radius:50%;background:#fffffff2;display:flex;align-items:center;justify-content:center;font:900 96px/1 Inter,sans-serif;letter-spacing:-3px;box-shadow:0 0 0 12px #ffffff33,0 8px 24px #0003}
 @media (max-width:800px){.nrc{width:92px;height:92px;font-size:58px;box-shadow:0 0 0 8px #ffffff33}.panel .formler{opacity:.18}}
+.knapp.pil{width:56px;height:56px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:26px;line-height:1}
 """
 
 # Lösenordsskydd för Lektioner-sidorna. Lösenordet läses från en fil utanför webbplatsen och repot.
@@ -620,7 +621,7 @@ def bygg():
             grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3">{t}</div></div>'
         sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Årskurs {k}', 'Lär dig nytt, träna mer och kolla vad du kan.',
              f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="nrc" style="color:{c["ink"]}" aria-hidden="true">{k}</div>')
-             + f'<main><div class="wrap">{grupper}<p style="margin:34px 0 10px"><a class="knapp" href="index.html">← Till startsidan</a></p></div></main>')
+             + f'<main><div class="wrap">{grupper}<p style="margin:34px 0 10px"><a class="knapp pil" href="index.html" aria-label="Till startsidan" title="Till startsidan">←</a></p></div></main>')
         if k in TRANA_AR:
             sti = [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), ('Interaktiva övningar', 'ak%d/trana.html' % k)]
             hero = lambda t, p, sti=sti: panel(c, t, p, f'Åk {k} · Matematik {c["bok"]}', sti, f'<img class="bild" src="../bilder/ak{k}/16_Interaktiva_ovningar.png" alt="">', '../')

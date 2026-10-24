@@ -200,3 +200,4 @@ footer{background:#1E2B3A;color:#DDE3EA}footer .wrap{color:#DDE3EA}
 .panel .formler{position:absolute!important;inset:0;width:100%;height:100%;opacity:.28;z-index:0!important}
 .nrc{width:150px;height:150px;flex:none;border-radius:50%;background:#fffffff2;display:flex;align-items:center;justify-content:center;font:900 96px/1 Inter,sans-serif;letter-spacing:-3px;box-shadow:0 0 0 12px #ffffff33,0 8px 24px #0003}
 @media (max-width:800px){.nrc{width:92px;height:92px;font-size:58px;box-shadow:0 0 0 8px #ffffff33}.panel .formler{opacity:.18}}
+.knapp.pil{width:56px;height:56px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:26px;line-height:1}
