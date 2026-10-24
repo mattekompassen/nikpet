@@ -342,6 +342,16 @@ GRUPPER = [
    ('17_Ovningsprov', 'ovningsprov', 'Övningsprov', 'Öva inför provet under provliknande former.')]),
 ]
 
+# De fyra gemensamma sidorna får samma färg som sin ikon på startsidan
+SIDFARG = {'bedomning.html': farger('turk'), 'hjalp.html': farger('apri'), 'nationella-prov.html': farger('sand'), 'amnesord.html': farger('lav')}
+# Gamla färger i innehållet (bedomning.py, hjalp.py, np.py) -> vintagefärger
+FARGBYTE = {'#2C4152': '#435264', '#426B89': '#5B6B7E', '#5A7552': '#545A3F', '#96505A': '#8A4A30', '#B95E52': '#B0785C',
+            '#8A5E22': '#7A5A22', '#F2CD69': '#DDBE88', '#1F6E6C': '#5A4A5A', '#DDEBF3': '#E3E6EA', '#E3ECDD': '#E6E7DD',
+            '#F7E3DE': '#F2E2DA', '#F8EBC9': '#F3E8D3', '#D9EEEC': '#E8E3E8'}
+def byt_farger(h):
+    import re
+    return re.sub('|'.join(FARGBYTE), lambda m: FARGBYTE[m.group(0).upper()], h, flags=re.I)
+
 def bygg():
     open(os.path.join(UT, 'stil.css'), 'w').write(CSS)
     # Startsida
@@ -408,9 +418,10 @@ def bygg():
                          ('bedomning.html', 'Hur bedöms du?', 'Vad bedöms i matematik, och hur visar du vad du kan?'),
                          ('hjalp.html', 'Så får du hjälp i matte', 'Så gör vi för att alla ska lära sig matte.'),
                          ('nationella-prov.html', 'Nationella prov i matematik', 'Så går provet till i åk 9, och så kan du förbereda dig.')]:
-        sida(fil, t, '', NEUTRAL, f"""
-{panel(NEUTRAL, t, text, '', [('Startsida', 'index.html'), (t, None)])}
-<main><section><div class="wrap">{extra(fil)}
+        c = SIDFARG[fil]
+        sida(fil, t, '', c, f"""
+{panel(c, t, text, '', [('Startsida', 'index.html'), (t, None)])}
+<main><section><div class="wrap">{byt_farger(extra(fil))}
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     # Gemensam sida om problemlösning (länkas från årskursernas problemlösningssidor)
     arl = ''.join(f'<a href="ak{k}/problemlosning.html" style="background:{AR[k]["ink"]}">Åk {k}<small>Matematik {AR[k]["bok"]} · problemlösning per kapitel</small></a>' for k in AR)
