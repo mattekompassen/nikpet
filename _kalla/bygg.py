@@ -6,11 +6,12 @@ UT = '/mnt/project-files/webbplats'
 LANKAR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lankar.json'), encoding='utf-8'))
 
 # Organic färgskala (Nikola 2026-10-24): (skalans färg, mörk nyans för text/knappar, ljus bakgrund)
-ORG = dict(sage=('#818D75','#4F5A45','#EAF4EA'), terra=('#CA8C75','#8C4D36','#FDEBE7'), sand=('#D8AC65','#7A571F','#FFF6E3'),
- himmel=('#7799BD','#3F6082','#E8F2FA'), rosa=('#CE9BA2','#7E4D57','#FCEEF1'), lav=('#A69FC1','#554C76','#EFEAF9'),
- turk=('#7FAEB6','#3B666D','#E6F6F4'), beige=('#C4AF9A','#6D5740','#F7EFE4'), apri=('#E2A296','#883526','#FFECE4'),
- mint=('#B2C3B9','#4E6357','#EDF7F0'), ljuslila=('#C6BCC5','#5E4F5D','#F3EEF5'), karamell=('#D1C0B0','#6B5644','#F9EFE3'))
-BG = '#EDF7F0'  # mintgrön sidbakgrund
+# Vintage-färger (Nikolas bild, godkänd 2026-10-24): (färg, mörk nyans, ljus nyans)
+V = dict(gron=('#AAAD8D','#545A3F','#EEEFE6'), bla=('#A2A9B3','#435264','#ECEEF1'), lila=('#A397A3','#5A4A5A','#F0ECF0'),
+         terra=('#C9947A','#8A4A30','#F7E7DC'), gul=('#DDBE88','#7A5A22','#F6EBD3'))
+ORG = dict(sage=V['gron'], turk=V['bla'], rosa=V['lila'], himmel=V['bla'], apri=V['terra'], sand=V['gul'], lav=V['lila'], mint=('#B2C3B9','#4E6357','#EDF7F0'))
+RAND = [V[k] for k in ('gul','gron','terra','bla','lila')]
+BG = '#EDF7F0'  # mintgrön (som nu)
 
 def mix(a, b, t):
     A = [int(a[i:i+2], 16) for i in (1, 3, 5)]; B = [int(b[i:i+2], 16) for i in (1, 3, 5)]
@@ -18,8 +19,8 @@ def mix(a, b, t):
 
 def farger(nyckel, **extra):
     m, d, t = ORG[nyckel]
-    return dict(main=m, ink=d, mid=m, l=mix(t, m, .45), vl=mix(t, m, .18), w=mix(t, '#FFFFFF', .5), hi=t, bg=BG,
-                hero=mix(m, t, .6), c1=mix(m, t, .35), c2=mix(m, t, .42), ram=mix(m, '#FFFFFF', .45), **extra)
+    return dict(main=m, ink=d, mid=m, l=mix(m, '#FFFFFF', .35), vl=mix(m, '#FFFFFF', .5), w=mix(m, '#FFFFFF', .8), hi=t, bg=mix(m, '#FFFFFF', .72),
+                hero=m, c1=mix(m, d, .12), c2=mix(m, '#FFFFFF', .18), ram=mix(m, d, .25), ljus=mix(m, '#FFFFFF', .45), **extra)
 
 AR = {7: farger('sage', bok='X'), 8: farger('turk', bok='Y'), 9: farger('rosa', bok='Z')}
 # Nio ikoner på årskurssidan: (filnamn, sidnamn, rubrik)
@@ -34,7 +35,7 @@ MATERIAL = [
  ('17_Ovningsprov', 'ovningsprov', 'Övningsprov'),
 ]
 MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html')]
-NEUTRAL = dict(farger('mint'), vl='#D2E6D9', l='#B5D2BF', hero='#D2E6D9', c1='#C3DCCB', c2='#C9E0D0', hi='#E8C88A')
+NEUTRAL = dict(farger('mint'), bg='#EDF7F0', vl='#D2E6D9', l='#B5D2BF', hero='#D2E6D9', c1='#C3DCCB', c2='#C9E0D0', hi='#DDBE86')
 
 CSS = """
 body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2F2B26;background:var(--bg);line-height:1.5}
@@ -58,7 +59,7 @@ nav a i{width:10px;height:10px;border-radius:50%;flex:none}nav a:hover{backgroun
 .panel p{font-size:18px;line-height:1.55;margin:12px 0 0;max-width:600px}
 .start{display:grid;grid-template-columns:1fr auto;align-items:center;gap:30px;padding:4px 0 26px}
 .start .lbl{display:inline-block;background:#fff9;border-radius:999px;padding:6px 14px;font-weight:600;font-size:13px;color:#4E6357;margin-bottom:14px}
-.start h1{font-size:clamp(38px,4.6vw,56px);line-height:1.05;margin:0}.start h1 em{font-style:italic;color:#8C4D36}
+.start h1{font-size:clamp(38px,4.6vw,56px);line-height:1.05;margin:0}.start h1 em{font-style:italic;color:#8A4A30}
 .start p{font-size:18px;line-height:1.55;color:#4A433C;max-width:520px;margin:14px 0 0}
 .ros{width:110px;margin-left:auto;filter:drop-shadow(0 10px 20px #0002)}
 .ak{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
@@ -85,7 +86,7 @@ nav a i{width:10px;height:10px;border-radius:50%;flex:none}nav a:hover{backgroun
 .t h3{font-size:22px;margin:0}.t p{margin:0;font-size:15px;line-height:1.45;color:#4A433C}
 .t .pil{position:absolute;right:20px;top:22px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;background:#fff9;color:var(--ink)}
 .t .las-ikon{position:absolute;right:20px;bottom:18px;font-size:12px;font-weight:600;opacity:.65}
-footer{margin-top:60px;background:#D2E6D9}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;padding-bottom:26px;font-size:14px;color:#4A433C}
+footer{margin-top:60px;background:var(--vl)}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;padding-bottom:26px;font-size:14px;color:#4A433C}
 
 *{box-sizing:border-box}
 a{color:inherit}
@@ -223,7 +224,7 @@ import hashlib
 CSS_VER = hashlib.sha1(CSS.encode()).hexdigest()[:8]  # ny version -> webbläsaren hämtar ny stil.css
 
 def rand():
-    return '<div class="rand" aria-hidden="true">' + ''.join(f'<i style="background:{c[0]}"></i>' for c in ORG.values()) + '</div>'
+    return '<div class="rand" aria-hidden="true">' + ''.join(f'<i style="background:{c[0]}"></i>' for c in RAND) + '</div>'
 
 PRICK = {'Startsida': '#2F2B26', 'Åk 7': AR[7]['main'], 'Åk 8': AR[8]['main'], 'Åk 9': AR[9]['main']}
 
@@ -347,7 +348,7 @@ def bygg():
     inneh = [rt for _, _, rutor in GRUPPER for _, _, rt, _ in rutor]  # samma som rutorna på årskurssidorna
     kort = ''
     for k, c in AR.items():
-        kort += (f'<a href="ak{k}.html" style="background:{c["vl"]};box-shadow:inset 0 0 0 2px {c["ram"]}"><div class="sol" style="background:{c["main"]}" aria-hidden="true">{k}</div>'
+        kort += (f'<a href="ak{k}.html" style="background:{c["main"]};box-shadow:inset 0 0 0 2px {c["ram"]}"><div class="sol" style="background:{c["ljus"]}" aria-hidden="true">{k}</div>'
                  f'<h3>Åk {k}</h3><div class="bok" style="color:{c["ink"]}">Matematik {c["bok"]}</div>'
                  + f'<span class="gaa" style="background:{c["ink"]}">Gå till åk {k} →</span></a>')
     veta = [('himmel', 'prov', 'bedomning.html', 'Hur bedöms du?', 'Så visar du vad du kan och vad som krävs för olika betyg.', 'Läs om bedömning'),
@@ -369,7 +370,7 @@ def bygg():
                         + ('<span class="las-ikon">🔒 Lösenord</span>' if s == 'lektioner' else '') + '</a>' for f, s, rt, p in rutor)
             grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3">{t}</div></div>'
         sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Åk {k}', f'Här hittar du allt material till matten i åk {k}: lektioner, träning och sätt att kolla vad du kan.',
-             f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="bage" style="background:{c["main"]}" aria-hidden="true">{k}</div>')
+             f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="bage" style="background:{c["ljus"]}" aria-hidden="true">{k}</div>')
              + f'<main><div class="wrap">{grupper}</div></main>')
         if k in TRANA_AR:
             sti = [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), ('Interaktiva övningar', 'ak%d/trana.html' % k)]

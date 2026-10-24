@@ -1,5 +1,5 @@
 """Ikonerna för årskurssidorna (Organic-färger, utan textband). Kör: python3 bygg_ikoner.py
-Källor: ikoner-ak{7,8,9}.html (färgade kopior av layout/v8-ikonerna). PNG hamnar i ../../webbplats/bilder/akN/."""
+Källor: ikoner-ak{7,8,9}.html (vintagefärger 2026-10-24; ändra färger direkt i dem). PNG hamnar i ../../webbplats/bilder/akN/."""
 import pathlib, subprocess, re
 H = pathlib.Path(__file__).parent
 UT = pathlib.Path('/mnt/project-files/webbplats/bilder')
@@ -14,11 +14,6 @@ OVNINGSPROV = """ '17_Ovningsprov':{lbl:['ÖVNINGSPROV'],svg:`
   <path d="M780 420 L810 390" stroke="${ink}" stroke-width="18" stroke-linecap="round"/>`},
 """
 VILL = ['07_Lektioner', '08_Tillbakablick', '10_Trygg_start', '06_Problemlosning', '16_Interaktiva_ovningar', '11_Repetition', '12_Diagnos', '13_Test', '17_Ovningsprov']
-for k in (7, 8, 9):
-    src = (H.parent.parent/f'layout/v10-organic/kalla/ikoner-ak{k}.html').read_text()
-    src = src.replace(".replace('SYMBOL',icons[k].svg).replace('BAR',bar)", ".replace('SYMBOL','<g transform=\"translate(0,80)\">'+icons[k].svg+'</g>').replace('BAR','')")
-    src = src.replace(" '15_Amnesord_pa_olika_sprak'", OVNINGSPROV.replace('MID', MID[k]) + " '15_Amnesord_pa_olika_sprak'", 1)
-    (H/f'ikoner-ak{k}.html').write_text(src)
 js = r'''const {chromium}=require('playwright');(async()=>{const [h,ut,...v]=process.argv.slice(2);const b=await chromium.launch();const p=await b.newPage({viewport:{width:1100,height:1100}});
 for(const k of [7,8,9]){await p.goto('file://'+h+'/ikoner-ak'+k+'.html');await p.waitForTimeout(300);
 for(const n of v){await p.locator('svg[data-name="'+n+'"]').screenshot({path:ut+'/ak'+k+'/'+n+'.png',omitBackground:true});}}await b.close();})();'''
