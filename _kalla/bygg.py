@@ -463,7 +463,7 @@ def bygg():
     veta = [('himmel', 'prov', 'bedomning.html', 'Hur bedöms du?', 'Så visar du vad du kan och vad som krävs för olika betyg.', 'Läs om bedömning'),
             ('apri', 'boj', 'hjalp.html', 'Så får du hjälp', 'Stöd du kan få och sätt som hjälper dig att lära dig matte.', 'Hitta hjälp'),
             ('sand', 'medalj', 'nationella-prov.html', 'Nationella prov', 'Så går provet i åk 9 till, och så tränar du inför det.', 'Om provet'),
-            ('lav', 'prata', 'amnesord.html', 'Förstår du inte ett ord?', 'Viktiga matteord förklarade på ditt språk.', 'Ämnesord')]
+            ('lav', 'prata', 'amnesord.html', 'Förstår du inte ett ord?', 'Viktiga matteord förklarade på ditt språk.', 'Ämnesord på olika språk')]
     veta = ''.join(f'<a href="{h}"><div class="pebble" style="background:{ORG[c][1]}">{ikon(i)}</div><h3>{t}</h3><p>{p}</p><b style="color:{ORG[c][1]}">{l} →</b></a>' for c, i, h, t, p, l in veta)
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
 <main><div class="wrap"><section class="start"><div><span class="lbl">Matematik för åk 7, 8 och 9</span><h1>Hitta rätt i <em>matematiken</em></h1>
