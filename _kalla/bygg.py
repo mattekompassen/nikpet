@@ -361,7 +361,7 @@ def bygg():
     veta = ''.join(f'<a href="{h}"><div class="pebble" style="background:{ORG[c][1]}">{ikon(i)}</div><h3>{t}</h3><p>{p}</p><b style="color:{ORG[c][1]}">{l} →</b></a>' for c, i, h, t, p, l in veta)
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
 <main><div class="wrap"><section class="start"><div><span class="lbl">Matematik för åk 7, 8 och 9</span><h1>Hitta rätt i <em>matematiken</em></h1>
-<p>Välj din årskurs och hitta lektioner, övningar och stöd, samlat på ett ställe.</p></div>
+<p>Allt matematerial på ett ställe. Välj din årskurs!</p></div>
 <div class="ros" aria-hidden="true">{ros}<img src="bilder/kompass-matte.png" alt=""></div></section>
 <h2 class="sr">Välj din årskurs</h2><div class="ak">{kort}</div>
 <div class="alla"><b>I varje årskurs hittar du</b><ul>{''.join(f'<li>{x}</li>' for x in inneh)}</ul></div>
