@@ -196,7 +196,7 @@ body{background:#F4F3EF}
 main.hem{background:radial-gradient(600px 420px at -5% 20%,#58A73E22,transparent 70%),radial-gradient(520px 420px at 105% 15%,#8A4A7822,transparent 70%),radial-gradient(500px 300px at 50% 0%,#1A86B014,transparent 70%)}
 header{background:#FBFAF7;border-bottom:1px solid #E6E3DC}.rand{display:none}
 header .wrap{padding-top:14px;padding-bottom:14px}
-.logo{font-family:Inter,sans-serif;font-weight:800;font-size:26px;color:#1E2B3A}.logo img{width:50px;height:50px;background:none;box-shadow:none}.logo small{font-weight:500}
+.logo{font-family:Inter,sans-serif;font-weight:600;font-size:24px;color:#1E2B3A}.logo img{width:50px;height:50px;background:none;box-shadow:none}.logo small{font-weight:500}
 nav{background:none;border:0;padding:0;gap:4px}
 nav a{border-radius:0;padding:8px 10px;border-bottom:3px solid transparent;font-weight:500;color:#1E2B3A}nav a:hover{background:none;color:#000}
 nav a.on{color:#1E2B3A;font-weight:700;background:none!important}
