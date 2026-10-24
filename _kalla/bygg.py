@@ -7,11 +7,11 @@ LANKAR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 # Organic färgskala (Nikola 2026-10-24): (skalans färg, mörk nyans för text/knappar, ljus bakgrund)
 # Vintage-färger (Nikolas bild, godkänd 2026-10-24): (färg, mörk nyans, ljus nyans)
-V = dict(gron=('#AAAD8D','#545A3F','#EEEFE6'), bla=('#A2A9B3','#435264','#ECEEF1'), lila=('#A397A3','#5A4A5A','#F0ECF0'),
-         terra=('#C9947A','#8A4A30','#F7E7DC'), gul=('#DDBE88','#7A5A22','#F6EBD3'))
-ORG = dict(sage=V['gron'], turk=V['bla'], rosa=V['lila'], himmel=V['bla'], apri=V['terra'], sand=V['gul'], lav=V['lila'], mint=('#B2C3B9','#4E6357','#EDF7F0'))
-RAND = [V[k] for k in ('gul','gron','terra','bla','lila')]
-BG = '#F3EFEA'  # ljus neutral (de fem färgerna blandade)
+V = dict(gron=('#58A73E','#2E6E28','#EAF4E4'), bla=('#1A86B0','#0F5F82','#E3F1F7'), lila=('#7A44B0','#5E2D8C','#F1EAF8'),
+         terra=('#E07A5F','#9A4630','#FBEAE4'), gul=('#E9B949','#7A5A12','#FBF1DA'))
+ORG = dict(sage=V['gron'], turk=V['bla'], rosa=V['lila'], himmel=V['bla'], apri=V['terra'], sand=V['gul'], lav=V['lila'], mint=('#B7A694','#4A3F33','#F3EFEA'))
+RAND = [V[k] for k in ('gron','bla','lila')]
+BG = '#F4F3EF'  # ljus neutral (de fem färgerna blandade)
 
 def mix(a, b, t):
     A = [int(a[i:i+2], 16) for i in (1, 3, 5)]; B = [int(b[i:i+2], 16) for i in (1, 3, 5)]
@@ -19,10 +19,10 @@ def mix(a, b, t):
 
 def farger(nyckel, **extra):
     m, d, t = ORG[nyckel]
-    return dict(main=m, ink=d, mid=m, l=mix(m, '#FFFFFF', .35), vl=mix(m, '#FFFFFF', .5), w=mix(m, '#FFFFFF', .8), hi=t, bg=mix(m, '#FFFFFF', .72),
-                hero=m, c1=mix(m, d, .12), c2=mix(m, '#FFFFFF', .18), ram=mix(m, d, .25), ljus=mix(m, '#FFFFFF', .45), **extra)
+    return dict(main=m, ink=d, mid=m, l=mix(m, '#FFFFFF', .35), vl=mix(m, '#FFFFFF', .84), w=mix(m, '#FFFFFF', .93), hi=t, bg=mix(m, '#FFFFFF', .9),
+                hero=m, c1=mix(m, d, .12), c2=mix(m, '#FFFFFF', .18), ram=mix(m, '#FFFFFF', .6), ljus=mix(m, '#FFFFFF', .45), **extra)
 
-AR = {7: farger('sage', bok='X'), 8: farger('turk', bok='Y'), 9: farger('rosa', bok='Z')}
+AR = {7: farger('sage', bok='X', k=7), 8: farger('turk', bok='Y', k=8), 9: farger('rosa', bok='Z', k=9)}
 # Nio ikoner på årskurssidan: (filnamn, sidnamn, rubrik)
 MATERIAL = [
  ('07_Lektioner', 'lektioner', 'Lektioner'),
@@ -34,11 +34,11 @@ MATERIAL = [
  ('13_Test', 'test', 'Test'),
  ('17_Ovningsprov', 'ovningsprov', 'Övningsprov'),
 ]
-MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html')]
+MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html'), ('Bedömning', 'bedomning.html'), ('Så får du hjälp', 'hjalp.html'), ('Nationella prov', 'nationella-prov.html')]
 # Neutral (startsida m.m.): medelvärdet av de fem färgerna, ljusat
-NEUTRAL_M = '#B7A694'
-NEUTRAL = dict(main=NEUTRAL_M, ink='#4A3F33', mid=NEUTRAL_M, l=mix(NEUTRAL_M, '#FFFFFF', .45), vl=mix(NEUTRAL_M, '#FFFFFF', .62), w=mix(NEUTRAL_M, '#FFFFFF', .9),
-               hi='#DDBE88', bg=mix(NEUTRAL_M, '#FFFFFF', .84), hero=mix(NEUTRAL_M, '#FFFFFF', .62), c1=mix(NEUTRAL_M, '#FFFFFF', .5), c2=mix(NEUTRAL_M, '#FFFFFF', .55),
+NEUTRAL_M = '#9AA3AE'
+NEUTRAL = dict(main=NEUTRAL_M, ink='#1E2B3A', mid=NEUTRAL_M, l=mix(NEUTRAL_M, '#FFFFFF', .45), vl=mix(NEUTRAL_M, '#FFFFFF', .62), w=mix(NEUTRAL_M, '#FFFFFF', .9),
+               hi='#DDBE88', bg='#F4F3EF', hero=mix(NEUTRAL_M, '#FFFFFF', .62), c1=mix(NEUTRAL_M, '#FFFFFF', .5), c2=mix(NEUTRAL_M, '#FFFFFF', .55),
                ram=mix(NEUTRAL_M, '#FFFFFF', .45), ljus=mix(NEUTRAL_M, '#FFFFFF', .62))
 
 CSS = """
@@ -186,6 +186,54 @@ a.knapp2{text-decoration:none;display:inline-block}
  .ak a{padding:24px 22px 22px}.ak .sol{width:120px;height:120px;font-size:84px;margin-bottom:12px}.ak h3{font-size:26px}
  .kort-t{padding:18px 14px}.match{gap:8px}.mb{font-size:14px;padding:10px}
 }
+
+/* --- Bokomslagens färger (förslag) --- */
+body{background:#F4F3EF}
+main.hem{background:radial-gradient(600px 420px at -5% 20%,#58A73E22,transparent 70%),radial-gradient(520px 420px at 105% 15%,#7A44B022,transparent 70%),radial-gradient(500px 300px at 50% 0%,#1A86B014,transparent 70%)}
+header{background:#FBFAF7;border-bottom:1px solid #E6E3DC}.rand{display:none}
+header .wrap{padding-top:14px;padding-bottom:14px}
+.logo{font-family:Inter,sans-serif;font-weight:800;font-size:26px;color:#1E2B3A}.logo img{width:50px;height:50px;background:none;box-shadow:none}.logo small{font-weight:500}
+nav{background:none;border:0;padding:0;gap:4px}
+nav a{border-radius:0;padding:8px 10px;border-bottom:3px solid transparent;font-weight:500;color:#1E2B3A}nav a:hover{background:none;color:#000}
+nav a.on{color:#1E2B3A;font-weight:700;background:none!important}
+.topprubrik{display:flex;align-items:center;justify-content:center;gap:22px;text-align:center;padding:34px 0 30px}
+.topprubrik img{width:96px}.topprubrik h1{font-family:Inter,sans-serif;font-weight:800;font-size:clamp(38px,5.4vw,64px);letter-spacing:-1.5px;margin:0;color:#14202E;line-height:1}
+.topprubrik p{margin:8px 0 0;font-size:21px;color:#3B4A5A;text-align:left}
+.topprubrik div{text-align:left}
+.kkrad{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.kk{display:block;border-radius:22px;overflow:hidden;text-decoration:none;box-shadow:0 10px 30px #1E2B3A1f;transition:transform .15s}.kk:hover{transform:translateY(-5px)}
+.kk .topp{height:210px;position:relative;overflow:hidden}
+.motiv-k{position:absolute;inset:14px 18px;width:calc(100% - 36px);height:calc(100% - 28px);opacity:.95}
+.kk .kropp{padding:22px 26px 26px;text-align:center}
+.kk h3{font-family:Inter,sans-serif;font-weight:800;font-size:32px;margin:0 0 8px;letter-spacing:-.5px}
+.kk p{margin:0 0 20px;color:#3B4A5A;font-size:17px;line-height:1.45;min-height:50px}
+.kk .gaa{display:inline-block;color:#fff;border-radius:999px;padding:13px 34px;font-weight:700;font-size:18px}
+.infor{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;border-top:1.5px solid #E1DED6;padding-top:26px}
+.infor a{display:flex;gap:16px;align-items:flex-start;padding:4px 20px;text-decoration:none;color:#1E2B3A}.infor a+a{border-left:1.5px solid #E1DED6}
+.infor .rik{width:62px;height:62px;border-radius:50%;background:#E7EBEF;display:flex;align-items:center;justify-content:center;flex:none}
+.infor b{display:block;font-size:17px;margin-bottom:4px}.infor small{display:block;color:#566373;font-size:14.5px;line-height:1.45}
+.panel.farg{color:#fff}.panel.farg .sti,.panel.farg .sti a{color:#ffffffd9}.panel.farg .etikett{color:#ffffffcc}.panel.farg h1{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-1px}
+.panel .motiv{position:absolute;right:24px;top:22px;height:calc(100% - 44px);max-width:26%;width:auto;opacity:.35;z-index:0}.panel.farg>div{position:relative;z-index:1}.panel.farg p{max-width:440px}
+.panel.farg .bage{background:#ffffff2e;color:#fff;font-family:Inter,sans-serif;font-weight:800;border:3px solid #ffffff66}
+.grupp h2,.t h3{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.4px}
+.t{background:var(--w);box-shadow:inset 0 0 0 2px var(--ram),0 6px 16px #1E2B3A0d}
+footer{background:#1E2B3A;color:#DDE3EA}footer .wrap{color:#DDE3EA}
+@media (max-width:1000px){nav{width:100%;overflow-x:auto;flex-wrap:nowrap}nav a{white-space:nowrap}}
+@media (max-width:800px){.kkrad{grid-template-columns:1fr}.infor{grid-template-columns:1fr 1fr;row-gap:20px}.infor a:nth-child(3){border-left:0}
+ .topprubrik{gap:14px;padding:18px 0}.topprubrik img{width:64px}.topprubrik p{font-size:16px}.kk .topp{height:150px}.panel .motiv{display:none}}
+@media (max-width:560px){.infor{grid-template-columns:1fr}.infor a{border-left:0!important;padding:4px 0}.infor a+a{border-top:1.5px solid #E1DED6;padding-top:16px}nav{max-width:100%;min-width:0}header .wrap{min-width:0;max-width:100%}nav a{flex:none}}
+.ak2{position:relative;display:flex;flex-direction:column;border:2px solid;border-radius:22px;overflow:hidden;text-decoration:none;box-shadow:0 8px 24px #1E2B3A14;transition:transform .15s}.ak2:hover{transform:translateY(-4px)}
+.ak2 .blob{position:absolute;border-radius:50%;z-index:0}.ak2 .b1{width:190px;height:150px;right:-50px;bottom:10px;opacity:.7}.ak2 .b2{width:150px;height:120px;left:-40px;bottom:-30px;opacity:.8}
+.ak2 .prick{position:absolute;border-radius:50%;background:var(--d);opacity:.35;z-index:0}.ak2 .p1{width:9px;height:9px;right:26px;top:22px}.ak2 .p2{width:6px;height:6px;right:16px;top:44px;background:var(--m);opacity:.6}
+.ak2 .inne{position:relative;z-index:1;display:flex;gap:18px;align-items:center;padding:24px 22px 22px;flex:1}
+.ak2 .nr{position:relative;width:110px;flex:none;text-align:center}.ak2 .sol{position:absolute;left:-6px;top:-6px;width:118px;height:118px;border-radius:50%;background:#ffffff8c;z-index:-1}
+.ak2 .nr b{display:block;font-family:Inter,sans-serif;font-weight:900;font-size:104px;line-height:1;letter-spacing:-3px}.ak2 .nr small{display:block;font-weight:800;font-size:20px;margin-top:8px}
+.ak2 h3{font-family:Inter,sans-serif;font-weight:800;font-size:24px;margin:0 0 8px}
+.ak2 ul{list-style:none;margin:0 0 6px;padding:0}.ak2 li{display:flex;align-items:center;gap:8px;font-weight:600;font-size:16px;color:#1E2B3A;margin:5px 0}.ak2 li svg{width:18px;height:18px;flex:none;fill:var(--m)}
+.ak2 em{font-weight:700;font-size:15px;opacity:.85}
+.ak2 .gaa{position:relative;z-index:1;display:block;text-align:center;color:#fff;padding:14px;font-weight:700;font-size:17px}
+@media (max-width:560px){.topprubrik h1{font-size:34px!important}.topprubrik p{font-size:15px!important}.topprubrik img{width:56px!important}.ak2 .inne{gap:12px;padding:20px 16px 18px}.ak2 .nr{width:92px}.ak2 .nr b{font-size:86px}.ak2 .sol{width:100px;height:100px}}
+@media (max-width:1100px) and (min-width:801px){.ak2 .nr{width:84px}.ak2 .nr b{font-size:80px}.ak2 .sol{width:92px;height:92px}.ak2 h3{font-size:20px}.ak2 li{font-size:14.5px}}
 """
 
 # Lösenordsskydd för Lektioner-sidorna. Lösenordet läses från en fil utanför webbplatsen och repot.
@@ -337,23 +385,38 @@ CSS_VER = hashlib.sha1(CSS.encode()).hexdigest()[:8]  # ny version -> webbläsar
 def rand():
     return '<div class="rand" aria-hidden="true">' + ''.join(f'<i style="background:{c[0]}"></i>' for c in RAND) + '</div>'
 
-PRICK = {'Startsida': '#2F2B26', 'Åk 7': AR[7]['main'], 'Åk 8': AR[8]['main'], 'Åk 9': AR[9]['main']}
+PRICK = {'Startsida': '#2F2B26', 'Åk 7': AR[7]['main'], 'Åk 8': AR[8]['main'], 'Åk 9': AR[9]['main'], 'Bedömning': '#1E2B3A', 'Så får du hjälp': '#1E2B3A', 'Nationella prov': '#1E2B3A'}
+
+MOTIV = {
+ 7: '''<text x="40" y="95" font-size="44" fill="#fff">3</text><path d="M34 108h34" stroke="#fff" stroke-width="4"/><text x="40" y="152" font-size="44" fill="#fff">5</text>
+ <circle cx="150" cy="120" r="52" fill="#ffffff22"/><path d="M150 68v52l45 26M150 120l-50 15" fill="none"/><path d="M150 68a52 52 0 0 1 45 78" fill="#ffffff33"/>
+ <path d="M240 40l90 90h-90z"/><path d="M258 82l30 30h-30z"/><path d="M60 215h300M80 205v20M130 205v20M180 205v20M230 205v20M280 205v20M350 207l12 8-12 8"/>
+ <text x="72" y="248" font-size="20" fill="#fff">−2</text><text x="124" y="248" font-size="20" fill="#fff">−1</text><text x="175" y="248" font-size="20" fill="#fff">0</text><text x="225" y="248" font-size="20" fill="#fff">1</text><text x="275" y="248" font-size="20" fill="#fff">2</text>''',
+ 8: '''<path d="M60 230V20M50 32l10-14 10 14M30 190h220M238 180l14 10-14 10"/><path d="M40 210L250 50"/><circle cx="92" cy="170" r="6" fill="#fff"/><circle cx="145" cy="130" r="6" fill="#fff"/><circle cx="198" cy="90" r="6" fill="#fff"/>
+ <path d="M300 60l-70 150h150z"/><path d="M300 60v150" stroke-dasharray="6 6"/><path d="M300 196h14v14"/><text x="250" y="140" font-size="22" fill="#fff">a</text><text x="345" y="140" font-size="22" fill="#fff">b</text>''',
+ 9: '''<circle cx="90" cy="130" r="62"/><path d="M90 130V68M90 130l50 32" /><path d="M90 100a30 30 0 0 1 26 46" stroke-dasharray="4 5"/>
+ <ellipse cx="225" cy="55" rx="55" ry="16"/><path d="M170 55v140M280 55v140"/><path d="M170 195a55 16 0 0 0 110 0"/><path d="M170 195a55 16 0 0 1 110 0" stroke-dasharray="6 6"/><path d="M225 55v140" stroke-dasharray="6 6"/>
+ <path d="M300 230h90"/><rect x="306" y="190" width="16" height="40" fill="#ffffff33"/><rect x="330" y="160" width="16" height="70" fill="#ffffff33"/><rect x="354" y="120" width="16" height="110" fill="#ffffff33"/><rect x="378" y="70" width="16" height="160" fill="#ffffff33"/>'''}
+def motiv(k, cls='motiv'):
+    return (f'<svg class="{cls}" viewBox="0 0 410 260" aria-hidden="true" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" '
+            f'font-family="Inter,sans-serif" font-weight="600">{MOTIV[k]}</svg>')
 
 def panel(c, titel, text='', etikett='', sti=None, vanster='', rot=''):
     """Rundad rubrikpanel högst upp på sidan. sti = [(namn, länk), ...] (brödsmulor)."""
     st = ''
     if sti:
         st = '<div class="sti">' + ' / '.join(f'<a href="{rot}{h}">{html.escape(n)}</a>' if h else html.escape(n) for n, h in sti) + '</div>'
-    return (f'<div class="wrap"><section class="panel" style="background:{c["hero"]}"><span class="cirk c1" style="background:{c["c1"]}"></span>'
-            f'<span class="cirk c2" style="background:{c["c2"]}"></span>{vanster}<div>{st}<h1>{titel}</h1>'
+    k = c.get('k')
+    bakgrund = f'linear-gradient(120deg,{c["main"]},{c["ink"]})' if k else c['hero']
+    return (f'<div class="wrap"><section class="panel{" farg" if k else ""}" style="background:{bakgrund}">' + (motiv(k) if k else '') + f'{vanster}<div>{st}<h1>{titel}</h1>'
             + (f'<div class="etikett">{etikett}</div>' if etikett else '') + (f'<p>{text}</p>' if text else '') + '</div></section></div>')
 
 def sida(fil, titel, aktiv, c, kropp, rot=''):
     meny = ''
     for n, h in MENY:
         on = n == aktiv
-        st = f' style="background:{"#2F2B26" if n == "Startsida" else c["ink"]}"' if on else ''
-        meny += f'<a href="{rot}{h}" class="{"on" if on else ""}"{st}{" aria-current=\"page\"" if on else ""}><i style="background:{PRICK[n]}"></i>{n}</a>'
+        st = f' style="border-color:{c["ink"] if c.get("k") else "#1E2B3A"}"' if on else ''
+        meny += f'<a href="{rot}{h}" class="{"on" if on else ""}"{st}{" aria-current=\"page\"" if on else ""}>{n}</a>'
     var = ';'.join(f'--{k}:{v}' for k, v in c.items() if k in ('ink', 'hi', 'w', 'vl', 'l', 'mid', 'bg', 'ram'))
     doc = f"""<!doctype html>
 <html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -457,13 +520,14 @@ GRUPPER = [
 # De fyra gemensamma sidorna får samma färg som sin ikon på startsidan
 SIDFARG = {'bedomning.html': farger('turk'), 'hjalp.html': farger('apri'), 'nationella-prov.html': farger('sand'), 'amnesord.html': farger('lav')}
 # Gamla färger i innehållet (bedomning.py, hjalp.py, np.py) -> vintagefärger
-FARGBYTE = {'#2C4152': '#435264', '#426B89': '#5B6B7E', '#5A7552': '#545A3F', '#96505A': '#8A4A30', '#B95E52': '#B0785C',
-            '#8A5E22': '#7A5A22', '#F2CD69': '#DDBE88', '#1F6E6C': '#5A4A5A', '#DDEBF3': '#E3E6EA', '#E3ECDD': '#E6E7DD',
-            '#F7E3DE': '#F2E2DA', '#F8EBC9': '#F3E8D3', '#D9EEEC': '#E8E3E8'}
-# Nationella prov: allt i gula/bruna nyanser
-FARGBYTE_NP = {'#2C4152': '#6E5120', '#426B89': '#8F6C2E', '#5A7552': '#A07E3E', '#96505A': '#7A5A22', '#B95E52': '#B48A45',
-               '#8A5E22': '#7A5A22', '#F2CD69': '#DDBE88', '#1F6E6C': '#8F6C2E', '#DDEBF3': '#F3E6C9', '#E3ECDD': '#F6EBD3',
-               '#F7E3DE': '#F1E0BD', '#F8EBC9': '#F3E8D3', '#D9EEEC': '#F3E6C9'}
+FARGBYTE = {'#2C4152': '#0F5F82', '#426B89': '#1A86B0', '#5A7552': '#2E6E28', '#96505A': '#9A4630', '#B95E52': '#C4613F',
+            '#8A5E22': '#7A5A12', '#F2CD69': '#E9B949', '#1F6E6C': '#5E2D8C', '#DDEBF3': '#E3F1F7', '#E3ECDD': '#EAF4E4',
+            '#F7E3DE': '#FBEAE4', '#F8EBC9': '#FBF1DA', '#D9EEEC': '#F1EAF8'}
+# Nationella prov: allt i gula nyanser (omslagens gula)
+FARGBYTE_NP = {'#2C4152': '#6B4E0E', '#426B89': '#8A6614', '#5A7552': '#A67C17', '#96505A': '#7A5A12', '#B95E52': '#B8891F',
+               '#8A5E22': '#7A5A12', '#F2CD69': '#E9B949', '#1F6E6C': '#8A6614', '#DDEBF3': '#FBEFD0', '#E3ECDD': '#FBF1DA',
+               '#F7E3DE': '#F8E6BC', '#F8EBC9': '#FBF1DA', '#D9EEEC': '#FBEFD0',
+               '#DDBE88': '#F0CF73', '#A07E3E': '#A67C17', '#8F6C2E': '#8A6614', '#7A5A22': '#7A5A12', '#F6EBD3': '#FBF1DA', '#F3E8D3': '#FBF1DA'}
 def byt_farger(h, tabell=None):
     import re
     tabell = tabell or FARGBYTE
@@ -483,12 +547,23 @@ def bygg():
             ('sand', 'medalj', 'nationella-prov.html', 'Nationella prov', 'Så går provet i åk 9 till, och så tränar du inför det.', 'Om provet'),
             ('lav', 'prata', 'amnesord.html', 'Förstår du inte ett ord?', 'Viktiga matteord förklarade på ditt språk.', 'Ämnesord på olika språk')]
     veta = ''.join(f'<a href="{h}"><div class="pebble" style="background:{ORG[c][1]}">{ikon(i)}</div><h3>{t}</h3><p>{p}</p><b style="color:{ORG[c][1]}">{l} →</b></a>' for c, i, h, t, p, l in veta)
+    TEXT = {7: 'Utforska, träna och utmana dina matematikkunskaper.', 8: 'Bygg vidare och utveckla din matematiska förmåga.', 9: 'Fördjupa, resonera och förbered dig för framtiden.'}
+    BOCK = '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    kort = ''.join(f"""<a class="ak2" href="ak{k}.html" style="--m:{c['main']};--d:{c['ink']};border-color:{mix(c['main'], '#FFFFFF', .45)};background:linear-gradient(135deg,{mix(c['main'], '#FFFFFF', .9)},{mix(c['main'], '#FFFFFF', .7)})">
+<span class="blob b1" style="background:{mix(c['main'], '#FFFFFF', .6)}"></span><span class="blob b2" style="background:{mix(c['main'], '#FFFFFF', .78)}"></span>
+<span class="prick p1"></span><span class="prick p2"></span>
+<div class="inne"><div class="nr"><span class="sol"></span><b style="color:{c['ink']}">{k}</b><small style="color:{c['ink']}">Åk {k}</small></div>
+<div class="lista"><h3 style="color:{c['ink']}">Matematik {c['bok']}</h3><ul>{''.join(f'<li>{BOCK}{t}</li>' for t in ('Planering', 'Lektioner', 'Problemlösning', 'Repetitionsuppgifter'))}</ul><em style="color:{c['ink']}">och mycket mer!</em></div></div>
+<span class="gaa" style="background:{c['ink']}">Gå till Åk {k} →</span></a>""" for k, c in AR.items())
+    rad = [('prov', 'bedomning.html', 'Bedömning', 'Mål, kriterier och vad som krävs för de olika betygsstegen.'),
+           ('boj', 'hjalp.html', 'Så får du hjälp', 'Stöd, tips och resurser du kan använda.'),
+           ('medalj', 'nationella-prov.html', 'Nationella prov', 'Information och förberedelser inför proven i åk 9.'),
+           ('prata', 'amnesord.html', 'Ämnesord', 'Viktiga matteord förklarade på ditt språk.')]
+    rad = ''.join(f'<a href="{h}"><span class="rik">{ikon(i).replace("#fff", "#1E2B3A")}</span><span><b>{t}</b><small>{p}</small></span></a>' for i, h, t, p in rad)
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
-<main><div class="wrap"><section class="start"><div><span class="lbl">Matematik för åk 7, 8 och 9</span><h1>Hitta rätt i <em>matematiken</em></h1>
-<p>Allt matematerial på ett ställe. Välj din årskurs!</p></div>
-<img class="ros" src="bilder/kompass-matte.png" alt=""></section>
-<h2 class="sr">Välj din årskurs</h2><div class="ak">{kort}</div>
-<div class="rubrik"><h2>Bra att veta</h2><span>För alla elever i åk 7–9</span></div><div class="veta">{veta}</div></div></main>""")
+<main class="hem"><div class="wrap"><section class="topprubrik"><img src="bilder/kompass-matte.png" alt=""><div><h1>Mattekompassen</h1><p>Din väg genom matematiken i årskurs 7–9</p></div></section>
+<h2 class="sr">Välj din årskurs</h2><div class="kkrad">{kort}</div>
+<div class="infor">{rad}</div></div></main>""")
     # Årskurssidor och undersidor
     for k, c in AR.items():
         grupper = ''
@@ -497,7 +572,7 @@ def bygg():
                         + ('<span class="las-ikon">🔒 Lösenord</span>' if s == 'lektioner' else '') + '</a>' for f, s, rt, p in rutor)
             grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3">{t}</div></div>'
         sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Åk {k}', f'Här hittar du allt material till matten i åk {k}: lektioner, träning och sätt att kolla vad du kan.',
-             f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="bage" style="background:{c["ljus"]}" aria-hidden="true">{k}</div>')
+             f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="bage" aria-hidden="true">{k}</div>')
              + f'<main><div class="wrap">{grupper}</div></main>')
         if k in TRANA_AR:
             sti = [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), ('Interaktiva övningar', 'ak%d/trana.html' % k)]
@@ -536,7 +611,7 @@ def bygg():
                          ('hjalp.html', 'Så får du hjälp i matte', 'Så gör vi för att alla ska lära sig matte.'),
                          ('nationella-prov.html', 'Nationella prov i matematik', 'Så går provet till i åk 9, och så kan du förbereda dig.')]:
         c = SIDFARG[fil]
-        sida(fil, t, '', c, f"""
+        sida(fil, t, {'bedomning.html': 'Bedömning', 'hjalp.html': 'Så får du hjälp', 'nationella-prov.html': 'Nationella prov'}.get(fil, ''), c, f"""
 {panel(c, t, text, '', [('Startsida', 'index.html'), (t, None)])}
 <main><section><div class="wrap">{byt_farger(extra(fil), FARGBYTE_NP if fil == 'nationella-prov.html' else None)}
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")

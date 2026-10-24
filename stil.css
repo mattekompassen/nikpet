@@ -143,3 +143,51 @@ a.knapp2{text-decoration:none;display:inline-block}
  .ak a{padding:24px 22px 22px}.ak .sol{width:120px;height:120px;font-size:84px;margin-bottom:12px}.ak h3{font-size:26px}
  .kort-t{padding:18px 14px}.match{gap:8px}.mb{font-size:14px;padding:10px}
 }
+
+/* --- Bokomslagens färger (förslag) --- */
+body{background:#F4F3EF}
+main.hem{background:radial-gradient(600px 420px at -5% 20%,#58A73E22,transparent 70%),radial-gradient(520px 420px at 105% 15%,#7A44B022,transparent 70%),radial-gradient(500px 300px at 50% 0%,#1A86B014,transparent 70%)}
+header{background:#FBFAF7;border-bottom:1px solid #E6E3DC}.rand{display:none}
+header .wrap{padding-top:14px;padding-bottom:14px}
+.logo{font-family:Inter,sans-serif;font-weight:800;font-size:26px;color:#1E2B3A}.logo img{width:50px;height:50px;background:none;box-shadow:none}.logo small{font-weight:500}
+nav{background:none;border:0;padding:0;gap:4px}
+nav a{border-radius:0;padding:8px 10px;border-bottom:3px solid transparent;font-weight:500;color:#1E2B3A}nav a:hover{background:none;color:#000}
+nav a.on{color:#1E2B3A;font-weight:700;background:none!important}
+.topprubrik{display:flex;align-items:center;justify-content:center;gap:22px;text-align:center;padding:34px 0 30px}
+.topprubrik img{width:96px}.topprubrik h1{font-family:Inter,sans-serif;font-weight:800;font-size:clamp(38px,5.4vw,64px);letter-spacing:-1.5px;margin:0;color:#14202E;line-height:1}
+.topprubrik p{margin:8px 0 0;font-size:21px;color:#3B4A5A;text-align:left}
+.topprubrik div{text-align:left}
+.kkrad{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.kk{display:block;border-radius:22px;overflow:hidden;text-decoration:none;box-shadow:0 10px 30px #1E2B3A1f;transition:transform .15s}.kk:hover{transform:translateY(-5px)}
+.kk .topp{height:210px;position:relative;overflow:hidden}
+.motiv-k{position:absolute;inset:14px 18px;width:calc(100% - 36px);height:calc(100% - 28px);opacity:.95}
+.kk .kropp{padding:22px 26px 26px;text-align:center}
+.kk h3{font-family:Inter,sans-serif;font-weight:800;font-size:32px;margin:0 0 8px;letter-spacing:-.5px}
+.kk p{margin:0 0 20px;color:#3B4A5A;font-size:17px;line-height:1.45;min-height:50px}
+.kk .gaa{display:inline-block;color:#fff;border-radius:999px;padding:13px 34px;font-weight:700;font-size:18px}
+.infor{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;border-top:1.5px solid #E1DED6;padding-top:26px}
+.infor a{display:flex;gap:16px;align-items:flex-start;padding:4px 20px;text-decoration:none;color:#1E2B3A}.infor a+a{border-left:1.5px solid #E1DED6}
+.infor .rik{width:62px;height:62px;border-radius:50%;background:#E7EBEF;display:flex;align-items:center;justify-content:center;flex:none}
+.infor b{display:block;font-size:17px;margin-bottom:4px}.infor small{display:block;color:#566373;font-size:14.5px;line-height:1.45}
+.panel.farg{color:#fff}.panel.farg .sti,.panel.farg .sti a{color:#ffffffd9}.panel.farg .etikett{color:#ffffffcc}.panel.farg h1{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-1px}
+.panel .motiv{position:absolute;right:24px;top:22px;height:calc(100% - 44px);max-width:26%;width:auto;opacity:.35;z-index:0}.panel.farg>div{position:relative;z-index:1}.panel.farg p{max-width:440px}
+.panel.farg .bage{background:#ffffff2e;color:#fff;font-family:Inter,sans-serif;font-weight:800;border:3px solid #ffffff66}
+.grupp h2,.t h3{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.4px}
+.t{background:var(--w);box-shadow:inset 0 0 0 2px var(--ram),0 6px 16px #1E2B3A0d}
+footer{background:#1E2B3A;color:#DDE3EA}footer .wrap{color:#DDE3EA}
+@media (max-width:1000px){nav{width:100%;overflow-x:auto;flex-wrap:nowrap}nav a{white-space:nowrap}}
+@media (max-width:800px){.kkrad{grid-template-columns:1fr}.infor{grid-template-columns:1fr 1fr;row-gap:20px}.infor a:nth-child(3){border-left:0}
+ .topprubrik{gap:14px;padding:18px 0}.topprubrik img{width:64px}.topprubrik p{font-size:16px}.kk .topp{height:150px}.panel .motiv{display:none}}
+@media (max-width:560px){.infor{grid-template-columns:1fr}.infor a{border-left:0!important;padding:4px 0}.infor a+a{border-top:1.5px solid #E1DED6;padding-top:16px}nav{max-width:100%;min-width:0}header .wrap{min-width:0;max-width:100%}nav a{flex:none}}
+.ak2{position:relative;display:flex;flex-direction:column;border:2px solid;border-radius:22px;overflow:hidden;text-decoration:none;box-shadow:0 8px 24px #1E2B3A14;transition:transform .15s}.ak2:hover{transform:translateY(-4px)}
+.ak2 .blob{position:absolute;border-radius:50%;z-index:0}.ak2 .b1{width:190px;height:150px;right:-50px;bottom:10px;opacity:.7}.ak2 .b2{width:150px;height:120px;left:-40px;bottom:-30px;opacity:.8}
+.ak2 .prick{position:absolute;border-radius:50%;background:var(--d);opacity:.35;z-index:0}.ak2 .p1{width:9px;height:9px;right:26px;top:22px}.ak2 .p2{width:6px;height:6px;right:16px;top:44px;background:var(--m);opacity:.6}
+.ak2 .inne{position:relative;z-index:1;display:flex;gap:18px;align-items:center;padding:24px 22px 22px;flex:1}
+.ak2 .nr{position:relative;width:110px;flex:none;text-align:center}.ak2 .sol{position:absolute;left:-6px;top:-6px;width:118px;height:118px;border-radius:50%;background:#ffffff8c;z-index:-1}
+.ak2 .nr b{display:block;font-family:Inter,sans-serif;font-weight:900;font-size:104px;line-height:1;letter-spacing:-3px}.ak2 .nr small{display:block;font-weight:800;font-size:20px;margin-top:8px}
+.ak2 h3{font-family:Inter,sans-serif;font-weight:800;font-size:24px;margin:0 0 8px}
+.ak2 ul{list-style:none;margin:0 0 6px;padding:0}.ak2 li{display:flex;align-items:center;gap:8px;font-weight:600;font-size:16px;color:#1E2B3A;margin:5px 0}.ak2 li svg{width:18px;height:18px;flex:none;fill:var(--m)}
+.ak2 em{font-weight:700;font-size:15px;opacity:.85}
+.ak2 .gaa{position:relative;z-index:1;display:block;text-align:center;color:#fff;padding:14px;font-weight:700;font-size:17px}
+@media (max-width:560px){.topprubrik h1{font-size:34px!important}.topprubrik p{font-size:15px!important}.topprubrik img{width:56px!important}.ak2 .inne{gap:12px;padding:20px 16px 18px}.ak2 .nr{width:92px}.ak2 .nr b{font-size:86px}.ak2 .sol{width:100px;height:100px}}
+@media (max-width:1100px) and (min-width:801px){.ak2 .nr{width:84px}.ak2 .nr b{font-size:80px}.ak2 .sol{width:92px;height:92px}.ak2 h3{font-size:20px}.ak2 li{font-size:14.5px}}

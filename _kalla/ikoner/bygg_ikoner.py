@@ -1,5 +1,5 @@
 """Ikonerna för årskurssidorna (Organic-färger, utan textband). Kör: python3 bygg_ikoner.py
-Källor: ikoner-ak{7,8,9}.html (vintagefärger 2026-10-24; ändra färger direkt i dem). PNG hamnar i ../../webbplats/bilder/akN/."""
+Källor: ikoner-ak{7,8,9}.html (bokomslagsfärger 2026-10-24; ändra färger direkt i dem). PNG hamnar i ../../webbplats/bilder/akN/."""
 import pathlib, subprocess, re
 H = pathlib.Path(__file__).parent
 UT = pathlib.Path('/mnt/project-files/webbplats/bilder')
