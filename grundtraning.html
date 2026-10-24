@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grundträning – Mattekompassen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="icon" href="bilder/kompass-liten.png">
+<link rel="stylesheet" href="stil.css?v=d4cf2b1f">
+<style>:root{--ink:#33407A;--mid:#8794D0;--l:#B1B9E0;--vl:#ECEEF7;--w:#F7F8FC;--hi:#ECEFFA;--bg:#F3F4FA;--ram:#CFD4EC}</style></head><body>
+<div class="rand" aria-hidden="true"><i style="background:#58A73E"></i><i style="background:#1A86B0"></i><i style="background:#7A44B0"></i></div><header><div class="wrap"><a class="logo" href="index.html"><img src="bilder/kompass-liten.png" alt=""><span>Mattekompassen<small>Örtagårdsskolan 7–9</small></span></a>
+<nav aria-label="Huvudmeny"><a href="index.html" class="">Startsida</a><a href="ak7.html" class="">Åk 7</a><a href="ak8.html" class="">Åk 8</a><a href="ak9.html" class="">Åk 9</a><a href="bedomning.html" class="">Bedömning</a><a href="hjalp.html" class="">Så får du hjälp</a><a href="nationella-prov.html" class="">Nationella prov</a></nav></div></header>
+<div class="wrap"><section class="panel" style="background:#8794D0"><div><div class="sti"><a href="index.html">Startsida</a> / Grundträning</div><h1>Grundträning</h1><p>Träna huvudräkning, gångertabellen och klockan. Välj en övning och en nivå. Du får nya uppgifter varje gång.</p></div></section></div><main><section><div class="wrap"><div id="trana"></div><a class="knapp" href="index.html">← Till startsidan</a></div></section></main><style>
+.gt-del{max-width:1150px}.gt-txt{margin:-6px 0 16px;color:#4A433C;font-size:16px}
+.gt-typer{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.gt-typer .typ{font-size:18px;line-height:1.3}.gt-typer .typ b{margin-top:6px;font-size:14px}.typ .gt-ik{display:block;font-size:26px;margin-bottom:8px}
+.gt-ord{margin-top:16px;background:#fff;border:2px solid var(--l);border-radius:16px}
+.gt-ord summary{cursor:pointer;padding:12px 18px;font-weight:800;font-size:18px;color:var(--ink)}
+.gt-ordgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;padding:0 18px}
+.gt-ordgrid div{text-align:center}.gt-ordgrid b{display:block;color:var(--ink);font-size:16px}.gt-ordgrid span{font-size:14px;color:#5F6368}
+.gt-ord ul{margin:12px 0 0;padding:0 18px 16px 38px;line-height:1.7;font-size:15.5px}
+.klocka{display:block;width:230px;height:auto;margin:4px auto 10px}.klocka.liten{width:92px;margin:0 auto 4px}
+.klocka.stor{width:min(290px,78vw);touch-action:none;cursor:grab;user-select:none}
+.klocka text{font:700 17px Inter,sans-serif;fill:#1E2B3A;text-anchor:middle}
+.kl-y{fill:#fff;stroke:var(--ink);stroke-width:4}.kl-t{stroke:#1E2B3A;stroke-width:3}.kl-s{stroke:#AEB4BB;stroke-width:1.2}
+.kl-h line{stroke:#1E2B3A;stroke-width:8;stroke-linecap:round}.kl-m line{stroke:var(--mid);stroke-width:5;stroke-linecap:round}.kl-c{fill:#1E2B3A}
+.klocka.stor .kl-m line{stroke-width:7}.klocka.visad .kl-m line{stroke:#545A3F}
+.gt-bild{display:flex;justify-content:center;margin:0 0 14px}
+.tidslinje{width:100%;max-width:600px;overflow:visible}.tl-l{stroke:#1E2B3A;stroke-width:3}.tl-h{stroke:#9AA3AE;stroke-width:2}
+.tl-p{fill:var(--mid)}.tl-b{fill:none;stroke:var(--mid);stroke-width:2.5;stroke-dasharray:6 5}
+.tl-t{font:800 17px Inter,sans-serif;fill:var(--ink);text-anchor:middle}.tl-ht{font:600 14px Inter,sans-serif;fill:#5F6368;text-anchor:middle}.tl-q{font:800 18px Inter,sans-serif;fill:var(--mid);text-anchor:middle}
+.tioruta{width:200px}.tr-r{fill:#fff;stroke:var(--l);stroke-width:2}.tr-f{fill:var(--mid)}.tr-t{fill:none;stroke:#AEB4BB;stroke-width:2;stroke-dasharray:4 3}
+#trana .gt-tid input{width:84px;text-align:center}.gt-enh{align-self:center;font-weight:800;font-size:20px;color:var(--ink)}.gt-kolon{align-self:center;font-weight:800;font-size:30px;color:var(--ink)}
+.gt-knappar{display:grid;grid-template-columns:repeat(4,auto);gap:8px;justify-content:center}
+.gt-knappar button{font:inherit;font-weight:700;font-size:16px;border:0;border-radius:12px;background:var(--ink);color:#fff;padding:10px 14px;cursor:pointer}.gt-knappar button:active{opacity:.8}
+.gt-klar{display:block;margin:14px auto 0}
+.gt-ex{display:flex;gap:12px;align-items:flex-start;background:#fff;border:2px solid var(--l);border-radius:16px;padding:14px 16px;margin:14px 0 4px;font-size:17px}
+.gt-ex>span{font-size:24px}.gt-ex p{margin:4px 0 0;line-height:1.6}
+.gt-val{max-width:860px}.gt-val h3{margin:20px 0 10px;color:var(--ink)}.gt-niva{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+.gt-tillbaka{display:inline-block;margin-top:18px;text-decoration:none}
+.gt-missar{background:#fff;border-radius:14px;padding:12px 16px;margin:0 0 16px}.gt-missar ul{margin:6px 0 0;padding-left:22px;line-height:1.6}
+.klar .knapp2{display:inline-block;text-decoration:none;margin:4px 4px 0 0}
+@media (max-width:560px){.gt-knappar{grid-template-columns:1fr 1fr}.klocka{width:200px}.alt{grid-template-columns:1fr}}
+</style><script src="grundtraning.js"></script>
+<footer><div class="rand" aria-hidden="true"><i style="background:#58A73E"></i><i style="background:#1A86B0"></i><i style="background:#7A44B0"></i></div><div class="wrap"><b>Mattekompassen</b><span>Matematik för åk 7–9 på Örtagårdsskolan. Frågor? Fråga eller mejla din <a class="mejl" data-u="nikola.petranovic" data-d="skola.malmo.se" href="#">lärare</a>.</span></div></footer>
+<script>document.querySelectorAll('a.mejl').forEach(function(a){a.href='mailto:'+a.dataset.u+'@'+a.dataset.d})</script>
+</body></html>
