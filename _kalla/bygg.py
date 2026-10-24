@@ -348,8 +348,8 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
 {rand()}<header><div class="wrap"><a class="logo" href="{rot}index.html"><img src="{rot}bilder/kompass-liten.png" alt=""><span>Mattekompassen<small>Örtagårdsskolan 7–9</small></span></a>
 <nav aria-label="Huvudmeny">{meny}</nav></div></header>
 {kropp}
-<footer>{rand()}<div class="wrap"><b>Mattekompassen</b><span>Matematik för åk 7–9 på Örtagårdsskolan. Frågor om matten? Prata med din mattelärare.<br>Frågor om webbplatsen? Mejla Nikola Petranovic: <a class="mejl" data-u="nikola.petranovic" data-d="skola.malmo.se" href="#">nikola.petranovic [snabel-a] skola.malmo.se</a></span></div></footer>
-<script>document.querySelectorAll('a.mejl').forEach(function(a){{var m=a.dataset.u+'@'+a.dataset.d;a.href='mailto:'+m;a.textContent=m}})</script>
+<footer>{rand()}<div class="wrap"><b>Mattekompassen</b><span>Matematik för åk 7–9 på Örtagårdsskolan. Frågor? Fråga eller mejla din <a class="mejl" data-u="nikola.petranovic" data-d="skola.malmo.se" href="#">lärare</a>.</span></div></footer>
+<script>document.querySelectorAll('a.mejl').forEach(function(a){{a.href='mailto:'+a.dataset.u+'@'+a.dataset.d}})</script>
 </body></html>"""
     p = os.path.join(UT, fil)
     os.makedirs(os.path.dirname(p), exist_ok=True)
