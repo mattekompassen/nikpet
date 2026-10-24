@@ -236,6 +236,12 @@ footer{background:#1E2B3A;color:#DDE3EA}footer .wrap{color:#DDE3EA}
 .ak2 .gaa{position:relative;z-index:1;display:block;text-align:center;color:#fff;padding:14px;font-weight:700;font-size:17px}
 @media (max-width:560px){.topprubrik h1{font-size:34px!important}.topprubrik p{font-size:15px!important}.topprubrik img{width:56px!important}.ak2 .inne{gap:12px;padding:20px 16px 18px}.ak2 .nr{width:92px}.ak2 .nr b{font-size:86px}.ak2 .sol{width:100px;height:100px}}
 @media (max-width:1100px) and (min-width:801px){.ak2 .nr{width:84px}.ak2 .nr b{font-size:80px}.ak2 .sol{width:92px;height:92px}.ak2 h3{font-size:20px}.ak2 li{font-size:14.5px}}
+.panel.farg{min-height:240px;box-shadow:0 10px 28px #1E2B3A26;border-radius:26px}
+.panel .vag{position:absolute!important;inset:0;width:100%;height:100%;z-index:0!important}
+.panel .prick{position:absolute!important;fill:#fff;opacity:.35;z-index:0!important}.panel .pr1{left:18px;bottom:16px}.panel .pr2{right:20px;top:16px}
+.panel.farg .motiv{position:absolute!important;right:50px;top:50%;transform:translateY(-50%);height:82%;max-width:40%;width:auto;opacity:.92;z-index:0!important;filter:drop-shadow(0 2px 6px #0002)}
+.panel.farg h1{font-family:Fraunces,Georgia,serif;font-weight:700;letter-spacing:0;font-size:clamp(32px,4.4vw,54px)}.panel.farg>div{max-width:56%}.panel.farg .etikett{letter-spacing:3px;font-weight:800}.panel.farg p{max-width:520px}
+@media (max-width:800px){.panel.farg>div{max-width:100%}.panel.farg .motiv{display:block;opacity:.22;right:-40px;height:70%;max-width:70%}}
 """
 
 # Lösenordsskydd för Lektioner-sidorna. Lösenordet läses från en fil utanför webbplatsen och repot.
@@ -403,14 +409,26 @@ def motiv(k, cls='motiv'):
     return (f'<svg class="{cls}" viewBox="0 0 410 260" aria-hidden="true" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" '
             f'font-family="Inter,sans-serif" font-weight="600">{MOTIV[k]}</svg>')
 
+def _prickar(x, y, kol, rad, g=12):
+    return ''.join(f'<circle cx="{x+c*g}" cy="{y+r*g}" r="2.2"/>' for c in range(kol) for r in range(rad))
+# Vågbakgrund i årskursernas rubrikpaneler (Nikola 2026-10-24)
+VAG = ('<svg class="vag" viewBox="0 0 1200 300" preserveAspectRatio="none" aria-hidden="true">'
+       '<path d="M0 210 C 200 150, 380 260, 620 190 S 1000 120, 1200 170 V300 H0Z" fill="#ffffff1f"/>'
+       '<path d="M0 250 C 260 200, 450 290, 700 235 S 1050 190, 1200 230 V300 H0Z" fill="#ffffff1a"/>'
+       '<path d="M0 60 C 220 20, 420 120, 680 70 S 1050 0, 1200 40 V0 H0Z" fill="#00000010"/>'
+       '<path d="M0 120 C 300 60, 520 200, 820 120 S 1100 60, 1200 90" fill="none" stroke="#ffffff45" stroke-width="2"/>'
+       '<path d="M0 150 C 300 90, 540 230, 840 150 S 1100 95, 1200 120" fill="none" stroke="#ffffff1c" stroke-width="2"/></svg>'
+       f'<svg class="prick pr1" width="60" height="48" aria-hidden="true">{_prickar(4, 4, 5, 4)}</svg>'
+       f'<svg class="prick pr2" width="72" height="48" aria-hidden="true">{_prickar(4, 4, 6, 4)}</svg>')
+
 def panel(c, titel, text='', etikett='', sti=None, vanster='', rot=''):
     """Rundad rubrikpanel högst upp på sidan. sti = [(namn, länk), ...] (brödsmulor)."""
     st = ''
     if sti:
         st = '<div class="sti">' + ' / '.join(f'<a href="{rot}{h}">{html.escape(n)}</a>' if h else html.escape(n) for n, h in sti) + '</div>'
     k = c.get('k')
-    bakgrund = f'linear-gradient(120deg,{c["main"]},{c["ink"]})' if k else c['hero']
-    return (f'<div class="wrap"><section class="panel{" farg" if k else ""}" style="background:{bakgrund}">' + (motiv(k) if k else '') + f'{vanster}<div>{st}<h1>{titel}</h1>'
+    bakgrund = f'linear-gradient(115deg,{c["main"]} 0%,{c["main"]} 30%,{c["ink"]} 100%)' if k else c['hero']
+    return (f'<div class="wrap"><section class="panel{" farg" if k else ""}" style="background:{bakgrund}">' + (VAG + motiv(k) if k else '') + f'{vanster}<div>{st}<h1>{titel}</h1>'
             + (f'<div class="etikett">{etikett}</div>' if etikett else '') + (f'<p>{text}</p>' if text else '') + '</div></section></div>')
 
 def sida(fil, titel, aktiv, c, kropp, rot=''):
@@ -575,8 +593,8 @@ def bygg():
             t = ''.join(f'<a class="t" href="ak{k}/{s}.html"><img src="bilder/ak{k}/{f}.png" alt=""><span class="pil" aria-hidden="true">→</span><h3>{rt}</h3><p>{p}</p>'
                         + ('<span class="las-ikon">🔒 Lösenord</span>' if s == 'lektioner' else '') + '</a>' for f, s, rt, p in rutor)
             grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3">{t}</div></div>'
-        sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Åk {k}', f'Här hittar du allt material till matten i åk {k}: lektioner, träning och sätt att kolla vad du kan.',
-             f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="bage" aria-hidden="true">{k}</div>')
+        sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Årskurs {k}', f'Här hittar du allt material till matten i åk {k}: lektioner, träning och sätt att kolla vad du kan.',
+             f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)])
              + f'<main><div class="wrap">{grupper}</div></main>')
         if k in TRANA_AR:
             sti = [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), ('Interaktiva övningar', 'ak%d/trana.html' % k)]
