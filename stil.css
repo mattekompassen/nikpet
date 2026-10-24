@@ -28,9 +28,10 @@ nav a i{width:10px;height:10px;border-radius:50%;flex:none}nav a:hover{backgroun
 .ak a{display:block;border-radius:220px 220px 34px 34px;padding:34px 30px 30px;text-decoration:none;color:#2F2B26;transition:transform .15s}
 .ak a:hover{transform:translateY(-5px)}
 .ak .sol{width:190px;height:190px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-family:Fraunces,Georgia,serif;font-weight:700;font-size:130px;line-height:1}
-.ak h3{font-size:30px;text-align:center;margin:0}.ak .bok{text-align:center;font-weight:600;font-size:15px;margin:4px 0 18px;letter-spacing:1.5px;text-transform:uppercase}
+.ak h3{font-size:30px;text-align:center;margin:0}.ak .bok{text-align:center;font-weight:600;font-size:15px;margin:4px 0 22px;letter-spacing:1.5px;text-transform:uppercase}
 .ak ul{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.ak li{background:#fff9;border-radius:999px;padding:6px 13px;font-size:14px;font-weight:600}
+.alla{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px;background:#D2E6D9;border-radius:24px;padding:16px 24px}.alla b{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px}
+.alla ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}.alla li{background:#fff9;border-radius:999px;padding:6px 13px;font-size:14px;font-weight:600;color:#4E6357}
 .ak .gaa{display:block;text-align:center;color:#fff;border-radius:999px;padding:14px;font-weight:700;font-size:17px}
 .rubrik{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin:64px 0 22px}.rubrik h2{font-size:38px;margin:0;color:#2F2B26}.rubrik span{color:#5A5047;font-size:17px}
 .veta{display:grid;grid-template-columns:repeat(4,1fr);background:#D2E6D9;border-radius:30px;padding:10px}

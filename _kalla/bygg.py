@@ -66,9 +66,10 @@ nav a i{width:10px;height:10px;border-radius:50%;flex:none}nav a:hover{backgroun
 .ak a{display:block;border-radius:220px 220px 34px 34px;padding:34px 30px 30px;text-decoration:none;color:#2F2B26;transition:transform .15s}
 .ak a:hover{transform:translateY(-5px)}
 .ak .sol{width:190px;height:190px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-family:Fraunces,Georgia,serif;font-weight:700;font-size:130px;line-height:1}
-.ak h3{font-size:30px;text-align:center;margin:0}.ak .bok{text-align:center;font-weight:600;font-size:15px;margin:4px 0 18px;letter-spacing:1.5px;text-transform:uppercase}
+.ak h3{font-size:30px;text-align:center;margin:0}.ak .bok{text-align:center;font-weight:600;font-size:15px;margin:4px 0 22px;letter-spacing:1.5px;text-transform:uppercase}
 .ak ul{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.ak li{background:#fff9;border-radius:999px;padding:6px 13px;font-size:14px;font-weight:600}
+.alla{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px;background:#D2E6D9;border-radius:24px;padding:16px 24px}.alla b{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px}
+.alla ul{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px}.alla li{background:#fff9;border-radius:999px;padding:6px 13px;font-size:14px;font-weight:600;color:#4E6357}
 .ak .gaa{display:block;text-align:center;color:#fff;border-radius:999px;padding:14px;font-weight:700;font-size:17px}
 .rubrik{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin:64px 0 22px}.rubrik h2{font-size:38px;margin:0;color:#2F2B26}.rubrik span{color:#5A5047;font-size:17px}
 .veta{display:grid;grid-template-columns:repeat(4,1fr);background:#D2E6D9;border-radius:30px;padding:10px}
@@ -347,12 +348,12 @@ def bygg():
     ros = ''.join(f'<span style="width:{w}px;height:{w}px;left:{x}px;top:{y}px;background:{ORG[c][0]}"></span>' for c, w, x, y in
                   [('sand', 170, 250, 10), ('turk', 150, 0, 40), ('rosa', 190, 230, 210), ('sage', 210, 20, 180), ('lav', 90, 170, 0), ('apri', 80, 360, 150)])
     ros += f'<span style="width:250px;height:250px;left:85px;top:75px;background:{BG};opacity:1"></span>'
-    inneh = ['Lektioner', 'Tillbakablick', 'Trygg start', 'Problemlösning', 'Diagnos', 'Test']
+    inneh = [rt for _, _, rutor in GRUPPER for _, _, rt, _ in rutor]  # samma som rutorna på årskurssidorna
     kort = ''
     for k, c in AR.items():
         kort += (f'<a href="ak{k}.html" style="background:{c["vl"]};box-shadow:inset 0 0 0 2px {c["ram"]}"><div class="sol" style="background:{c["main"]}" aria-hidden="true">{k}</div>'
-                 f'<h3>Åk {k}</h3><div class="bok" style="color:{c["ink"]}">Matematik {c["bok"]}</div><ul>' + ''.join(f'<li style="color:{c["ink"]}">{x}</li>' for x in inneh)
-                 + f'</ul><span class="gaa" style="background:{c["ink"]}">Gå till åk {k} →</span></a>')
+                 f'<h3>Åk {k}</h3><div class="bok" style="color:{c["ink"]}">Matematik {c["bok"]}</div>'
+                 + f'<span class="gaa" style="background:{c["ink"]}">Gå till åk {k} →</span></a>')
     veta = [('himmel', 'prov', 'bedomning.html', 'Hur bedöms du?', 'Så visar du vad du kan och vad som krävs för olika betyg.', 'Läs om bedömning'),
             ('apri', 'boj', 'hjalp.html', 'Så får du hjälp', 'Stöd du kan få och sätt som hjälper dig att lära dig matte.', 'Hitta hjälp'),
             ('sand', 'medalj', 'nationella-prov.html', 'Nationella prov', 'Så går provet i åk 9 till, och så tränar du inför det.', 'Om provet'),
@@ -363,6 +364,7 @@ def bygg():
 <p>Välj din årskurs och hitta lektioner, övningar och stöd, samlat på ett ställe.</p></div>
 <div class="ros" aria-hidden="true">{ros}<img src="bilder/kompass-matte.png" alt=""></div></section>
 <h2 class="sr">Välj din årskurs</h2><div class="ak">{kort}</div>
+<div class="alla"><b>I varje årskurs hittar du</b><ul>{''.join(f'<li>{x}</li>' for x in inneh)}</ul></div>
 <div class="rubrik"><h2>Bra att veta</h2><span>För alla elever i åk 7–9</span></div><div class="veta">{veta}</div></div></main>""")
     # Årskurssidor och undersidor
     for k, c in AR.items():
