@@ -173,7 +173,7 @@ nav a.on{color:#1E2B3A;font-weight:700;background:none!important}
 .panel .motiv{position:absolute;right:24px;top:22px;height:calc(100% - 44px);max-width:26%;width:auto;opacity:.35;z-index:0}.panel.farg>div{position:relative;z-index:1}.panel.farg p{max-width:440px}
 .panel.farg .bage{background:#ffffff2e;color:#fff;font-family:Inter,sans-serif;font-weight:800;border:3px solid #ffffff66}
 .grupp h2,.t h3{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.4px}
-.t{background:var(--w);box-shadow:inset 0 0 0 2px var(--ram),0 6px 16px #1E2B3A0d}
+.t{background:var(--t,var(--w));box-shadow:inset 0 0 0 2px var(--tram,var(--ram)),0 6px 16px #1E2B3A0d}
 footer{background:#1E2B3A;color:#DDE3EA}footer .wrap{color:#DDE3EA}
 @media (max-width:1000px){nav{width:100%;overflow-x:auto;flex-wrap:nowrap}nav a{white-space:nowrap}}
 @media (max-width:800px){.kkrad{grid-template-columns:1fr}.infor{grid-template-columns:1fr 1fr;row-gap:20px}.infor a:nth-child(3){border-left:0}
