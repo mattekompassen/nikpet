@@ -348,9 +348,14 @@ SIDFARG = {'bedomning.html': farger('turk'), 'hjalp.html': farger('apri'), 'nati
 FARGBYTE = {'#2C4152': '#435264', '#426B89': '#5B6B7E', '#5A7552': '#545A3F', '#96505A': '#8A4A30', '#B95E52': '#B0785C',
             '#8A5E22': '#7A5A22', '#F2CD69': '#DDBE88', '#1F6E6C': '#5A4A5A', '#DDEBF3': '#E3E6EA', '#E3ECDD': '#E6E7DD',
             '#F7E3DE': '#F2E2DA', '#F8EBC9': '#F3E8D3', '#D9EEEC': '#E8E3E8'}
-def byt_farger(h):
+# Nationella prov: allt i gula/bruna nyanser
+FARGBYTE_NP = {'#2C4152': '#6E5120', '#426B89': '#8F6C2E', '#5A7552': '#A07E3E', '#96505A': '#7A5A22', '#B95E52': '#B48A45',
+               '#8A5E22': '#7A5A22', '#F2CD69': '#DDBE88', '#1F6E6C': '#8F6C2E', '#DDEBF3': '#F3E6C9', '#E3ECDD': '#F6EBD3',
+               '#F7E3DE': '#F1E0BD', '#F8EBC9': '#F3E8D3', '#D9EEEC': '#F3E6C9'}
+def byt_farger(h, tabell=None):
     import re
-    return re.sub('|'.join(FARGBYTE), lambda m: FARGBYTE[m.group(0).upper()], h, flags=re.I)
+    tabell = tabell or FARGBYTE
+    return re.sub('|'.join(tabell), lambda m: tabell[m.group(0).upper()], h, flags=re.I)
 
 def bygg():
     open(os.path.join(UT, 'stil.css'), 'w').write(CSS)
@@ -421,7 +426,7 @@ def bygg():
         c = SIDFARG[fil]
         sida(fil, t, '', c, f"""
 {panel(c, t, text, '', [('Startsida', 'index.html'), (t, None)])}
-<main><section><div class="wrap">{byt_farger(extra(fil))}
+<main><section><div class="wrap">{byt_farger(extra(fil), FARGBYTE_NP if fil == 'nationella-prov.html' else None)}
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     # Gemensam sida om problemlösning (länkas från årskursernas problemlösningssidor)
     arl = ''.join(f'<a href="ak{k}/problemlosning.html" style="background:{AR[k]["ink"]}">Åk {k}<small>Matematik {AR[k]["bok"]} · problemlösning per kapitel</small></a>' for k in AR)
