@@ -27,6 +27,34 @@ FORMAGOR = [  # namn, färg, ljus, vad det är, så visar du det, E, C, A
   'Du redovisar tydligt och använder matematiska symboler.',
   'Du redovisar tydligt och strukturerat med rätt symboler och matteord.'),
 ]
+# Planscher om förmågorna (bilder i planscher/, kopieras till bilder/planscher/). Stegen = planschens text, för "Kolla dig själv".
+PLANSCHER = {
+ 'Begrepp': ('begrepp', 'Jag förstår, använder och kopplar samman matematiska begrepp.', [
+  ('Jag förstår matematiska begrepp', ['Jag kan förklara begrepp med egna ord.', 'Jag vet vad begreppet syftar på.', 'Jag kan skilja mellan liknande begrepp.', 'Jag kan tolka begreppets betydelse i olika sammanhang.']),
+  ('Jag använder matematiska begrepp', ['Jag använder begrepp på ett korrekt och tydligt sätt.', 'Jag använder begrepp i beräkningar och problemlösning.', 'Jag kommunicerar med matematiska begrepp.', 'Jag använder begrepp i tabeller, diagram, formler och grafer.']),
+  ('Jag ser samband mellan begrepp', ['Jag kan koppla ihop olika begrepp.', 'Jag ser hur ett begrepp är en del av ett större sammanhang.', 'Jag kan beskriva ett begrepp med ord, symboler, figurer och exempel.', 'Jag använder begrepp för att förstå helheten.']),
+  ('Jag utvecklar min begreppsförståelse', ['Jag är nyfiken och undersöker nya begrepp.', 'Jag tänker på vad jag har lärt mig och vad som är svårt.', 'Jag ändrar och fördjupar min förståelse.', 'Jag använder begrepp säkert, även i nya situationer.'])]),
+ 'Metod': ('metod', 'Jag väljer och använder lämpliga metoder för att lösa matematiska problem.', [
+  ('Jag väljer en lämplig metod', ['Jag funderar på vilket sätt som passar bäst för att lösa uppgiften.', 'Jag tar hänsyn till vad jag redan vet.', 'Jag väljer en metod som är effektiv och passar uppgiften.', 'Jag vill lösa uppgiften på ett korrekt och tydligt sätt.']),
+  ('Jag genomför min metod', ['Jag följer den metod jag har valt.', 'Jag räknar steg för steg och visar hur jag tänker.', 'Jag använder verktyg vid behov, till exempel miniräknare eller linjal.', 'Om det inte fungerar, prövar jag en annan metod.']),
+  ('Jag bedömer resultatet', ['Jag kontrollerar att svaret är rimligt.', 'Jag jämför med andra metoder: får jag samma svar?', 'Jag granskar min lösning: har jag gjort alla steg och räknat rätt?', 'Jag funderar på om svaret passar i verkligheten.']),
+  ('Jag reflekterar och utvecklar', ['Jag tänker på vad som fungerade bra och vad som var svårt.', 'Jag lär mig av mina erfarenheter.', 'Jag kan förklara min metod för andra.', 'Jag kan använda metoden i andra uppgifter och ämnen.'])]),
+ 'Problemlösning': ('problemlosning', 'Jag använder mina kunskaper och strategier för att lösa matematiska problem.', [
+  ('Jag förstår problemet', ['Jag läser problemet noggrant. Vad är givet och vad ska jag ta reda på?', 'Jag hittar den viktiga informationen.', 'Jag kan säga problemet med egna ord.', 'Jag tänker på vad som är möjligt och rimligt.']),
+  ('Jag planerar en strategi', ['Jag tänker på olika sätt att lösa problemet.', 'Jag väljer en strategi som passar.', 'Jag gör en plan: ska jag rita en figur, göra en tabell eller använda en formel?', 'Jag tänker på vad som kan bli svårt.']),
+  ('Jag genomför och prövar min strategi', ['Jag använder min strategi och löser problemet.', 'Om det inte fungerar, försöker jag på ett annat sätt.', 'Jag håller ordning på mina steg och beräkningar.', 'Jag använder det jag redan kan på ett nytt sätt.']),
+  ('Jag granskar min lösning', ['Jag kontrollerar att svaret är rimligt.', 'Jag förklarar hur jag har tänkt.', 'Jag jämför med andra lösningar.', 'Jag tänker på vad jag kan göra annorlunda nästa gång.'])]),
+ 'Resonemang': ('resonemang', 'Jag förklarar, motiverar och drar slutsatser i matematiken.', [
+  ('Jag förklarar mitt tänkande', ['Jag använder matematiska begrepp och samband.', 'Jag visar hur jag tänker steg för steg.', 'Jag förklarar varför min lösning är rimlig.', 'Jag använder det jag redan vet för att förklara.']),
+  ('Jag jämför och värderar', ['Jag jämför olika lösningsmetoder.', 'Jag bedömer om svaret är rimligt.', 'Jag ser för- och nackdelar med olika lösningar.', 'Jag letar efter fel och otydligheter.']),
+  ('Jag ser samband och drar slutsatser', ['Jag ser mönster och samband.', 'Jag drar slutsatser utifrån det jag ser.', 'Jag använder mitt resonemang i nya uppgifter.', 'Jag kopplar samman olika delar av matematiken.']),
+  ('Jag diskuterar med andra', ['Jag förklarar och lyssnar på andra.', 'Jag tänker på andras sätt att tänka.', 'Jag använder rätt begrepp och ett tydligt språk.', 'Jag förklarar på olika sätt beroende på vem jag pratar med.'])]),
+ 'Kommunikation': ('kommunikation', 'Jag uttrycker, förklarar och lyssnar, tillsammans med andra.', [
+  ('Jag uttrycker min förståelse', ['Jag förklarar matematiska begrepp med egna ord.', 'Jag visar och förklarar mina metoder, steg och val.', 'Jag använder rätt begrepp, symboler och uttryck.', 'Jag förklarar på olika sätt beroende på vem som lyssnar.']),
+  ('Jag lyssnar och tar till mig', ['Jag lyssnar på andras tankar och förklaringar.', 'Jag ställer frågor när jag inte förstår.', 'Jag är nyfiken på andra sätt att tänka.', 'Jag respekterar andra och visar en positiv attityd.']),
+  ('Jag diskuterar och argumenterar', ['Jag deltar i matematiska samtal och bygger vidare på andras idéer.', 'Jag förklarar varför min lösning är rimlig.', 'Jag jämför olika lösningar.', 'Jag kan ändra mig när jag får bättre argument.']),
+  ('Jag visar matematik på olika sätt', ['Jag använder tabeller, diagram, figurer, symboler, formler och ord.', 'Jag använder digitala verktyg för att förklara och visa.', 'Jag kan förklara samma sak på flera sätt.', 'Jag väljer det sätt som passar bäst.'])]),
+}
 TILLFALLEN = [('På lektionerna', 'När du diskuterar, förklarar för en kompis eller visar din lösning på tavlan.'),
               ('I räknehäftet', 'När läraren går runt visar du hur du har räknat i ditt räknehäfte och berättar hur du tänkte.'),
               ('Prov och diagnoser', 'Skriftliga prov efter varje kapitel och korta diagnoser som visar var du är.'),
@@ -41,12 +69,24 @@ CSS = """<style>
 .bd h2.grupp{display:flex;align-items:center;gap:12px;font-size:24px;margin:38px 0 6px}
 .bd h2.grupp::before{content:"";width:10px;height:30px;border-radius:6px;background:var(--g)}
 .bd p.under{margin:0 0 18px;max-width:780px;line-height:1.5}
-.bd .fg{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.bd .fg{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:start}
 .bd .fk{background:#FBF8F2;border:2px solid var(--l);border-top:8px solid var(--g);border-radius:20px;padding:18px 16px}
 .bd .fk h3{margin:0 0 8px;font-size:19px;color:var(--g)}
 .bd .fk p{margin:0 0 12px;font-size:15px;line-height:1.45}
 .bd .fk .visa{background:var(--gl);border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.45;margin:0}
 .bd .fk .visa b{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--g);margin-bottom:2px}
+.bd .fk{display:flex;flex-direction:column}.bd .fk .visa{margin-bottom:12px!important}
+.bd .pl{display:block;margin:0 0 10px;border-radius:12px;overflow:hidden;border:2px solid var(--gl);height:150px;background:#fff}
+.bd .pl img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
+.bd .pknapp{align-self:flex-start;display:inline-block;background:var(--g);color:#fff;text-decoration:none;font-weight:700;font-size:14px;border-radius:999px;padding:7px 14px;margin:0 0 10px}
+.bd .pknapp:hover{filter:brightness(1.1)}
+.bd .kolla{margin:0;background:#fff;border:2px solid var(--gl);border-radius:12px}
+.bd .kolla summary{cursor:pointer;font-weight:700;color:var(--g);padding:9px 12px;font-size:15px}
+.bd .kolla .in{padding:0 12px 10px;font-size:14px;line-height:1.4}
+.bd .kolla .mening{margin:0 0 8px;font-style:italic}
+.bd .kolla h4{margin:10px 0 4px;font-size:14.5px;color:var(--g);display:flex;gap:8px;align-items:center}
+.bd .kolla h4 span{flex:none;width:22px;height:22px;border-radius:50%;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12.5px}
+.bd .kolla ul{margin:0;padding-left:18px}.bd .kolla li{margin:2px 0}
 .bd .tab{display:grid;grid-template-columns:170px repeat(3,1fr);gap:8px;margin-top:8px}
 .bd .tab .h{font-weight:800;text-align:center;color:#fff;border-radius:12px;padding:10px 6px;font-size:18px}
 .bd .tab .f{display:flex;align-items:center;font-weight:700;color:#fff;background:var(--g);border-radius:12px;padding:12px 14px}
@@ -70,9 +110,16 @@ def sida():
     e = html.escape
     ut = [CSS, '<div class="bd">',
           '<p class="ingress">I matematik bedöms det du visar att du kan: på lektionerna, i skriftliga uppgifter, muntligt och på prov. Här ser du vad som bedöms och hur du kan visa det.</p>',
-          '<h2 class="grupp" style="--g:#2C4152">Fem förmågor</h2><p class="under">All matematik bygger på fem förmågor. Det är de som bedöms, i alla kapitel och alla årskurser.</p><div class="fg">']
+          '<h2 class="grupp" style="--g:#2C4152">Fem förmågor</h2><p class="under">All matematik bygger på fem förmågor. Det är de som bedöms, i alla kapitel och alla årskurser. Öppna planschen eller klicka på Kolla dig själv för att se hur du kan bli bättre.</p><div class="fg">']
     for n, g, gl, vad, visa, *_ in FORMAGOR:
-        ut.append(f'<div class="fk" style="--g:{g};--gl:{gl}"><h3>{e(n)}</h3><p>{e(vad)}</p><p class="visa"><b>Så visar du det</b>{e(visa)}</p></div>')
+        fil, mening, steg = PLANSCHER[n]
+        src = f'bilder/planscher/{fil}.jpg'
+        kolla = ''.join(f'<h4><span>{i}</span>{e(r)}</h4><ul>' + ''.join(f'<li>{e(p)}</li>' for p in pp) + '</ul>' for i, (r, pp) in enumerate(steg, 1))
+        ut.append(f'<div class="fk" style="--g:{g};--gl:{gl}"><h3>{e(n)}</h3><p>{e(vad)}</p>'
+                  f'<p class="visa"><b>Så visar du det</b>{e(visa)}</p>'
+                  f'<a class="pl" href="{src}" target="_blank" rel="noopener" aria-label="Planschen om {e(n.lower())}, öppnas i stort format"><img src="bilder/planscher/{fil}-liten.jpg" alt="" loading="lazy"></a>'
+                  f'<a class="pknapp" href="{src}" target="_blank" rel="noopener">Se planschen</a>'
+                  f'<details class="kolla"><summary>Kolla dig själv</summary><div class="in"><p class="mening">{e(mening)}</p>{kolla}</div></details></div>')
     ut.append('</div>')
     ut.append('<h2 class="grupp" style="--g:#F2CD69">Från E till A</h2><p class="under">Så här skiljer sig betygen åt för varje förmåga. Ju högre betyg, desto säkrare, mer utvecklat och mer motiverat.</p><div class="tab">')
     ut.append('<div class="tom"></div><div class="h" style="background:#8A8F98">E</div><div class="h" style="background:#5F6368">C</div><div class="h" style="background:#2C4152">A</div>')
