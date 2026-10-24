@@ -38,15 +38,16 @@ nav a i{width:10px;height:10px;border-radius:50%;flex:none}nav a:hover{backgroun
 .veta a:hover{background:#ffffff55}.veta a+a{border-left:1.5px dashed #D2C6B7}
 .pebble{display:flex;align-items:center;justify-content:center;flex:none;width:64px;height:64px;margin-bottom:18px;border-radius:58% 42% 55% 45%/48% 58% 42% 52%}
 .veta h3{font-size:22px;margin:0 0 8px}.veta p{margin:0;color:#4A433C;font-size:15.5px;line-height:1.5}.veta b{display:inline-block;margin-top:14px;font-size:15px}
-.grupp{display:grid;grid-template-columns:230px 1fr;gap:30px;margin-bottom:46px;align-items:start}
+.grupp{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:42px;align-items:start}
+.grupp>div:first-child{display:flex;align-items:baseline;gap:6px 14px;flex-wrap:wrap}
 .grupp .nr{font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:600;letter-spacing:1px;color:var(--ink)}
-.grupp h2{font-size:34px;margin:4px 0 6px;color:#2F2B26}.grupp .g{color:#5A5047;font-size:16px;line-height:1.45;margin:0}
+.grupp h2{font-size:32px;margin:0;color:#2F2B26}.grupp .g{color:#5A5047;font-size:16px;line-height:1.45;margin:0}
 .rad3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .t{display:flex;flex-direction:column;gap:12px;border-radius:26px;padding:20px 22px 20px;min-height:182px;position:relative;text-decoration:none;color:#2F2B26;background:var(--vl);box-shadow:inset 0 0 0 2px var(--ram);transition:transform .15s}
 .t:hover{transform:translateY(-4px)}.t img{width:104px;height:104px;filter:drop-shadow(0 4px 10px #0001)}
 .t h3{font-size:22px;margin:0}.t p{margin:0;font-size:15px;line-height:1.45;color:#4A433C}
 .t .pil{position:absolute;right:20px;top:22px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;background:#fff9;color:var(--ink)}
-.t .las-ikon{position:absolute;right:20px;bottom:18px;font-size:12px;font-weight:600;opacity:.65}
+.t .las-ikon{display:inline-block;margin-top:-6px;font-size:12px;font-weight:600;opacity:.65}
 footer{margin-top:60px;background:var(--vl)}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;padding-bottom:26px;font-size:14px;color:#4A433C}
 
 *{box-sizing:border-box}
