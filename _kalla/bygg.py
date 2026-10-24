@@ -354,13 +354,13 @@ def ovningsprov_sida(k, rot='', intro=None):
         intro = f'<p class="ingress" style="max-width:860px;margin:0 0 18px">Här finns sex övningsprov med samma upplägg som det nationella provet i åk 9: fyra delprov A–D. Uppgifterna är egna och kommer inte från något riktigt prov. Skriv ut delprovet eller öppna det, ta tid och lös uppgifterna som på riktigt. Rätta sedan med facit. <a href="../nationella-prov.html" style="font-weight:700;color:var(--ink)">Läs mer om nationella provet →</a></p>'
     salt = __import__('base64').b64encode(LOSEN_SALT).decode()
     return f"""{intro}
-<div id="facit" class="ruta las" data-salt="{salt}" data-varv="{LOSEN_VARV}" style="margin-bottom:18px">
+{prov}
+<div id="facit" class="ruta las" data-salt="{salt}" data-varv="{LOSEN_VARV}" style="margin-top:22px">
 <h3>Facit är skyddat med lösenord</h3><p style="margin:0 0 14px">Uppgifterna kan alla öppna. För att öppna facit behöver du lösenordet. Du får det av din mattelärare.</p>
 <form id="lasform" autocomplete="off"><label class="sr" for="losen">Lösenord</label>
 <input id="losen" type="password" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Lösenord" required>
 <button type="submit">Lås upp facit</button></form><p id="lasfel" class="lasfel" role="alert"></p></div>
-<div id="olast" class="ruta" style="display:none;margin-bottom:18px;padding:16px 24px"><b>Facit är upplåst.</b> Klicka på Facit vid det delprov du vill rätta.</div>
-{prov}
+<div id="olast" class="ruta" style="display:none;margin-top:22px;padding:16px 24px"><b>Facit är upplåst.</b> Klicka på Facit vid det delprov du vill rätta.</div>
 <script>
 (function(){{
 var las=document.getElementById('facit'),ok=document.getElementById('olast'),fel=document.getElementById('lasfel'),NYCKEL='mk-lektioner-nyckel',raa=null;
