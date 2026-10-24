@@ -5,11 +5,23 @@ UT = '/mnt/project-files/webbplats'
 # Drive-länkar per årskurs och sida (lektioner, tillbakablick), se lankar.json
 LANKAR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lankar.json'), encoding='utf-8'))
 
-AR = {
- 7: dict(bok='X', ink='#3E5A3A', mid='#6F9477', l='#C9D8C2', vl='#E3ECDD', w='#F3EEE4', hi='#C9E3A0'),
- 8: dict(bok='Y', ink='#164E63', mid='#2E8FA3', l='#BFE4EA', vl='#DDF1F4', w='#F3EEE4', hi='#A8E0EA'),
- 9: dict(bok='Z', ink='#5C2A45', mid='#9A5A7A', l='#E3C8D5', vl='#F2E3EA', w='#F3EEE4', hi='#EBC6D6'),
-}
+# Organic färgskala (Nikola 2026-10-24): (skalans färg, mörk nyans för text/knappar, ljus bakgrund)
+ORG = dict(sage=('#818D75','#4F5A45','#EAF4EA'), terra=('#CA8C75','#8C4D36','#FDEBE7'), sand=('#D8AC65','#7A571F','#FFF6E3'),
+ himmel=('#7799BD','#3F6082','#E8F2FA'), rosa=('#CE9BA2','#7E4D57','#FCEEF1'), lav=('#A69FC1','#554C76','#EFEAF9'),
+ turk=('#7FAEB6','#3B666D','#E6F6F4'), beige=('#C4AF9A','#6D5740','#F7EFE4'), apri=('#E2A296','#883526','#FFECE4'),
+ mint=('#B2C3B9','#4E6357','#EDF7F0'), ljuslila=('#C6BCC5','#5E4F5D','#F3EEF5'), karamell=('#D1C0B0','#6B5644','#F9EFE3'))
+BG = '#EDF7F0'  # mintgrön sidbakgrund
+
+def mix(a, b, t):
+    A = [int(a[i:i+2], 16) for i in (1, 3, 5)]; B = [int(b[i:i+2], 16) for i in (1, 3, 5)]
+    return '#%02X%02X%02X' % tuple(round(x + (y - x) * t) for x, y in zip(A, B))
+
+def farger(nyckel, **extra):
+    m, d, t = ORG[nyckel]
+    return dict(main=m, ink=d, mid=m, l=mix(t, m, .45), vl=mix(t, m, .18), w=mix(t, '#FFFFFF', .5), hi=t, bg=BG,
+                hero=mix(m, t, .6), c1=mix(m, t, .35), c2=mix(m, t, .42), ram=mix(m, '#FFFFFF', .45), **extra)
+
+AR = {7: farger('sage', bok='X'), 8: farger('turk', bok='Y'), 9: farger('rosa', bok='Z')}
 # Nio ikoner på årskurssidan: (filnamn, sidnamn, rubrik)
 MATERIAL = [
  ('07_Lektioner', 'lektioner', 'Lektioner'),
@@ -19,44 +31,69 @@ MATERIAL = [
  ('11_Repetition', 'repetition', 'Repetition'),
  ('12_Diagnos', 'diagnos', 'Diagnos'),
  ('13_Test', 'test', 'Test'),
+ ('17_Ovningsprov', 'ovningsprov', 'Övningsprov'),
 ]
 MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html')]
-NEUTRAL = dict(ink='#2C4152', hi='#F2CD69', w='#F3EEE4', vl='#E9E2D4', l='#D9D4C8', mid='#5F6368')
+NEUTRAL = dict(farger('mint'), vl='#D2E6D9', l='#B5D2BF', hero='#D2E6D9', c1='#C3DCCB', c2='#C9E0D0', hi='#E8C88A')
 
 CSS = """
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2F2B26;background:var(--bg);line-height:1.5}
+h1,h2,h3,.serif{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.3px;line-height:1.15}
+.rand{display:flex;height:8px}.rand i{flex:1}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;padding-bottom:20px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:24px;line-height:1.15}
+.logo img{width:46px;height:46px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px #fff8}
+.logo small{display:block;font-family:Inter,sans-serif;font-weight:500;font-size:13px;color:#6B6258}
+nav{display:flex;gap:6px;background:#fff8;padding:6px;border-radius:999px;border:1px solid #0000000f}
+nav a{display:flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;color:#2F2B26}
+nav a i{width:10px;height:10px;border-radius:50%;flex:none}nav a:hover{background:#fff}nav a.on{color:#fff}nav a.on i{background:#fff!important}
+.panel{position:relative;overflow:hidden;display:flex;align-items:center;gap:44px;border-radius:40px;padding:40px 48px;margin:4px 0 40px}
+.panel>*{position:relative;z-index:1}.panel .cirk{position:absolute;border-radius:50%;z-index:0}
+.panel .c1{width:340px;height:340px;right:-90px;top:-120px}.panel .c2{width:180px;height:180px;right:160px;bottom:-110px}
+.bage{width:200px;height:240px;flex:none;border-radius:120px 120px 30px 30px;display:flex;align-items:center;justify-content:center;font-family:Fraunces,Georgia,serif;font-weight:700;font-size:160px;line-height:1;color:#2F2B26}
+.panel .bild{width:130px;flex:none;filter:drop-shadow(0 6px 14px #0002)}
+.sti{font-size:14px;font-weight:600;margin-bottom:12px;color:#4A433C}.sti a{text-decoration:none}.sti a:hover{text-decoration:underline}
+.panel h1{font-size:clamp(34px,5vw,60px);line-height:1.05;margin:0}
+.etikett{font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin:10px 0 0;color:var(--ink)}
+.panel p{font-size:18px;line-height:1.55;margin:12px 0 0;max-width:600px}
+.start{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:40px;padding:26px 0 46px}
+.start .lbl{display:inline-block;background:#fff9;border-radius:999px;padding:7px 16px;font-weight:600;font-size:14px;color:#4E6357;margin-bottom:20px}
+.start h1{font-size:clamp(44px,6.4vw,76px);line-height:1.02;margin:0}.start h1 em{font-style:italic;color:#8C4D36}
+.start p{font-size:20px;line-height:1.55;color:#4A433C;max-width:520px;margin:22px 0 0}
+.ros{position:relative;width:420px;height:400px;margin-left:auto}.ros span{position:absolute;border-radius:50%;opacity:.9}
+.ros img{position:absolute;left:105px;top:95px;width:210px;filter:drop-shadow(0 14px 26px #0002)}
+.ak{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.ak a{display:block;border-radius:220px 220px 34px 34px;padding:34px 30px 30px;text-decoration:none;color:#2F2B26;transition:transform .15s}
+.ak a:hover{transform:translateY(-5px)}
+.ak .sol{width:190px;height:190px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-family:Fraunces,Georgia,serif;font-weight:700;font-size:130px;line-height:1}
+.ak h3{font-size:30px;text-align:center;margin:0}.ak .bok{text-align:center;font-weight:600;font-size:15px;margin:4px 0 18px;letter-spacing:1.5px;text-transform:uppercase}
+.ak ul{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.ak li{background:#fff9;border-radius:999px;padding:6px 13px;font-size:14px;font-weight:600}
+.ak .gaa{display:block;text-align:center;color:#fff;border-radius:999px;padding:14px;font-weight:700;font-size:17px}
+.rubrik{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin:64px 0 22px}.rubrik h2{font-size:38px;margin:0;color:#2F2B26}.rubrik span{color:#5A5047;font-size:17px}
+.veta{display:grid;grid-template-columns:repeat(4,1fr);background:#D2E6D9;border-radius:30px;padding:10px}
+.veta a{display:block;padding:26px 24px;border-radius:24px;text-decoration:none;color:#2F2B26;transition:background .15s}
+.veta a:hover{background:#ffffff55}.veta a+a{border-left:1.5px dashed #B5D2BF}
+.pebble{display:flex;align-items:center;justify-content:center;flex:none;width:64px;height:64px;margin-bottom:18px;border-radius:58% 42% 55% 45%/48% 58% 42% 52%}
+.veta h3{font-size:22px;margin:0 0 8px}.veta p{margin:0;color:#4A433C;font-size:15.5px;line-height:1.5}.veta b{display:inline-block;margin-top:14px;font-size:15px}
+.grupp{display:grid;grid-template-columns:230px 1fr;gap:30px;margin-bottom:46px;align-items:start}
+.grupp .nr{font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:600;letter-spacing:1px;color:var(--ink)}
+.grupp h2{font-size:34px;margin:4px 0 6px;color:#2F2B26}.grupp .g{color:#5A5047;font-size:16px;line-height:1.45;margin:0}
+.rad3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.t{display:flex;flex-direction:column;gap:12px;border-radius:26px;padding:20px 22px 20px;min-height:182px;position:relative;text-decoration:none;color:#2F2B26;background:var(--vl);box-shadow:inset 0 0 0 2px var(--ram);transition:transform .15s}
+.t:hover{transform:translateY(-4px)}.t img{width:104px;height:104px;filter:drop-shadow(0 4px 10px #0001)}
+.t h3{font-size:22px;margin:0}.t p{margin:0;font-size:15px;line-height:1.45;color:#4A433C}
+.t .pil{position:absolute;right:20px;top:22px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;background:#fff9;color:var(--ink)}
+.t .las-ikon{position:absolute;right:20px;bottom:18px;font-size:12px;font-weight:600;opacity:.65}
+footer{margin-top:60px;background:#D2E6D9}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;padding-bottom:26px;font-size:14px;color:#4A433C}
+
 *{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,sans-serif;color:#292A28;background:var(--w);line-height:1.5}
 a{color:inherit}
 img{max-width:100%;display:block}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-header{background:var(--ink);color:#fff}
-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:18px;padding-bottom:18px;flex-wrap:wrap}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo img{width:46px;height:46px;background:#fff;border-radius:50%}
-.logo b{font-size:22px;display:block;line-height:1.1}.logo small{opacity:.75;font-size:13px}
-nav{display:flex;flex-wrap:wrap;gap:6px 24px;font-size:16px}
-nav a{text-decoration:none;opacity:.85;padding:4px 0;border-bottom:3px solid transparent}
-nav a:hover{opacity:1}
-nav a.on{opacity:1;font-weight:700;border-bottom-color:var(--hi)}
-.hero{background:var(--ink);color:#fff}
-.hero .wrap{display:flex;align-items:center;justify-content:space-between;gap:32px;padding-top:6px;padding-bottom:10px}
-.hero h1{font-size:clamp(30px,4vw,46px);line-height:1.1;margin:0 0 10px;letter-spacing:-1px}
-.hero h1 span{color:var(--hi)}
-.hero h1.streck::after{content:"";display:block;width:90px;height:6px;border-radius:3px;background:#F2CD69;margin-top:10px}
-.hero p{font-size:clamp(16px,1.6vw,19px);opacity:.9;margin:0;max-width:640px}
-.hero .bild{width:min(185px,26vw);flex:none}
-.hero.start .wrap{flex-direction:row;justify-content:flex-start;align-items:center;gap:28px;padding-top:14px;padding-bottom:18px}.hero.start .bild{width:150px}.hero.start h1{margin:0}
-.wave{display:block;width:100%;height:40px}
 main section{padding:6px 0 60px}
 h2{font-size:clamp(24px,3vw,32px);margin:0 0 4px;color:var(--ink)}
 p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
-.kort{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.kort a img{filter:drop-shadow(0 8px 18px rgba(0,0,0,.12));transition:transform .15s}
-.kort a:hover img,.ikoner a:hover img{transform:translateY(-4px)}
-.num{width:120px;height:120px;border-radius:26px;background:var(--vl);color:var(--ink);font-weight:900;font-size:88px;display:flex;align-items:center;justify-content:center;flex:none;line-height:1}
-.etikett{font-weight:700;color:var(--hi);font-size:16px;letter-spacing:2px}
-.ikoner{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:860px;margin:0 auto}
-.ikoner img{filter:drop-shadow(0 6px 14px rgba(0,0,0,.10));transition:transform .15s}
 .center{text-align:center}
 .pl h2{font-size:26px;margin:36px 0 12px;color:var(--ink)}.pl p.ingress{font-size:18px;max-width:760px;line-height:1.6}
 .niva{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;max-width:960px}
@@ -108,34 +145,21 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .match-kort{max-width:860px}.match>div{min-width:0}.mb{overflow-wrap:anywhere}
 .typer{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;max-width:1150px}@media (max-width:1000px){.typer{grid-template-columns:1fr 1fr}}
 .typ{display:block;background:var(--ink);border-radius:16px;padding:20px 24px;text-decoration:none;color:#fff;font-weight:700;font-size:19px;transition:transform .15s}
-.typ:hover{transform:translateY(-3px)}.kapblock{margin-bottom:22px;background:#DFE9D8;border-radius:22px;padding:20px 24px 24px;max-width:1150px}.kapblock:nth-child(even){background:#E4EDE6}.kapblock h2{margin:0 0 14px}.typ:nth-child(1){background:#4F6B57}.typ:nth-child(2){background:#5A7A63}.typ:nth-child(3){background:#557566}.typ:nth-child(4){background:#63785B}.typ:nth-child(5){background:#667A55}.exempel{background:#fff;border:2px solid var(--l);border-radius:18px;padding:22px;margin:16px 0 4px;text-align:center;font-size:clamp(28px,5vw,42px);font-weight:800;color:#292A28}.exempel mark{white-space:nowrap;background:#F8E7A3;color:inherit;border-radius:8px;padding:0 6px;box-shadow:inset 0 -5px #E5AD45}.exempel .fig{max-width:100%;height:auto;display:inline-block}.exempel .tab{margin:0 auto;font-size:24px}.br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 4px}.br>span+span{border-top:3px solid currentColor}.fraga.liten{font-size:22px;margin:12px 0}.fraga.mening{font-size:clamp(22px,3.4vw,30px);line-height:1.6}.hj{color:#5F6368;margin:6px 0 10px}.ordbank{display:flex;flex-wrap:wrap;gap:10px}.ordk{font:inherit;font-size:20px;font-weight:700;padding:10px 18px;border-radius:12px;background:#fff;border:2px solid var(--l);color:var(--ink);cursor:grab;touch-action:manipulation}.ordk:hover{border-color:var(--mid)}.ordk.fel{background:#F6DADA;border-color:#B95E52;opacity:.55;text-decoration:line-through}.ordk.par{background:#DDEFD9;border-color:#2E7D32}.lucka.drop{min-width:150px;min-height:1.3em;vertical-align:bottom;border-bottom-style:dashed;background:#ffffff80;border-radius:6px 6px 0 0}.lucka.drop.over{background:#fff}.lucka.fylld{border-bottom-style:solid}.tab{border-collapse:collapse;margin:14px 0;font-size:17px;font-weight:600}.tab th,.tab td{border:1.5px solid var(--l);padding:6px 12px;text-align:center;background:#fff}.tab th{background:var(--l)}.typ b{display:block;color:#E9F1DF;font-size:14px;font-weight:600}
+.typ:hover{transform:translateY(-3px)}.kapblock{margin-bottom:22px;background:var(--vl);border:2px solid var(--ram);border-radius:22px;padding:20px 24px 24px;max-width:1150px}.kapblock h2{margin:0 0 14px}.exempel{background:#fff;border:2px solid var(--l);border-radius:18px;padding:22px;margin:16px 0 4px;text-align:center;font-size:clamp(28px,5vw,42px);font-weight:800;color:#292A28}.exempel mark{white-space:nowrap;background:#F8E7A3;color:inherit;border-radius:8px;padding:0 6px;box-shadow:inset 0 -5px #E5AD45}.exempel .fig{max-width:100%;height:auto;display:inline-block}.exempel .tab{margin:0 auto;font-size:24px}.br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 4px}.br>span+span{border-top:3px solid currentColor}.fraga.liten{font-size:22px;margin:12px 0}.fraga.mening{font-size:clamp(22px,3.4vw,30px);line-height:1.6}.hj{color:#5F6368;margin:6px 0 10px}.ordbank{display:flex;flex-wrap:wrap;gap:10px}.ordk{font:inherit;font-size:20px;font-weight:700;padding:10px 18px;border-radius:12px;background:#fff;border:2px solid var(--l);color:var(--ink);cursor:grab;touch-action:manipulation}.ordk:hover{border-color:var(--mid)}.ordk.fel{background:#F6DADA;border-color:#B95E52;opacity:.55;text-decoration:line-through}.ordk.par{background:#DDEFD9;border-color:#2E7D32}.lucka.drop{min-width:150px;min-height:1.3em;vertical-align:bottom;border-bottom-style:dashed;background:#ffffff80;border-radius:6px 6px 0 0}.lucka.drop.over{background:#fff}.lucka.fylld{border-bottom-style:solid}.tab{border-collapse:collapse;margin:14px 0;font-size:17px;font-weight:600}.tab th,.tab td{border:1.5px solid var(--l);padding:6px 12px;text-align:center;background:#fff}.tab th{background:var(--l)}.typ b{display:block;color:var(--hi);font-size:14px;font-weight:600}
 a.knapp2{text-decoration:none;display:inline-block}
 .alt{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:620px}.alt .mb{font-size:19px;font-weight:700;color:var(--ink);text-align:center;padding:14px}
 .mb.kvar{animation:none;opacity:1}.forkl{color:#292A28;font-weight:500;font-size:16px}.fb.ok .forkl{display:block;margin-top:4px}
 .lucka{display:inline-block;min-width:80px;border-bottom:4px solid var(--mid);color:var(--mid);text-align:center;padding:0 8px}.lucka.fylld{color:#2E7D32;border-color:#2E7D32}
-.trana-ruta{max-width:640px;margin:34px auto 0;text-align:left}
-.rutor .info{gap:16px;padding:20px 20px}.rutor .info .ik{width:60px;height:60px;flex:0 0 60px}.rutor .info .ik svg{width:32px;height:32px}.rutor .info h3{font-size:19px;line-height:1.25;margin:0 0 6px}.rutor .info p{font-size:15px;line-height:1.45;margin:0}.rutor .info .pil{margin-left:auto}
-.rutor{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:34px}
-.info{display:flex;align-items:center;gap:24px;background:var(--vl);border:2px solid var(--l);border-radius:24px;padding:22px 26px;text-decoration:none;transition:transform .15s}
-.info:hover{transform:translateY(-3px)}
-.info .ik{width:84px;height:84px;border-radius:50%;background:var(--ink);flex:none;display:flex;align-items:center;justify-content:center}
-.info .ik svg{width:48px;height:48px}
-.info h3{margin:0 0 4px;font-size:22px;color:var(--ink)}
-.info p{margin:0;color:#4A4E52;font-size:16px}
-.info .pil{margin-left:auto;font-size:26px;color:var(--ink);font-weight:700}
-footer{background:var(--ink);color:#fff}
-footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:34px;padding-bottom:34px;font-size:15px}
-footer span{opacity:.8}
 .sr{position:absolute;left:-9999px}
 @media (max-width:800px){
- .hero.start .wrap{flex-direction:row;align-items:center;gap:16px;padding-top:6px;padding-bottom:14px}.hero.start .bild{width:92px}.hero.start h1{font-size:28px}
- .hero .wrap{flex-direction:column-reverse;align-items:flex-start}
- .hero .bild{width:150px}
- .num{display:none}
- .kort{grid-template-columns:1fr}
- .rutor{grid-template-columns:1fr}
+ header .wrap{padding-top:14px;padding-bottom:12px}nav{width:100%;justify-content:space-between}nav a{padding:8px 10px;font-size:14px;gap:5px;white-space:nowrap}nav{gap:2px;padding:4px}
+ .panel{flex-direction:column;align-items:flex-start;gap:20px;padding:26px 22px;border-radius:28px}
+ .bage{width:96px;height:116px;font-size:80px;border-radius:60px 60px 18px 18px}.panel .bild{width:84px}
+ .start{grid-template-columns:1fr;gap:10px;padding-top:6px}.ros{transform:scale(.7);transform-origin:top left;margin:0 0 -110px calc(50% - 147px)}
+ .ak{grid-template-columns:1fr}.veta{grid-template-columns:1fr}.veta a+a{border-left:0;border-top:1.5px dashed #B5D2BF}
+ .grupp{grid-template-columns:1fr;gap:14px}.rad3{grid-template-columns:1fr}.t{min-height:0;display:grid;grid-template-columns:72px 1fr;column-gap:16px;row-gap:2px;padding-right:60px}.t img{width:72px;height:72px;grid-row:span 3}.t .las-ikon{position:static;grid-column:2}
+ .ak a{padding:24px 22px 22px}.ak .sol{width:120px;height:120px;font-size:84px;margin-bottom:12px}.ak h3{font-size:26px}
  .kort-t{padding:18px 14px}.match{gap:8px}.mb{font-size:14px;padding:10px}
- .ikoner{grid-template-columns:repeat(2,1fr);gap:18px}
 }
 """
 
@@ -154,18 +178,14 @@ def losen_nyckel():
     norm = ''.join(rad.lower().split())  # samma normalisering som i webbläsaren
     return hashlib.pbkdf2_hmac('sha256', norm.encode('utf-8'), LOSEN_SALT, LOSEN_VARV, 32)
 
-def krypterad_data(text):
-    """Krypterar text med Lektioner-lösenordet. Ger (salt, varv, data) som base64 för webbläsaren."""
+def krypterad(innehall_html):
     import base64, hashlib
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
     nyckel = losen_nyckel()
     # IV från innehållet: samma innehåll ger samma fil (inga onödiga ändringar vid varje bygge)
-    iv = hashlib.sha256(nyckel + text.encode('utf-8')).digest()[:12]
-    data = base64.b64encode(iv + AESGCM(nyckel).encrypt(iv, text.encode('utf-8'), None)).decode()
-    return base64.b64encode(LOSEN_SALT).decode(), LOSEN_VARV, data
-
-def krypterad(innehall_html):
-    salt, _, data = krypterad_data(innehall_html)
+    iv = hashlib.sha256(nyckel + innehall_html.encode('utf-8')).digest()[:12]
+    data = base64.b64encode(iv + AESGCM(nyckel).encrypt(iv, innehall_html.encode('utf-8'), None)).decode()
+    salt = base64.b64encode(LOSEN_SALT).decode()
     return f"""<div id="las" class="ruta las" data-salt="{salt}" data-varv="{LOSEN_VARV}" data-krypto="{data}">
 <h3>Skriv lösenordet</h3><p style="margin:0 0 14px">Lektionerna är skyddade med lösenord. Du får lösenordet av din mattelärare.</p>
 <form id="lasform" autocomplete="off"><label class="sr" for="losen">Lösenord</label>
@@ -199,38 +219,46 @@ document.getElementById('lasform').addEventListener('submit',function(e){{
 }})();
 </script>"""
 
-def wave(top, bottom):
-    return (f'<svg class="wave" style="background:{bottom}" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true">'
-            f'<path d="M0 0 H1440 V25 C1100 80 700 0 360 45 C200 64 80 54 0 35 Z" fill="{top}"/></svg>')
+def rand():
+    return '<div class="rand" aria-hidden="true">' + ''.join(f'<i style="background:{c[0]}"></i>' for c in ORG.values()) + '</div>'
+
+PRICK = {'Startsida': '#2F2B26', 'Åk 7': AR[7]['main'], 'Åk 8': AR[8]['main'], 'Åk 9': AR[9]['main']}
+
+def panel(c, titel, text='', etikett='', sti=None, vanster='', rot=''):
+    """Rundad rubrikpanel högst upp på sidan. sti = [(namn, länk), ...] (brödsmulor)."""
+    st = ''
+    if sti:
+        st = '<div class="sti">' + ' / '.join(f'<a href="{rot}{h}">{html.escape(n)}</a>' if h else html.escape(n) for n, h in sti) + '</div>'
+    return (f'<div class="wrap"><section class="panel" style="background:{c["hero"]}"><span class="cirk c1" style="background:{c["c1"]}"></span>'
+            f'<span class="cirk c2" style="background:{c["c2"]}"></span>{vanster}<div>{st}<h1>{titel}</h1>'
+            + (f'<div class="etikett">{etikett}</div>' if etikett else '') + (f'<p>{text}</p>' if text else '') + '</div></section></div>')
 
 def sida(fil, titel, aktiv, c, kropp, rot=''):
-    meny = ''.join(f'<a href="{rot}{h}" class="{"on" if n == aktiv else ""}">{n}</a>' for n, h in MENY)
-    var = ';'.join(f'--{k}:{v}' for k, v in c.items() if k in ('ink', 'hi', 'w', 'vl', 'l', 'mid'))
+    meny = ''
+    for n, h in MENY:
+        on = n == aktiv
+        st = f' style="background:{"#2F2B26" if n == "Startsida" else c["ink"]}"' if on else ''
+        meny += f'<a href="{rot}{h}" class="{"on" if on else ""}"{st}{" aria-current=\"page\"" if on else ""}><i style="background:{PRICK[n]}"></i>{n}</a>'
+    var = ';'.join(f'--{k}:{v}' for k, v in c.items() if k in ('ink', 'hi', 'w', 'vl', 'l', 'mid', 'bg', 'ram'))
     doc = f"""<!doctype html>
 <html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(titel)} – Mattekompassen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" href="{rot}bilder/logo-mattekompassen.png">
 <link rel="stylesheet" href="{rot}stil.css">
 <style>:root{{{var}}}</style></head><body>
-<header><div class="wrap"><a class="logo" href="{rot}index.html"><img src="{rot}bilder/logo-mattekompassen.png" alt=""><span><b>Mattekompassen</b><small>Örtagårdsskolan 7–9</small></span></a>
+{rand()}<header><div class="wrap"><a class="logo" href="{rot}index.html"><img src="{rot}bilder/logo-mattekompassen.png" alt=""><span>Mattekompassen<small>Örtagårdsskolan 7–9</small></span></a>
 <nav aria-label="Huvudmeny">{meny}</nav></div></header>
 {kropp}
-<footer><div class="wrap"><b>Mattekompassen</b><span>Matematik för åk 7–9 på Örtagårdsskolan. Frågor? Prata med din mattelärare.</span></div></footer>
+<footer>{rand()}<div class="wrap"><b>Mattekompassen</b><span>Matematik för åk 7–9 på Örtagårdsskolan. Frågor? Prata med din mattelärare.</span></div></footer>
 </body></html>"""
     p = os.path.join(UT, fil)
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, 'w').write(doc)
 
 TRANA_AR = (7, 8, 9)
-TRANA_FARG = {8: '<style>.kapblock{background:#DCEBEE}.kapblock:nth-child(even){background:#E4EFF1}.typ:nth-child(1){background:#3F6470}.typ:nth-child(2){background:#4A6E78}.typ:nth-child(3){background:#4E7270}.typ:nth-child(4){background:#5A727D}.typ:nth-child(5){background:#557883}.typ b{color:#E6F2F4}</style>', 9: '<style>.kapblock{background:#F2E3EA}.kapblock:nth-child(even){background:#F6ECF0}.typ:nth-child(1){background:#6A3A54}.typ:nth-child(2){background:#74445E}.typ:nth-child(3){background:#6B4258}.typ:nth-child(4){background:#7A4C63}.typ:nth-child(5){background:#704860}.typ b{color:#F7E9F0}</style>'}
-
-def trana_ruta(k):
-    if k not in TRANA_AR:
-        return ''
-    return (f'<a class="info trana-ruta" href="ak{k}/trana.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">'
-            '<rect x="9" y="9" width="30" height="21" rx="2.5"/><path d="M4 35h40l-3 4H7z"/><path d="M18 20l4 4 8-8" stroke="#F2CD69"/></svg></span><span><h3>Interaktiva övningar</h3><p>Klicka, dra och få svar direkt. Öva på räkning och matteord.</p></span><span class="pil">→</span></a>')
+TRANA_FARG = {}  # färgerna kommer nu från årskursens variabler
 
 def innehall(k, s, t):
     d = LANKAR.get(str(k), {})
@@ -276,7 +304,7 @@ def extra(fil):
         return bedomning.sida()
     if fil == 'nationella-prov.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import np as npsida
-        return npsida.sida(krypterad_data)
+        return npsida.sida()
     if fil == 'hjalp.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import hjalp
         return hjalp.sida()
@@ -286,39 +314,66 @@ def extra(fil):
         return f'<div class="ruta"><h3>Termer för matematikundervisning</h3><p style="margin:0 0 14px">Klicka på ditt språk för att öppna ordlistan (PDF).</p><div class="lankar" style="padding:0">{lank}</div></div>'
     return '<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Sidan fylls på under läsåret.</p></div>'
 
+IKON = dict(
+ prov='<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.8h6V4M8.5 10.5l1.6 1.6 3.2-3.2M8.5 16l1.6 1.6 3.2-3.2"/>',
+ boj='<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.8"/><path d="M5.6 5.6l3.7 3.7M18.4 5.6l-3.7 3.7M5.6 18.4l3.7-3.7M18.4 18.4l-3.7-3.7"/>',
+ medalj='<circle cx="12" cy="9" r="6"/><path d="M8.6 13.9 7 21l5-2.6 5 2.6-1.6-7.1"/>',
+ prata='<path d="M4 4h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3.5V14H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M19 8h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-1v3l-4-3h-3a2 2 0 0 1-2-1.6"/>')
+def ikon(n):
+    return f'<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{IKON[n]}</svg>'
+
+# Årskurssidans rutor i tre grupper: (filnamn, sidnamn, rubrik, beskrivning)
+GRUPPER = [
+ ('Lär dig', 'Följ med i lektionerna och kom ihåg vad ni gjorde.', [
+   ('07_Lektioner', 'lektioner', 'Lektioner', 'Genomgångar och mål för varje avsnitt.'),
+   ('08_Tillbakablick', 'tillbakablick', 'Tillbakablick', 'Repetera förra lektionen på några minuter.'),
+   ('10_Trygg_start', 'trygg-start', 'Trygg start', 'Grunderna steg för steg, i lugn takt.')]),
+ ('Träna', 'Öva mer, på det sätt som passar dig.', [
+   ('06_Problemlosning', 'problemlosning', 'Problemlösning', 'Kluriga uppgifter på olika nivåer.'),
+   ('16_Interaktiva_ovningar', 'trana', 'Interaktiva övningar', 'Träna direkt i mobilen eller datorn.'),
+   ('11_Repetition', 'repetition', 'Repetition', 'Gå igenom hela kapitlet en gång till.')]),
+ ('Kolla vad du kan', 'Se vad du redan kan och vad du ska träna mer på.', [
+   ('12_Diagnos', 'diagnos', 'Diagnos', 'Hitta det du behöver öva mer på.'),
+   ('13_Test', 'test', 'Test', 'Testa dig själv när kapitlet är klart.'),
+   ('17_Ovningsprov', 'ovningsprov', 'Övningsprov', 'Öva inför provet under provliknande former.')]),
+]
+
 def bygg():
     open(os.path.join(UT, 'stil.css'), 'w').write(CSS)
     # Startsida
-    kort = ''.join(f'<a href="ak{k}.html"><img src="bilder/arskurs-{k}.png" alt="Åk {k}, Matematik {AR[k]["bok"]}: planering, lektioner, problemlösning, repetitionsuppgifter och mycket mer"></a>' for k in AR)
+    ros = ''.join(f'<span style="width:{w}px;height:{w}px;left:{x}px;top:{y}px;background:{ORG[c][0]}"></span>' for c, w, x, y in
+                  [('sand', 170, 250, 10), ('turk', 150, 0, 40), ('rosa', 190, 230, 210), ('sage', 210, 20, 180), ('lav', 90, 170, 0), ('apri', 80, 360, 150)])
+    ros += f'<span style="width:250px;height:250px;left:85px;top:75px;background:{BG};opacity:1"></span>'
+    inneh = ['Lektioner', 'Tillbakablick', 'Trygg start', 'Problemlösning', 'Diagnos', 'Test']
+    kort = ''
+    for k, c in AR.items():
+        kort += (f'<a href="ak{k}.html" style="background:{c["vl"]};box-shadow:inset 0 0 0 2px {c["ram"]}"><div class="sol" style="background:{c["main"]}" aria-hidden="true">{k}</div>'
+                 f'<h3>Åk {k}</h3><div class="bok" style="color:{c["ink"]}">Matematik {c["bok"]}</div><ul>' + ''.join(f'<li style="color:{c["ink"]}">{x}</li>' for x in inneh)
+                 + f'</ul><span class="gaa" style="background:{c["ink"]}">Gå till åk {k} →</span></a>')
+    veta = [('himmel', 'prov', 'bedomning.html', 'Hur bedöms du?', 'Så visar du vad du kan och vad som krävs för olika betyg.', 'Läs om bedömning'),
+            ('apri', 'boj', 'hjalp.html', 'Så får du hjälp', 'Stöd du kan få och sätt som hjälper dig att lära dig matte.', 'Hitta hjälp'),
+            ('sand', 'medalj', 'nationella-prov.html', 'Nationella prov', 'Så går provet i åk 9 till, och så tränar du inför det.', 'Om provet'),
+            ('lav', 'prata', 'amnesord.html', 'Förstår du inte ett ord?', 'Viktiga matteord förklarade på ditt språk.', 'Ämnesord')]
+    veta = ''.join(f'<a href="{h}"><div class="pebble" style="background:{ORG[c][1]}">{ikon(i)}</div><h3>{t}</h3><p>{p}</p><b style="color:{ORG[c][1]}">{l} →</b></a>' for c, i, h, t, p, l in veta)
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
-<div class="hero start"><div class="wrap"><img class="bild" src="bilder/kompass-matte.png" alt="Kompass med räknesätten plus, gånger, minus och delat med">
-<h1>Hitta rätt i <span>matematiken</span></h1></div></div>
-{wave(NEUTRAL['ink'], NEUTRAL['w'])}
-<main><section><div class="wrap"><h2>Välj din årskurs</h2><p class="sub">Allt du behöver i matte, samlat på ett ställe.</p>
-<div class="kort">{kort}</div>
-<div class="rutor">
-<a class="info" href="bedomning.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke-linejoin="round" stroke-linecap="round"><rect x="9" y="7" width="30" height="36" rx="4" stroke="#fff" stroke-width="3.5"/><rect x="17" y="3" width="14" height="8" rx="3" fill="#F2CD69"/><path d="M15 21l3 3 6-6M15 33l3 3 6-6" stroke="#F2CD69" stroke-width="3.5"/><path d="M28 22h6M28 34h6" stroke="#fff" stroke-width="3.5"/></svg></span><span><h3>Hur bedöms du?</h3><p>Läs om hur du visar vad du kan i matematik och vad som krävs för olika betyg.</p></span><span class="pil">→</span></a>
-<a class="info" href="hjalp.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke-linejoin="round" stroke-linecap="round"><circle cx="24" cy="24" r="17" stroke="#fff" stroke-width="3.5"/><circle cx="24" cy="24" r="7" stroke="#fff" stroke-width="3.5"/><path d="M12 12l7 7M36 12l-7 7M12 36l7-7M36 36l-7-7" stroke="#F2CD69" stroke-width="4"/></svg></span><span><h3>Så får du hjälp i matte</h3><p>Se vilket stöd du kan få och vad som hjälper dig att lära dig matte.</p></span><span class="pil">→</span></a>
-<a class="info" href="nationella-prov.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke-linejoin="round" stroke-linecap="round"><circle cx="24" cy="19" r="12" stroke="#fff" stroke-width="3.5"/><path d="M17 29l-4 14 11-5 11 5-4-14" stroke="#fff" stroke-width="3.5"/><path d="M24 12l2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="#F2CD69"/></svg></span><span><h3>Nationella prov</h3><p>Så går provet i åk 9 till, och så tränar du inför det.</p></span><span class="pil">→</span></a>
-<a class="info" href="amnesord.html"><span class="ik"><svg viewBox="0 0 48 48" fill="none" stroke-linejoin="round" stroke-linecap="round"><path d="M6 8h22a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H15l-6 5v-5H6a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z" stroke="#fff" stroke-width="3.5"/><path d="M24 20h17a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3h-1v5l-6-5H24a3 3 0 0 1-3-3V23a3 3 0 0 1 3-3z" fill="#F2CD69"/></svg></span><span><h3>Förstår du inte ett ord?</h3><p>Titta i Ämnesord på olika språk. Där finns viktiga matteord förklarade på ditt språk.</p></span><span class="pil">→</span></a>
-</div></div></section></main>""")
+<main><div class="wrap"><section class="start"><div><span class="lbl">Matematik för åk 7, 8 och 9</span><h1>Hitta rätt i <em>matematiken</em></h1>
+<p>Välj din årskurs och hitta lektioner, övningar och stöd, samlat på ett ställe.</p></div>
+<div class="ros" aria-hidden="true">{ros}<img src="bilder/kompass-matte.png" alt=""></div></section>
+<h2 class="sr">Välj din årskurs</h2><div class="ak">{kort}</div>
+<div class="rubrik"><h2>Bra att veta</h2><span>För alla elever i åk 7–9</span></div><div class="veta">{veta}</div></div></main>""")
     # Årskurssidor och undersidor
     for k, c in AR.items():
-        ikoner = ''.join(f'<a href="ak{k}/{s}.html"><img src="bilder/ak{k}/{f}.png" alt="{t}"></a>' for f, s, t in MATERIAL)
+        grupper = ''
+        for n, (rub, g, rutor) in enumerate(GRUPPER, 1):
+            t = ''.join(f'<a class="t" href="ak{k}/{s}.html"><img src="bilder/ak{k}/{f}.png" alt=""><span class="pil" aria-hidden="true">→</span><h3>{rt}</h3><p>{p}</p>'
+                        + ('<span class="las-ikon">🔒 Lösenord</span>' if s == 'lektioner' else '') + '</a>' for f, s, rt, p in rutor)
+            grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3">{t}</div></div>'
+        sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Åk {k}', f'Här hittar du allt material till matten i åk {k}: lektioner, träning och sätt att kolla vad du kan.',
+             f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="bage" style="background:{c["main"]}" aria-hidden="true">{k}</div>')
+             + f'<main><div class="wrap">{grupper}</div></main>')
         if k in TRANA_AR:
-            ikoner += f'<a href="ak{k}/trana.html"><img src="bilder/ak{k}/16_Interaktiva_ovningar.png" alt="Interaktiva övningar"></a>'
-        sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, f"""
-<div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">{k}</div>
-<div><div class="etikett">MATEMATIK {c['bok']}</div><h1 class="streck">Åk {k}</h1>
-<p>Planering, lektioner, problemlösning, repetitionsuppgifter och mycket mer för Matematik {c['bok']}.</p></div></div></div>
-{wave(c['ink'], c['w'])}
-<main><section class="center"><div class="wrap"><h2>Lektionsmaterial</h2><p class="sub">Allt du behöver till lektionerna i åk {k}.</p>
-<div class="ikoner">{ikoner}</div></div></section></main>""")
-        if k in TRANA_AR:
-            hero = lambda t, p: f"""
-<div class="hero"><div class="wrap" style="justify-content:flex-start"><div class="num" aria-hidden="true">{k}</div>
-<div><div class="etikett">ÅK {k} · MATEMATIK {c['bok']} · INTERAKTIVA ÖVNINGAR</div><h1>{t}</h1><p>{p}</p></div></div></div>
-{wave(c['ink'], c['w'])}{TRANA_FARG.get(k, '')}"""
+            sti = [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), ('Interaktiva övningar', 'ak%d/trana.html' % k)]
+            hero = lambda t, p, sti=sti: panel(c, t, p, f'Åk {k} · Matematik {c["bok"]}', sti, f'<img class="bild" src="../bilder/ak{k}/16_Interaktiva_ovningar.png" alt="">', '../')
             typer = [('trana-rakna.html', '🔢', 'Räkneträning', 'Per avsnitt'),
                      ('trana-exempel.html', '🔍', 'Från exempel till ord', 'Titta och välj'),
                      ('trana-dra.html', '🧲', 'Dra ordet', 'Ord i mening'),
@@ -329,7 +384,7 @@ def bygg():
                               + ''.join(f'<a class="typ" href="{h}?kap={nr}"><b>{p}</b>{e} {t}</a>' for h, e, t, p in typer) + '</div></div>'
                               for nr, namn in LANKAR[str(k)]['kapitel'])
             tillbaka = '<a class="knapp" href="trana.html">← Alla övningar</a>'
-            sida(f'ak{k}/trana.html', f'Interaktiva övningar – åk {k}', f'Åk {k}', c, hero('Interaktiva övningar', 'Klicka, dra och få svar direkt. Välj kapitel och typ av övning.') + f"""
+            sida(f'ak{k}/trana.html', f'Interaktiva övningar – åk {k}', f'Åk {k}', c, hero('Interaktiva övningar', 'Klicka, dra och få svar direkt. Välj kapitel och typ av övning.', sti[:2] + [('Interaktiva övningar', None)]) + f"""
 <main><section><div class="wrap">{kapitel}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
             for fil, lage, t, p in [('trana-rakna.html', 'rakna', 'Räkneträning', 'Korta övningar med nya tal varje gång.'),
@@ -344,9 +399,7 @@ def bygg():
 <script src="../trana-ak{k}.js"></script><script src="../trana.js"></script>""", rot='../')
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""
-<div class="hero"><div class="wrap" style="justify-content:flex-start"><img src="../bilder/ak{k}/{f}.png" alt="" style="width:110px;border-radius:20px">
-<div><div class="etikett">ÅK {k} · MATEMATIK {c['bok']}</div><h1>{t}</h1></div></div></div>
-{wave(c['ink'], c['w'])}
+{panel(c, t, '', f'Åk {k} · Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), (t, None)], f'<img class="bild" src="../bilder/ak{k}/{f}.png" alt="">', '../')}
 <main><section><div class="wrap">{'<a class="omlank" href="../problemlosning.html">Så arbetar vi med problemlösning: nivåer och strategier →</a>' if s == 'problemlosning' else ''}{krypterad(innehall(k, s, t)) if s == 'lektioner' else innehall(k, s, t)}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
@@ -355,15 +408,13 @@ def bygg():
                          ('hjalp.html', 'Så får du hjälp i matte', 'Så gör vi för att alla ska lära sig matte.'),
                          ('nationella-prov.html', 'Nationella prov i matematik', 'Så går provet till i åk 9, och så kan du förbereda dig.')]:
         sida(fil, t, '', NEUTRAL, f"""
-<div class="hero"><div class="wrap"><div><h1>{t}</h1><p>{text}</p></div></div></div>
-{wave(NEUTRAL['ink'], NEUTRAL['w'])}
+{panel(NEUTRAL, t, text, '', [('Startsida', 'index.html'), (t, None)])}
 <main><section><div class="wrap">{extra(fil)}
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     # Gemensam sida om problemlösning (länkas från årskursernas problemlösningssidor)
     arl = ''.join(f'<a href="ak{k}/problemlosning.html" style="background:{AR[k]["ink"]}">Åk {k}<small>Matematik {AR[k]["bok"]} · problemlösning per kapitel</small></a>' for k in AR)
     sida('problemlosning.html', 'Problemlösning', '', NEUTRAL, f"""
-<div class="hero"><div class="wrap"><div><h1>Problemlösning</h1><p>Att lösa problem är att hitta en väg när du inte direkt vet hur du ska göra.</p></div></div></div>
-{wave(NEUTRAL['ink'], NEUTRAL['w'])}
+{panel(NEUTRAL, 'Problemlösning', 'Att lösa problem är att hitta en väg när du inte direkt vet hur du ska göra.', '', [('Startsida', 'index.html'), ('Problemlösning', None)])}
 <main><section><div class="wrap pl">
 <p class="ingress">Till varje avsnitt i boken finns ett problemlösningspass. Uppgifterna blir svårare steg för steg, så att alla kan börja och alla kan utmanas. Svar och förklaringar visas efter hand, så att du kan jämföra med hur du själv tänkte.</p>
 <h2>Progression: tre nivåer</h2>
