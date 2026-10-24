@@ -9,7 +9,9 @@ LANKAR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 # Vintage-färger (Nikolas bild, godkänd 2026-10-24): (färg, mörk nyans, ljus nyans)
 V = dict(gron=('#58A73E','#2E6E28','#EAF4E4'), bla=('#1A86B0','#0F5F82','#E3F1F7'), lila=('#7A44B0','#5E2D8C','#F1EAF8'),
          terra=('#E07A5F','#9A4630','#FBEAE4'), gul=('#E9B949','#7A5A12','#FBF1DA'))
-ORG = dict(sage=V['gron'], turk=V['bla'], rosa=V['lila'], himmel=V['bla'], apri=V['terra'], sand=V['gul'], lav=V['lila'], mint=('#B7A694','#4A3F33','#F3EFEA'))
+ORG = dict(sage=V['gron'], turk=V['bla'], rosa=V['lila'], himmel=V['bla'], apri=V['terra'], sand=V['gul'], lav=V['lila'], mint=('#B7A694','#4A3F33','#F3EFEA'),
+           # diskreta färger för undersidorna
+           havsgron=('#6B93B3','#33566F','#E6F2F7'), mint2=('#63A9A6','#2F6B69','#E6F6F3'), solgul=('#F4B942','#7A5A12','#FFF7E3'), korall=('#E07A5F','#9A4630','#FDECEA'))
 RAND = [V[k] for k in ('gron','bla','lila')]
 BG = '#F4F3EF'  # ljus neutral (de fem färgerna blandade)
 
@@ -518,16 +520,18 @@ GRUPPER = [
 ]
 
 # De fyra gemensamma sidorna får samma färg som sin ikon på startsidan
-SIDFARG = {'bedomning.html': farger('turk'), 'hjalp.html': farger('apri'), 'nationella-prov.html': farger('sand'), 'amnesord.html': farger('lav')}
+SIDFARG = {'bedomning.html': farger('havsgron'), 'hjalp.html': farger('mint2'), 'nationella-prov.html': farger('solgul'), 'amnesord.html': farger('korall')}
 # Gamla färger i innehållet (bedomning.py, hjalp.py, np.py) -> vintagefärger
-FARGBYTE = {'#2C4152': '#0F5F82', '#426B89': '#1A86B0', '#5A7552': '#2E6E28', '#96505A': '#9A4630', '#B95E52': '#C4613F',
-            '#8A5E22': '#7A5A12', '#F2CD69': '#E9B949', '#1F6E6C': '#5E2D8C', '#DDEBF3': '#E3F1F7', '#E3ECDD': '#EAF4E4',
-            '#F7E3DE': '#FBEAE4', '#F8EBC9': '#FBF1DA', '#D9EEEC': '#F1EAF8'}
-# Nationella prov: allt i gula nyanser (omslagens gula)
+FARGBYTE = {'#2C4152': '#3E5463', '#426B89': '#5F7E92', '#5A7552': '#5C7A55', '#96505A': '#8A5A4E', '#B95E52': '#A8705F',
+            '#8A5E22': '#6B5626', '#F2CD69': '#D3BE8E', '#1F6E6C': '#6A5F80', '#DDEBF3': '#EEF2F5', '#E3ECDD': '#EEF3EC',
+            '#F7E3DE': '#F5ECE8', '#F8EBC9': '#F7F2E6', '#D9EEEC': '#F2F0F5'}
+# Nationella prov: allt i diskreta sandfärger
 FARGBYTE_NP = {'#2C4152': '#6B4E0E', '#426B89': '#8A6614', '#5A7552': '#A67C17', '#96505A': '#7A5A12', '#B95E52': '#B8891F',
                '#8A5E22': '#7A5A12', '#F2CD69': '#E9B949', '#1F6E6C': '#8A6614', '#DDEBF3': '#FBEFD0', '#E3ECDD': '#FBF1DA',
                '#F7E3DE': '#F8E6BC', '#F8EBC9': '#FBF1DA', '#D9EEEC': '#FBEFD0',
                '#DDBE88': '#F0CF73', '#A07E3E': '#A67C17', '#8F6C2E': '#8A6614', '#7A5A22': '#7A5A12', '#F6EBD3': '#FBF1DA', '#F3E8D3': '#FBF1DA'}
+# Så får du hjälp: rosa detaljer blir mint
+FARGBYTE_HJALP = {**FARGBYTE, '#B95E52': '#3F8582', '#96505A': '#2F6B69', '#F7E3DE': '#E6F6F3'}
 def byt_farger(h, tabell=None):
     import re
     tabell = tabell or FARGBYTE
@@ -559,7 +563,7 @@ def bygg():
            ('boj', 'hjalp.html', 'Så får du hjälp', 'Stöd, tips och resurser du kan använda.'),
            ('medalj', 'nationella-prov.html', 'Nationella prov', 'Information och förberedelser inför proven i åk 9.'),
            ('prata', 'amnesord.html', 'Ämnesord', 'Viktiga matteord förklarade på ditt språk.')]
-    rad = ''.join(f'<a href="{h}"><span class="rik">{ikon(i).replace("#fff", "#1E2B3A")}</span><span><b>{t}</b><small>{p}</small></span></a>' for i, h, t, p in rad)
+    rad = ''.join(f'<a href="{h}"><span class="rik" style="background:{mix(SIDFARG[h]["main"], "#FFFFFF", .6)}">{ikon(i).replace("#fff", SIDFARG[h]["ink"])}</span><span><b>{t}</b><small>{p}</small></span></a>' for i, h, t, p in rad)
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
 <main class="hem"><div class="wrap"><section class="topprubrik"><img src="bilder/kompass-matte.png" alt=""><div><h1>Mattekompassen</h1><p>Din väg genom matematiken i årskurs 7–9</p></div></section>
 <h2 class="sr">Välj din årskurs</h2><div class="kkrad">{kort}</div>
@@ -613,7 +617,7 @@ def bygg():
         c = SIDFARG[fil]
         sida(fil, t, {'bedomning.html': 'Bedömning', 'hjalp.html': 'Så får du hjälp', 'nationella-prov.html': 'Nationella prov'}.get(fil, ''), c, f"""
 {panel(c, t, text, '', [('Startsida', 'index.html'), (t, None)])}
-<main><section><div class="wrap">{byt_farger(extra(fil), FARGBYTE_NP if fil == 'nationella-prov.html' else None)}
+<main><section><div class="wrap">{byt_farger(extra(fil), FARGBYTE_NP if fil == 'nationella-prov.html' else FARGBYTE_HJALP if fil == 'hjalp.html' else None)}
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     # Gemensam sida om problemlösning (länkas från årskursernas problemlösningssidor)
     arl = ''.join(f'<a href="ak{k}/problemlosning.html" style="background:{AR[k]["ink"]}">Åk {k}<small>Matematik {AR[k]["bok"]} · problemlösning per kapitel</small></a>' for k in AR)
