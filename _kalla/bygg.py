@@ -92,6 +92,8 @@ nav a i{width:10px;height:10px;border-radius:50%;flex:none}nav a:hover{backgroun
 .t .pil{position:absolute;right:20px;top:22px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;background:#fff9;color:var(--ink)}
 .t .las-ikon{display:inline-block;margin-top:-6px;font-size:12px;font-weight:600;opacity:.65}
 footer{margin-top:60px;background:var(--vl)}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;padding-bottom:26px;font-size:14px;color:#4A433C}
+footer .wrap>span{text-align:right;line-height:1.6}footer a.mejl{color:inherit;font-weight:600}
+@media (max-width:800px){footer .wrap>span{text-align:left}}
 
 *{box-sizing:border-box}
 a{color:inherit}
@@ -346,7 +348,8 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
 {rand()}<header><div class="wrap"><a class="logo" href="{rot}index.html"><img src="{rot}bilder/kompass-liten.png" alt=""><span>Mattekompassen<small>Örtagårdsskolan 7–9</small></span></a>
 <nav aria-label="Huvudmeny">{meny}</nav></div></header>
 {kropp}
-<footer>{rand()}<div class="wrap"><b>Mattekompassen</b><span>Matematik för åk 7–9 på Örtagårdsskolan. Frågor? Prata med din mattelärare.</span></div></footer>
+<footer>{rand()}<div class="wrap"><b>Mattekompassen</b><span>Matematik för åk 7–9 på Örtagårdsskolan. Frågor om matten? Prata med din mattelärare.<br>Frågor om webbplatsen? Mejla Nikola Petranovic: <a class="mejl" data-u="nikola.petranovic" data-d="skola.malmo.se" href="#">nikola.petranovic [snabel-a] skola.malmo.se</a></span></div></footer>
+<script>document.querySelectorAll('a.mejl').forEach(function(a){{var m=a.dataset.u+'@'+a.dataset.d;a.href='mailto:'+m;a.textContent=m}})</script>
 </body></html>"""
     p = os.path.join(UT, fil)
     os.makedirs(os.path.dirname(p), exist_ok=True)
