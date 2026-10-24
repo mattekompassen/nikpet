@@ -47,7 +47,7 @@ h1,h2,h3,.serif{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacin
 .rand{display:flex;height:8px}.rand i{flex:1}
 header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;padding-bottom:20px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:24px;line-height:1.15}
-.logo img{width:46px;height:46px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px #fff8}
+.logo img{width:50px;height:50px}
 .logo small{display:block;font-family:Inter,sans-serif;font-weight:500;font-size:13px;color:#6B6258}
 nav{display:flex;gap:6px;background:#fff8;padding:6px;border-radius:999px;border:1px solid #0000000f}
 nav a{display:flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;color:#2F2B26}
@@ -340,10 +340,10 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
 <title>{html.escape(titel)} – Mattekompassen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="icon" href="{rot}bilder/logo-mattekompassen.png">
+<link rel="icon" href="{rot}bilder/kompass-liten.png">
 <link rel="stylesheet" href="{rot}stil.css?v={CSS_VER}">
 <style>:root{{{var}}}</style></head><body>
-{rand()}<header><div class="wrap"><a class="logo" href="{rot}index.html"><img src="{rot}bilder/logo-mattekompassen.png" alt=""><span>Mattekompassen<small>Örtagårdsskolan 7–9</small></span></a>
+{rand()}<header><div class="wrap"><a class="logo" href="{rot}index.html"><img src="{rot}bilder/kompass-liten.png" alt=""><span>Mattekompassen<small>Örtagårdsskolan 7–9</small></span></a>
 <nav aria-label="Huvudmeny">{meny}</nav></div></header>
 {kropp}
 <footer>{rand()}<div class="wrap"><b>Mattekompassen</b><span>Matematik för åk 7–9 på Örtagårdsskolan. Frågor? Prata med din mattelärare.</span></div></footer>
