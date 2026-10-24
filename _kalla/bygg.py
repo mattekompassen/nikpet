@@ -219,6 +219,9 @@ document.getElementById('lasform').addEventListener('submit',function(e){{
 }})();
 </script>"""
 
+import hashlib
+CSS_VER = hashlib.sha1(CSS.encode()).hexdigest()[:8]  # ny version -> webbläsaren hämtar ny stil.css
+
 def rand():
     return '<div class="rand" aria-hidden="true">' + ''.join(f'<i style="background:{c[0]}"></i>' for c in ORG.values()) + '</div>'
 
@@ -246,7 +249,7 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="icon" href="{rot}bilder/logo-mattekompassen.png">
-<link rel="stylesheet" href="{rot}stil.css">
+<link rel="stylesheet" href="{rot}stil.css?v={CSS_VER}">
 <style>:root{{{var}}}</style></head><body>
 {rand()}<header><div class="wrap"><a class="logo" href="{rot}index.html"><img src="{rot}bilder/logo-mattekompassen.png" alt=""><span>Mattekompassen<small>Örtagårdsskolan 7–9</small></span></a>
 <nav aria-label="Huvudmeny">{meny}</nav></div></header>
