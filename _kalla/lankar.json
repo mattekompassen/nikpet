@@ -1,1812 +1,1804 @@
 {
- "7": {
-  "kapitel": [
-   [
-    "1",
-    "Taluppfattning"
-   ],
-   [
-    "2",
-    "Algebra"
-   ],
-   [
-    "3",
-    "Geometri"
-   ],
-   [
-    "4",
-    "Samband och förändring"
-   ],
-   [
-    "5",
-    "Sannolikhet och statistik"
-   ]
-  ],
-  "tillbakablick": {
-   "1": [
-    [
-     "1.1 Naturliga tal",
-     "1qEKuAQPGumSyqAXxtkAbDEl3xSQ5xWO8"
+  "7": {
+    "kapitel": [
+      [
+        "1",
+        "Taluppfattning"
+      ],
+      [
+        "2",
+        "Algebra"
+      ],
+      [
+        "3",
+        "Geometri"
+      ],
+      [
+        "4",
+        "Samband och förändring"
+      ],
+      [
+        "5",
+        "Sannolikhet och statistik"
+      ]
     ],
-    [
-     "1.2 Numeriska uttryck",
-     "1HK7ym_SaANmq0Bhy-IP4ezFvltRSs1Gl"
-    ],
-    [
-     "1.3 Hela tal",
-     "1HAh5omc7fPA0jw7sRc2Ft6x5vap-iux-"
-    ],
-    [
-     "1.4 Rationella tal",
-     "14VnLsGgetpUrzq-Od5WsLDS0GbsuT72V"
-    ],
-    [
-     "1.5 Räkna med bråk",
-     "1jUlKkGabK02vBOlPjvXrIthxFoNjsPxv"
-    ],
-    [
-     "1.6 Multiplikation och division",
-     "1dhX4Da1vyeVBP1eT3NWYFrQZ07zFvFwh"
-    ],
-    [
-     "1.7 Division med stora och små tal",
-     "1mKCfcTBnK-1FsSj0lmmMmbmSDT8q7zuR"
-    ],
-    [
-     "1.8 Avrundning och överslagsräkning",
-     "1kbcyHRu_qYTcdNqQRUCS7cihVfzV-onQ"
-    ]
-   ],
-   "2": [
-    [
-     "2.1 Algebraiska uttryck",
-     "16UUFxlk0e3zMaK3I4-oKpqL3pU3z9_Gs"
-    ],
-    [
-     "2.2 Mönster",
-     "1mHu8on_xy2fIogdE0alcQiAqLb7l_DY1"
-    ],
-    [
-     "2.3 Förenkling av uttryck",
-     "16iSDdCEBf3heL_ILGgCE32_-fOD_xAm8"
-    ],
-    [
-     "2.4 Ekvationer",
-     "1L7I5N0NKyyl70dDsS-sD7UPgXyhFeMQh"
-    ],
-    [
-     "2.5 Problemlösning med ekvation",
-     "1vY2TY5PHX5dxcFo2hi5ZjT_u6V1zE-vp"
-    ],
-    [
-     "2.6 Ekvationer med obekanta i båda leden",
-     "1ACbfbU6HzUuVZeCQBiV-yRUMZ32WDvNi"
-    ]
-   ],
-   "3": [
-    [
-     "3.1 Prefix och enheter",
-     "1WpW77CEUynlUcsdzAddsbBuxFPQmtxPJ"
-    ],
-    [
-     "3.2 Längd och skala",
-     "1uDTIvoiy8mklmrl9pXenW5JWxtSW0jwi"
-    ],
-    [
-     "3.3 Vinklar",
-     "13Z10_cYpqgumPfuHAtaRrGyy5b3UobgB"
-    ],
-    [
-     "3.4 Vinkelsumma",
-     "1EQc7W8eKUbN-z1ahnjg-h0Ouz3c-lBVw"
-    ],
-    [
-     "3.5 Omkrets",
-     "1XKTk1H2FLFydJNP21xyQsEhYDkrOBxhU"
-    ],
-    [
-     "3.6 Area",
-     "1cJMURlZ0xVwgK5a3DVIgqW0FrDSJT_1i"
-    ]
-   ],
-   "4": [
-    [
-     "4.1 Proportionalitet",
-     "157GxU6Frwmex2jlCJ6S1KqG09XXQilPd"
-    ],
-    [
-     "4.2 Tid och rörelse",
-     "1YQZvdL-ubt7KnUHjtwR2nTw9Rs9TZuBi"
-    ],
-    [
-     "4.3 Sträcka, tid och hastighet",
-     "1L1gAE8uYVHxBQFNtQ19auc4_m-zCf-G9"
-    ],
-    [
-     "4.4 Andel i bråkform",
-     "1K9oK6pRGjKGDK3sU8J8rEqHC2_KU_fIh"
-    ],
-    [
-     "4.5 Andel i procentform (I)",
-     "1vm9CAy3GtkW5r_3j_nNr-ql5rSIOCCpC"
-    ],
-    [
-     "4.6 Andel i procentform (II)",
-     "1Z-2QSQWejKGfcKyv0Rjgqa9EC9MRmDnu"
-    ],
-    [
-     "4.7 Hur stor är delen",
-     "1bGdoEJYB559YUNc-L5DLLqYyydTbBag5"
-    ]
-   ],
-   "5": [
-    [
-     "5.1 Sannolikhet",
-     "1lWvGugcljFEJKIUiDGUHkdPcGQjhFQKS"
-    ],
-    [
-     "5.2 Tabeller och diagram",
-     "1ONrNrwryoq46pEJo5vb1fX4Zb7r1ZQsl"
-    ],
-    [
-     "5.3 Relativ frekvens",
-     "1xLQz1EsbxSAZfmkS5yj988d-PaoKgspJ"
-    ],
-    [
-     "5.4 Lägesmått",
-     "1c8HqBwMGHVy6J6JwGFsstp7vvoKdBG8n"
-    ],
-    [
-     "5.5 Lägesmått från tabeller och diagram",
-     "1bdtFskYkv36_pSllJT79tAAkB_yEWUgd"
-    ],
-    [
-     "5.6 Cirkeldiagram",
-     "1kAJIFJZxkjkVBT_TSuD-hXuP-2vw4L3U"
-    ]
-   ]
+    "tillbakablick": {
+      "1": [
+        [
+          "1.1 Naturliga tal",
+          "1qEKuAQPGumSyqAXxtkAbDEl3xSQ5xWO8"
+        ],
+        [
+          "1.2 Numeriska uttryck",
+          "1HK7ym_SaANmq0Bhy-IP4ezFvltRSs1Gl"
+        ],
+        [
+          "1.3 Hela tal",
+          "1HAh5omc7fPA0jw7sRc2Ft6x5vap-iux-"
+        ],
+        [
+          "1.4 Rationella tal",
+          "14VnLsGgetpUrzq-Od5WsLDS0GbsuT72V"
+        ],
+        [
+          "1.5 Räkna med bråk",
+          "1jUlKkGabK02vBOlPjvXrIthxFoNjsPxv"
+        ],
+        [
+          "1.6 Multiplikation och division",
+          "1dhX4Da1vyeVBP1eT3NWYFrQZ07zFvFwh"
+        ],
+        [
+          "1.7 Division med stora och små tal",
+          "1mKCfcTBnK-1FsSj0lmmMmbmSDT8q7zuR"
+        ],
+        [
+          "1.8 Avrundning och överslagsräkning",
+          "1kbcyHRu_qYTcdNqQRUCS7cihVfzV-onQ"
+        ]
+      ],
+      "2": [
+        [
+          "2.1 Algebraiska uttryck",
+          "16UUFxlk0e3zMaK3I4-oKpqL3pU3z9_Gs"
+        ],
+        [
+          "2.2 Mönster",
+          "1mHu8on_xy2fIogdE0alcQiAqLb7l_DY1"
+        ],
+        [
+          "2.3 Förenkling av uttryck",
+          "16iSDdCEBf3heL_ILGgCE32_-fOD_xAm8"
+        ],
+        [
+          "2.4 Ekvationer",
+          "1L7I5N0NKyyl70dDsS-sD7UPgXyhFeMQh"
+        ],
+        [
+          "2.5 Problemlösning med ekvation",
+          "1vY2TY5PHX5dxcFo2hi5ZjT_u6V1zE-vp"
+        ],
+        [
+          "2.6 Ekvationer med obekanta i båda leden",
+          "1ACbfbU6HzUuVZeCQBiV-yRUMZ32WDvNi"
+        ]
+      ],
+      "3": [
+        [
+          "3.1 Prefix och enheter",
+          "1WpW77CEUynlUcsdzAddsbBuxFPQmtxPJ"
+        ],
+        [
+          "3.2 Längd och skala",
+          "1uDTIvoiy8mklmrl9pXenW5JWxtSW0jwi"
+        ],
+        [
+          "3.3 Vinklar",
+          "13Z10_cYpqgumPfuHAtaRrGyy5b3UobgB"
+        ],
+        [
+          "3.4 Vinkelsumma",
+          "1EQc7W8eKUbN-z1ahnjg-h0Ouz3c-lBVw"
+        ],
+        [
+          "3.5 Omkrets",
+          "1XKTk1H2FLFydJNP21xyQsEhYDkrOBxhU"
+        ],
+        [
+          "3.6 Area",
+          "1cJMURlZ0xVwgK5a3DVIgqW0FrDSJT_1i"
+        ]
+      ],
+      "4": [
+        [
+          "4.1 Proportionalitet",
+          "157GxU6Frwmex2jlCJ6S1KqG09XXQilPd"
+        ],
+        [
+          "4.2 Tid och rörelse",
+          "1YQZvdL-ubt7KnUHjtwR2nTw9Rs9TZuBi"
+        ],
+        [
+          "4.3 Sträcka, tid och hastighet",
+          "1L1gAE8uYVHxBQFNtQ19auc4_m-zCf-G9"
+        ],
+        [
+          "4.4 Andel i bråkform",
+          "1K9oK6pRGjKGDK3sU8J8rEqHC2_KU_fIh"
+        ],
+        [
+          "4.5 Andel i procentform (I)",
+          "1vm9CAy3GtkW5r_3j_nNr-ql5rSIOCCpC"
+        ],
+        [
+          "4.6 Andel i procentform (II)",
+          "1Z-2QSQWejKGfcKyv0Rjgqa9EC9MRmDnu"
+        ],
+        [
+          "4.7 Hur stor är delen",
+          "1bGdoEJYB559YUNc-L5DLLqYyydTbBag5"
+        ]
+      ],
+      "5": [
+        [
+          "5.1 Sannolikhet",
+          "1lWvGugcljFEJKIUiDGUHkdPcGQjhFQKS"
+        ],
+        [
+          "5.2 Tabeller och diagram",
+          "1ONrNrwryoq46pEJo5vb1fX4Zb7r1ZQsl"
+        ],
+        [
+          "5.3 Relativ frekvens",
+          "1xLQz1EsbxSAZfmkS5yj988d-PaoKgspJ"
+        ],
+        [
+          "5.4 Lägesmått",
+          "1c8HqBwMGHVy6J6JwGFsstp7vvoKdBG8n"
+        ],
+        [
+          "5.5 Lägesmått från tabeller och diagram",
+          "1bdtFskYkv36_pSllJT79tAAkB_yEWUgd"
+        ],
+        [
+          "5.6 Cirkeldiagram",
+          "1kAJIFJZxkjkVBT_TSuD-hXuP-2vw4L3U"
+        ]
+      ]
+    },
+    "problemlosning": {
+      "1": [
+        [
+          "1.1 Naturliga tal",
+          "15rRE477t0_tWt1eIgRAtQhXVyZfbSFEc"
+        ],
+        [
+          "1.2 Numeriska uttryck",
+          "1Nw0q8oKIShAELObFETnE8BKH-nVv9vm2"
+        ],
+        [
+          "1.3 Hela tal",
+          "1SwIFmjdstMpXruJpDruzUiVmClROmDH9"
+        ],
+        [
+          "1.4 Rationella tal",
+          "1tXIp6tLd2xvabTbo3b8R5FoH2WBVCh2Q"
+        ],
+        [
+          "1.5 Räkna med bråk",
+          "1Fsixe1UU3CP-uj1L-KzJjeshepjbpUNu"
+        ],
+        [
+          "1.6 Multiplikation och division",
+          "1VH1o0GwYDC4xqAqcqAHaVMi8w6FEWxS7"
+        ],
+        [
+          "1.7 Division med stora och små tal",
+          "11njc6QR9Z7CxG2otcYDsJ0FwIQbl6n2y"
+        ],
+        [
+          "1.8 Avrundning och överslagsräkning",
+          "1rLtvcRX3jbFIBju6pf4OJMInyXUb5iwK"
+        ]
+      ],
+      "2": [
+        [
+          "2.1 Algebraiska uttryck",
+          "1vre9ippV1HYgf1WSajWnIYzNLpOwDXf8"
+        ],
+        [
+          "2.2 Mönster",
+          "1d5vTksouahsHAyd1HvFabQMQk3NESvCy"
+        ],
+        [
+          "2.3 Förenkling av uttryck",
+          "1Mxla7egl0xUYtZEH4M59sXQRcAbOzX_4"
+        ],
+        [
+          "2.4 Ekvationer",
+          "1nYqXVYniTbxn21Lmprh9K13LuhVuMaxE"
+        ],
+        [
+          "2.5 Problemlösning med ekvation",
+          "1qTv5wdYEztNihhXhc8YQI6RAnG11ulVX"
+        ],
+        [
+          "2.6 Ekvationer med obekanta i båda leden",
+          "1OBgTx1rrhzO4g8dgP6lx6y7FwTdsetWS"
+        ]
+      ],
+      "3": [
+        [
+          "3.1 Prefix och enheter",
+          "1P9ucgwX7JNC-P2AhAuuQvyV8_GEPTHuz"
+        ],
+        [
+          "3.2 Längd och skala",
+          "1p8gYVx110lfN03zxeB3BMlXhA8f3eTDZ"
+        ],
+        [
+          "3.3 Vinklar",
+          "1dk7OQGq3suGYImHqjKm_k7fZmunisq_V"
+        ],
+        [
+          "3.4 Vinkelsumma",
+          "1-kc0WKL4ESuSkWraJ_yxbF2A5a7QUW1I"
+        ],
+        [
+          "3.5 Omkrets",
+          "1J3A89T9IF2I5lemHg2Rf_9HgFWQ6OU5N"
+        ],
+        [
+          "3.6 Area",
+          "1ZUOsPXy6_CURy4wKv9TIo4yrVz7y7emN"
+        ]
+      ],
+      "4": [
+        [
+          "4.1 Proportionalitet",
+          "1gVwhpS00Onzj8RrZY3euD5xhvSgFqIwx"
+        ],
+        [
+          "4.2 Tid och rörelse",
+          "17ZxzYmIsqjhPU0eP3s2ilqznSZzZhr_1"
+        ],
+        [
+          "4.3 Sträcka, tid och hastighet",
+          "1kamul8hW15wKwdrO21x8t8XaQOC5n0kB"
+        ],
+        [
+          "4.4 Andel i bråkform",
+          "1gQDmmmqM9pjr7BKCpvfmHYCXw8gziFJ5"
+        ],
+        [
+          "4.5 Andel i procentform (I)",
+          "1mom7ax33M9gNR23EpnK-vfbOHNfm4UPm"
+        ],
+        [
+          "4.6 Andel i procentform (II)",
+          "16rKfBofqaWGJF5YdF98Yyl3ffJR48AVP"
+        ],
+        [
+          "4.7 Hur stor är delen",
+          "1jaXMsp8U7v6leqSdBsDY3SvpY0CB-Z76"
+        ]
+      ],
+      "5": [
+        [
+          "5.1 Sannolikhet",
+          "17ibI_jQfSuhKsB2-sxVH8sdX2-agjGmR"
+        ],
+        [
+          "5.2 Tabeller och diagram",
+          "1u6IDigsbGN-9Gz3H6XScCSj4L_VLrT9i"
+        ],
+        [
+          "5.3 Relativ frekvens",
+          "14szzX3w54h1_TnatxMRQC2v8Kuec00bn"
+        ],
+        [
+          "5.4 Lägesmått",
+          "1adviiYLJ2D6vIjHLs7xvTzRbyrLzyK69"
+        ],
+        [
+          "5.5 Lägesmått från tabeller och diagram",
+          "10wwFgTda634paIH9XqhBlKBpFpkVt9SP"
+        ],
+        [
+          "5.6 Cirkeldiagram",
+          "1zXGT_efbeKw45JpO5R4IBvq8XfnLqGBc"
+        ]
+      ]
+    },
+    "test": {
+      "1": [
+        [
+          "Genomgång av testet",
+          "19oAOPRuhLdWkVySw5IMa_Uz6ekXdNby8"
+        ]
+      ],
+      "2": [
+        [
+          "Genomgång av testet",
+          "1pqWSNaIXY-qQZNEzb1lg1mTfbClVTNHv"
+        ]
+      ],
+      "3": [
+        [
+          "Genomgång av testet",
+          "1Ye4oDXlB5R1Ef3TaDDI5uKn-0Q61roOT"
+        ]
+      ],
+      "4": [
+        [
+          "Genomgång av testet",
+          "1XhpSX_UXHi85vbSMzIX1IaYKRGL-kwD9"
+        ]
+      ],
+      "5": [
+        [
+          "Genomgång av testet",
+          "1glDrCR9Kt3xxJymegwulLvktDboIA9tp"
+        ]
+      ]
+    },
+    "repetition": {
+      "1": [
+        [
+          "Genomgång av repetitionen",
+          "1URWRw_c5gjSRzv0qp1rGV2Bs98EwxaLY"
+        ]
+      ],
+      "2": [
+        [
+          "Genomgång av repetitionen",
+          "1zTw0N1Tgx7Km8vmf91_kcITNjGopT0Jq"
+        ]
+      ],
+      "3": [
+        [
+          "Genomgång av repetitionen",
+          "1qhNqxT6YGr_150G0owTIFaG5jnri6dgC"
+        ]
+      ],
+      "4": [
+        [
+          "Genomgång av repetitionen",
+          "1X4VhZibTiDqJ8pXL4IE46dPLaH1Esbmh"
+        ]
+      ],
+      "5": [
+        [
+          "Genomgång av repetitionen",
+          "1zBigH4R4yNQyQ7kv6O7T5glT4yH-pKOk"
+        ]
+      ]
+    },
+    "testuppgifter": {
+      "1": [
+        [
+          "Uppgifter till testet",
+          "1IkaENVKc4AGggPzooX4z6foYsnZucav0"
+        ]
+      ],
+      "2": [
+        [
+          "Uppgifter till testet",
+          "1sRm1_0JCzE-SS6ShSa_1nTQ1NAqqKv8i"
+        ]
+      ],
+      "3": [
+        [
+          "Uppgifter till testet",
+          "16unDwMpI7gRcQ1PEfdX-SPY5cvtE7qNj"
+        ]
+      ],
+      "4": [
+        [
+          "Uppgifter till testet",
+          "15b-V4qy3vmst_xIZr_WShM0TVa9f6fbu"
+        ]
+      ],
+      "5": [
+        [
+          "Uppgifter till testet",
+          "1-005Cf3jirHFIy5xXvnMb8PZkp0VC9Dr"
+        ]
+      ]
+    },
+    "repetitionsuppgifter": {
+      "1": [
+        [
+          "Uppgifter till repetitionen",
+          "1_84Qgy2ZyRwgevDcVoWGzdSpL-_m01Xo"
+        ]
+      ],
+      "2": [
+        [
+          "Uppgifter till repetitionen",
+          "1F6foecAOgy91lgQZ9mQfE5ak_tty-PI5"
+        ]
+      ],
+      "3": [
+        [
+          "Uppgifter till repetitionen",
+          "1IufoS5W_aUsas1v4TSvyyaberyTICrxa"
+        ]
+      ],
+      "4": [
+        [
+          "Uppgifter till repetitionen",
+          "1_KjH9ShSF2o_ymVQ04g5P_E8pMJG_s6E"
+        ]
+      ],
+      "5": [
+        [
+          "Uppgifter till repetitionen",
+          "1T6QDr_ZVG3szbPgSduz-V02eFm4Y4oV6"
+        ]
+      ]
+    },
+    "diagnosuppgifter": {
+      "1": [
+        [
+          "Uppgifter till diagnosen",
+          "1LAtdD1vohtlTq1FWXj4gXhxfIaOP-0ng"
+        ]
+      ],
+      "2": [
+        [
+          "Uppgifter till diagnosen",
+          "1LM1KQfcJxn3Ey470sW0ta3UauTVTys3I"
+        ]
+      ],
+      "3": [
+        [
+          "Uppgifter till diagnosen",
+          "19U35517GBfyEK0ISDINPl547I8dx6uBq"
+        ]
+      ],
+      "4": [
+        [
+          "Uppgifter till diagnosen",
+          "11x7M6XZsPrUsb58EE0_wIMxxRyCVACOL"
+        ]
+      ],
+      "5": [
+        [
+          "Uppgifter till diagnosen",
+          "1Dl4QWJN-vx54WhTtUZUnuWUkctWvRyL3"
+        ]
+      ]
+    },
+    "diagnos": {
+      "1": [
+        [
+          "Genomgång av diagnosen",
+          "15s-5fTRK66ba1yIZYrF0Kfv4BA1-iffM"
+        ]
+      ],
+      "2": [
+        [
+          "Genomgång av diagnosen",
+          "187WQJoTeuIHWEIuoCThbm4MY2MZHuLqo"
+        ]
+      ],
+      "3": [
+        [
+          "Genomgång av diagnosen",
+          "108m2d8Hpaul5p-bwj3egh3mf5x7cV5iI"
+        ]
+      ],
+      "4": [
+        [
+          "Genomgång av diagnosen",
+          "1Lmr6tDvtg7uh01wrriswCb2bCgXJ4xHM"
+        ]
+      ],
+      "5": [
+        [
+          "Genomgång av diagnosen",
+          "17ugo3LIFWAsAc65Ms9ye60mZeErar7KN"
+        ]
+      ]
+    },
+    "trygg-start": {
+      "1": [
+        [
+          "1.1 Naturliga tal",
+          "11ZPEI_S1utU-wM0A41zo7wz0ReDI6kTF"
+        ],
+        [
+          "1.2 Numeriska uttryck",
+          "1Jc2UZ66SY96E9bwNch3T8aSyMp5G6KiQ"
+        ],
+        [
+          "1.3 Hela tal",
+          "1ItHySSxwHyhv1sFrsOnwBrMJzHDOwk4o"
+        ],
+        [
+          "1.4 Rationella tal",
+          "14Se83OPTJSpvhoUEEdkJN1f6w8jKptlk"
+        ],
+        [
+          "1.5 Räkna med bråk",
+          "1roGbwEKzAUkOIbiBLTk3mJYaY3PkVtkN"
+        ],
+        [
+          "1.6 Multiplikation och division",
+          "1v8AFENF4ppezaWNv2O7WZjIV6X1KAsq6"
+        ],
+        [
+          "1.7 Division med stora och små tal",
+          "13W8GJjj6nBykQRFhmlLXPfudrAU1moXJ"
+        ],
+        [
+          "1.8 Avrundning och överslagsräkning",
+          "1ft3J7wGV93g_xvAcXpizsj-TsmcHwyu0"
+        ]
+      ],
+      "2": [
+        [
+          "2.1 Algebraiska uttryck",
+          "19u02b3mRikXrCMhNxj3ti1ckOiNjscnZ"
+        ],
+        [
+          "2.2 Mönster",
+          "1GW7l_5uf9SQQsst9L3M4kc7eUoRD1PBk"
+        ],
+        [
+          "2.3 Förenkling av uttryck",
+          "1adTHOPmPGfca1HT7odly14pD0ms9crnk"
+        ],
+        [
+          "2.4 Ekvationer",
+          "1jAlro7M79WBK-hSj8Ee880nC87un_UCl"
+        ],
+        [
+          "2.5 Problemlösning med ekvation",
+          "1S1sk8EN1iJqJ33f6HrXDh336oNtDHzOU"
+        ],
+        [
+          "2.6 Ekvationer med obekanta i båda leden",
+          "1t18fgt6_G3x9PGceQvXKw88cEt5uiPwp"
+        ]
+      ],
+      "3": [
+        [
+          "3.1 Prefix och enheter",
+          "1AE2wXoaWCaQrOCHnLEHpGkd5bSRO92ts"
+        ],
+        [
+          "3.2 Längd och skala",
+          "1_U6mTIvpeA4t_BIyhmwvjm11S_wshgHX"
+        ],
+        [
+          "3.3 Vinklar",
+          "1ZTifM1psRLRuJgOmDWgn0VxANFuhU0wR"
+        ],
+        [
+          "3.4 Vinkelsumma",
+          "1pm8u3hdgE32cA7i7ambk4ppA68fmJWqW"
+        ],
+        [
+          "3.5 Omkrets",
+          "1SZCnNkhGBwAVnAwDzd6zceebzPppQdER"
+        ],
+        [
+          "3.6 Area",
+          "1xAvQrg4s6saxhodEme02dm0ZmBE2CoYf"
+        ]
+      ],
+      "4": [
+        [
+          "4.1 Proportionalitet",
+          "1eQ9fz7HA2UH35UgNjJPN6DIJev1yJvA0"
+        ],
+        [
+          "4.2 Tid och rörelse",
+          "1EPhGTXoSTss7s9aruBOcYqqmLtdF0yoD"
+        ],
+        [
+          "4.3 Sträcka, tid och hastighet",
+          "1wKYDN8Iho60fbltbeNEgwtXOO-jwXWjr"
+        ],
+        [
+          "4.4 Andel i bråkform",
+          "1Yrzh62jFUVvk9WMiiUkgoS-xlxXZNixS"
+        ],
+        [
+          "4.5 Andel i procentform (I)",
+          "1P1sUwV2oen_Od6u95rOlOCj93PFj6aj3"
+        ],
+        [
+          "4.6 Andel i procentform (II)",
+          "1wXUuvGlQWzc87LD4-aDvrpXkeHI103LK"
+        ],
+        [
+          "4.7 Hur stor är delen",
+          "1P35SN20OFjImtJ_VuTo1d49MIuWjXMY2"
+        ]
+      ],
+      "5": [
+        [
+          "5.1 Sannolikhet",
+          "1TNVDLl_7GdmheDX4w3jXIp7Tw6_pHrZ3"
+        ],
+        [
+          "5.2 Tabeller och diagram",
+          "1Xf2utMa_Bj1csl_N1rJN5JWQD-CEi8HK"
+        ],
+        [
+          "5.3 Relativ frekvens",
+          "1vWS4SbD2lP9374h8J1gtWGdI0qN2HTik"
+        ],
+        [
+          "5.4 Lägesmått",
+          "129h7WuMj2usEiK1BIeGp5xyvWRLWZUWC"
+        ],
+        [
+          "5.5 Lägesmått från tabeller och diagram",
+          "1glWNTWU3e9yd4FTxeuZhaQtGxmpBd0-6"
+        ],
+        [
+          "5.6 Cirkeldiagram",
+          "1hG1Gg4pSA1TY3m0riLex3wj2rwJIXUF_"
+        ]
+      ]
+    }
   },
-  "problemlosning": {
-   "1": [
-    [
-     "1.1 Naturliga tal",
-     "1eBhCuSxszvDlGP6TCXdPNJPNwm_Zg2UQ"
+  "8": {
+    "kapitel": [
+      [
+        "1",
+        "Tal"
+      ],
+      [
+        "2",
+        "Samband och förändring"
+      ],
+      [
+        "3",
+        "Geometri"
+      ],
+      [
+        "4",
+        "Algebra"
+      ],
+      [
+        "5",
+        "Statistik och sannolikhet"
+      ]
     ],
-    [
-     "1.2 Numeriska uttryck",
-     "1dF-VJQVLyKN8xGdRJr91WV4YpPU4fDr0"
-    ],
-    [
-     "1.3 Hela tal",
-     "1KG4-kj-_zQ_drU6CmdGLAMq_1vS4nAui"
-    ],
-    [
-     "1.4 Rationella tal",
-     "1DjS2IE3x6cfflL-ZG22XM2IW7FhrXJgI"
-    ],
-    [
-     "1.5 Räkna med bråk",
-     "1wsb8iibPrJqVo2UNaEqjWHvSdod4ncu0"
-    ],
-    [
-     "1.6 Multiplikation och division",
-     "1tuyrT9uoevVnDZre8UVcEr4zt5cJAXYC"
-    ],
-    [
-     "1.7 Division med stora och små tal",
-     "1flOtTBKUYqfaR9UScKLoW_LekecSu_ee"
-    ],
-    [
-     "1.8 Avrundning och överslagsräkning",
-     "19Ft7vU-RhVSdSjxXDjDAHKTntlDo_9uu"
-    ]
-   ],
-   "2": [
-    [
-     "2.1 Algebraiska uttryck",
-     "1Yd5x1TB2KfT34v4txyURN1jV5XdPk_c3"
-    ],
-    [
-     "2.2 Mönster",
-     "1jPL4F0FkApEJtqFTVn902p7f18U78BQD"
-    ],
-    [
-     "2.3 Förenkling av uttryck",
-     "1_G512s2ppIBKV0uuczXb-MpgTc-Q2q1Z"
-    ],
-    [
-     "2.4 Ekvationer",
-     "1_AhN8-sHncdFAroe3OskVRrxc_uyQ4TB"
-    ],
-    [
-     "2.5 Problemlösning med ekvation",
-     "1ORAm8KL0LZNKKI4GEMQtdzJYA0xxroEo"
-    ],
-    [
-     "2.6 Ekvationer med obekanta i båda leden",
-     "1XiLzN35dawZyh90o8ADm99fdt-egKwqC"
-    ]
-   ],
-   "3": [
-    [
-     "3.1 Prefix och enheter",
-     "1eCGqXvxbMgAsW7K3XWDwjTBtexAFLbSo"
-    ],
-    [
-     "3.2 Längd och skala",
-     "1mRoTGLbO_KzNV-ERqAWDcrLxJUtClLOC"
-    ],
-    [
-     "3.3 Vinklar",
-     "1DKDxurytaYfHVELnM-cWmplwVh4gGxp-"
-    ],
-    [
-     "3.4 Vinkelsumma",
-     "19CD6LhXAmUTZkFv_EuIj1QhXzcvegngh"
-    ],
-    [
-     "3.5 Omkrets",
-     "13HhH6d8RDZKuIK4S3LwZDVCLVyPYPFJ_"
-    ],
-    [
-     "3.6 Area",
-     "1BKxIg6rjWhvmZGB5dFerDfquRMS1a6Hj"
-    ]
-   ],
-   "4": [
-    [
-     "4.1 Proportionalitet",
-     "1ZPbWJ695L2SUXH6tyqbiHv8gZvpoWGeX"
-    ],
-    [
-     "4.2 Tid och rörelse",
-     "1q2atP-7v10N4YBdkvqvrQrMycnVy0xP0"
-    ],
-    [
-     "4.3 Sträcka, tid och hastighet",
-     "1oeSkA6U-r_w_2__fdE8KXtXwWznSGTbq"
-    ],
-    [
-     "4.4 Andel i bråkform",
-     "1Abx_h8OKH0JSKh06qBlkJm8gNtTwio7H"
-    ],
-    [
-     "4.5 Andel i procentform (I)",
-     "16JZbFwJyPd3Z6M4GDZAQ3RaCHr9i3NT_"
-    ],
-    [
-     "4.6 Andel i procentform (II)",
-     "1qO7skZXHGpQKTAmMIVm36Ae8NBz4DA04"
-    ],
-    [
-     "4.7 Hur stor är delen",
-     "12XPaRgUg7a3LyfDzaETwaxvtlPLoSD9A"
-    ]
-   ],
-   "5": [
-    [
-     "5.1 Sannolikhet",
-     "1gpKKKLpnZUNNnfWiaCfNK3Iw3vrcR5-B"
-    ],
-    [
-     "5.2 Tabeller och diagram",
-     "1dtHQnXuG2gZvAN92hPdoj2w8R_QGY2yo"
-    ],
-    [
-     "5.3 Relativ frekvens",
-     "1K-ffTV-MZgRTpsvOeOygIlpF3eh767T_"
-    ],
-    [
-     "5.4 Lägesmått",
-     "1Me0KjoxcHIX92o2GOPshFikcr663YYFr"
-    ],
-    [
-     "5.5 Lägesmått från tabeller och diagram",
-     "1c8VmGAPlGtVUylyfh_aoe1w8czwai8vO"
-    ],
-    [
-     "5.6 Cirkeldiagram",
-     "1MEuVJ0oe2Ek95KaicgImX2zEeyWAdUaj"
-    ]
-   ]
+    "problemlosning": {
+      "1": [
+        [
+          "1.1 Räkna med bråk",
+          "1KjCAmpV2VN9R-yhNA0thBhKcO7WNFmTc"
+        ],
+        [
+          "1.2 Addition och subtraktion av bråk",
+          "1NYnaAn_iWLvKr09NpcI331GJwLsKzL6U"
+        ],
+        [
+          "1.3 Multiplikation av bråk",
+          "1q4CTiVnccWDeD310vrfyKw6FLD0z4IBl"
+        ],
+        [
+          "1.4 Division av bråk",
+          "1GIl5tAPYsQT1sFaHVpTxVUFstolTmJkw"
+        ],
+        [
+          "1.5 Potenser",
+          "1aqs8XlbpBpI-iLKAI-h--SRSX7uWzrlf"
+        ],
+        [
+          "1.6 Tiopotenser",
+          "1BkBeTfVjZRmt0UYDtrUOBd7a3X8b1R1z"
+        ]
+      ],
+      "2": [
+        [
+          "2.1 Andelen",
+          "1JB2VIy1k4Ng37GdrKDrge5DRTiuBfjpC"
+        ],
+        [
+          "2.2 Jämförelser och förändringar",
+          "1zH6bJw5pQK6TbYghjN55TBwc693cfISr"
+        ],
+        [
+          "2.3 Det hela",
+          "16LjOD0y3ysZZgXmHK4Hrg7Dby262WnCZ"
+        ],
+        [
+          "2.4 Delen",
+          "1m3LGLqfXtdECvWorI7FhSSy0OHaBVJzE"
+        ],
+        [
+          "2.5 Ränta",
+          "1yY_4ETTj5ySmYftbbP2a-9FpiRvwyeMb"
+        ]
+      ],
+      "3": [
+        [
+          "3.1 Omkrets och area",
+          "1qLXNlGpJ5RCfRPzK_P0s5ps-60tMUxZs"
+        ],
+        [
+          "3.2 Cirkelns area",
+          "1Vyq4Iy11KFdGbhTgqdb4YpHEZLa0IsTg"
+        ],
+        [
+          "3.3 Volym och begränsningsarea",
+          "1y8DiD-0hxDXbj_5Nng1VY3sLZqbOh4Dp"
+        ],
+        [
+          "3.4 Enheter för volym",
+          "1_gJ_Z_PAr7NCf4-MzDfOwGnE-6E7Zels"
+        ],
+        [
+          "3.5 Prisma och pyramid",
+          "1bJouE_z73ll21N87nBgWw9UtzN4l8CG0"
+        ],
+        [
+          "3.6 Cylinder, kon och klot",
+          "1vcrmkpYD3ja86XMo-6xVRnEydTpiWTZC"
+        ]
+      ],
+      "4": [
+        [
+          "4.1 Algebraiska uttryck",
+          "1i4SYCpB51I4Ut4oux1OL_yP8gJdsfSZo"
+        ],
+        [
+          "4.2 Mönster",
+          "1zAH0JY2oAAPPTph7W15IiwTT3jnPdT1u"
+        ],
+        [
+          "4.3 Uttryck med parenteser",
+          "1tp12OLWIqMNSelXKChmPoshV8t1qQSRy"
+        ],
+        [
+          "4.4 Multiplikation av parenteser",
+          "1i9yAYwQzB-F5eRqcvHhUVZD9O9hMhb8B"
+        ],
+        [
+          "4.5 Uttryck med potenser",
+          "1uE42Gczaat7EHGTTIPYnRx3Yp2RFhd4i"
+        ],
+        [
+          "4.6 Ekvationer",
+          "1YiM4fKYKKY6EDpyYNZ2SttKFlzqQlTrm"
+        ],
+        [
+          "4.7 Ekvationer med parenteser",
+          "1BHur3TDtEsPRijBkO3EyCggLIyOGjcbc"
+        ],
+        [
+          "4.8 Problemlösning med ekvationer",
+          "19NxQNRV4HRqCClymweZ9Mq83MpFhXBHQ"
+        ]
+      ],
+      "5": [
+        [
+          "5.1 Hur stor är sannolikheten",
+          "1dvHIK4WHN1pnvUK8EwRQ-lsWrCeyeVan"
+        ],
+        [
+          "5.2 Oberoende och beroende händelser",
+          "1VyHXWLKun_O7azaYOY7N7yHCLPWPpmvK"
+        ],
+        [
+          "5.3 Kombinatorik",
+          "1e3ZlBcn9JPom_DB9IE3kSuw40EuSfxzt"
+        ],
+        [
+          "5.4 Tabeller och diagram",
+          "1AJnG1n8p9_xSs9u9MQ5dCCAxNBwAsKIo"
+        ]
+      ]
+    },
+    "test": {
+      "1": [
+        [
+          "Genomgång av testet",
+          "1n857nijHkq_0a4QXrn2IOggHbMy8OF-Q"
+        ]
+      ],
+      "2": [
+        [
+          "Genomgång av testet",
+          "1cmWTppuCEyjz3WckKG1yfECOw01xqT2_"
+        ]
+      ],
+      "3": [
+        [
+          "Genomgång av testet",
+          "1h3Q5-hCLlaUtkCVp5W7f8XCnu8q4AO1Y"
+        ]
+      ],
+      "4": [
+        [
+          "Genomgång av testet",
+          "1DpeOfyz0j4t599NElTtsh1XgHvEg9NKm"
+        ]
+      ],
+      "5": [
+        [
+          "Genomgång av testet",
+          "1dWCfH4ui_Z2EXOvIt72VxMSsnm3wfk5_"
+        ]
+      ]
+    },
+    "repetition": {
+      "1": [
+        [
+          "Genomgång av repetitionen",
+          "1IgUUGSTU8kir0vGGynaeqlsrlTX_sGMY"
+        ]
+      ],
+      "2": [
+        [
+          "Genomgång av repetitionen",
+          "1RUwzrtFzWYOxRI_v3Dri0aSd8nAa5Zm1"
+        ]
+      ],
+      "3": [
+        [
+          "Genomgång av repetitionen",
+          "1XdNBKa1CZ3bHoKZGOk5tzcuMgl9ieS5z"
+        ]
+      ],
+      "4": [
+        [
+          "Genomgång av repetitionen",
+          "1rcubV90mS29eiyi806LcTibaLqv8lYmN"
+        ]
+      ],
+      "5": [
+        [
+          "Genomgång av repetitionen",
+          "1Fm51gzlKrxCeRZLH8WxmqcAjNtcF4pJh"
+        ]
+      ]
+    },
+    "tillbakablick": {
+      "1": [
+        [
+          "1.1 Räkna med bråk",
+          "1SUOXC3JGOLxZiUdGFEVMnUF0kQkpKM8W"
+        ],
+        [
+          "1.2 Addition och subtraktion av bråk",
+          "1wqKcEL7Ey252fSGK0EWcSiCTKk73zjwa"
+        ],
+        [
+          "1.3 Multiplikation av bråk",
+          "1bqV_N6pw4YeQ64_P1ppbwjXBfBiWa8y4"
+        ],
+        [
+          "1.4 Division av bråk",
+          "1VxD8hFOkQAH2shv0cuOvzn8Kt64ByApa"
+        ],
+        [
+          "1.5 Potenser",
+          "1d9mxVL3XctRAQ1TGfS6B9iG99BOrG8hK"
+        ],
+        [
+          "1.6 Tiopotenser",
+          "1mVnIejJM_59TUscBmFtUKcB5H1Ql3Wj7"
+        ]
+      ],
+      "2": [
+        [
+          "2.1 Andelen",
+          "1PrcgG670mSoNhBmSMOteDyXgXLIBjUjE"
+        ],
+        [
+          "2.2 Jämförelser och förändringar",
+          "1LCQVNyBeQfrv08LmnIqqOPyEZIn0w6iT"
+        ],
+        [
+          "2.3 Det hela",
+          "1YILoz08hvvj0X79TCINef3zA0b2FdPeS"
+        ],
+        [
+          "2.4 Delen",
+          "1PDO82ZEu2PiOWhCQWW-41Y49UDJ5Pi9w"
+        ],
+        [
+          "2.5 Ränta",
+          "1fYOkdmwYLhPVQryge71RSgyO6a8r_NLn"
+        ]
+      ],
+      "3": [
+        [
+          "3.1 Omkrets och area",
+          "158fnf2cwlMIQiLuF5s3tQhHyAGHiCvU_"
+        ],
+        [
+          "3.2 Cirkelns area",
+          "1SemHi9MbA6hfntmXVTuQvK6cJQXv2BhK"
+        ],
+        [
+          "3.3 Volym och begränsningsarea",
+          "1WySIvGl_SprWLOFW4npbRw_e1zhawjcn"
+        ],
+        [
+          "3.4 Enheter för volym",
+          "1mQh3F0IEsVJAqX44sn7ywNa4AbNHZUrU"
+        ],
+        [
+          "3.5 Prisma och pyramid",
+          "14JOzNtZD9HlNgzSaLJ1WNYVbUNKid8LZ"
+        ],
+        [
+          "3.6 Cylinder, kon och klot",
+          "1K5d8tT0025DHzkePRqRSLCk4jhMLAk6O"
+        ]
+      ],
+      "4": [
+        [
+          "4.1 Algebraiska uttryck",
+          "1D9ZJEEWJiwfUDCBZXKUjiEGNW4sT1vfz"
+        ],
+        [
+          "4.2 Mönster",
+          "193GoWo0cTJyGBNNMvVjyhx1V0qZIIebX"
+        ],
+        [
+          "4.3 Uttryck med parenteser",
+          "1Ekfmq13PYmrhQmpmNYHyD3HxIA6dHE5l"
+        ],
+        [
+          "4.4 Multiplikation av parenteser",
+          "1Z500OclLTFV42i7_LgyWQy3uUeV2x-EX"
+        ],
+        [
+          "4.5 Uttryck med potenser",
+          "135BptAZWI3JMmrZHr62Uwbk75955HVbH"
+        ],
+        [
+          "4.6 Ekvationer",
+          "1ZjFpFpO5-iVzHvw6rxl_u5FLUS4NJcMA"
+        ],
+        [
+          "4.7 Ekvationer med parenteser",
+          "1hyU_v4McFq9YByY6HRuClfyEx5neHUdN"
+        ],
+        [
+          "4.8 Problemlösning med ekvationer",
+          "12o4beTrBnKS-eJCVXswTQFmR8e0yxHek"
+        ]
+      ],
+      "5": [
+        [
+          "5.1 Hur stor är sannolikheten",
+          "1D6tL8PHsFlygQ8y-P5U-cpbeuTIr7yhv"
+        ],
+        [
+          "5.2 Oberoende och beroende händelser",
+          "1hoqmKgu_Xn5Yx5Pv4fS6iOHHblNoDiV7"
+        ],
+        [
+          "5.3 Kombinatorik",
+          "13PT5TBsdFoERGWpXdqaDJBH4DaZU6-ZO"
+        ],
+        [
+          "5.4 Tabeller och diagram",
+          "1F4I4lcjtl-51aN6kRg-iCZvAAE1sNSvM"
+        ]
+      ]
+    },
+    "testuppgifter": {
+      "1": [
+        [
+          "Uppgifter till testet",
+          "1dkw_2tNOutvtMoRw8L95XfDDesE5Cemz"
+        ]
+      ],
+      "2": [
+        [
+          "Uppgifter till testet",
+          "1JuMzZiTbbCrme5j95yUix6g2YTGW3DCm"
+        ]
+      ],
+      "3": [
+        [
+          "Uppgifter till testet",
+          "1Ns5zmeW0zqbOGBb8IyTIbznTD1ZjvBiu"
+        ]
+      ],
+      "4": [
+        [
+          "Uppgifter till testet",
+          "1ATOQ4mljWBxyQe9Sw6eLnVeBtj4bgjxY"
+        ]
+      ],
+      "5": [
+        [
+          "Uppgifter till testet",
+          "1V21Y-Pn0PVN6R-YmOLtculmgVBIDlxeg"
+        ]
+      ]
+    },
+    "repetitionsuppgifter": {
+      "1": [
+        [
+          "Uppgifter till repetitionen",
+          "1dY-dxtm2sgkgQdLeS60EfoebMrmpmy0M"
+        ]
+      ],
+      "2": [
+        [
+          "Uppgifter till repetitionen",
+          "1_UdEBAgT5_VXCtT3wVMYaPb0LR_ELzsF"
+        ]
+      ],
+      "3": [
+        [
+          "Uppgifter till repetitionen",
+          "16IoNfyw5LmVxcLUYo1ZjFSN4HFumIFl-"
+        ]
+      ],
+      "4": [
+        [
+          "Uppgifter till repetitionen",
+          "1-zMp5zdBkYPMMPSY7uhQN7kaoWgm49bT"
+        ]
+      ],
+      "5": [
+        [
+          "Uppgifter till repetitionen",
+          "1JI2UlVy9hzstJHJI2w70TGMyw9UcMTpH"
+        ]
+      ]
+    },
+    "diagnosuppgifter": {
+      "1": [
+        [
+          "Uppgifter till diagnosen",
+          "1knef9MJXpXftfPoedXnjkoey0h2YDxMs"
+        ]
+      ],
+      "2": [
+        [
+          "Uppgifter till diagnosen",
+          "1JJRNUbzv69KtZAcajsUv7RuRpvBIxjDL"
+        ]
+      ],
+      "3": [
+        [
+          "Uppgifter till diagnosen",
+          "1mRjCRA7sn8KBsukdRkX6mo1RPGYpFwks"
+        ]
+      ],
+      "4": [
+        [
+          "Uppgifter till diagnosen",
+          "1migHszc5Z7OWaUrwYQNyuo2r988_PNdo"
+        ]
+      ],
+      "5": [
+        [
+          "Uppgifter till diagnosen",
+          "1Jo16wqTyCutHWd_YmNRWJILAHxrt8_h7"
+        ]
+      ]
+    },
+    "trygg-start": {
+      "1": [
+        [
+          "1.1 Räkna med bråk",
+          "1HbZYpOGXzyV8VgpRMPYi7trbJPLzjAE1"
+        ],
+        [
+          "1.2 Addition och subtraktion av bråk",
+          "1RwpM2Hb2eHgUEKAfKqybmM1ZIN9TPlbZ"
+        ],
+        [
+          "1.3 Multiplikation av bråk",
+          "1pzladsyKEtti_IRI0IplnKeaQ2GvGVeV"
+        ],
+        [
+          "1.4 Division av bråk",
+          "1Mz1l39ysVaMGNd1AuFhz4QRH8TCEcBFY"
+        ],
+        [
+          "1.5 Potenser",
+          "1UEZmelOjlxmPgiDxGKk6-RwFuLUt5lk7"
+        ],
+        [
+          "1.6 Tiopotenser",
+          "1X2Uj5_ZT4sncVaWHZ6QujHshKUN36vjq"
+        ]
+      ],
+      "2": [
+        [
+          "2.1 Andelen",
+          "1HfB2blZlQavFmLQ6VPUXBrygyNebkR0U"
+        ],
+        [
+          "2.2 Jämförelser och förändringar",
+          "117k0RO21kMkZqnBcUOLy7uWFbTXxLi0F"
+        ],
+        [
+          "2.3 Det hela",
+          "15Ag1HJ-0ZsoIfQZ-Ew5j3RGSCH150e_Q"
+        ],
+        [
+          "2.4 Delen",
+          "1WdfkelSmfB6sc4Bx2IUgW4cC6YXGI9wU"
+        ],
+        [
+          "2.5 Ränta",
+          "1WQbHn0_vdyDWnfj7AsClEXTGav1soFFL"
+        ]
+      ],
+      "3": [
+        [
+          "3.1 Omkrets och area",
+          "1bu97fLil6LzJuhDNygNGR4fnG1dQXz6L"
+        ],
+        [
+          "3.2 Cirkelns area",
+          "1a17Gy3XzwHK9DUMCLLD9r9wccJDt3buL"
+        ],
+        [
+          "3.3 Volym och begränsningsarea",
+          "1_JlamBCfTHcxdCl71NtpdqbPJVVa040L"
+        ],
+        [
+          "3.4 Enheter för volym",
+          "1PBE6I1chyHLIJl9uG6DXed1pfVhGZcTY"
+        ],
+        [
+          "3.5 Prisma och pyramid",
+          "1ezrq2a6NwpaEKzLhmBPbjNPZG-AVueP7"
+        ],
+        [
+          "3.6 Cylinder, kon och klot",
+          "1zNlz82MICFPkOeS7mTeAEe39K_oyYsnl"
+        ]
+      ],
+      "4": [
+        [
+          "4.1 Algebraiska uttryck",
+          "19dWeKBKK2nMeOfr2c5dfj27pB_bNL7T6"
+        ],
+        [
+          "4.2 Mönster",
+          "16xRchUyXeoqAA0VmYbHz1Jy8oq6sT7HO"
+        ],
+        [
+          "4.3 Uttryck med parenteser",
+          "1mD6njdZWAYVVQSDKGAkSuO74FxRx5gem"
+        ],
+        [
+          "4.4 Multiplikation av parenteser",
+          "1Dz57sPrYZZPt6E4ucFWBKahaGx-NfoNS"
+        ],
+        [
+          "4.5 Uttryck med potenser",
+          "1a9GWiSwbkvuuZGaqDRemSudia9-aXH63"
+        ],
+        [
+          "4.6 Ekvationer",
+          "1uzVvldZqrAQlMJ4UL19PWlA_8MQWH9fY"
+        ],
+        [
+          "4.7 Ekvationer med parenteser",
+          "1W0Pbi0e1aWcK8VQ_1I0Ow27gGKFLhpXM"
+        ],
+        [
+          "4.8 Problemlösning med ekvationer",
+          "1-BcBwugqcXXcPZwExpD_uPXFQdZ68u9I"
+        ]
+      ],
+      "5": [
+        [
+          "5.1 Hur stor är sannolikheten",
+          "1AMbOFJkgRGqWPjljjhZeUoiF21RJvCeo"
+        ],
+        [
+          "5.2 Oberoende och beroende händelser",
+          "1vPpJ__4hG9HOAEByny7dcn8GQmmwvwqc"
+        ],
+        [
+          "5.3 Kombinatorik",
+          "1Xv5vTBkFlVzMt65Yk4qzkLDnyPlUD_wF"
+        ],
+        [
+          "5.4 Tabeller och diagram",
+          "1ckUFALXHUoR6ui86sm9zBf2ko52DZknZ"
+        ]
+      ]
+    },
+    "diagnos": {
+      "1": [
+        [
+          "Genomgång av diagnosen",
+          "1MKsbA8iAVhB7mjK5B_NnRBw3KdmRAbeH"
+        ]
+      ],
+      "2": [
+        [
+          "Genomgång av diagnosen",
+          "1o42icR3ytF-iXpVyQ50X92qycJreLkbP"
+        ]
+      ],
+      "3": [
+        [
+          "Genomgång av diagnosen",
+          "1Jo_FN2rmPEv12fMc-VU9HQl-CvuJ6Tcn"
+        ]
+      ],
+      "4": [
+        [
+          "Genomgång av diagnosen",
+          "1FATelRoy0CpaaC3YACT8NtSLZ6QOH6AP"
+        ]
+      ],
+      "5": [
+        [
+          "Genomgång av diagnosen",
+          "1LgVY9WLxF8UXxM-4pumhIiarTPdfaFy7"
+        ]
+      ]
+    }
   },
-  "test": {
-   "1": [
-    [
-     "Genomgång av testet",
-     "19oAOPRuhLdWkVySw5IMa_Uz6ekXdNby8"
-    ]
-   ],
-   "2": [
-    [
-     "Genomgång av testet",
-     "1pqWSNaIXY-qQZNEzb1lg1mTfbClVTNHv"
-    ]
-   ],
-   "3": [
-    [
-     "Genomgång av testet",
-     "1Ye4oDXlB5R1Ef3TaDDI5uKn-0Q61roOT"
-    ]
-   ],
-   "4": [
-    [
-     "Genomgång av testet",
-     "1XhpSX_UXHi85vbSMzIX1IaYKRGL-kwD9"
-    ]
-   ],
-   "5": [
-    [
-     "Genomgång av testet",
-     "1glDrCR9Kt3xxJymegwulLvktDboIA9tp"
-    ]
-   ]
+  "9": {
+    "kapitel": [
+      [
+        "1",
+        "Tal"
+      ],
+      [
+        "2",
+        "Samband och förändring"
+      ],
+      [
+        "3",
+        "Algebra"
+      ],
+      [
+        "4",
+        "Geometri"
+      ]
+    ],
+    "problemlosning": {
+      "1": [
+        [
+          "1.1 Tal och beräkningar",
+          "1o-hAgxhpJfxBofrjyaQpiUmAftFhUQky"
+        ],
+        [
+          "1.2 Räkna med bråk",
+          "1LfMdQCZO-mYOUR6RIQBBVWtNwFbpllCI"
+        ],
+        [
+          "1.3 Räkna med negativa tal",
+          "1pOyEQ0y-W-rc_u1fg24QK_ANG6GNHthe"
+        ],
+        [
+          "1.4 Räkna med potenser",
+          "19gVdsNfmvaB7rs9uRZ-5KXi5iW8lGDeM"
+        ],
+        [
+          "1.5 Små tal och tiopotenser",
+          "10WaBYInBXh7yE6hWEm5K9xvO3rVhaATZ"
+        ],
+        [
+          "1.6 Räkna med tal i grundpotensform",
+          "1Fxb7AGvq1aCPF_GDFlnnTnLM8PR9A5IZ"
+        ],
+        [
+          "1.7 Kvadrater och kvadratrötter",
+          "1-6VOsNrlsuVXXy1k-N3vtTWEAWjF4q8I"
+        ]
+      ],
+      "2": [
+        [
+          "2.1 Procent",
+          "1nkyzbHxHFNTTCMW2M0QXTO_cojU8DAWp"
+        ],
+        [
+          "2.2 Förändringsfaktor",
+          "1FMkmQEAGDOeSEv8fUiMSWRljCfgpDpZQ"
+        ],
+        [
+          "2.3 Funktioner",
+          "1fgd5nmDcryJvCIq_WLsqWCwFQkXG-AYZ"
+        ],
+        [
+          "2.4 Linjära funktioner",
+          "1JTGnoGw9QDoOe_oW_CXRF5PJS6rUC9UR"
+        ],
+        [
+          "2.5 Tillämpning av linjära funktioner",
+          "1FDVPzg3nVEr7JJ7BuwNIRwXRL_bZ2J0-"
+        ]
+      ],
+      "3": [
+        [
+          "3.1 Uttryck och mönster",
+          "1rOcNdTUQhFjrJfaADijictlzMQxNGA51"
+        ],
+        [
+          "3.2 Förenkling av uttryck",
+          "1AWmgGflLUKY03f4shJQOw5TBKzPSoN5Z"
+        ],
+        [
+          "3.3 Ekvationer",
+          "1k-gCxCESIbNyESXmqOlOjfqmHxfehaJN"
+        ],
+        [
+          "3.4 Procent och ekvationer",
+          "1dGdraLvmzUlWngEo44RqeyE4ZAI7Burz"
+        ],
+        [
+          "3.5 Proportion",
+          "1ujS6C8pqKATfbio8HLWVo3MZ--RqS4j1"
+        ],
+        [
+          "3.6 Ekvationssystem",
+          "1CiQu5ldbDbtuHt3Mht3nLFNYgX9twiUY"
+        ]
+      ],
+      "4": [
+        [
+          "4.1 Spegling och symmetri",
+          "1M9RE7cKMCskKJIFBeMNaI8REDzuFHd_F"
+        ],
+        [
+          "4.2 Skala",
+          "1hYjuw8vQsVZdO0rqOjmlz3rCOSajfBbP"
+        ],
+        [
+          "4.3 Ekvationer med flera nämnare",
+          "1gNcoFNLtDwGph7icSgbGsxKeFSFEXCjI"
+        ],
+        [
+          "4.4 Likformighet",
+          "1-Wzpu6iyZRKicraIQCr-BVG5OPLwG14R"
+        ],
+        [
+          "4.5 Pythagoras sats",
+          "1m5ACv8-hKUk7_2-Gnb5qe4JaaaMYXSlQ"
+        ]
+      ]
+    },
+    "test": {
+      "1": [
+        [
+          "Genomgång av testet",
+          "1ZjRaO-y984JLNa8m1KzA_bNZICIjGE4t"
+        ]
+      ],
+      "2": [
+        [
+          "Genomgång av testet",
+          "17eAn961r0ephSJcaOC-soEcccpU8qytK"
+        ]
+      ],
+      "3": [
+        [
+          "Genomgång av testet",
+          "1vqru-yvqXS59uZAEl7IIByf39lyk7tUr"
+        ]
+      ],
+      "4": [
+        [
+          "Genomgång av testet",
+          "14NipVR3q8sFofAlHO54rDQA7FY1SmMBk"
+        ]
+      ]
+    },
+    "repetition": {
+      "1": [
+        [
+          "Genomgång av repetitionen",
+          "1fT9xaRYNouWljieAjJlkOChaLlDzuc93"
+        ]
+      ],
+      "2": [
+        [
+          "Genomgång av repetitionen",
+          "1gcxa6NShdvqGVbnscIQwVFb2gdOlhhOA"
+        ]
+      ],
+      "3": [
+        [
+          "Genomgång av repetitionen",
+          "1ybGmRWCT2mWpcG61xehU8JGqIfa4-vJR"
+        ]
+      ],
+      "4": [
+        [
+          "Genomgång av repetitionen",
+          "1VUhiS8K4llm_M94dJsty3kd3ndoGS6ej"
+        ]
+      ]
+    },
+    "tillbakablick": {
+      "1": [
+        [
+          "1.1 Tal och beräkningar",
+          "11TOptj3iIhA4dyjIOF5UEO7hK1nH4Otw"
+        ],
+        [
+          "1.2 Räkna med bråk",
+          "1Y_AxlgCsFJLCxXEUB1jrOH66NI2J-7W9"
+        ],
+        [
+          "1.3 Räkna med negativa tal",
+          "1njBjNhVd3bwQLGXbaPQjIig4P_Qho355"
+        ],
+        [
+          "1.4 Räkna med potenser",
+          "1puzAdaa2RawFCm4uGAHmWTaf1byeTnmf"
+        ],
+        [
+          "1.5 Små tal och tiopotenser",
+          "1fOl6lWNQ5xfgkH5dtrdeItLMrfLphZbi"
+        ],
+        [
+          "1.6 Räkna med tal i grundpotensform",
+          "1eycIkPA7gtb47APnBUwUQbikLrmqt6lk"
+        ],
+        [
+          "1.7 Kvadrater och kvadratrötter",
+          "17ZZ3-_W7FO31dYA12mkJ_5Q4FVOPP7gV"
+        ]
+      ],
+      "2": [
+        [
+          "2.1 Procent",
+          "1R2U45LBlIXnv42Xj-pPEyUdb7uEdo-mB"
+        ],
+        [
+          "2.2 Förändringsfaktor",
+          "1VoG4_boWk9pGfs8GPdBWlttxGlY-6azN"
+        ],
+        [
+          "2.3 Funktioner",
+          "1CHsz2vRQNdS6T9e6HJVlduCR13oH2aNb"
+        ],
+        [
+          "2.4 Linjära funktioner",
+          "1iqX0oM3lmjrCshPa6FXWexzKszBPdBCw"
+        ],
+        [
+          "2.5 Tillämpning av linjära funktioner",
+          "16HiAKbssc-upJNqyiQLejOdrDnUkTNWN"
+        ]
+      ],
+      "3": [
+        [
+          "3.1 Uttryck och mönster",
+          "1qRiwj_57Y7DT0HDC9nTUy8n5aHmBSYMZ"
+        ],
+        [
+          "3.2 Förenkling av uttryck",
+          "1YtuE2m2Q9SX51z2FQxPHyJdVk7mPf40Z"
+        ],
+        [
+          "3.3 Ekvationer",
+          "1o1x3HiZ0XTelS7J27joN-iHN780GgceO"
+        ],
+        [
+          "3.4 Procent och ekvationer",
+          "1bK8IgT8ccWJUHiFTq2GoxFuOJbkh8z_r"
+        ],
+        [
+          "3.5 Proportion",
+          "1GO2Eztl3O2O0eZ2setw_hWidy_4jL9pZ"
+        ],
+        [
+          "3.6 Ekvationssystem",
+          "17WuJfWde1Pc8dS9ZmTHgvtQiOOKZfh8u"
+        ]
+      ],
+      "4": [
+        [
+          "4.1 Spegling och symmetri",
+          "1UROs-vBZDiW4n3Ka_247uWLTZQ1Yqpyc"
+        ],
+        [
+          "4.2 Skala",
+          "1BKcJzmGzKsGLDQv_Lks8KqxaJrgO-B2J"
+        ],
+        [
+          "4.3 Ekvationer med flera nämnare",
+          "1DIvaw7EqxzTHnKi-BFlgQoKpYyXaFO6z"
+        ],
+        [
+          "4.4 Likformighet",
+          "1azOnByuWHKHBdqOfM6CbpbWv8E4csuhS"
+        ],
+        [
+          "4.5 Pythagoras sats",
+          "1FJGHR3xTtzkvfEF3Kr0iJAZeqQg4BmPH"
+        ]
+      ]
+    },
+    "testuppgifter": {
+      "1": [
+        [
+          "Uppgifter till testet",
+          "1QduNv8BBlLcd2-yZHUUKEqcaF_LI5efV"
+        ]
+      ],
+      "2": [
+        [
+          "Uppgifter till testet",
+          "1hKOEHpBU0q0JIy1mdKIwhWfX2nIZr3dJ"
+        ]
+      ],
+      "3": [
+        [
+          "Uppgifter till testet",
+          "1KRNKBtuu-J_ejuU2VzkkxbMw4iehacjt"
+        ]
+      ],
+      "4": [
+        [
+          "Uppgifter till testet",
+          "1V0mpqmCx6_qv6xPhUjEbeNFv5OYe7VpW"
+        ]
+      ]
+    },
+    "repetitionsuppgifter": {
+      "1": [
+        [
+          "Uppgifter till repetitionen",
+          "17vYokEVpxzbtnoo2OxQvmVGpkydyX26f"
+        ]
+      ],
+      "2": [
+        [
+          "Uppgifter till repetitionen",
+          "1zB2xJs_GhtoL0_30yv0VqcOf7Nj7FxT6"
+        ]
+      ],
+      "3": [
+        [
+          "Uppgifter till repetitionen",
+          "143MTEkZvT9DMA4ykLL1QI0W99FLqgRMT"
+        ]
+      ],
+      "4": [
+        [
+          "Uppgifter till repetitionen",
+          "1423PJXI7CXdQg_nC5wbz-T19pZ_RgZYT"
+        ]
+      ]
+    },
+    "diagnosuppgifter": {
+      "1": [
+        [
+          "Uppgifter till diagnosen",
+          "1pfRsjqKGqu9EWPUiCGPNJbW-uiknAcD3"
+        ]
+      ],
+      "2": [
+        [
+          "Uppgifter till diagnosen",
+          "1I0AtrcskEl0HhQvr-k6xmLz4D1mP93vj"
+        ]
+      ],
+      "3": [
+        [
+          "Uppgifter till diagnosen",
+          "1CeOHmz31e0GHonkyAlD627yzCg3VFQyp"
+        ]
+      ],
+      "4": [
+        [
+          "Uppgifter till diagnosen",
+          "1CAaR0snQBMz1u8b3l1QB51QTiV7ZF_jy"
+        ]
+      ]
+    },
+    "trygg-start": {
+      "1": [
+        [
+          "1.1 Tal och beräkningar",
+          "1foEATumFZc2VDf7Iwi7E0nIiQLUB-0wC"
+        ],
+        [
+          "1.2 Räkna med bråk",
+          "1dbhhkcVUqr7zgHUL5x8r2_dok7vNUUsJ"
+        ],
+        [
+          "1.3 Räkna med negativa tal",
+          "1AY34In8oCrl-kwTgKcZcy11ugMxTwPPr"
+        ],
+        [
+          "1.4 Räkna med potenser",
+          "1oFQrpjQ-rcVJINYzH1ZtoyTZ0U69xavx"
+        ],
+        [
+          "1.5 Små tal och tiopotenser",
+          "1VM_MvFFCAYOA0_JB6kl2z2ipUQt7qR8t"
+        ],
+        [
+          "1.6 Räkna med tal i grundpotensform",
+          "1fKkPuaXOSyui-vlYUx8sNHINYdfZ9Xrs"
+        ],
+        [
+          "1.7 Kvadrater och kvadratrötter",
+          "1KeMmwrI671pBuM2uFKA5ZPTn4PHfF-Cm"
+        ]
+      ],
+      "2": [
+        [
+          "2.1 Procent",
+          "18OSCXMxcOlFpSgSCLhgWL4QRw87Bq0yp"
+        ],
+        [
+          "2.2 Förändringsfaktor",
+          "1w8nY_KgJr0_bnuci8XVBSXfb0znp5c0z"
+        ],
+        [
+          "2.3 Funktioner",
+          "1AlTj5C_nf-R4f-fD8jnZTdnmU13By7zi"
+        ],
+        [
+          "2.4 Linjära funktioner",
+          "1ajh6xcUxHErIja8NzIIdSEs7ypVaXg-q"
+        ],
+        [
+          "2.5 Tillämpning av linjära funktioner",
+          "1l9BLIk29tn1IxfBCKxoxoNobI4DsZh0u"
+        ]
+      ],
+      "3": [
+        [
+          "3.1 Uttryck och mönster",
+          "1fv248_4owxGin0fpbkCFZ5QwwToyp7Bz"
+        ],
+        [
+          "3.2 Förenkling av uttryck",
+          "1yWluxMJJu5CKSt0WMI8dPXZwOGPh-I3H"
+        ],
+        [
+          "3.3 Ekvationer",
+          "1BgDK8xRejujUSdMpG_skSMRSPk75zUba"
+        ],
+        [
+          "3.4 Procent och ekvationer",
+          "1eKG5XoL5bllMhM51SKRPNfON-r5Eqj5b"
+        ],
+        [
+          "3.5 Proportion",
+          "1W9-IQVQyo2ppUYePDiOnPOuyo60Sp8Qt"
+        ],
+        [
+          "3.6 Ekvationssystem",
+          "1H-3A48MVnXo_9B7ZcnV2U1Jr3J6-UhKy"
+        ]
+      ],
+      "4": [
+        [
+          "4.1 Spegling och symmetri",
+          "18bFgzD66BinLmNJUVAKB6bPLdkQMlcWu"
+        ],
+        [
+          "4.2 Skala",
+          "1tqjgaaLjBnkLcFFG6K_w4lotvxP7B5vA"
+        ],
+        [
+          "4.3 Ekvationer med flera nämnare",
+          "1BBKWOncq0oIyP2yOvqLI9lQJVoZg1BR6"
+        ],
+        [
+          "4.4 Likformighet",
+          "1CtZz0jgIXWzujVjgskMsUY74ewe2_AD9"
+        ],
+        [
+          "4.5 Pythagoras sats",
+          "1TsdYfEXn2GHML_F2QLrtgchjg9M5T6sC"
+        ]
+      ]
+    },
+    "diagnos": {
+      "1": [
+        [
+          "Genomgång av diagnosen",
+          "1xtUIG55SUw6ZCjfRsUgRCxhQfh_7w2FV"
+        ]
+      ],
+      "2": [
+        [
+          "Genomgång av diagnosen",
+          "1svieDE6uWcivNu9SP_jyhToDAav4kVwg"
+        ]
+      ],
+      "3": [
+        [
+          "Genomgång av diagnosen",
+          "1Wexaf-nzRb54E36WJEPV5HJhNx6oAO10"
+        ]
+      ],
+      "4": [
+        [
+          "Genomgång av diagnosen",
+          "1I-OFafke8xrpasjcjmLiBCeOekzy8_kl"
+        ]
+      ]
+    }
   },
-  "repetition": {
-   "1": [
+  "amnesord": [
     [
-     "Genomgång av repetitionen",
-     "1URWRw_c5gjSRzv0qp1rGV2Bs98EwxaLY"
-    ]
-   ],
-   "2": [
-    [
-     "Genomgång av repetitionen",
-     "1zTw0N1Tgx7Km8vmf91_kcITNjGopT0Jq"
-    ]
-   ],
-   "3": [
-    [
-     "Genomgång av repetitionen",
-     "1qhNqxT6YGr_150G0owTIFaG5jnri6dgC"
-    ]
-   ],
-   "4": [
-    [
-     "Genomgång av repetitionen",
-     "1X4VhZibTiDqJ8pXL4IE46dPLaH1Esbmh"
-    ]
-   ],
-   "5": [
-    [
-     "Genomgång av repetitionen",
-     "1zBigH4R4yNQyQ7kv6O7T5glT4yH-pKOk"
-    ]
-   ]
-  },
-  "testuppgifter": {
-   "1": [
-    [
-     "Uppgifter till testet",
-     "1IkaENVKc4AGggPzooX4z6foYsnZucav0"
-    ]
-   ],
-   "2": [
-    [
-     "Uppgifter till testet",
-     "1sRm1_0JCzE-SS6ShSa_1nTQ1NAqqKv8i"
-    ]
-   ],
-   "3": [
-    [
-     "Uppgifter till testet",
-     "16unDwMpI7gRcQ1PEfdX-SPY5cvtE7qNj"
-    ]
-   ],
-   "4": [
-    [
-     "Uppgifter till testet",
-     "15b-V4qy3vmst_xIZr_WShM0TVa9f6fbu"
-    ]
-   ],
-   "5": [
-    [
-     "Uppgifter till testet",
-     "1-005Cf3jirHFIy5xXvnMb8PZkp0VC9Dr"
-    ]
-   ]
-  },
-  "repetitionsuppgifter": {
-   "1": [
-    [
-     "Uppgifter till repetitionen",
-     "1_84Qgy2ZyRwgevDcVoWGzdSpL-_m01Xo"
-    ]
-   ],
-   "2": [
-    [
-     "Uppgifter till repetitionen",
-     "1F6foecAOgy91lgQZ9mQfE5ak_tty-PI5"
-    ]
-   ],
-   "3": [
-    [
-     "Uppgifter till repetitionen",
-     "1IufoS5W_aUsas1v4TSvyyaberyTICrxa"
-    ]
-   ],
-   "4": [
-    [
-     "Uppgifter till repetitionen",
-     "1_KjH9ShSF2o_ymVQ04g5P_E8pMJG_s6E"
-    ]
-   ],
-   "5": [
-    [
-     "Uppgifter till repetitionen",
-     "1T6QDr_ZVG3szbPgSduz-V02eFm4Y4oV6"
-    ]
-   ]
-  },
-  "diagnosuppgifter": {
-   "1": [
-    [
-     "Uppgifter till diagnosen",
-     "1LAtdD1vohtlTq1FWXj4gXhxfIaOP-0ng"
-    ]
-   ],
-   "2": [
-    [
-     "Uppgifter till diagnosen",
-     "1LM1KQfcJxn3Ey470sW0ta3UauTVTys3I"
-    ]
-   ],
-   "3": [
-    [
-     "Uppgifter till diagnosen",
-     "19U35517GBfyEK0ISDINPl547I8dx6uBq"
-    ]
-   ],
-   "4": [
-    [
-     "Uppgifter till diagnosen",
-     "11x7M6XZsPrUsb58EE0_wIMxxRyCVACOL"
-    ]
-   ],
-   "5": [
-    [
-     "Uppgifter till diagnosen",
-     "1Dl4QWJN-vx54WhTtUZUnuWUkctWvRyL3"
-    ]
-   ]
-  },
-  "diagnos": {
-   "1": [
-    [
-     "Genomgång av diagnosen",
-     "15s-5fTRK66ba1yIZYrF0Kfv4BA1-iffM"
-    ]
-   ],
-   "2": [
-    [
-     "Genomgång av diagnosen",
-     "187WQJoTeuIHWEIuoCThbm4MY2MZHuLqo"
-    ]
-   ],
-   "3": [
-    [
-     "Genomgång av diagnosen",
-     "108m2d8Hpaul5p-bwj3egh3mf5x7cV5iI"
-    ]
-   ],
-   "4": [
-    [
-     "Genomgång av diagnosen",
-     "1Lmr6tDvtg7uh01wrriswCb2bCgXJ4xHM"
-    ]
-   ],
-   "5": [
-    [
-     "Genomgång av diagnosen",
-     "17ugo3LIFWAsAc65Ms9ye60mZeErar7KN"
-    ]
-   ]
-  },
-  "trygg-start": {
-   "1": [
-    [
-     "1.1 Naturliga tal",
-     "11ZPEI_S1utU-wM0A41zo7wz0ReDI6kTF"
-    ],
-    [
-     "1.2 Numeriska uttryck",
-     "1Jc2UZ66SY96E9bwNch3T8aSyMp5G6KiQ"
-    ],
-    [
-     "1.3 Hela tal",
-     "1ItHySSxwHyhv1sFrsOnwBrMJzHDOwk4o"
-    ],
-    [
-     "1.4 Rationella tal",
-     "14Se83OPTJSpvhoUEEdkJN1f6w8jKptlk"
-    ],
-    [
-     "1.5 Räkna med bråk",
-     "1roGbwEKzAUkOIbiBLTk3mJYaY3PkVtkN"
-    ],
-    [
-     "1.6 Multiplikation och division",
-     "1v8AFENF4ppezaWNv2O7WZjIV6X1KAsq6"
-    ],
-    [
-     "1.7 Division med stora och små tal",
-     "13W8GJjj6nBykQRFhmlLXPfudrAU1moXJ"
-    ],
-    [
-     "1.8 Avrundning och överslagsräkning",
-     "1ft3J7wGV93g_xvAcXpizsj-TsmcHwyu0"
-    ]
-   ],
-   "2": [
-    [
-     "2.1 Algebraiska uttryck",
-     "19u02b3mRikXrCMhNxj3ti1ckOiNjscnZ"
-    ],
-    [
-     "2.2 Mönster",
-     "1GW7l_5uf9SQQsst9L3M4kc7eUoRD1PBk"
-    ],
-    [
-     "2.3 Förenkling av uttryck",
-     "1adTHOPmPGfca1HT7odly14pD0ms9crnk"
-    ],
-    [
-     "2.4 Ekvationer",
-     "1jAlro7M79WBK-hSj8Ee880nC87un_UCl"
-    ],
-    [
-     "2.5 Problemlösning med ekvation",
-     "1S1sk8EN1iJqJ33f6HrXDh336oNtDHzOU"
-    ],
-    [
-     "2.6 Ekvationer med obekanta i båda leden",
-     "1t18fgt6_G3x9PGceQvXKw88cEt5uiPwp"
-    ]
-   ],
-   "3": [
-    [
-     "3.1 Prefix och enheter",
-     "1AE2wXoaWCaQrOCHnLEHpGkd5bSRO92ts"
-    ],
-    [
-     "3.2 Längd och skala",
-     "1_U6mTIvpeA4t_BIyhmwvjm11S_wshgHX"
-    ],
-    [
-     "3.3 Vinklar",
-     "1ZTifM1psRLRuJgOmDWgn0VxANFuhU0wR"
-    ],
-    [
-     "3.4 Vinkelsumma",
-     "1pm8u3hdgE32cA7i7ambk4ppA68fmJWqW"
-    ],
-    [
-     "3.5 Omkrets",
-     "1SZCnNkhGBwAVnAwDzd6zceebzPppQdER"
-    ],
-    [
-     "3.6 Area",
-     "1xAvQrg4s6saxhodEme02dm0ZmBE2CoYf"
-    ]
-   ],
-   "4": [
-    [
-     "4.1 Proportionalitet",
-     "1eQ9fz7HA2UH35UgNjJPN6DIJev1yJvA0"
-    ],
-    [
-     "4.2 Tid och rörelse",
-     "1EPhGTXoSTss7s9aruBOcYqqmLtdF0yoD"
-    ],
-    [
-     "4.3 Sträcka, tid och hastighet",
-     "1wKYDN8Iho60fbltbeNEgwtXOO-jwXWjr"
-    ],
-    [
-     "4.4 Andel i bråkform",
-     "1Yrzh62jFUVvk9WMiiUkgoS-xlxXZNixS"
-    ],
-    [
-     "4.5 Andel i procentform (I)",
-     "1P1sUwV2oen_Od6u95rOlOCj93PFj6aj3"
-    ],
-    [
-     "4.6 Andel i procentform (II)",
-     "1wXUuvGlQWzc87LD4-aDvrpXkeHI103LK"
-    ],
-    [
-     "4.7 Hur stor är delen",
-     "1P35SN20OFjImtJ_VuTo1d49MIuWjXMY2"
-    ]
-   ],
-   "5": [
-    [
-     "5.1 Sannolikhet",
-     "1TNVDLl_7GdmheDX4w3jXIp7Tw6_pHrZ3"
-    ],
-    [
-     "5.2 Tabeller och diagram",
-     "1Xf2utMa_Bj1csl_N1rJN5JWQD-CEi8HK"
-    ],
-    [
-     "5.3 Relativ frekvens",
-     "1vWS4SbD2lP9374h8J1gtWGdI0qN2HTik"
-    ],
-    [
-     "5.4 Lägesmått",
-     "129h7WuMj2usEiK1BIeGp5xyvWRLWZUWC"
-    ],
-    [
-     "5.5 Lägesmått från tabeller och diagram",
-     "1glWNTWU3e9yd4FTxeuZhaQtGxmpBd0-6"
-    ],
-    [
-     "5.6 Cirkeldiagram",
-     "1hG1Gg4pSA1TY3m0riLex3wj2rwJIXUF_"
-    ]
-   ]
-  }
- },
- "8": {
-  "kapitel": [
-   [
-    "1",
-    "Tal"
-   ],
-   [
-    "2",
-    "Samband och förändring"
-   ],
-   [
-    "3",
-    "Geometri"
-   ],
-   [
-    "4",
-    "Algebra"
-   ],
-   [
-    "5",
-    "Statistik och sannolikhet"
-   ]
-  ],
-  "problemlosning": {
-   "1": [
-    [
-     "1.1 Räkna med bråk",
-     "1OodoOUtWveuWLsunnhlCvRTKUfOmYHoH"
-    ],
-    [
-     "1.2 Addition och subtraktion av bråk",
-     "138C01HMC5lDoYrBaD1qQQULdcyP000qh"
-    ],
-    [
-     "1.3 Multiplikation av bråk",
-     "1Sgd67vfD7qyX3KKV6H94JIwM-IIkqVZd"
-    ],
-    [
-     "1.4 Division av bråk",
-     "1H_F_pY8VQGbmUx_ihZJQg6V0MSBtyf2o"
-    ],
-    [
-     "1.5 Potenser",
-     "1-ZSSfRCZLqS_Pllx73GQtiYHsafpCr_B"
-    ],
-    [
-     "1.6 Tiopotenser",
-     "1HqVoyr9aeetPjTmJ6rVOfiJ1BEfo0YWP"
-    ]
-   ],
-   "2": [
-    [
-     "2.1 Andelen",
-     "1P_8TgzomXuXXeqjr6QFQia_m9brcOul7"
-    ],
-    [
-     "2.2 Jämförelser och förändringar",
-     "1QH00IPdvpuexYBoBrxmYgIlbHY0OL2yb"
-    ],
-    [
-     "2.3 Det hela",
-     "1vu81D68BzJukzXEgIpWXpXuc6ximqa9c"
-    ],
-    [
-     "2.4 Delen",
-     "1-qslFQtleFnJ0i81Qw-ocPSp1Sic-dcg"
-    ],
-    [
-     "2.5 Ränta",
-     "1jULUsK751yyJpoJ2oGJr0-zOLnuUPniQ"
-    ]
-   ],
-   "3": [
-    [
-     "3.1 Omkrets och area",
-     "1t_Sg_pxCEbIuI5FTc2AXpC36O2ADWteF"
-    ],
-    [
-     "3.2 Cirkelns area",
-     "1v5_FAt0htPWL2DG9ooHdfTlt1yUrMjOt"
-    ],
-    [
-     "3.3 Volym och begränsningsarea",
-     "1chSW2O2IPcXr_Dpg0QB8Rp6AKMqUJ99E"
-    ],
-    [
-     "3.4 Enheter för volym",
-     "1HO8--TyUWJRH-qZJ76gekXWHLJQY9919"
-    ],
-    [
-     "3.5 Prisma och pyramid",
-     "1Syb5bT_iD1Sl4pgAsyJL7VB1pw2p6jaZ"
-    ],
-    [
-     "3.6 Cylinder, kon och klot",
-     "1zrnplbL7yAURZKkKWpoiBi8luB8cT8E0"
-    ]
-   ],
-   "4": [
-    [
-     "4.1 Algebraiska uttryck",
-     "17zTatUHyzx_w6HH2nHWmSPfYPv8GFkfr"
-    ],
-    [
-     "4.2 Mönster",
-     "10iyOot_bSIJafm9d_f-Rmr1vDOvcJ0Ey"
-    ],
-    [
-     "4.3 Uttryck med parenteser",
-     "1Mv3Xi40qmxrEWrMrQRYC3HuQsUlSE_t9"
-    ],
-    [
-     "4.4 Multiplikation av parenteser",
-     "1VONGSRzgpsVbmydO47pxZaYxgrSuigAN"
-    ],
-    [
-     "4.5 Uttryck med potenser",
-     "19a5MHiY6AwOG5EJ-_iOsqlXxVZ_-avKT"
-    ],
-    [
-     "4.6 Ekvationer",
-     "1zVDSAqJ78wtO6t8wL7aMQ6ECvY-2VWsy"
-    ],
-    [
-     "4.7 Ekvationer med parenteser",
-     "1Pq-ApA2T-axTmksWHa6Gypk1XCs_IFST"
-    ],
-    [
-     "4.8 Problemlösning med ekvationer",
-     "162-1UU-9g_ywjoNGlpSzmwi7R5V1zkfN"
-    ]
-   ],
-   "5": [
-    [
-     "5.1 Hur stor är sannolikheten",
-     "1YHhk6pguwZY71jkxxPLxjJK5cxk7Qcm6"
-    ],
-    [
-     "5.2 Oberoende och beroende händelser",
-     "1Zs7FxaGJJMu8jjKH3VOCwZKhKOqQgAAd"
-    ],
-    [
-     "5.3 Kombinatorik",
-     "1RCTJmAZBsmKZRFeD-nfPEwD0HDPF0e3T"
-    ],
-    [
-     "5.4 Tabeller och diagram",
-     "11mG0fyyAx-_rFUxJIMbvS2hFueExJJbU"
-    ]
-   ]
-  },
-  "test": {
-   "1": [
-    [
-     "Genomgång av testet",
-     "1n857nijHkq_0a4QXrn2IOggHbMy8OF-Q"
-    ]
-   ],
-   "2": [
-    [
-     "Genomgång av testet",
-     "1cmWTppuCEyjz3WckKG1yfECOw01xqT2_"
-    ]
-   ],
-   "3": [
-    [
-     "Genomgång av testet",
-     "1h3Q5-hCLlaUtkCVp5W7f8XCnu8q4AO1Y"
-    ]
-   ],
-   "4": [
-    [
-     "Genomgång av testet",
-     "1DpeOfyz0j4t599NElTtsh1XgHvEg9NKm"
-    ]
-   ],
-   "5": [
-    [
-     "Genomgång av testet",
-     "1dWCfH4ui_Z2EXOvIt72VxMSsnm3wfk5_"
-    ]
-   ]
-  },
-  "repetition": {
-   "1": [
-    [
-     "Genomgång av repetitionen",
-     "1IgUUGSTU8kir0vGGynaeqlsrlTX_sGMY"
-    ]
-   ],
-   "2": [
-    [
-     "Genomgång av repetitionen",
-     "1RUwzrtFzWYOxRI_v3Dri0aSd8nAa5Zm1"
-    ]
-   ],
-   "3": [
-    [
-     "Genomgång av repetitionen",
-     "1XdNBKa1CZ3bHoKZGOk5tzcuMgl9ieS5z"
-    ]
-   ],
-   "4": [
-    [
-     "Genomgång av repetitionen",
-     "1rcubV90mS29eiyi806LcTibaLqv8lYmN"
-    ]
-   ],
-   "5": [
-    [
-     "Genomgång av repetitionen",
-     "1Fm51gzlKrxCeRZLH8WxmqcAjNtcF4pJh"
-    ]
-   ]
-  },
-  "tillbakablick": {
-   "1": [
-    [
-     "1.1 Räkna med bråk",
-     "1SUOXC3JGOLxZiUdGFEVMnUF0kQkpKM8W"
-    ],
-    [
-     "1.2 Addition och subtraktion av bråk",
-     "1wqKcEL7Ey252fSGK0EWcSiCTKk73zjwa"
-    ],
-    [
-     "1.3 Multiplikation av bråk",
-     "1bqV_N6pw4YeQ64_P1ppbwjXBfBiWa8y4"
-    ],
-    [
-     "1.4 Division av bråk",
-     "1VxD8hFOkQAH2shv0cuOvzn8Kt64ByApa"
-    ],
-    [
-     "1.5 Potenser",
-     "1d9mxVL3XctRAQ1TGfS6B9iG99BOrG8hK"
-    ],
-    [
-     "1.6 Tiopotenser",
-     "1mVnIejJM_59TUscBmFtUKcB5H1Ql3Wj7"
-    ]
-   ],
-   "2": [
-    [
-     "2.1 Andelen",
-     "1PrcgG670mSoNhBmSMOteDyXgXLIBjUjE"
-    ],
-    [
-     "2.2 Jämförelser och förändringar",
-     "1LCQVNyBeQfrv08LmnIqqOPyEZIn0w6iT"
-    ],
-    [
-     "2.3 Det hela",
-     "1YILoz08hvvj0X79TCINef3zA0b2FdPeS"
-    ],
-    [
-     "2.4 Delen",
-     "1PDO82ZEu2PiOWhCQWW-41Y49UDJ5Pi9w"
-    ],
-    [
-     "2.5 Ränta",
-     "1fYOkdmwYLhPVQryge71RSgyO6a8r_NLn"
-    ]
-   ],
-   "3": [
-    [
-     "3.1 Omkrets och area",
-     "158fnf2cwlMIQiLuF5s3tQhHyAGHiCvU_"
-    ],
-    [
-     "3.2 Cirkelns area",
-     "1SemHi9MbA6hfntmXVTuQvK6cJQXv2BhK"
-    ],
-    [
-     "3.3 Volym och begränsningsarea",
-     "1WySIvGl_SprWLOFW4npbRw_e1zhawjcn"
-    ],
-    [
-     "3.4 Enheter för volym",
-     "1mQh3F0IEsVJAqX44sn7ywNa4AbNHZUrU"
-    ],
-    [
-     "3.5 Prisma och pyramid",
-     "14JOzNtZD9HlNgzSaLJ1WNYVbUNKid8LZ"
-    ],
-    [
-     "3.6 Cylinder, kon och klot",
-     "1K5d8tT0025DHzkePRqRSLCk4jhMLAk6O"
-    ]
-   ],
-   "4": [
-    [
-     "4.1 Algebraiska uttryck",
-     "1D9ZJEEWJiwfUDCBZXKUjiEGNW4sT1vfz"
-    ],
-    [
-     "4.2 Mönster",
-     "193GoWo0cTJyGBNNMvVjyhx1V0qZIIebX"
-    ],
-    [
-     "4.3 Uttryck med parenteser",
-     "1Ekfmq13PYmrhQmpmNYHyD3HxIA6dHE5l"
-    ],
-    [
-     "4.4 Multiplikation av parenteser",
-     "1Z500OclLTFV42i7_LgyWQy3uUeV2x-EX"
-    ],
-    [
-     "4.5 Uttryck med potenser",
-     "135BptAZWI3JMmrZHr62Uwbk75955HVbH"
-    ],
-    [
-     "4.6 Ekvationer",
-     "1ZjFpFpO5-iVzHvw6rxl_u5FLUS4NJcMA"
-    ],
-    [
-     "4.7 Ekvationer med parenteser",
-     "1hyU_v4McFq9YByY6HRuClfyEx5neHUdN"
-    ],
-    [
-     "4.8 Problemlösning med ekvationer",
-     "12o4beTrBnKS-eJCVXswTQFmR8e0yxHek"
-    ]
-   ],
-   "5": [
-    [
-     "5.1 Hur stor är sannolikheten",
-     "1D6tL8PHsFlygQ8y-P5U-cpbeuTIr7yhv"
-    ],
-    [
-     "5.2 Oberoende och beroende händelser",
-     "1hoqmKgu_Xn5Yx5Pv4fS6iOHHblNoDiV7"
-    ],
-    [
-     "5.3 Kombinatorik",
-     "13PT5TBsdFoERGWpXdqaDJBH4DaZU6-ZO"
-    ],
-    [
-     "5.4 Tabeller och diagram",
-     "1F4I4lcjtl-51aN6kRg-iCZvAAE1sNSvM"
-    ]
-   ]
-  },
-  "testuppgifter": {
-   "1": [
-    [
-     "Uppgifter till testet",
-     "1dkw_2tNOutvtMoRw8L95XfDDesE5Cemz"
-    ]
-   ],
-   "2": [
-    [
-     "Uppgifter till testet",
-     "1JuMzZiTbbCrme5j95yUix6g2YTGW3DCm"
-    ]
-   ],
-   "3": [
-    [
-     "Uppgifter till testet",
-     "1Ns5zmeW0zqbOGBb8IyTIbznTD1ZjvBiu"
-    ]
-   ],
-   "4": [
-    [
-     "Uppgifter till testet",
-     "1ATOQ4mljWBxyQe9Sw6eLnVeBtj4bgjxY"
-    ]
-   ],
-   "5": [
-    [
-     "Uppgifter till testet",
-     "1V21Y-Pn0PVN6R-YmOLtculmgVBIDlxeg"
-    ]
-   ]
-  },
-  "repetitionsuppgifter": {
-   "1": [
-    [
-     "Uppgifter till repetitionen",
-     "1dY-dxtm2sgkgQdLeS60EfoebMrmpmy0M"
-    ]
-   ],
-   "2": [
-    [
-     "Uppgifter till repetitionen",
-     "1_UdEBAgT5_VXCtT3wVMYaPb0LR_ELzsF"
-    ]
-   ],
-   "3": [
-    [
-     "Uppgifter till repetitionen",
-     "16IoNfyw5LmVxcLUYo1ZjFSN4HFumIFl-"
-    ]
-   ],
-   "4": [
-    [
-     "Uppgifter till repetitionen",
-     "1-zMp5zdBkYPMMPSY7uhQN7kaoWgm49bT"
-    ]
-   ],
-   "5": [
-    [
-     "Uppgifter till repetitionen",
-     "1JI2UlVy9hzstJHJI2w70TGMyw9UcMTpH"
-    ]
-   ]
-  },
-  "diagnosuppgifter": {
-   "1": [
-    [
-     "Uppgifter till diagnosen",
-     "1knef9MJXpXftfPoedXnjkoey0h2YDxMs"
-    ]
-   ],
-   "2": [
-    [
-     "Uppgifter till diagnosen",
-     "1JJRNUbzv69KtZAcajsUv7RuRpvBIxjDL"
-    ]
-   ],
-   "3": [
-    [
-     "Uppgifter till diagnosen",
-     "1mRjCRA7sn8KBsukdRkX6mo1RPGYpFwks"
-    ]
-   ],
-   "4": [
-    [
-     "Uppgifter till diagnosen",
-     "1migHszc5Z7OWaUrwYQNyuo2r988_PNdo"
-    ]
-   ],
-   "5": [
-    [
-     "Uppgifter till diagnosen",
-     "1Jo16wqTyCutHWd_YmNRWJILAHxrt8_h7"
-    ]
-   ]
-  },
-  "trygg-start": {
-   "1": [
-    [
-     "1.1 Räkna med bråk",
-     "1HbZYpOGXzyV8VgpRMPYi7trbJPLzjAE1"
-    ],
-    [
-     "1.2 Addition och subtraktion av bråk",
-     "1RwpM2Hb2eHgUEKAfKqybmM1ZIN9TPlbZ"
-    ],
-    [
-     "1.3 Multiplikation av bråk",
-     "1pzladsyKEtti_IRI0IplnKeaQ2GvGVeV"
-    ],
-    [
-     "1.4 Division av bråk",
-     "1Mz1l39ysVaMGNd1AuFhz4QRH8TCEcBFY"
-    ],
-    [
-     "1.5 Potenser",
-     "1UEZmelOjlxmPgiDxGKk6-RwFuLUt5lk7"
-    ],
-    [
-     "1.6 Tiopotenser",
-     "1X2Uj5_ZT4sncVaWHZ6QujHshKUN36vjq"
-    ]
-   ],
-   "2": [
-    [
-     "2.1 Andelen",
-     "1HfB2blZlQavFmLQ6VPUXBrygyNebkR0U"
-    ],
-    [
-     "2.2 Jämförelser och förändringar",
-     "117k0RO21kMkZqnBcUOLy7uWFbTXxLi0F"
-    ],
-    [
-     "2.3 Det hela",
-     "15Ag1HJ-0ZsoIfQZ-Ew5j3RGSCH150e_Q"
-    ],
-    [
-     "2.4 Delen",
-     "1WdfkelSmfB6sc4Bx2IUgW4cC6YXGI9wU"
-    ],
-    [
-     "2.5 Ränta",
-     "1WQbHn0_vdyDWnfj7AsClEXTGav1soFFL"
-    ]
-   ],
-   "3": [
-    [
-     "3.1 Omkrets och area",
-     "1bu97fLil6LzJuhDNygNGR4fnG1dQXz6L"
-    ],
-    [
-     "3.2 Cirkelns area",
-     "1a17Gy3XzwHK9DUMCLLD9r9wccJDt3buL"
-    ],
-    [
-     "3.3 Volym och begränsningsarea",
-     "1_JlamBCfTHcxdCl71NtpdqbPJVVa040L"
-    ],
-    [
-     "3.4 Enheter för volym",
-     "1PBE6I1chyHLIJl9uG6DXed1pfVhGZcTY"
-    ],
-    [
-     "3.5 Prisma och pyramid",
-     "1ezrq2a6NwpaEKzLhmBPbjNPZG-AVueP7"
-    ],
-    [
-     "3.6 Cylinder, kon och klot",
-     "1zNlz82MICFPkOeS7mTeAEe39K_oyYsnl"
-    ]
-   ],
-   "4": [
-    [
-     "4.1 Algebraiska uttryck",
-     "19dWeKBKK2nMeOfr2c5dfj27pB_bNL7T6"
-    ],
-    [
-     "4.2 Mönster",
-     "16xRchUyXeoqAA0VmYbHz1Jy8oq6sT7HO"
-    ],
-    [
-     "4.3 Uttryck med parenteser",
-     "1mD6njdZWAYVVQSDKGAkSuO74FxRx5gem"
-    ],
-    [
-     "4.4 Multiplikation av parenteser",
-     "1Dz57sPrYZZPt6E4ucFWBKahaGx-NfoNS"
-    ],
-    [
-     "4.5 Uttryck med potenser",
-     "1a9GWiSwbkvuuZGaqDRemSudia9-aXH63"
-    ],
-    [
-     "4.6 Ekvationer",
-     "1uzVvldZqrAQlMJ4UL19PWlA_8MQWH9fY"
-    ],
-    [
-     "4.7 Ekvationer med parenteser",
-     "1W0Pbi0e1aWcK8VQ_1I0Ow27gGKFLhpXM"
-    ],
-    [
-     "4.8 Problemlösning med ekvationer",
-     "1-BcBwugqcXXcPZwExpD_uPXFQdZ68u9I"
-    ]
-   ],
-   "5": [
-    [
-     "5.1 Hur stor är sannolikheten",
-     "1AMbOFJkgRGqWPjljjhZeUoiF21RJvCeo"
-    ],
-    [
-     "5.2 Oberoende och beroende händelser",
-     "1vPpJ__4hG9HOAEByny7dcn8GQmmwvwqc"
-    ],
-    [
-     "5.3 Kombinatorik",
-     "1Xv5vTBkFlVzMt65Yk4qzkLDnyPlUD_wF"
-    ],
-    [
-     "5.4 Tabeller och diagram",
-     "1ckUFALXHUoR6ui86sm9zBf2ko52DZknZ"
-    ]
-   ]
-  },
-  "trygg-start-extra": {
-   "1": [
-    [
-     "Övningsprov kapitel 1",
-     "1wq5ZRb9YGAkt78pv3a1VGu7R7MNgcqJo"
-    ]
-   ]
-  },
-  "diagnos": {
-   "1": [
-    [
-     "Genomgång av diagnosen",
-     "1MKsbA8iAVhB7mjK5B_NnRBw3KdmRAbeH"
-    ]
-   ],
-   "2": [
-    [
-     "Genomgång av diagnosen",
-     "1o42icR3ytF-iXpVyQ50X92qycJreLkbP"
-    ]
-   ],
-   "3": [
-    [
-     "Genomgång av diagnosen",
-     "1Jo_FN2rmPEv12fMc-VU9HQl-CvuJ6Tcn"
-    ]
-   ],
-   "4": [
-    [
-     "Genomgång av diagnosen",
-     "1FATelRoy0CpaaC3YACT8NtSLZ6QOH6AP"
-    ]
-   ],
-   "5": [
-    [
-     "Genomgång av diagnosen",
-     "1LgVY9WLxF8UXxM-4pumhIiarTPdfaFy7"
-    ]
-   ]
-  }
- },
- "9": {
-  "kapitel": [
-   [
-    "1",
-    "Tal"
-   ],
-   [
-    "2",
-    "Samband och förändring"
-   ],
-   [
-    "3",
-    "Algebra"
-   ],
-   [
-    "4",
-    "Geometri"
-   ]
-  ],
-  "problemlosning": {
-   "1": [
-    [
-     "1.1 Tal och beräkningar",
-     "1uT8hYVYjdYvqAfwM3DH2VcEGiId-TMVw"
-    ],
-    [
-     "1.2 Räkna med bråk",
-     "1e619bYkYJUjx_Or282ayGXcqtMC_XiG5"
-    ],
-    [
-     "1.3 Räkna med negativa tal",
-     "10bHT61sybIHBzOx17HouQQV5JBvWEgJr"
-    ],
-    [
-     "1.4 Räkna med potenser",
-     "1y_YDiPxJ9TTUlpyyhv52GuADNhNRElIC"
-    ],
-    [
-     "1.5 Små tal och tiopotenser",
-     "1p4I-nKuXAcflqdTVnw002_RJEPSU7QwK"
-    ],
-    [
-     "1.6 Räkna med tal i grundpotensform",
-     "1KUJxGF4gtoWgHpZFmbhFsoDhVTgeTHAQ"
-    ],
-    [
-     "1.7 Kvadrater och kvadratrötter",
-     "1tKtVnHqzJ2KyVFpUUxDWTakuMAOsjnIR"
-    ]
-   ],
-   "2": [
-    [
-     "2.1 Procent",
-     "1xci8s0Dz8USkDwsm34szSIoF7p3x8KOz"
-    ],
-    [
-     "2.2 Förändringsfaktor",
-     "1o-iAvwDGoTB2dRvBSzP8vf4wA8XVDlP4"
-    ],
-    [
-     "2.3 Funktioner",
-     "1-Uy5Ddh9KKGSY3PV3JDYsNailfJRuYHO"
-    ],
-    [
-     "2.4 Linjära funktioner",
-     "10Gwcj3ddKDPrv2S1VF2c5MhLiPgKRxai"
-    ],
-    [
-     "2.5 Tillämpning av linjära funktioner",
-     "161fFAtF3O9xOMkKQR67FKPNKqciu7OAq"
-    ]
-   ],
-   "3": [
-    [
-     "3.1 Uttryck och mönster",
-     "1EwcavIQrnRWiCDJKRw_vS9fXrurrg6VS"
-    ],
-    [
-     "3.2 Förenkling av uttryck",
-     "1F60Uhvt6tLUr1RQxnk7otjFE6yrI804U"
-    ],
-    [
-     "3.3 Ekvationer",
-     "1VyDjVPP1pvcOm_DCCLMPNH8F0yMPd0NL"
-    ],
-    [
-     "3.4 Procent och ekvationer",
-     "1b-2AzAK7xk1OoGW_jjfz2aafXtBqawz7"
+      "Albanska",
+      "1F53D4xg2UIcVuVoqmE_M6AEHRe0AVu6T",
+      "al"
     ],
     [
-     "3.5 Proportion",
-     "1Vp36z4sxWqpMAi_F5Wzt_CpRA9qXC4Wn"
+      "Arabiska",
+      "1_VJSuXFX66avZ_y2ojW9b2s-UsfNgaEV",
+      "arab"
     ],
     [
-     "3.6 Ekvationssystem",
-     "1Nt-vqDWEUY3uVVDghRmHdMD3PGeMjleW"
-    ]
-   ],
-   "4": [
-    [
-     "4.1 Spegling och symmetri",
-     "1F3I3pCXlj9AFCW_gcBWx8Q3MfcwGyQ3-"
-    ],
-    [
-     "4.2 Skala",
-     "1lVE3a5U51uQf_kmv6EZApZH6gKPgDi1F"
-    ],
-    [
-     "4.3 Ekvationer med flera nämnare",
-     "1U7Ok2PyJ1PCa5TNekXDOs-B_XuPHn33S"
-    ],
-    [
-     "4.4 Likformighet",
-     "1mF5aOcA_MflrvXa4QMCEr6_ZcHrF4wrG"
-    ],
-    [
-     "4.5 Pythagoras sats",
-     "1aIK56qRB5LVXUFaHbPyIr48HPhiGQQXh"
-    ]
-   ]
-  },
-  "test": {
-   "1": [
-    [
-     "Genomgång av testet",
-     "1ZjRaO-y984JLNa8m1KzA_bNZICIjGE4t"
-    ]
-   ],
-   "2": [
-    [
-     "Genomgång av testet",
-     "17eAn961r0ephSJcaOC-soEcccpU8qytK"
-    ]
-   ],
-   "3": [
-    [
-     "Genomgång av testet",
-     "1vqru-yvqXS59uZAEl7IIByf39lyk7tUr"
-    ]
-   ],
-   "4": [
-    [
-     "Genomgång av testet",
-     "14NipVR3q8sFofAlHO54rDQA7FY1SmMBk"
-    ]
-   ]
-  },
-  "repetition": {
-   "1": [
-    [
-     "Genomgång av repetitionen",
-     "1fT9xaRYNouWljieAjJlkOChaLlDzuc93"
-    ]
-   ],
-   "2": [
-    [
-     "Genomgång av repetitionen",
-     "1gcxa6NShdvqGVbnscIQwVFb2gdOlhhOA"
-    ]
-   ],
-   "3": [
-    [
-     "Genomgång av repetitionen",
-     "1ybGmRWCT2mWpcG61xehU8JGqIfa4-vJR"
-    ]
-   ],
-   "4": [
-    [
-     "Genomgång av repetitionen",
-     "1VUhiS8K4llm_M94dJsty3kd3ndoGS6ej"
-    ]
-   ]
-  },
-  "tillbakablick": {
-   "1": [
-    [
-     "1.1 Tal och beräkningar",
-     "11TOptj3iIhA4dyjIOF5UEO7hK1nH4Otw"
-    ],
-    [
-     "1.2 Räkna med bråk",
-     "1Y_AxlgCsFJLCxXEUB1jrOH66NI2J-7W9"
-    ],
-    [
-     "1.3 Räkna med negativa tal",
-     "1njBjNhVd3bwQLGXbaPQjIig4P_Qho355"
-    ],
-    [
-     "1.4 Räkna med potenser",
-     "1puzAdaa2RawFCm4uGAHmWTaf1byeTnmf"
-    ],
-    [
-     "1.5 Små tal och tiopotenser",
-     "1fOl6lWNQ5xfgkH5dtrdeItLMrfLphZbi"
-    ],
-    [
-     "1.6 Räkna med tal i grundpotensform",
-     "1eycIkPA7gtb47APnBUwUQbikLrmqt6lk"
-    ],
-    [
-     "1.7 Kvadrater och kvadratrötter",
-     "17ZZ3-_W7FO31dYA12mkJ_5Q4FVOPP7gV"
-    ]
-   ],
-   "2": [
-    [
-     "2.1 Procent",
-     "1R2U45LBlIXnv42Xj-pPEyUdb7uEdo-mB"
-    ],
-    [
-     "2.2 Förändringsfaktor",
-     "1VoG4_boWk9pGfs8GPdBWlttxGlY-6azN"
-    ],
-    [
-     "2.3 Funktioner",
-     "1CHsz2vRQNdS6T9e6HJVlduCR13oH2aNb"
-    ],
-    [
-     "2.4 Linjära funktioner",
-     "1iqX0oM3lmjrCshPa6FXWexzKszBPdBCw"
-    ],
-    [
-     "2.5 Tillämpning av linjära funktioner",
-     "16HiAKbssc-upJNqyiQLejOdrDnUkTNWN"
-    ]
-   ],
-   "3": [
-    [
-     "3.1 Uttryck och mönster",
-     "1qRiwj_57Y7DT0HDC9nTUy8n5aHmBSYMZ"
-    ],
-    [
-     "3.2 Förenkling av uttryck",
-     "1YtuE2m2Q9SX51z2FQxPHyJdVk7mPf40Z"
-    ],
-    [
-     "3.3 Ekvationer",
-     "1o1x3HiZ0XTelS7J27joN-iHN780GgceO"
-    ],
-    [
-     "3.4 Procent och ekvationer",
-     "1bK8IgT8ccWJUHiFTq2GoxFuOJbkh8z_r"
-    ],
-    [
-     "3.5 Proportion",
-     "1GO2Eztl3O2O0eZ2setw_hWidy_4jL9pZ"
-    ],
-    [
-     "3.6 Ekvationssystem",
-     "17WuJfWde1Pc8dS9ZmTHgvtQiOOKZfh8u"
-    ]
-   ],
-   "4": [
-    [
-     "4.1 Spegling och symmetri",
-     "1UROs-vBZDiW4n3Ka_247uWLTZQ1Yqpyc"
+      "Bosniska",
+      "1CBvDIKhMNMmZo2KTdB8g2v5G3DLRh-If",
+      "ba"
     ],
     [
-     "4.2 Skala",
-     "1BKcJzmGzKsGLDQv_Lks8KqxaJrgO-B2J"
+      "Dari",
+      "1iSq_SyeunXGng7j9m8u453floUTqBg5k",
+      "af"
     ],
     [
-     "4.3 Ekvationer med flera nämnare",
-     "1DIvaw7EqxzTHnKi-BFlgQoKpYyXaFO6z"
+      "Engelska",
+      "1KRBJSBgtG4vYwduH3hxKoKicxtTiirH6",
+      "gb"
     ],
     [
-     "4.4 Likformighet",
-     "1azOnByuWHKHBdqOfM6CbpbWv8E4csuhS"
+      "Pashto",
+      "13jSZIqQLMUBpPex8pIPUUoQ5L4ZJ7MFA",
+      "af"
     ],
     [
-     "4.5 Pythagoras sats",
-     "1FJGHR3xTtzkvfEF3Kr0iJAZeqQg4BmPH"
-    ]
-   ]
-  },
-  "testuppgifter": {
-   "1": [
-    [
-     "Uppgifter till testet",
-     "1QduNv8BBlLcd2-yZHUUKEqcaF_LI5efV"
-    ]
-   ],
-   "2": [
-    [
-     "Uppgifter till testet",
-     "1hKOEHpBU0q0JIy1mdKIwhWfX2nIZr3dJ"
-    ]
-   ],
-   "3": [
-    [
-     "Uppgifter till testet",
-     "1KRNKBtuu-J_ejuU2VzkkxbMw4iehacjt"
-    ]
-   ],
-   "4": [
-    [
-     "Uppgifter till testet",
-     "1V0mpqmCx6_qv6xPhUjEbeNFv5OYe7VpW"
-    ]
-   ]
-  },
-  "repetitionsuppgifter": {
-   "1": [
-    [
-     "Uppgifter till repetitionen",
-     "17vYokEVpxzbtnoo2OxQvmVGpkydyX26f"
-    ]
-   ],
-   "2": [
-    [
-     "Uppgifter till repetitionen",
-     "1zB2xJs_GhtoL0_30yv0VqcOf7Nj7FxT6"
-    ]
-   ],
-   "3": [
-    [
-     "Uppgifter till repetitionen",
-     "143MTEkZvT9DMA4ykLL1QI0W99FLqgRMT"
-    ]
-   ],
-   "4": [
-    [
-     "Uppgifter till repetitionen",
-     "1423PJXI7CXdQg_nC5wbz-T19pZ_RgZYT"
-    ]
-   ]
-  },
-  "diagnosuppgifter": {
-   "1": [
-    [
-     "Uppgifter till diagnosen",
-     "1pfRsjqKGqu9EWPUiCGPNJbW-uiknAcD3"
-    ]
-   ],
-   "2": [
-    [
-     "Uppgifter till diagnosen",
-     "1I0AtrcskEl0HhQvr-k6xmLz4D1mP93vj"
-    ]
-   ],
-   "3": [
-    [
-     "Uppgifter till diagnosen",
-     "1CeOHmz31e0GHonkyAlD627yzCg3VFQyp"
-    ]
-   ],
-   "4": [
-    [
-     "Uppgifter till diagnosen",
-     "1CAaR0snQBMz1u8b3l1QB51QTiV7ZF_jy"
-    ]
-   ]
-  },
-  "trygg-start": {
-   "1": [
-    [
-     "1.1 Tal och beräkningar",
-     "1foEATumFZc2VDf7Iwi7E0nIiQLUB-0wC"
-    ],
-    [
-     "1.2 Räkna med bråk",
-     "1dbhhkcVUqr7zgHUL5x8r2_dok7vNUUsJ"
-    ],
-    [
-     "1.3 Räkna med negativa tal",
-     "1AY34In8oCrl-kwTgKcZcy11ugMxTwPPr"
-    ],
-    [
-     "1.4 Räkna med potenser",
-     "1oFQrpjQ-rcVJINYzH1ZtoyTZ0U69xavx"
+      "Persiska",
+      "1JK_X7b_0674t6IxEERyoX418cL5jG2jX",
+      "ir"
     ],
     [
-     "1.5 Små tal och tiopotenser",
-     "1VM_MvFFCAYOA0_JB6kl2z2ipUQt7qR8t"
+      "Romani chib arli",
+      "1dQB8rqBwbLW5gxUpttLcXTabLxWlu02Z",
+      "rom"
     ],
     [
-     "1.6 Räkna med tal i grundpotensform",
-     "1fKkPuaXOSyui-vlYUx8sNHINYdfZ9Xrs"
+      "Somaliska",
+      "17BetSpntMUbsMa_RfzW9Va8v8YU9Y9oV",
+      "so"
     ],
     [
-     "1.7 Kvadrater och kvadratrötter",
-     "1KeMmwrI671pBuM2uFKA5ZPTn4PHfF-Cm"
-    ]
-   ],
-   "2": [
-    [
-     "2.1 Procent",
-     "18OSCXMxcOlFpSgSCLhgWL4QRw87Bq0yp"
-    ],
-    [
-     "2.2 Förändringsfaktor",
-     "1w8nY_KgJr0_bnuci8XVBSXfb0znp5c0z"
-    ],
-    [
-     "2.3 Funktioner",
-     "1AlTj5C_nf-R4f-fD8jnZTdnmU13By7zi"
-    ],
-    [
-     "2.4 Linjära funktioner",
-     "1ajh6xcUxHErIja8NzIIdSEs7ypVaXg-q"
-    ],
-    [
-     "2.5 Tillämpning av linjära funktioner",
-     "1l9BLIk29tn1IxfBCKxoxoNobI4DsZh0u"
-    ]
-   ],
-   "3": [
-    [
-     "3.1 Uttryck och mönster",
-     "1fv248_4owxGin0fpbkCFZ5QwwToyp7Bz"
-    ],
-    [
-     "3.2 Förenkling av uttryck",
-     "1yWluxMJJu5CKSt0WMI8dPXZwOGPh-I3H"
-    ],
-    [
-     "3.3 Ekvationer",
-     "1BgDK8xRejujUSdMpG_skSMRSPk75zUba"
+      "Spanska",
+      "1lukOyKaHCXXmUMqm9gSFfx8eUhnLx8V2",
+      "es"
     ],
     [
-     "3.4 Procent och ekvationer",
-     "1eKG5XoL5bllMhM51SKRPNfON-r5Eqj5b"
+      "Sydkurdiska",
+      "18F3K1n00Z8iDWz-YkGzmEnEvknXcq16X",
+      "ku"
     ],
     [
-     "3.5 Proportion",
-     "1W9-IQVQyo2ppUYePDiOnPOuyo60Sp8Qt"
+      "Turkiska",
+      "1GB8GSILPf3pJczru5aodhiTugzc-wlDG",
+      "tr"
     ],
     [
-     "3.6 Ekvationssystem",
-     "1H-3A48MVnXo_9B7ZcnV2U1Jr3J6-UhKy"
-    ]
-   ],
-   "4": [
-    [
-     "4.1 Spegling och symmetri",
-     "18bFgzD66BinLmNJUVAKB6bPLdkQMlcWu"
-    ],
-    [
-     "4.2 Skala",
-     "1tqjgaaLjBnkLcFFG6K_w4lotvxP7B5vA"
-    ],
-    [
-     "4.3 Ekvationer med flera nämnare",
-     "1BBKWOncq0oIyP2yOvqLI9lQJVoZg1BR6"
-    ],
-    [
-     "4.4 Likformighet",
-     "1CtZz0jgIXWzujVjgskMsUY74ewe2_AD9"
+      "Tyska",
+      "1BiA238_hJQ7T4ZfKUGQCKOvEOILLVoEi",
+      "de"
     ],
-    [
-     "4.5 Pythagoras sats",
-     "1TsdYfEXn2GHML_F2QLrtgchjg9M5T6sC"
-    ]
-   ]
-  },
-  "diagnos": {
-   "1": [
-    [
-     "Genomgång av diagnosen",
-     "1xtUIG55SUw6ZCjfRsUgRCxhQfh_7w2FV"
-    ]
-   ],
-   "2": [
-    [
-     "Genomgång av diagnosen",
-     "1svieDE6uWcivNu9SP_jyhToDAav4kVwg"
-    ]
-   ],
-   "3": [
-    [
-     "Genomgång av diagnosen",
-     "1Wexaf-nzRb54E36WJEPV5HJhNx6oAO10"
-    ]
-   ],
-   "4": [
     [
-     "Genomgång av diagnosen",
-     "1I-OFafke8xrpasjcjmLiBCeOekzy8_kl"
+      "Urdu",
+      "105Bzagu8i56kLJdo0nc1f6hMDQkzQVtr",
+      "pk"
     ]
-   ]
-  }
- },
- "amnesord": [
-  [
-   "Albanska",
-   "1F53D4xg2UIcVuVoqmE_M6AEHRe0AVu6T",
-   "al"
-  ],
-  [
-   "Arabiska",
-   "1_VJSuXFX66avZ_y2ojW9b2s-UsfNgaEV",
-   "arab"
-  ],
-  [
-   "Bosniska",
-   "1CBvDIKhMNMmZo2KTdB8g2v5G3DLRh-If",
-   "ba"
-  ],
-  [
-   "Dari",
-   "1iSq_SyeunXGng7j9m8u453floUTqBg5k",
-   "af"
-  ],
-  [
-   "Engelska",
-   "1KRBJSBgtG4vYwduH3hxKoKicxtTiirH6",
-   "gb"
-  ],
-  [
-   "Pashto",
-   "13jSZIqQLMUBpPex8pIPUUoQ5L4ZJ7MFA",
-   "af"
-  ],
-  [
-   "Persiska",
-   "1JK_X7b_0674t6IxEERyoX418cL5jG2jX",
-   "ir"
-  ],
-  [
-   "Romani chib arli",
-   "1dQB8rqBwbLW5gxUpttLcXTabLxWlu02Z",
-   "rom"
-  ],
-  [
-   "Somaliska",
-   "17BetSpntMUbsMa_RfzW9Va8v8YU9Y9oV",
-   "so"
-  ],
-  [
-   "Spanska",
-   "1lukOyKaHCXXmUMqm9gSFfx8eUhnLx8V2",
-   "es"
-  ],
-  [
-   "Sydkurdiska",
-   "18F3K1n00Z8iDWz-YkGzmEnEvknXcq16X",
-   "ku"
-  ],
-  [
-   "Turkiska",
-   "1GB8GSILPf3pJczru5aodhiTugzc-wlDG",
-   "tr"
-  ],
-  [
-   "Tyska",
-   "1BiA238_hJQ7T4ZfKUGQCKOvEOILLVoEi",
-   "de"
-  ],
-  [
-   "Urdu",
-   "105Bzagu8i56kLJdo0nc1f6hMDQkzQVtr",
-   "pk"
   ]
- ]
 }
