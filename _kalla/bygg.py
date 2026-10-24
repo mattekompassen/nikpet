@@ -7,7 +7,7 @@ LANKAR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 # Organic färgskala (Nikola 2026-10-24): (skalans färg, mörk nyans för text/knappar, ljus bakgrund)
 # Vintage-färger (Nikolas bild, godkänd 2026-10-24): (färg, mörk nyans, ljus nyans)
-V = dict(gron=('#58A73E','#2E6E28','#EAF4E4'), bla=('#1A86B0','#0F5F82','#E3F1F7'), lila=('#7A44B0','#5E2D8C','#F1EAF8'),
+V = dict(gron=('#58A73E','#2E6E28','#EAF4E4'), bla=('#1A86B0','#0F5F82','#E3F1F7'), lila=('#8A4A78','#5E2E54','#F5ECF2'),
          terra=('#E07A5F','#9A4630','#FBEAE4'), gul=('#E9B949','#7A5A12','#FBF1DA'))
 ORG = dict(sage=V['gron'], turk=V['bla'], rosa=V['lila'], himmel=V['bla'], apri=V['terra'], sand=V['gul'], lav=V['lila'], mint=('#B7A694','#4A3F33','#F3EFEA'),
            # diskreta färger för undersidorna
@@ -25,6 +25,8 @@ def farger(nyckel, **extra):
                 hero=m, c1=mix(m, d, .12), c2=mix(m, '#FFFFFF', .18), ram=mix(m, '#FFFFFF', .6), ljus=mix(m, '#FFFFFF', .45), **extra)
 
 AR = {7: farger('sage', bok='X', k=7), 8: farger('turk', bok='Y', k=8), 9: farger('rosa', bok='Z', k=9)}
+# Materialrutorna på årskurssidorna: en nyans mörkare (Nikola 2026-10-24)
+for _c in AR.values(): _c['t'] = mix(_c['main'], '#FFFFFF', .84); _c['tram'] = mix(_c['main'], '#FFFFFF', .59)
 # Nio ikoner på årskurssidan: (filnamn, sidnamn, rubrik)
 MATERIAL = [
  ('07_Lektioner', 'lektioner', 'Lektioner'),
@@ -191,7 +193,7 @@ a.knapp2{text-decoration:none;display:inline-block}
 
 /* --- Bokomslagens färger (förslag) --- */
 body{background:#F4F3EF}
-main.hem{background:radial-gradient(600px 420px at -5% 20%,#58A73E22,transparent 70%),radial-gradient(520px 420px at 105% 15%,#7A44B022,transparent 70%),radial-gradient(500px 300px at 50% 0%,#1A86B014,transparent 70%)}
+main.hem{background:radial-gradient(600px 420px at -5% 20%,#58A73E22,transparent 70%),radial-gradient(520px 420px at 105% 15%,#8A4A7822,transparent 70%),radial-gradient(500px 300px at 50% 0%,#1A86B014,transparent 70%)}
 header{background:#FBFAF7;border-bottom:1px solid #E6E3DC}.rand{display:none}
 header .wrap{padding-top:14px;padding-bottom:14px}
 .logo{font-family:Inter,sans-serif;font-weight:800;font-size:26px;color:#1E2B3A}.logo img{width:50px;height:50px;background:none;box-shadow:none}.logo small{font-weight:500}
@@ -218,7 +220,7 @@ nav a.on{color:#1E2B3A;font-weight:700;background:none!important}
 .panel .motiv{position:absolute;right:24px;top:22px;height:calc(100% - 44px);max-width:26%;width:auto;opacity:.35;z-index:0}.panel.farg>div{position:relative;z-index:1}.panel.farg p{max-width:440px}
 .panel.farg .bage{background:#ffffff2e;color:#fff;font-family:Inter,sans-serif;font-weight:800;border:3px solid #ffffff66}
 .grupp h2,.t h3{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.4px}
-.t{background:var(--w);box-shadow:inset 0 0 0 2px var(--ram),0 6px 16px #1E2B3A0d}
+.t{background:var(--t,var(--w));box-shadow:inset 0 0 0 2px var(--tram,var(--ram)),0 6px 16px #1E2B3A0d}
 footer{background:#1E2B3A;color:#DDE3EA}footer .wrap{color:#DDE3EA}
 @media (max-width:1000px){nav{width:100%;overflow-x:auto;flex-wrap:nowrap}nav a{white-space:nowrap}}
 @media (max-width:800px){.kkrad{grid-template-columns:1fr}.infor{grid-template-columns:1fr 1fr;row-gap:20px}.infor a:nth-child(3){border-left:0}
@@ -239,7 +241,7 @@ footer{background:#1E2B3A;color:#DDE3EA}footer .wrap{color:#DDE3EA}
 .panel.farg{min-height:240px;box-shadow:0 10px 28px #1E2B3A26;border-radius:26px}
 .panel .vag{position:absolute!important;inset:0;width:100%;height:100%;z-index:0!important}
 .panel .prick{position:absolute!important;fill:#fff;opacity:.35;z-index:0!important}.panel .pr1{left:18px;bottom:16px}.panel .pr2{right:20px;top:16px}
-.panel.farg .motiv{position:absolute!important;right:50px;top:50%;transform:translateY(-50%);height:82%;max-width:46%;width:auto;opacity:.92;z-index:0!important;filter:drop-shadow(0 2px 6px #0002)}
+.panel.farg .motiv{position:absolute!important;right:50px;top:50%;transform:translateY(-50%);height:82%;max-width:46%;width:auto;opacity:.45;z-index:0!important;filter:drop-shadow(0 2px 6px #0002)}
 .panel.farg h1{font-family:Fraunces,Georgia,serif;font-weight:700;letter-spacing:0;font-size:clamp(32px,4.4vw,54px)}.panel.farg>div{max-width:50%}.panel.farg .etikett{letter-spacing:3px;font-weight:800}.panel.farg p{max-width:520px}
 @media (max-width:800px){.panel.farg>div{max-width:100%}.panel.farg .motiv{display:block;opacity:.22;right:-40px;height:70%;max-width:70%}}
 .panel .formler{position:absolute!important;inset:0;width:100%;height:100%;opacity:.28;z-index:0!important}
@@ -451,7 +453,7 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
         on = n == aktiv
         st = f' style="border-color:{c["ink"] if c.get("k") else "#1E2B3A"}"' if on else ''
         meny += f'<a href="{rot}{h}" class="{"on" if on else ""}"{st}{" aria-current=\"page\"" if on else ""}>{n}</a>'
-    var = ';'.join(f'--{k}:{v}' for k, v in c.items() if k in ('ink', 'hi', 'w', 'vl', 'l', 'mid', 'bg', 'ram'))
+    var = ';'.join(f'--{k}:{v}' for k, v in c.items() if k in ('ink', 'hi', 'w', 'vl', 'l', 'mid', 'bg', 'ram', 't', 'tram'))
     doc = f"""<!doctype html>
 <html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(titel)} – Mattekompassen</title>
@@ -564,6 +566,11 @@ FARGBYTE_NP = {'#2C4152': '#6B4E0E', '#426B89': '#8A6614', '#5A7552': '#A67C17',
                '#DDBE88': '#F0CF73', '#A07E3E': '#A67C17', '#8F6C2E': '#8A6614', '#7A5A22': '#7A5A12', '#F6EBD3': '#FBF1DA', '#F3E8D3': '#FBF1DA'}
 # Så får du hjälp: rosa detaljer blir mint
 FARGBYTE_HJALP = {**FARGBYTE, '#B95E52': '#3F8582', '#96505A': '#2F6B69', '#F7E3DE': '#E6F6F3'}
+# Grundträning (huvudräkning och klockan), gemensam sida som bara länkas från startsidan. Dold tills Nikola godkänt.
+VISA_GRUNDTRANING = True
+ORG['indigo'] = ('#9AA5B1', '#2E3A46', '#EEF1F4')  # neutral gråblå (Nikola 2026-10-24)
+GT_FARG = farger('indigo')
+
 def byt_farger(h, tabell=None):
     import re
     tabell = tabell or FARGBYTE
@@ -596,10 +603,12 @@ def bygg():
            ('medalj', 'nationella-prov.html', 'Nationella prov', 'Information och förberedelser inför proven i åk 9.'),
            ('prata', 'amnesord.html', 'Ämnesord', 'Viktiga matteord förklarade på ditt språk.')]
     rad = ''.join(f'<a href="{h}"><span class="rik" style="background:{mix(SIDFARG[h]["main"], "#FFFFFF", .6)}">{ikon(i).replace("#fff", SIDFARG[h]["ink"])}</span><span><b>{t}</b><small>{p}</small></span></a>' for i, h, t, p in rad)
+    import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import grundtraning as gt
+    gtlank = gt.startlank(GT_FARG, mix) if VISA_GRUNDTRANING else ''
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
 <main class="hem"><div class="wrap"><section class="topprubrik"><img src="bilder/kompass-matte.png" alt=""><div><h1>Mattekompassen</h1><p>Din väg genom matematiken i årskurs 7–9</p></div></section>
 <h2 class="sr">Välj din årskurs</h2><div class="kkrad">{kort}</div>
-<div class="infor">{rad}</div></div></main>""")
+<div class="infor">{rad}</div>{gtlank}</div></main>""")
     # Årskurssidor och undersidor
     for k, c in AR.items():
         grupper = ''
@@ -607,7 +616,7 @@ def bygg():
             t = ''.join(f'<a class="t" href="ak{k}/{s}.html"><img src="bilder/ak{k}/{f}.png" alt=""><span class="pil" aria-hidden="true">→</span><h3>{rt}</h3><p>{p}</p>'
                         + ('<span class="las-ikon">🔒 Lösenord</span>' if s == 'lektioner' else '') + '</a>' for f, s, rt, p in rutor)
             grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3">{t}</div></div>'
-        sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Årskurs {k}', f'Här hittar du allt material till matten i åk {k}: lektioner, träning och sätt att kolla vad du kan.',
+        sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Årskurs {k}', 'Lär dig nytt, träna mer och kolla vad du kan.',
              f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="nrc" style="color:{c["ink"]}" aria-hidden="true">{k}</div>')
              + f'<main><div class="wrap">{grupper}</div></main>')
         if k in TRANA_AR:
@@ -665,6 +674,9 @@ def bygg():
 <h2>Välj årskurs</h2>
 <div class="arlank">{arl}</div>
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
+    if VISA_GRUNDTRANING:
+        sida('grundtraning.html', 'Grundträning', '', GT_FARG, gt.kropp(panel, GT_FARG))
+        shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'grundtraning.js'), UT)
     for js in ('trana.js', 'trana-ak7.js', 'trana-ak8.js', 'trana-ak9.js'):
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), js), UT)
     open(os.path.join(UT, '.nojekyll'), 'w').write('')

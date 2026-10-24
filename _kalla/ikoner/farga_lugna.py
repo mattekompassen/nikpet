@@ -8,7 +8,7 @@ def mix(a, b, t):
 GAMLA = {7: dict(ink='#555F4C', mid='#818D75', m2='#A9B39C', l='#D2DCCB', vl='#EAF4EA', w='#F6FAF5'),
          8: dict(ink='#3F6A70', mid='#7FAEB6', m2='#A8CDD2', l='#CBE5E6', vl='#E6F6F4', w='#F5FBFA'),
          9: dict(ink='#7E4D57', mid='#CE9BA2', m2='#E0BAC0', l='#EED3D7', vl='#FCEEF1', w='#FEF8F9')}
-NY = {7: ('#58A73E','#2E6E28'), 8: ('#1A86B0','#0F5F82'), 9: ('#7A44B0','#5E2D8C')}
+NY = {7: ('#58A73E','#2E6E28'), 8: ('#1A86B0','#0F5F82'), 9: ('#8A4A78','#5E2E54')}
 ACC = {'#C47B63': '#E07A5F', '#E3BC72': '#E9B949', '#F3DFAE': '#F7E2A8'}
 for k in (7, 8, 9):
     m, d = NY[k]; W = '#FFFFFF'
