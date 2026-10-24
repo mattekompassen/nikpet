@@ -127,6 +127,16 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .lankar a:hover{border-color:var(--mid)}
 .lankar .rad{display:flex;gap:6px}.lankar .rad>a:first-child,.lankar .rad>span{flex:1;display:block;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:11px 14px;color:var(--ink);font-weight:600}.lankar .rad>span{opacity:.75}.lankar .rad b{color:var(--mid);margin-right:6px}
 .lankar a.mal{flex:none;display:flex;align-items:center;background:var(--ink);border-color:var(--ink);color:#fff;font-size:14px;padding:0 14px}.lankar a.mal:hover{opacity:.85}
+.ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr));gap:16px;max-width:1150px}
+.ovkort{background:var(--vl);border:2px solid var(--l);border-radius:22px;padding:18px 18px 10px}
+.ovkort h3{margin:0 0 12px;font-size:21px;color:var(--ink)}
+.ovrad{display:flex;gap:6px;margin-bottom:8px}
+.ovrad a.upg{flex:1;display:flex;align-items:center;gap:10px;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:8px 12px;text-decoration:none;color:var(--ink);font-weight:700;font-size:15.5px;line-height:1.3}
+.ovrad a.upg:hover{border-color:var(--mid)}
+.ovrad .bok{flex:none;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.ovrad small{display:block;font-weight:500;font-size:13px;opacity:.75}
+.ovrad a.facit{flex:none;display:flex;align-items:center;background:var(--ink);color:#fff;border-radius:12px;padding:0 12px;font-weight:700;font-size:14px;text-decoration:none}
+.ovrad a.facit:hover{opacity:.85}
 .lankar.ovp{grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr))}
 .lankar .ovinfo{display:block;font-weight:500;font-size:14px;opacity:.7;margin-top:2px}.lankar a b{color:var(--mid);margin-right:6px}
 .las form{display:flex;gap:10px;flex-wrap:wrap}.las input{font:inherit;font-size:18px;padding:10px 14px;border:2px solid var(--l);border-radius:14px;flex:1 1 200px;min-width:0;max-width:320px}.las input:focus{outline:3px solid var(--mid);outline-offset:1px}.las button{font:inherit;font-weight:700;font-size:17px;cursor:pointer;border:0;border-radius:14px;background:var(--ink);color:#fff;padding:12px 24px}.lasfel{min-height:24px;margin:10px 0 0;color:#8A4A30;font-weight:600}
@@ -258,8 +268,8 @@ def ovp_info(pdf):
     m = re.search(r'Uppgift (\d+\s*[–-]\s*\d+).*?högst (\d+) poäng', t, re.S)
     return f'uppgift {m.group(1).replace(" ", "")} · {m.group(2)} p' if m else ''
 
-def ovningsprov_sida(k):
-    """Innehåll till ak9/ovningsprov.html. Kopierar PDF:erna och skriver krypterat facit."""
+def ovningsprov_sida(k, rot='', intro=None):
+    """De sex övningsproven som kort (uppgifter öppet, facit krypterat). rot = sökväg från sidan till ak{k}/."""
     ut_mapp = os.path.join(UT, f'ak{k}', 'ovningsprov')
     prov = ''
     for n in range(1, OVP_ANTAL + 1):
@@ -274,12 +284,15 @@ def ovningsprov_sida(k):
             shutil.copy(upg, os.path.join(UT, f'ak{k}', sti + '.pdf'))
             open(os.path.join(UT, f'ak{k}', sti + '-facit.bin'), 'wb').write(krypterad_fil(open(fac, 'rb').read()))
             info = ovp_info(upg)
-            rader += (f'<div class="rad"><a href="{sti}.pdf" target="_blank" rel="noopener"><b>Delprov {b}</b>{tid}, {rk}, {typ}'
-                      + (f'<small class="ovinfo">{info}</small>' if info else '') + '</a>'
-                      f'<a class="mal facit" href="#facit" data-fil="{sti}-facit.bin" data-namn="Övningsprov {n} delprov {b} facit.pdf">🔒 Facit</a></div>')
-        prov += f'<details class="kap"{" open" if n == 1 else ""}><summary><span>Övningsprov {n}<small>Delprov A–D</small></span></summary><div class="lankar ovp">{rader}</div></details>'
+            rader += (f'<div class="ovrad"><a class="upg" href="{rot}{sti}.pdf" target="_blank" rel="noopener"><span class="bok">{b}</span><span>Delprov {b}<small>{tid} · {rk}'
+                      + (f' · {info}' if info else '') + '</small></span></a>'
+                      f'<a class="facit" href="#facit" data-fil="{rot}{sti}-facit.bin" data-namn="Övningsprov {n} delprov {b} facit.pdf">🔒 Facit</a></div>')
+        prov += f'<div class="ovkort"><h3>Övningsprov {n}</h3>{rader}</div>'
+    prov = f'<div class="ovgrid">{prov}</div>'
+    if intro is None:
+        intro = f'<p class="ingress" style="max-width:860px;margin:0 0 18px">Här finns sex övningsprov med samma upplägg som det nationella provet i åk 9: fyra delprov A–D. Uppgifterna är egna och kommer inte från något riktigt prov. Skriv ut delprovet eller öppna det, ta tid och lös uppgifterna som på riktigt. Rätta sedan med facit. <a href="../nationella-prov.html" style="font-weight:700;color:var(--ink)">Läs mer om nationella provet →</a></p>'
     salt = __import__('base64').b64encode(LOSEN_SALT).decode()
-    return f"""<p class="ingress" style="max-width:860px;margin:0 0 18px">Här finns sex övningsprov med samma upplägg som det nationella provet i åk 9: fyra delprov A–D. Uppgifterna är egna och kommer inte från något riktigt prov. Skriv ut delprovet eller öppna det, ta tid och lös uppgifterna som på riktigt. Rätta sedan med facit. <a href="../nationella-prov.html" style="font-weight:700;color:var(--ink)">Läs mer om nationella provet →</a></p>
+    return f"""{intro}
 <div id="facit" class="ruta las" data-salt="{salt}" data-varv="{LOSEN_VARV}" style="margin-bottom:18px">
 <h3>Facit är skyddat med lösenord</h3><p style="margin:0 0 14px">Uppgifterna kan alla öppna. För att öppna facit behöver du lösenordet. Du får det av din mattelärare.</p>
 <form id="lasform" autocomplete="off"><label class="sr" for="losen">Lösenord</label>
@@ -407,7 +420,7 @@ def extra(fil):
         return bedomning.sida()
     if fil == 'nationella-prov.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import np as npsida
-        return npsida.sida()
+        return npsida.sida() + ovningsprov_sida(9, 'ak9/', npsida.OVP_INTRO) + '</div>'
     if fil == 'hjalp.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import hjalp
         return hjalp.sida()

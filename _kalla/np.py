@@ -19,7 +19,7 @@ TA_MED = ['Penna och sudd', 'Linjal', 'Räknare (delprov C och D)']
 FAR_EJ = ['Mobiltelefon', 'Smartklocka', 'Räknare och formelblad på delprov A och B']
 TIPS = [('Före provet', ['Öva huvudräkning och skriftlig räkning, för delprov A och B görs utan räknare.',
                          'Titta på formelbladet i förväg så att du vet vad som står där.',
-                         'Träna med övningsproven längre ner på den här sidan.',
+                         'Träna med övningsproven längre ner på sidan.',
                          'Sov ordentligt och ät frukost.']),
         ('Under provet', ['Läs varje uppgift noga. Vad ska du ta reda på?',
                           'Börja med det du kan. Hoppa över och kom tillbaka sedan.',
@@ -27,6 +27,20 @@ TIPS = [('Före provet', ['Öva huvudräkning och skriftlig räkning, för delpr
                           'Kontrollera att svaret är rimligt och har rätt enhet.'])]
 CSS = """<style>
 .np{max-width:1100px}
+.np .infobox{background:#FBF8F2;border:2px solid #E6E1D7;border-radius:28px;padding:28px 32px;box-shadow:0 6px 20px #6E51201a}
+.np .infobox .ingress{max-width:none;margin:0 0 18px}
+.np .ib-dagar{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.np .ib-dagar div{background:#2C4152;color:#fff;border-radius:18px;padding:14px 18px;line-height:1.4}
+.np .ib-dagar .kl{background:#F2CD69;color:#292A28}
+.np .ib-dagar b{display:block;color:#F2CD69;font-size:18px}.np .ib-dagar .kl b{color:#292A28}
+.np .ibh{font-size:21px;margin:26px 0 4px;color:#2C4152}.np .ibu{margin:0 0 14px;color:#3a3a3a}
+.np .infobox .dk{background:#fff;border-width:1.5px;border-top-width:7px;padding:16px}
+.np .ib4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.np .ib4>div{background:#fff;border:1.5px solid #E6E1D7;border-radius:18px;padding:14px 18px}
+.np .ib4 h3{margin:0 0 6px;font-size:17px}.np .ib4 ul{margin:0;padding-left:18px;line-height:1.55;font-size:15px}
+.np .ib4 .tips h3{color:#2C4152}
+@media(max-width:1000px){.np .ib4{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.np .ib4,.np .ib-dagar{grid-template-columns:1fr}.np .infobox{padding:20px 18px}}
 .np .ingress{font-size:19px;line-height:1.55;max-width:780px;margin:0 0 10px}
 .np h2.grupp{display:flex;align-items:center;gap:12px;font-size:24px;margin:36px 0 8px}
 .np h2.grupp::before{content:"";width:10px;height:30px;border-radius:6px;background:var(--g)}
@@ -74,34 +88,28 @@ CSS = """<style>
 @media(max-width:1000px){.np .dp{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.np .dp,.np .dagar,.np .hm,.np .tipsg{grid-template-columns:1fr}}
 </style>"""
+OVP_INTRO = ('<h2 class="grupp" style="--g:#426B89;margin-top:40px">Övningsprov</h2>'
+             '<p class="under" style="max-width:860px">Här finns sex övningsprov med samma upplägg som det riktiga provet: fyra delprov A–D. '
+             'Uppgifterna är egna och kommer inte från något riktigt prov. Skriv ut delprovet eller öppna det, ta tid och lös uppgifterna som på riktigt. '
+             'Rätta sedan med facit. Facit öppnar du med lösenordet som du får av din mattelärare.</p>')
+
 def sida():
+    """Översta delen av nationella-prov.html: en avlång ruta med all information om provet.
+    Övningsproven läggs till under av bygg.py (ovningsprov_sida), som också stänger <div class="np">."""
     e = html.escape
-    ut = [CSS, '<div class="np">',
+    ut = [CSS, '<div class="np"><section class="infobox">',
           '<p class="ingress">I åk 9 skriver alla elever i Sverige nationellt prov i matematik. Provet visar vad du kan och hjälper läraren när betyget sätts. Provet har fyra delar och skrivs på papper i skolan.</p>',
-          '<h2 class="grupp" style="--g:#F2CD69">När är provet?</h2><p class="under">Vårterminen 2027. Provet börjar klockan 9.00 båda dagarna.</p><div class="dagar">']
-    ut += [f'<div><b>{e(d)}</b>{e(t)}</div>' for d, t in DAGAR]
-    ut.append('</div><h2 class="grupp" style="--g:#2C4152">Fyra delprov</h2><p class="under">Varje delprov har en egen tid och egna regler för räknare och formelblad. Provet har inget muntligt delprov.</p><div class="dp">')
+          '<div class="ib-dagar">' + ''.join(f'<div><b>{e(d)}</b>{e(t)}</div>' for d, t in DAGAR) + '<div class="kl"><b>Klockan 9.00</b>Provet börjar båda dagarna</div></div>',
+          '<h3 class="ibh">Fyra delprov</h3><p class="ibu">Varje delprov har en egen tid och egna regler för räknare och formelblad. Provet har inget muntligt delprov.</p><div class="dp">']
     for b, g, gl, tid, rk, typ, var in DELPROV:
         r = 'Räknare och formelblad' if rk else 'Utan räknare och formelblad'
-        ut.append(f'<div class="dk" style="--g:{g};--gl:{gl}"><div class="bok"><span>{b}</span><div><h3>Delprov {b}</h3><div class="tid">{tid}</div></div></div><p>{e(typ)}</p><p>{e(var)}</p><span class="rk">{r}</span><span class="tp">Tänk på</span><ul>' + ''.join(f'<li>{e(x)}</li>' for x in TANK[b]) + '</ul></div>')
-    ut.append('</div><h2 class="grupp" style="--g:#5A7552">Vad får du ha med dig?</h2><div class="hm">')
+        ut.append(f'<div class="dk" style="--g:{g};--gl:{gl}"><div class="bok"><span>{b}</span><div><h3>Delprov {b}</h3><div class="tid">{tid}</div></div></div><p>{e(typ)} {e(var)}</p><span class="rk">{r}</span><span class="tp">Tänk på</span><ul>' + ''.join(f'<li>{e(x)}</li>' for x in TANK[b]) + '</ul></div>')
+    ut.append('</div><div class="ib4">')
     ut.append('<div class="ja"><h3>Det här får du använda</h3><ul>' + ''.join(f'<li>{e(t)}</li>' for t in TA_MED) + '<li>Formelblad (delprov C och D)</li></ul></div>')
-    ut.append('<div class="nej"><h3>Det här får du inte använda</h3><ul>' + ''.join(f'<li>{e(t)}</li>' for t in FAR_EJ) + '</ul></div></div>')
-    ut.append('<h2 class="grupp" style="--g:#B95E52">Tips</h2><div class="tipsg">')
+    ut.append('<div class="nej"><h3>Det här får du inte använda</h3><ul>' + ''.join(f'<li>{e(t)}</li>' for t in FAR_EJ) + '</ul></div>')
     for t, li in TIPS:
-        ut.append(f'<div><h3>{e(t)}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in li) + '</ul></div>')
-    ut.append('</div>')
-    if VISA_OVNINGSPROV:
-        ut.append('<h2 class="grupp" style="--g:#426B89">Så kan uppgifterna se ut</h2><p class="under">Så här kan uppgifterna i varje delprov se ut. Uppgifterna är egna och kommer inte från några riktiga prov. Skriv ut eller öppna uppgifterna, lös dem själv och rätta sedan med facit.</p>')
-        ut.append('<div class="pdfer">')
-        for b, g, gl, tid, rk, typ, var in DELPROV:
-            ut.append(f'<div style="--g:{g};--gl:{gl}"><h3><span>{b}</span>Delprov {b}</h3><p>{tid}</p>' + ''.join(f'<b class="ov">Övningsprov {n}</b><div class="par"><a class="pk" href="np/delprov-{b.lower()}{suf}.pdf" target="_blank">Uppgifter</a><a class="pf" href="np/delprov-{b.lower()}{suf}-facit.pdf" target="_blank">Facit</a></div>' for n, (suf, _) in enumerate(VERSIONER, 1)) + '</div>')
-        ut.append('</div>')
-    else:
-        ut.append('<h2 class="grupp" style="--g:#426B89">Träna inför provet</h2>')
-        ut.append('<a class="ovlank" href="ak9/ovningsprov.html"><span class="ovik" aria-hidden="true">📝</span><span class="ovtxt"><b>Sex övningsprov inför nationella provet</b>'
-                  'Samma upplägg som det riktiga provet: fyra delprov A–D med uppgifter och facit.</span><span class="ovknapp">Gå till övningsproven →</span></a>')
-    ut.append('</div>')
+        ut.append(f'<div class="tips"><h3>Tips {e(t.lower())}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in li) + '</ul></div>')
+    ut.append('</div></section>')
     return ''.join(ut)
 
 # Exempeluppgifter (egna, med nya tal – INTE originaluppgifter). (text, alternativ, poäng, svar)
