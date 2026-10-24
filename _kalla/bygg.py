@@ -118,7 +118,9 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .lankar a.sprak{display:flex;align-items:center;gap:10px}.lankar a.sprak img{width:24px;height:18px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
 .lankar a:hover{border-color:var(--mid)}
 .lankar .rad{display:flex;gap:6px}.lankar .rad>a:first-child,.lankar .rad>span{flex:1;display:block;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:11px 14px;color:var(--ink);font-weight:600}.lankar .rad>span{opacity:.75}.lankar .rad b{color:var(--mid);margin-right:6px}
-.lankar a.mal{flex:none;display:flex;align-items:center;background:var(--ink);border-color:var(--ink);color:#fff;font-size:14px;padding:0 14px}.lankar a.mal:hover{opacity:.85}.lankar a b{color:var(--mid);margin-right:6px}
+.lankar a.mal{flex:none;display:flex;align-items:center;background:var(--ink);border-color:var(--ink);color:#fff;font-size:14px;padding:0 14px}.lankar a.mal:hover{opacity:.85}
+.lankar.ovp{grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr))}
+.lankar .ovinfo{display:block;font-weight:500;font-size:14px;opacity:.7;margin-top:2px}.lankar a b{color:var(--mid);margin-right:6px}
 .las form{display:flex;gap:10px;flex-wrap:wrap}.las input{font:inherit;font-size:18px;padding:10px 14px;border:2px solid var(--l);border-radius:14px;flex:1 1 200px;min-width:0;max-width:320px}.las input:focus{outline:3px solid var(--mid);outline-offset:1px}.las button{font:inherit;font-weight:700;font-size:17px;cursor:pointer;border:0;border-radius:14px;background:var(--ink);color:#fff;padding:12px 24px}.lasfel{min-height:24px;margin:10px 0 0;color:#8A4A30;font-weight:600}
 .knapp{display:inline-block;margin-top:24px;padding:14px 26px;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700}
 
@@ -221,6 +223,90 @@ document.getElementById('lasform').addEventListener('submit',function(e){{
  .then(function(bits){{var raa=new Uint8Array(bits);return visa(raa).then(function(){{spara(raa)}})}})
  .catch(function(){{fel.textContent='Fel lösenord. Försök igen.';document.getElementById('losen').select()}});
 }});
+}})();
+</script>"""
+
+# Övningsprov inför NP åk 9 (sex prov, delprov A–D). Uppgifterna läggs öppet som PDF; facit krypteras
+# med samma lösenord/nyckel som Lektioner-sidorna (AES-GCM) och låses upp i webbläsaren.
+OVP_KALLA = '/mnt/project-files/np-ovningsprov-{n}'
+OVP_ANTAL = 6
+OVP_DELPROV = [('A', '40 min', 'utan räknare', 'bara svar'), ('B', '80 min', 'utan räknare', 'visa lösningen'),
+               ('C', '40 min', 'med räknare', 'bara svar'), ('D', '80 min', 'med räknare', 'visa lösningen')]
+
+def krypterad_fil(data):
+    import hashlib
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    nyckel = losen_nyckel()
+    iv = hashlib.sha256(nyckel + data).digest()[:12]
+    return iv + AESGCM(nyckel).encrypt(iv, data, None)
+
+def ovp_info(pdf):
+    """'Uppgift 17–23 … högst 22 poäng' ur PDF:ens första sida."""
+    import re, subprocess
+    try:
+        t = subprocess.run(['pdftotext', '-l', '1', pdf, '-'], capture_output=True, text=True).stdout
+    except Exception:
+        return ''
+    m = re.search(r'Uppgift (\d+\s*[–-]\s*\d+).*?högst (\d+) poäng', t, re.S)
+    return f'uppgift {m.group(1).replace(" ", "")} · {m.group(2)} p' if m else ''
+
+def ovningsprov_sida(k):
+    """Innehåll till ak9/ovningsprov.html. Kopierar PDF:erna och skriver krypterat facit."""
+    ut_mapp = os.path.join(UT, f'ak{k}', 'ovningsprov')
+    prov = ''
+    for n in range(1, OVP_ANTAL + 1):
+        kalla = OVP_KALLA.format(n=n)
+        if not os.path.isdir(kalla):
+            continue
+        os.makedirs(os.path.join(ut_mapp, f'prov-{n}'), exist_ok=True)
+        rader = ''
+        for b, tid, rk, typ in OVP_DELPROV:
+            upg, fac = os.path.join(kalla, f'delprov-{b.lower()}.pdf'), os.path.join(kalla, f'delprov-{b.lower()}-facit.pdf')
+            sti = f'ovningsprov/prov-{n}/delprov-{b.lower()}'
+            shutil.copy(upg, os.path.join(UT, f'ak{k}', sti + '.pdf'))
+            open(os.path.join(UT, f'ak{k}', sti + '-facit.bin'), 'wb').write(krypterad_fil(open(fac, 'rb').read()))
+            info = ovp_info(upg)
+            rader += (f'<div class="rad"><a href="{sti}.pdf" target="_blank" rel="noopener"><b>Delprov {b}</b>{tid}, {rk}, {typ}'
+                      + (f'<small class="ovinfo">{info}</small>' if info else '') + '</a>'
+                      f'<a class="mal facit" href="#facit" data-fil="{sti}-facit.bin" data-namn="Övningsprov {n} delprov {b} facit.pdf">🔒 Facit</a></div>')
+        prov += f'<details class="kap"{" open" if n == 1 else ""}><summary><span>Övningsprov {n}<small>Delprov A–D</small></span></summary><div class="lankar ovp">{rader}</div></details>'
+    salt = __import__('base64').b64encode(LOSEN_SALT).decode()
+    return f"""<p class="ingress" style="max-width:860px;margin:0 0 18px">Här finns sex övningsprov med samma upplägg som det nationella provet i åk 9: fyra delprov A–D. Uppgifterna är egna och kommer inte från något riktigt prov. Skriv ut delprovet eller öppna det, ta tid och lös uppgifterna som på riktigt. Rätta sedan med facit. <a href="../nationella-prov.html" style="font-weight:700;color:var(--ink)">Läs mer om nationella provet →</a></p>
+<div id="facit" class="ruta las" data-salt="{salt}" data-varv="{LOSEN_VARV}" style="margin-bottom:18px">
+<h3>Facit är skyddat med lösenord</h3><p style="margin:0 0 14px">Uppgifterna kan alla öppna. För att öppna facit behöver du lösenordet. Du får det av din mattelärare.</p>
+<form id="lasform" autocomplete="off"><label class="sr" for="losen">Lösenord</label>
+<input id="losen" type="password" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="Lösenord" required>
+<button type="submit">Lås upp facit</button></form><p id="lasfel" class="lasfel" role="alert"></p></div>
+<div id="olast" class="ruta" style="display:none;margin-bottom:18px;padding:16px 24px"><b>Facit är upplåst.</b> Klicka på Facit vid det delprov du vill rätta.</div>
+{prov}
+<script>
+(function(){{
+var las=document.getElementById('facit'),ok=document.getElementById('olast'),fel=document.getElementById('lasfel'),NYCKEL='mk-lektioner-nyckel',raa=null;
+var b64=function(s){{return Uint8Array.from(atob(s),function(c){{return c.charCodeAt(0)}})}};
+var u8b64=function(a){{var s='';a.forEach(function(x){{s+=String.fromCharCode(x)}});return btoa(s)}};
+var forsta=document.querySelector('a.facit');
+function oppna(fil,k){{return fetch(fil).then(function(r){{if(!r.ok)throw 0;return r.arrayBuffer()}}).then(function(b){{var a=new Uint8Array(b);
+ return crypto.subtle.importKey('raw',k,'AES-GCM',false,['decrypt']).then(function(x){{return crypto.subtle.decrypt({{name:'AES-GCM',iv:a.slice(0,12)}},x,a.slice(12))}})}})}}
+function upplast(k){{raa=k;las.style.display='none';ok.style.display='';document.querySelectorAll('a.facit').forEach(function(a){{a.textContent='Facit'}})}}
+function prova(k){{return oppna(forsta.dataset.fil,k).then(function(){{upplast(k);return true}})}}
+if(!window.crypto||!crypto.subtle||!window.fetch){{fel.textContent='Din webbläsare kan inte öppna facit. Prova en annan webbläsare.';return}}
+var sparad=null;try{{sparad=localStorage.getItem(NYCKEL)}}catch(e){{}}
+if(sparad){{prova(b64(sparad)).catch(function(){{}})}}
+document.getElementById('lasform').addEventListener('submit',function(e){{
+ e.preventDefault();fel.textContent='Öppnar …';
+ var ord=document.getElementById('losen').value.trim().toLowerCase().split(/\\s+/).join('');
+ crypto.subtle.importKey('raw',new TextEncoder().encode(ord),'PBKDF2',false,['deriveBits'])
+ .then(function(k){{return crypto.subtle.deriveBits({{name:'PBKDF2',hash:'SHA-256',salt:b64(las.dataset.salt),iterations:+las.dataset.varv}},k,256)}})
+ .then(function(bits){{var k=new Uint8Array(bits);return prova(k).then(function(){{fel.textContent='';try{{localStorage.setItem(NYCKEL,u8b64(k))}}catch(e){{}}}})}})
+ .catch(function(){{fel.textContent='Fel lösenord. Försök igen.';document.getElementById('losen').select()}});
+}});
+document.querySelectorAll('a.facit').forEach(function(a){{a.addEventListener('click',function(e){{
+ if(!raa){{e.preventDefault();las.scrollIntoView({{behavior:'smooth',block:'center'}});document.getElementById('losen').focus();fel.textContent='Skriv lösenordet för att öppna facit.';return}}
+ e.preventDefault();var w=navigator.pdfViewerEnabled===false?null:window.open('','_blank');
+ oppna(a.dataset.fil,raa).then(function(b){{var url=URL.createObjectURL(new Blob([b],{{type:'application/pdf'}}));
+  if(w){{w.location.href=url}}else{{var l=document.createElement('a');l.href=url;l.download=a.dataset.namn;document.body.appendChild(l);l.click();l.remove()}}}})
+ .catch(function(){{if(w)w.close();alert('Facit gick inte att öppna. Försök igen.')}});
+}})}});
 }})();
 </script>"""
 
@@ -420,7 +506,7 @@ def bygg():
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""
 {panel(c, t, '', f'Åk {k} · Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), (t, None)], f'<img class="bild" src="../bilder/ak{k}/{f}.png" alt="">', '../')}
-<main><section><div class="wrap">{'<a class="omlank" href="../problemlosning.html">Så arbetar vi med problemlösning: nivåer och strategier →</a>' if s == 'problemlosning' else ''}{krypterad(innehall(k, s, t)) if s == 'lektioner' else innehall(k, s, t)}
+<main><section><div class="wrap">{'<a class="omlank" href="../problemlosning.html">Så arbetar vi med problemlösning: nivåer och strategier →</a>' if s == 'problemlosning' else ''}{krypterad(innehall(k, s, t)) if s == 'lektioner' else ovningsprov_sida(k) if (s == 'ovningsprov' and k == 9) else innehall(k, s, t)}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
