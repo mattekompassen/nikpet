@@ -56,12 +56,11 @@ nav a i{width:10px;height:10px;border-radius:50%;flex:none}nav a:hover{backgroun
 .panel h1{font-size:clamp(34px,5vw,60px);line-height:1.05;margin:0}
 .etikett{font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:15px;margin:10px 0 0;color:var(--ink)}
 .panel p{font-size:18px;line-height:1.55;margin:12px 0 0;max-width:600px}
-.start{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:30px;padding:4px 0 26px}
+.start{display:grid;grid-template-columns:1fr auto;align-items:center;gap:30px;padding:4px 0 26px}
 .start .lbl{display:inline-block;background:#fff9;border-radius:999px;padding:6px 14px;font-weight:600;font-size:13px;color:#4E6357;margin-bottom:14px}
 .start h1{font-size:clamp(38px,4.6vw,56px);line-height:1.05;margin:0}.start h1 em{font-style:italic;color:#8C4D36}
 .start p{font-size:18px;line-height:1.55;color:#4A433C;max-width:520px;margin:14px 0 0}
-.ros{position:relative;width:420px;height:400px;margin:0 0 -136px auto;transform:scale(.66);transform-origin:top right}.ros span{position:absolute;border-radius:50%;opacity:.9}
-.ros img{position:absolute;left:105px;top:95px;width:210px;filter:drop-shadow(0 14px 26px #0002)}
+.ros{width:110px;margin-left:auto;filter:drop-shadow(0 10px 20px #0002)}
 .ak{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
 .ak a{display:block;border-radius:220px 220px 34px 34px;padding:34px 30px 30px;text-decoration:none;color:#2F2B26;transition:transform .15s}
 .ak a:hover{transform:translateY(-5px)}
@@ -156,7 +155,7 @@ a.knapp2{text-decoration:none;display:inline-block}
  header .wrap{padding-top:14px;padding-bottom:12px}nav{width:100%;justify-content:space-between}nav a{padding:8px 10px;font-size:14px;gap:5px;white-space:nowrap}nav{gap:2px;padding:4px}
  .panel{flex-direction:column;align-items:flex-start;gap:20px;padding:26px 22px;border-radius:28px}
  .bage{width:96px;height:116px;font-size:80px;border-radius:60px 60px 18px 18px}.panel .bild{width:84px}
- .start{grid-template-columns:1fr;gap:10px;padding-top:6px}.ros{transform:scale(.5);transform-origin:top left;margin:6px 0 -190px calc(50% - 105px)}
+ .start{grid-template-columns:1fr auto;align-items:start;gap:10px;padding-top:6px}.ros{width:72px;margin:44px 0 0}
  .ak{grid-template-columns:1fr}.veta{grid-template-columns:1fr}.veta a+a{border-left:0;border-top:1.5px dashed #B5D2BF}
  .grupp{grid-template-columns:1fr;gap:14px}.rad3{grid-template-columns:1fr}.t{min-height:0;display:grid;grid-template-columns:72px 1fr;column-gap:16px;row-gap:2px;padding-right:60px}.t img{width:72px;height:72px;grid-row:span 3}.t .las-ikon{position:static;grid-column:2}
  .ak a{padding:24px 22px 22px}.ak .sol{width:120px;height:120px;font-size:84px;margin-bottom:12px}.ak h3{font-size:26px}
@@ -345,9 +344,6 @@ GRUPPER = [
 def bygg():
     open(os.path.join(UT, 'stil.css'), 'w').write(CSS)
     # Startsida
-    ros = ''.join(f'<span style="width:{w}px;height:{w}px;left:{x}px;top:{y}px;background:{ORG[c][0]}"></span>' for c, w, x, y in
-                  [('sand', 170, 250, 10), ('turk', 150, 0, 40), ('rosa', 190, 230, 210), ('sage', 210, 20, 180), ('lav', 90, 170, 0), ('apri', 80, 360, 150)])
-    ros += f'<span style="width:250px;height:250px;left:85px;top:75px;background:{BG};opacity:1"></span>'
     inneh = [rt for _, _, rutor in GRUPPER for _, _, rt, _ in rutor]  # samma som rutorna på årskurssidorna
     kort = ''
     for k, c in AR.items():
@@ -362,7 +358,7 @@ def bygg():
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
 <main><div class="wrap"><section class="start"><div><span class="lbl">Matematik för åk 7, 8 och 9</span><h1>Hitta rätt i <em>matematiken</em></h1>
 <p>Allt matematerial på ett ställe. Välj din årskurs!</p></div>
-<div class="ros" aria-hidden="true">{ros}<img src="bilder/kompass-matte.png" alt=""></div></section>
+<img class="ros" src="bilder/kompass-matte.png" alt=""></section>
 <h2 class="sr">Välj din årskurs</h2><div class="ak">{kort}</div>
 <div class="rubrik"><h2>Bra att veta</h2><span>För alla elever i åk 7–9</span></div><div class="veta">{veta}</div></div></main>""")
     # Årskurssidor och undersidor
