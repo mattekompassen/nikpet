@@ -364,7 +364,6 @@ def bygg():
 <p>Allt matematerial på ett ställe. Välj din årskurs!</p></div>
 <div class="ros" aria-hidden="true">{ros}<img src="bilder/kompass-matte.png" alt=""></div></section>
 <h2 class="sr">Välj din årskurs</h2><div class="ak">{kort}</div>
-<div class="alla"><b>I varje årskurs hittar du</b><ul>{''.join(f'<li>{x}</li>' for x in inneh)}</ul></div>
 <div class="rubrik"><h2>Bra att veta</h2><span>För alla elever i åk 7–9</span></div><div class="veta">{veta}</div></div></main>""")
     # Årskurssidor och undersidor
     for k, c in AR.items():
