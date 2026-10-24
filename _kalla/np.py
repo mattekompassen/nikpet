@@ -27,7 +27,16 @@ TIPS = [('Före provet', ['Öva huvudräkning och skriftlig räkning, för delpr
                           'Kontrollera att svaret är rimligt och har rätt enhet.'])]
 CSS = """<style>
 .np{max-width:1100px}
-.np .infobox{background:#FBF8F2;border:2px solid #E6E1D7;border-radius:28px;padding:28px 32px;box-shadow:0 6px 20px #6E51201a}
+.np .infobox{background:#FBF8F2;border:2px solid #E6E1D7;border-radius:28px;box-shadow:0 6px 20px #6E51201a}
+.np .infobox summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:22px 28px;border-radius:26px;background:#DDBE88}
+.np .infobox summary::-webkit-details-marker{display:none}
+.np .infobox summary:hover{filter:brightness(1.03)}
+.np .infobox[open] summary{border-radius:26px 26px 0 0}
+.np .ibik{font-size:34px;width:60px;height:60px;border-radius:16px;background:#FFF8EA;display:flex;align-items:center;justify-content:center;flex:none}
+.np .ibtit{flex:1 1 260px;font-size:16px;line-height:1.45;color:#3A2C12}.np .ibtit b{display:block;font-family:Fraunces,Georgia,serif;font-size:24px}
+.np .ibvisa{background:#5A4219;color:#fff;font-weight:700;border-radius:999px;padding:11px 22px;white-space:nowrap}
+.np .ibvisa::after{content:' ↓'}.np .infobox[open] .ibvisa{font-size:0}.np .infobox[open] .ibvisa::before{content:'Dölj ↑';font-size:16px}.np .infobox[open] .ibvisa::after{content:''}
+.np .ibinn{padding:24px 28px 28px}
 .np .infobox .ingress{max-width:none;margin:0 0 18px}
 .np .ib-dagar{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .np .ib-dagar div{background:#2C4152;color:#fff;border-radius:18px;padding:14px 18px;line-height:1.4}
@@ -40,7 +49,7 @@ CSS = """<style>
 .np .ib4 h3{margin:0 0 6px;font-size:17px}.np .ib4 ul{margin:0;padding-left:18px;line-height:1.55;font-size:15px}
 .np .ib4 .tips h3{color:#2C4152}
 @media(max-width:1000px){.np .ib4{grid-template-columns:1fr 1fr}}
-@media(max-width:620px){.np .ib4,.np .ib-dagar{grid-template-columns:1fr}.np .infobox{padding:20px 18px}}
+@media(max-width:620px){.np .ib4,.np .ib-dagar{grid-template-columns:1fr}.np .ibinn,.np .infobox summary{padding:18px}}
 .np .ingress{font-size:19px;line-height:1.55;max-width:780px;margin:0 0 10px}
 .np h2.grupp{display:flex;align-items:center;gap:12px;font-size:24px;margin:36px 0 8px}
 .np h2.grupp::before{content:"";width:10px;height:30px;border-radius:6px;background:var(--g)}
@@ -97,7 +106,8 @@ def sida():
     """Översta delen av nationella-prov.html: en avlång ruta med all information om provet.
     Övningsproven läggs till under av bygg.py (ovningsprov_sida), som också stänger <div class="np">."""
     e = html.escape
-    ut = [CSS, '<div class="np"><section class="infobox">',
+    ut = [CSS, '<div class="np"><details class="infobox"><summary><span class="ibik" aria-hidden="true">📋</span><span class="ibtit"><b>Allt om nationella provet</b>'
+          '12 och 14 maj 2027 · fyra delprov · vad du får ha med dig · tips</span><span class="ibvisa">Visa</span></summary><div class="ibinn">',
           '<p class="ingress">I åk 9 skriver alla elever i Sverige nationellt prov i matematik. Provet visar vad du kan och hjälper läraren när betyget sätts. Provet har fyra delar och skrivs på papper i skolan.</p>',
           '<div class="ib-dagar">' + ''.join(f'<div><b>{e(d)}</b>{e(t)}</div>' for d, t in DAGAR) + '<div class="kl"><b>Klockan 9.00</b>Provet börjar båda dagarna</div></div>',
           '<h3 class="ibh">Fyra delprov</h3><p class="ibu">Varje delprov har en egen tid och egna regler för räknare och formelblad. Provet har inget muntligt delprov.</p><div class="dp">']
@@ -109,7 +119,7 @@ def sida():
     ut.append('<div class="nej"><h3>Det här får du inte använda</h3><ul>' + ''.join(f'<li>{e(t)}</li>' for t in FAR_EJ) + '</ul></div>')
     for t, li in TIPS:
         ut.append(f'<div class="tips"><h3>Tips {e(t.lower())}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in li) + '</ul></div>')
-    ut.append('</div></section>')
+    ut.append('</div></div></details>')
     return ''.join(ut)
 
 # Exempeluppgifter (egna, med nya tal – INTE originaluppgifter). (text, alternativ, poäng, svar)
