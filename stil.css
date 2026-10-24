@@ -92,7 +92,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .ovrad a.upg:hover{border-color:var(--mid)}
 .ovrad .bok{flex:none;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
 .ovrad small{display:block;font-weight:500;font-size:13px;opacity:.75}
-.ovrad a.facit{flex:none;display:flex;align-items:center;background:var(--ink);color:#fff;border-radius:12px;padding:0 12px;font-weight:700;font-size:14px;text-decoration:none}
+.ovrad a.facit{flex:none;display:flex;align-items:center;background:var(--knapp,var(--ink));color:#fff;border-radius:12px;padding:0 12px;font-weight:700;font-size:14px;text-decoration:none}
 .ovrad a.facit:hover{opacity:.85}
 .lankar.ovp{grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr))}
 .lankar .ovinfo{display:block;font-weight:500;font-size:14px;opacity:.7;margin-top:2px}.lankar a b{color:var(--mid);margin-right:6px}

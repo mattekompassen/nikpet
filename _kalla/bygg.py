@@ -139,7 +139,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .ovrad a.upg:hover{border-color:var(--mid)}
 .ovrad .bok{flex:none;width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
 .ovrad small{display:block;font-weight:500;font-size:13px;opacity:.75}
-.ovrad a.facit{flex:none;display:flex;align-items:center;background:var(--ink);color:#fff;border-radius:12px;padding:0 12px;font-weight:700;font-size:14px;text-decoration:none}
+.ovrad a.facit{flex:none;display:flex;align-items:center;background:var(--knapp,var(--ink));color:#fff;border-radius:12px;padding:0 12px;font-weight:700;font-size:14px;text-decoration:none}
 .ovrad a.facit:hover{opacity:.85}
 .lankar.ovp{grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr))}
 .lankar .ovinfo{display:block;font-weight:500;font-size:14px;opacity:.7;margin-top:2px}.lankar a b{color:var(--mid);margin-right:6px}
@@ -453,7 +453,7 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
         on = n == aktiv
         st = f' style="border-color:{c["ink"] if c.get("k") else "#1E2B3A"}"' if on else ''
         meny += f'<a href="{rot}{h}" class="{"on" if on else ""}"{st}{" aria-current=\"page\"" if on else ""}>{n}</a>'
-    var = ';'.join(f'--{k}:{v}' for k, v in c.items() if k in ('ink', 'hi', 'w', 'vl', 'l', 'mid', 'bg', 'ram', 't', 'tram'))
+    var = ';'.join(f'--{k}:{v}' for k, v in c.items() if k in ('ink', 'hi', 'w', 'vl', 'l', 'mid', 'bg', 'ram', 't', 'tram', 'knapp'))
     doc = f"""<!doctype html>
 <html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(titel)} – Mattekompassen</title>
@@ -555,6 +555,8 @@ GRUPPER = [
 
 # De fyra gemensamma sidorna får samma färg som sin ikon på startsidan
 SIDFARG = {'bedomning.html': farger('havsgron'), 'hjalp.html': farger('mint2'), 'nationella-prov.html': farger('solgul'), 'amnesord.html': farger('korall')}
+# En nyans ljusare rubrikruta och knappar på de fyra sidorna (Nikola 2026-10-24)
+for _c in SIDFARG.values(): _c['hero'] = mix(_c['main'], '#FFFFFF', .3); _c['knapp'] = mix(_c['ink'], _c['main'], .3)
 # Gamla färger i innehållet (bedomning.py, hjalp.py, np.py) -> vintagefärger
 FARGBYTE = {'#2C4152': '#3E5463', '#426B89': '#5F7E92', '#5A7552': '#5C7A55', '#96505A': '#8A5A4E', '#B95E52': '#A8705F',
             '#8A5E22': '#6B5626', '#F2CD69': '#D3BE8E', '#1F6E6C': '#6A5F80', '#DDEBF3': '#EEF2F5', '#E3ECDD': '#EEF3EC',
@@ -563,7 +565,7 @@ FARGBYTE = {'#2C4152': '#3E5463', '#426B89': '#5F7E92', '#5A7552': '#5C7A55', '#
 FARGBYTE_NP = {'#2C4152': '#6B4E0E', '#426B89': '#8A6614', '#5A7552': '#A67C17', '#96505A': '#7A5A12', '#B95E52': '#B8891F',
                '#8A5E22': '#7A5A12', '#F2CD69': '#E9B949', '#1F6E6C': '#8A6614', '#DDEBF3': '#FBEFD0', '#E3ECDD': '#FBF1DA',
                '#F7E3DE': '#F8E6BC', '#F8EBC9': '#FBF1DA', '#D9EEEC': '#FBEFD0',
-               '#DDBE88': '#F0CF73', '#A07E3E': '#A67C17', '#8F6C2E': '#8A6614', '#7A5A22': '#7A5A12', '#F6EBD3': '#FBF1DA', '#F3E8D3': '#FBF1DA'}
+               '#DDBE88': '#F7DE9A', '#5A4219': '#8A6614', '#A07E3E': '#A67C17', '#8F6C2E': '#8A6614', '#7A5A22': '#7A5A12', '#F6EBD3': '#FBF1DA', '#F3E8D3': '#FBF1DA'}
 # Så får du hjälp: rosa detaljer blir mint
 FARGBYTE_HJALP = {**FARGBYTE, '#B95E52': '#3F8582', '#96505A': '#2F6B69', '#F7E3DE': '#E6F6F3'}
 # Grundträning (huvudräkning och klockan), gemensam sida som bara länkas från startsidan. Dold tills Nikola godkänt.
