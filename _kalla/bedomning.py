@@ -27,7 +27,7 @@ FORMAGOR = [  # namn, färg, ljus, vad det är, så visar du det, E, C, A
   'Du redovisar tydligt och använder matematiska symboler.',
   'Du redovisar tydligt och strukturerat med rätt symboler och matteord.'),
 ]
-# Planscher om förmågorna (bilder i planscher/, kopieras till bilder/planscher/). Stegen = planschens text, för "Kolla dig själv".
+# "Kolla dig själv": de fyra stegen per förmåga (text från planscherna i Drive-mapp 1JXJZOsKRK93rJavDA_5yASsma9WSnA-n; bilderna visas inte).
 PLANSCHER = {
  'Begrepp': ('begrepp', 'Jag förstår, använder och kopplar samman matematiska begrepp.', [
   ('Jag förstår matematiska begrepp', ['Jag kan förklara begrepp med egna ord.', 'Jag vet vad begreppet syftar på.', 'Jag kan skilja mellan liknande begrepp.', 'Jag kan tolka begreppets betydelse i olika sammanhang.']),
@@ -76,10 +76,6 @@ CSS = """<style>
 .bd .fk .visa{background:var(--gl);border-radius:12px;padding:10px 12px;font-size:14.5px;line-height:1.45;margin:0}
 .bd .fk .visa b{display:block;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--g);margin-bottom:2px}
 .bd .fk{display:flex;flex-direction:column}.bd .fk .visa{margin-bottom:12px!important}
-.bd .pl{display:block;margin:0 0 10px;border-radius:12px;overflow:hidden;border:2px solid var(--gl);height:150px;background:#fff}
-.bd .pl img{display:block;width:100%;height:100%;object-fit:cover;object-position:top}
-.bd .pknapp{align-self:flex-start;display:inline-block;background:var(--g);color:#fff;text-decoration:none;font-weight:700;font-size:14px;border-radius:999px;padding:7px 14px;margin:0 0 10px}
-.bd .pknapp:hover{filter:brightness(1.1)}
 .bd .kolla{margin:0;background:#fff;border:2px solid var(--gl);border-radius:12px}
 .bd .kolla summary{cursor:pointer;font-weight:700;color:var(--g);padding:9px 12px;font-size:15px}
 .bd .kolla .in{padding:0 12px 10px;font-size:14px;line-height:1.4}
@@ -110,15 +106,12 @@ def sida():
     e = html.escape
     ut = [CSS, '<div class="bd">',
           '<p class="ingress">I matematik bedöms det du visar att du kan: på lektionerna, i skriftliga uppgifter, muntligt och på prov. Här ser du vad som bedöms och hur du kan visa det.</p>',
-          '<h2 class="grupp" style="--g:#2C4152">Fem förmågor</h2><p class="under">All matematik bygger på fem förmågor. Det är de som bedöms, i alla kapitel och alla årskurser. Öppna planschen eller klicka på Kolla dig själv för att se hur du kan bli bättre.</p><div class="fg">']
+          '<h2 class="grupp" style="--g:#2C4152">Fem förmågor</h2><p class="under">All matematik bygger på fem förmågor. Det är de som bedöms, i alla kapitel och alla årskurser. Klicka på Kolla dig själv för att se hur du kan bli bättre.</p><div class="fg">']
     for n, g, gl, vad, visa, *_ in FORMAGOR:
         fil, mening, steg = PLANSCHER[n]
-        src = f'bilder/planscher/{fil}.jpg'
         kolla = ''.join(f'<h4><span>{i}</span>{e(r)}</h4><ul>' + ''.join(f'<li>{e(p)}</li>' for p in pp) + '</ul>' for i, (r, pp) in enumerate(steg, 1))
         ut.append(f'<div class="fk" style="--g:{g};--gl:{gl}"><h3>{e(n)}</h3><p>{e(vad)}</p>'
                   f'<p class="visa"><b>Så visar du det</b>{e(visa)}</p>'
-                  f'<a class="pl" href="{src}" target="_blank" rel="noopener" aria-label="Planschen om {e(n.lower())}, öppnas i stort format"><img src="bilder/planscher/{fil}-liten.jpg" alt="" loading="lazy"></a>'
-                  f'<a class="pknapp" href="{src}" target="_blank" rel="noopener">Se planschen</a>'
                   f'<details class="kolla"><summary>Kolla dig själv</summary><div class="in"><p class="mening">{e(mening)}</p>{kolla}</div></details></div>')
     ut.append('</div>')
     ut.append('<h2 class="grupp" style="--g:#F2CD69">Från E till A</h2><p class="under">Så här skiljer sig betygen åt för varje förmåga. Ju högre betyg, desto säkrare, mer utvecklat och mer motiverat.</p><div class="tab">')

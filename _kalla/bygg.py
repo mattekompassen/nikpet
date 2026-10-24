@@ -399,7 +399,6 @@ def innehall(k, s, t):
 def extra(fil):
     if fil == 'bedomning.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import bedomning
-        shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'planscher'), os.path.join(UT, 'bilder', 'planscher'), dirs_exist_ok=True)
         return bedomning.sida()
     if fil == 'nationella-prov.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import np as npsida
