@@ -620,7 +620,7 @@ def bygg():
             grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3">{t}</div></div>'
         sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Årskurs {k}', 'Lär dig nytt, träna mer och kolla vad du kan.',
              f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="nrc" style="color:{c["ink"]}" aria-hidden="true">{k}</div>')
-             + f'<main><div class="wrap">{grupper}</div></main>')
+             + f'<main><div class="wrap">{grupper}<p style="margin:34px 0 10px"><a class="knapp" href="index.html">← Till startsidan</a></p></div></main>')
         if k in TRANA_AR:
             sti = [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), ('Interaktiva övningar', 'ak%d/trana.html' % k)]
             hero = lambda t, p, sti=sti: panel(c, t, p, f'Åk {k} · Matematik {c["bok"]}', sti, f'<img class="bild" src="../bilder/ak{k}/16_Interaktiva_ovningar.png" alt="">', '../')
