@@ -109,6 +109,11 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .strat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;max-width:960px}.strat h3{margin:0;font-size:18px}
 .arlank{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:960px}.arlank a{display:block;border-radius:20px;padding:22px 24px;color:#fff;text-decoration:none;font-weight:800;font-size:22px}.arlank a small{display:block;font-weight:500;font-size:15px;opacity:.9;margin-top:4px}
 .omlank{display:inline-block;margin:0 0 20px;font-weight:700;color:var(--ink)}
+.ovlank{display:flex;align-items:center;gap:20px;flex-wrap:wrap;background:var(--l);border-radius:24px;padding:22px 26px;margin:0 0 22px;max-width:860px;text-decoration:none;color:#2F2B26;box-shadow:0 6px 18px #0000001a;transition:transform .15s}
+.ovlank:hover{transform:translateY(-3px)}
+.ovlank .ovik{font-size:36px;width:64px;height:64px;border-radius:18px;background:var(--w);display:flex;align-items:center;justify-content:center;flex:none}
+.ovlank .ovtxt{flex:1 1 260px;font-size:16px;line-height:1.5}.ovlank .ovtxt b{display:block;font-family:Fraunces,Georgia,serif;font-size:22px;margin-bottom:4px}
+.ovlank .ovknapp{background:var(--ink);color:#fff;font-weight:700;font-size:16px;border-radius:999px;padding:12px 22px;white-space:nowrap}
 .ruta{background:var(--vl);border:2px solid var(--l);border-radius:24px;padding:28px 32px;max-width:800px}
 .ruta h3{margin:0 0 6px;color:var(--ink)}
 .kap{background:var(--vl);border:2px solid var(--l);border-radius:20px;margin:0 0 14px;max-width:860px}
@@ -510,7 +515,7 @@ def bygg():
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""
 {panel(c, t, '', f'Åk {k} · Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), (t, None)], f'<img class="bild" src="../bilder/ak{k}/{f}.png" alt="">', '../')}
-<main><section><div class="wrap">{'<a class="omlank" href="../problemlosning.html">Så arbetar vi med problemlösning: nivåer och strategier →</a>' if s == 'problemlosning' else ''}{krypterad(innehall(k, s, t)) if s == 'lektioner' else ovningsprov_sida(k) if (s == 'ovningsprov' and k == 9) else innehall(k, s, t)}
+<main><section><div class="wrap">{'<a class="ovlank" href="../problemlosning.html"><span class="ovik" aria-hidden="true">💡</span><span class="ovtxt"><b>Så arbetar vi med problemlösning</b>Läs om de tre nivåerna och strategier som hjälper dig när du fastnar.</span><span class="ovknapp">Nivåer och strategier →</span></a>' if s == 'problemlosning' else ''}{krypterad(innehall(k, s, t)) if s == 'lektioner' else ovningsprov_sida(k) if (s == 'ovningsprov' and k == 9) else innehall(k, s, t)}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
