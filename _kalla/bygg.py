@@ -613,7 +613,7 @@ def _blatt(t, m='#5B8DB8', d='#1F4466'):
     return mix(m, '#FFFFFF', (L - Lm) / (1 - Lm))
 FARGBYTE_NP = {k: _blatt(v) for k, v in FARGBYTE_NP.items()}
 # Ljus rubrikruta med ram, som Matematikens grunder
-NP_PANEL = '<style>.panel{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}.panel .sti,.panel .sti a{color:#5F6368}.panel h1{color:var(--ink)}.panel p{color:#3B4A5A}</style>'
+NP_PANEL = '<style>.panel{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}.panel .sti,.panel .sti a{color:#5F6368}.panel h1{color:var(--ink)}.panel p{color:#3B4A5A;max-width:none}</style>'
 # Så får du hjälp: rosa detaljer blir mint
 FARGBYTE_HJALP = {**FARGBYTE, '#B95E52': '#357D8A', '#96505A': '#1E5560', '#F7E3DE': '#E4F3F5'}
 # Grundträning (huvudräkning och klockan), gemensam sida som bara länkas från startsidan. Dold tills Nikola godkänt.
