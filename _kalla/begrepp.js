@@ -21,6 +21,49 @@
   const OM = Object.fromEntries(OMR.map(o => [o[0], o]));
   const omrade = n => (n = n.toLowerCase(), /algebra/.test(n) ? 'alg' : /geometri/.test(n) ? 'geo' : /samband|procent/.test(n) ? 'sam' : /statistik|sannolik/.test(n) ? 'sta' : 'tal');
 
+  // Egna bilder till begrepp som saknar exempel i övningsdatan (2026-10-25)
+  const K = '#2E3A46', Y = '#E9B949', sv_ = (w, h, i) => `<svg class="fig" viewBox="0 0 ${w} ${h}" width="${w}" aria-hidden="true" fill="none" stroke="${K}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${i}</svg>`;
+  const b_ = (t, n) => `<span class="br"><span>${t}</span><span>${n}</span></span>`;
+  const txt = (x, y, t, s = 16) => `<text x="${x}" y="${y}" font-size="${s}" font-weight="700" fill="${K}" stroke="none" font-family="Inter,sans-serif">${t}</text>`;
+  const EGNA = {
+    'siffra': '<mark>4</mark> <mark>7</mark> <mark>2</mark>',
+    'positionssystem': '3<mark>5</mark>2<br><small>5 tiotal = 50</small>',
+    'naturliga tal': '<mark>0, 1, 2, 3 …</mark>',
+    'heltal': '… −2, −1, <mark>0</mark>, 1, 2 …',
+    'rationellt tal': '0,5 = <mark>' + b_('1', '2') + '</mark>',
+    'överslagsräkning': '49 · 21 ≈ <mark>50 · 20</mark>',
+    'negativ exponent': '10<sup><mark>−2</mark></sup> = 0,01',
+    'prefix': '<mark>kilo</mark>meter',
+    'nano': '1 <mark>n</mark>m = 10<sup>−9</sup> m',
+    'milli': '1 <mark>m</mark>m = 0,001 m',
+    'led': '<mark>2x + 3</mark> = <mark>11</mark>',
+    'obekant': '2<mark>x</mark> + 3 = 11',
+    'balansmetoden': 'x + 3 <mark>− 3</mark> = 8 <mark>− 3</mark>',
+    'potens': '<mark>x<sup>3</sup></mark>',
+    'additionsmetoden': '<small>x + y = 5<br>x − y = 1</small><br><mark>2x = 6</mark>',
+    'grafisk lösning': sv_(170, 120, `<path d="M15 105H160M25 115V8" stroke-width="2"/><path d="M30 100L150 20" /><path d="M30 25L150 95" stroke="#4F9BA8"/><circle cx="90" cy="60" r="8" fill="${Y}" stroke="${K}"/>`),
+    'skala': '<mark>1 : 100</mark>',
+    'vertikalvinklar': sv_(170, 120, `<path d="M20 20L150 100M20 100L150 20"/><path d="M62 46A28 28 0 0 1 62 74" stroke="${Y}" stroke-width="6"/><path d="M108 46A28 28 0 0 0 108 74" stroke="${Y}" stroke-width="6"/>`),
+    'sidovinklar': sv_(180, 110, `<path d="M15 90H165M90 90L130 20"/><path d="M120 90A30 30 0 0 0 105 64" stroke="${Y}" stroke-width="6"/><path d="M60 90A30 30 0 0 1 102 63" stroke="#4F9BA8" stroke-width="6"/>${txt(28, 70, '120°', 15)}${txt(132, 76, '60°', 15)}`),
+    'gradskiva': sv_(180, 105, `<path d="M15 95A75 75 0 0 1 165 95Z" fill="#FBF1DA"/>${[...Array(19)].map((_, i) => { const a = Math.PI * i / 18, l = i % 3 ? 8 : 15; return `<path d="M${(90 - 75 * Math.cos(a)).toFixed(1)} ${(95 - 75 * Math.sin(a)).toFixed(1)}L${(90 - (75 - l) * Math.cos(a)).toFixed(1)} ${(95 - (75 - l) * Math.sin(a)).toFixed(1)}" stroke-width="2"/>`; }).join('')}<path d="M90 95L140 40" stroke="${Y}" stroke-width="4"/><circle cx="90" cy="95" r="4" fill="${K}"/>`),
+    'π (pi)': '<mark>π</mark> ≈ 3,14',
+    'begränsningsarea': sv_(170, 120, `<path d="M30 45H110V105H30Z" fill="${Y}"/><path d="M30 45L60 20H140L110 45Z" fill="#F3D88E"/><path d="M110 45L140 20V80L110 105Z" fill="#F7E3AE"/>`),
+    'basyta': sv_(170, 125, `<path d="M40 30V95M130 30V95"/><ellipse cx="85" cy="30" rx="45" ry="13"/><ellipse cx="85" cy="95" rx="45" ry="13" fill="${Y}"/>`),
+    'liter': '1 <mark>l</mark> = 1 dm<sup>3</sup>',
+    'parallelltrapets': sv_(170, 110, `<path d="M55 20H115L150 95H20Z"/><path d="M55 20H115M20 95H150" stroke="${Y}" stroke-width="6"/><path d="M80 15l6 5-6 5M80 90l6 5-6 5" stroke-width="2"/>`),
+    'rotationssymmetri': sv_(170, 125, `<path d="M85 60L85 15L110 40ZM85 60L130 60L105 85ZM85 60L85 105L60 80ZM85 60L40 60L65 35Z" fill="${Y}"/><path d="M140 30A60 60 0 0 1 145 90" stroke="#4F9BA8"/><path d="M137 82l8 9 5-11" stroke="#4F9BA8"/>`),
+    'motsvarande sidor': sv_(190, 110, `<path d="M15 95H75L15 50Z"/><path d="M95 95H185L95 28Z"/><path d="M15 95H75M95 95H185" stroke="${Y}" stroke-width="6"/>`),
+    'rätvinklig triangel': sv_(170, 115, `<path d="M30 100H145L30 20Z" fill="#FBF1DA"/><path d="M30 82H48V100" stroke="${Y}" stroke-width="4"/>`),
+    'medelhastighet': 'v = <mark>' + b_('s', 't') + '</mark>',
+    'km/h': '90 <mark>km/h</mark>',
+    'koordinatsystem': sv_(160, 120, `<path d="M15 95H150M40 112V8" stroke-width="2.5"/><path d="M140 90l10 5-10 5M35 18l5-10 5 10" stroke-width="2"/><circle cx="100" cy="45" r="7" fill="${Y}" stroke="${K}"/>${txt(108, 40, '(3, 2)', 13)}${txt(148, 112, 'x', 14)}${txt(48, 16, 'y', 14)}`),
+    'lån': '🏦 → <mark>5 000 kr</mark>',
+    'funktion': '<mark>y = 2x + 1</mark>',
+    'gynnsamt utfall': '⚀ ⚁ ⚂ ⚃ ⚄ <mark>⚅</mark>',
+    'slumpförsök': '🪙 <mark>krona?</mark>',
+    'lägesmått': '<small><mark>medelvärde</mark><br><mark>median</mark><br><mark>typvärde</mark></small>',
+    'kombinatorik': '3 · 2 = <mark>6</mark> sätt',
+  };
   // Bygg ordlistan
   const ORD = [], NYCKEL = {}, MENING = [];
   const stam = s => s.toLowerCase().replace(/[^a-zåäö ]/g, '').slice(0, 5);
@@ -34,7 +77,7 @@
         const id = om + ':' + ord.toLowerCase();
         const e = ex.find(x => x[1].toLowerCase() === ord.toLowerCase()) || ex.find(x => stam(x[1]) === stam(ord) && ord.length > 4);
         if (NYCKEL[id]) { if (!NYCKEL[id].ak.includes(ak)) NYCKEL[id].ak.push(ak); if (!NYCKEL[id].bild && e) Object.assign(NYCKEL[id], {bild: e[0], exText: e[2]}); egna.push(NYCKEL[id]); continue; }
-        const o = {id, ord, forkl, om, ak: [ak], kap: `Åk ${ak} kap ${kap}`, bild: e ? e[0] : '', exText: e ? e[2] : ''};
+        const o = {id, ord, forkl, om, ak: [ak], kap: `Åk ${ak} kap ${kap}`, bild: e ? e[0] : (EGNA[ord.toLowerCase()] || ''), exText: e ? e[2] : ''};
         ORD.push(o); NYCKEL[id] = o; egna.push(o);
       }
       const svar = (k.dra || []).map(d => d[1]);
@@ -100,9 +143,8 @@
   const kort = o => {
     const c = OM[o.om];
     return `<div class="bk" tabindex="0" role="button" aria-label="${esc(o.ord)}, vänd kortet" style="--o:${c[2]};--od:${c[3]}"><div class="bk-in">
-<div class="bk-fram"><div class="bk-topp"><span class="bk-om">${c[4]} ${c[1]}</span>${hogt(o.ord)}</div><h3>${esc(o.ord)}</h3>
-${o.bild ? `<div class="bk-bild"><span>${o.bild}</span></div>` : `<div class="bk-bild tom" aria-hidden="true">${c[4]}</div>`}<span class="bk-ak">${o.ak.map(a => 'Åk ' + a).join(' · ')}</span></div>
-<div class="bk-bak"><h3>${esc(o.ord)}</h3><p>${esc(o.forkl)}.</p>${o.exText ? `<p class="bk-ex"><b>Exempel:</b> ${esc(o.exText)}</p>` : ''}<span class="bk-vand">↺ Vänd tillbaka</span></div></div></div>`;
+<div class="bk-fram"><h3>${esc(o.ord)}</h3></div>
+<div class="bk-bak"><div class="bk-topp"><h4>${esc(o.ord)}</h4>${hogt(o.ord)}</div>${o.bild ? `<div class="bk-bild"><span>${o.bild}</span></div>` : ''}<p>${esc(o.forkl)}.</p>${o.exText ? `<p class="bk-ex">${esc(o.exText)}</p>` : ''}</div></div></div>`;
   };
   function kortlista(lista, mal) {
     const t = $('#bg-traff');

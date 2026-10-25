@@ -27,18 +27,29 @@
 .bk-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;border-radius:20px}
 .bk.vand .bk-in{transform:rotateY(180deg)}
 .bk-fram,.bk-bak{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden}
-.bk-fram{background:#fff;border:2px solid color-mix(in srgb,var(--o) 45%,#fff);box-shadow:inset 0 6px 0 var(--o)}
 .bk-bak{background:color-mix(in srgb,var(--o) 16%,#fff);border:2px solid color-mix(in srgb,var(--o) 55%,#fff);transform:rotateY(180deg)}
-.bk-topp{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
-.bk-om{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--od)}
-.bk h3{font-size:24px;margin:6px 0 4px;color:#292A28}
-.bk-bild{flex:1;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#292A28;min-height:0;text-align:center}
-.bk-bild .fig{max-width:100%;max-height:120px;height:auto}.bk-bild .tab{font-size:14px}
+.bk-topp{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.bk-om{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--od)}
+.bk-om i{font-style:normal;width:22px;height:22px;border-radius:7px;background:var(--o);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;letter-spacing:0}
+.bk h3{font-size:23px;margin:6px 0 4px;color:#292A28}
+.bk-bild{flex:1;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#292A28;min-height:0;text-align:center;line-height:1.3}
+.bk-bild small{font-size:.62em;font-weight:700}
+.bk-bild .fig{max-width:100%;max-height:105px;height:auto;display:block}.bk-bild .tab{font-size:14px}
 .bk-bild mark,.bg-bildv mark{background:#F3E8D3;color:inherit;border-radius:6px;padding:0 4px;box-shadow:inset 0 -4px #DDBE88}
-.bk-bild.tom{font-size:64px;color:color-mix(in srgb,var(--o) 35%,#fff)}
-.bk-ak{font-size:12px;font-weight:600;color:#6B6258}
-.bk-bak p{margin:6px 0 0;font-size:16px;line-height:1.45}.bk-bak .bk-ex{font-size:14px;color:#3B3B38}
+.bk-bild.tom{font-size:56px;color:color-mix(in srgb,var(--o) 40%,#fff)}
+.bk-fot{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.bk-ak{font-size:12px;font-weight:700;color:#6B6258}
+.bk-tips{font-size:12px;font-weight:700;color:var(--od);background:color-mix(in srgb,var(--o) 16%,#fff);padding:3px 9px;border-radius:999px}
+/* Framsida: bara ordet (Nikola 2026-10-25). Baksida: bild, förklaring och exempel */
+.bk-fram{background:color-mix(in srgb,var(--o) 22%,#fff);background-image:radial-gradient(color-mix(in srgb,var(--o) 34%,#fff) 1.5px,transparent 1.7px);background-size:14px 14px;border:2px solid color-mix(in srgb,var(--o) 50%,#fff);align-items:center;justify-content:center;text-align:center}
+.bk-fram h3{font-size:30px;margin:0;color:var(--od);background:#fff;padding:14px 18px;border-radius:16px;box-shadow:0 4px 12px color-mix(in srgb,var(--o) 30%,transparent);max-width:100%;box-sizing:border-box;hyphens:auto;overflow-wrap:break-word}
+.bk:hover .bk-fram{border-color:var(--o)}
+.bk-bak{gap:4px}.bk-bak h4{margin:0;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px;color:var(--od)}
+.bk-bak .bk-bild{flex:0 1 auto;font-size:21px;background:#fff;border-radius:12px;padding:6px;min-height:46px}
+.bk-bak .bk-bild .fig{max-height:70px}
+.bk-bak p{font-size:15px!important;line-height:1.4!important;margin:2px 0 0!important}.bk-bak .bk-ex{font-size:13px!important;color:#4A4A45}
 .bk-vand{margin-top:auto;font-size:13px;font-weight:600;color:var(--od)}
+.bk{height:270px}
 .bg-hogt{border:0;background:#0000000d;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:15px;flex:none}.bg-hogt:hover{background:#0000001a}
 .br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 4px}.br>span+span{border-top:3px solid currentColor}
 .bg-typer{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}@media (max-width:900px){.bg-typer{grid-template-columns:1fr 1fr}}
@@ -72,7 +83,7 @@
 .bg-tomruta{background:#fff;border:2px dashed var(--l);border-radius:24px;padding:30px;text-align:center;max-width:560px;margin:10px auto 30px}.bg-tomruta span{font-size:44px}.bg-tomruta h3{margin:6px 0}
 .bg-pik{width:120px;height:120px;flex:none;border-radius:30px;background:#fff;box-shadow:inset 0 0 0 2px var(--l);display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:14px;box-sizing:border-box}
 .bg-pik i{border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-weight:800;font-size:18px}
-@media (max-width:640px){.bg-alt{grid-template-columns:1fr}.bg-pik{display:none}.bg-filter{padding:10px 12px;gap:8px}.bg-grupp{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.bg-grupp>span{display:none}.bg-grupp button{white-space:nowrap;font-size:14px;padding:6px 12px}.bg-flikar{flex-wrap:nowrap;gap:6px}.bg-flikar button{font-size:14px;padding:9px 8px;flex:1 1 auto;justify-content:center;white-space:nowrap}.bg-flikar .em{display:none}.bg-kortrad{grid-template-columns:1fr 1fr;gap:10px}.bk{height:200px}.bk h3{font-size:18px;hyphens:auto;overflow-wrap:anywhere}.bk-om{display:none}.bk-bild .fig{max-height:80px}.bk-bak p{font-size:14px}.bk-bak .bk-ex{display:none}}
+@media (max-width:640px){.bg-alt{grid-template-columns:1fr}.bg-pik{display:none}.bg-filter{padding:10px 12px;gap:8px}.bg-grupp{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.bg-grupp>span{display:none}.bg-grupp button{white-space:nowrap;font-size:14px;padding:6px 12px}.bg-flikar{flex-wrap:nowrap;gap:6px}.bg-flikar button{font-size:14px;padding:9px 8px;flex:1 1 auto;justify-content:center;white-space:nowrap}.bg-flikar .em{display:none}.bg-kortrad{grid-template-columns:1fr 1fr;gap:10px}.bk{height:235px}.bk-fram h3{font-size:18px!important;padding:10px!important}.bk-bak{padding:10px!important}.bk-bak .bk-bild{font-size:15px}.bk-bak .bk-bild .fig{max-height:50px}.bk-bak p{font-size:13px!important}.bk-bak h4{font-size:15px;overflow-wrap:anywhere}.bk-bild.tom{font-size:36px}.bk-bild small{font-size:.75em}.bg-hogt{width:26px;height:26px;font-size:12px}.bk-ak{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bk-tips{font-size:11px;white-space:nowrap;padding:2px 7px}.bk h3{font-size:18px;hyphens:auto;overflow-wrap:anywhere}.bk-om{display:none}.bk-bild .fig{max-height:80px}.bk-bak p{font-size:14px}}
 </style><script src="trana-ak7.js"></script><script>(window.BG_DATA=window.BG_DATA||{})[7]=TRANA_DATA</script><script src="trana-ak8.js"></script><script>(window.BG_DATA=window.BG_DATA||{})[8]=TRANA_DATA</script><script src="trana-ak9.js"></script><script>(window.BG_DATA=window.BG_DATA||{})[9]=TRANA_DATA</script><script src="begrepp.js"></script>
 <footer><div class="rand" aria-hidden="true"><i style="background:#58A73E"></i><i style="background:#1A86B0"></i><i style="background:#8A4A78"></i></div><div class="wrap"><b>Mattekompassen</b><span>Matematik för åk 7–9 på Örtagårdsskolan. Frågor? Fråga eller mejla din <a class="mejl" data-u="nikola.petranovic" data-d="skola.malmo.se" href="#">lärare</a>.</span></div></footer>
 <script>document.querySelectorAll('a.mejl').forEach(function(a){a.href='mailto:'+a.dataset.u+'@'+a.dataset.d})</script>
