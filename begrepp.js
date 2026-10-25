@@ -58,12 +58,13 @@
 
   // Filter
   const F = {ak: 0, om: '', sok: ''};
+  // Sökningen jämför utan stora bokstäver, mellanslag och bindestreck
+  const norm = t => String(t || '').toLowerCase().normalize('NFC').replace(/[\s\-–]+/g, ' ').trim();
   const passar = o => (!F.ak || o.ak.includes(F.ak)) && (!F.om || o.om === F.om);
   const urval = () => ORD.filter(passar);
 
   el.innerHTML = `
 <div class="bg-filter">
-  <div class="bg-grupp"><span>Årskurs</span>${[['Alla', 0], ['Åk 7', 7], ['Åk 8', 8], ['Åk 9', 9]].map(([t, v]) => `<button type="button" data-ak="${v}" class="${v ? '' : 'on'}">${t}</button>`).join('')}</div>
   <div class="bg-grupp"><span>Område</span><button type="button" data-om="" class="on">Alla</button>${OMR.map(o => `<button type="button" data-om="${o[0]}"><i style="background:${o[2]}"></i>${o[1]}</button>`).join('')}</div>
 </div>
 <div class="bg-flikar" role="tablist">
@@ -71,7 +72,7 @@
   <button type="button" data-flik="ova"><span class="em">🎯</span> Öva</button>
   <button type="button" data-flik="svara"><span class="em">⭐</span> Mina svåra ord <b id="bg-antal">0</b></button>
 </div>
-<div id="bg-kort"><label class="bg-sok"><span aria-hidden="true">🔍</span><input type="search" placeholder="Sök ett ord, t.ex. nämnare" aria-label="Sök ett ord"></label><p class="bg-hj">Klicka på ett kort för att vända det.</p><div id="bg-kortlista"></div></div>
+<div id="bg-kort"><label class="bg-sok"><span aria-hidden="true">🔍</span><input type="search" placeholder="Sök ett ord, t.ex. nämnare" aria-label="Sök ett ord"></label><p class="bg-hj" id="bg-traff" aria-live="polite">Klicka på ett kort för att vända det.</p><div id="bg-kortlista"></div></div>
 <div id="bg-ova" hidden>
   <div class="bg-typer">
     <button type="button" data-typ="bild"><span>🖼️</span><b>Para ihop ord och bild</b><small>Vilket ord hör till vilken bild?</small></button>
@@ -88,7 +89,9 @@
 
   el.querySelectorAll('[data-ak]').forEach(b => b.onclick = () => { F.ak = +b.dataset.ak; el.querySelectorAll('[data-ak]').forEach(x => x.classList.toggle('on', x === b)); visa(); });
   el.querySelectorAll('[data-om]').forEach(b => b.onclick = () => { F.om = b.dataset.om; el.querySelectorAll('[data-om]').forEach(x => x.classList.toggle('on', x === b)); visa(); });
-  $('.bg-sok input').oninput = e => { F.sok = e.target.value.trim().toLowerCase(); kortlista(); };
+  const sokruta = $('.bg-sok input');
+  const sok = () => { const v = norm(sokruta.value); if (v !== F.sok) { F.sok = v; kortlista(); } };
+  ['input', 'keyup', 'change', 'search'].forEach(h => sokruta.addEventListener(h, sok));
   let FLIK = 'kort', TYP = '';
   el.querySelectorAll('[data-flik]').forEach(b => b.onclick = () => { FLIK = b.dataset.flik; el.querySelectorAll('[data-flik]').forEach(x => x.classList.toggle('on', x === b)); visa(); });
   el.querySelectorAll('[data-typ]').forEach(b => b.onclick = () => { TYP = b.dataset.typ; el.querySelectorAll('[data-typ]').forEach(x => x.classList.toggle('on', x === b)); starta(); });
@@ -102,13 +105,21 @@ ${o.bild ? `<div class="bk-bild"><span>${o.bild}</span></div>` : `<div class="bk
 <div class="bk-bak"><h3>${esc(o.ord)}</h3><p>${esc(o.forkl)}.</p>${o.exText ? `<p class="bk-ex"><b>Exempel:</b> ${esc(o.exText)}</p>` : ''}<span class="bk-vand">↺ Vänd tillbaka</span></div></div></div>`;
   };
   function kortlista(lista, mal) {
-    lista = lista || urval().filter(o => !F.sok || o.ord.toLowerCase().includes(F.sok) || o.forkl.toLowerCase().includes(F.sok));
+    const t = $('#bg-traff');
+    if (!lista && F.sok) {
+      // Sök i alla områden: först ord som börjar på sökordet, sedan ord som innehåller det, sist förklaringar
+      const q = F.sok, n = o => norm(o.ord);
+      const a = ORD.filter(o => n(o).startsWith(q)), b = ORD.filter(o => !a.includes(o) && n(o).includes(q)), c = ORD.filter(o => !a.includes(o) && !b.includes(o) && norm(o.forkl).includes(q));
+      lista = [...a, ...b, ...c];
+      if (t && !mal) t.textContent = lista.length ? `${lista.length} ord hittades för ”${sokruta.value.trim()}” i alla områden. Klicka på ett kort för att vända det.` : '';
+    } else if (t && !mal) t.textContent = 'Klicka på ett kort för att vända det.';
+    lista = lista || urval();
     let h = '';
     for (const o of OMR) {
       const l = lista.filter(x => x.om === o[0]);
       if (l.length) h += `<section class="bg-omr"><h2><span class="bg-prick" style="background:${o[2]}">${o[4]}</span>${o[1]} <small>${l.length} ord</small></h2><div class="bg-kortrad">${l.map(kort).join('')}</div></section>`;
     }
-    (mal || $('#bg-kortlista')).innerHTML = h || '<p class="bg-tom">Inga ord matchar. Prova ett annat filter.</p>';
+    (mal || $('#bg-kortlista')).innerHTML = h || (F.sok && !mal ? `<p class="bg-tom">Inget ord hittades för ”${esc(sokruta.value.trim())}”. Prova en kortare del av ordet.</p>` : '<p class="bg-tom">Inga ord matchar. Prova ett annat filter.</p>');
   }
   el.addEventListener('click', e => { const k = e.target.closest('.bk'); if (k) k.classList.toggle('vand'); });
   el.addEventListener('keydown', e => { const k = e.target.closest('.bk'); if (k && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); k.classList.toggle('vand'); } });
