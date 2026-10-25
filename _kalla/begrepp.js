@@ -13,11 +13,12 @@
 
   // Områden (kursplanens centrala innehåll). Procent hör till Samband och förändring.
   const OMR = [
-    ['tal', 'Taluppfattning', '#E07A5F', '#9A4630', '½'],
-    ['alg', 'Algebra', '#4F9BA8', '#1E5560', 'x'],
-    ['geo', 'Geometri', '#E9B949', '#7A5A12', '△'],
-    ['sam', 'Samband och förändring', '#8A9A5B', '#4F5A2E', '%'],
-    ['sta', 'Sannolikhet och statistik', '#A97CB8', '#5A3A6B', '⚄']];
+    // Nikolas pastellfärger (2026-10-25): (område, namn, pastell, mörk nyans för text, symbol)
+    ['tal', 'Taluppfattning', '#A7CBEA', '#2C5A85', '½'],
+    ['alg', 'Algebra', '#B7E3C6', '#2E6B45', 'x'],
+    ['geo', 'Geometri', '#F7B1B1', '#9A3A3A', '△'],
+    ['sam', 'Samband och förändring', '#FCEEC0', '#7A5A12', '%'],
+    ['sta', 'Sannolikhet och statistik', '#C7B8F9', '#4B3A99', '⚄']];
   const OM = Object.fromEntries(OMR.map(o => [o[0], o]));
   const omrade = n => (n = n.toLowerCase(), /algebra/.test(n) ? 'alg' : /geometri/.test(n) ? 'geo' : /samband|procent/.test(n) ? 'sam' : /statistik|sannolik/.test(n) ? 'sta' : 'tal');
 
@@ -143,7 +144,7 @@
   const kort = o => {
     const c = OM[o.om];
     return `<div class="bk" tabindex="0" role="button" aria-label="${esc(o.ord)}, vänd kortet" style="--o:${c[2]};--od:${c[3]}"><div class="bk-in">
-<div class="bk-fram"><h3>${esc(o.ord)}</h3></div>
+<div class="bk-fram"><h3${o.ord.length > 13 ? ' class="lang"' : ''}>${esc(o.ord)}</h3></div>
 <div class="bk-bak"><div class="bk-topp"><h4>${esc(o.ord)}</h4>${hogt(o.ord)}</div>${o.bild ? `<div class="bk-bild"><span>${o.bild}</span></div>` : ''}<p>${esc(o.forkl)}.</p>${o.exText ? `<p class="bk-ex">${esc(o.exText)}</p>` : ''}</div></div></div>`;
   };
   function kortlista(lista, mal) {

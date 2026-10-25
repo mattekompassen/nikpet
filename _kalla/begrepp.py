@@ -12,13 +12,13 @@ CSS = """
 .bg-sok input{border:0;outline:0;font:inherit;font-size:17px;padding:8px 0;flex:1;background:none}
 .bg-hj{color:#5F6368;margin:10px 0 14px}.bg-tom{color:#5F6368;font-style:italic}
 .bg-omr h2{display:flex;align-items:center;gap:12px;font-size:26px;margin:26px 0 14px}.bg-omr h2 small{font-family:Inter,sans-serif;font-size:14px;font-weight:600;color:#6B6258}
-.bg-prick{width:38px;height:38px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-family:Inter,sans-serif;font-weight:800;font-size:20px}
+.bg-prick{width:38px;height:38px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;color:#2E3A46;box-shadow:inset 0 0 0 1.5px #0000001f;font-family:Inter,sans-serif;font-weight:800;font-size:20px}
 .bg-kortrad{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
 .bk{perspective:900px;height:250px;cursor:pointer;outline:none}.bk:focus-visible .bk-in{box-shadow:0 0 0 4px var(--l)}
 .bk-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;border-radius:20px}
 .bk.vand .bk-in{transform:rotateY(180deg)}
 .bk-fram,.bk-bak{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden}
-.bk-bak{background:color-mix(in srgb,var(--o) 16%,#fff);border:2px solid color-mix(in srgb,var(--o) 55%,#fff);transform:rotateY(180deg)}
+.bk-bak{background:color-mix(in srgb,var(--o) 35%,#fff);border:2px solid color-mix(in srgb,var(--o) 80%,var(--od));transform:rotateY(180deg)}
 .bk-topp{display:flex;justify-content:space-between;align-items:center;gap:6px}
 .bk-om{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--od)}
 .bk-om i{font-style:normal;width:22px;height:22px;border-radius:7px;background:var(--o);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;letter-spacing:0}
@@ -32,10 +32,10 @@ CSS = """
 .bk-ak{font-size:12px;font-weight:700;color:#6B6258}
 .bk-tips{font-size:12px;font-weight:700;color:var(--od);background:color-mix(in srgb,var(--o) 16%,#fff);padding:3px 9px;border-radius:999px}
 /* Framsida: bara ordet (Nikola 2026-10-25). Baksida: bild, förklaring och exempel */
-.bk-fram{background:color-mix(in srgb,var(--o) 22%,#fff);background-image:radial-gradient(color-mix(in srgb,var(--o) 34%,#fff) 1.5px,transparent 1.7px);background-size:14px 14px;border:2px solid color-mix(in srgb,var(--o) 50%,#fff);align-items:center;justify-content:center;text-align:center}
+.bk-fram{background:var(--o);background-image:radial-gradient(#ffffff80 1.5px,transparent 1.7px);background-size:14px 14px;border:2px solid color-mix(in srgb,var(--o) 80%,var(--od));align-items:center;justify-content:center;text-align:center}
 .bk-fram h3{font-size:30px;margin:0;color:var(--od);background:#fff;padding:14px 18px;border-radius:16px;box-shadow:0 4px 12px color-mix(in srgb,var(--o) 30%,transparent);max-width:100%;box-sizing:border-box;hyphens:auto;overflow-wrap:break-word}
-.bk:hover .bk-fram{border-color:var(--o)}
-.bk-bak{gap:4px}.bk-bak h4{margin:0;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px;color:var(--od)}
+.bk:hover .bk-fram{border-color:var(--od)}
+.bk-fram h3.lang{font-size:21px}.bk-bak{gap:4px}.bk-bak h4{margin:0;min-width:0;hyphens:auto;overflow-wrap:anywhere;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px;color:var(--od)}
 .bk-bak .bk-bild{flex:0 1 auto;font-size:21px;background:#fff;border-radius:12px;padding:6px;min-height:46px}
 .bk-bak .bk-bild .fig{max-height:70px}
 .bk-bak p{font-size:15px!important;line-height:1.4!important;margin:2px 0 0!important}.bk-bak .bk-ex{font-size:13px!important;color:#4A4A45}
@@ -73,13 +73,13 @@ CSS = """
 .bg-rensa{font-size:14px;padding:5px 12px;margin-left:8px}
 .bg-tomruta{background:#fff;border:2px dashed var(--l);border-radius:24px;padding:30px;text-align:center;max-width:560px;margin:10px auto 30px}.bg-tomruta span{font-size:44px}.bg-tomruta h3{margin:6px 0}
 .bg-pik{width:120px;height:120px;flex:none;border-radius:30px;background:#fff;box-shadow:inset 0 0 0 2px var(--l);display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:14px;box-sizing:border-box}
-.bg-pik i{border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-weight:800;font-size:18px}
+.bg-pik i{border-radius:10px;display:flex;align-items:center;justify-content:center;color:#2E3A46;font-style:normal;font-weight:800;font-size:18px}
 @media (max-width:640px){.bg-alt{grid-template-columns:1fr}.bg-pik{display:none}.bg-filter{padding:10px 12px;gap:8px}.bg-grupp{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.bg-grupp>span{display:none}.bg-grupp button{white-space:nowrap;font-size:14px;padding:6px 12px}.bg-flikar{flex-wrap:nowrap;gap:6px}.bg-flikar button{font-size:14px;padding:9px 8px;flex:1 1 auto;justify-content:center;white-space:nowrap}.bg-flikar .em{display:none}.bg-kortrad{grid-template-columns:1fr 1fr;gap:10px}.bk{height:235px}.bk-fram h3{font-size:18px!important;padding:10px!important}.bk-bak{padding:10px!important}.bk-bak .bk-bild{font-size:15px}.bk-bak .bk-bild .fig{max-height:50px}.bk-bak p{font-size:13px!important}.bk-bak h4{font-size:15px;overflow-wrap:anywhere}.bk-bild.tom{font-size:36px}.bk-bild small{font-size:.75em}.bg-hogt{width:26px;height:26px;font-size:12px}.bk-ak{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bk-tips{font-size:11px;white-space:nowrap;padding:2px 7px}.bk h3{font-size:18px;hyphens:auto;overflow-wrap:anywhere}.bk-om{display:none}.bk-bild .fig{max-height:80px}.bk-bak p{font-size:14px}}
 """
 
 def ikon():
-    return ('<div class="bg-pik" aria-hidden="true"><i style="background:#E07A5F">½</i><i style="background:#4F9BA8">x</i>'
-            '<i style="background:#E9B949">△</i><i style="background:#A97CB8">%</i></div>')
+    return ('<div class="bg-pik" aria-hidden="true"><i style="background:#A7CBEA">½</i><i style="background:#B7E3C6">x</i>'
+            '<i style="background:#F7B1B1">△</i><i style="background:#C7B8F9">%</i></div>')
 
 def kropp(panel, c, rot=''):
     data = ''.join(f'<script src="{rot}trana-ak{k}.js"></script><script>(window.BG_DATA=window.BG_DATA||{{}})[{k}]=TRANA_DATA</script>' for k in (7, 8, 9))
@@ -94,4 +94,4 @@ def startlank():
     g = ''.join(f'<a href="begrepp.html"><i style="background:#E3E8F4">{e}</i><span><b>{t}</b><small>{s}</small></span></a>' for e, t, s in del3)
     return (f'<section class="gtC" style="background:#E3E8F4;box-shadow:inset 0 0 0 2px #B9C4DE"><div class="h"><span class="gik" style="background:#fff">{ikon().replace("bg-pik", "bg-pik mini")}</span>'
             f'<div><b>Matematiska begrepp</b><small>Lär dig matteorden. För alla årskurser.</small></div><a class="alla" href="begrepp.html" style="background:#2B3A6B">Träna begreppen →</a></div><div class="g">{g}</div></section>'
-            '<style>.bg-pik.mini{width:58px;height:58px;border-radius:14px;padding:6px;gap:3px;display:grid;grid-template-columns:1fr 1fr;box-shadow:none}.bg-pik.mini i{border-radius:5px;font-size:11px;color:#fff;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800}</style>')
+            '<style>.bg-pik.mini{width:58px;height:58px;border-radius:14px;padding:6px;gap:3px;display:grid;grid-template-columns:1fr 1fr;box-shadow:none}.bg-pik.mini i{border-radius:5px;font-size:11px;color:#2E3A46;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800}</style>')
