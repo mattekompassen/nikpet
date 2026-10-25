@@ -108,6 +108,64 @@
     if (b === 1 || a === 1) return 'Ett tal gånger 1 är talet självt.';
     return `${a} · ${b} = ${a} · ${b - 1} + ${a}. Vad är ${a} · ${b - 1}?`;
   }
+  // ---------- Enheter (längd, volym, vikt) ----------
+  const fmt = x => { const [h, d] = String(Math.round(x * 1e6) / 1e6).split('.'); return tus(h) + (d ? ',' + d : ''); };
+  const ENH = {  // enheter från störst till minst, med värdet i grundenheten
+    langd: {e: [['km', 1000], ['m', 1], ['dm', .1], ['cm', .01], ['mm', .001]], mest: 'längst', trappa: [['km', 1000], ['m', 10], ['dm', 10], ['cm', 10], ['mm']],
+      saker: [['En penna är ungefär 15 ___ lång.', 'cm'], ['Ett rum är ungefär 4 ___ brett.', 'm'], ['Från Malmö till Stockholm är det ungefär 600 ___.', 'km'],
+        ['En myra är ungefär 5 ___ lång.', 'mm'], ['En dörr är ungefär 2 ___ hög.', 'm'], ['En linjal är 30 ___ lång.', 'cm'], ['En fotbollsplan är ungefär 100 ___ lång.', 'm'],
+        ['Ett mynt är ungefär 2 ___ tjockt.', 'mm'], ['Du går 1 ___ på ungefär 15 minuter.', 'km'], ['Ett A4-papper är ungefär 2 ___ brett.', 'dm'], ['En nagel är ungefär 1 ___ bred.', 'cm']]},
+    volym: {e: [['l', 1], ['dl', .1], ['cl', .01], ['ml', .001]], mest: 'mest', trappa: [['l', 10], ['dl', 10], ['cl', 10], ['ml']],
+      saker: [['Ett glas mjölk rymmer ungefär 2 ___.', 'dl'], ['En hink rymmer ungefär 10 ___.', 'l'], ['En tesked rymmer ungefär 5 ___.', 'ml'], ['En läskburk rymmer 33 ___.', 'cl'],
+        ['Ett badkar rymmer ungefär 200 ___.', 'l'], ['En kopp te är ungefär 2 ___.', 'dl'], ['En mjölkförpackning rymmer 1 ___.', 'l'], ['En droppe är mindre än 1 ___.', 'ml'], ['En vattenflaska rymmer 50 ___.', 'cl']]},
+    vikt: {e: [['ton', 1000], ['kg', 1], ['hg', .1], ['g', .001]], mest: 'tyngst', trappa: [['ton', 1000], ['kg', 10], ['hg', 100], ['g']],
+      saker: [['Ett paket mjöl väger 2 ___.', 'kg'], ['En bil väger ungefär 1,5 ___.', 'ton'], ['Ett äpple väger ungefär 150 ___.', 'g'], ['En elefant väger ungefär 5 ___.', 'ton'],
+        ['En godispåse väger ungefär 2 ___.', 'hg'], ['En vuxen människa väger ungefär 70 ___.', 'kg'], ['Ett brev väger ungefär 20 ___.', 'g'], ['Ett paket smör väger 500 ___.', 'g'], ['En lastbil kan väga 20 ___.', 'ton']]}};
+  const trappa = typ => `<span class="gt-trappa">${ENH[typ].trappa.map(([u, f]) => `<b>${u}</b>${f ? `<i>· ${tus(f)} →</i>` : ''}`).join('')}</span>`;
+  function byt(typ, dec) {  // n stor enhet = ? liten enhet, eller tvärtom
+    const E = ENH[typ].e;
+    let i, j, R;
+    do { i = r(0, E.length - 2); j = r(i + 1, E.length - 1); R = Math.round(E[i][1] / E[j][1]); } while (R > 1000);
+    const [st, sm] = [E[i][0], E[j][0]];
+    const tips = `1 ${st} = ${tus(R)} ${sm}.`;
+    if (!dec) {
+      const n = R >= 100 ? r(2, 9) : r(2, 15);
+      return Math.random() < .5 ? {typ: 'tal', q: `${n} ${st} = ? ${sm}`, svar: n * R, ledtrad: `${tips} Räkna ${n} · ${tus(R)}.`}
+        : {typ: 'tal', q: `${tus(n * R)} ${sm} = ? ${st}`, svar: n, ledtrad: `${tips} Räkna ${tus(n * R)} / ${tus(R)}.`};
+    }
+    const n = d1(r(1, 9) + val([.5, .2, .25, .8, .1]));
+    return Math.random() < .5 ? {typ: 'tal', q: `${fmt(n)} ${st} = ? ${sm}`, svar: d1(n * R), ledtrad: `${tips} Räkna ${fmt(n)} · ${tus(R)}.`}
+      : {typ: 'tal', q: `${fmt(d1(n * R))} ${sm} = ? ${st}`, svar: n, ledtrad: `${tips} Räkna ${fmt(d1(n * R))} / ${tus(R)}.`};
+  }
+  function enhetOv(typ, ikon, namn, kort) {
+    const E = ENH[typ].e;
+    return {del: 'enhet', ikon, namn, kort, typ,
+      exempel: `Enhetstrappan: ${trappa(typ)}<br>Neråt i trappan räknar du gånger, uppåt räknar du delat med.`,
+      val: NIVA('välj rätt enhet', 'byt enhet', 'decimaltal och blandat'),
+      gen(v) {
+        if (v === '1') { const [t, u] = val(ENH[typ].saker); return {typ: 'val', q: t.replace('___', '<span class="lucka">?</span>'), alt: fyra(u, E.map(e => e[0])), ledtrad: `Tänk på hur stor saken är. ${trappa(typ)}`}; }
+        if (v === '2') return byt(typ, false);
+        if (typ === 'volym' && Math.random() < .25) { const n = r(2, 9); return val([
+          {typ: 'tal', q: `${n} l = ? dm³`, svar: n, ledtrad: '1 dm³ = 1 l.'}, {typ: 'tal', q: `${n * 100} ml = ? cm³`, svar: n * 100, ledtrad: '1 cm³ = 1 ml.'},
+          {typ: 'tal', q: `${n} dm³ = ? dl`, svar: n * 10, ledtrad: '1 dm³ = 1 l = 10 dl.'}]); }
+        const k = r(0, 2);
+        if (k === 0) return byt(typ, true);
+        if (k === 1) {  // t.ex. 3 m 40 cm = ? cm
+          let i, R; do { i = r(0, E.length - 2); R = Math.round(E[i][1] / E[i + 1][1]); } while (R > 1000);
+          const a = r(1, 9), b = r(1, R - 1);
+          return {typ: 'tal', q: `${a} ${E[i][0]} ${tus(b)} ${E[i + 1][0]} = ? ${E[i + 1][0]}`, svar: a * R + b, ledtrad: `1 ${E[i][0]} = ${tus(R)} ${E[i + 1][0]}. Gör om ${a} ${E[i][0]} och lägg till ${tus(b)} ${E[i + 1][0]}.`};
+        }
+        // Vilket är längst/tyngst/mest? Fyra mängder i olika enheter
+        let mangder;
+        do {
+          const T = r(2, 9) * E[r(0, E.length - 2)][1], ok = E.filter(([, w]) => T / w >= .1 && T / w <= 20000);
+          mangder = [.5, .8, 1, 1.25, 2, 3].map(m => { const [u, w] = val(ok); const x = d1(T * m / w); return [x, u, x * w]; });
+          mangder = blanda(mangder).filter((m, i, a) => a.findIndex(z => Math.abs(z[2] - m[2]) < 1e-9) === i).slice(0, 4);
+        } while (mangder.length < 4 || new Set(mangder.map(m => m[1])).size < 2);
+        const text = m => `${fmt(m[0])} ${m[1]}`, max = mangder.reduce((a, b) => b[2] > a[2] ? b : a);
+        return {typ: 'val', q: `Vilket är ${ENH[typ].mest}?`, alt: [text(max), ...mangder.filter(m => m !== max).map(text)], ledtrad: `Gör om alla till samma enhet först. ${trappa(typ)}`};
+      }};
+  }
   const OV = {
     tiokamrater: {del: 'rakna', ikon: '🔟', namn: 'Tiokamrater och hundrakamrater', kort: 'Fyll upp till 10, 100 och 1000',
       exempel: '<b>7 + 3 = 10</b>. 7 och 3 är tiokamrater.<br><b>60 + 40 = 100</b>. 60 och 40 är hundrakamrater.',
@@ -292,7 +350,10 @@
         return {typ: v === '3' ? 'langd' : 'tal', enhet: 'min', q: `${vad[0]} ${tt(Math.floor(a / 60), a % 60)} ${vad[1]} ${tt(Math.floor(b / 60), b % 60)}. Hur lång tid tar ${vad[2]}?`, bild: tidslinje(a, b), svar: b - a,
           ledtrad: v === '1' ? `Räkna minuterna från ${a % 60} till ${b % 60}.` : `Räkna först till hel timme: från ${tt(Math.floor(a / 60), a % 60)} till ${tt(tim / 60, 0)} är det ${tim - a} min. Hur mycket är det sedan kvar?`};
       }},
-    enheter: {del: 'tid', ikon: '⏳', namn: 'Timmar, minuter och sekunder', kort: 'Byt mellan tidsenheter',
+    langd: enhetOv('langd', '📏', 'Längd', 'km, m, dm, cm och mm'),
+    volym: enhetOv('volym', '🥛', 'Volym', 'l, dl, cl och ml'),
+    vikt: enhetOv('vikt', '⚖️', 'Vikt', 'ton, kg, hg och g'),
+    enheter: {del: 'enhet', ikon: '⏳', namn: 'Tid', kort: 'Sekunder, minuter, timmar, dygn och år',
       exempel: '<b>1 h = 60 min</b> &nbsp; <b>1 min = 60 s</b> &nbsp; <b>1 dygn = 24 h</b><br>En halvtimme = 30 min, en kvart = 15 min.',
       val: NIVA('hela timmar och minuter', 'halvtimme, kvart och sekunder', 'dygn och blandade enheter'),
       gen(v) {
@@ -314,19 +375,26 @@
           {typ: 'tal', q: `${t} h ${mm} min = ? min`, svar: 60 * t + mm, ledtrad: `${t} h = ${60 * t} min. Lägg till ${mm} min.`},
           {typ: 'langd', q: `${60 * t + mm} min = ? h ? min`, svar: 60 * t + mm, ledtrad: `Hur många hela timmar (60 min) får plats i ${60 * t + mm} min? Resten är minuter.`},
           {typ: 'tal', q: `${n} veckor = ? dygn`, svar: 7 * n, ledtrad: `En vecka har 7 dygn. Räkna ${n} · 7.`},
-          {typ: 'tal', q: `${48 * n / 2} h = ? dygn`, svar: n, ledtrad: 'Hur många gånger får 24 plats?'}]);
+          {typ: 'tal', q: `${48 * n / 2} h = ? dygn`, svar: n, ledtrad: 'Hur många gånger får 24 plats?'},
+          {typ: 'tal', q: `${n} år = ? månader`, svar: 12 * n, ledtrad: `Ett år har 12 månader. Räkna ${n} · 12.`},
+          {typ: 'tal', q: 'Ett kvartal = ? månader', svar: 3, ledtrad: 'Ett kvartal är en fjärdedel av ett år. 12 / 4.'},
+          {typ: 'tal', q: `${n} kvartal = ? månader`, svar: 3 * n, ledtrad: `Ett kvartal är 3 månader. Räkna ${n} · 3.`},
+          {typ: 'tal', q: 'Ett vanligt år har ? dygn', svar: 365, ledtrad: 'Ett skottår har 366 dygn. Ett vanligt år har ett dygn mindre.'},
+          {typ: 'tal', q: 'Ett skottår har ? dygn', svar: 366, ledtrad: 'Ett skottår har ett dygn mer än ett vanligt år (29 februari).'}]);
       }},
   };
 
   // ---------- Visning ----------
-  const DELAR = [['rakna', 'Huvudräkning', 'Räkna i huvudet. Du får 10 uppgifter med nya tal varje gång.'], ['tid', 'Klockan och tid', 'Läs klockan, ställ visarna och räkna med tid.']];
+  const DELAR = [['rakna', 'Huvudräkning', 'Räkna i huvudet. Du får 10 uppgifter med nya tal varje gång.'], ['tid', 'Klockan och tid', 'Läs klockan, ställ visarna och räkna med tid.'], ['enhet', 'Enheter', 'Längd, volym, vikt och tid. Välj rätt enhet och byt mellan enheter.']];
   const KLOCKORD = [[7, 0, 'klockan 7', '7.00'], [7, 30, 'halv 8', '7.30'], [7, 15, 'kvart över 7', '7.15'], [7, 45, 'kvart i 8', '7.45'], [7, 5, 'fem över 7', '7.05'], [7, 55, 'fem i 8', '7.55']];
   function meny() {
     el.innerHTML = DELAR.map(([d, rub, txt]) => `<div class="kapblock gt-del"><h2>${rub}</h2><p class="gt-txt">${txt}</p><div class="gt-typer">` +
       Object.entries(OV).filter(([, o]) => o.del === d).map(([k, o]) => `<a class="typ" href="#${k}"><span class="gt-ik" aria-hidden="true">${o.ikon}</span>${o.namn}<b>${o.kort}</b></a>`).join('') + '</div>' +
       (d === 'tid' ? `<details class="gt-ord"><summary>📖 Klockord</summary><div class="gt-ordgrid">${KLOCKORD.map(([h, m, f, d]) => `<div>${klocka(h, m, 'liten')}<b>${f}</b><span>${d}</span></div>`).join('')}</div>
         <ul><li><b>över</b> = minuter efter hel timme</li><li><b>i</b> = minuter kvar till nästa timme</li><li><b>halv 8</b> = halvvägs till 8, alltså 7.30</li>
-        <li><b>morgon</b> ca 05–10, <b>förmiddag</b> 10–12, <b>eftermiddag</b> 12–18, <b>kväll</b> 18–24</li><li><b>1 h</b> (timme) = 60 min, <b>1 min</b> (minut) = 60 s (sekunder), <b>1 dygn</b> = 24 h</li></ul></details>` : '') + '</div>').join('');
+        <li><b>morgon</b> ca 05–10, <b>förmiddag</b> 10–12, <b>eftermiddag</b> 12–18, <b>kväll</b> 18–24</li><li><b>1 h</b> (timme) = 60 min, <b>1 min</b> (minut) = 60 s (sekunder), <b>1 dygn</b> = 24 h</li></ul></details>` : '') +
+      (d === 'enhet' ? `<details class="gt-ord"><summary>📖 Enhetstrappan</summary><div class="gt-trappor"><p><b>Längd</b>${trappa('langd')}</p><p><b>Volym</b>${trappa('volym')}</p><p><b>Vikt</b>${trappa('vikt')}</p>
+        <ul><li>Från stor till liten enhet (neråt i trappan): räkna <b>gånger</b>.</li><li>Från liten till stor enhet (uppåt): räkna <b>delat med</b>.</li><li><b>1 dm³ = 1 l</b> och <b>1 cm³ = 1 ml</b></li></ul></div></details>` : '') + '</div>').join('');
   }
   function valmeny(k) {
     const o = OV[k];
@@ -461,7 +529,7 @@
     else meny();
     if (k) el.scrollIntoView({block: 'start', behavior: 'smooth'});
   }
-  window.GT_TEST = {OV, fras, del, tt};  // för automatiska tester
+  window.GT_TEST = {OV, fras, del, tt, ENH};  // för automatiska tester
   window.addEventListener('hashchange', route);
   route();
 })();
