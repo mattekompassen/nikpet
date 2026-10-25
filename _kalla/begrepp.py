@@ -80,6 +80,21 @@ CSS = """
 .bg-pik i{border-radius:10px;display:flex;align-items:center;justify-content:center;color:#2E3A46;font-style:normal;font-weight:800;font-size:18px}
 @media (max-width:640px){.bg-alt{grid-template-columns:1fr}.bg-pik{display:none}.bg-filter{padding:10px 12px;gap:8px}.bg-grupp{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.bg-grupp>span{display:none}.bg-grupp button{white-space:nowrap;font-size:14px;padding:6px 12px}.bg-flikar{flex-wrap:nowrap;gap:6px}.bg-flikar button{font-size:14px;padding:9px 8px;flex:1 1 auto;justify-content:center;white-space:nowrap}.bg-flikar .em{display:none}.bg-kortrad{grid-template-columns:1fr 1fr;gap:10px}.bk{height:235px}.bk-fram h3{font-size:18px!important;padding:10px!important}.bk-bak{padding:10px!important}.bk-bak .bk-bild{font-size:15px}.bk-bak .bk-bild .fig{max-height:50px}.bk-bak p{font-size:13px!important}.bk-bak h4{font-size:15px;overflow-wrap:anywhere}.bk-bild.tom{font-size:36px}.bk-bild small{font-size:.75em}.bg-hogt{width:26px;height:26px;font-size:12px}.bk-ak{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bk-tips{font-size:11px;white-space:nowrap;padding:2px 7px}.bk h3{font-size:18px;hyphens:auto;overflow-wrap:anywhere}.bk-om{display:none}.bk-bild .fig{max-height:80px}.bk-bak p{font-size:14px}}
 #bg [hidden]{display:none!important}
+.bg-rub{font-size:28px;margin:22px 0 4px}
+.bg-del{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;font-size:21px;margin:22px 0 12px;color:var(--ink)}.bg-del small{font-family:Inter,sans-serif;font-size:15px;font-weight:500;color:#5F6368}
+.bg-val{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.bg-ruta{font:inherit;text-align:left;cursor:pointer;background:var(--o);border:2px solid color-mix(in srgb,var(--o) 70%,var(--od));border-radius:22px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;color:var(--od);transition:transform .15s,box-shadow .15s;min-height:128px}
+.bg-ruta:hover{transform:translateY(-3px);box-shadow:0 8px 18px #0002}
+.bg-rsym{width:44px;height:44px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;margin-bottom:6px}
+.bg-ruta b{font-size:19px;line-height:1.25}.bg-ruta small{font-size:14px;font-weight:600;opacity:.85}
+.bg-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;background:#fff;border:2px solid var(--ram);border-radius:20px;padding:10px 14px;margin:16px 0 18px}
+.bg-tillbaka{font:inherit;font-weight:700;font-size:15px;border:0;background:var(--vl);color:var(--ink);border-radius:999px;padding:9px 16px;cursor:pointer}
+.bg-var{display:flex;align-items:center;gap:10px;font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:700;color:var(--ink);flex:1 1 auto}.bg-var small{font-family:Inter,sans-serif;font-size:15px;font-weight:600;color:#5F6368}
+.bg-var .bg-prick{width:34px;height:34px;font-size:17px;color:#2E3A46}
+.bg-lage{display:flex;background:var(--vl);border-radius:999px;padding:4px;gap:4px}
+.bg-lage button{font:inherit;font-weight:700;font-size:16px;border:0;background:none;color:var(--ink);border-radius:999px;padding:9px 18px;cursor:pointer}.bg-lage button.on{background:var(--ink);color:#fff}
+#bg-steg2 #bg-yta:not(:empty){margin-top:0}
+@media (max-width:640px){.bg-val{grid-template-columns:1fr 1fr;gap:10px}.bg-ruta{min-height:110px;padding:12px}.bg-ruta b{font-size:16px}.bg-rub{font-size:23px}.bg-var{font-size:18px;flex-basis:100%;order:-1}.bg-lage{flex:1}.bg-lage button{flex:1;font-size:14px;padding:8px 6px;white-space:nowrap}}
 .kk-intro{font-size:18px;line-height:1.55;max-width:860px;margin:0 0 16px}
 .kk-val{display:flex;gap:10px;margin:0 0 18px}.kk-val button{font:inherit;font-weight:700;font-size:16px;padding:9px 18px;border-radius:999px;border:2px solid var(--l);background:#fff;color:var(--ink);cursor:pointer}.kk-val button.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .kk-typer{grid-template-columns:repeat(3,1fr)}
