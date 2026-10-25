@@ -19,7 +19,7 @@ TA_MED = ['Penna och sudd', 'Linjal', 'Räknare (delprov C och D)']
 FAR_EJ = ['Mobiltelefon', 'Smartklocka', 'Räknare och formelblad på delprov A och B']
 TIPS = [('Före provet', ['Öva huvudräkning och skriftlig räkning, för delprov A och B görs utan räknare.',
                          'Titta på formelbladet i förväg så att du vet vad som står där.',
-                         'Träna med övningsproven längre ner på sidan.',
+                         'Träna med NP-träningen längre ner på sidan.',
                          'Sov ordentligt och ät frukost.']),
         ('Under provet', ['Läs varje uppgift noga. Vad ska du ta reda på?',
                           'Börja med det du kan. Hoppa över och kom tillbaka sedan.',
@@ -97,8 +97,8 @@ CSS = """<style>
 @media(max-width:1000px){.np .dp{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.np .dp,.np .dagar,.np .hm,.np .tipsg{grid-template-columns:1fr}}
 </style>"""
-OVP_INTRO = ('<h2 class="grupp" style="--g:#426B89;margin-top:40px">Övningsprov</h2>'
-             '<p class="under" style="max-width:860px">Här finns sex övningsprov med samma upplägg som det riktiga provet: fyra delprov A–D. '
+OVP_INTRO = ('<h2 class="grupp" id="np-traning" style="--g:#426B89;margin-top:40px;scroll-margin-top:20px">NP-träning</h2>'
+             '<p class="under" style="max-width:860px">Här finns sex träningsprov inför det nationella provet, med samma upplägg som det riktiga provet: fyra delprov A–D. '
              'Uppgifterna är egna och kommer inte från något riktigt prov. Skriv ut delprovet eller öppna det, ta tid och lös uppgifterna som på riktigt. '
              'Rätta sedan med facit. Facit öppnar du med lösenordet som du får av din mattelärare.</p>')
 

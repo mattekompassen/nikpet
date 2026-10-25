@@ -350,11 +350,11 @@ def ovningsprov_sida(k, rot='', intro=None):
             info = ovp_info(upg)
             rader += (f'<div class="ovrad"><a class="upg" href="{rot}{sti}.pdf" target="_blank" rel="noopener"><span class="bok">{b}</span><span>Delprov {b}<small>{tid} · {rk}'
                       + (f' · {info}' if info else '') + '</small></span></a>'
-                      f'<a class="facit" href="#facit" data-fil="{rot}{sti}-facit.bin" data-namn="Övningsprov {n} delprov {b} facit.pdf">🔒 Facit</a></div>')
-        prov += f'<div class="ovkort"><h3>Övningsprov {n}</h3>{rader}</div>'
+                      f'<a class="facit" href="#facit" data-fil="{rot}{sti}-facit.bin" data-namn="NP-träning {n} delprov {b} facit.pdf">🔒 Facit</a></div>')
+        prov += f'<div class="ovkort"><h3>NP-träning {n}</h3>{rader}</div>'
     prov = f'<div class="ovgrid">{prov}</div>'
     if intro is None:
-        intro = f'<p class="ingress" style="max-width:860px;margin:0 0 18px">Här finns sex övningsprov med samma upplägg som det nationella provet i åk 9: fyra delprov A–D. Uppgifterna är egna och kommer inte från något riktigt prov. Skriv ut delprovet eller öppna det, ta tid och lös uppgifterna som på riktigt. Rätta sedan med facit. <a href="../nationella-prov.html" style="font-weight:700;color:var(--ink)">Läs mer om nationella provet →</a></p>'
+        intro = f'<p class="ingress" style="max-width:860px;margin:0 0 18px">Här finns sex träningsprov med samma upplägg som det nationella provet i åk 9: fyra delprov A–D. Uppgifterna är egna och kommer inte från något riktigt prov. Skriv ut delprovet eller öppna det, ta tid och lös uppgifterna som på riktigt. Rätta sedan med facit. <a href="../nationella-prov.html" style="font-weight:700;color:var(--ink)">Läs mer om nationella provet →</a></p>'
     salt = __import__('base64').b64encode(LOSEN_SALT).decode()
     return f"""{intro}
 {prov}
@@ -637,9 +637,9 @@ def STARTSIDA_HTML(rad, gtlank, fik):
     sm = [('prov', 'bedomning.html', 'Bedömning'), ('boj', 'hjalp.html', 'Så får du hjälp'), ('prata', 'amnesord.html', 'Ämnesord på olika språk')]
     smal = ''.join(f'<a href="{h}"><span class="rik" style="background:{mix(SIDFARG[h]["main"], "#FFFFFF", .6)}">{fik(i)}</span>{t}</a>' for i, h, t in sm)
     np_ = (f'<section class="npruta"><div class="npik">{fik("medalj").replace("width=\"32\" height=\"32\"", "width=\"44\" height=\"44\"")}</div>'
-           '<div class="nptxt"><div class="npet">Åk 9 · 12 och 14 maj 2027</div><h2>Nationella prov i matematik</h2><p>Så går provet till, och så tränar du inför det med övningsprov.</p></div>'
+           '<div class="nptxt"><div class="npet">Åk 9 · 12 och 14 maj 2027</div><h2>Nationella prov i matematik</h2><p>Så går provet till, och så tränar du inför det med NP-träning.</p></div>'
            '<div class="npdag" aria-live="polite"><b id="npdagar">–</b><small>dagar kvar</small></div>'
-           '<div class="npkn"><a href="nationella-prov.html">Om provet →</a><a href="ak9/ovningsprov.html">Övningsprov</a></div></section>'
+           '<div class="npkn"><a href="nationella-prov.html">Om provet →</a><a href="nationella-prov.html#np-traning">NP-träning</a></div></section>'
            '<script>(function(){var d=Math.ceil((new Date(2027,4,12)-new Date())/864e5),e=document.getElementById("npdagar");if(e)e.textContent=d>0?d:"0"})()</script>')
     return f'<style>{NP_CSS}</style>{np_}{gtlank}<div class="smalrad" role="navigation" aria-label="Mer information">{smal}</div>'
 ORG['indigo'] = ('#9AA5B1', '#2E3A46', '#EEF1F4')  # neutral gråblå (Nikola 2026-10-24)
@@ -732,7 +732,7 @@ def bygg():
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""
 {panel(c, t, '', f'Åk {k} · Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), (t, None)], f'<img class="bild" src="../bilder/ak{k}/{f}.png" alt="">', '../')}
-<main><section><div class="wrap">{'<a class="ovlank" href="../problemlosning.html"><span class="ovik" aria-hidden="true">💡</span><span class="ovtxt"><b>Så arbetar vi med problemlösning</b>Läs om de tre nivåerna och strategier som hjälper dig när du fastnar.</span><span class="ovknapp">Nivåer och strategier →</span></a>' if s == 'problemlosning' else ''}{krypterad(innehall(k, s, t)) if s == 'lektioner' else (innehall(k, s, t) + '<h2 style="margin:34px 0 14px">Övningsprov inför nationella provet</h2>' + ovningsprov_sida(k)) if (s == 'ovningsprov' and k == 9) else innehall(k, s, t)}
+<main><section><div class="wrap">{'<a class="ovlank" href="../problemlosning.html"><span class="ovik" aria-hidden="true">💡</span><span class="ovtxt"><b>Så arbetar vi med problemlösning</b>Läs om de tre nivåerna och strategier som hjälper dig när du fastnar.</span><span class="ovknapp">Nivåer och strategier →</span></a>' if s == 'problemlosning' else ''}{krypterad(innehall(k, s, t)) if s == 'lektioner' else (innehall(k, s, t) + '<h2 id="np-traning" style="margin:34px 0 14px;scroll-margin-top:20px">NP-träning inför nationella provet</h2>' + ovningsprov_sida(k)) if (s == 'ovningsprov' and k == 9) else innehall(k, s, t)}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
