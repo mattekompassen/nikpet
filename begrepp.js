@@ -71,7 +71,6 @@
   <button type="button" data-flik="kort" class="on"><span class="em">🃏</span> Begreppskort</button>
   <button type="button" data-flik="ova"><span class="em">🎯</span> Öva</button>
   <button type="button" data-flik="kitt"><span class="em">🔗</span> ${esc(window.BG_KITT_NAMN || 'Ord som hjälper dig att resonera')}</button>
-  <button type="button" data-flik="svara"><span class="em">⭐</span> Mina svåra ord <b id="bg-antal">0</b></button>
 </div>
 <div id="bg-kort"><label class="bg-sok"><span aria-hidden="true">🔍</span><input type="search" placeholder="Sök ett ord, t.ex. nämnare" aria-label="Sök ett ord"></label><p class="bg-hj" id="bg-traff" aria-live="polite">Klicka på ett kort för att vända det.</p><div id="bg-kortlista"></div></div>
 <div id="bg-ova" hidden>
@@ -158,7 +157,7 @@
       if (vald.dataset.i === b.dataset.i) {
         b.disabled = vald.disabled = true; b.classList.add('par'); vald.classList.add('par'); vald.classList.remove('vald');
         b.insertAdjacentHTML('beforeend', `<span class="bg-etik">${esc(o.ord)}</span>`); ratt(o); vald = null;
-        if (--kvar === 0) { POANG.n++; if (!felen) POANG.r++; yta().querySelector('.bg-poang').textContent = `Rätt: ${POANG.r} av ${POANG.n}`; res(felen ? `Klart! Du gjorde ${felen} fel. Orden har lagts till i Mina svåra ord.` : 'Snyggt! Alla rätt på första försöket.', !felen); }
+        if (--kvar === 0) { POANG.n++; if (!felen) POANG.r++; yta().querySelector('.bg-poang').textContent = `Rätt: ${POANG.r} av ${POANG.n}`; res(felen ? `Klart! Du gjorde ${felen} fel.` : 'Snyggt! Alla rätt på första försöket.', !felen); }
       } else { felen++; fel(o); b.classList.add('skak'); setTimeout(() => b.classList.remove('skak'), 450); }
     });
   }
