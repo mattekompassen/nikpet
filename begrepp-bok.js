@@ -222,7 +222,7 @@ var BG_BOK = [
 "om": "alg",
 "ord": "Likhet",
 "besk": "En likhet är ett samband som betyder att något är lika med något\nannat. Matematiska likheter skrivs med ett likhetstecken (=).",
-"ex": "<p>En ekvation är ett exempel på en matematisk likhet där vänster\nled är lika med höger led.</p>\n<p>4<em>x</em> + 1 = 36 ‒ <em>x</em></p>"
+"ex": "<p>En ekvation är ett exempel på en matematisk likhet där vänster\nled är lika med höger led.</p>\n<p>4<em>x</em> + 1 = 36 − <em>x</em></p>"
 },
 {
 "ak": 7,
@@ -476,7 +476,7 @@ var BG_BOK = [
 "ak": 7,
 "kap": 4,
 "om": "sam",
-"ord": "x-axel och y -axel",
+"ord": "x-axel och y-axel",
 "besk": "De båda tallinjerna i ett koordinatsystem kallas <em>x</em>-axel\n(vågrät) och <em>y</em>-axel (lodrät).",
 "ex": "<img alt=\"\" class=\"foto\" src=\"bilder/begrepp/X4-image2.jpg\"/>"
 },
@@ -710,7 +710,7 @@ var BG_BOK = [
 "om": "tal",
 "ord": "Bråkform",
 "besk": "Ett tal i bråkform är ett tal som är skrivet som en kvot - med\ntäljare och nämnare.",
-"ex": "240/13 ‒<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y1-image1.svg\"/>\n9/10 <img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y1-image2.svg\"/>\n‒ 1/2"
+"ex": "240/13 −<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y1-image1.svg\"/>\n9/10 <img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y1-image2.svg\"/>\n− 1/2"
 },
 {
 "ak": 8,
@@ -718,7 +718,7 @@ var BG_BOK = [
 "om": "tal",
 "ord": "Blandad form",
 "besk": "Ett tal i blandad form är ett tal som är en blandning av ett heltal\noch ett tal i bråkform.",
-"ex": "1<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y1-image3.svg\"/>\n‒ 5<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y1-image4.svg\"/>\n10<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y1-image5.svg\"/>"
+"ex": "1<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y1-image3.svg\"/>\n− 5<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y1-image4.svg\"/>\n10<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y1-image5.svg\"/>"
 },
 {
 "ak": 8,
@@ -726,7 +726,7 @@ var BG_BOK = [
 "om": "tal",
 "ord": "Decimalform",
 "besk": "Ett tal i decimalform är ett tal som är skrivet i\ndecimalsystemet.",
-"ex": "0,5 ‒ 0,6 0,9 1,75 ‒ 5,5 10,03"
+"ex": "0,5 − 0,6 0,9 1,75 − 5,5 10,03"
 },
 {
 "ak": 8,
@@ -830,7 +830,7 @@ var BG_BOK = [
 "om": "sam",
 "ord": "Bråkform",
 "besk": "Ett tal i bråkform är ett tal som är skrivet som en kvot - med\ntäljare och nämnare.",
-"ex": "240/13 ‒<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y2-image4.svg\"/>\n9/10 <img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y2-image5.svg\"/>\n‒1/2"
+"ex": "240/13 −<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y2-image4.svg\"/>\n9/10 <img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Y2-image5.svg\"/>\n−1/2"
 },
 {
 "ak": 8,
@@ -838,7 +838,7 @@ var BG_BOK = [
 "om": "sam",
 "ord": "Decimalform",
 "besk": "Ett tal som är skrivet i decimalsystemet.",
-"ex": "0,5 0,6 ‒0,9 1,75 5,5 ‒10,03"
+"ex": "0,5 0,6 −0,9 1,75 5,5 −10,03"
 },
 {
 "ak": 8,
@@ -1334,7 +1334,7 @@ var BG_BOK = [
 "om": "tal",
 "ord": "Rationella tal",
 "besk": "Ett rationellt tal är ett tal som kan skrivas i bråkform. Även hela\ntal är rationella tal eftersom de kan skrivas med nämnaren 1.",
-"ex": "–17 ‒3,5 ‒<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Z1-image1.svg\"/>\n0 0,42 <img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Z1-image2.svg\"/>\n2 108"
+"ex": "–17 −3,5 −<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Z1-image1.svg\"/>\n0 0,42 <img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Z1-image2.svg\"/>\n2 108"
 },
 {
 "ak": 9,
@@ -1366,7 +1366,7 @@ var BG_BOK = [
 "om": "tal",
 "ord": "Reella tal",
 "besk": "Reella tal omfattar alla tal som kan visas på en tallinje, alltså\nalla rationella och irrationella tal.",
-"ex": "<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Z1-image14.svg\"/>\n3 ‒0,8 π <img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Z1-image15.svg\"/>\n‒<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Z1-image16.svg\"/>"
+"ex": "<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Z1-image14.svg\"/>\n3 −0,8 π <img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Z1-image15.svg\"/>\n−<img alt=\"\" class=\"ekv\" src=\"bilder/begrepp/Z1-image16.svg\"/>"
 },
 {
 "ak": 9,
@@ -1422,7 +1422,7 @@ var BG_BOK = [
 "om": "tal",
 "ord": "Tiopotens",
 "besk": "<p>Tiopotens är ett sätt att skriva att man multiplicerar talet 10\nmed sig självt ett visst antal gånger. Tiopotenser skrivs som 10 upphöjt\ntill ett annat tal, till exempel 10<em><sup>y</sup></em>. Talet 10 ska\nmultipliceras <em>y</em> gånger med sig självt.</p>\n<p>Talet 10 är potensens bas och talet <em>y</em> är potensens\nexponent.</p>",
-"ex": "<p>En tiopotens kan skrivas 10<sup>5</sup>. Det betyder att 10\nmultipliceras med sig självt 5 gånger:</p>\n<p>10<sup>5</sup> = 10 · 10 · 10 · 10 · 10 = 100 000</p>\n<p>En tiopotens kan även skrivas med negativ exponent.<br/>\nTill exempel är:</p>\n<p>10<sup>‒1</sup> = 0,1</p>\n<p>10<sup>‒2</sup> = 0,01</p>\n<p>10<sup>‒3</sup> = 0,001</p>\n<p>och så vidare …</p>"
+"ex": "<p>En tiopotens kan skrivas 10<sup>5</sup>. Det betyder att 10\nmultipliceras med sig självt 5 gånger:</p>\n<p>10<sup>5</sup> = 10 · 10 · 10 · 10 · 10 = 100 000</p>\n<p>En tiopotens kan även skrivas med negativ exponent.<br/>\nTill exempel är:</p>\n<p>10<sup>−1</sup> = 0,1</p>\n<p>10<sup>−2</sup> = 0,01</p>\n<p>10<sup>−3</sup> = 0,001</p>\n<p>och så vidare …</p>"
 },
 {
 "ak": 9,
@@ -1492,7 +1492,7 @@ var BG_BOK = [
 "ak": 9,
 "kap": 2,
 "om": "sam",
-"ord": "Koordinatsystem / Koordinataxlar / x-axel och y -axel / Koordinat / Origo",
+"ord": "Koordinatsystem / Koordinataxlar / x-axel och y-axel / Koordinat / Origo",
 "besk": "<p>Ett koordinatsystem består av tallinjer som korsar varandra.\nTallinjerna kallas för koordinataxlar där <em>x</em>-axeln är vågrät och\n<em>y</em>-axeln är lodrät.</p>\n<p>Koordinataxlarnas gradering gör att man kan ange en punkts läge med\nhjälp av tal, koordinater. Man anger alltid <em>x</em>-koordinaten\nförst.</p>\n<p>Origo kallas nollpunkten i ett koordinatsystem. Det är punkten där\naxlarna korsar varandra. Origo har koordinaterna (0, 0).</p>",
 "ex": "<img alt=\"\" class=\"foto\" src=\"bilder/begrepp/Z2-image5.jpg\"/>"
 },
@@ -1614,7 +1614,7 @@ var BG_BOK = [
 "om": "alg",
 "ord": "Ekvation",
 "besk": "En ekvation är en matematisk likhet där något tal är obekant.",
-"ex": "<p><em>x</em> – 2 = 10,</p>\n<p>52 = <em>y</em> ‒48</p>"
+"ex": "<p><em>x</em> – 2 = 10,</p>\n<p>52 = <em>y</em> −48</p>"
 },
 {
 "ak": 9,
@@ -1782,6 +1782,6 @@ var BG_BOK = [
 "om": "geo",
 "ord": "Pythagoras sats / Andragradsekvation",
 "besk": "<p>Pythagoras sats är ett samband som gäller för alla rätvinkliga\ntrianglar. Pythagoras sats innebär att kvadraten på hypotenusan är lika\nmed summan av kvadraten på de två kateterna.</p>\n<p><img alt=\"\" class=\"foto\" src=\"bilder/begrepp/Z4-image19.jpg\"/></p>",
-"ex": "<p><img alt=\"\" class=\"foto\" src=\"bilder/begrepp/Z4-image20.jpg\"/></p>\n<p>Om två sidor är kända i en rätvinklig triangel kan vi ta reda på den\ntredje sidan. Vi använder då Pythagoras sats.</p>\n<p><em>a</em><sup>2</sup> + <em>b</em><sup>2</sup> =\n<em>c</em><sup>2</sup></p>\n<p>3<sup>2</sup> + 4<sup>2</sup> = <em>c</em><sup>2</sup></p>\n<p>9 + 16 = <em>c</em><sup>2</sup></p>\n<p>25 = <em>c</em><sup>2</sup></p>\n<p>5 = <em>c</em></p>\n<p>Ekvationen är en andragradsekvation. Ekvationen har två lösningar,\n<em>c</em> = 5 och<br/>\n<em>c</em> = ‒5. Men eftersom <em>c</em> är en sträcka så är det bara\ndet positiva värdet som vi kan använda.</p>"
+"ex": "<p><img alt=\"\" class=\"foto\" src=\"bilder/begrepp/Z4-image20.jpg\"/></p>\n<p>Om två sidor är kända i en rätvinklig triangel kan vi ta reda på den\ntredje sidan. Vi använder då Pythagoras sats.</p>\n<p><em>a</em><sup>2</sup> + <em>b</em><sup>2</sup> =\n<em>c</em><sup>2</sup></p>\n<p>3<sup>2</sup> + 4<sup>2</sup> = <em>c</em><sup>2</sup></p>\n<p>9 + 16 = <em>c</em><sup>2</sup></p>\n<p>25 = <em>c</em><sup>2</sup></p>\n<p>5 = <em>c</em></p>\n<p>Ekvationen är en andragradsekvation. Ekvationen har två lösningar,\n<em>c</em> = 5 och<br/>\n<em>c</em> = −5. Men eftersom <em>c</em> är en sträcka så är det bara\ndet positiva värdet som vi kan använda.</p>"
 }
 ];
