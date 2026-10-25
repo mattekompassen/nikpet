@@ -1,5 +1,9 @@
 # Sidan Matematiska begrepp (skiss). Används av skiss.py (och senare av bygg.py).
 CSS = """
+.bk-bak{overflow-y:auto!important;scrollbar-width:thin}.bk-text{font-size:15px;line-height:1.4;margin-top:2px}.bk-text p{margin:0 0 4px}
+.bk-bild img.foto,.bg-bildv img.foto{max-height:95px;max-width:100%;height:auto;border-radius:8px}.bk-bild img.ekv,.bg-bildv img.ekv,.bk-text img.ekv{display:inline-block;vertical-align:middle;margin:0 2px}.bk-bild img.foto,.bg-bildv img.foto{display:block;margin:2px auto}
+.bk-bild p,.bg-bildv p{margin:2px 0}.bk-bild table,.bg-bildv table{border-collapse:collapse;font-size:12px;margin:2px auto}.bk-bild td,.bk-bild th,.bg-bildv td,.bg-bildv th{border:1px solid #ccc;padding:1px 5px}
+.bk-bak .bk-bild{font-size:14px!important;font-weight:500!important;flex:none!important;line-height:1.35}
 .bg-filter{display:flex;flex-wrap:wrap;gap:12px 26px;background:#fff;border:2px solid var(--ram);border-radius:22px;padding:16px 20px;margin:0 0 18px}
 .bg-grupp{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.bg-grupp>span{font-weight:700;font-size:14px;color:#5F6368;margin-right:4px}
 .bg-grupp button,.bg-flikar button{font:inherit;font-weight:600;font-size:15px;padding:8px 15px;border-radius:999px;border:1.5px solid var(--l);background:#fff;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
@@ -87,7 +91,7 @@ def kropp(panel, c, rot=''):
                   [('Startsida', 'index.html'), ('Matematiska begrepp', None)], ikon())
             + f'<main><section><div class="wrap"><div id="bg"></div><a class="knapp" href="index.html">← Till startsidan</a></div></section></main>'
             + f'<style>.panel{{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}}.panel .sti,.panel .sti a{{color:#5F6368}}.panel h1{{color:var(--ink)}}.panel p{{color:#3B4A5A}}{CSS}</style>'
-            + data + f'<script src="{rot}begrepp.js"></script>')
+            + data + f'<script src="{rot}begrepp-bok.js"></script><script src="{rot}begrepp.js"></script>')
 
 def startlank():
     del3 = [('🃏', 'Begreppskort', 'Ord, förklaring och bild'), ('🎯', 'Öva på orden', 'Bild, mening, udda ord'), ('⭐', 'Mina svåra ord', 'Fel svar kommer tillbaka')]

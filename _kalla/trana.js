@@ -19,7 +19,12 @@
   if (!el) return;
   const ALLA = TRANA_DATA({r, val, sv, tus, sgn, blanda: a => blanda(a)});
   const kap = ALLA[new URLSearchParams(location.search).get('kap')] ? new URLSearchParams(location.search).get('kap') : '1';
-  const D = ALLA[kap], AVSNITT = D.avsnitt, BEGREPP = D.begrepp, QUIZ = D.quiz, FYLL = D.fyll, EX = D.exempel || [], DRA = D.dra || [];
+  // Matcha begrepp använder bokens begrepp (begrepp-bok.js, Nikolas begreppslistor) när de finns
+  const AK = +((location.pathname.match(/ak(\d)\//) || [])[1] || 0);
+  const ren = h => { const d = document.createElement('div'); d.innerHTML = h; return d.textContent.replace(/\s+/g, ' ').trim(); };
+  const dolj = (t, ord) => ord.split(' / ').reduce((a, w) => a.replace(new RegExp(w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\s+/g, '\\s+') + '[a-zåäö]*', 'gi'), '___'), t);
+  const BOKB = (window.BG_BOK || []).filter(b => b.ak === AK && String(b.kap) === kap && !/<img/.test(b.besk)).map(b => [b.ord, dolj(ren(b.besk), b.ord)]);
+  const D = ALLA[kap], AVSNITT = D.avsnitt, BEGREPP = BOKB.length >= 6 ? BOKB : D.begrepp, QUIZ = D.quiz, FYLL = D.fyll, EX = D.exempel || [], DRA = D.dra || [];
   const rub = document.getElementById('kaprubrik');
   if (rub) rub.innerHTML = `Kapitel ${kap} <span style="font-weight:500;opacity:.7">${D.namn}</span>`;
   const TILLBAKA = 'trana.html#kap' + kap;

@@ -675,7 +675,7 @@ def bygg():
 <main><section><div class="wrap"><h2 id="kaprubrik">Kapitel</h2>
 <div id="trana" data-lage="{lage}"></div>
 {tillbaka}</div></section></main>
-<script src="../trana-ak{k}.js"></script><script src="../trana.js"></script>""", rot='../')
+<script src="../trana-ak{k}.js"></script>{'<script src="../begrepp-bok.js"></script>' if lage == 'begrepp' else ''}<script src="../trana.js"></script>""", rot='../')
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""
 {panel(c, t, '', f'Åk {k} · Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), (t, None)], f'<img class="bild" src="../bilder/ak{k}/{f}.png" alt="">', '../')}
@@ -712,6 +712,8 @@ def bygg():
         import begrepp as bgr
         sida('begrepp.html', 'Matematiska begrepp', '', SIDFARG['amnesord.html'], bgr.kropp(panel, SIDFARG['amnesord.html']))
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'begrepp.js'), UT)
+        shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'begrepp-bok.js'), UT)
+        shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bilder-begrepp'), os.path.join(UT, 'bilder', 'begrepp'), dirs_exist_ok=True)
     for js in ('trana.js', 'trana-ak7.js', 'trana-ak8.js', 'trana-ak9.js'):
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), js), UT)
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
