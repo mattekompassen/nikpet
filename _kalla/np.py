@@ -106,7 +106,7 @@ def sida():
     """Översta delen av nationella-prov.html: en avlång ruta med all information om provet.
     Övningsproven läggs till under av bygg.py (ovningsprov_sida), som också stänger <div class="np">."""
     e = html.escape
-    ut = [CSS, '<div class="np"><div class="infobox"><div class="ibinn">',
+    ut = [CSS, '<script>if(location.hash==="#np-traning")location.replace("np-traning.html")</script><div class="np"><div class="infobox"><div class="ibinn">',
           '<p class="ingress">I åk 9 skriver alla elever i Sverige nationellt prov i matematik. Provet visar vad du kan och hjälper läraren när betyget sätts. Provet har fyra delar och skrivs på papper i skolan.</p>',
           '<div class="ib-dagar">' + ''.join(f'<div><b>{e(d)}</b>{e(t)}</div>' for d, t in DAGAR) + '<div class="kl"><b>Klockan 9.00</b>Provet börjar båda dagarna</div></div>',
           '<h3 class="ibh">Fyra delprov</h3><p class="ibu">Varje delprov har en egen tid och egna regler för räknare och formelblad. Provet har inget muntligt delprov.</p><div class="dp">']
