@@ -79,6 +79,20 @@ CSS = """
 .bg-pik{width:120px;height:120px;flex:none;border-radius:30px;background:#fff;box-shadow:inset 0 0 0 2px var(--l);display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:14px;box-sizing:border-box}
 .bg-pik i{border-radius:10px;display:flex;align-items:center;justify-content:center;color:#2E3A46;font-style:normal;font-weight:800;font-size:18px}
 @media (max-width:640px){.bg-alt{grid-template-columns:1fr}.bg-pik{display:none}.bg-filter{padding:10px 12px;gap:8px}.bg-grupp{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.bg-grupp>span{display:none}.bg-grupp button{white-space:nowrap;font-size:14px;padding:6px 12px}.bg-flikar{flex-wrap:nowrap;gap:6px}.bg-flikar button{font-size:14px;padding:9px 8px;flex:1 1 auto;justify-content:center;white-space:nowrap}.bg-flikar .em{display:none}.bg-kortrad{grid-template-columns:1fr 1fr;gap:10px}.bk{height:235px}.bk-fram h3{font-size:18px!important;padding:10px!important}.bk-bak{padding:10px!important}.bk-bak .bk-bild{font-size:15px}.bk-bak .bk-bild .fig{max-height:50px}.bk-bak p{font-size:13px!important}.bk-bak h4{font-size:15px;overflow-wrap:anywhere}.bk-bild.tom{font-size:36px}.bk-bild small{font-size:.75em}.bg-hogt{width:26px;height:26px;font-size:12px}.bk-ak{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bk-tips{font-size:11px;white-space:nowrap;padding:2px 7px}.bk h3{font-size:18px;hyphens:auto;overflow-wrap:anywhere}.bk-om{display:none}.bk-bild .fig{max-height:80px}.bk-bak p{font-size:14px}}
+#bg [hidden]{display:none!important}
+.kk-intro{font-size:18px;line-height:1.55;max-width:860px;margin:0 0 16px}
+.kk-val{display:flex;gap:10px;margin:0 0 18px}.kk-val button{font:inherit;font-weight:700;font-size:16px;padding:9px 18px;border-radius:999px;border:2px solid var(--l);background:#fff;color:var(--ink);cursor:pointer}.kk-val button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.kk-typer{grid-template-columns:repeat(3,1fr)}
+.kk-gtxt{margin:-8px 0 14px;color:#4A4F55}
+.bk.kw{height:300px}.bk.kw .bk-fram{align-items:center;justify-content:center;text-align:center;gap:6px}
+.kk-grupp{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--od)}
+.kk-extra{font-size:12px;font-weight:600;color:#6B6258;background:#fff9;border-radius:999px;padding:2px 9px}
+.bk.kw .bk-bak{gap:6px;overflow:auto}.bk.kw .bk-bak p{font-size:15px!important;margin:4px 0 0!important;min-height:0!important}.kk-ex{color:#3B3B38}
+.bk.kw mark,.bg-fraga mark,.bg-res mark{background:color-mix(in srgb,var(--o,#E9B949) 70%,#fff);color:inherit;border-radius:5px;padding:0 3px}
+.kk-bok{font-size:13px;line-height:1.4;color:#4A4F55;border-top:1.5px dashed color-mix(in srgb,var(--o) 70%,#888);padding-top:6px;margin-top:auto}
+.kk-fr{font-size:16px;font-weight:500;color:#4A4F55}
+.bg-alt.kk-lang{max-width:820px}.bg-alt.kk-lang button{font-size:16px;font-weight:600;text-align:left;line-height:1.4}
+@media (max-width:640px){.bg-flikar{flex-wrap:wrap}.bg-flikar button{flex:1 1 40%}.kk-typer{grid-template-columns:1fr}.bg-kortrad.kk-rad{grid-template-columns:1fr}.bk.kw{height:240px}.kk-intro{font-size:16px}}
 """
 
 def ikon():
@@ -91,7 +105,7 @@ def kropp(panel, c, rot=''):
                   [('Startsida', 'index.html'), ('Matematiska begrepp', None)], ikon())
             + f'<main><section><div class="wrap"><div id="bg"></div><a class="knapp" href="index.html">← Till startsidan</a></div></section></main>'
             + f'<style>.panel{{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}}.panel .sti,.panel .sti a{{color:#5F6368}}.panel h1{{color:var(--ink)}}.panel p{{color:#3B4A5A}}{CSS}</style>'
-            + data + f'<script src="{rot}begrepp-bok.js"></script><script src="{rot}begrepp.js"></script>')
+            + data + f'<script src="{rot}begrepp-bok.js"></script><script src="{rot}begrepp-kitt.js"></script><script src="{rot}begrepp.js"></script>')
 
 def startlank():
     del3 = [('🃏', 'Begreppskort', 'Ord, förklaring och bild'), ('🎯', 'Öva på orden', 'Bild, mening, udda ord'), ('⭐', 'Mina svåra ord', 'Fel svar kommer tillbaka')]
