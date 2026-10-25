@@ -93,7 +93,7 @@
         const par = t.length === 1 ? blanda([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map(n => [t[0], n]) : blanda(t.flatMap(a => [2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => [a, n]))).slice(0, RUNDA);
         return par.map(([a, n]) => { const [x, y] = Math.random() < .5 ? [a, n] : [n, a]; return {typ: 'tal', q: `${x} · ${y} =`, svar: x * y, ledtrad: multTips(x, y), fakta: `${x} · ${y} = ${x * y}`}; });
       }},
-    division: {del: 'rakna', ikon: '➗', namn: 'Division med tabellen', kort: 'Division som omvänd multiplikation',
+    division: {del: 'rakna', ikon: '➗', namn: 'Division', kort: 'Division som omvänd multiplikation',
       exempel: '<b>12 / 4 = 3</b>, eftersom <b>4 · 3 = 12</b>.', valrubrik: 'Välj tabell', val: TABELL,
       lista(v) {
         const t = tabeller(v);
