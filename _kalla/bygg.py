@@ -38,7 +38,8 @@ MATERIAL = [
  ('13_Test', 'test', 'Test'),
  ('17_Ovningsprov', 'ovningsprov', 'Övningsprov'),
 ]
-MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html'), ('Nationella prov', 'nationella-prov.html'), ('Matematikens grunder', 'grundtraning.html')]
+# Nationella prov och Matematikens grunder nås via Alla sidor och startsidan (Nikola 2026-10-25)
+MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html')]
 # Neutral (startsida m.m.): medelvärdet av de fem färgerna, ljusat
 NEUTRAL_M = '#9AA3AE'
 NEUTRAL = dict(main=NEUTRAL_M, ink='#1E2B3A', mid=NEUTRAL_M, l=mix(NEUTRAL_M, '#FFFFFF', .45), vl=mix(NEUTRAL_M, '#FFFFFF', .62), w=mix(NEUTRAL_M, '#FFFFFF', .9),
@@ -395,6 +396,33 @@ document.querySelectorAll('a.facit').forEach(function(a){{a.addEventListener('cl
 </script>"""
 
 import hashlib
+# Rullgardinsmeny "Alla sidor" längst upp till höger (Nikola 2026-10-25)
+CSS += """
+.hoger{display:flex;align-items:center;gap:14px;min-width:0}
+.am{position:relative}.am summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:#1E2B3A;color:#fff;font-weight:700;font-size:15px;user-select:none}
+.am summary::-webkit-details-marker{display:none}.am summary:hover{background:#2E3E52}.am[open] summary{background:#2E3E52}
+.am .ham{display:inline-flex;flex-direction:column;gap:3px}.am .ham i{display:block;width:16px;height:2px;background:#fff;border-radius:2px}
+.am-panel{position:absolute;right:0;top:calc(100% + 10px);z-index:50;width:min(900px,calc(100vw - 32px));background:#fff;border:1.5px solid #D5DEE7;border-radius:22px;box-shadow:0 18px 40px #1E2B3A2a;padding:20px 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px 22px}
+.am-panel h3{font-family:Inter,sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin:0 0 6px;display:flex;align-items:center;gap:8px}
+.am-panel h3 i{width:10px;height:10px;border-radius:50%;flex:none}
+.am-panel a{display:block;text-decoration:none;color:#1E2B3A;font-size:15px;padding:5px 8px;margin:0 -8px;border-radius:8px}.am-panel a:hover{background:#EEF2F6}
+.am-panel a.ar{font-weight:700}
+@media (max-width:860px){.am-panel{grid-template-columns:1fr 1fr;max-height:75vh;overflow:auto}}
+@media (max-width:560px){.hoger{width:100%;flex-wrap:wrap;gap:8px}.am{width:100%}.am summary{justify-content:center}.am-panel{position:static;width:auto;margin-top:8px;grid-template-columns:1fr 1fr;box-shadow:none}}
+"""
+def allamenu(rot=''):
+    kol = ''
+    for k in (7, 8, 9):
+        l = f'<a class="ar" href="{rot}ak{k}.html">Årskurs {k}</a>' + ''.join(f'<a href="{rot}ak{k}/{sl}.html">{html.escape(rt)}</a>' for _, _, rutor in GRUPPER for _, sl, rt, _ in rutor)
+        kol += f'<div><h3><i style="background:{AR[k]["main"]}"></i>Åk {k}</h3>{l}</div>'
+    gem = [('Startsida', 'index.html'), ('Nationella prov', 'nationella-prov.html'), ('Matematikens grunder', 'grundtraning.html'), ('Matematiska begrepp', 'begrepp.html'),
+           ('Problemlösning', 'problemlosning.html'), ('Bedömning', 'bedomning.html'), ('Så får du hjälp', 'hjalp.html'), ('Ämnesord på olika språk', 'amnesord.html')]
+    kol += '<div><h3><i style="background:#1E2B3A"></i>För alla</h3>' + ''.join(f'<a href="{rot}{h}">{t}</a>' for t, h in gem) + '</div>'
+    return ('<details class="am"><summary aria-label="Alla sidor"><span class="ham" aria-hidden="true"><i></i><i></i><i></i></span>Alla sidor</summary>'
+            f'<div class="am-panel">{kol}</div></details>'
+            '<script>document.addEventListener("click",function(e){document.querySelectorAll("details.am[open]").forEach(function(d){if(!d.contains(e.target))d.removeAttribute("open")})});'
+            'document.addEventListener("keydown",function(e){if(e.key==="Escape")document.querySelectorAll("details.am[open]").forEach(function(d){d.removeAttribute("open")})})</script>')
+
 CSS_VER = hashlib.sha1(CSS.encode()).hexdigest()[:8]  # ny version -> webbläsaren hämtar ny stil.css
 
 def rand():
@@ -465,7 +493,7 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
 <link rel="stylesheet" href="{rot}stil.css?v={CSS_VER}">
 <style>:root{{{var}}}</style></head><body>
 {rand()}<header><div class="wrap"><a class="logo" href="{rot}index.html"><img src="{rot}bilder/kompass-liten.png" alt=""><span>Mattekompassen<small>Örtagårdsskolan 7–9</small></span></a>
-<nav aria-label="Huvudmeny">{meny}</nav></div></header>
+<div class="hoger"><nav aria-label="Huvudmeny">{meny}</nav>{allamenu(rot)}</div></div></header>
 {kropp}
 <footer>{rand()}<div class="wrap"><b>Mattekompassen</b><span>Matematik för åk 7–9 på Örtagårdsskolan. Frågor? Fråga eller mejla din <a class="mejl" data-u="nikola.petranovic" data-d="skola.malmo.se" href="#">lärare</a>.</span></div></footer>
 <script>document.querySelectorAll('a.mejl').forEach(function(a){{a.href='mailto:'+a.dataset.u+'@'+a.dataset.d}})</script>
