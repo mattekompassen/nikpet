@@ -589,6 +589,31 @@ FARGBYTE_HJALP = {**FARGBYTE, '#B95E52': '#357D8A', '#96505A': '#1E5560', '#F7E3
 VISA_GRUNDTRANING = True
 # Matematiska begrepp (begrepp.py/begrepp.js), godkänd av Nikola 2026-10-25
 VISA_BEGREPP = True
+# Startsidan (test 2026-10-25): Nationella prov som lång ruta under årskurserna, Bedömning/Hjälp/Ämnesord som smal rad längst ner
+STARTSIDA_NP = True
+NP_CSS = """
+.npruta{position:relative;overflow:hidden;display:flex;align-items:center;gap:26px;margin-top:30px;padding:24px 30px;border-radius:26px;background:linear-gradient(110deg,#E6EEF5,#D3E1EE);border:2px solid #A9BFD6;box-shadow:0 2px 8px #1E2B3A12}
+.npruta .npik{width:74px;height:74px;flex:none;border-radius:22px;background:#fff;border:2px solid #A9BFD6;display:flex;align-items:center;justify-content:center}
+.npruta .nptxt{flex:1;min-width:0}.npruta .npet{font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#1F4466}
+.npruta h2{font-size:clamp(24px,3vw,32px);margin:2px 0 4px;color:#1F4466}.npruta p{margin:0;color:#3B4A5A;font-size:16px}
+.npruta .npdag{flex:none;text-align:center;background:#fff;border-radius:20px;padding:10px 18px;border:2px solid #A9BFD6;min-width:96px}
+.npruta .npdag b{display:block;font-family:Fraunces,Georgia,serif;font-size:38px;line-height:1;color:#1F4466}.npruta .npdag small{font-size:13px;font-weight:700;color:#566373}
+.npruta .npkn{display:flex;flex-direction:column;gap:8px;flex:none}.npruta .npkn a{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:15px;padding:10px 18px;border-radius:999px;background:#1F4466;color:#fff}
+.npruta .npkn a+a{background:#fff;color:#1F4466;box-shadow:inset 0 0 0 2px #1F4466}
+.smalrad{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:38px 0 6px;padding-top:22px;border-top:1.5px solid #E1DED6}
+.smalrad a{display:flex;align-items:center;gap:10px;padding:8px 16px 8px 8px;border-radius:999px;background:#fff;border:1.5px solid #D5DEE7;text-decoration:none;color:#1E2B3A;font-weight:600;font-size:15px}
+.smalrad a:hover{border-color:#8FA6BE}.smalrad .rik{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}.smalrad .rik svg{width:22px;height:22px}
+@media (max-width:760px){.npruta{flex-wrap:wrap;padding:20px}.npruta .npik{display:none}.npruta .npkn{flex-direction:row;width:100%}.npruta .npkn a{flex:1}}
+"""
+def STARTSIDA_HTML(rad, gtlank, fik):
+    sm = [('prov', 'bedomning.html', 'Bedömning'), ('boj', 'hjalp.html', 'Så får du hjälp'), ('prata', 'amnesord.html', 'Ämnesord på olika språk')]
+    smal = ''.join(f'<a href="{h}"><span class="rik" style="background:{mix(SIDFARG[h]["main"], "#FFFFFF", .6)}">{fik(i)}</span>{t}</a>' for i, h, t in sm)
+    np_ = (f'<section class="npruta"><div class="npik">{fik("medalj").replace("width=\"32\" height=\"32\"", "width=\"44\" height=\"44\"")}</div>'
+           '<div class="nptxt"><div class="npet">Åk 9 · 12 och 14 maj 2027</div><h2>Nationella prov i matematik</h2><p>Så går provet till, och så tränar du inför det med övningsprov.</p></div>'
+           '<div class="npdag" aria-live="polite"><b id="npdagar">–</b><small>dagar kvar</small></div>'
+           '<div class="npkn"><a href="nationella-prov.html">Om provet →</a><a href="ak9/ovningsprov.html">Övningsprov</a></div></section>'
+           '<script>(function(){var d=Math.ceil((new Date(2027,4,12)-new Date())/864e5),e=document.getElementById("npdagar");if(e)e.textContent=d>0?d:"0"})()</script>')
+    return f'<style>{NP_CSS}</style>{np_}{gtlank}<div class="smalrad" role="navigation" aria-label="Mer information">{smal}</div>'
 ORG['indigo'] = ('#9AA5B1', '#2E3A46', '#EEF1F4')  # neutral gråblå (Nikola 2026-10-24)
 GT_FARG = farger('indigo')
 
@@ -639,7 +664,7 @@ def bygg():
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
 <main class="hem"><div class="wrap"><section class="topprubrik"><img src="bilder/kompass-matte.png" alt=""><div><h1>Mattekompassen</h1><p>Din väg genom matematiken i årskurs 7–9</p></div></section>
 <h2 class="sr">Välj din årskurs</h2><div class="kkrad">{kort}</div>
-<div class="infor">{rad}</div>{gtlank}</div></main>""")
+{STARTSIDA_HTML(rad, gtlank, fik) if STARTSIDA_NP else f'<div class="infor">{rad}</div>{gtlank}'}</div></main>""")
     # Årskurssidor och undersidor
     for k, c in AR.items():
         grupper = ''
