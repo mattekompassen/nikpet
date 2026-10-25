@@ -264,6 +264,10 @@
       box.querySelectorAll('[data-ktyp]').forEach(b => b.onclick = () => { KTYP = b.dataset.ktyp; box.querySelectorAll('[data-ktyp]').forEach(x => x.classList.toggle('on', x === b)); kstart(); });
     }
     $('#kk-kort').hidden = KFLIK !== 'kort'; $('#kk-ova').hidden = KFLIK !== 'ova';
+    // Ord med flera betydelser har bara övningen Vardag eller matte, de andra grupperna har inte den
+    box.querySelectorAll('[data-ktyp]').forEach(b => b.hidden = KF === 'fler' ? b.dataset.ktyp !== 'fler' : KF && b.dataset.ktyp === 'fler');
+    if (KTYP && box.querySelector(`[data-ktyp="${KTYP}"]`).hidden) { KTYP = KF === 'fler' ? 'fler' : ''; box.querySelectorAll('[data-ktyp]').forEach(x => x.classList.toggle('on', x.dataset.ktyp === KTYP)); }
+    box.querySelector('.kk-typer').style.gridTemplateColumns = KF ? (KF === 'fler' ? '1fr' : 'repeat(2,1fr)') : '';
     if (KFLIK === 'kort') $('#kk-kort').innerHTML = KG.filter(g => !KF || g[0] === KF).map(g => {
       const l = KO.filter(k => k.g === g[0]);
       return `<section class="bg-omr"><h2><span class="bg-prick" style="background:${g[2]}">${g[4]}</span>${esc(g[1])} <small>${l.length} ord</small></h2><p class="kk-gtxt">${esc(g[5])}</p><div class="bg-kortrad kk-rad">${l.map(kkort).join('')}</div></section>`;
