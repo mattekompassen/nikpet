@@ -293,5 +293,6 @@
   // Från startsidan: ?flik=kitt hoppar till Ord för att resonera
   const q = new URLSearchParams(location.search);
   if (q.get('flik') === 'kitt') setTimeout(() => $('#bg-resonera').scrollIntoView({block: 'start'}), 50);
+  if (q.get('flik') === 'sok') setTimeout(() => { sokruta.scrollIntoView({block: 'center'}); sokruta.focus(); }, 50);
   window.BG_ANTAL = ORD.length;
 })();

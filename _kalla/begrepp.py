@@ -127,9 +127,9 @@ def kropp(panel, c, rot=''):
             + data + ''.join(f'<script src="{rot}{f}?v={_ver(f)}"></script>' for f in ('begrepp-bok.js', 'begrepp-kitt.js', 'begrepp.js')))
 
 def startlank():
-    del3 = [('🃏', 'Begreppskort', 'Ord, förklaring och bild'), ('🎯', 'Öva på orden', 'Bild, mening, udda ord'), ('🔗', 'Ord för att resonera', 'Eftersom, jämför, motivera …')]
-    lank = {'Begreppskort': 'begrepp.html', 'Öva på orden': 'begrepp.html?flik=ova', 'Ord för att resonera': 'begrepp.html?flik=kitt'}
+    del3 = [('📐', 'Matteord', 'Tal, algebra, geometri …'), ('🔗', 'Ord för att resonera', 'Eftersom, jämför, motivera …'), ('🔍', 'Sök ett ord', 'Hitta ett ord du undrar över')]
+    lank = {'Matteord': 'begrepp.html', 'Ord för att resonera': 'begrepp.html?flik=kitt', 'Sök ett ord': 'begrepp.html?flik=sok'}
     g = ''.join(f'<a href="{lank[t]}"><i style="background:#E3E8F4">{e}</i><span><b>{t}</b><small>{s}</small></span></a>' for e, t, s in del3)
     return (f'<section class="gtC" style="background:#E3E8F4;box-shadow:inset 0 0 0 2px #B9C4DE"><div class="h"><span class="gik" style="background:#fff">{ikon().replace("bg-pik", "bg-pik mini")}</span>'
-            f'<div><b>Matematiska begrepp</b><small>Lär dig matteorden. För alla årskurser.</small></div><a class="alla" href="begrepp.html" style="background:#2B3A6B">Träna begreppen →</a></div><div class="g">{g}</div></section>'
+            f'<div><b>Matematiska begrepp</b><small>Matteord och ord för att resonera. För alla årskurser.</small></div><a class="alla" href="begrepp.html" style="background:#2B3A6B">Träna begreppen →</a></div><div class="g">{g}</div></section>'
             '<style>.bg-pik.mini{width:58px;height:58px;border-radius:14px;padding:6px;gap:3px;display:grid;grid-template-columns:1fr 1fr;box-shadow:none}.bg-pik.mini i{border-radius:5px;font-size:11px;color:#2E3A46;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800}</style>')
