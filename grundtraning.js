@@ -57,6 +57,46 @@
 
   // ---------- Övningarna ----------
   const NIVA = (a, b, c) => [['1', 'Nivå 1', a], ['2', 'Nivå 2', b], ['3', 'Nivå 3', c]];
+  const tus = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const d1 = x => Math.round(x * 1e6) / 1e6;  // undvik avrundningsfel med decimaltal
+  // De fyra räknesätten: eleven väljer räknesätt och nivå. Blandat har värdena '1'–'3' (som förut).
+  const RS_NAMN = {bland: ['Blandat', ['plus och minus inom 20', 'inom 100, gånger och delat', 'tiotal, hundratal och decimaltal']],
+    plus: ['Addition', ['inom 20', 'tvåsiffriga tal', 'hundratal']], minus: ['Subtraktion', ['inom 20', 'tvåsiffriga tal', 'hundratal och 1000']],
+    ganger: ['Multiplikation', ['2, 5 och 10', 'hela tabellen', 'tiotal och tvåsiffriga tal']], delat: ['Division', ['med 2, 5 och 10', 'hela tabellen', 'tiotal och tvåsiffriga tal']]};
+  const RS_VAL = Object.entries(RS_NAMN).flatMap(([op, [namn, niv]]) => niv.map((t, i) => [op === 'bland' ? String(i + 1) : `${op}-${i + 1}`, `${namn}, nivå ${i + 1}`, t]));
+  const RS = {
+    plus(n) {
+      if (n === '1') { const a = r(3, 12), b = r(2, 20 - a); return {typ: 'tal', q: `${a} + ${b} =`, svar: a + b, ledtrad: a + b > 10 ? `Fyll först upp till 10: ${a} + ${10 - a} = 10. Lägg sedan till resten.` : 'Börja med det största talet och räkna vidare.'}; }
+      if (n === '2') { const a = r(12, 68), b = r(12, 99 - a); return {typ: 'tal', q: `${a} + ${b} =`, svar: a + b, ledtrad: `Ta tiotalen först: ${a - a % 10} + ${b - b % 10} = ${a - a % 10 + b - b % 10}. Lägg sedan till entalen ${a % 10} och ${b % 10}.`}; }
+      const p = r(1, 6) * 100 + r(1, 9) * 10, q = r(1, 3) * 100 + r(1, 9) * 10;
+      return {typ: 'tal', q: `${p} + ${q} =`, svar: p + q, ledtrad: `Ta hundratalen först: ${p - p % 100} + ${q - q % 100} = ${p - p % 100 + q - q % 100}. Lägg sedan till ${p % 100} och ${q % 100}.`};
+    },
+    minus(n) {
+      if (n === '1') { const c = r(11, 20), d = r(2, c - 1); return {typ: 'tal', q: `${c} − ${d} =`, svar: c - d, ledtrad: c - d < d ? `Räkna uppåt från ${d} till ${c}.` : `Ta först bort ner till 10: ${c} − ${c - 10} = 10. Ta sedan bort resten.`}; }
+      if (n === '2') { const c = r(41, 99), d = r(11, c - 10); return {typ: 'tal', q: `${c} − ${d} =`, svar: c - d, ledtrad: `Ta bort tiotalen först: ${c} − ${d - d % 10} = ${c - d + d % 10}. Ta sedan bort ${d % 10}.`}; }
+      const a = r(2, 8), b = r(1, 9);
+      return val([
+        {typ: 'tal', q: `1000 − ${a * 100 + b * 10} =`, svar: 1000 - a * 100 - b * 10, ledtrad: `Tänk: ${a * 100 + b * 10} + ? = 1000. Fyll först upp till ${a * 100 + 100}.`},
+        (() => { const p = r(4, 9) * 100 + r(1, 9) * 10, q = r(1, 3) * 100 + r(1, 9) * 10; return {typ: 'tal', q: `${p} − ${q} =`, svar: p - q, ledtrad: `Ta bort hundratalen först: ${p} − ${q - q % 100} = ${p - q + q % 100}. Ta sedan bort ${q % 100}.`}; })()]);
+    },
+    ganger(n) {
+      if (n === '1') { const a = val([2, 5, 10]), b = r(1, 10), [x, y] = Math.random() < .5 ? [a, b] : [b, a]; return {typ: 'tal', q: `${x} · ${y} =`, svar: x * y, ledtrad: multTips(x, y)}; }
+      if (n === '2') { const x = r(2, 9), y = r(2, 9); return {typ: 'tal', q: `${x} · ${y} =`, svar: x * y, ledtrad: multTips(x, y)}; }
+      const a = r(2, 9), b = r(2, 9), t = r(11, 29);
+      return val([
+        {typ: 'tal', q: `${a * 10} · ${b} =`, svar: a * b * 10, ledtrad: `Räkna ${a} · ${b} och lägg sedan till en nolla.`},
+        {typ: 'tal', q: `${a * 10} · ${b * 10} =`, svar: a * b * 100, ledtrad: `Räkna ${a} · ${b} och lägg sedan till två nollor.`},
+        {typ: 'tal', q: `${t} · ${b} =`, svar: t * b, ledtrad: `Dela upp ${t} i ${t - t % 10} och ${t % 10}: ${t - t % 10} · ${b} + ${t % 10} · ${b}.`}]);
+    },
+    delat(n) {
+      if (n === '1') { const d = val([2, 5, 10]), k = r(1, 10); return {typ: 'tal', q: `${d * k} / ${d} =`, svar: k, ledtrad: `Tänk: ${d} · ? = ${d * k}.`}; }
+      if (n === '2') { const d = r(2, 9), k = r(2, 9); return {typ: 'tal', q: `${d * k} / ${d} =`, svar: k, ledtrad: `Tänk: ${d} · ? = ${d * k}.`}; }
+      const a = r(2, 9), b = r(2, 9), d = r(2, 4), k = r(11, 24);
+      return val([
+        {typ: 'tal', q: `${a * b * 100} / ${a * 10} =`, svar: b * 10, ledtrad: `Stryk en nolla i båda talen: ${a * b * 10} / ${a}.`},
+        {typ: 'tal', q: `${a * b * 10} / ${a} =`, svar: b * 10, ledtrad: `Räkna ${a * b} / ${a} och lägg sedan till en nolla.`},
+        {typ: 'tal', q: `${d * k} / ${d} =`, svar: k, ledtrad: `Dela upp ${d * k} i ${d * (k - k % 10)} och ${d * (k % 10)}. Dela båda med ${d}.`}]);
+    }};
   const TABELL = [...[2, 3, 4, 5, 6, 7, 8, 9, 10].map(t => [String(t), '', `${t}:ans tabell`]), ['2-5', 'Blandat', 'tabell 2–5'], ['6-10', 'Blandat', 'tabell 6–10'], ['alla', 'Blandat', 'alla tabeller']];
   const tabeller = v => v === '2-5' ? [2, 3, 4, 5] : v === '6-10' ? [6, 7, 8, 9, 10] : v === 'alla' ? [2, 3, 4, 5, 6, 7, 8, 9, 10] : [+v];
   function multTips(a, b) {
@@ -86,7 +126,7 @@
           {typ: 'tal', q: `100 − ${a} =`, svar: 100 - a, ledtrad: `Tänk: ${a} + ? = 100. Fyll först upp till ${a + 10 - a % 10}.`},
           {typ: 'tal', q: `${b} + ? = 1000`, svar: 1000 - b, ledtrad: `Tänk tiokamrater: ${b / 100} + ? = 10.`}]);
       }},
-    gangertabell: {del: 'rakna', ikon: '✖️', namn: 'Gångertabellen', kort: 'Multiplikation, välj tabell',
+    gangertabell: {del: 'rakna', ikon: '✖️', namn: 'Multiplikation', kort: 'Gångertabellen: välj tabell eller blandat',
       exempel: '<b>3 · 4 = 12</b>. Tre grupper med fyra i varje: 4 + 4 + 4 = 12.', valrubrik: 'Välj tabell', val: TABELL,
       lista(v) {  // tio olika uppgifter per runda
         const t = tabeller(v);
@@ -100,10 +140,11 @@
         const par = t.length === 1 ? blanda([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map(n => [t[0], n]) : blanda(t.flatMap(a => [2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => [a, n]))).slice(0, RUNDA);
         return par.map(([d, n]) => ({typ: 'tal', q: `${d * n} / ${d} =`, svar: n, ledtrad: `Tänk: ${d} · ? = ${d * n}.`, fakta: `${d * n} / ${d} = ${n}`}));
       }},
-    raknesatt: {del: 'rakna', ikon: '🧮', namn: 'De fyra räknesätten i huvudet', kort: '+ − · / på tre nivåer',
+    raknesatt: {del: 'rakna', ikon: '🧮', namn: 'De fyra räknesätten i huvudet', kort: 'Välj räknesätt och nivå',
       exempel: '<b>47 + 28</b>: ta tiotalen först, 40 + 20 = 60. Sedan entalen, 7 + 8 = 15. Till sist 60 + 15 = 75.',
-      val: NIVA('plus och minus inom 20', 'inom 100, gånger och delat', 'tiotal, hundratal och decimaltal'),
+      rs: true, val: RS_VAL,
       gen(v) {
+        if (v.includes('-')) { const [op, n] = v.split('-'); return RS[op](n); }
         if (v === '1') {
           const a = r(2, 12), b = r(2, 20 - a), c = r(11, 20), d = r(2, c - 1);
           return val([
@@ -136,6 +177,56 @@
         return val([
           {typ: 'tal', q: `Dubbelt så mycket som ${sv(a)} =`, svar: 2 * a, ledtrad: a >= 10 && a % 10 ? `Dela upp talet: dubbla ${sv(a - a % 10)} och dubbla ${sv(Math.round(a % 10 * 10) / 10)}. Lägg ihop.` : `Räkna ${sv(a)} + ${sv(a)}.`},
           {typ: 'tal', q: `Hälften av ${sv(b)} =`, svar: b / 2, ledtrad: b >= 20 && b % 20 ? `Dela upp talet: hälften av ${sv(b - b % 20)} och hälften av ${sv(Math.round(b % 20 * 10) / 10)}. Lägg ihop.` : `Vilket tal + samma tal blir ${sv(b)}?`}]);
+      }},
+
+    decimal: {del: 'rakna', ikon: '🔢', namn: 'Decimaltal', kort: 'Räkna med decimaltal i huvudet',
+      exempel: '<b>2,5 + 1,8</b>: räkna i tiondelar. 25 + 18 = 43 tiondelar, alltså <b>4,3</b>.<br><b>4 · 0,3</b>: 4 · 3 = 12 tiondelar, alltså <b>1,2</b>.',
+      val: NIVA('plus och minus med tiondelar', 'gånger och delat med heltal', 'gånger och delat med 10, 100 och 1000'),
+      gen(v) {
+        if (v === '1') {
+          const a = r(11, 59), b = r(11, 39);
+          return val([
+            {typ: 'tal', q: `${sv(a / 10)} + ${sv(b / 10)} =`, svar: d1((a + b) / 10), ledtrad: `Räkna i tiondelar: ${a} + ${b} tiondelar. Sätt sedan tillbaka kommat.`},
+            {typ: 'tal', q: `${sv((a + b) / 10)} − ${sv(b / 10)} =`, svar: d1(a / 10), ledtrad: `Räkna i tiondelar: ${a + b} − ${b} tiondelar. Sätt sedan tillbaka kommat.`},
+            {typ: 'tal', q: `${sv(a / 10)} + ? = ${Math.ceil(a / 10)}`, svar: d1(Math.ceil(a / 10) - a / 10), ledtrad: `Hur många tiondelar saknas upp till ${Math.ceil(a / 10)}?`}].filter(f => f.svar > 0));
+        }
+        if (v === '2') {
+          const k = r(2, 9), t = r(2, 9);
+          return val([
+            {typ: 'tal', q: `${k} · ${sv(t / 10)} =`, svar: d1(k * t / 10), ledtrad: `Räkna ${k} · ${t} = ${k * t}. Det är tiondelar, så svaret blir ${k * t} tiondelar.`},
+            {typ: 'tal', q: `${sv(k * t / 10)} / ${k} =`, svar: d1(t / 10), ledtrad: `${sv(k * t / 10)} är ${k * t} tiondelar. Räkna ${k * t} / ${k} tiondelar.`},
+            {typ: 'tal', q: `0,5 · ${2 * k} =`, svar: k, ledtrad: `0,5 är en halv. Hälften av ${2 * k}.`},
+            {typ: 'tal', q: `${sv(k + .5)} · 2 =`, svar: 2 * k + 1, ledtrad: `Dubbla ${k} och dubbla 0,5. Lägg ihop.`}].filter(f => f.svar !== null));
+        }
+        const x = r(11, 999) / 100, g = val([10, 100, 1000]);
+        return Math.random() < .5
+          ? {typ: 'tal', q: `${sv(x)} · ${tus(g)} =`, svar: d1(x * g), ledtrad: `Gånger ${tus(g)}: talet blir ${tus(g)} gånger större. Kommat flyttar ${String(g).length - 1} steg åt höger.`}
+          : {typ: 'tal', q: `${sv(x)} / ${tus(g)} =`, svar: d1(x / g), ledtrad: `Delat med ${tus(g)}: talet blir ${tus(g)} gånger mindre. Kommat flyttar ${String(g).length - 1} steg åt vänster.`};
+      }},
+    overslag: {del: 'rakna', ikon: '🎯', namn: 'Överslagsräkning', kort: 'Ungefär hur mycket? Välj det rimliga svaret',
+      exempel: 'Ungefär hur mycket är <b>49 · 21</b>?<br>Avrunda: 49 ≈ 50 och 21 ≈ 20. Räkna 50 · 20 = <b>1 000</b>.',
+      val: NIVA('plus och minus', 'gånger och delat', 'pengar och decimaltal'),
+      gen(v) {
+        const runt = x => { const e = Math.pow(10, Math.floor(Math.log10(x))); return Math.round(x / e) * e; };
+        const alt = (ratt, ...fel) => fyra(tus(ratt), [tus(ratt * 10), tus(ratt / 10), ...fel.map(tus)].filter(x => !x.includes('.')));
+        if (v === '1') {
+          const a = r(2, 9) * 10 + val([-1, -2, 1, 2]), b = r(2, 9) * 10 + val([-1, 1, 2]), ra = Math.round(a / 10) * 10, rb = Math.round(b / 10) * 10;
+          if (Math.random() < .5) return {typ: 'val', q: `Ungefär hur mycket är <b>${a} + ${b}</b>?`, alt: alt(ra + rb, ra + rb + 30, Math.abs(ra - rb) || ra + rb - 20), ledtrad: `Avrunda till hela tiotal: ${a} ≈ ${ra} och ${b} ≈ ${rb}.`};
+          const [p, q] = ra >= rb ? [a + 100, b] : [b + 100, a], rp = Math.round(p / 10) * 10, rq = Math.round(q / 10) * 10;
+          return {typ: 'val', q: `Ungefär hur mycket är <b>${p} − ${q}</b>?`, alt: alt(rp - rq, rp + rq, rp - rq + 40), ledtrad: `Avrunda till hela tiotal: ${p} ≈ ${rp} och ${q} ≈ ${rq}.`};
+        }
+        if (v === '2') {
+          const a = r(2, 9) * 10 + val([-1, -2, 1, 2]), b = val([r(2, 9), r(2, 9) * 10 + val([-1, 1, 2])]), ra = runt(a), rb = runt(b);
+          if (Math.random() < .55) return {typ: 'val', q: `Ungefär hur mycket är <b>${a} · ${b}</b>?`, alt: alt(ra * rb, ra * rb * 2, ra + rb), ledtrad: `Avrunda: ${a} ≈ ${ra} och ${b} ≈ ${rb}. Räkna ${ra} · ${rb}.`};
+          const d = r(2, 9), k = r(2, 9) * (Math.random() < .5 ? 10 : 100), t = d * k + val([-3, -2, 2, 3, 4]);
+          return {typ: 'val', q: `Ungefär hur mycket är <b>${tus(t)} / ${d}</b>?`, alt: alt(k, k * 2, k + k / 2), ledtrad: `${tus(t)} ligger nära ${tus(d * k)}. Räkna ${tus(d * k)} / ${d}.`};
+        }
+        const pris = d1(r(1, 9) * 10 - val([0.1, 0.5, 0.05])), st = r(2, 6), sak = val(['glassar', 'böcker', 'biljetter', 'tröjor', 'pennor']), rp = Math.round(pris / 10) * 10;
+        if (Math.random() < .6) return {typ: 'val', q: `Du köper ${st} ${sak} för <b>${sv(pris)} kr</b> styck. Ungefär hur mycket kostar det?`, alt: fyra(`${tus(rp * st)} kr`, [`${tus(rp * st * 10)} kr`, `${tus(rp * st + rp)} kr`, `${tus(rp + st)} kr`, `${tus(rp * st * 2)} kr`]),
+          ledtrad: `${sv(pris)} kr är nästan ${rp} kr. Räkna ${st} · ${rp}.`};
+        const ra = r(2, 9), rb = r(2, 9), a = d1(ra + val([-.2, -.1, .1, .2])), b = d1(rb + val([-.1, .1])), p = ra * rb;
+        return {typ: 'val', q: `Ungefär hur mycket är <b>${sv(a)} · ${sv(b)}</b>?`, alt: fyra(sv(p), [sv(p * 10), sv(p / 10), sv(p * 100)]),
+          ledtrad: `Avrunda till heltal: ${sv(a)} ≈ ${ra} och ${sv(b)} ≈ ${rb}.`};
       }},
 
     lasklockan: {del: 'tid', ikon: '🕒', namn: 'Läs klockan', kort: 'Titta på klockan och välj rätt tid',
@@ -244,6 +335,17 @@
       <h3>${o.valrubrik || 'Välj nivå'}</h3><div class="valj gt-niva">${o.val.map(([v, n, p]) => `<button data-v="${v}">${n ? `<b>${n}</b>` : ''}${p || ''}</button>`).join('')}</div>
       <a class="knapp2 sek gt-tillbaka" href="#">← Alla övningar</a></div>`;
     el.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { location.hash = k + '/' + b.dataset.v; });
+    if (o.rs) {  // först räknesätt, sedan nivå
+      const niva = el.querySelector('.gt-niva'), h3 = el.querySelector('.gt-val h3');
+      h3.insertAdjacentHTML('beforebegin', `<h3>Välj räknesätt</h3><div class="gt-op">${Object.entries(RS_NAMN).map(([op, [n]]) => `<button type="button" data-op="${op}">${n}</button>`).join('')}</div>`);
+      const visa = op => {
+        el.querySelectorAll('[data-op]').forEach(b => b.classList.toggle('vald', b.dataset.op === op));
+        niva.innerHTML = RS_NAMN[op][1].map((t, i) => `<button data-v="${op === 'bland' ? i + 1 : op + '-' + (i + 1)}"><b>Nivå ${i + 1}</b>${t}</button>`).join('');
+        niva.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { location.hash = k + '/' + b.dataset.v; });
+      };
+      el.querySelectorAll('[data-op]').forEach(b => b.onclick = () => visa(b.dataset.op));
+      visa('plus');
+    }
   }
 
   let O, V, lista, nr, ratt, svit, missar, fraga, fel;
