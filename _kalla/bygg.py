@@ -637,7 +637,7 @@ NP_CSS = """
 @media (max-width:760px){.npruta{flex-wrap:wrap;padding:20px}.npruta .npik{display:none}.npruta .npkn{flex-direction:row;width:100%}.npruta .npkn a{flex:1}}
 """
 def STARTSIDA_HTML(rad, gtlank, fik):
-    sm = [('prov', 'bedomning.html', 'Bedömning'), ('boj', 'hjalp.html', 'Så får du hjälp'), ('prata', 'amnesord.html', 'Ämnesord på olika språk')]
+    sm = [('prov', 'bedomning.html', 'Hur bedöms du?'), ('boj', 'hjalp.html', 'Så får du hjälp'), ('prata', 'amnesord.html', 'Ämnesord på olika språk')]
     smal = ''.join(f'<a href="{h}"><span class="rik" style="background:{mix(SIDFARG[h]["main"], "#FFFFFF", .6)}">{fik(i)}</span>{t}</a>' for i, h, t in sm)
     np_ = (f'<section class="npruta"><div class="npik">{fik("medalj").replace("width=\"32\" height=\"32\"", "width=\"44\" height=\"44\"")}</div>'
            '<div class="nptxt"><div class="npet">Åk 9 · 12 och 14 maj 2027</div><h2>Nationella prov i matematik</h2><p>Så går provet till, och så tränar du inför det med NP-träning.</p></div>'
