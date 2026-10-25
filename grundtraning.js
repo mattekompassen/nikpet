@@ -390,7 +390,7 @@
   function meny() {
     el.innerHTML = DELAR.map(([d, rub, txt]) => `<div class="kapblock gt-del"><h2>${rub}</h2><p class="gt-txt">${txt}</p><div class="gt-typer">` +
       Object.entries(OV).filter(([, o]) => o.del === d).map(([k, o]) => `<a class="typ" href="#${k}"><span class="gt-ik" aria-hidden="true">${o.ikon}</span>${o.namn}<b>${o.kort}</b></a>`).join('') + '</div>' +
-      (d === 'tid' ? `<details class="gt-ord"><summary>📖 Klockord</summary><div class="gt-ordgrid">${KLOCKORD.map(([h, m, f, d]) => `<div>${klocka(h, m, 'liten')}<b>${f}</b><span>${d}</span></div>`).join('')}</div>
+      (d === 'tid' ? `<details class="gt-ord"><summary>📖 Att läsa av klockan</summary><div class="gt-ordgrid">${KLOCKORD.map(([h, m, f, d]) => `<div>${klocka(h, m, 'liten')}<b>${f}</b><span>${d}</span></div>`).join('')}</div>
         <ul><li><b>över</b> = minuter efter hel timme</li><li><b>i</b> = minuter kvar till nästa timme</li><li><b>halv 8</b> = halvvägs till 8, alltså 7.30</li>
         <li><b>morgon</b> ca 05–10, <b>förmiddag</b> 10–12, <b>eftermiddag</b> 12–18, <b>kväll</b> 18–24</li><li><b>1 h</b> (timme) = 60 min, <b>1 min</b> (minut) = 60 s (sekunder), <b>1 dygn</b> = 24 h</li></ul></details>` : '') +
       (d === 'enhet' ? `<details class="gt-ord"><summary>📖 Enhetstrappan</summary><div class="gt-trappor"><p><b>Längd</b>${trappa('langd')}</p><p><b>Volym</b>${trappa('volym')}</p><p><b>Vikt</b>${trappa('vikt')}</p>
