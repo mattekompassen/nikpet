@@ -631,8 +631,8 @@ NP_CSS = """
 .npruta .npdag b{display:block;font-family:Fraunces,Georgia,serif;font-size:38px;line-height:1;color:#1F4466}.npruta .npdag small{font-size:13px;font-weight:700;color:#566373}
 .npruta .npkn{display:flex;flex-direction:column;gap:8px;flex:none}.npruta .npkn a{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:15px;padding:10px 18px;border-radius:999px;background:#1F4466;color:#fff}
 .npruta .npkn a+a{background:#fff;color:#1F4466;box-shadow:inset 0 0 0 2px #1F4466}
-.smalrad{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:38px 0 6px;padding-top:22px;border-top:1.5px solid #E1DED6}
-.smalrad a{display:flex;align-items:center;gap:10px;padding:8px 16px 8px 8px;border-radius:999px;background:#fff;border:1.5px solid #D5DEE7;text-decoration:none;color:#1E2B3A;font-weight:600;font-size:15px}
+.smalrad{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:38px 0 6px;padding-top:22px;border-top:1.5px solid #E1DED6}@media (max-width:700px){.smalrad{grid-template-columns:1fr;gap:10px}}
+.smalrad a::after{content:'→';margin-left:auto;color:#8FA6BE;font-weight:700}.smalrad a{display:flex;align-items:center;gap:12px;padding:10px 18px 10px 10px;border-radius:16px;background:#fff;border:1.5px solid #D5DEE7;text-decoration:none;color:#1E2B3A;font-weight:600;font-size:15px}
 .smalrad a:hover{border-color:#8FA6BE}.smalrad .rik{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}.smalrad .rik svg{width:22px;height:22px}
 @media (max-width:760px){.npruta{flex-wrap:wrap;padding:20px}.npruta .npik{display:none}.npruta .npkn{flex-direction:row;width:100%}.npruta .npkn a{flex:1}}
 """
