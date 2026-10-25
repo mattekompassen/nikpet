@@ -99,13 +99,17 @@ def ikon():
     return ('<div class="bg-pik" aria-hidden="true"><i style="background:#A7CBEA">½</i><i style="background:#B7E3C6">x</i>'
             '<i style="background:#F7B1B1">△</i><i style="background:#C7B8F9">%</i></div>')
 
+def _ver(f):  # ny version -> webbläsaren hämtar ny fil i stället för en gammal sparad
+    import hashlib, os
+    return hashlib.sha1(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), f), 'rb').read()).hexdigest()[:8]
+
 def kropp(panel, c, rot=''):
     data = ''.join(f'<script src="{rot}trana-ak{k}.js"></script><script>(window.BG_DATA=window.BG_DATA||{{}})[{k}]=TRANA_DATA</script>' for k in (7, 8, 9))
     return (panel(c, 'Matematiska begrepp', 'Lär dig matteorden. Vänd korten, öva på orden och samla dina svåra ord, så kommer de tillbaka tills du kan dem.', '',
                   [('Startsida', 'index.html'), ('Matematiska begrepp', None)], ikon())
             + f'<main><section><div class="wrap"><div id="bg"></div><a class="knapp" href="index.html">← Till startsidan</a></div></section></main>'
             + f'<style>.panel{{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}}.panel .sti,.panel .sti a{{color:#5F6368}}.panel h1{{color:var(--ink)}}.panel p{{color:#3B4A5A}}{CSS}</style>'
-            + data + f'<script src="{rot}begrepp-bok.js"></script><script src="{rot}begrepp-kitt.js"></script><script src="{rot}begrepp.js"></script>')
+            + data + ''.join(f'<script src="{rot}{f}?v={_ver(f)}"></script>' for f in ('begrepp-bok.js', 'begrepp-kitt.js', 'begrepp.js')))
 
 def startlank():
     del3 = [('🃏', 'Begreppskort', 'Ord, förklaring och bild'), ('🎯', 'Öva på orden', 'Bild, mening, udda ord'), ('⭐', 'Mina svåra ord', 'Fel svar kommer tillbaka')]
