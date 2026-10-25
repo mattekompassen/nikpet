@@ -476,7 +476,7 @@ var BG_BOK = [
 "ak": 7,
 "kap": 4,
 "om": "sam",
-"ord": "x -axel och y -axel",
+"ord": "x-axel och y -axel",
 "besk": "De båda tallinjerna i ett koordinatsystem kallas <em>x</em>-axel\n(vågrät) och <em>y</em>-axel (lodrät).",
 "ex": "<img alt=\"\" class=\"foto\" src=\"bilder/begrepp/X4-image2.jpg\"/>"
 },
@@ -1492,7 +1492,7 @@ var BG_BOK = [
 "ak": 9,
 "kap": 2,
 "om": "sam",
-"ord": "Koordinatsystem / Koordinataxlar / x -axel och y -axel / Koordinat / Origo",
+"ord": "Koordinatsystem / Koordinataxlar / x-axel och y -axel / Koordinat / Origo",
 "besk": "<p>Ett koordinatsystem består av tallinjer som korsar varandra.\nTallinjerna kallas för koordinataxlar där <em>x</em>-axeln är vågrät och\n<em>y</em>-axeln är lodrät.</p>\n<p>Koordinataxlarnas gradering gör att man kan ange en punkts läge med\nhjälp av tal, koordinater. Man anger alltid <em>x</em>-koordinaten\nförst.</p>\n<p>Origo kallas nollpunkten i ett koordinatsystem. Det är punkten där\naxlarna korsar varandra. Origo har koordinaterna (0, 0).</p>",
 "ex": "<img alt=\"\" class=\"foto\" src=\"bilder/begrepp/Z2-image5.jpg\"/>"
 },
@@ -1508,7 +1508,7 @@ var BG_BOK = [
 "ak": 9,
 "kap": 2,
 "om": "sam",
-"ord": "k -värde / Riktningskoefficient",
+"ord": "k-värde / Riktningskoefficient",
 "besk": "<em>k</em>-värdet är en konstant i en linjär funktion. Värdet\nberättar vilken lutning den räta linjen har.",
 "ex": "<p>I koordinatsystemet syns graferna till de linjära\nfunktionerna:</p>\n<p><em>y</em> = 2<em>x</em> – 1 (gul)</p>\n<p><em>y</em> = 2<em>x</em> + 1 (röd)</p>\n<p><em>y</em> = 2<em>x</em> + 3 (blå)</p>\n<p>De tre funktionerna har samma <em>k</em>-värde, <em>k</em> = 2. Det\ninnebär att de lutar på samma sätt snett upp åt höger.</p>\n<p><img alt=\"\" class=\"foto\" src=\"bilder/begrepp/Z2-image8.jpg\"/></p>"
 },
@@ -1516,7 +1516,7 @@ var BG_BOK = [
 "ak": 9,
 "kap": 2,
 "om": "sam",
-"ord": "m -värde",
+"ord": "m-värde",
 "besk": "<em>m</em>-värdet är en konstant i en linjär funktion. Värdet\nberättar var den räta linjen skär <em>y</em>-axeln.",
 "ex": "<p>I koordinatsystemet syns graferna till de linjära\nfunktionerna:</p>\n<p><em>y</em> = 3<em>x</em> – 1 (blå)</p>\n<p><em>y</em> = <em>x</em> – 1 (röd)</p>\n<p><em>y</em> = – 2<em>x</em> – 1 (gul)</p>\n<p>De tre funktionerna har samma <em>m</em>-värde, –1. Det innebär att\nde skär <em>y</em>-axeln i punkten (0, –1).</p>\n<p><img alt=\"\" class=\"foto\" src=\"bilder/begrepp/Z2-image9.jpg\"/></p>"
 },

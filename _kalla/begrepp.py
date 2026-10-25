@@ -47,8 +47,8 @@ CSS = """
 .bk{height:270px}
 .bg-hogt{border:0;background:#0000000d;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:15px;flex:none}.bg-hogt:hover{background:#0000001a}
 .br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 4px}.br>span+span{border-top:3px solid currentColor}
-.bg-typer{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}@media (max-width:900px){.bg-typer{grid-template-columns:1fr 1fr}}
-.bg-typer button{font:inherit;text-align:left;background:var(--ink);color:#fff;border:0;border-radius:18px;padding:18px 20px;cursor:pointer;transition:transform .15s;display:flex;flex-direction:column;gap:4px}
+.bg-typer{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}@media (max-width:900px){.bg-typer{grid-template-columns:1fr}}
+.bg-typer button{font:inherit;text-align:left;background:color-mix(in srgb,var(--ink) 72%,var(--mid));color:#fff;border:0;border-radius:18px;padding:18px 20px;cursor:pointer;transition:transform .15s;display:flex;flex-direction:column;gap:4px}
 .bg-typer button:hover{transform:translateY(-3px)}.bg-typer button span{font-size:28px}.bg-typer button b{font-size:18px}.bg-typer button small{opacity:.8;font-size:14px}
 .bg-typer button.on{box-shadow:0 0 0 4px var(--bg),0 0 0 7px #E9B949}
 #bg-yta:not(:empty){background:#fff;border:2px solid var(--ram);border-radius:24px;padding:22px 26px;margin-bottom:24px}

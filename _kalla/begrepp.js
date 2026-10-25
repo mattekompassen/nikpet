@@ -78,7 +78,6 @@
     <button type="button" data-typ="bild"><span>🖼️</span><b>Para ihop ord och bild</b><small>Vilket ord hör till vilken bild?</small></button>
     <button type="button" data-typ="mening"><span>✏️</span><b>Vilket ord passar?</b><small>Välj ordet som passar i meningen.</small></button>
     <button type="button" data-typ="udda"><span>🧐</span><b>Vilken passar inte in?</b><small>Tre ord hör ihop. Hitta det fjärde.</small></button>
-    <button type="button" data-typ="egna"><span>💬</span><b>Förklara med egna ord</b><small>Skriv eller säg högt. Kolla själv.</small></button>
   </div>
   <div id="bg-yta"></div>
 </div>
@@ -136,7 +135,7 @@
   function starta() {
     if (FLIK === 'svara') return svaraTrana();
     if (!TYP) { yta().innerHTML = '<p class="bg-hj" style="margin-top:6px">Välj en övning ovanför.</p>'; return; }
-    ({bild, mening, udda, egna})[TYP]();
+    ({bild, mening, udda})[TYP]();
   }
 
   function bild() {
@@ -193,26 +192,6 @@
       if (!r_) b.classList.add('fel');
       yta().querySelector('.bg-poang').textContent = `Rätt: ${POANG.r} av ${POANG.n}`;
       res(`<b>${esc(ut.ord)}</b> hör till ${OM[ut.om][1].toLowerCase()}. De andra orden hör till ${OM[g[0].om][1].toLowerCase()}.`, r_);
-    });
-  }
-
-  function egna() {
-    const u = kalla(); if (!u.length) return forLite();
-    const o = val(u);
-    yta().innerHTML = huvud('Förklara med egna ord', `Vad betyder <b>${esc(o.ord)}</b>? ${hogt(o.ord)}`)
-      + `<textarea class="bg-text" rows="3" placeholder="Skriv din förklaring här, eller säg den högt för en kompis."></textarea>
-<p class="bg-hj">Ingen dator rättar det här. Du kollar själv.</p><button type="button" class="bg-klar">Jag är klar, visa checklistan</button><div class="bg-check" hidden>
-<h4>Kolla din förklaring</h4>
-<label><input type="checkbox"> Jag har sagt vad ordet betyder.</label>
-<label><input type="checkbox"> Jag har gett ett exempel (ett tal, en bild eller en situation).</label>
-<label><input type="checkbox"> Jag har använt minst ett annat matteord.</label>
-<label><input type="checkbox"> En kompis skulle förstå min förklaring.</label>
-<div class="bg-jmf"><b>Jämför med boken:</b> ${esc(o.forkl)}</div>
-<div class="bg-sjalv"><button type="button" data-v="1">😊 Jag kunde det</button><button type="button" data-v="0">🤔 Jag vill öva mer på ordet</button></div></div>` + nasta();
-    yta().querySelector('.bg-klar').onclick = e => { e.target.hidden = true; yta().querySelector('.bg-check').hidden = false; };
-    yta().querySelectorAll('.bg-sjalv button').forEach(b => b.onclick = () => {
-      yta().querySelectorAll('.bg-sjalv button').forEach(x => x.disabled = true); b.classList.add('vald');
-      if (b.dataset.v === '1') { ratt(o); res('Bra jobbat!', true); } else { fel(o); res('Ordet finns nu i Mina svåra ord.', false); }
     });
   }
 
