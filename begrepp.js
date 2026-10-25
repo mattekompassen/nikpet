@@ -240,7 +240,7 @@
   <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div>
   <h3 class="bg-del" id="bg-resonera">🔗 Ord för att resonera <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}</div>
-  <p class="bg-saknar">💬 Saknar du ett ord? Säg till din lärare, så kan det läggas till.</p>
+  <p class="bg-saknar">💬 Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>
 </div>
 <div id="bg-steg2" hidden>
   <div class="bg-bar"><button type="button" class="bg-tillbaka">← Byt ord</button><span class="bg-var"></span>
@@ -285,7 +285,7 @@
     steg(3);
     const n = o => norm(o.ord), a = ORD.filter(o => n(o).startsWith(q)), b = ORD.filter(o => !a.includes(o) && n(o).includes(q)), c = ORD.filter(o => !a.includes(o) && !b.includes(o) && norm(o.forkl).includes(q));
     const om = [...a, ...b, ...c], ko = KO.filter(k => n(k).includes(q));
-    $('#bg-traff').textContent = om.length + ko.length ? `${om.length + ko.length} ord hittades för ”${sokruta.value.trim()}”. Klicka på ett kort för att vända det.` : `Inget ord hittades för ”${sokruta.value.trim()}”. Prova en kortare del av ordet. Saknar du ett ord? Säg till din lärare, så kan det läggas till.`;
+    $('#bg-traff').textContent = om.length + ko.length ? `${om.length + ko.length} ord hittades för ”${sokruta.value.trim()}”. Klicka på ett kort för att vända det.` : `Inget ord hittades för ”${sokruta.value.trim()}”. Prova en kortare del av ordet. Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.`;
     const lista = $('#bg-soklista'); lista.innerHTML = '';
     if (om.length) { kortlista(om, lista); }
     if (ko.length) lista.insertAdjacentHTML('beforeend', kittsektion(ko, ['', 'Ord för att resonera', '#D5E3F0', '#1E4A73', '🔗', '']));
