@@ -1,0 +1,86 @@
+# Sidan Matematiska begrepp (skiss). Används av skiss.py (och senare av bygg.py).
+CSS = """
+.bg-filter{display:flex;flex-wrap:wrap;gap:12px 26px;background:#fff;border:2px solid var(--ram);border-radius:22px;padding:16px 20px;margin:0 0 18px}
+.bg-grupp{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.bg-grupp>span{font-weight:700;font-size:14px;color:#5F6368;margin-right:4px}
+.bg-grupp button,.bg-flikar button{font:inherit;font-weight:600;font-size:15px;padding:8px 15px;border-radius:999px;border:1.5px solid var(--l);background:#fff;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.bg-grupp button i{width:11px;height:11px;border-radius:50%}
+.bg-grupp button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.bg-flikar{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 22px}
+.bg-flikar button{font-size:17px;padding:11px 20px;border-radius:16px;border-width:2px}.bg-flikar button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.bg-flikar b{display:inline-block;min-width:24px;padding:1px 7px;border-radius:999px;background:#0001;font-size:14px;text-align:center}.bg-flikar b.har{background:#E9B949;color:#3A2A05}
+.bg-sok{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--l);border-radius:14px;padding:4px 14px;max-width:420px}
+.bg-sok input{border:0;outline:0;font:inherit;font-size:17px;padding:8px 0;flex:1;background:none}
+.bg-hj{color:#5F6368;margin:10px 0 14px}.bg-tom{color:#5F6368;font-style:italic}
+.bg-omr h2{display:flex;align-items:center;gap:12px;font-size:26px;margin:26px 0 14px}.bg-omr h2 small{font-family:Inter,sans-serif;font-size:14px;font-weight:600;color:#6B6258}
+.bg-prick{width:38px;height:38px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-family:Inter,sans-serif;font-weight:800;font-size:20px}
+.bg-kortrad{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.bk{perspective:900px;height:250px;cursor:pointer;outline:none}.bk:focus-visible .bk-in{box-shadow:0 0 0 4px var(--l)}
+.bk-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;border-radius:20px}
+.bk.vand .bk-in{transform:rotateY(180deg)}
+.bk-fram,.bk-bak{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden}
+.bk-fram{background:#fff;border:2px solid color-mix(in srgb,var(--o) 45%,#fff);box-shadow:inset 0 6px 0 var(--o)}
+.bk-bak{background:color-mix(in srgb,var(--o) 16%,#fff);border:2px solid color-mix(in srgb,var(--o) 55%,#fff);transform:rotateY(180deg)}
+.bk-topp{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.bk-om{font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--od)}
+.bk h3{font-size:24px;margin:6px 0 4px;color:#292A28}
+.bk-bild{flex:1;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800;color:#292A28;min-height:0;text-align:center}
+.bk-bild .fig{max-width:100%;max-height:120px;height:auto}.bk-bild .tab{font-size:14px}
+.bk-bild mark,.bg-bildv mark{background:#F3E8D3;color:inherit;border-radius:6px;padding:0 4px;box-shadow:inset 0 -4px #DDBE88}
+.bk-bild.tom{font-size:64px;color:color-mix(in srgb,var(--o) 35%,#fff)}
+.bk-ak{font-size:12px;font-weight:600;color:#6B6258}
+.bk-bak p{margin:6px 0 0;font-size:16px;line-height:1.45}.bk-bak .bk-ex{font-size:14px;color:#3B3B38}
+.bk-vand{margin-top:auto;font-size:13px;font-weight:600;color:var(--od)}
+.bg-hogt{border:0;background:#0000000d;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:15px;flex:none}.bg-hogt:hover{background:#0000001a}
+.br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.15;margin:0 4px}.br>span+span{border-top:3px solid currentColor}
+.bg-typer{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}@media (max-width:900px){.bg-typer{grid-template-columns:1fr 1fr}}
+.bg-typer button{font:inherit;text-align:left;background:var(--ink);color:#fff;border:0;border-radius:18px;padding:18px 20px;cursor:pointer;transition:transform .15s;display:flex;flex-direction:column;gap:4px}
+.bg-typer button:hover{transform:translateY(-3px)}.bg-typer button span{font-size:28px}.bg-typer button b{font-size:18px}.bg-typer button small{opacity:.8;font-size:14px}
+.bg-typer button.on{box-shadow:0 0 0 4px var(--bg),0 0 0 7px #E9B949}
+#bg-yta:not(:empty){background:#fff;border:2px solid var(--ram);border-radius:24px;padding:22px 26px;margin-bottom:24px}
+.bg-ovhuvud{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.bg-ovhuvud h3{margin:0;font-size:24px}
+.bg-poang{font-weight:700;font-size:14px;background:var(--vl);color:var(--ink);padding:6px 12px;border-radius:999px}
+.bg-fraga{font-size:clamp(20px,3vw,26px);font-weight:600;line-height:1.5;margin:14px 0 18px}
+.bg-lucka{display:inline-block;min-width:120px;text-align:center;border-bottom:3px dashed var(--mid);color:var(--ink);font-weight:800}
+.bg-def{font-style:italic}
+.bg-alt{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px}
+.bg-alt button,.bg-ord,.bg-sjalv button,.bg-klar,.bg-nasta,.bg-rensa{font:inherit;font-weight:700;font-size:19px;padding:12px 18px;border-radius:14px;border:2px solid var(--l);background:#fff;color:var(--ink);cursor:pointer}
+.bg-alt button:hover:not(:disabled),.bg-ord:hover:not(:disabled){border-color:var(--ink)}
+.par{background:#E5F2E0!important;border-color:#3E8A36!important;color:#22501D!important}.bg-alt .fel{background:#F8E3DD!important;border-color:#B0573F!important;color:#7A2E1C!important}
+.bg-ordrad{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}.bg-ord.vald{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bg-bilder{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.bg-bildv{font:inherit;font-size:26px;font-weight:800;color:#292A28;background:#FAF8F3;border:2px solid var(--l);border-radius:16px;min-height:140px;padding:12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.bg-bildv .fig{max-width:100%;max-height:110px;height:auto}.bg-etik{font-size:15px;font-weight:700;color:#22501D}
+.skak{animation:skak .4s}@keyframes skak{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.bg-ovfot{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:18px;min-height:48px;flex-wrap:wrap}
+.bg-res{font-size:17px}.bg-res.ok{color:#22501D;font-weight:600}.bg-res.fel{color:#7A2E1C}
+.bg-nasta{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bg-text{width:100%;box-sizing:border-box;font:inherit;font-size:18px;padding:12px 14px;border:2px solid var(--l);border-radius:14px;resize:vertical}
+.bg-check{background:var(--vl);border-radius:18px;padding:16px 20px;margin-top:14px}.bg-check h4{margin:0 0 8px;font-size:18px}
+.bg-check label{display:flex;gap:10px;align-items:flex-start;font-size:17px;margin:8px 0;cursor:pointer}.bg-check input{width:20px;height:20px;margin-top:3px;accent-color:var(--ink)}
+.bg-jmf{background:#fff;border-radius:12px;padding:12px 14px;margin:12px 0}
+.bg-sjalv{display:flex;flex-wrap:wrap;gap:10px}.bg-sjalv button{font-size:16px}.bg-sjalv .vald{background:var(--ink);color:#fff}
+.bg-rensa{font-size:14px;padding:5px 12px;margin-left:8px}
+.bg-tomruta{background:#fff;border:2px dashed var(--l);border-radius:24px;padding:30px;text-align:center;max-width:560px;margin:10px auto 30px}.bg-tomruta span{font-size:44px}.bg-tomruta h3{margin:6px 0}
+.bg-pik{width:120px;height:120px;flex:none;border-radius:30px;background:#fff;box-shadow:inset 0 0 0 2px var(--l);display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:14px;box-sizing:border-box}
+.bg-pik i{border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-weight:800;font-size:18px}
+@media (max-width:640px){.bg-alt{grid-template-columns:1fr}.bg-pik{display:none}.bg-filter{padding:10px 12px;gap:8px}.bg-grupp{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.bg-grupp>span{display:none}.bg-grupp button{white-space:nowrap;font-size:14px;padding:6px 12px}.bg-flikar{flex-wrap:nowrap;gap:6px}.bg-flikar button{font-size:14px;padding:9px 8px;flex:1 1 auto;justify-content:center;white-space:nowrap}.bg-flikar .em{display:none}.bg-kortrad{grid-template-columns:1fr 1fr;gap:10px}.bk{height:200px}.bk h3{font-size:18px;hyphens:auto;overflow-wrap:anywhere}.bk-om{display:none}.bk-bild .fig{max-height:80px}.bk-bak p{font-size:14px}.bk-bak .bk-ex{display:none}}
+"""
+
+def ikon():
+    return ('<div class="bg-pik" aria-hidden="true"><i style="background:#E07A5F">½</i><i style="background:#4F9BA8">x</i>'
+            '<i style="background:#E9B949">△</i><i style="background:#A97CB8">%</i></div>')
+
+def kropp(panel, c, rot=''):
+    data = ''.join(f'<script src="{rot}trana-ak{k}.js"></script><script>(window.BG_DATA=window.BG_DATA||{{}})[{k}]=TRANA_DATA</script>' for k in (7, 8, 9))
+    return (panel(c, 'Matematiska begrepp', 'Lär dig matteorden. Vänd korten, öva på orden och samla dina svåra ord, så kommer de tillbaka tills du kan dem.', '',
+                  [('Startsida', 'index.html'), ('Matematiska begrepp', None)], ikon())
+            + f'<main><section><div class="wrap"><div id="bg"></div><a class="knapp" href="index.html">← Till startsidan</a></div></section></main>'
+            + f'<style>.panel{{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}}.panel .sti,.panel .sti a{{color:#5F6368}}.panel h1{{color:var(--ink)}}.panel p{{color:#3B4A5A}}{CSS}</style>'
+            + data + f'<script src="{rot}begrepp.js"></script>')
+
+def startlank():
+    del3 = [('🃏', 'Begreppskort', 'Ord, förklaring och bild'), ('🎯', 'Öva på orden', 'Bild, mening, udda ord'), ('⭐', 'Mina svåra ord', 'Fel svar kommer tillbaka')]
+    g = ''.join(f'<a href="begrepp.html"><i style="background:#E3E8F4">{e}</i><span><b>{t}</b><small>{s}</small></span></a>' for e, t, s in del3)
+    return (f'<section class="gtC" style="background:#E3E8F4;box-shadow:inset 0 0 0 2px #B9C4DE"><div class="h"><span class="gik" style="background:#fff">{ikon().replace("bg-pik", "bg-pik mini")}</span>'
+            f'<div><b>Matematiska begrepp</b><small>Lär dig matteorden. För alla årskurser.</small></div><a class="alla" href="begrepp.html" style="background:#2B3A6B">Träna begreppen →</a></div><div class="g">{g}</div></section>'
+            '<style>.bg-pik.mini{width:58px;height:58px;border-radius:14px;padding:6px;gap:3px;display:grid;grid-template-columns:1fr 1fr;box-shadow:none}.bg-pik.mini i{border-radius:5px;font-size:11px;color:#fff;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800}</style>')

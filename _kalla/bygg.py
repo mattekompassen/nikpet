@@ -38,7 +38,7 @@ MATERIAL = [
  ('13_Test', 'test', 'Test'),
  ('17_Ovningsprov', 'ovningsprov', 'Övningsprov'),
 ]
-MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html'), ('Bedömning', 'bedomning.html'), ('Så får du hjälp', 'hjalp.html'), ('Nationella prov', 'nationella-prov.html')]
+MENY = [('Startsida', 'index.html'), ('Åk 7', 'ak7.html'), ('Åk 8', 'ak8.html'), ('Åk 9', 'ak9.html'), ('Nationella prov', 'nationella-prov.html'), ('Matematikens grunder', 'grundtraning.html')]
 # Neutral (startsida m.m.): medelvärdet av de fem färgerna, ljusat
 NEUTRAL_M = '#9AA3AE'
 NEUTRAL = dict(main=NEUTRAL_M, ink='#1E2B3A', mid=NEUTRAL_M, l=mix(NEUTRAL_M, '#FFFFFF', .45), vl=mix(NEUTRAL_M, '#FFFFFF', .62), w=mix(NEUTRAL_M, '#FFFFFF', .9),
@@ -226,6 +226,7 @@ footer{background:#1E2B3A;color:#DDE3EA}footer .wrap{color:#DDE3EA}
 @media (max-width:800px){.kkrad{grid-template-columns:1fr}.infor{grid-template-columns:1fr 1fr;row-gap:20px}.infor a:nth-child(3){border-left:0}
  .topprubrik{gap:14px;padding:18px 0}.topprubrik img{width:64px}.topprubrik p{font-size:16px}.kk .topp{height:150px}.panel .motiv{display:none}}
 @media (max-width:560px){.infor{grid-template-columns:1fr}.infor a{border-left:0!important;padding:4px 0}.infor a+a{border-top:1.5px solid #E1DED6;padding-top:16px}nav{max-width:100%;min-width:0}header .wrap{min-width:0;max-width:100%}nav a{flex:none}}
+.infor{gap:14px;border-top:0!important;padding-top:0!important}.infor a{background:#E5ECF2;border-radius:18px;padding:18px 20px!important;border:2px solid #B9CADA!important;box-shadow:0 2px 6px #1E2B3A0d;transition:background .15s}.infor a:hover{background:#DAE4EC}
 .ak2{position:relative;display:flex;flex-direction:column;border:2px solid;border-radius:22px;overflow:hidden;text-decoration:none;box-shadow:0 8px 24px #1E2B3A14;transition:transform .15s}.ak2:hover{transform:translateY(-4px)}
 .ak2 .blob{position:absolute;border-radius:50%;z-index:0}.ak2 .b1{width:190px;height:150px;right:-50px;bottom:10px;opacity:.7}.ak2 .b2{width:150px;height:120px;left:-40px;bottom:-30px;opacity:.8}
 .ak2 .prick{position:absolute;border-radius:50%;background:var(--d);opacity:.35;z-index:0}.ak2 .p1{width:9px;height:9px;right:26px;top:22px}.ak2 .p2{width:6px;height:6px;right:16px;top:44px;background:var(--m);opacity:.6}
@@ -399,7 +400,7 @@ CSS_VER = hashlib.sha1(CSS.encode()).hexdigest()[:8]  # ny version -> webbläsar
 def rand():
     return '<div class="rand" aria-hidden="true">' + ''.join(f'<i style="background:{c[0]}"></i>' for c in RAND) + '</div>'
 
-PRICK = {'Startsida': '#2F2B26', 'Åk 7': AR[7]['main'], 'Åk 8': AR[8]['main'], 'Åk 9': AR[9]['main'], 'Bedömning': '#1E2B3A', 'Så får du hjälp': '#1E2B3A', 'Nationella prov': '#1E2B3A'}
+PRICK = {'Startsida': '#2F2B26', 'Åk 7': AR[7]['main'], 'Åk 8': AR[8]['main'], 'Åk 9': AR[9]['main'], 'Bedömning': '#1E2B3A', 'Så får du hjälp': '#1E2B3A', 'Nationella prov': '#1E2B3A', 'Matematikens grunder': '#1E2B3A'}
 
 MOTIV = {
  7: '''<text x="40" y="95" font-size="44" fill="#fff">3</text><path d="M34 108h34" stroke="#fff" stroke-width="4"/><text x="40" y="152" font-size="44" fill="#fff">5</text>
@@ -527,7 +528,8 @@ def extra(fil):
     if fil == 'amnesord.html' and LANKAR.get('amnesord'):
         shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flaggor'), os.path.join(UT, 'bilder', 'flaggor'), dirs_exist_ok=True)
         lank = ''.join(f'<a class="sprak" href="https://drive.google.com/file/d/{i}/view" target="_blank" rel="noopener"><img src="bilder/flaggor/{f}.svg" alt="">{html.escape(n)}</a>' for n, i, f in LANKAR['amnesord'])
-        return f'<div class="ruta"><h3>Termer för matematikundervisning</h3><p style="margin:0 0 14px">Klicka på ditt språk för att öppna ordlistan (PDF).</p><div class="lankar" style="padding:0">{lank}</div></div>'
+        tb = '<a class="ovlank" href="begrepp.html"><span class="ovik" aria-hidden="true">🃏</span><span class="ovtxt"><b>Träna begreppen</b>Begreppskort och övningar på svenska, med bild och exempel.</span><span class="ovknapp">Träna begreppen →</span></a>' if VISA_BEGREPP else ''
+        return tb + f'<div class="ruta"><h3>Termer för matematikundervisning</h3><p style="margin:0 0 14px">Klicka på ditt språk för att öppna ordlistan (PDF).</p><div class="lankar" style="padding:0">{lank}</div></div>'
     return '<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Sidan fylls på under läsåret.</p></div>'
 
 IKON = dict(
@@ -555,7 +557,11 @@ GRUPPER = [
 ]
 
 # De fyra gemensamma sidorna får samma färg som sin ikon på startsidan
-SIDFARG = {'bedomning.html': farger('havsgron'), 'hjalp.html': farger('mint2'), 'nationella-prov.html': farger('solgul'), 'amnesord.html': farger('korall')}
+ORG['stalbla'] = ('#5B8DB8', '#1F4466', '#E6EEF5')  # Nationella prov: stålblå (Nikola 2026-10-25)
+ORG['blaviolett'] = ('#6F86BC', '#2B3A6B', '#E9EDF6')  # Ämnesord: blåviolett (2026-10-25)
+ORG['himmel2'] = ('#5FA8D3', '#1B4F72', '#E6F3FA')  # Bedömning: himmelsblå (2026-10-25)
+ORG['petrol'] = ('#4F9BA8', '#1E5560', '#E4F3F5')  # Hjälp: petrolblå (2026-10-25)
+SIDFARG = {'bedomning.html': farger('himmel2'), 'hjalp.html': farger('petrol'), 'nationella-prov.html': farger('stalbla'), 'amnesord.html': farger('blaviolett')}
 # En nyans ljusare rubrikruta och knappar på de fyra sidorna (Nikola 2026-10-24)
 for _c in SIDFARG.values(): _c['hero'] = mix(_c['main'], '#FFFFFF', .3); _c['knapp'] = mix(_c['ink'], _c['main'], .3)
 # Gamla färger i innehållet (bedomning.py, hjalp.py, np.py) -> vintagefärger
@@ -567,10 +573,22 @@ FARGBYTE_NP = {'#2C4152': '#6B4E0E', '#426B89': '#8A6614', '#5A7552': '#A67C17',
                '#8A5E22': '#7A5A12', '#F2CD69': '#E9B949', '#1F6E6C': '#8A6614', '#DDEBF3': '#FBEFD0', '#E3ECDD': '#FBF1DA',
                '#F7E3DE': '#F8E6BC', '#F8EBC9': '#FBF1DA', '#D9EEEC': '#FBEFD0',
                '#DDBE88': '#F7DE9A', '#5A4219': '#8A6614', '#A07E3E': '#A67C17', '#8F6C2E': '#8A6614', '#7A5A22': '#7A5A12', '#F6EBD3': '#FBF1DA', '#F3E8D3': '#FBF1DA'}
+# Nationella prov är sedan 2026-10-25 stålblått: de gula målfärgerna ovan översätts till blått med samma ljushet
+def _lum(h): r, g, b_ = [int(h[i:i+2], 16) / 255 for i in (1, 3, 5)]; return .3*r + .59*g + .11*b_
+def _blatt(t, m='#5B8DB8', d='#1F4466'):
+    L, Ld, Lm = _lum(t), _lum(d), _lum(m)
+    if L <= Ld: return d
+    if L <= Lm: return mix(d, m, (L - Ld) / (Lm - Ld))
+    return mix(m, '#FFFFFF', (L - Lm) / (1 - Lm))
+FARGBYTE_NP = {k: _blatt(v) for k, v in FARGBYTE_NP.items()}
+# Ljus rubrikruta med ram, som Matematikens grunder
+NP_PANEL = '<style>.panel{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}.panel .sti,.panel .sti a{color:#5F6368}.panel h1{color:var(--ink)}.panel p{color:#3B4A5A}</style>'
 # Så får du hjälp: rosa detaljer blir mint
-FARGBYTE_HJALP = {**FARGBYTE, '#B95E52': '#3F8582', '#96505A': '#2F6B69', '#F7E3DE': '#E6F6F3'}
+FARGBYTE_HJALP = {**FARGBYTE, '#B95E52': '#357D8A', '#96505A': '#1E5560', '#F7E3DE': '#E4F3F5'}
 # Grundträning (huvudräkning och klockan), gemensam sida som bara länkas från startsidan. Dold tills Nikola godkänt.
 VISA_GRUNDTRANING = True
+# Matematiska begrepp (begrepp.py/begrepp.js), godkänd av Nikola 2026-10-25
+VISA_BEGREPP = True
 ORG['indigo'] = ('#9AA5B1', '#2E3A46', '#EEF1F4')  # neutral gråblå (Nikola 2026-10-24)
 GT_FARG = farger('indigo')
 
@@ -605,9 +623,19 @@ def bygg():
            ('boj', 'hjalp.html', 'Så får du hjälp', 'Stöd, tips och resurser du kan använda.'),
            ('medalj', 'nationella-prov.html', 'Nationella prov', 'Information och förberedelser inför proven i åk 9.'),
            ('prata', 'amnesord.html', 'Ämnesord', 'Viktiga matteord förklarade på ditt språk.')]
-    rad = ''.join(f'<a href="{h}"><span class="rik" style="background:{mix(SIDFARG[h]["main"], "#FFFFFF", .6)}">{ikon(i).replace("#fff", SIDFARG[h]["ink"])}</span><span><b>{t}</b><small>{p}</small></span></a>' for i, h, t, p in rad)
+    # Färgade symboler (Nikola 2026-10-25), bakgrunden oförändrad
+    K = '#2E3A46'
+    FARGIK = dict(
+     prov=f'<rect x="5" y="4" width="14" height="17" rx="2" fill="#fff" stroke="{K}"/><path d="M9 4V2.8h6V4" fill="#E9B949" stroke="{K}"/><rect x="8.6" y="2.6" width="6.8" height="3" rx="1" fill="#E9B949" stroke="{K}"/><path d="M8.5 10.5l1.6 1.6 3.2-3.2M8.5 16l1.6 1.6 3.2-3.2" stroke="#3E9A3A"/>',
+     boj=f'<circle cx="12" cy="12" r="9" fill="#E07A5F" stroke="{K}"/><path d="M5.6 5.6l3.7 3.7M18.4 5.6l-3.7 3.7M5.6 18.4l3.7-3.7M18.4 18.4l-3.7-3.7" stroke="#fff" stroke-width="3.2"/><circle cx="12" cy="12" r="9" fill="none" stroke="{K}"/><circle cx="12" cy="12" r="3.8" fill="#fff" stroke="{K}"/>',
+     medalj=f'<path d="M8.6 13.9 7 21l5-2.6 5 2.6-1.6-7.1" fill="#E07A5F" stroke="{K}"/><circle cx="12" cy="9" r="6" fill="#E9B949" stroke="{K}"/><circle cx="12" cy="9" r="2.6" fill="#FFF3CF" stroke="none"/>',
+     prata=f'<path d="M19 8h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-1v3l-4-3h-3a2 2 0 0 1-2-1.6" fill="#E9B949" stroke="{K}"/><path d="M4 4h10a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H9l-4 3.5V14H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" fill="#fff" stroke="{K}"/><path d="M6 8h6M6 11h4" stroke="#5B8DB8"/>')
+    fik = lambda n: f'<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{FARGIK[n]}</svg>'
+    rad = ''.join(f'<a href="{h}"><span class="rik" style="background:{mix(SIDFARG[h]["main"], "#FFFFFF", .45)};border:1.5px solid {mix(SIDFARG[h]["main"], SIDFARG[h]["ink"], .2)}">{fik(i)}</span><span><b>{t}</b><small>{p}</small></span></a>' for i, h, t, p in rad)
     import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import grundtraning as gt
     gtlank = gt.startlank(GT_FARG, mix) if VISA_GRUNDTRANING else ''
+    import begrepp as bgr
+    gtlank += bgr.startlank() if VISA_BEGREPP else ''
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
 <main class="hem"><div class="wrap"><section class="topprubrik"><img src="bilder/kompass-matte.png" alt=""><div><h1>Mattekompassen</h1><p>Din väg genom matematiken i årskurs 7–9</p></div></section>
 <h2 class="sr">Välj din årskurs</h2><div class="kkrad">{kort}</div>
@@ -661,7 +689,7 @@ def bygg():
         c = SIDFARG[fil]
         sida(fil, t, {'bedomning.html': 'Bedömning', 'hjalp.html': 'Så får du hjälp', 'nationella-prov.html': 'Nationella prov'}.get(fil, ''), c, f"""
 {panel(c, t, text, '', [('Startsida', 'index.html'), (t, None)])}
-<main><section><div class="wrap">{byt_farger(extra(fil), FARGBYTE_NP if fil == 'nationella-prov.html' else FARGBYTE_HJALP if fil == 'hjalp.html' else None)}
+<main><section><div class="wrap">{NP_PANEL if fil in ('nationella-prov.html', 'amnesord.html') else ''}{byt_farger(extra(fil), FARGBYTE_NP if fil == 'nationella-prov.html' else FARGBYTE_HJALP if fil == 'hjalp.html' else None)}
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     # Gemensam sida om problemlösning (länkas från årskursernas problemlösningssidor)
     arl = ''.join(f'<a href="ak{k}/problemlosning.html" style="background:{AR[k]["ink"]}">Åk {k}<small>Matematik {AR[k]["bok"]} · problemlösning per kapitel</small></a>' for k in AR)
@@ -678,8 +706,12 @@ def bygg():
 <div class="arlank">{arl}</div>
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     if VISA_GRUNDTRANING:
-        sida('grundtraning.html', 'Grundträning', '', GT_FARG, gt.kropp(panel, GT_FARG))
+        sida('grundtraning.html', 'Matematikens grunder', 'Matematikens grunder', GT_FARG, gt.kropp(panel, GT_FARG))
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'grundtraning.js'), UT)
+    if VISA_BEGREPP:
+        import begrepp as bgr
+        sida('begrepp.html', 'Matematiska begrepp', '', SIDFARG['amnesord.html'], bgr.kropp(panel, SIDFARG['amnesord.html']))
+        shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'begrepp.js'), UT)
     for js in ('trana.js', 'trana-ak7.js', 'trana-ak8.js', 'trana-ak9.js'):
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), js), UT)
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
