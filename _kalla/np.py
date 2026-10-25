@@ -19,7 +19,7 @@ TA_MED = ['Penna och sudd', 'Linjal', 'Räknare (delprov C och D)']
 FAR_EJ = ['Mobiltelefon', 'Smartklocka', 'Räknare och formelblad på delprov A och B']
 TIPS = [('Före provet', ['Öva huvudräkning och skriftlig räkning, för delprov A och B görs utan räknare.',
                          'Titta på formelbladet i förväg så att du vet vad som står där.',
-                         'Träna med NP-träningen längre ner på sidan.',
+                         'Träna med NP-träningen: sex träningsprov med facit.',
                          'Sov ordentligt och ät frukost.']),
         ('Under provet', ['Läs varje uppgift noga. Vad ska du ta reda på?',
                           'Börja med det du kan. Hoppa över och kom tillbaka sedan.',
@@ -97,17 +97,16 @@ CSS = """<style>
 @media(max-width:1000px){.np .dp{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.np .dp,.np .dagar,.np .hm,.np .tipsg{grid-template-columns:1fr}}
 </style>"""
-OVP_INTRO = ('<h2 class="grupp" id="np-traning" style="--g:#426B89;margin-top:40px;scroll-margin-top:20px">NP-träning</h2>'
+OVP_INTRO = (''
              '<p class="under" style="max-width:860px">Här finns sex träningsprov inför det nationella provet, med samma upplägg som det riktiga provet: fyra delprov A–D. '
              'Uppgifterna är egna och kommer inte från något riktigt prov. Skriv ut delprovet eller öppna det, ta tid och lös uppgifterna som på riktigt. '
-             'Rätta sedan med facit. Facit öppnar du med lösenordet som du får av din mattelärare.</p>')
+             'Rätta sedan med facit. Facit öppnar du med lösenordet som du får av din mattelärare. <a href="nationella-prov.html" style="font-weight:700;color:var(--ink)">Allt om nationella provet →</a></p>')
 
 def sida():
     """Översta delen av nationella-prov.html: en avlång ruta med all information om provet.
     Övningsproven läggs till under av bygg.py (ovningsprov_sida), som också stänger <div class="np">."""
     e = html.escape
-    ut = [CSS, '<div class="np"><details class="infobox"><summary><span class="ibik" aria-hidden="true">📋</span><span class="ibtit"><b>Allt om nationella provet</b>'
-          '12 och 14 maj 2027 · fyra delprov · vad du får ha med dig · tips</span><span class="ibvisa">Visa</span></summary><div class="ibinn">',
+    ut = [CSS, '<div class="np"><div class="infobox"><div class="ibinn">',
           '<p class="ingress">I åk 9 skriver alla elever i Sverige nationellt prov i matematik. Provet visar vad du kan och hjälper läraren när betyget sätts. Provet har fyra delar och skrivs på papper i skolan.</p>',
           '<div class="ib-dagar">' + ''.join(f'<div><b>{e(d)}</b>{e(t)}</div>' for d, t in DAGAR) + '<div class="kl"><b>Klockan 9.00</b>Provet börjar båda dagarna</div></div>',
           '<h3 class="ibh">Fyra delprov</h3><p class="ibu">Varje delprov har en egen tid och egna regler för räknare och formelblad. Provet har inget muntligt delprov.</p><div class="dp">']
@@ -119,7 +118,8 @@ def sida():
     ut.append('<div class="nej"><h3>Det här får du inte använda</h3><ul>' + ''.join(f'<li>{e(t)}</li>' for t in FAR_EJ) + '</ul></div>')
     for t, li in TIPS:
         ut.append(f'<div class="tips"><h3>Tips {e(t.lower())}</h3><ul>' + ''.join(f'<li>{e(x)}</li>' for x in li) + '</ul></div>')
-    ut.append('</div></div></details>')
+    ut.append('</div></div></div>')
+    ut.append('<a class="ovlank" href="np-traning.html" style="margin-top:22px"><span class="ovik" aria-hidden="true">📝</span><span class="ovtxt"><b>NP-träning</b>Sex träningsprov med samma upplägg som det nationella provet, med facit.</span><span class="ovknapp">Till NP-träning →</span></a>')
     return ''.join(ut)
 
 # Exempeluppgifter (egna, med nya tal – INTE originaluppgifter). (text, alternativ, poäng, svar)

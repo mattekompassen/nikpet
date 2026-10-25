@@ -415,7 +415,7 @@ def allamenu(rot=''):
     for k in (7, 8, 9):
         l = f'<a class="ar" href="{rot}ak{k}.html">Årskurs {k}</a>' + ''.join(f'<a href="{rot}ak{k}/{sl}.html">{html.escape(rt)}</a>' for _, _, rutor in GRUPPER for _, sl, rt, _ in rutor)
         kol += f'<div><h3><i style="background:{AR[k]["main"]}"></i>Åk {k}</h3>{l}</div>'
-    gem = [('Startsida', 'index.html'), ('Nationella prov', 'nationella-prov.html'), ('Matematikens grunder', 'grundtraning.html'), ('Matematiska begrepp', 'begrepp.html'),
+    gem = [('Startsida', 'index.html'), ('Nationella prov', 'nationella-prov.html'), ('NP-träning', 'np-traning.html'), ('Matematikens grunder', 'grundtraning.html'), ('Matematiska begrepp', 'begrepp.html'),
            ('Problemlösning', 'problemlosning.html'), ('Bedömning', 'bedomning.html'), ('Så får du hjälp', 'hjalp.html'), ('Ämnesord på olika språk', 'amnesord.html')]
     kol += '<div><h3><i style="background:#1E2B3A"></i>För alla</h3>' + ''.join(f'<a href="{rot}{h}">{t}</a>' for t, h in gem) + '</div>'
     return ('<details class="am"><summary aria-label="Alla sidor"><span class="ham" aria-hidden="true"><i></i><i></i><i></i></span>Alla sidor</summary>'
@@ -549,7 +549,10 @@ def extra(fil):
         return bedomning.sida()
     if fil == 'nationella-prov.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import np as npsida
-        return npsida.sida() + ovningsprov_sida(9, 'ak9/', npsida.OVP_INTRO) + '</div>'
+        return npsida.sida() + '</div>'
+    if fil == 'np-traning.html':
+        import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import np as npsida
+        return npsida.CSS + '<div class="np">' + ovningsprov_sida(9, 'ak9/', npsida.OVP_INTRO) + '</div>'
     if fil == 'hjalp.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import hjalp
         return hjalp.sida()
@@ -589,7 +592,7 @@ ORG['stalbla'] = ('#5B8DB8', '#1F4466', '#E6EEF5')  # Nationella prov: stålblå
 ORG['blaviolett'] = ('#6F86BC', '#2B3A6B', '#E9EDF6')  # Ämnesord: blåviolett (2026-10-25)
 ORG['himmel2'] = ('#5FA8D3', '#1B4F72', '#E6F3FA')  # Bedömning: himmelsblå (2026-10-25)
 ORG['petrol'] = ('#4F9BA8', '#1E5560', '#E4F3F5')  # Hjälp: petrolblå (2026-10-25)
-SIDFARG = {'bedomning.html': farger('himmel2'), 'hjalp.html': farger('petrol'), 'nationella-prov.html': farger('stalbla'), 'amnesord.html': farger('blaviolett')}
+SIDFARG = {'bedomning.html': farger('himmel2'), 'hjalp.html': farger('petrol'), 'nationella-prov.html': farger('stalbla'), 'np-traning.html': farger('stalbla'), 'amnesord.html': farger('blaviolett')}
 # En nyans ljusare rubrikruta och knappar på de fyra sidorna (Nikola 2026-10-24)
 for _c in SIDFARG.values(): _c['hero'] = mix(_c['main'], '#FFFFFF', .3); _c['knapp'] = mix(_c['ink'], _c['main'], .3)
 # Gamla färger i innehållet (bedomning.py, hjalp.py, np.py) -> vintagefärger
@@ -639,7 +642,7 @@ def STARTSIDA_HTML(rad, gtlank, fik):
     np_ = (f'<section class="npruta"><div class="npik">{fik("medalj").replace("width=\"32\" height=\"32\"", "width=\"44\" height=\"44\"")}</div>'
            '<div class="nptxt"><div class="npet">Åk 9 · 12 och 14 maj 2027</div><h2>Nationella prov i matematik</h2><p>Så går provet till, och så tränar du inför det med NP-träning.</p></div>'
            '<div class="npdag" aria-live="polite"><b id="npdagar">–</b><small>dagar kvar</small></div>'
-           '<div class="npkn"><a href="nationella-prov.html">Om provet →</a><a href="nationella-prov.html#np-traning">NP-träning</a></div></section>'
+           '<div class="npkn"><a href="nationella-prov.html">Om provet →</a><a href="np-traning.html">NP-träning</a></div></section>'
            '<script>(function(){var d=Math.ceil((new Date(2027,4,12)-new Date())/864e5),e=document.getElementById("npdagar");if(e)e.textContent=d>0?d:"0"})()</script>')
     return f'<style>{NP_CSS}</style>{np_}{gtlank}<div class="smalrad" role="navigation" aria-label="Mer information">{smal}</div>'
 ORG['indigo'] = ('#9AA5B1', '#2E3A46', '#EEF1F4')  # neutral gråblå (Nikola 2026-10-24)
@@ -738,11 +741,12 @@ def bygg():
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
                          ('bedomning.html', 'Hur bedöms du?', 'Vad bedöms i matematik, och hur visar du vad du kan?'),
                          ('hjalp.html', 'Så får du hjälp i matte', 'Så gör vi för att alla ska lära sig matte.'),
-                         ('nationella-prov.html', 'Nationella prov i matematik', 'Så går provet till i åk 9, och så kan du förbereda dig.')]:
+                         ('nationella-prov.html', 'Allt om nationella provet', 'Så går provet i matematik till i åk 9: datum, delprov, vad du får ha med dig och tips.'),
+                         ('np-traning.html', 'NP-träning', 'Sex träningsprov inför det nationella provet i åk 9.')]:
         c = SIDFARG[fil]
-        sida(fil, t, {'bedomning.html': 'Bedömning', 'hjalp.html': 'Så får du hjälp', 'nationella-prov.html': 'Nationella prov'}.get(fil, ''), c, f"""
+        sida(fil, t, {'bedomning.html': 'Bedömning', 'hjalp.html': 'Så får du hjälp', 'nationella-prov.html': 'Nationella prov', 'np-traning.html': 'NP-träning'}.get(fil, ''), c, f"""
 {panel(c, t, text, '', [('Startsida', 'index.html'), (t, None)])}
-<main><section><div class="wrap">{NP_PANEL if fil in ('nationella-prov.html', 'amnesord.html') else ''}{byt_farger(extra(fil), FARGBYTE_NP if fil == 'nationella-prov.html' else FARGBYTE_HJALP if fil == 'hjalp.html' else None)}
+<main><section><div class="wrap">{NP_PANEL if fil in ('nationella-prov.html', 'np-traning.html', 'amnesord.html') else ''}{byt_farger(extra(fil), FARGBYTE_NP if fil in ('nationella-prov.html', 'np-traning.html') else FARGBYTE_HJALP if fil == 'hjalp.html' else None)}
 <a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
     # Gemensam sida om problemlösning (länkas från årskursernas problemlösningssidor)
     arl = ''.join(f'<a href="ak{k}/problemlosning.html" style="background:{AR[k]["ink"]}">Åk {k}<small>Matematik {AR[k]["bok"]} · problemlösning per kapitel</small></a>' for k in AR)
