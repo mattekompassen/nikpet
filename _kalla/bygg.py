@@ -142,6 +142,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .ovrad small{display:block;font-weight:500;font-size:13px;opacity:.75}
 .ovrad a.facit{flex:none;display:flex;align-items:center;background:var(--knapp,var(--ink));color:#fff;border-radius:12px;padding:0 12px;font-weight:700;font-size:14px;text-decoration:none}
 .ovrad a.facit:hover{opacity:.85}
+.ovrad.gg{flex-wrap:wrap}.ovrad.gg a.upg{flex:1 1 100%}.ovrad.gg a.facit{flex:1;justify-content:center;padding:8px 12px}
 .lankar.ovp{grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr))}
 .lankar .ovinfo{display:block;font-weight:500;font-size:14px;opacity:.7;margin-top:2px}.lankar a b{color:var(--mid);margin-right:6px}
 .las form{display:flex;gap:10px;flex-wrap:wrap}.las input{font:inherit;font-size:18px;padding:10px 14px;border:2px solid var(--l);border-radius:14px;flex:1 1 200px;min-width:0;max-width:320px}.las input:focus{outline:3px solid var(--mid);outline-offset:1px}.las button{font:inherit;font-weight:700;font-size:17px;cursor:pointer;border:0;border-radius:14px;background:var(--ink);color:#fff;padding:12px 24px}.lasfel{min-height:24px;margin:10px 0 0;color:#8A4A30;font-weight:600}
@@ -312,6 +313,9 @@ document.getElementById('lasform').addEventListener('submit',function(e){{
 # med samma lösenord/nyckel som Lektioner-sidorna (AES-GCM) och låses upp i webbläsaren.
 OVP_KALLA = '/mnt/project-files/np-ovningsprov-{n}'
 OVP_ANTAL = 6
+# Genomgångs-PPT per NP-träning och delprov (Drive-fil-id). Länken krypteras som facit (Nikola 2026-10-26).
+OVP_GENOMGANG = {1: {'A': '1zf0p478GaacCDaIS4jpjVfdN0CJuEfhg', 'B': '1RqvjJmMfPoPTcm0nUAqLOxtDhfiHvPQ4',
+                     'C': '1aruWJriCS7VxSQmAVezFm5BjqCQoo5JM', 'D': '1OROt_KXTtYGumZHoR_T1FMi-_1lgsZA2'}}
 OVP_DELPROV = [('A', '40 min', 'utan räknare', 'bara svar'), ('B', '80 min', 'utan räknare', 'visa lösningen'),
                ('C', '40 min', 'med räknare', 'bara svar'), ('D', '80 min', 'med räknare', 'visa lösningen')]
 
@@ -348,9 +352,14 @@ def ovningsprov_sida(k, rot='', intro=None):
             shutil.copy(upg, os.path.join(UT, f'ak{k}', sti + '.pdf'))
             open(os.path.join(UT, f'ak{k}', sti + '-facit.bin'), 'wb').write(krypterad_fil(open(fac, 'rb').read()))
             info = ovp_info(upg)
-            rader += (f'<div class="ovrad"><a class="upg" href="{rot}{sti}.pdf" target="_blank" rel="noopener"><span class="bok">{b}</span><span>Delprov {b}<small>{tid} · {rk}'
+            gid = OVP_GENOMGANG.get(n, {}).get(b)
+            gg = ''
+            if gid:
+                open(os.path.join(UT, f'ak{k}', sti + '-genomgang.bin'), 'wb').write(krypterad_fil(f'https://drive.google.com/file/d/{gid}/view'.encode()))
+                gg = f'<a class="facit" href="#facit" data-url="{rot}{sti}-genomgang.bin">🔒 Genomgång</a>'
+            rader += (f'<div class="ovrad{" gg" if gg else ""}"><a class="upg" href="{rot}{sti}.pdf" target="_blank" rel="noopener"><span class="bok">{b}</span><span>Delprov {b}<small>{tid} · {rk}'
                       + (f' · {info}' if info else '') + '</small></span></a>'
-                      f'<a class="facit" href="#facit" data-fil="{rot}{sti}-facit.bin" data-namn="NP-träning {n} delprov {b} facit.pdf">🔒 Facit</a></div>')
+                      f'<a class="facit" href="#facit" data-fil="{rot}{sti}-facit.bin" data-namn="NP-träning {n} delprov {b} facit.pdf">🔒 Facit</a>{gg}</div>')
         prov += f'<div class="ovkort"><h3>NP-träning {n}</h3>{rader}</div>'
     prov = f'<div class="ovgrid">{prov}</div>'
     if intro is None:
@@ -369,10 +378,10 @@ def ovningsprov_sida(k, rot='', intro=None):
 var las=document.getElementById('facit'),ok=document.getElementById('olast'),fel=document.getElementById('lasfel'),NYCKEL='mk-lektioner-nyckel',raa=null;
 var b64=function(s){{return Uint8Array.from(atob(s),function(c){{return c.charCodeAt(0)}})}};
 var u8b64=function(a){{var s='';a.forEach(function(x){{s+=String.fromCharCode(x)}});return btoa(s)}};
-var forsta=document.querySelector('a.facit');
+var forsta=document.querySelector('a.facit[data-fil]');
 function oppna(fil,k){{return fetch(fil).then(function(r){{if(!r.ok)throw 0;return r.arrayBuffer()}}).then(function(b){{var a=new Uint8Array(b);
  return crypto.subtle.importKey('raw',k,'AES-GCM',false,['decrypt']).then(function(x){{return crypto.subtle.decrypt({{name:'AES-GCM',iv:a.slice(0,12)}},x,a.slice(12))}})}})}}
-function upplast(k){{raa=k;las.style.display='none';ok.style.display='';document.querySelectorAll('a.facit').forEach(function(a){{a.textContent='Facit'}})}}
+function upplast(k){{raa=k;las.style.display='none';ok.style.display='';document.querySelectorAll('a.facit').forEach(function(a){{a.textContent=a.textContent.replace('🔒 ','')}})}}
 function prova(k){{return oppna(forsta.dataset.fil,k).then(function(){{upplast(k);return true}})}}
 if(!window.crypto||!crypto.subtle||!window.fetch){{fel.textContent='Din webbläsare kan inte öppna facit. Prova en annan webbläsare.';return}}
 var sparad=null;try{{sparad=localStorage.getItem(NYCKEL)}}catch(e){{}}
@@ -387,6 +396,7 @@ document.getElementById('lasform').addEventListener('submit',function(e){{
 }});
 document.querySelectorAll('a.facit').forEach(function(a){{a.addEventListener('click',function(e){{
  if(!raa){{e.preventDefault();las.scrollIntoView({{behavior:'smooth',block:'center'}});document.getElementById('losen').focus();fel.textContent='Skriv lösenordet för att öppna facit.';return}}
+ if(a.dataset.url){{e.preventDefault();var g=window.open('','_blank');oppna(a.dataset.url,raa).then(function(b){{var u=new TextDecoder().decode(b);if(g){{g.location.href=u}}else{{location.href=u}}}}).catch(function(){{if(g)g.close();alert('Genomgången gick inte att öppna. Försök igen.')}});return}}
  e.preventDefault();var w=navigator.pdfViewerEnabled===false?null:window.open('','_blank');
  oppna(a.dataset.fil,raa).then(function(b){{var url=URL.createObjectURL(new Blob([b],{{type:'application/pdf'}}));
   if(w){{w.location.href=url}}else{{var l=document.createElement('a');l.href=url;l.download=a.dataset.namn;document.body.appendChild(l);l.click();l.remove()}}}})
