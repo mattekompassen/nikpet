@@ -121,16 +121,16 @@ def _ver(f):  # ny version -> webbläsaren hämtar ny fil i stället för en gam
 
 def kropp(panel, c, rot=''):
     data = ''.join(f'<script src="{rot}trana-ak{k}.js"></script><script>(window.BG_DATA=window.BG_DATA||{{}})[{k}]=TRANA_DATA</script>' for k in (7, 8, 9))
-    return (panel(c, 'Matematiska begrepp', 'Lär dig matteorden och orden som hjälper dig att resonera. Vänd korten och öva på orden.', '',
+    return (panel(c, 'Matematiska begrepp', 'Lär dig matteord och resonemangsord. Vänd korten och öva på orden.', '',
                   [('Startsida', 'index.html'), ('Matematiska begrepp', None)], ikon())
             + f'<main><section><div class="wrap"><div id="bg"></div><a class="knapp" href="index.html">← Till startsidan</a></div></section></main>'
             + f'<style>.panel{{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}}.panel .sti,.panel .sti a{{color:#5F6368}}.panel h1{{color:var(--ink)}}.panel p{{color:#3B4A5A}}{CSS}</style>'
             + data + ''.join(f'<script src="{rot}{f}?v={_ver(f)}"></script>' for f in ('begrepp-bok.js', 'begrepp-kitt.js', 'begrepp.js')))
 
 def startlank():
-    del3 = [('📐', 'Matteord', 'Tal, algebra, geometri …'), ('🔗', 'Ord för att resonera', 'Eftersom, jämför, motivera …'), ('🔍', 'Sök ett ord', 'Hitta ett ord du undrar över')]
-    lank = {'Matteord': 'begrepp.html', 'Ord för att resonera': 'begrepp.html?flik=kitt', 'Sök ett ord': 'begrepp.html?flik=sok'}
+    del3 = [('📐', 'Matteord', 'Tal, algebra, geometri …'), ('🔗', 'Resonemangsord', 'Eftersom, jämför, motivera …'), ('🔍', 'Sök ett ord', 'Hitta ett ord du undrar över')]
+    lank = {'Matteord': 'begrepp.html', 'Resonemangsord': 'begrepp.html?flik=kitt', 'Sök ett ord': 'begrepp.html?flik=sok'}
     g = ''.join(f'<a href="{lank[t]}"><i style="background:#E3E8F4">{e}</i><span><b>{t}</b><small>{s}</small></span></a>' for e, t, s in del3)
     return (f'<section class="gtC" style="background:#E3E8F4;box-shadow:inset 0 0 0 2px #B9C4DE"><div class="h"><span class="gik" style="background:#fff">{ikon().replace("bg-pik", "bg-pik mini")}</span>'
-            f'<div><b>Matematiska begrepp</b><small>Matteord och ord för att resonera. För alla årskurser.</small></div><a class="alla" href="begrepp.html" style="background:#2B3A6B">Träna begreppen →</a></div><div class="g">{g}</div></section>'
+            f'<div><b>Matematiska begrepp</b><small>Matteord och resonemangsord. För alla årskurser.</small></div><a class="alla" href="begrepp.html" style="background:#2B3A6B">Träna begreppen →</a></div><div class="g">{g}</div></section>'
             '<style>.bg-saknas{margin:14px 4px 0;font-size:15px;color:#3B4A5A}.bg-pik.mini{width:58px;height:58px;border-radius:14px;padding:6px;gap:3px;display:grid;grid-template-columns:1fr 1fr;box-shadow:none}.bg-pik.mini i{border-radius:5px;font-size:11px;color:#2E3A46;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800}</style>')

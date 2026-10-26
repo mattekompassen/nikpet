@@ -238,7 +238,7 @@
   <h2 class="bg-rub">Vilka ord vill du träna på?</h2>
   <h3 class="bg-del">📐 Matteord <small>Begreppen från matteboken</small></h3>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div>
-  <h3 class="bg-del" id="bg-resonera">🔗 Ord för att resonera <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
+  <h3 class="bg-del" id="bg-resonera">🔗 Resonemangsord <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}</div>
   <p class="bg-saknar">💬 Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>
 </div>
@@ -278,7 +278,7 @@
   el.querySelectorAll('[data-val]').forEach(b => b.onclick = () => { const [t, id] = b.dataset.val.split(':'); VAL = VALEN.find(x => x.typ === t && x.id === id); LAGE = 'kort'; steg(2); visaVal(); el.scrollIntoView({block: 'start'}); });
   el.querySelectorAll('[data-lage]').forEach(b => b.onclick = () => { LAGE = b.dataset.lage; visaVal(); });
   $('.bg-tillbaka').onclick = () => { VAL = null; steg(1); };
-  // Sök bland alla ord, både matteord och ord för att resonera
+  // Sök bland alla ord, både matteord och resonemangsord
   const sok = () => {
     const q = norm(sokruta.value); if (q === F.sok) return; F.sok = q;
     if (!q) return steg(VAL ? 2 : 1);
@@ -288,10 +288,10 @@
     $('#bg-traff').textContent = om.length + ko.length ? `${om.length + ko.length} ord hittades för ”${sokruta.value.trim()}”. Klicka på ett kort för att vända det.` : `Inget ord hittades för ”${sokruta.value.trim()}”. Prova en kortare del av ordet. Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.`;
     const lista = $('#bg-soklista'); lista.innerHTML = '';
     if (om.length) { kortlista(om, lista); }
-    if (ko.length) lista.insertAdjacentHTML('beforeend', kittsektion(ko, ['', 'Ord för att resonera', '#D5E3F0', '#1E4A73', '🔗', '']));
+    if (ko.length) lista.insertAdjacentHTML('beforeend', kittsektion(ko, ['', 'Resonemangsord', '#D5E3F0', '#1E4A73', '🔗', '']));
   };
   ['input', 'keyup', 'change', 'search'].forEach(h => sokruta.addEventListener(h, sok));
-  // Från startsidan: ?flik=kitt hoppar till Ord för att resonera
+  // Från startsidan: ?flik=kitt hoppar till Resonemangsord
   const q = new URLSearchParams(location.search);
   if (q.get('flik') === 'kitt') setTimeout(() => $('#bg-resonera').scrollIntoView({block: 'start'}), 50);
   if (q.get('flik') === 'sok') setTimeout(() => { sokruta.scrollIntoView({block: 'center'}); sokruta.focus(); }, 50);
