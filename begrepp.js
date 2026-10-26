@@ -236,7 +236,7 @@
 <label class="bg-sok"><span aria-hidden="true">🔍</span><input type="search" placeholder="Sök ett ord, t.ex. nämnare eller eftersom" aria-label="Sök ett ord"></label>
 <div id="bg-steg1">
   <h2 class="bg-rub">Vilka ord vill du träna på?</h2>
-  <h3 class="bg-del">📐 Matteord <small>Begreppen från matteboken</small></h3>
+  <h3 class="bg-del">📐 Mattebegrepp <small>Ord som används i matematiken, till exempel nämnare, ekvation och omkrets</small></h3>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div>
   <h3 class="bg-del" id="bg-resonera">🔗 Resonemangsord <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}</div>
@@ -278,7 +278,7 @@
   el.querySelectorAll('[data-val]').forEach(b => b.onclick = () => { const [t, id] = b.dataset.val.split(':'); VAL = VALEN.find(x => x.typ === t && x.id === id); LAGE = 'kort'; steg(2); visaVal(); el.scrollIntoView({block: 'start'}); });
   el.querySelectorAll('[data-lage]').forEach(b => b.onclick = () => { LAGE = b.dataset.lage; visaVal(); });
   $('.bg-tillbaka').onclick = () => { VAL = null; steg(1); };
-  // Sök bland alla ord, både matteord och resonemangsord
+  // Sök bland alla ord, både mattebegrepp och resonemangsord
   const sok = () => {
     const q = norm(sokruta.value); if (q === F.sok) return; F.sok = q;
     if (!q) return steg(VAL ? 2 : 1);
