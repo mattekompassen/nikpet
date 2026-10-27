@@ -387,14 +387,16 @@
   // ---------- Visning ----------
   const DELAR = [['rakna', 'Huvudräkning', 'Räkna i huvudet. Du får 10 uppgifter med nya tal varje gång.'], ['tid', 'Klockan och tid', 'Läs klockan, ställ visarna och räkna med tid.'], ['enhet', 'Enheter', 'Längd, volym, vikt och tid. Välj rätt enhet och byt mellan enheter.']];
   const KLOCKORD = [[7, 0, 'klockan 7', '7.00'], [7, 30, 'halv 8', '7.30'], [7, 15, 'kvart över 7', '7.15'], [7, 45, 'kvart i 8', '7.45'], [7, 5, 'fem över 7', '7.05'], [7, 55, 'fem i 8', '7.55']];
-  function meny() {
-    el.innerHTML = DELAR.map(([d, rub, txt]) => `<div class="kapblock gt-del"><h2>${rub}</h2><p class="gt-txt">${txt}</p><div class="gt-typer">` +
+  function meny(bara) {  // bara = 'tid' m.fl.: visa bara den delen (genväg från startsidan)
+    const delar = bara ? DELAR.filter(x => x[0] === bara) : DELAR;
+    el.innerHTML = delar.map(([d, rub, txt]) => `<div class="kapblock gt-del" id="del-${d}"><h2>${rub}</h2><p class="gt-txt">${txt}</p><div class="gt-typer">` +
       Object.entries(OV).filter(([, o]) => o.del === d).map(([k, o]) => `<a class="typ" href="#${k}"><span class="gt-ik" aria-hidden="true">${o.ikon}</span>${o.namn}<b>${o.kort}</b></a>`).join('') + '</div>' +
       (d === 'tid' ? `<details class="gt-ord"><summary>📖 Att läsa av klockan</summary><div class="gt-ordgrid">${KLOCKORD.map(([h, m, f, d]) => `<div>${klocka(h, m, 'liten')}<b>${f}</b><span>${d}</span></div>`).join('')}</div>
         <ul><li><b>över</b> = minuter efter hel timme</li><li><b>i</b> = minuter kvar till nästa timme</li><li><b>halv 8</b> = halvvägs till 8, alltså 7.30</li>
         <li><b>morgon</b> ca 05–10, <b>förmiddag</b> 10–12, <b>eftermiddag</b> 12–18, <b>kväll</b> 18–24</li><li><b>1 h</b> (timme) = 60 min, <b>1 min</b> (minut) = 60 s (sekunder), <b>1 dygn</b> = 24 h</li></ul></details>` : '') +
       (d === 'enhet' ? `<details class="gt-ord"><summary>📖 Enhetstrappan</summary><div class="gt-trappor"><p><b>Längd</b>${trappa('langd')}</p><p><b>Volym</b>${trappa('volym')}</p><p><b>Vikt</b>${trappa('vikt')}</p>
-        <ul><li>Från stor till liten enhet (neråt i trappan): räkna <b>gånger</b>.</li><li>Från liten till stor enhet (uppåt): räkna <b>delat med</b>.</li><li><b>1 dm³ = 1 l</b> och <b>1 cm³ = 1 ml</b></li></ul></div></details>` : '') + '</div>').join('');
+        <ul><li>Från stor till liten enhet (neråt i trappan): räkna <b>gånger</b>.</li><li>Från liten till stor enhet (uppåt): räkna <b>delat med</b>.</li><li><b>1 dm³ = 1 l</b> och <b>1 cm³ = 1 ml</b></li></ul></div></details>` : '') + '</div>').join('') +
+      (bara ? '<a class="knapp2 sek gt-tillbaka" href="#">← Alla övningar</a>' : '');
   }
   function valmeny(k) {
     const o = OV[k];
@@ -526,7 +528,7 @@
     const [k, v] = decodeURIComponent(location.hash.slice(1)).split('/');
     if (OV[k] && v && OV[k].val.some(a => a[0] === v)) start(k, v);
     else if (OV[k]) valmeny(k);
-    else meny();
+    else meny(DELAR.some(x => 'del-' + x[0] === k) ? k.slice(4) : '');
     if (k) el.scrollIntoView({block: 'start', behavior: 'smooth'});
   }
   window.GT_TEST = {OV, fras, del, tt, ENH};  // för automatiska tester
