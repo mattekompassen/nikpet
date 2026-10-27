@@ -112,10 +112,10 @@ CSS = """
 .bt-lank>span:first-child{font-size:30px}.bt-lank b{font-size:19px;margin-right:6px}.bt-lank .bt-pil{margin-left:auto;background:#fff;color:var(--ink);font-weight:700;border-radius:999px;padding:8px 16px;white-space:nowrap}
 .bt-intro{font-size:17px;color:#3B4A5A;margin:0 0 6px;max-width:760px}
 .bt-val{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
-.bt-ruta{font:inherit;text-align:left;cursor:pointer;background:var(--o);border:2px solid color-mix(in srgb,var(--o) 70%,var(--od));border-radius:18px;padding:12px 14px;display:flex;gap:12px;align-items:center;color:var(--od);transition:transform .15s,box-shadow .15s}
-.bt-ruta:hover{transform:translateY(-2px);box-shadow:0 6px 14px #0002}.bt-ruta .bg-rsym{margin:0;flex:none}.bt-ruta>span:last-child{display:flex;flex-direction:column;gap:1px}
+.bt-ruta{font:inherit;text-align:left;cursor:pointer;background:color-mix(in srgb,var(--o) 42%,#F6F1E8);border:1.5px solid color-mix(in srgb,var(--o) 55%,#C9BFAE);border-radius:18px;padding:12px 14px;display:flex;gap:12px;align-items:center;color:var(--od);transition:transform .15s,box-shadow .15s}
+.bt-ruta:hover{transform:translateY(-2px);box-shadow:0 6px 14px #0002}.bt-ruta .bg-rsym{margin:0;flex:none;background:#FFFCF6;color:color-mix(in srgb,var(--od) 80%,#6B6258);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--o) 50%,#D8CFC0)}.bt-ruta b{color:color-mix(in srgb,var(--od) 82%,#4A4238)}.bt-ruta small{color:color-mix(in srgb,var(--od) 60%,#6B6258)}.bt-ruta>span:last-child{display:flex;flex-direction:column;gap:1px}
 .bt-ruta b{font-size:17px;line-height:1.25}.bt-ruta small{font-size:13px;font-weight:600;opacity:.85}
-.bt-ruta.hela{--o:#fff;--od:var(--ink);border-color:var(--l)}.bt-ruta.hela .bg-rsym{background:var(--vl)}
+.bt-ruta.hela{--o:#fff;--od:var(--ink);background:#FFFCF6;border-color:#D8CFC0}.bt-ruta.hela .bg-rsym{background:var(--vl)}
 .bt-topp{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:16px;color:var(--ink);margin:6px 0 8px}
 .bt-bar{height:10px;border-radius:999px;background:var(--vl);overflow:hidden;margin-bottom:16px}.bt-bar i{display:block;height:100%;background:var(--ink);border-radius:999px;transition:width .3s}
 .bt-kort{background:#fff;border:2px solid var(--ram);border-radius:22px;padding:22px 24px}.bt-kort h3{margin:0 0 6px;font-size:24px}
