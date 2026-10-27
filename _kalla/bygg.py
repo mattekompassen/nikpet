@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Bygger Mattekompassens webbplats till /mnt/project-files/webbplats/. Kör: python3 bygg.py
 import os, html, json, shutil
-UT = '/mnt/project-files/webbplats'
+UT = os.environ.get('MK_UT', '/mnt/project-files/webbplats')  # MK_UT: förhandsbygge i annan mapp
 # Drive-länkar per årskurs och sida (lektioner, tillbakablick), se lankar.json
 LANKAR = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'lankar.json'), encoding='utf-8'))
 
@@ -90,12 +90,12 @@ nav a i{width:10px;height:10px;border-radius:50%;flex:none}nav a:hover{backgroun
 .grupp>div:first-child{display:flex;align-items:baseline;gap:6px 14px;flex-wrap:wrap}
 .grupp .nr{font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:600;letter-spacing:1px;color:var(--ink)}
 .grupp h2{font-size:32px;margin:0;color:#2F2B26}.grupp .g{color:#5A5047;font-size:16px;line-height:1.45;margin:0}
-.rad3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rad3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.rad4{grid-template-columns:repeat(4,1fr)}@media(max-width:1000px){.rad4{grid-template-columns:repeat(2,1fr)}}
 .t{display:flex;flex-direction:column;gap:12px;border-radius:26px;padding:20px 22px 20px;min-height:182px;position:relative;text-decoration:none;color:#2F2B26;background:var(--vl);box-shadow:inset 0 0 0 2px var(--ram);transition:transform .15s}
 .t:hover{transform:translateY(-4px)}.t img{width:104px;height:104px;filter:drop-shadow(0 4px 10px #0001)}
 .t h3{font-size:22px;margin:0}.t p{margin:0;font-size:15px;line-height:1.45;color:#4A433C}
 .t .pil{position:absolute;right:20px;top:22px;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;background:#fff9;color:var(--ink)}
-.t .las-ikon{display:inline-block;margin-top:-6px;font-size:12px;font-weight:600;opacity:.65}
+.t .las-ikon{display:inline-block;margin-top:-6px;font-size:12px;font-weight:600;opacity:.65}.t .tagg{align-self:flex-start;margin-top:auto;font-size:12.5px;font-weight:600;color:var(--ink);background:#fff9;border-radius:999px;padding:4px 11px;text-transform:none;letter-spacing:0;white-space:nowrap}
 footer{margin-top:60px;background:var(--vl)}footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;padding-bottom:26px;font-size:14px;color:#4A433C}
 footer .wrap>span{text-align:right;line-height:1.6}footer a.mejl{color:inherit;font-weight:600}
 @media (max-width:800px){footer .wrap>span{text-align:left}}
@@ -188,7 +188,7 @@ a.knapp2{text-decoration:none;display:inline-block}
  .bage{width:96px;height:116px;font-size:80px;border-radius:60px 60px 18px 18px}.panel .bild{width:84px}
  .start{grid-template-columns:1fr auto;align-items:start;gap:10px;padding-top:6px}.ros{width:72px;margin:44px 0 0}
  .ak{grid-template-columns:1fr}.veta{grid-template-columns:1fr}.veta a+a{border-left:0;border-top:1.5px dashed #D2C6B7}
- .grupp{grid-template-columns:1fr;gap:14px}.rad3{grid-template-columns:1fr}.t{min-height:0;display:grid;grid-template-columns:72px 1fr;column-gap:16px;row-gap:2px;padding-right:60px}.t img{width:72px;height:72px;grid-row:span 3}.t .las-ikon{position:static;grid-column:2}
+ .grupp{grid-template-columns:1fr;gap:14px}.rad3{grid-template-columns:1fr}.t{min-height:0;display:grid;grid-template-columns:72px 1fr;column-gap:16px;row-gap:2px;padding-right:60px}.t img{width:72px;height:72px;grid-row:span 3}.t .las-ikon{position:static;grid-column:2}.t .tagg{grid-column:2;justify-self:start;margin-top:6px}
  .ak a{padding:24px 22px 22px}.ak .sol{width:120px;height:120px;font-size:84px;margin-bottom:12px}.ak h3{font-size:26px}
  .kort-t{padding:18px 14px}.match{gap:8px}.mb{font-size:14px;padding:10px}
 }
@@ -425,7 +425,7 @@ def allamenu(rot=''):
     for k in (7, 8, 9):
         l = f'<a class="ar" href="{rot}ak{k}.html">Årskurs {k}</a>' + ''.join(f'<a href="{rot}ak{k}/{sl}.html">{html.escape(rt)}</a>' for _, _, rutor in GRUPPER for _, sl, rt, _ in rutor)
         kol += f'<div><h3><i style="background:{AR[k]["main"]}"></i>Åk {k}</h3>{l}</div>'
-    gem = [('Startsida', 'index.html'), ('Nationella prov', 'nationella-prov.html'), ('NP-träning', 'np-traning.html'), ('Matematikens grunder', 'grundtraning.html'), ('Matematiska begrepp', 'begrepp.html'),
+    gem = [('Startsida', 'index.html'), ('Nationella prov', 'nationella-prov.html'), ('NP-träning', 'np-traning.html'), ('Matematikens grunder', 'grundtraning.html'), ('Matematiska begrepp', 'begrepp.html'), ('Testa dina begrepp', 'begrepp-test.html'),
            ('Problemlösning', 'problemlosning.html'), ('Bedömning', 'bedomning.html'), ('Så får du hjälp', 'hjalp.html'), ('Ämnesord på olika språk', 'amnesord.html')]
     kol += '<div><h3><i style="background:#1E2B3A"></i>För alla</h3>' + ''.join(f'<a href="{rot}{h}">{t}</a>' for t, h in gem) + '</div>'
     return ('<details class="am"><summary aria-label="Alla sidor"><span class="ham" aria-hidden="true"><i></i><i></i><i></i></span>Alla sidor</summary>'
@@ -526,7 +526,7 @@ def innehall(k, s, t):
     sm = d.get('sammanfattning', {}) if lek else {}  # en sammanfattning per kapitel, efter avsnitten
     if s == 'trygg-start':  # t.ex. övningsprov sist i kapitlet
         sm = d.get('trygg-start-extra', {})
-    if s not in d and not extra_upg and not tp and not mal and not sm:
+    if s not in d and not extra_upg and not tp and not mal and not sm and s not in ('utmana-dig', 'na-toppen'):
         return f'<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>'
     drive = lambda i: f'https://drive.google.com/file/d/{i}/view'
     ut = []
@@ -587,15 +587,31 @@ GRUPPER = [
    ('07_Lektioner', 'lektioner', 'Lektioner', 'Genomgångar och mål för varje avsnitt.'),
    ('08_Tillbakablick', 'tillbakablick', 'Tillbakablick', 'Repetera förra lektionen på några minuter.'),
    ('10_Trygg_start', 'trygg-start', 'Trygg start', 'Grunderna steg för steg, i lugn takt.')]),
- ('Träna', 'Öva mer, på det sätt som passar dig.', [
+ ('Träna', 'Öva och lär dig mer, med genomgång och hjälp på vägen.', [
+   ('11_Repetition', 'repetition', 'Repetition', 'Gå igenom hela kapitlet en gång till.'),
    ('06_Problemlosning', 'problemlosning', 'Problemlösning', 'Kluriga uppgifter på olika nivåer.'),
-   ('16_Interaktiva_ovningar', 'trana', 'Interaktiva övningar', 'Träna direkt i mobilen eller datorn.'),
-   ('11_Repetition', 'repetition', 'Repetition', 'Gå igenom hela kapitlet en gång till.')]),
- ('Kolla vad du kan', 'Se vad du redan kan och vad du ska träna mer på.', [
+   ('16_Interaktiva_ovningar', 'trana', 'Interaktiva övningar', 'Träna direkt i mobilen eller datorn.')]),
+ ('Kolla vad du kan', 'Gör uppgifterna själv först, titta sedan på genomgången och se vad du kan.', [
    ('12_Diagnos', 'diagnos', 'Diagnos', 'Hitta det du behöver öva mer på.'),
    ('13_Test', 'test', 'Test', 'Testa dig själv när kapitlet är klart.'),
    ('17_Ovningsprov', 'ovningsprov', 'Övningsprov', 'Öva inför provet under provliknande former.')]),
 ]
+# Kort rad under rutorna som visar skillnaden Träna / Kolla vad du kan (Nikola 2026-10-27)
+ETIKETT = {}  # borttagna 2026-10-27 (för mycket text), gamla: {'repetition': '📘 Med genomgång', 'problemlosning': '💬 Svar efter hand', 'trana': '⚡ Svar direkt', 'utmana-dig': '🧭 Med ledtrådar',
+#            'diagnos': '✏️ Gör själv, rätta sedan', 'test': '✏️ Gör själv, rätta sedan', 'ovningsprov': '✏️ Som ett riktigt prov', 'na-toppen': '✏️ Gör själv, rätta sedan'}
+# Ny ruta Utmana dig (Nikola 2026-10-27): None = av, annars gruppens namn ('Lär dig' eller 'Träna')
+UTMANA = os.environ.get('MK_UTMANA') or 'Träna'  # publicerad 2026-10-27
+UTMANA_RUTA = ('18_Utmana_dig', 'utmana-dig', 'Utmana dig', 'Extra kluriga uppgifter när du vill ta nästa steg.')
+if UTMANA:
+    for _rub, _g, _rutor in GRUPPER:
+        if _rub == UTMANA: _rutor.append(UTMANA_RUTA)
+    MATERIAL.append(UTMANA_RUTA[:3])
+# Ny ruta Nå toppen i Kolla vad du kan (Nikola 2026-10-27): extra svåra uppgifter. None = av
+TOPPEN = os.environ.get('MK_TOPPEN') or True  # publicerad 2026-10-27
+TOPPEN_RUTA = ('19_Na_toppen', 'na-toppen', 'Nå toppen', 'Våga mer! Extra svåra uppgifter för dig som vill testa hur långt du kan nå.')
+if TOPPEN:
+    GRUPPER[2][2].append(TOPPEN_RUTA)
+    MATERIAL.append(TOPPEN_RUTA[:3])
 
 # De fyra gemensamma sidorna får samma färg som sin ikon på startsidan
 ORG['stalbla'] = ('#5B8DB8', '#1F4466', '#E6EEF5')  # Nationella prov: stålblå (Nikola 2026-10-25)
@@ -711,8 +727,8 @@ def bygg():
         grupper = ''
         for n, (rub, g, rutor) in enumerate(GRUPPER, 1):
             t = ''.join(f'<a class="t" href="ak{k}/{s}.html"><img src="bilder/ak{k}/{f}.png" alt=""><span class="pil" aria-hidden="true">→</span><h3>{rt}</h3><p>{p}</p>'
-                        + ('<span class="las-ikon">🔒 Lösenord</span>' if s == 'lektioner' else '') + '</a>' for f, s, rt, p in rutor)
-            grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3">{t}</div></div>'
+                        + ('<span class="las-ikon">🔒 Lösenord</span>' if s == 'lektioner' else f'<span class="tagg">{ETIKETT[s]}</span>' if s in ETIKETT else '') + '</a>' for f, s, rt, p in rutor)
+            grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3{" rad4" if len(rutor) == 4 else ""}">{t}</div></div>'
         sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Årskurs {k}', 'Lär dig nytt, träna mer och kolla vad du kan.',
              f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="nrc" style="color:{c["ink"]}" aria-hidden="true">{k}</div>')
              + f'<main><div class="wrap">{grupper}<p style="margin:34px 0 10px;text-align:center"><a class="knapp pil" href="index.html" aria-label="Till startsidan" title="Till startsidan">←</a></p></div></main>')
@@ -778,6 +794,7 @@ def bygg():
     if VISA_BEGREPP:
         import begrepp as bgr
         sida('begrepp.html', 'Matematiska begrepp', '', SIDFARG['amnesord.html'], bgr.kropp(panel, SIDFARG['amnesord.html']))
+        sida('begrepp-test.html', 'Testa dina begrepp', '', SIDFARG['amnesord.html'], bgr.kropp(panel, SIDFARG['amnesord.html'], test=True))
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'begrepp.js'), UT)
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'begrepp-bok.js'), UT)
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'begrepp-kitt.js'), UT)

@@ -108,6 +108,26 @@ CSS = """
 .kk-bok{font-size:13px;line-height:1.4;color:#4A4F55;border-top:1.5px dashed color-mix(in srgb,var(--o) 70%,#888);padding-top:6px;margin-top:auto}
 .kk-fr{font-size:16px;font-weight:500;color:#4A4F55}
 .bg-alt.kk-lang{max-width:820px}.bg-alt.kk-lang button{font-size:16px;font-weight:600;text-align:left;line-height:1.4}
+.bt-lank{display:flex;align-items:center;gap:14px;background:var(--ink);color:#fff;text-decoration:none;border-radius:20px;padding:14px 20px;margin:20px 0 4px;font-size:16px;line-height:1.4}
+.bt-lank>span:first-child{font-size:30px}.bt-lank b{font-size:19px;margin-right:6px}.bt-lank .bt-pil{margin-left:auto;background:#fff;color:var(--ink);font-weight:700;border-radius:999px;padding:8px 16px;white-space:nowrap}
+.bt-intro{font-size:17px;color:#3B4A5A;margin:0 0 6px;max-width:760px}
+.bt-val{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.bt-ruta{font:inherit;text-align:left;cursor:pointer;background:var(--o);border:2px solid color-mix(in srgb,var(--o) 70%,var(--od));border-radius:18px;padding:12px 14px;display:flex;gap:12px;align-items:center;color:var(--od);transition:transform .15s,box-shadow .15s}
+.bt-ruta:hover{transform:translateY(-2px);box-shadow:0 6px 14px #0002}.bt-ruta .bg-rsym{margin:0;flex:none}.bt-ruta>span:last-child{display:flex;flex-direction:column;gap:1px}
+.bt-ruta b{font-size:17px;line-height:1.25}.bt-ruta small{font-size:13px;font-weight:600;opacity:.85}
+.bt-ruta.hela{--o:#fff;--od:var(--ink);border-color:var(--l)}.bt-ruta.hela .bg-rsym{background:var(--vl)}
+.bt-topp{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:16px;color:var(--ink);margin:6px 0 8px}
+.bt-bar{height:10px;border-radius:999px;background:var(--vl);overflow:hidden;margin-bottom:16px}.bt-bar i{display:block;height:100%;background:var(--ink);border-radius:999px;transition:width .3s}
+.bt-kort{background:#fff;border:2px solid var(--ram);border-radius:22px;padding:22px 24px}.bt-kort h3{margin:0 0 6px;font-size:24px}
+.bt-bild{margin:8px 0 16px;font-size:20px}.bt-bild img.foto{max-height:150px;max-width:100%;border-radius:10px}
+.bg-alt.tva{max-width:420px}
+.bt-avbryt{font:inherit;font-weight:600;font-size:15px;border:0;background:none;color:#5F6368;cursor:pointer;margin:14px 0 0;padding:6px 0;text-decoration:underline}
+.bt-klar{text-align:center}.bt-stor{font-size:56px}.bt-poang{font-family:Fraunces,Georgia,serif;font-size:34px;font-weight:700;color:var(--ink);margin:4px 0}.bt-namn{color:#5F6368;font-size:15px}
+.bt-missar{text-align:left;max-width:720px;margin:18px auto;background:var(--vl);border-radius:16px;padding:14px 18px}.bt-missar h3{font-size:20px}
+.bt-missar div{display:flex;flex-direction:column;gap:2px;padding:9px 0;border-top:1.5px solid #fff}.bt-missar b{font-size:17px;color:var(--ink)}.bt-missar span{font-size:15px;line-height:1.45;color:#3B4A5A}
+.bt-knappar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.bt-sek{font:inherit;font-weight:700;font-size:17px;padding:12px 18px;border-radius:14px;border:2px solid var(--l);background:#fff;color:var(--ink);cursor:pointer;text-decoration:none}
+@media (max-width:640px){.bt-lank{flex-wrap:wrap}.bt-lank .bt-pil{margin-left:0}.bt-val{grid-template-columns:1fr}.bt-kort{padding:16px}}
 @media (max-width:640px){.bg-flikar{flex-wrap:wrap}.bg-flikar button{flex:1 1 40%}.kk-typer{grid-template-columns:1fr}.bg-kortrad.kk-rad{grid-template-columns:1fr}.bk.kw{height:240px}.kk-intro{font-size:16px}}
 """
 
@@ -119,18 +139,25 @@ def _ver(f):  # ny version -> webbläsaren hämtar ny fil i stället för en gam
     import hashlib, os
     return hashlib.sha1(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), f), 'rb').read()).hexdigest()[:8]
 
-def kropp(panel, c, rot=''):
+def kropp(panel, c, rot='', test=False):
     data = ''.join(f'<script src="{rot}trana-ak{k}.js"></script><script>(window.BG_DATA=window.BG_DATA||{{}})[{k}]=TRANA_DATA</script>' for k in (7, 8, 9))
-    return (panel(c, 'Matematiska begrepp', 'Lär dig mattebegrepp och resonemangsord. Vänd korten och öva på orden.', '',
-                  [('Startsida', 'index.html'), ('Matematiska begrepp', None)], ikon())
-            + f'<main><section><div class="wrap"><div id="bg"></div><a class="knapp" href="index.html">← Till startsidan</a></div></section></main>'
+    if test:  # begrepp-test.html: Testa dig
+        top = panel(c, 'Testa dina begrepp', 'Kolla vad du kan. Välj ett kapitel och svara på 10 frågor om begreppen.', '',
+                    [('Startsida', 'index.html'), ('Matematiska begrepp', 'begrepp.html'), ('Testa dig', None)], ikon())
+        mitt = '<div id="bg" data-test="1"></div><a class="knapp" href="begrepp.html">← Till Matematiska begrepp</a>'
+    else:
+        top = panel(c, 'Matematiska begrepp', 'Lär dig mattebegrepp och resonemangsord. Vänd korten och öva på orden.', '',
+                    [('Startsida', 'index.html'), ('Matematiska begrepp', None)], ikon())
+        mitt = '<div id="bg"></div><a class="knapp" href="index.html">← Till startsidan</a>'
+    return (top
+            + f'<main><section><div class="wrap">{mitt}</div></section></main>'
             + f'<style>.panel{{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}}.panel .sti,.panel .sti a{{color:#5F6368}}.panel h1{{color:var(--ink)}}.panel p{{color:#3B4A5A}}{CSS}</style>'
             + data + ''.join(f'<script src="{rot}{f}?v={_ver(f)}"></script>' for f in ('begrepp-bok.js', 'begrepp-kitt.js', 'begrepp.js')))
 
 def startlank():
-    del3 = [('📐', 'Mattebegrepp', 'Tal, algebra, geometri …'), ('🔗', 'Resonemangsord', 'Eftersom, jämför, motivera …'), ('🔍', 'Sök ett ord', 'Hitta ett ord du undrar över')]
-    lank = {'Mattebegrepp': 'begrepp.html', 'Resonemangsord': 'begrepp.html?flik=kitt', 'Sök ett ord': 'begrepp.html?flik=sok'}
+    del3 = [('📐', 'Mattebegrepp', 'Tal, algebra, geometri …'), ('🔗', 'Resonemangsord', 'Eftersom, jämför, motivera …'), ('🔍', 'Sök ett ord', 'Hitta ett ord du undrar över'), ('🏁', 'Testa dig', 'Kolla vad du kan om begreppen')]
+    lank = {'Mattebegrepp': 'begrepp.html?flik=mat', 'Resonemangsord': 'begrepp.html?flik=kitt', 'Sök ett ord': 'begrepp.html?flik=sok', 'Testa dig': 'begrepp-test.html'}
     g = ''.join(f'<a href="{lank[t]}"><i style="background:#E3E8F4">{e}</i><span><b>{t}</b><small>{s}</small></span></a>' for e, t, s in del3)
     return (f'<section class="gtC" style="background:#E3E8F4;box-shadow:inset 0 0 0 2px #B9C4DE"><div class="h"><span class="gik" style="background:#fff">{ikon().replace("bg-pik", "bg-pik mini")}</span>'
-            f'<div><b>Matematiska begrepp</b><small>Mattebegrepp och resonemangsord. För alla årskurser.</small></div><a class="alla" href="begrepp.html" style="background:#2B3A6B">Träna begreppen →</a></div><div class="g">{g}</div></section>'
-            '<style>.bg-saknas{margin:14px 4px 0;font-size:15px;color:#3B4A5A}.bg-pik.mini{width:58px;height:58px;border-radius:14px;padding:6px;gap:3px;display:grid;grid-template-columns:1fr 1fr;box-shadow:none}.bg-pik.mini i{border-radius:5px;font-size:11px;color:#2E3A46;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800}</style>')
+            f'<div><b>Matematiska begrepp</b><small>Mattebegrepp och resonemangsord. För alla årskurser.</small></div><a class="alla" href="begrepp.html" style="background:#2B3A6B">Träna begreppen →</a></div><div class="g g4">{g}</div></section>'
+            '<style>.bg-saknas{margin:14px 4px 0;font-size:15px;color:#3B4A5A}.bg-pik.mini{width:58px;height:58px;border-radius:14px;padding:6px;gap:3px;display:grid;grid-template-columns:1fr 1fr;box-shadow:none}.gtC .g.g4{grid-template-columns:repeat(4,1fr)}@media (max-width:1000px){.gtC .g.g4{grid-template-columns:1fr 1fr}}@media (max-width:640px){.gtC .g.g4{grid-template-columns:1fr}}.bg-pik.mini i{border-radius:5px;font-size:11px;color:#2E3A46;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800}</style>')

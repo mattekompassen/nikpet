@@ -23,13 +23,13 @@
   const omrade = n => (n = n.toLowerCase(), /algebra/.test(n) ? 'alg' : /geometri/.test(n) ? 'geo' : /samband|procent/.test(n) ? 'sam' : /statistik|sannolik/.test(n) ? 'sta' : 'tal');
 
   // Bygg ordlistan: bara bokens begrepp (BG_BOK i begrepp-bok.js, Nikolas begreppslistor, ordagrant)
-  const ORD = [], NYCKEL = {}, MENING = [];
+  const ORD = [], NYCKEL = {}, MENING = [], KAPNAMN = {};
   const stam = s => s.toLowerCase().replace(/[^a-zåäö ]/g, '').slice(0, 5);
   const text = h => { const d = document.createElement('div'); d.innerHTML = h; d.querySelectorAll('img').forEach(i => i.remove()); return d.textContent.replace(/\s+/g, ' ').trim(); };
   for (const b of window.BG_BOK || []) {
     const id = b.om + ':' + b.ord.toLowerCase();
-    if (NYCKEL[id]) { if (!NYCKEL[id].ak.includes(b.ak)) NYCKEL[id].ak.push(b.ak); continue; }
-    const o = {id, ord: b.ord, delar: b.ord.split(' / '), forkl: text(b.besk), forklHtml: b.besk, om: b.om, ak: [b.ak], kap: `Åk ${b.ak} kap ${b.kap}`, bild: b.ex, exText: text(b.ex)};
+    if (NYCKEL[id]) { if (!NYCKEL[id].ak.includes(b.ak)) NYCKEL[id].ak.push(b.ak); NYCKEL[id].kaps.push(b.ak + ':' + b.kap); continue; }
+    const o = {id, kaps: [b.ak + ':' + b.kap], ord: b.ord, delar: b.ord.split(' / '), forkl: text(b.besk), forklHtml: b.besk, om: b.om, ak: [b.ak], kap: `Åk ${b.ak} kap ${b.kap}`, bild: b.ex, exText: text(b.ex)};
     ORD.push(o); NYCKEL[id] = o;
   }
   const hitta = (s, om) => { const l = ORD.filter(o => !om || o.om === om); return l.find(o => o.delar.some(d => d.toLowerCase() === s.toLowerCase())) || l.find(o => o.delar.some(d => stam(d) === stam(s))); };
@@ -38,6 +38,7 @@
     const fn = (window.BG_DATA || {})[ak]; if (!fn) continue;
     const D = fn({r, val, sv, tus, sgn, blanda});
     for (const kap in D) {
+      KAPNAMN[ak + ':' + kap] = D[kap].namn;
       const om = omrade(D[kap].namn), dra = (D[kap].dra || []).map(([m, s_]) => ({m, s: s_, ord: hitta(s_, om)})).filter(x => x.ord);
       for (const x of dra) MENING.push({m: x.m, s: x.s, ak, om, ord: x.ord, andra: dra.map(y => y.s).filter(y => y !== x.s)});
     }
@@ -229,17 +230,134 @@
   }
   // ---------- Upplägg: steg 1 Vilka ord? -> steg 2 Läs korten / Öva ----------
   const BILDOK = o => /class="foto"/.test(o.bild) && o.exText.length < 40 && dolj(o.exText, o) === o.exText;
+  if (el.dataset.test) return testsida();
+
+  // ---------- Testa dig (begrepp-test.html): 10 frågor, resultat och ord att öva på i slutet ----------
+  function testsida() {
+    const ANTAL = 10;
+    // Kort förklaring: hela meningar tills den är lagom lång
+    const korta = t => { let u = ''; for (const m of t.split(/(?<=[.!?])\s+/)) { if (u.length >= 50) break; u += (u ? ' ' : '') + m; } return u.length > 210 ? u.slice(0, 200).replace(/\s\S*$/, '') + ' …' : u; };
+    // Om två begrepp får samma korta förklaring (t.ex. bas och exponent) visas hela förklaringen
+    const KORT = {}; for (const o of ORD) { const k = korta(dolj(o.forkl, o)); (KORT[k] = KORT[k] || new Set()).add(o.ord.toLowerCase()); }
+    const beskr = o => { const k = korta(dolj(o.forkl, o)); return KORT[k].size > 1 ? dolj(o.forkl, o) : k; };
+    const OKF = o => o.forkl.length >= 12;
+    const lika = (a, b) => a.ord.toLowerCase() === b.ord.toLowerCase();
+    // Tre felaktiga alternativ, helst från samma område
+    const andra = (o, pool, ok = () => true) => {
+      const ut = [];
+      for (const l of [pool.filter(x => x.om === o.om), pool, ORD.filter(x => x.om === o.om), ORD])
+        for (const x of blanda(l)) { if (ut.length === 3) return ut; if (x !== o && !lika(x, o) && ok(x) && !ut.some(y => lika(x, y) || beskr(x) === beskr(y))) ut.push(x); }
+      return ut;
+    };
+    // Frågor om bokens begrepp
+    function fragaOrd(o, pool) {
+      const typer = [];
+      if (OKF(o)) typer.push('betyd', 'beskr', 'beskr');
+      if (BILDOK(o)) typer.push('bild');
+      const men = MENING.filter(m => m.ord === o && m.andra.length >= 3);
+      if (men.length) typer.push('mening');
+      const t = val(typer.length ? typer : ['beskr']), facit = {ord: o.ord, txt: o.forkl};
+      if (t === 'mening') {
+        const m = val(men), alt = blanda([m.s, ...blanda(m.andra).slice(0, 3)]);
+        return {rub: 'Vilket ord passar?', q: esc(m.m).replace('___', '<span class="bg-lucka">?</span>'), alt: alt.map(esc), ratt: alt.indexOf(m.s), facit, lucka: m.s};
+      }
+      if (t === 'betyd') {
+        const fel = andra(o, pool, OKF), alt = blanda([o, ...fel]);
+        return {rub: 'Vad betyder ordet?', q: `Vad betyder <b>${esc(o.ord)}</b>?`, lang: true, alt: alt.map(x => esc(beskr(x))), ratt: alt.indexOf(o), facit};
+      }
+      const fel = andra(o, pool), alt = blanda([o, ...fel]);
+      if (t === 'bild') return {rub: 'Vilket begrepp visar bilden?', q: '', bild: o.bild, alt: alt.map(x => esc(x.ord)), ratt: alt.indexOf(o), facit};
+      return {rub: 'Vilket begrepp beskrivs?', q: `”${esc(beskr(o))}”`, alt: alt.map(x => esc(x.ord)), ratt: alt.indexOf(o), facit};
+    }
+    // Frågor om resonemangsord
+    function fragaKitt(k) {
+      const facit = {ord: k.ord, txt: k.g === 'fler' ? `I vardagen: ${k.vardag} I matten: ${k.matte}` : k.forkl};
+      if (k.g === 'fler') {
+        const mat = Math.random() < .5, re = new RegExp(ICKE + '(' + k.sok + ')' + SLUT, 'i');
+        return {rub: 'Vardag eller matte?', q: `”${markera(mat ? k.ms : k.vs, re)}”<br><small class="kk-fr">Vilken betydelse har ordet <b>${esc(k.ord)}</b> här?</small>`, alt: ['🏠 Vardag', '📐 Matte'], ratt: mat ? 1 : 0, facit};
+      }
+      const l = KO.filter(x => x.g !== 'fler' && x !== k), samma = l.filter(x => x.g === k.g);
+      if (k.lucka && Math.random() < .5) {
+        const fel = blanda((samma.filter(x => x.lucka).length >= 3 ? samma : l).filter(x => x.lucka)).slice(0, 3), alt = blanda([k, ...fel]);
+        const borjan = /^\[|[.!?] \[/.test(k.ex), form = x => borjan ? x.lucka[0].toUpperCase() + x.lucka.slice(1) : x.lucka.toLowerCase();
+        return {rub: 'Vilket ord passar?', q: esc(k.ex).replace(/\[[^\]]+\]/, '<span class="bg-lucka">?</span>'), alt: alt.map(x => esc(form(x))), ratt: alt.indexOf(k), facit, lucka: form(k)};
+      }
+      const fel = blanda(samma.length >= 3 ? samma : l).slice(0, 3), alt = blanda([k, ...fel]);
+      return {rub: 'Vad betyder ordet?', q: `Vad betyder <b>${esc(k.ord)}</b>?`, lang: true, alt: alt.map(x => esc(x.forkl)), ratt: alt.indexOf(k), facit};
+    }
+    // Vad kan man testa? Åk 7–9 per kapitel, resonemangsord och allt blandat
+    const kapOrd = (ak, kap) => ORD.filter(o => OKF(o) && o.kaps.some(x => kap ? x === ak + ':' + kap : x.startsWith(ak + ':')));
+    const VAL_T = {};
+    let h = '<h2 class="bg-rub">Vad vill du testa?</h2><p class="bt-intro">Du får ' + ANTAL + ' frågor. Svara så gott du kan. När du är klar ser du ditt resultat och vilka ord du kan öva mer på.</p>';
+    for (const ak of [7, 8, 9]) {
+      const kaps = Object.keys(KAPNAMN).filter(x => x.startsWith(ak + ':') && kapOrd(ak, +x.split(':')[1]).length).map(x => +x.split(':')[1]).sort();
+      if (!kaps.length) continue;
+      h += `<h3 class="bg-del">Årskurs ${ak}</h3><div class="bt-val">`;
+      for (const kap of kaps) {
+        const id = ak + ':' + kap, c = OM[omrade(KAPNAMN[id])]; VAL_T[id] = {namn: `Åk ${ak} kapitel ${kap}: ${KAPNAMN[id]}`, pool: () => kapOrd(ak, kap)};
+        h += `<button type="button" class="bt-ruta" data-t="${id}" style="--o:${c[2]};--od:${c[3]}"><span class="bg-rsym">${c[4]}</span><span><small>Kapitel ${kap}</small><b>${esc(KAPNAMN[id])}</b><small>${kapOrd(ak, kap).length} begrepp</small></span></button>`;
+      }
+      VAL_T['ak' + ak] = {namn: `Hela årskurs ${ak}`, pool: () => kapOrd(ak)};
+      h += `<button type="button" class="bt-ruta hela" data-t="ak${ak}"><span class="bg-rsym">${ak}</span><span><small>Blandat</small><b>Hela åk ${ak}</b><small>${kapOrd(ak).length} begrepp</small></span></button></div>`;
+    }
+    VAL_T.kitt = {namn: 'Resonemangsord', kitt: true, pool: () => KO.filter(k => k.g !== 'fler' || (k.ms && k.vs))};
+    VAL_T.alla = {namn: 'Alla begrepp blandat', pool: () => ORD.filter(OKF)};
+    h += `<h3 class="bg-del">Mer</h3><div class="bt-val"><button type="button" class="bt-ruta" data-t="kitt" style="--o:#D5E3F0;--od:#1E4A73"><span class="bg-rsym">🔗</span><span><small>Resonemangsord</small><b>Ord som hjälper dig att resonera</b><small>${VAL_T.kitt.pool().length} ord</small></span></button>`
+      + `<button type="button" class="bt-ruta hela" data-t="alla"><span class="bg-rsym">★</span><span><small>Utmaning</small><b>Alla begrepp blandat</b><small>${VAL_T.alla.pool().length} begrepp</small></span></button></div>`;
+    const startsida = h;
+    let T = null;
+    function valj() { el.innerHTML = startsida; el.querySelectorAll('[data-t]').forEach(b => b.onclick = () => starta_t(b.dataset.t)); }
+    function starta_t(id) {
+      const v = VAL_T[id], pool = v.pool(), ord = [];
+      for (const o of blanda(pool)) { if (!ord.some(x => x.ord.toLowerCase() === o.ord.toLowerCase())) ord.push(o); if (ord.length === ANTAL) break; }
+      T = {id, v, fragor: ord.map(o => v.kitt ? fragaKitt(o) : fragaOrd(o, pool)), nr: 0, ratt: 0, missar: []};
+      visa(); el.scrollIntoView({block: 'start'});
+    }
+    function visa() {
+      const f = T.fragor[T.nr], n = T.fragor.length;
+      el.innerHTML = `<div class="bt-topp"><span><b>${esc(T.v.namn)}</b></span><span>Fråga ${T.nr + 1} av ${n}</span></div><div class="bt-bar"><i style="width:${T.nr / n * 100}%"></i></div>
+        <div class="bt-kort"><h3>${f.rub}</h3>${f.q ? `<p class="bg-fraga">${f.q}</p>` : ''}${f.bild ? `<div class="bt-bild">${f.bild}</div>` : ''}
+        <div class="bg-alt${f.lang ? ' kk-lang' : ''}${f.alt.length === 2 ? ' tva' : ''}">${f.alt.map((a, i) => `<button type="button" data-i="${i}">${a}</button>`).join('')}</div>
+        <div class="bg-ovfot"><span class="bg-res" aria-live="polite"></span><button type="button" class="bg-nasta" hidden>${T.nr + 1 < n ? 'Nästa fråga →' : 'Se resultatet →'}</button></div></div>
+        <button type="button" class="bt-avbryt">← Avbryt testet</button>`;
+      el.querySelector('.bt-avbryt').onclick = valj;
+      el.querySelectorAll('.bg-alt button').forEach(b => b.onclick = () => {
+        const r_ = +b.dataset.i === f.ratt;
+        el.querySelectorAll('.bg-alt button').forEach(x => { x.disabled = true; if (+x.dataset.i === f.ratt) x.classList.add('par'); });
+        if (r_) T.ratt++; else { b.classList.add('fel'); T.missar.push(f.facit); }
+        const l = el.querySelector('.bg-lucka'); if (l && f.lucka) l.textContent = f.lucka;
+        const s = el.querySelector('.bg-res'); s.textContent = r_ ? 'Rätt!' : 'Fel. Det gröna svaret är rätt.'; s.className = 'bg-res ' + (r_ ? 'ok' : 'fel');
+        const nb = el.querySelector('.bg-nasta'); nb.hidden = false; nb.focus();
+        nb.onclick = () => { T.nr++; T.nr < T.fragor.length ? visa() : resultat(); };
+      });
+    }
+    function resultat() {
+      const n = T.fragor.length, p = T.ratt / n;
+      const m = p >= .9 ? ['🏆', 'Fantastiskt! Du kan begreppen mycket bra.'] : p >= .7 ? ['🌟', 'Bra jobbat! Du kan de flesta begreppen.'] : p >= .5 ? ['👍', 'Bra kämpat! Öva lite till på orden nedanför.'] : ['💪', 'Bra att du testade! Läs korten och öva på orden, och gör sedan testet igen.'];
+      el.innerHTML = `<div class="bt-kort bt-klar"><div class="bt-stor">${m[0]}</div><p class="bt-poang">${T.ratt} av ${n} rätt</p><p>${m[1]}</p>
+        <p class="bt-namn">${esc(T.v.namn)}</p>
+        ${T.missar.length ? `<div class="bt-missar"><h3>Ord att öva mer på</h3>${T.missar.map(x => `<div><b>${esc(x.ord)}</b><span>${esc(x.txt)}</span></div>`).join('')}</div>` : ''}
+        <div class="bt-knappar"><button type="button" class="bg-nasta" data-a="igen">Gör ett nytt test</button><button type="button" class="bt-sek" data-a="val">Välj ett annat test</button><a class="bt-sek" href="begrepp.html">Träna på begreppen</a></div></div>`;
+      el.querySelector('[data-a=igen]').onclick = () => starta_t(T.id);
+      el.querySelector('[data-a=val]').onclick = () => { valj(); el.scrollIntoView({block: 'start'}); };
+      el.scrollIntoView({block: 'start'});
+    }
+    valj();
+    window.BT_TEST = {VAL_T, fragaOrd, fragaKitt, ORD, KO};  // för automatiska tester
+  }
   const VALEN = [...OMR.map(o => ({typ: 'om', id: o[0], namn: o[1], ljus: o[2], mork: o[3], sym: o[4], antal: ORD.filter(x => x.om === o[0]).length})),
                  ...KG.map(g => ({typ: 'kg', id: g[0], namn: g[1], ljus: g[2], mork: g[3], sym: g[4], txt: g[5], antal: KO.filter(k => k.g === g[0]).length}))];
   const ruta = v => `<button type="button" class="bg-ruta" data-val="${v.typ}:${v.id}" style="--o:${v.ljus};--od:${v.mork}"><span class="bg-rsym">${v.sym}</span><b>${esc(v.namn)}</b><small>${v.antal} ord</small></button>`;
   el.innerHTML = `
 <label class="bg-sok"><span aria-hidden="true">🔍</span><input type="search" placeholder="Sök ett ord, t.ex. nämnare eller eftersom" aria-label="Sök ett ord"></label>
 <div id="bg-steg1">
+  <a class="bt-lank" href="begrepp-test.html"><span aria-hidden="true">🏁</span><span><b>Testa dig</b> Kolla vad du kan om begreppen. 10 frågor och resultat på slutet.</span><span class="bt-pil">Testa dig →</span></a>
   <h2 class="bg-rub">Vilka ord vill du träna på?</h2>
-  <h3 class="bg-del">📐 Mattebegrepp <small>Ord som används i matematiken, till exempel nämnare, ekvation och omkrets</small></h3>
-  <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div>
-  <h3 class="bg-del" id="bg-resonera">🔗 Resonemangsord <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
-  <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}</div>
+  <div class="bg-matte"><h3 class="bg-del">📐 Mattebegrepp <small>Ord som används i matematiken, till exempel nämnare, ekvation och omkrets</small></h3>
+  <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div></div>
+  <div class="bg-kitt"><h3 class="bg-del" id="bg-resonera">🔗 Resonemangsord <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
+  <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}</div></div>
+  <p class="bg-allaord" hidden><a class="knapp2 sek" href="begrepp.html">← Visa alla ord</a></p>
   <p class="bg-saknar">💬 Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>
 </div>
 <div id="bg-steg2" hidden>
@@ -293,7 +411,9 @@
   ['input', 'keyup', 'change', 'search'].forEach(h => sokruta.addEventListener(h, sok));
   // Från startsidan: ?flik=kitt hoppar till Resonemangsord
   const q = new URLSearchParams(location.search);
-  if (q.get('flik') === 'kitt') setTimeout(() => $('#bg-resonera').scrollIntoView({block: 'start'}), 50);
+  // ?flik=mat / ?flik=kitt: visa bara den delen (genvägar från startsidan)
+  const bara = {mat: '.bg-kitt', kitt: '.bg-matte'}[q.get('flik')];
+  if (bara) { $(bara).hidden = true; $('.bg-allaord').hidden = false; setTimeout(() => el.scrollIntoView({block: 'start'}), 50); }
   if (q.get('flik') === 'sok') setTimeout(() => { sokruta.scrollIntoView({block: 'center'}); sokruta.focus(); }, 50);
   window.BG_ANTAL = ORD.length;
 })();
