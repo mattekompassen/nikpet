@@ -236,10 +236,11 @@
 <label class="bg-sok"><span aria-hidden="true">🔍</span><input type="search" placeholder="Sök ett ord, t.ex. nämnare eller eftersom" aria-label="Sök ett ord"></label>
 <div id="bg-steg1">
   <h2 class="bg-rub">Vilka ord vill du träna på?</h2>
-  <h3 class="bg-del">📐 Mattebegrepp <small>Ord som används i matematiken, till exempel nämnare, ekvation och omkrets</small></h3>
-  <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div>
-  <h3 class="bg-del" id="bg-resonera">🔗 Resonemangsord <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
-  <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}</div>
+  <div class="bg-matte"><h3 class="bg-del">📐 Mattebegrepp <small>Ord som används i matematiken, till exempel nämnare, ekvation och omkrets</small></h3>
+  <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div></div>
+  <div class="bg-kitt"><h3 class="bg-del" id="bg-resonera">🔗 Resonemangsord <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
+  <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}</div></div>
+  <p class="bg-allaord" hidden><a class="knapp2 sek" href="begrepp.html">← Visa alla ord</a></p>
   <p class="bg-saknar">💬 Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>
 </div>
 <div id="bg-steg2" hidden>
@@ -293,7 +294,9 @@
   ['input', 'keyup', 'change', 'search'].forEach(h => sokruta.addEventListener(h, sok));
   // Från startsidan: ?flik=kitt hoppar till Resonemangsord
   const q = new URLSearchParams(location.search);
-  if (q.get('flik') === 'kitt') setTimeout(() => $('#bg-resonera').scrollIntoView({block: 'start'}), 50);
+  // ?flik=mat / ?flik=kitt: visa bara den delen (genvägar från startsidan)
+  const bara = {mat: '.bg-kitt', kitt: '.bg-matte'}[q.get('flik')];
+  if (bara) { $(bara).hidden = true; $('.bg-allaord').hidden = false; setTimeout(() => el.scrollIntoView({block: 'start'}), 50); }
   if (q.get('flik') === 'sok') setTimeout(() => { sokruta.scrollIntoView({block: 'center'}); sokruta.focus(); }, 50);
   window.BG_ANTAL = ORD.length;
 })();
