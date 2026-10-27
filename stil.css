@@ -42,7 +42,7 @@ nav a i{width:10px;height:10px;border-radius:50%;flex:none}nav a:hover{backgroun
 .grupp>div:first-child{display:flex;align-items:baseline;gap:6px 14px;flex-wrap:wrap}
 .grupp .nr{font-family:Fraunces,Georgia,serif;font-size:15px;font-weight:600;letter-spacing:1px;color:var(--ink)}
 .grupp h2{font-size:32px;margin:0;color:#2F2B26}.grupp .g{color:#5A5047;font-size:16px;line-height:1.45;margin:0}
-.rad3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rad3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.rad4{grid-template-columns:repeat(4,1fr)}@media(max-width:1000px){.rad4{grid-template-columns:repeat(2,1fr)}}
 .t{display:flex;flex-direction:column;gap:12px;border-radius:26px;padding:20px 22px 20px;min-height:182px;position:relative;text-decoration:none;color:#2F2B26;background:var(--vl);box-shadow:inset 0 0 0 2px var(--ram);transition:transform .15s}
 .t:hover{transform:translateY(-4px)}.t img{width:104px;height:104px;filter:drop-shadow(0 4px 10px #0001)}
 .t h3{font-size:22px;margin:0}.t p{margin:0;font-size:15px;line-height:1.45;color:#4A433C}
