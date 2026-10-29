@@ -325,7 +325,22 @@
     }
     VAL_T.kitt = {namn: 'Resonemangsord', kitt: true, pool: () => KO.filter(k => k.g !== 'fler' || (k.ms && k.vs))};
     VAL_T.alla = {namn: 'Alla begrepp blandat', pool: () => ORD.filter(OKF)};
+    // Meningsstarter: exemplet visas med början bortplockad, eleven väljer rätt meningsstart
+    const MS = (window.BG_MENINGAR || []).flatMap(([ik, rub, l]) => l.map(([b, e]) => ({ord: b, ex: e, rub})));
+    const msDelar = b => b.replace(/[()]/g, '').split('…').map(x => x.trim().replace(/^,\s*/, ', ').replace(/,$/, '')).filter(x => x && x !== ',');
+    const msLucka = m => {  // ersätt meningsstartens fasta ord i exemplet med luckor
+      let t = esc(m.ex), fran = 0, n = 0;
+      for (const d of msDelar(m.ord)) { const i = t.toLowerCase().indexOf(esc(d).toLowerCase(), fran); if (i < 0) continue; t = t.slice(0, i) + '<span class="bg-lucka">?</span>' + t.slice(i + esc(d).length); fran = i + 30; n++; }
+      return n ? t : null;
+    };
+    const msPasser = (m, x) => msDelar(x.ord).every(d => m.ex.toLowerCase().includes(d.toLowerCase()));
+    function fragaMS(m) {
+      const fel = blanda(MS.filter(x => x !== m && x.rub !== m.rub && !msPasser(m, x))).slice(0, 3), alt = blanda([m, ...fel]);
+      return {rub: 'Vilken meningsstart passar?', q: `”${msLucka(m)}”`, lang: true, alt: alt.map(x => esc(x.ord)), ratt: alt.indexOf(m), facit: {ord: m.ord, txt: m.ex}};
+    }
+    VAL_T.ms = {namn: 'Meningsstarter', ms: true, pool: () => MS.filter(msLucka)};
     h += `<h3 class="bg-del">Mer</h3><div class="bt-val"><button type="button" class="bt-ruta" data-t="kitt" style="--o:#D5E3F0;--od:#1E4A73"><span class="bg-rsym">🔗</span><span><small>Resonemangsord</small><b>Ord som hjälper dig att resonera</b><small>${VAL_T.kitt.pool().length} ord</small></span></button>`
+      + `<button type="button" class="bt-ruta" data-t="ms" style="--o:#FFF1CC;--od:#7A5A12"><span class="bg-rsym">💬</span><span><small>Meningsstarter</small><b>Så kan du börja en mening</b><small>${VAL_T.ms.pool().length} meningsstarter</small></span></button>`
       + `<button type="button" class="bt-ruta hela" data-t="alla"><span class="bg-rsym">★</span><span><small>Utmaning</small><b>Alla begrepp blandat</b><small>${VAL_T.alla.pool().length} begrepp</small></span></button></div>`;
     const startsida = h;
     let T = null;
@@ -333,7 +348,7 @@
     function starta_t(id) {
       const v = VAL_T[id], pool = v.pool(), ord = [];
       for (const o of blanda(pool)) { if (!ord.some(x => x.ord.toLowerCase() === o.ord.toLowerCase())) ord.push(o); if (ord.length === ANTAL) break; }
-      T = {id, v, fragor: ord.map(o => v.kitt ? fragaKitt(o) : fragaOrd(o, pool)), nr: 0, ratt: 0, missar: []};
+      T = {id, v, fragor: ord.map(o => v.ms ? fragaMS(o) : v.kitt ? fragaKitt(o) : fragaOrd(o, pool)), nr: 0, ratt: 0, missar: []};
       visa(); el.scrollIntoView({block: 'start'});
     }
     function visa() {
@@ -366,7 +381,7 @@
       el.scrollIntoView({block: 'start'});
     }
     valj();
-    window.BT_TEST = {VAL_T, fragaOrd, fragaKitt, ORD, KO};  // för automatiska tester
+    window.BT_TEST = {VAL_T, fragaOrd, fragaKitt, fragaMS, MS, ORD, KO};  // för automatiska tester
   }
   const VALEN = [...OMR.map(o => ({typ: 'om', id: o[0], namn: o[1], ljus: o[2], mork: o[3], sym: o[4], antal: ORD.filter(x => x.om === o[0]).length})),
                  ...KG.map(g => ({typ: 'kg', id: g[0], namn: g[1], ljus: g[2], mork: g[3], sym: g[4], txt: g[5], antal: KO.filter(k => k.g === g[0]).length}))];
