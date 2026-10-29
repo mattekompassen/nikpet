@@ -314,8 +314,8 @@ document.getElementById('lasform').addEventListener('submit',function(e){{
 OVP_KALLA = '/mnt/project-files/np-ovningsprov-{n}'
 OVP_ANTAL = 6
 # Genomgångs-PPT per NP-träning och delprov (Drive-fil-id). Länken krypteras som facit (Nikola 2026-10-26).
-OVP_GENOMGANG = {1: {'A': '1zf0p478GaacCDaIS4jpjVfdN0CJuEfhg', 'B': '1RqvjJmMfPoPTcm0nUAqLOxtDhfiHvPQ4',
-                     'C': '1aruWJriCS7VxSQmAVezFm5BjqCQoo5JM', 'D': '1OROt_KXTtYGumZHoR_T1FMi-_1lgsZA2'}}
+OVP_GENOMGANG = {1: {'A': '1Ywj5zKLhZdjciSdTI-01sI5w7Xa0wITh', 'B': '1lmWoNplYTQs69VOAD_7V8q_TXkzn8t8e',
+                     'C': '1tDdoXobOoMKg6GsQ4SELK-eMES_tUM6_', 'D': '1OROt_KXTtYGumZHoR_T1FMi-_1lgsZA2'}}
 OVP_DELPROV = [('A', '40 min', 'utan räknare', 'bara svar'), ('B', '80 min', 'utan räknare', 'visa lösningen'),
                ('C', '40 min', 'med räknare', 'bara svar'), ('D', '80 min', 'med räknare', 'visa lösningen')]
 
