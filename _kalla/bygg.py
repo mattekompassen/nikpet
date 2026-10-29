@@ -314,12 +314,18 @@ document.getElementById('lasform').addEventListener('submit',function(e){{
 OVP_KALLA = '/mnt/project-files/np-ovningsprov-{n}'
 OVP_ANTAL = 6
 # Genomgångs-PPT per NP-träning och delprov (Drive-fil-id). Länken krypteras som facit (Nikola 2026-10-26).
-OVP_GENOMGANG = {1: {'A': '1Ywj5zKLhZdjciSdTI-01sI5w7Xa0wITh', 'B': '1lmWoNplYTQs69VOAD_7V8q_TXkzn8t8e',
-                     'C': '1tDdoXobOoMKg6GsQ4SELK-eMES_tUM6_', 'D': '1OROt_KXTtYGumZHoR_T1FMi-_1lgsZA2'},
-                 2: {'A': '17ec3PEuq2J30mi99d_U9ZMrvuwULzlp_', 'B': '1w2-jq-lhplVVjb2P-nR9Qx3SqVJkXK54',
-                     'C': '1o6q-JaSBLZ3S3OjSSeE5VyAFuxPNYoy-', 'D': '1sAYgPDjqXfCuxbahGoe_1SPcrhdJ2U2H'},
-                 3: {'A': '1IYGsc3EZeoeHE5Kk_IbOELMI4l5b1CYa', 'B': '1dC3RreZvz9a76HEzCpxksALSVCI-z0vU',
-                     'C': '1RrYQpKEJ5ZOnCYYOsJKKSWtzCI6WMYlR', 'D': '1SwPCUfp75jYofniY8vFVKVdpMti4zo-F'}}
+OVP_GENOMGANG = {1: {'A': '1v4YLV9uegaxjY3W0qWaUBHlqx8ktgON-', 'B': '1Ll1fHV4BblXh2QJL_C5pjnEdK-tkGYcH',
+                     'C': '1mUHTGpJxgiVx_rk8oc8g1LNlZYyv7TV2', 'D': '1EONjAuV6oq72Gk3mb-d6303PNMS6WaEl'},
+                 2: {'A': '1Wscy6MEIspbaPqWi3YONhxVHuxlyMssc', 'B': '1OB0NbkqrFTJ_r5BGERtufPNQqm1FCifJ',
+                     'C': '1ZLavvKtrsyUk8JF9glk1w0gafnVF6GkZ', 'D': '1GlSiJRfDaA-8Fv-7Pmhes5BnOUxizzzm'},
+                 3: {'A': '1ticed-TIXpSX695vLviMjVcvZkIpSDYr', 'B': '1X8UjGESfgknv_r-iToY5x1BP7cEacNsm',
+                     'C': '1VLEJwo_ytzcmHdAhZjXN3YgHUMeqMgQX', 'D': '10xC1t_iLWbW3Ybs047WRTvWhpkbLvMbr'},
+                 4: {'A': '1T_K28Qvwrn1JeIQHJXjsoVPoFUWWtZsF', 'B': '1tZuk5XZm2cOSA_4jatDVBZPlpCTLbvXv',
+                     'C': '1Rv0_OAuYc9AvOGKkYaFVgEbxXXVCArIp', 'D': '1-1PRauLSsm5ghtunNUz0143PiKgnojCu'},
+                 5: {'A': '15gsodCARfYx75rEMhxaXvU-i--0HMsGH', 'B': '1WE23izOlBKpLL_tEq0fhX-g601ggNyMF',
+                     'C': '1ZxR7AMVq0OmmSMZt_QVbimSMOM55jYwR', 'D': '1QWn25D47Nvt6x03fudQDcIedbJZMIB79'},
+                 6: {'A': '1EPowIs12jvYuYFp-PNsy05ec8QDDncwq', 'B': '1e1IDEkx4kz0R1zPoRaSqDLEepJUEX6N2',
+                     'C': '174EAZgEIIJWbJJ46IAyvef0kTNcOr5fT', 'D': '1E9xZm2bz6HGAMssRAvXWDy3EJssQAyv1'}}
 OVP_DELPROV = [('A', '40 min', 'utan räknare', 'bara svar'), ('B', '80 min', 'utan räknare', 'visa lösningen'),
                ('C', '40 min', 'med räknare', 'bara svar'), ('D', '80 min', 'med räknare', 'visa lösningen')]
 
