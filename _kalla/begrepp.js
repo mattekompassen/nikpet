@@ -32,6 +32,13 @@
     const o = {id, kaps: [b.ak + ':' + b.kap], ord: b.ord, delar: b.ord.split(' / '), forkl: text(b.besk), forklHtml: b.besk, om: b.om, ak: [b.ak], kap: `Åk ${b.ak} kap ${b.kap}`, bild: b.ex, exText: text(b.ex)};
     ORD.push(o); NYCKEL[id] = o;
   }
+  // Kompletterande begrepp ur Skolverkets ordlista (BG_SKV i begrepp-skolverket.js), utan årskurs och kapitel
+  for (const b of window.BG_SKV || []) {
+    const id = b.om + ':' + b.ord.toLowerCase();
+    if (NYCKEL[id]) continue;
+    const o = {id, kaps: [], ord: b.ord, delar: b.ord.replace(/ \([^)]*\)$/, '').split(' / '), forkl: text(b.besk), forklHtml: b.besk + '<span class="bk-skv">Ur Skolverkets ordlista</span>', om: b.om, ak: [], kap: 'Skolverket', bild: b.ex, exText: text(b.ex), skv: true};
+    ORD.push(o); NYCKEL[id] = o;
+  }
   const hitta = (s, om) => { const l = ORD.filter(o => !om || o.om === om); return l.find(o => o.delar.some(d => d.toLowerCase() === s.toLowerCase())) || l.find(o => o.delar.some(d => stam(d) === stam(s))); };
   // Meningar från Interaktiva övningar, bara de vars svar är ett av bokens begrepp
   for (const ak of [7, 8, 9]) {

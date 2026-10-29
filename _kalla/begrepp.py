@@ -1,6 +1,6 @@
 # Sidan Matematiska begrepp (skiss). Används av skiss.py (och senare av bygg.py).
 CSS = """
-.bk-bak{overflow-y:auto!important;scrollbar-width:thin}.bk-text{font-size:15px;line-height:1.4;margin-top:2px}.bk-text p{margin:0 0 4px}
+.bk-bak{overflow-y:auto!important;scrollbar-width:thin}.bk-text{font-size:15px;line-height:1.4;margin-top:2px}.bk-text p{margin:0 0 4px}.bk-skv{display:table;margin-top:6px;font-size:11.5px;font-weight:700;color:var(--od);background:color-mix(in srgb,var(--o) 45%,#fff);border-radius:999px;padding:1px 8px}.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 2px}.frac>i{font-style:normal}.frac>i:first-child{border-bottom:1.5px solid currentColor;padding:0 2px}
 .bk-bild img.foto,.bg-bildv img.foto{max-height:95px;max-width:100%;height:auto;border-radius:8px}.bk-bild img.ekv,.bg-bildv img.ekv,.bk-text img.ekv{display:inline-block;vertical-align:middle;margin:0 2px}.bk-bild img.foto,.bg-bildv img.foto{display:block;margin:2px auto}
 .bk-bild p,.bg-bildv p{margin:2px 0}.bk-bild table,.bg-bildv table{border-collapse:collapse;font-size:12px;margin:2px auto}.bk-bild td,.bk-bild th,.bg-bildv td,.bg-bildv th{border:1px solid #ccc;padding:1px 5px}
 .bk-bak .bk-bild{font-size:14px!important;font-weight:500!important;flex:none!important;line-height:1.35}
@@ -152,7 +152,7 @@ def kropp(panel, c, rot='', test=False):
     return (top
             + f'<main><section><div class="wrap">{mitt}</div></section></main>'
             + f'<style>.panel{{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}}.panel .sti,.panel .sti a{{color:#5F6368}}.panel h1{{color:var(--ink)}}.panel p{{color:#3B4A5A}}{CSS}</style>'
-            + data + ''.join(f'<script src="{rot}{f}?v={_ver(f)}"></script>' for f in ('begrepp-bok.js', 'begrepp-kitt.js', 'begrepp.js')))
+            + data + ''.join(f'<script src="{rot}{f}?v={_ver(f)}"></script>' for f in ('begrepp-bok.js', 'begrepp-skolverket.js', 'begrepp-kitt.js', 'begrepp.js')))
 
 def startlank():
     del3 = [('📐', 'Mattebegrepp', 'Tal, algebra, geometri …'), ('🔗', 'Resonemangsord', 'Eftersom, jämför, motivera …'), ('🔍', 'Sök ett ord', 'Hitta ett ord du undrar över'), ('🏁', 'Testa dig', 'Kolla vad du kan om begreppen')]

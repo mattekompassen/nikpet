@@ -797,6 +797,7 @@ def bygg():
         sida('begrepp-test.html', 'Testa dina begrepp', '', SIDFARG['amnesord.html'], bgr.kropp(panel, SIDFARG['amnesord.html'], test=True))
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'begrepp.js'), UT)
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'begrepp-bok.js'), UT)
+        shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'begrepp-skolverket.js'), UT)
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'begrepp-kitt.js'), UT)
         shutil.copytree(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bilder-begrepp'), os.path.join(UT, 'bilder', 'begrepp'), dirs_exist_ok=True)
     for js in ('trana.js', 'trana-ak7.js', 'trana-ak8.js', 'trana-ak9.js'):
