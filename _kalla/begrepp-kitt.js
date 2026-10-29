@@ -111,45 +111,45 @@ window.BG_KITT = [
 // Meningsstarter (kollegans dokument 'Meningsstartare i matematik åk 7–9', urval och rättningar 2026-10-29): [ikon, rubrik, [[början, ifyllt exempel], …]]
 window.BG_MENINGAR = [
   ['🧠', 'Förklara hur du tänker', [
-    ['Jag börjar med att …', 'Jag börjar med att skriva upp det jag vet i uppgiften.'],
-    ['Först …, sedan … och till sist …', 'Först multiplicerar jag 4 med 3, sedan adderar jag 2 och till sist får jag 14.'],
-    ['Det viktiga i uppgiften är …', 'Det viktiga i uppgiften är att omkretsen är 24 cm.'],
-    ['Jag vet att … eftersom …', 'Jag vet att vinklarna tillsammans är 180° eftersom de är sidovinklar.']]],
+    ['Jag börjar med att …', 'Jag börjar med att skriva upp det jag vet i uppgiften.', '_ skriva upp det jag vet.'],
+    ['Först …, sedan … och till sist …', 'Först multiplicerar jag 4 med 3, sedan adderar jag 2 och till sist får jag 14.', '_ läser jag, sedan ritar jag och till sist räknar jag.'],
+    ['Det viktiga i uppgiften är …', 'Det viktiga i uppgiften är att omkretsen är 24 cm.', '_ att omkretsen är 24 cm.'],
+    ['Jag vet att … eftersom …', 'Jag vet att vinklarna tillsammans är 180° eftersom de är sidovinklar.', '_ vinkeln är 90° eftersom den är rät.']]],
   ['🛠️', 'Motivera och kontrollera', [
-    ['Mitt svar är … eftersom …', 'Mitt svar är 25 % eftersom 10 av 40 är en fjärdedel.'],
-    ['Jag väljer den här metoden eftersom …', 'Jag väljer att ställa upp en ekvation eftersom det okända värdet kan kallas x.'],
-    ['Svaret är rimligt eftersom …', 'Svaret är rimligt eftersom 20 % av 50 kr måste vara mindre än 50 kr.'],
-    ['Jag kan kontrollera svaret genom att …', 'Jag kan kontrollera svaret genom att sätta in x = 5 i ekvationen.']]],
+    ['Mitt svar är … eftersom …', 'Mitt svar är 25 % eftersom 10 av 40 är en fjärdedel.', '_ 25 % eftersom 10 av 40 är en fjärdedel.'],
+    ['Jag väljer den här metoden eftersom …', 'Jag väljer att ställa upp en ekvation eftersom det okända värdet kan kallas x.', '_ den går snabbt.'],
+    ['Svaret är rimligt eftersom …', 'Svaret är rimligt eftersom 20 % av 50 kr måste vara mindre än 50 kr.', '_ 20 % av 50 kr är mindre än 50 kr.'],
+    ['Jag kan kontrollera svaret genom att …', 'Jag kan kontrollera svaret genom att sätta in x = 5 i ekvationen.', '_ sätta in x = 5 i ekvationen.']]],
   ['⚖️', 'Jämföra', [
-    ['Både … och …', 'Både 1/2 och 0,5 beskriver samma värde.'],
-    ['En skillnad mellan … och … är …', 'En skillnad mellan area och omkrets är att area mäter ytan medan omkrets mäter längden runt figuren.'],
-    ['Jämfört med … är …', 'Jämfört med 0,4 är 0,6 större.'],
-    ['Metod A är bättre än metod B eftersom …', 'Att förkorta bråket först är bättre eftersom talen blir mindre.']]],
+    ['Både … och …', 'Både 1/2 och 0,5 beskriver samma värde.', '_ 1/2 och 0,5 är samma tal.'],
+    ['En skillnad mellan … och … är …', 'En skillnad mellan area och omkrets är att area mäter ytan medan omkrets mäter längden runt figuren.', '_ area och omkrets är att area mäter ytan.'],
+    ['Jämfört med … är …', 'Jämfört med 0,4 är 0,6 större.', '_ 0,4 är 0,6 större.'],
+    ['Metod A är bättre än metod B eftersom …', 'Att förkorta bråket först är bättre eftersom talen blir mindre.', '_ den har färre steg.']]],
   ['🔗', 'Beskriva samband och förändring', [
-    ['När … ökar, …', 'När antalet varor ökar och priset per styck är detsamma, ökar den totala kostnaden.'],
-    ['Ju … desto …', 'Ju längre sträcka vi kör med samma hastighet, desto längre tid tar det.'],
-    ['Det är (inte) proportionellt eftersom …', 'Det är inte proportionellt eftersom det finns en fast startavgift.'],
-    ['Mönstret verkar vara … eftersom …', 'Mönstret verkar vara att man lägger till 4 varje gång eftersom 3, 7, 11 och 15 ökar med 4.']]],
+    ['När … ökar, …', 'När antalet varor ökar och priset per styck är detsamma, ökar den totala kostnaden.', '_ antalet varor ökar, ökar kostnaden.'],
+    ['Ju … desto …', 'Ju längre sträcka vi kör med samma hastighet, desto längre tid tar det.', '_ fler varor, desto högre pris.'],
+    ['Det är (inte) proportionellt eftersom …', 'Det är inte proportionellt eftersom det finns en fast startavgift.', '_ det finns en startavgift.'],
+    ['Mönstret verkar vara … eftersom …', 'Mönstret verkar vara att man lägger till 4 varje gång eftersom 3, 7, 11 och 15 ökar med 4.', '_ +3 eftersom 2, 5, 8 och 11 ökar med 3.']]],
   ['📊', 'Tolka tabeller, grafer och statistik', [
-    ['Jag kan läsa av att …', 'Jag kan läsa av att y är 12 när x = 3.'],
-    ['Grafen visar att …', 'Grafen visar att sträckan ökar lika mycket varje minut.'],
-    ['Det bästa lägesmåttet är … eftersom …', 'Det bästa lägesmåttet är medianen eftersom ett mycket högt värde drar upp medelvärdet.'],
-    ['Vi kan inte säkert säga att … eftersom …', 'Vi kan inte säkert säga att alla elever tycker så eftersom vi bara frågade en klass.']]],
+    ['Jag kan läsa av att …', 'Jag kan läsa av att y är 12 när x = 3.', '_ y är 12 när x är 3.'],
+    ['Grafen visar att …', 'Grafen visar att sträckan ökar lika mycket varje minut.', '_ priset ökar varje år.'],
+    ['Det bästa lägesmåttet är … eftersom …', 'Det bästa lägesmåttet är medianen eftersom ett mycket högt värde drar upp medelvärdet.', '_ medianen eftersom ett värde är mycket högt.'],
+    ['Vi kan inte säkert säga att … eftersom …', 'Vi kan inte säkert säga att alla elever tycker så eftersom vi bara frågade en klass.', '_ alla tycker så eftersom vi bara frågade fem.']]],
   ['🎲', 'Resonera om sannolikhet', [
-    ['Det är mer sannolikt att … eftersom …', 'Det är mer sannolikt att få ett jämnt tal än en sexa eftersom tre av tärningens sex sidor är jämna.'],
-    ['Sannolikheten är … eftersom …', 'Sannolikheten är 1/2 eftersom tre av sex sidor på tärningen är jämna.'],
-    ['Det kan hända att …, men …', 'Det kan hända att jag får krona tre gånger i rad, men det är inte säkert.'],
-    ['Om …, så …', 'Om jag drar en röd kula och inte lägger tillbaka den, så ändras sannolikheten vid nästa dragning.']]],
+    ['Det är mer sannolikt att … eftersom …', 'Det är mer sannolikt att få ett jämnt tal än en sexa eftersom tre av tärningens sex sidor är jämna.', '_ dra en röd kula eftersom det finns fler röda.'],
+    ['Sannolikheten är … eftersom …', 'Sannolikheten är 1/2 eftersom tre av sex sidor på tärningen är jämna.', '_ 1/2 eftersom tre av sex sidor är jämna.'],
+    ['Det kan hända att …, men …', 'Det kan hända att jag får krona tre gånger i rad, men det är inte säkert.', '_ jag får en sexa tre gånger, men det är ovanligt.'],
+    ['Om …, så …', 'Om jag drar en röd kula och inte lägger tillbaka den, så ändras sannolikheten vid nästa dragning.', '_ x = 3, så är 2x = 6.']]],
   ['💡', 'Dra slutsatser och generalisera', [
-    ['Därför kan jag dra slutsatsen att …', 'Därför kan jag dra slutsatsen att vinkeln är 65°.'],
-    ['Det gäller alltid när …', 'Det gäller alltid när man adderar två jämna tal: summan blir jämn.'],
-    ['Ett motexempel är …', 'Påståendet att alla primtal är udda stämmer inte. Ett motexempel är 2.'],
-    ['Jag tror att regeln gäller för alla … eftersom …', 'Jag tror att summan av två udda tal alltid är jämn eftersom båda är ett jämnt tal plus 1.']]],
+    ['Därför kan jag dra slutsatsen att …', 'Därför kan jag dra slutsatsen att vinkeln är 65°.', '_ vinkeln är 65°.'],
+    ['Det gäller alltid när …', 'Det gäller alltid när man adderar två jämna tal: summan blir jämn.', '_ man adderar två jämna tal: summan blir jämn.'],
+    ['Ett motexempel är …', 'Påståendet att alla primtal är udda stämmer inte. Ett motexempel är 2.', '_ 2, som är ett jämnt primtal.'],
+    ['Jag tror att regeln gäller för alla … eftersom …', 'Jag tror att summan av två udda tal alltid är jämn eftersom båda är ett jämnt tal plus 1.', '_ jämna tal eftersom jag har testat många.']]],
   ['🔧', 'Förklara fel och förbättra en lösning', [
-    ['Felet uppstår när …', 'Felet uppstår när minustecknet inte följer med in i parentesen.'],
-    ['Här har jag blandat ihop … och …', 'Här har jag blandat ihop area och omkrets.'],
-    ['Ett bättre sätt är att … eftersom …', 'Ett bättre sätt är att rita en skiss eftersom den visar vilka mått som hör ihop.'],
-    ['Min första lösning fungerar inte eftersom …', 'Min första lösning fungerar inte eftersom den ger en negativ längd.']]]];
+    ['Felet uppstår när …', 'Felet uppstår när minustecknet inte följer med in i parentesen.', '_ man glömmer minustecknet.'],
+    ['Här har jag blandat ihop … och …', 'Här har jag blandat ihop area och omkrets.', '_ area och omkrets, därför blev det fel.'],
+    ['Ett bättre sätt är att … eftersom …', 'Ett bättre sätt är att rita en skiss eftersom den visar vilka mått som hör ihop.', '_ rita en bild eftersom den visar måtten.'],
+    ['Min första lösning fungerar inte eftersom …', 'Min första lösning fungerar inte eftersom den ger en negativ längd.', '_ längden blev negativ.']]]];
 // Modell för ett utvecklat resonemang och checklista (ur samma dokument)
 window.BG_MODELL = {
   uppgift: 'Är 25 % av 80 lika med 20?',

@@ -326,19 +326,16 @@
     VAL_T.kitt = {namn: 'Resonemangsord', kitt: true, pool: () => KO.filter(k => k.g !== 'fler' || (k.ms && k.vs))};
     VAL_T.alla = {namn: 'Alla begrepp blandat', pool: () => ORD.filter(OKF)};
     // Meningsstarter: exemplet visas med början bortplockad, eleven väljer rätt meningsstart
-    const MS = (window.BG_MENINGAR || []).flatMap(([ik, rub, l]) => l.map(([b, e]) => ({ord: b, ex: e, rub})));
-    const msDelar = b => b.replace(/[()]/g, '').split('…').map(x => x.trim().replace(/^,\s*/, ', ').replace(/,$/, '')).filter(x => x && x !== ',');
-    const msLucka = m => {  // ersätt meningsstartens fasta ord i exemplet med luckor
-      let t = esc(m.ex), fran = 0, n = 0;
-      for (const d of msDelar(m.ord)) { const i = t.toLowerCase().indexOf(esc(d).toLowerCase(), fran); if (i < 0) continue; t = t.slice(0, i) + '<span class="bg-lucka">?</span>' + t.slice(i + esc(d).length); fran = i + 30; n++; }
-      return n ? t : null;
-    };
-    const msPasser = (m, x) => msDelar(x.ord).every(d => m.ex.toLowerCase().includes(d.toLowerCase()));
+    const MS = (window.BG_MENINGAR || []).flatMap(([ik, rub, l]) => l.filter(x => x[2]).map(([b, e, t]) => ({ord: b, ex: e, t, rub})));
+    const msDelar = b => b.replace(/[()]/g, '').split('…').map(x => x.trim().replace(/^,\s*/, '').replace(/,$/, '')).filter(x => x);
+    // Fel alternativ ska inte kunna passa: starter som följs av en hel sats (… att/eftersom/när/om) blandas bara med starter som följs av något annat.
+    const msSats = b => ['att', 'eftersom', 'när', 'om', 'både'].includes(msDelar(b)[0].split(' ').pop().toLowerCase());
+    const msFacit = m => m.t.replace('_', msDelar(m.ord)[0]);
     function fragaMS(m) {
-      const fel = blanda(MS.filter(x => x !== m && x.rub !== m.rub && !msPasser(m, x))).slice(0, 3), alt = blanda([m, ...fel]);
-      return {rub: 'Vilken meningsstart passar?', q: `”${msLucka(m)}”`, lang: true, alt: alt.map(x => esc(x.ord)), ratt: alt.indexOf(m), facit: {ord: m.ord, txt: m.ex}};
+      const fel = blanda(MS.filter(x => x !== m && msSats(x.ord) !== msSats(m.ord))).slice(0, 3), alt = blanda([m, ...fel]);
+      return {rub: 'Vilken meningsstart passar?', q: esc(m.t).replace('_', '<span class="bg-lucka">?</span>'), lang: true, alt: alt.map(x => esc(x.ord)), ratt: alt.indexOf(m), facit: {ord: m.ord, txt: msFacit(m)}};
     }
-    VAL_T.ms = {namn: 'Meningsstarter', ms: true, pool: () => MS.filter(msLucka)};
+    VAL_T.ms = {namn: 'Meningsstarter', ms: true, pool: () => MS};
     h += `<h3 class="bg-del">Mer</h3><div class="bt-val"><button type="button" class="bt-ruta" data-t="kitt" style="--o:#D5E3F0;--od:#1E4A73"><span class="bg-rsym">🔗</span><span><small>Resonemangsord</small><b>Ord som hjälper dig att resonera</b><small>${VAL_T.kitt.pool().length} ord</small></span></button>`
       + `<button type="button" class="bt-ruta" data-t="ms" style="--o:#FFF1CC;--od:#7A5A12"><span class="bg-rsym">💬</span><span><small>Meningsstarter</small><b>Så kan du börja en mening</b><small>${VAL_T.ms.pool().length} meningsstarter</small></span></button>`
       + `<button type="button" class="bt-ruta hela" data-t="alla"><span class="bg-rsym">★</span><span><small>Utmaning</small><b>Alla begrepp blandat</b><small>${VAL_T.alla.pool().length} begrepp</small></span></button></div>`;
