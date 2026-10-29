@@ -378,11 +378,17 @@
       el.scrollIntoView({block: 'start'});
     }
     valj();
+    { const t = new URLSearchParams(location.search).get('t'); if (t && VAL_T[t]) starta_t(t); }  // ?t=ms startar ett test direkt
     window.BT_TEST = {VAL_T, fragaOrd, fragaKitt, fragaMS, MS, ORD, KO};  // för automatiska tester
   }
   const VALEN = [...OMR.map(o => ({typ: 'om', id: o[0], namn: o[1], ljus: o[2], mork: o[3], sym: o[4], antal: ORD.filter(x => x.om === o[0]).length})),
                  ...KG.map(g => ({typ: 'kg', id: g[0], namn: g[1], ljus: g[2], mork: g[3], sym: g[4], txt: g[5], antal: KO.filter(k => k.g === g[0]).length}))];
   const ruta = v => `<button type="button" class="bg-ruta" data-val="${v.typ}:${v.id}" style="--o:${v.ljus};--od:${v.mork}"><span class="bg-rsym">${v.sym}</span><b>${esc(v.namn)}</b><small>${v.antal} ord</small></button>`;
+  const MSINNEHALL = (window.BG_MENINGAR || []).length ? `<div class="ms-grid">${window.BG_MENINGAR.map(([ik, rub, l]) => `<div class="ms-kort"><h4><span aria-hidden="true">${ik}</span> ${esc(rub)}</h4><ul>${l.map(([b, e]) => `<li><b>${esc(b)}</b><span>${esc(e)}</span></li>`).join('')}</ul></div>`).join('')}</div>
+    ${window.BG_MODELL ? `<div class="ms-modell"><div class="ms-mod"><h4>🪜 Så bygger du ett resonemang</h4><p class="ms-pil">${window.BG_MODELL.steg.map(s => `<span>${esc(s[0])}</span>`).join('<i>→</i>')}</p><p class="ms-upg"><b>Exempel:</b> ${esc(window.BG_MODELL.uppgift)}</p><ol>${window.BG_MODELL.steg.map(s => `<li><b>${esc(s[0])}:</b> ${esc(s[1])}</li>`).join('')}</ol></div>
+    <div class="ms-chk"><h4>☑️ Checklista innan du lämnar in</h4><ul>${window.BG_MODELL.check.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div></div>` : ''}` : '';
+  const MSANTAL = (window.BG_MENINGAR || []).reduce((n, g) => n + g[2].length, 0);
+  const MSRUTA = MSANTAL ? `<button type="button" class="bg-ruta" data-ms="1" style="--o:#FCE9B8;--od:#6B4E0E"><span class="bg-rsym">💬</span><b>Så kan du börja en mening</b><small>${MSANTAL} meningsstarter</small></button>` : '';
   el.innerHTML = `
 <label class="bg-sok"><span aria-hidden="true">🔍</span><input type="search" placeholder="Sök ett ord, t.ex. nämnare eller eftersom" aria-label="Sök ett ord"></label>
 <div id="bg-steg1">
@@ -391,11 +397,8 @@
   <div class="bg-matte"><h3 class="bg-del">📐 Mattebegrepp <small>Ord som används i matematiken, till exempel nämnare, ekvation och omkrets</small></h3>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div></div>
   <div class="bg-kitt"><h3 class="bg-del" id="bg-resonera">🔗 Resonemangsord <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
-  <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}</div>
-  ${(window.BG_MENINGAR || []).length ? `<details class="ms-box"><summary><span aria-hidden="true">💬</span><span><b>Så kan du börja en mening</b><small>Meningsstarter som hjälper dig att förklara hur du tänker. Klicka för att visa.</small></span></summary>
-    <div class="ms-grid">${window.BG_MENINGAR.map(([ik, rub, l]) => `<div class="ms-kort"><h4><span aria-hidden="true">${ik}</span> ${esc(rub)}</h4><ul>${l.map(([b, e]) => `<li><b>${esc(b)}</b><span>${esc(e)}</span></li>`).join('')}</ul></div>`).join('')}</div>
-    ${window.BG_MODELL ? `<div class="ms-modell"><div class="ms-mod"><h4>🪜 Så bygger du ett resonemang</h4><p class="ms-pil">${window.BG_MODELL.steg.map(s => `<span>${esc(s[0])}</span>`).join('<i>→</i>')}</p><p class="ms-upg"><b>Exempel:</b> ${esc(window.BG_MODELL.uppgift)}</p><ol>${window.BG_MODELL.steg.map(s => `<li><b>${esc(s[0])}:</b> ${esc(s[1])}</li>`).join('')}</ol></div>
-    <div class="ms-chk"><h4>☑️ Checklista innan du lämnar in</h4><ul>${window.BG_MODELL.check.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div></div>` : ''}</details>` : ''}</div>
+  <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}${MSRUTA}</div>
+</div>
   <p class="bg-saknar">💬 Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>
 </div>
 <div id="bg-steg2" hidden>
@@ -431,7 +434,8 @@
       KF = v.id; KTYP = v.id === 'fler' ? 'fler' : val(['lucka', 'betyd']); kstart();
     }
   }
-  el.querySelectorAll('[data-val]').forEach(b => b.onclick = () => { const [t, id] = b.dataset.val.split(':'); VAL = VALEN.find(x => x.typ === t && x.id === id); LAGE = 'kort'; steg(2); visaVal(); el.scrollIntoView({block: 'start'}); });
+  el.querySelectorAll('[data-ms]').forEach(b => b.onclick = () => { VAL = null; steg(2); $('.bg-lage').hidden = true; $('.bg-var').innerHTML = `<span class="bg-prick" style="background:#FCE9B8">💬</span>Så kan du börja en mening <a class="ms-ovaknapp" href="begrepp-test.html?t=ms">🎯 Öva</a>`; $('#bg-kortlista').innerHTML = `<div class="ms-vy">${MSINNEHALL}</div><a class="ms-ova" href="begrepp-test.html?t=ms"><span aria-hidden="true">🎯</span><span><b>Öva på meningsstarterna</b><small>10 frågor: välj den meningsstart som passar i meningen.</small></span><span class="ms-ovapil">Öva →</span></a>`; $('#bg-yta').innerHTML = ''; el.scrollIntoView({block: 'start'}); });
+  el.querySelectorAll('[data-val]').forEach(b => b.onclick = () => { $('.bg-lage').hidden = false; const [t, id] = b.dataset.val.split(':'); VAL = VALEN.find(x => x.typ === t && x.id === id); LAGE = 'kort'; steg(2); visaVal(); el.scrollIntoView({block: 'start'}); });
   el.querySelectorAll('[data-lage]').forEach(b => b.onclick = () => { LAGE = b.dataset.lage; visaVal(); });
   $('.bg-tillbaka').onclick = () => { VAL = null; steg(1); };
   // Sök bland alla ord, både mattebegrepp och resonemangsord
