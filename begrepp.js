@@ -390,15 +390,15 @@
   const MSANTAL = (window.BG_MENINGAR || []).reduce((n, g) => n + g[2].length, 0);
   const MSRUTA = MSANTAL ? `<button type="button" class="bg-ruta" data-ms="1" style="--o:#FCE9B8;--od:#6B4E0E"><span class="bg-rsym">💬</span><b>Så kan du börja en mening</b><small>${MSANTAL} meningsstarter</small></button>` : '';
   el.innerHTML = `
-<label class="bg-sok"><span aria-hidden="true">🔍</span><input type="search" placeholder="Sök ett ord, t.ex. nämnare eller eftersom" aria-label="Sök ett ord"></label>
+<label class="bg-sok"><span aria-hidden="true">🔍</span><input type="search" placeholder="Sök ord" aria-label="Sök ett ord"></label>
 <div id="bg-steg1">
-  <a class="bt-lank" href="begrepp-test.html"><span aria-hidden="true">🏁</span><span><b>Testa dig</b> Kolla vad du kan om begreppen. 10 frågor och resultat på slutet.</span><span class="bt-pil">Testa dig →</span></a>
   <h2 class="bg-rub">Vilka ord vill du träna på?</h2>
   <div class="bg-matte"><h3 class="bg-del">📐 Mattebegrepp <small>Ord som används i matematiken, till exempel nämnare, ekvation och omkrets</small></h3>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div></div>
   <div class="bg-kitt"><h3 class="bg-del" id="bg-resonera">🔗 Resonemangsord <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}${MSRUTA}</div>
 </div>
+  <a class="bt-lank" href="begrepp-test.html"><span aria-hidden="true">🏁</span><span><b>Testa dig</b> Kolla vad du kan om begreppen. 10 frågor och resultat på slutet.</span><span class="bt-pil">Testa dig →</span></a>
   <p class="bg-saknar">💬 Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>
 </div>
 <div id="bg-steg2" hidden>
