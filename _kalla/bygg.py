@@ -353,14 +353,12 @@ def ovningsprov_sida(k, rot='', intro=None):
             sti = f'ovningsprov/prov-{n}/delprov-{b.lower()}'
             shutil.copy(upg, os.path.join(UT, f'ak{k}', sti + '.pdf'))
             open(os.path.join(UT, f'ak{k}', sti + '-facit.bin'), 'wb').write(krypterad_fil(open(fac, 'rb').read()))
-            info = ovp_info(upg)
             gid = OVP_GENOMGANG.get(n, {}).get(b)
             gg = ''
             if gid:
                 open(os.path.join(UT, f'ak{k}', sti + '-genomgang.bin'), 'wb').write(krypterad_fil(f'https://drive.google.com/file/d/{gid}/view'.encode()))
                 gg = f'<a class="facit" href="#facit" data-url="{rot}{sti}-genomgang.bin">🔒 Genomgång</a>'
-            rader += (f'<div class="ovrad{" gg" if gg else ""}"><a class="upg" href="{rot}{sti}.pdf" target="_blank" rel="noopener"><span class="bok">{b}</span><span>Delprov {b}<small>{tid} · {rk}'
-                      + (f' · {info}' if info else '') + '</small></span></a>'
+            rader += (f'<div class="ovrad{" gg" if gg else ""}"><a class="upg" href="{rot}{sti}.pdf" target="_blank" rel="noopener"><span class="bok">{b}</span><span>Delprov {b}<small>{tid} · {rk}</small></span></a>'
                       f'<a class="facit" href="#facit" data-fil="{rot}{sti}-facit.bin" data-namn="NP-träning {n} delprov {b} facit.pdf">🔒 Facit</a>{gg}</div>')
         prov += f'<div class="ovkort"><h3>NP-träning {n}</h3>{rader}</div>'
     prov = f'<div class="ovgrid">{prov}</div>'
