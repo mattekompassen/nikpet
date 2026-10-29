@@ -192,7 +192,7 @@
   }
 
   // ---------- Ord som hjälper dig att resonera (nivå 2-ord, begrepp-kitt.js) ----------
-  const KG = window.BG_KITT_GRUPPER || [], KO = window.BG_KITT || [], KGM = Object.fromEntries(KG.map(g => [g[0], g]));
+  const KG = window.BG_KITT_GRUPPER || [], KO = (window.BG_KITT || []).slice().sort((a, b) => a.ord.localeCompare(b.ord, 'sv')), KGM = Object.fromEntries(KG.map(g => [g[0], g]));
   const ICKE = '(?<![a-zåäöA-ZÅÄÖ])', SLUT = '(?![a-zåäöA-ZÅÄÖ])';
   // Meningar ur ordlistorna där ordet används (förklaringar och exempel utan formelbilder)
   const BOKMEN = [];
@@ -379,7 +379,11 @@
   <div class="bg-matte"><h3 class="bg-del">📐 Mattebegrepp <small>Ord som används i matematiken, till exempel nämnare, ekvation och omkrets</small></h3>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div></div>
   <div class="bg-kitt"><h3 class="bg-del" id="bg-resonera">🔗 Resonemangsord <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
-  <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}</div></div>
+  <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}</div>
+  ${(window.BG_MENINGAR || []).length ? `<details class="ms-box"><summary><span aria-hidden="true">💬</span><span><b>Så kan du börja en mening</b><small>Meningsstarter som hjälper dig att förklara hur du tänker. Klicka för att visa.</small></span></summary>
+    <div class="ms-grid">${window.BG_MENINGAR.map(([ik, rub, l]) => `<div class="ms-kort"><h4><span aria-hidden="true">${ik}</span> ${esc(rub)}</h4><ul>${l.map(([b, e]) => `<li><b>${esc(b)}</b><span>${esc(e)}</span></li>`).join('')}</ul></div>`).join('')}</div>
+    ${window.BG_MODELL ? `<div class="ms-modell"><div class="ms-mod"><h4>🪜 Så bygger du ett resonemang</h4><p class="ms-pil">${window.BG_MODELL.steg.map(s => `<span>${esc(s[0])}</span>`).join('<i>→</i>')}</p><p class="ms-upg"><b>Exempel:</b> ${esc(window.BG_MODELL.uppgift)}</p><ol>${window.BG_MODELL.steg.map(s => `<li><b>${esc(s[0])}:</b> ${esc(s[1])}</li>`).join('')}</ol></div>
+    <div class="ms-chk"><h4>☑️ Checklista innan du lämnar in</h4><ul>${window.BG_MODELL.check.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div></div>` : ''}</details>` : ''}</div>
   <p class="bg-allaord" hidden><a class="knapp2 sek" href="begrepp.html">← Visa alla ord</a></p>
   <p class="bg-saknar">💬 Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>
 </div>
