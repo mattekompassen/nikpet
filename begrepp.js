@@ -26,19 +26,35 @@
   const ORD = [], NYCKEL = {}, MENING = [], KAPNAMN = {};
   const stam = s => s.toLowerCase().replace(/[^a-zåäö ]/g, '').slice(0, 5);
   const text = h => { const d = document.createElement('div'); d.innerHTML = h; d.querySelectorAll('img').forEach(i => i.remove()); return d.textContent.replace(/\s+/g, ' ').trim(); };
-  for (const b of window.BG_BOK || []) {
-    const id = b.om + ':' + b.ord.toLowerCase();
-    if (NYCKEL[id]) { if (!NYCKEL[id].ak.includes(b.ak)) NYCKEL[id].ak.push(b.ak); NYCKEL[id].kaps.push(b.ak + ':' + b.kap); continue; }
-    const o = {id, kaps: [b.ak + ':' + b.kap], ord: b.ord, delar: b.ord.split(' / '), forkl: text(b.besk), forklHtml: b.besk, om: b.om, ak: [b.ak], kap: `Åk ${b.ak} kap ${b.kap}`, bild: b.ex, exText: text(b.ex)};
+  // Varje ord visas en gång (Nikola 2026-10-29). Samma ord i flera kapitel eller områden slås ihop till ett kort.
+  // NAMN: ord som skrivs olika i olika listor får ett gemensamt namn (null = sammansatt rubrik vars delar redan finns som egna kort)
+  const NAMN = {'minsta gemensam nämnare (mgn)': 'Minsta gemensamma nämnare (MGN)', 'minsta gemensam nämnare': 'Minsta gemensamma nämnare (MGN)',
+    'vänster och höger led': 'Vänster led och höger led', 'mönster': 'Mönster / Talföljd', 'cirkel': 'Cirkel / Medelpunkt', 'cylinder / mantelyta': 'Cylinder',
+    'koordinatsystem / koordinataxlar / x-axel och y-axel / koordinat / origo': null, 'potens / bas / exponent': null};
+  const DELAR = {'potens / bas / exponent': ['potens', 'bas', 'exponent'], 'koordinatsystem / koordinataxlar / x-axel och y-axel / koordinat / origo': ['koordinatsystem / koordinater', 'x-axel och y-axel', 'origo']};
+  // OMRADE: ord som finns i flera områden placeras i ett
+  const OMRADE = {'enklaste form': 'tal', 'förkortning': 'tal', 'förlängning': 'tal'};
+  const lagg = (b, ord) => {
+    const id = ord.toLowerCase();
+    if (NYCKEL[id]) { if (!NYCKEL[id].ak.includes(b.ak)) NYCKEL[id].ak.push(b.ak); NYCKEL[id].kaps.push(b.ak + ':' + b.kap); return; }
+    const o = {id, kaps: [b.ak + ':' + b.kap], ord, delar: ord.replace(/ \([^)]*\)$/, '').split(' / '), forkl: text(b.besk), forklHtml: b.besk, om: OMRADE[id] || b.om, ak: [b.ak], kap: `Åk ${b.ak} kap ${b.kap}`, bild: b.ex, exText: text(b.ex)};
     ORD.push(o); NYCKEL[id] = o;
+  };
+  const SENARE = [];
+  for (const b of window.BG_BOK || []) {
+    const k = b.ord.toLowerCase();
+    if (k in NAMN && NAMN[k] === null) { SENARE.push(b); continue; }
+    lagg(b, NAMN[k] || b.ord);
   }
+  for (const b of SENARE) for (const d of DELAR[b.ord.toLowerCase()]) if (NYCKEL[d]) lagg(b, NYCKEL[d].ord);
   // Kompletterande begrepp ur Skolverkets ordlista (BG_SKV i begrepp-skolverket.js), utan årskurs och kapitel
   for (const b of window.BG_SKV || []) {
-    const id = b.om + ':' + b.ord.toLowerCase();
+    const id = b.ord.toLowerCase();
     if (NYCKEL[id]) continue;
     const o = {id, kaps: [], ord: b.ord, delar: b.ord.replace(/ \([^)]*\)$/, '').split(' / '), forkl: text(b.besk), forklHtml: b.besk + '<span class="bk-skv">Ur Skolverkets ordlista</span>', om: b.om, ak: [], kap: 'Skolverket', bild: b.ex, exText: text(b.ex), skv: true};
     ORD.push(o); NYCKEL[id] = o;
   }
+  ORD.sort((a, b) => a.ord.localeCompare(b.ord, 'sv'));  // bokstavsordning
   const hitta = (s, om) => { const l = ORD.filter(o => !om || o.om === om); return l.find(o => o.delar.some(d => d.toLowerCase() === s.toLowerCase())) || l.find(o => o.delar.some(d => stam(d) === stam(s))); };
   // Meningar från Interaktiva övningar, bara de vars svar är ett av bokens begrepp
   for (const ak of [7, 8, 9]) {

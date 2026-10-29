@@ -47,7 +47,7 @@ var BG_SKV = (function () {
   {om: 'geo', ord: 'Likbent triangel', besk: 'I en likbent triangel är minst två sidor lika långa och två vinklar lika stora.', ex: ''},
   {om: 'geo', ord: 'Rätvinklig triangel', besk: 'En rätvinklig triangel har en rät vinkel.', ex: ''},
   {om: 'geo', ord: 'Höjd', besk: 'Höjden i en figur är avståndet från basen till det motstående hörnet, mätt vinkelrätt mot basen.', ex: 'Triangelns area = <span class="frac"><i>basen · höjden</i><i>2</i></span>'},
-  {om: 'geo', ord: 'Bas', besk: 'Basen i en figur är den sida som höjden mäts mot.', ex: ''},
+  {om: 'geo', ord: 'Bas (i en figur)', besk: 'Basen i en figur är den sida som höjden mäts mot.', ex: ''},
   {om: 'geo', ord: 'Pi (π)', besk: 'Pi är förhållandet mellan en cirkels omkrets och dess diameter. Pi är ett irrationellt tal.', ex: 'π ≈ 3,14'},
   {om: 'geo', ord: 'Cirkelsektor', besk: 'En cirkelsektor är en del av en cirkel som begränsas av två radier och en del av cirkelns rand.', ex: 'en tårtbit'},
   {om: 'geo', ord: 'Sidoyta', besk: 'En sidoyta är en av de plana ytorna på en kropp.', ex: 'En kub har sex sidoytor.'},
