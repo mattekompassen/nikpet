@@ -396,7 +396,6 @@
     <div class="ms-grid">${window.BG_MENINGAR.map(([ik, rub, l]) => `<div class="ms-kort"><h4><span aria-hidden="true">${ik}</span> ${esc(rub)}</h4><ul>${l.map(([b, e]) => `<li><b>${esc(b)}</b><span>${esc(e)}</span></li>`).join('')}</ul></div>`).join('')}</div>
     ${window.BG_MODELL ? `<div class="ms-modell"><div class="ms-mod"><h4>🪜 Så bygger du ett resonemang</h4><p class="ms-pil">${window.BG_MODELL.steg.map(s => `<span>${esc(s[0])}</span>`).join('<i>→</i>')}</p><p class="ms-upg"><b>Exempel:</b> ${esc(window.BG_MODELL.uppgift)}</p><ol>${window.BG_MODELL.steg.map(s => `<li><b>${esc(s[0])}:</b> ${esc(s[1])}</li>`).join('')}</ol></div>
     <div class="ms-chk"><h4>☑️ Checklista innan du lämnar in</h4><ul>${window.BG_MODELL.check.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div></div>` : ''}</details>` : ''}</div>
-  <p class="bg-allaord" hidden><a class="knapp2 sek" href="begrepp.html">← Visa alla ord</a></p>
   <p class="bg-saknar">💬 Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>
 </div>
 <div id="bg-steg2" hidden>
@@ -452,7 +451,7 @@
   const q = new URLSearchParams(location.search);
   // ?flik=mat / ?flik=kitt: visa bara den delen (genvägar från startsidan)
   const bara = {mat: '.bg-kitt', kitt: '.bg-matte'}[q.get('flik')];
-  if (bara) { $(bara).hidden = true; $('.bg-allaord').hidden = false; setTimeout(() => el.scrollIntoView({block: 'start'}), 50); }
+  if (bara) { $(bara).hidden = true; ['.bg-sok', '.bt-lank', '.bg-rub'].forEach(x => $(x).style.display = 'none'); setTimeout(() => el.scrollIntoView({block: 'start'}), 50); }
   if (q.get('flik') === 'sok') setTimeout(() => { sokruta.scrollIntoView({block: 'center'}); sokruta.focus(); }, 50);
   window.BG_ANTAL = ORD.length;
 })();

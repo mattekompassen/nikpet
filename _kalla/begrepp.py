@@ -144,11 +144,11 @@ def kropp(panel, c, rot='', test=False):
     if test:  # begrepp-test.html: Testa dig
         top = panel(c, 'Testa dina begrepp', 'Kolla vad du kan. Välj ett kapitel och svara på 10 frågor om begreppen.', '',
                     [('Startsida', 'index.html'), ('Matematiska begrepp', 'begrepp.html'), ('Testa dig', None)], ikon())
-        mitt = '<div id="bg" data-test="1"></div><a class="knapp" href="begrepp.html">← Till Matematiska begrepp</a>'
+        mitt = '<div id="bg" data-test="1"></div><a class="knapp" href="index.html" onclick="if(history.length>1){history.back();return false}">← Tillbaka</a>'
     else:
         top = panel(c, 'Matematiska begrepp', 'Lär dig mattebegrepp och resonemangsord. Vänd korten och öva på orden.', '',
                     [('Startsida', 'index.html'), ('Matematiska begrepp', None)], ikon())
-        mitt = '<div id="bg"></div><a class="knapp" href="index.html">← Till startsidan</a>'
+        mitt = '<div id="bg"></div><a class="knapp" href="index.html" onclick="if(history.length>1){history.back();return false}">← Tillbaka</a>'
     return (top
             + f'<main><section><div class="wrap">{mitt}</div></section></main>'
             + f'<style>.panel{{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}}.panel .sti,.panel .sti a{{color:#5F6368}}.panel h1{{color:var(--ink)}}.panel p{{color:#3B4A5A}}{CSS}</style>'

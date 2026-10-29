@@ -731,7 +731,7 @@ def bygg():
             grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3{" rad4" if len(rutor) == 4 else ""}">{t}</div></div>'
         sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Årskurs {k}', 'Lär dig nytt, träna mer och kolla vad du kan.',
              f'Matematik {c["bok"]}', [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="nrc" style="color:{c["ink"]}" aria-hidden="true">{k}</div>')
-             + f'<main><div class="wrap">{grupper}<p style="margin:34px 0 10px;text-align:center"><a class="knapp pil" href="index.html" aria-label="Till startsidan" title="Till startsidan">←</a></p></div></main>')
+             + f'<main><div class="wrap">{grupper}<p style="margin:34px 0 10px;text-align:center"><a class="knapp pil" href="index.html" onclick="if(history.length>1){{history.back();return false}}" aria-label="Tillbaka" title="Tillbaka">←</a></p></div></main>')
         if k in TRANA_AR:
             sti = [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), ('Interaktiva övningar', 'ak%d/trana.html' % k)]
             hero = lambda t, p, sti=sti: panel(c, t, p, f'Åk {k} · Matematik {c["bok"]}', sti, f'<img class="bild" src="../bilder/ak{k}/16_Interaktiva_ovningar.png" alt="">', '../')
@@ -773,7 +773,7 @@ def bygg():
         sida(fil, t, {'bedomning.html': 'Bedömning', 'hjalp.html': 'Så får du hjälp', 'nationella-prov.html': 'Nationella prov', 'np-traning.html': 'NP-träning'}.get(fil, ''), c, f"""
 {panel(c, t, text, '', [('Startsida', 'index.html'), (t, None)])}
 <main><section><div class="wrap">{NP_PANEL if fil in ('nationella-prov.html', 'np-traning.html', 'amnesord.html') else ''}{byt_farger(extra(fil), FARGBYTE_NP if fil in ('nationella-prov.html', 'np-traning.html') else FARGBYTE_HJALP if fil == 'hjalp.html' else None)}
-<a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
+<a class="knapp" href="index.html" onclick="if(history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
     # Gemensam sida om problemlösning (länkas från årskursernas problemlösningssidor)
     arl = ''.join(f'<a href="ak{k}/problemlosning.html" style="background:{AR[k]["ink"]}">Åk {k}<small>Matematik {AR[k]["bok"]} · problemlösning per kapitel</small></a>' for k in AR)
     sida('problemlosning.html', 'Problemlösning', '', NEUTRAL, f"""
@@ -787,7 +787,7 @@ def bygg():
 <div class="strat"><div><h3>Rita en bild</h3><p>En skiss gör problemet tydligare och visar vad du vet och vad du söker.</p></div><div><h3>Gör en tabell</h3><p>Ordna informationen i en tabell så att du ser samband och mönster.</p></div><div><h3>Leta efter mönster</h3><p>Undersök några fall och se vad som upprepas. Använd mönstret för att hitta svaret.</p></div><div><h3>Gissa och pröva</h3><p>Gör en rimlig gissning, testa den och förbättra den tills den stämmer.</p></div><div><h3>Arbeta baklänges</h3><p>Börja i slutet. Vad måste ha hänt innan? Räkna dig tillbaka till starten.</p></div><div><h3>Förenkla problemet</h3><p>Prova med mindre eller enklare tal först. Använd sedan samma idé på det riktiga problemet.</p></div><div><h3>Ställ upp en ekvation</h3><p>Kalla det okända för x, skriv en ekvation och lös den.</p></div><div><h3>Kontrollera svaret</h3><p>Är svaret rimligt? Svarar du på frågan? Pröva svaret i problemet.</p></div></div>
 <h2>Välj årskurs</h2>
 <div class="arlank">{arl}</div>
-<a class="knapp" href="index.html">← Till startsidan</a></div></section></main>""")
+<a class="knapp" href="index.html" onclick="if(history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
     if VISA_GRUNDTRANING:
         sida('grundtraning.html', 'Matematikens grunder', 'Matematikens grunder', GT_FARG, gt.kropp(panel, GT_FARG))
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'grundtraning.js'), UT)
