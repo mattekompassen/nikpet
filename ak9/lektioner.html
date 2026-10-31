@@ -30,10 +30,10 @@ function visa(raa){
  .then(function(k){return crypto.subtle.decrypt({name:'AES-GCM',iv:iv},k,chiffer)})
  .then(function(b){ut.innerHTML=new TextDecoder().decode(b);las.remove();return true});
 }
-function spara(raa){try{localStorage.setItem(NYCKEL,u8b64(raa))}catch(e){}}
+function spara(raa){try{sessionStorage.setItem(NYCKEL,u8b64(raa))}catch(e){}}
 if(!window.crypto||!crypto.subtle){fel.textContent='Din webbläsare kan inte öppna sidan. Prova en annan webbläsare.';return}
-var sparad=null;try{sparad=localStorage.getItem(NYCKEL)}catch(e){}
-if(sparad){las.style.visibility='hidden';visa(b64(sparad)).catch(function(){try{localStorage.removeItem(NYCKEL)}catch(e){}las.style.visibility=''})}
+try{localStorage.removeItem(NYCKEL)}catch(e){}var sparad=null;try{sparad=sessionStorage.getItem(NYCKEL)}catch(e){}
+if(sparad){las.style.visibility='hidden';visa(b64(sparad)).catch(function(){try{sessionStorage.removeItem(NYCKEL)}catch(e){}las.style.visibility=''})}
 document.getElementById('lasform').addEventListener('submit',function(e){
  e.preventDefault();fel.textContent='Öppnar …';
  var ord=document.getElementById('losen').value.trim().toLowerCase().split(/\s+/).join('');
