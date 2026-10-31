@@ -28,7 +28,7 @@ var u8b64=function(a){var s='';a.forEach(function(x){s+=String.fromCharCode(x)})
 var forsta=document.querySelector('a.facit[data-fil]');
 function oppna(fil,k){return fetch(fil).then(function(r){if(!r.ok)throw 0;return r.arrayBuffer()}).then(function(b){var a=new Uint8Array(b);
  return crypto.subtle.importKey('raw',k,'AES-GCM',false,['decrypt']).then(function(x){return crypto.subtle.decrypt({name:'AES-GCM',iv:a.slice(0,12)},x,a.slice(12))})})}
-function upplast(k){raa=k;las.style.display='none';ok.style.display='';document.querySelectorAll('a.facit').forEach(function(a){a.textContent=a.textContent.replace('🔒 ','')})}
+function upplast(k){raa=k;las.style.display='none';ok.style.display='';document.querySelectorAll('a.facit').forEach(function(a){a.textContent=a.textContent.replace('🔒 ','🔓 ')})}
 function prova(k){return oppna(forsta.dataset.fil,k).then(function(){upplast(k);return true})}
 if(!window.crypto||!crypto.subtle||!window.fetch){fel.textContent='Din webbläsare kan inte öppna facit. Prova en annan webbläsare.';return}
 var sparad=null;try{sparad=localStorage.getItem(NYCKEL)}catch(e){}
