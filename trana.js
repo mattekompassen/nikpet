@@ -4,7 +4,7 @@
   const r = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const val = a => a[r(0, a.length - 1)];
   const sv = x => String(Math.round(x * 1e6) / 1e6).replace('.', ',');
-  const tus = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const tus = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   const sgn = n => n < 0 ? '(' + sv(n) + ')' : sv(n);
 
 
@@ -34,7 +34,7 @@
   const lika = (g, svar) => svar.some(a => {
     const x = tal(g), y = tal(a);
     if (!isNaN(x) && !isNaN(y)) return Math.abs(x - y) < 1e-9;
-    return g.trim().toLowerCase().replace(/[.\s-]+$/, '').replace(/\s+/g, ' ') === a.toLowerCase().replace(/-$/, '');
+    return g.trim().toLowerCase().replace(/[.\s-]+$/, '').replace(/\s+/g, ' ') === a.toLowerCase().replace(/-$/, '').replace(/\s+/g, ' ');
   });
   const RUNDA_Q = 10;
   function slut(ratt, n, igen, rubrik) {

@@ -57,7 +57,7 @@
 
   // ---------- Övningarna ----------
   const NIVA = (a, b, c) => [['1', 'Nivå 1', a], ['2', 'Nivå 2', b], ['3', 'Nivå 3', c]];
-  const tus = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const tus = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   const d1 = x => Math.round(x * 1e6) / 1e6;  // undvik avrundningsfel med decimaltal
   // De fyra räknesätten: eleven väljer räknesätt och nivå. Blandat har värdena '1'–'3' (som förut).
   const RS_NAMN = {bland: ['Blandat', ['plus och minus inom 20', 'inom 100, gånger och delat', 'tiotal, hundratal och decimaltal']],
@@ -262,7 +262,7 @@
           : {typ: 'tal', q: `${sv(x)} / ${tus(g)} =`, svar: d1(x / g), ledtrad: `Delat med ${tus(g)}: talet blir ${tus(g)} gånger mindre. Kommat flyttar ${String(g).length - 1} steg åt vänster.`};
       }},
     overslag: {del: 'rakna', ikon: '🎯', namn: 'Överslagsräkning', kort: 'Ungefär hur mycket? Välj det rimliga svaret',
-      exempel: 'Ungefär hur mycket är <b>49 · 21</b>?<br>Avrunda: 49 ≈ 50 och 21 ≈ 20. Räkna 50 · 20 = <b>1 000</b>.',
+      exempel: 'Ungefär hur mycket är <b>49 · 21</b>?<br>Avrunda: 49 ≈ 50 och 21 ≈ 20. Räkna 50 · 20 = <b>1 000</b>.',
       val: NIVA('plus och minus', 'gånger och delat', 'pengar och decimaltal'),
       gen(v) {
         const runt = x => { const e = Math.pow(10, Math.floor(Math.log10(x))); return Math.round(x / e) * e; };

@@ -6,7 +6,7 @@
   const r = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
   const val = a => a[r(0, a.length - 1)];
   const sv = x => String(Math.round(x * 1e6) / 1e6).replace('.', ',');
-  const tus = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const tus = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   const sgn = n => n < 0 ? '(' + sv(n) + ')' : sv(n);
   const blanda = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = r(0, i); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));

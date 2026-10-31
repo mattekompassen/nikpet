@@ -24,7 +24,7 @@ var BG_SKV = (function () {
   {om: 'tal', ord: 'Primtalsfaktorisering', besk: 'En primtalsfaktorisering är när man skriver ett tal som en produkt av bara primtal.', ex: '18 = 2 · 3 · 3'},
   {om: 'tal', ord: 'Likvärdiga bråk', besk: 'Likvärdiga bråk är bråk som har samma värde fast de skrivs med olika tal.', ex: `${b(2, 4)} = ${b(4, 8)} = ${b(1, 2)}`},
   {om: 'tal', ord: 'Liknämniga bråk', besk: 'Liknämniga bråk är bråk som har samma nämnare.', ex: `${b(2, 8)}, ${b(4, 8)} och ${b(7, 8)}`},
-  {om: 'tal', ord: 'Rimlig', besk: 'Ett svar är rimligt när det verkar troligt och stämmer med verkligheten.', ex: 'Att en elev är 1 600 cm lång är inte rimligt.'},
+  {om: 'tal', ord: 'Rimlig', besk: 'Ett svar är rimligt när det verkar troligt och stämmer med verkligheten.', ex: 'Att en elev är 1 600 cm lång är inte rimligt.'},
   {om: 'tal', ord: 'Tallinje', besk: 'En tallinje är en linje där talen står i storleksordning med lika långt mellan heltalen.', ex: '–3 –2 –1 0 1 2 3'},
   // ---------- Algebra ----------
   {om: 'alg', ord: 'Uttryck', besk: 'Ett uttryck består av tal, variabler och räknetecken men har inget likhetstecken.', ex: '5 + 3 &nbsp; och &nbsp; 5<i>x</i> + 3'},
@@ -54,7 +54,7 @@ var BG_SKV = (function () {
   {om: 'geo', ord: 'Kant', besk: 'En kant är en sträcka där två sidoytor på en kropp möts.', ex: 'En kub har tolv kanter.'},
   {om: 'geo', ord: 'Symmetri', besk: 'En figur har symmetri om den ser likadan ut efter en spegling eller en vridning.', ex: ''},
   {om: 'geo', ord: 'Enhet', besk: 'En enhet talar om vad man mäter i.', ex: 'cm, m², kg och liter'},
-  {om: 'geo', ord: 'Liter', besk: 'Liter är en volymenhet som ofta används för vätskor.', ex: '1 liter = 1 dm³ = 1 000 ml'},
+  {om: 'geo', ord: 'Liter', besk: 'Liter är en volymenhet som ofta används för vätskor.', ex: '1 liter = 1 dm³ = 1 000 ml'},
   // ---------- Samband och förändring ----------
   {om: 'sam', ord: 'Procentsats', besk: 'Procentsatsen talar om hur många procent det är.', ex: '25 % av 80 kr är 20 kr. Procentsatsen är 25 %.'},
   {om: 'sam', ord: 'Procentuell förändring', besk: 'Den procentuella förändringen är hur stor förändringen är i procent av det gamla värdet.', ex: `Från 500 kr till 600 kr: ${b(100, 500)} = 0,20 = 20 %`},

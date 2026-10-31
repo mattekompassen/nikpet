@@ -136,7 +136,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     ['Vad är 8 − 2 · 3 + 4?', ['6', '22', '14', '−2'], 'Multiplikation först: 8 − 6 + 4 = 6.'],
     ['Vad är (−4) · (−5)?', ['20', '−20', '−9', '9'], 'Lika tecken ger plus.'],
     ['Vad är −12 / 3?', ['−4', '4', '−9', '−36'], 'Olika tecken ger minus.'],
-    ['Vad är 2³ · 2²?', ['32', '64', '1 024', '10'], '2³ · 2² = 2⁵ = 32.'],
+    ['Vad är 2³ · 2²?', ['32', '64', '1 024', '10'], '2³ · 2² = 2⁵ = 32.'],
     ['Vad är 5⁰?', ['1', '0', '5', '50'], 'Alla tal (utom 0) upphöjt till 0 är 1.'],
     ['Hur skrivs 0,0007 i grundpotensform?', ['7 · 10⁻⁴', '7 · 10⁴', '7 · 10⁻³', '0,7 · 10⁻³'], 'Decimaltecknet flyttas 4 steg åt höger.'],
     ['Vad är (2 · 10³) · (3 · 10⁴)?', ['6 · 10⁷', '6 · 10¹²', '5 · 10⁷', '6 · 10¹'], '2 · 3 = 6 och 3 + 4 = 7.'],
@@ -166,7 +166,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
         {q: `Vilken förändringsfaktor motsvarar en minskning med ${p} %?`, svar: 1 - p / 100, ledtrad: `100 % − ${p} % = ${100 - p} %.`},
         {q: `Förändringsfaktorn är ${sv(1 - p / 100)}. Med hur många procent minskar värdet?`, svar: p, ledtrad: `${sv(1 - p / 100)} = ${100 - p} %. Hur mycket saknas till 100 %?`},
         {q: `Ett pris på ${tus(a)} kr höjs med ${p} % två gånger. Vad blir priset (kr)?`, svar: Math.round(a * (1 + p / 100) ** 2 * 100) / 100, ledtrad: `Multiplicera med ${sv(1 + p / 100)} två gånger.`},
-        {q: `En moped värd 10 000 kr minskar i värde med 10 % per år. Vad är den värd efter ${n} år (kr)? Avrunda till heltal.`, svar: Math.round(v), tol: 1, ledtrad: `Räkna 10 000 · 0,9<sup>${n}</sup>.`}]);
+        {q: `En moped värd 10 000 kr minskar i värde med 10 % per år. Vad är den värd efter ${n} år (kr)? Avrunda till heltal.`, svar: Math.round(v), tol: 1, ledtrad: `Räkna 10 000 · 0,9<sup>${n}</sup>.`}]);
     }},
     '2.3': {namn: 'Funktioner', gen() {
       const a = r(2, 6), b = r(1, 9), x = r(1, 8), c = r(1, 10);
@@ -222,7 +222,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     [svg(160, 115, `<path d="M20 95 H150" stroke="${I}" stroke-width="2.5"/><path d="M30 105 V10" stroke="${M}" stroke-width="6"/>`), 'y-axel', 'Den lodräta axeln heter y-axel.', 'Vad heter den markerade axeln?'],
     ['<table class="tab"><tr><th>x</th><td>0</td><td>1</td><td>2</td></tr><tr><th>y</th><td>2</td><td>5</td><td>8</td></tr></table>', 'värdetabell', 'En tabell med x- och y-värden heter värdetabell.', 'Vad heter tabellen?'],
     ['<mark>y = 4x</mark>', 'proportionalitet', 'y = kx utan m. Linjen går genom origo. Det är proportionalitet.'],
-    ['1 000 · 1,05 · 1,05 · 1,05 = 1 000 · <mark>1,05<sup>3</sup></mark>', 'upprepad förändring', 'Samma förändringsfaktor tre gånger. Det är en upprepad förändring.'],
+    ['1 000 · 1,05 · 1,05 · 1,05 = 1 000 · <mark>1,05<sup>3</sup></mark>', 'upprepad förändring', 'Samma förändringsfaktor tre gånger. Det är en upprepad förändring.'],
   ],
   dra: [
     ['I y = 3x + 2 är 3 linjens ___.', 'lutning'],
@@ -244,7 +244,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     ['Vad är m-värdet i y = 2x − 7?', ['−7', '2', '7', 'x'], 'm är konstanten, här −7.'],
     ['En linje går genom (0, 1) och (2, 7). Vad är k?', ['3', '4', '1/3', '6'], '(7 − 1) / (2 − 0) = 3.'],
     ['Vilken förändringsfaktor motsvarar en minskning med 15 %?', ['0,85', '1,15', '0,15', '0,985'], '100 % − 15 % = 85 %.'],
-    ['Ett pris på 800 kr höjs med 10 % två gånger. Vad blir priset?', ['968 kr', '960 kr', '880 kr', '1 000 kr'], '800 · 1,1 · 1,1 = 968.'],
+    ['Ett pris på 800 kr höjs med 10 % två gånger. Vad blir priset?', ['968 kr', '960 kr', '880 kr', '1 000 kr'], '800 · 1,1 · 1,1 = 968.'],
     ['En taxi kostar 50 kr + 12 kr per km. Vad kostar 10 km?', ['170 kr', '120 kr', '620 kr', '62 kr'], '50 + 12 · 10 = 170.'],
     ['Vilken graf går genom origo?', ['y = 5x', 'y = 5x + 1', 'y = x − 5', 'y = 5'], 'Utan m-värde går linjen genom (0, 0).'],
     ['Andelen ökar från 30 % till 36 %. Hur många procent är ökningen?', ['20 %', '6 %', '36 %', '16 %'], 'Ökningen är 6 procentenheter. 6/30 = 20 %.'],
@@ -253,7 +253,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     ['x = 1 ger y = 4, x = 2 ger y = 7, x = 3 ger y = 10. Vilken regel?', ['y = 3x + 1', 'y = 4x', 'y = x + 3', 'y = 3x + 4'], 'y ökar med 3, och 3 · 1 + 1 = 4.'],
     ['Hur mycket är 25 % av 640?', ['160', '25', '615', '256'], '640 / 4 = 160.'],
     ['Vad betyder k = 0 i y = kx + m?', ['Linjen är vågrät', 'Linjen är lodrät', 'Linjen går genom origo', 'Linjen lutar uppåt'], 'y ändras inte när x ändras.'],
-    ['Ett värde på 10 000 kr minskar med 20 % per år. Vad är det värt efter 2 år?', ['6 400 kr', '6 000 kr', '8 000 kr', '9 600 kr'], '10 000 · 0,8 · 0,8 = 6 400.'],
+    ['Ett värde på 10 000 kr minskar med 20 % per år. Vad är det värt efter 2 år?', ['6 400 kr', '6 000 kr', '8 000 kr', '9 600 kr'], '10 000 · 0,8 · 0,8 = 6 400.'],
   ]},
   '3': {namn: 'Algebra',
   avsnitt: {
@@ -380,7 +380,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
       return val([
         {q: `Längdskalan är 1:${k}. Hur många gånger större är arean i verkligheten än på bilden?`, svar: k * k, ledtrad: 'Areaskalan är längdskalan i kvadrat.'},
         {q: `En figur förstoras ${k} gånger på längden. Hur många gånger större blir volymen?`, svar: k ** 3, ledtrad: 'Volymskalan är längdskalan i kubik.'},
-        {q: `Skala 1:${tus(s)}. Avståndet på kartan är ${d} cm. Hur många km är det i verkligheten?`, svar: d * s / 100000, ledtrad: `${d} · ${tus(s)} cm. 100 000 cm = 1 km.`},
+        {q: `Skala 1:${tus(s)}. Avståndet på kartan är ${d} cm. Hur många km är det i verkligheten?`, svar: d * s / 100000, ledtrad: `${d} · ${tus(s)} cm. 100 000 cm = 1 km.`},
         {q: `Ett ${d * k} cm långt föremål ritas ${d} cm långt. Skalan är 1:?`, svar: k, ledtrad: `Hur många gånger större är ${d * k} än ${d}?`}]);
     }},
     '4.3': {namn: 'Ekvationer med flera nämnare', gen() {
@@ -442,7 +442,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     ['Figurer med samma form men olika storlek är ___.', 'likformiga'],
     ['En linje som delar en figur i två spegelvända delar kallas ___.', 'symmetrilinje'],
     ['Om längdskalan är 1:3 är ___ 1:9.', 'areaskalan'],
-    ['En karta i skala 1:50 000 är en ___.', 'förminskning'],
+    ['En karta i skala 1:50 000 är en ___.', 'förminskning'],
     ['En bild i skala 20:1 är en ___.', 'förstoring'],
     ['(3, −2) är punktens ___.', 'koordinater'],
     ['För att lösa x/2 + x/3 = 10 multiplicerar vi med minsta gemensamma ___.', 'nämnaren'],
@@ -457,7 +457,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     ['Längdskalan är 1:2. Hur många gånger större är arean?', ['4', '2', '8', '1/2'], 'Areaskalan är 2² = 4.'],
     ['Triangeln 3, 4, 5 cm är likformig med en triangel vars kortaste sida är 6 cm. Längsta sidan?', ['10 cm', '8 cm', '12 cm', '15 cm'], 'Förstoringen är 2. 5 · 2 = 10.'],
     ['Lös ekvationen x/2 + x/3 = 10.', ['x = 12', 'x = 2', 'x = 60', 'x = 5'], 'Multiplicera med 6: 3x + 2x = 60.'],
-    ['Skala 1:50 000. Hur långt är 4 cm på kartan i verkligheten?', ['2 km', '200 m', '20 km', '0,2 km'], '4 · 50 000 = 200 000 cm = 2 km.'],
+    ['Skala 1:50 000. Hur långt är 4 cm på kartan i verkligheten?', ['2 km', '200 m', '20 km', '0,2 km'], '4 · 50 000 = 200 000 cm = 2 km.'],
     ['Vad säger Pythagoras sats?', ['a² + b² = c²', 'a + b = c', 'a · b = c²', 'a² − b² = c'], 'Gäller i rätvinkliga trianglar.'],
     ['Vilken triangel är rätvinklig?', ['5, 12, 13', '4, 5, 6', '2, 3, 4', '6, 7, 8'], '5² + 12² = 169 = 13².'],
     ['Vad har likformiga figurer gemensamt?', ['Samma form', 'Samma area', 'Samma omkrets', 'Samma storlek'], 'Storleken kan skilja, men formen är densamma.'],
