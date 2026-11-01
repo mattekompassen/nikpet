@@ -83,6 +83,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .lankar a.sprak{display:flex;align-items:center;gap:10px}.lankar a.sprak img{width:24px;height:18px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
 .lankar a:hover{border-color:var(--mid)}
 .lankar .rad{display:flex;gap:6px}.lankar .rad>a:first-child,.lankar .rad>span{flex:1;display:block;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:11px 14px;color:var(--ink);font-weight:600}.lankar .rad>span{opacity:.75}.lankar .rad b{color:var(--mid);margin-right:6px}
+.lankar .snart{display:block;border:1.5px dashed var(--l);border-radius:12px;padding:11px 14px;color:var(--ink);font-weight:600;opacity:.65}.lankar .snart small{font-weight:500;margin-left:6px}
 .lankar a.mal{flex:none;display:flex;align-items:center;background:var(--ink);border-color:var(--ink);color:#fff;font-size:14px;padding:0 14px}.lankar a.mal:hover{opacity:.85}
 .ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr));gap:16px;max-width:1150px}
 .ovkort{background:var(--vl);border:2px solid var(--l);border-radius:22px;padding:18px 18px 10px}
