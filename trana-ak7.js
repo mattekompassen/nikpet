@@ -68,10 +68,10 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     '1.7': {namn: 'Division med stora och små tal', gen() {
       const a = r(2, 99), f = val([10, 100, 1000]);
       return val([
-        {q: `${tus(a * f)} / ${tus(f)} =`, svar: a, ledtrad: `Dela med ${tus(f)}: ta bort ${String(f).length - 1} nollor.`},
+        {q: `${tus(a * f)} / ${tus(f)} =`, svar: a, ledtrad: `Dividera med ${tus(f)}: ta bort ${String(f).length - 1} nollor.`},
         {q: `${a} / ${f} =`, svar: a / f, ledtrad: `Flytta decimaltecknet ${String(f).length - 1} steg åt vänster.`},
-        {q: `${a} / 0,5 =`, svar: a * 2, ledtrad: 'Hur många halvor går det på talet? Dela med 0,5 är samma som att gånga med 2.'},
-        {q: `${a} / 0,1 =`, svar: a * 10, ledtrad: 'Dela med 0,1 är samma som att gånga med 10.'}]);
+        {q: `${a} / 0,5 =`, svar: a * 2, ledtrad: 'Hur många halvor går det på talet? Att dividera med 0,5 är samma som att multiplicera med 2.'},
+        {q: `${a} / 0,1 =`, svar: a * 10, ledtrad: 'Att dividera med 0,1 är samma som att multiplicera med 10.'}]);
     }},
     '1.8': {namn: 'Avrundning och överslagsräkning', gen() {
       const n = r(1000, 99999), d = r(100, 9999) / 100;
@@ -140,7 +140,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     ['Vilket bråk är lika med 0,25?', ['1/4', '2/5', '1/25', '25/10'], '0,25 är 25 hundradelar, och 25/100 = 1/4.'],
     ['Hur många procent är 3/4?', ['75 %', '34 %', '43 %', '25 %'], '3/4 = 0,75 = 75 hundradelar = 75 %.'],
     ['Vad är 2/7 + 3/7?', ['5/7', '5/14', '6/7', '1/7'], 'Samma nämnare: addera täljarna, 2 + 3 = 5. Nämnaren är kvar: 5/7.'],
-    ['Vad är 4,5 / 10?', ['0,45', '45', '0,045', '4,05'], 'Dela med 10: flytta decimaltecknet ett steg åt vänster.'],
+    ['Vad är 4,5 / 10?', ['0,45', '45', '0,045', '4,05'], 'Dividera med 10: flytta decimaltecknet ett steg åt vänster.'],
     ['Vad är 12 / 0,5?', ['24', '6', '12,5', '0,6'], 'Det går två halvor på varje hel, så 12 / 0,5 = 12 · 2 = 24.'],
     ['Vad blir 3 678 avrundat till närmaste hundratal?', ['3 700', '3 600', '3 680', '4 000'], 'Tiotalssiffran är 7, alltså 5 eller mer. Avrunda uppåt till 3 700.'],
     ['Vilket är ett bra överslag för 48 · 21?', ['50 · 20 = 1 000', '40 · 20 = 800', '50 · 30 = 1 500', '48 · 2 = 96'], 'Avrunda båda talen till närmaste tiotal: 50 · 20 = 1 000.'],
@@ -173,7 +173,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     ['1 000 · 0,07 = ___', ['70'], 'Gånger 1 000: flytta decimaltecknet tre steg åt höger.'],
     ['Det motsatta talet till −12 är ___', ['12'], 'Motsatta tal ligger lika långt från noll: −12 och 12.'],
     ['1/2 + 1/4 = ___/4', ['3'], '1/2 = 2/4. Sedan 2/4 + 1/4 = 3/4.'],
-    ['8 / 0,1 = ___', ['80'], 'Dela med 0,1 är samma som att gånga med 10.'],
+    ['8 / 0,1 = ___', ['80'], 'Att dividera med 0,1 är samma som att multiplicera med 10.'],
     ['(−5) · 3 = ___', ['-15', '−15'], 'Olika tecken ger minus: −15.'],
   ]},
   '2': {namn: 'Algebra',
@@ -319,7 +319,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
       return val([
         {q: `Skala 1:${s}. En vägg är ${d} cm på ritningen. Hur många meter är den i verkligheten?`, svar: d * s / 100, ledtrad: `Verkligheten är ${s} gånger större: ${d} · ${s} cm. Gör sedan om till meter.`},
         {q: `Skala 1:${tus(ks)}. Avståndet på kartan är ${kd} cm. Hur många km är det i verkligheten?`, svar: kd * ks / 100000, ledtrad: `Räkna ${kd} · ${tus(ks)} cm. 100 000 cm = 1 km.`},
-        {q: `Skala ${f}:1. En insekt är ${f * v} mm lång på bilden. Hur lång är den i verkligheten (mm)?`, svar: v, ledtrad: `Bilden är ${f} gånger större än verkligheten. Dela med ${f}.`},
+        {q: `Skala ${f}:1. En insekt är ${f * v} mm lång på bilden. Hur lång är den i verkligheten (mm)?`, svar: v, ledtrad: `Bilden är ${f} gånger större än verkligheten. Dividera med ${f}.`},
         {q: `Ett bord som är ${sv(d * s / 100)} m långt ritas ${d} cm långt. Skalan är 1:?`, svar: s, ledtrad: `Gör om till cm: ${tus(d * s)} cm. Hur många gånger större är det än ${d} cm?`}]);
     }},
     '3.3': {namn: 'Vinklar', gen() {
@@ -604,7 +604,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
       const typ = fem.slice(); typ.push(fem[0]);
       return val([
         {q: `Vad är medianen av talen ${fem.join(', ')}?`, svar: sort[2], ledtrad: 'Sortera talen i storleksordning. Medianen är talet i mitten.'},
-        {q: `Vad är medelvärdet av talen ${medel.join(', ')}?`, svar: medel.reduce((a, b) => a + b, 0) / 5, ledtrad: 'Addera alla talen och dela med antalet tal, alltså 5.'},
+        {q: `Vad är medelvärdet av talen ${medel.join(', ')}?`, svar: medel.reduce((a, b) => a + b, 0) / 5, ledtrad: 'Addera alla talen och dividera med antalet tal, alltså 5.'},
         {q: `Vad är typvärdet av talen ${blanda(typ).join(', ')}?`, svar: fem[0], ledtrad: 'Typvärdet är det tal som förekommer flest gånger.'},
         {q: `Vad är variationsbredden för talen ${fem.join(', ')}?`, svar: sort[4] - sort[0], ledtrad: 'Variationsbredd = största talet − minsta talet.'}]);
     }},
@@ -655,10 +655,10 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     ['Chansen att få en sexa är <mark>' + br('1', '6') + '</mark>', 'sannolikhet', '1/6 visar hur troligt det är. Det är sannolikheten.'],
     ['2, 3, <mark>5</mark>, 8, 9', 'median', '5 står i mitten när talen är sorterade. Det är medianen.'],
     ['3, <mark>7</mark>, 2, <mark>7</mark>, <mark>7</mark>', 'typvärde', '7 är det vanligaste talet. Det är typvärdet.'],
-    ['(2 + 4 + 9) / 3 = <mark>5</mark>', 'medelvärde', 'Summan delat med antalet ger medelvärdet.'],
-    ['Största 12, minsta 4: &nbsp;<mark>12 − 4 = 8</mark>', 'variationsbredd', 'Största minus minsta värdet är variationsbredden.'],
+    ['(2 + 4 + 9) / 3 = <mark>5</mark>', 'medelvärde', 'Summan dividerad med antalet ger medelvärdet.'],
+    ['Största 12, minsta 4: &nbsp;<mark>12 − 4 = 8</mark>', 'variationsbredd', 'Största värdet minus minsta värdet (skillnaden) är variationsbredden.'],
     ['Sexa kom <mark>9 gånger</mark>.', 'frekvens', 'Hur många gånger något kommer är frekvensen.'],
-    ['Sexa 9 gånger av 50: &nbsp;<mark>9/50 = 18 %</mark>', 'relativ frekvens', 'Frekvensen delat med totala antalet är den relativa frekvensen.'],
+    ['Sexa 9 gånger av 50: &nbsp;<mark>9/50 = 18 %</mark>', 'relativ frekvens', 'Frekvensen dividerad med totala antalet är den relativa frekvensen.'],
     [svg(160, 115, `${axlar}<rect x="42" y="45" width="18" height="50" fill="${M}"/><rect x="70" y="25" width="18" height="70" fill="${M}"/><rect x="98" y="60" width="18" height="35" fill="${M}"/><rect x="126" y="38" width="18" height="57" fill="${M}"/>`), 'stapeldiagram', 'Staplarnas höjd visar antalet. Det är ett stapeldiagram.', 'Vad heter diagrammet?'],
     [paj([45, 30, 25]), 'cirkeldiagram', 'Cirkeln är delad i delar som visar andelar. Det är ett cirkeldiagram.', 'Vad heter diagrammet?'],
     [paj([45, 30, 25], 2), 'sektor', 'En del av ett cirkeldiagram heter sektor.', 'Vad heter den markerade delen?'],

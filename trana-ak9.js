@@ -41,7 +41,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
       const [n1, n2] = val([[2, 3], [3, 4], [2, 5], [4, 6], [3, 5], [4, 5]]), a = r(1, n1 - 1), b = r(1, n2 - 1), c = r(1, 5), d = r(c + 1, 9);
       return val([
         {q: `${br(a, n1)} + ${br(b, n2)} = ?<br><small>Svara i bråkform.</small>`, svar: fr(a * n2 + b * n1, n1 * n2), ledtrad: 'Skriv om bråken med gemensam nämnare. Addera sedan täljarna.'},
-        {q: `${br(a, n1)} · ${br(c, d)} = ?<br><small>Svara i bråkform.</small>`, svar: fr(a * c, n1 * d), ledtrad: 'Täljare gånger täljare, nämnare gånger nämnare.'},
+        {q: `${br(a, n1)} · ${br(c, d)} = ?<br><small>Svara i bråkform.</small>`, svar: fr(a * c, n1 * d), ledtrad: 'Multiplicera täljare med täljare och nämnare med nämnare.'},
         {q: `${br(a, n1)} / ${br(c, d)} = ?<br><small>Svara i bråkform.</small>`, svar: fr(a * d, n1 * c), ledtrad: `Multiplicera med det inverterade talet ${br(d, c)}.`}]);
     }},
     '1.3': {namn: 'Räkna med negativa tal', gen() {
@@ -105,7 +105,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     ['Inverterat tal', 'Täljare och nämnare byter plats, t.ex. 2/5 och 5/2'],
   ],
   exempel: [
-    ['<mark>√49</mark> = 7', 'kvadratrot', '√49 är det tal som gånger sig självt blir 49. Det heter kvadratrot.'],
+    ['<mark>√49</mark> = 7', 'kvadratrot', '√49 är det tal som multiplicerat med sig självt blir 49. Det heter kvadratrot.'],
     ['<mark>7<sup>2</sup></mark> = 49', 'kvadrat', 'Ett tal upphöjt till 2 kallas kvadrat.'],
     ['<mark>3</mark><sup>4</sup>', 'bas', 'Talet som multipliceras med sig självt heter bas.'],
     ['3<sup><mark>4</mark></sup>', 'exponent', 'Det lilla talet uppe till höger heter exponent.'],
@@ -276,7 +276,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
       const x = r(1, 12), c = r(1, 5), a = c + r(1, 5), b = r(1, 15), d = (a - c) * x + b, f = r(2, 5), g = r(1, x);
       return val([
         {q: `Lös ekvationen: ${a}x + ${b} = ${c === 1 ? '' : c}x + ${d}`, svar: x, ledtrad: 'Samla x i ena ledet och talen i det andra.'},
-        {q: `Lös ekvationen: ${f}(x − ${g}) = ${f * (x - g)}`, svar: x, ledtrad: `Dela båda leden med ${f}, addera sedan ${g}.`},
+        {q: `Lös ekvationen: ${f}(x − ${g}) = ${f * (x - g)}`, svar: x, ledtrad: `Dividera båda leden med ${f}, addera sedan ${g}.`},
         {q: `Lös ekvationen: x/${f} + ${b} = ${x + b}`, svar: f * x, ledtrad: `Subtrahera ${b} och multiplicera med ${f}.`}]);
     }},
     '3.4': {namn: 'Procent och ekvationer', gen() {

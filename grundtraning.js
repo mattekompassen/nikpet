@@ -60,9 +60,9 @@
   const tus = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
   const d1 = x => Math.round(x * 1e6) / 1e6;  // undvik avrundningsfel med decimaltal
   // De fyra räknesätten: eleven väljer räknesätt och nivå. Blandat har värdena '1'–'3' (som förut).
-  const RS_NAMN = {bland: ['Blandat', ['plus och minus inom 20', 'inom 100, gånger och delat', 'tiotal, hundratal och decimaltal']],
-    plus: ['Addition', ['inom 20', 'tvåsiffriga tal', 'hundratal']], minus: ['Subtraktion', ['inom 20', 'tvåsiffriga tal', 'hundratal och 1000']],
-    ganger: ['Multiplikation', ['2, 5 och 10', 'hela tabellen', 'tiotal och tvåsiffriga tal']], delat: ['Division', ['med 2, 5 och 10', 'hela tabellen', 'tiotal och tvåsiffriga tal']]};
+  const RS_NAMN = {bland: ['Blandat', ['addition och subtraktion inom 20', 'alla fyra räknesätten inom 100', 'tiotal, hundratal och decimaltal'], ''],
+    plus: ['Addition', ['inom 20', 'tvåsiffriga tal', 'hundratal'], '+'], minus: ['Subtraktion', ['inom 20', 'tvåsiffriga tal', 'hundratal och 1000'], '−'],
+    ganger: ['Multiplikation', ['tabell 2, 5 och 10', 'hela multiplikationstabellen', 'tiotal och tvåsiffriga tal'], '·'], delat: ['Division', ['dividera med 2, 5 och 10', 'hela multiplikationstabellen baklänges', 'tiotal och tvåsiffriga tal'], '/']};
   const RS_VAL = Object.entries(RS_NAMN).flatMap(([op, [namn, niv]]) => niv.map((t, i) => [op === 'bland' ? String(i + 1) : `${op}-${i + 1}`, `${namn}, nivå ${i + 1}`, t]));
   const RS = {
     plus(n) {
@@ -95,17 +95,17 @@
       return val([
         {typ: 'tal', q: `${a * b * 100} / ${a * 10} =`, svar: b * 10, ledtrad: `Stryk en nolla i båda talen: ${a * b * 10} / ${a}.`},
         {typ: 'tal', q: `${a * b * 10} / ${a} =`, svar: b * 10, ledtrad: `Räkna ${a * b} / ${a} och lägg sedan till en nolla.`},
-        {typ: 'tal', q: `${d * k} / ${d} =`, svar: k, ledtrad: `Dela upp ${d * k} i ${d * (k - k % 10)} och ${d * (k % 10)}. Dela båda med ${d}.`}]);
+        {typ: 'tal', q: `${d * k} / ${d} =`, svar: k, ledtrad: `Dela upp ${d * k} i ${d * (k - k % 10)} och ${d * (k % 10)}. Dividera båda med ${d}.`}]);
     }};
   const TABELL = [...[2, 3, 4, 5, 6, 7, 8, 9, 10].map(t => [String(t), '', `${t}:ans tabell`]), ['2-5', 'Blandat', 'tabell 2–5'], ['6-10', 'Blandat', 'tabell 6–10'], ['alla', 'Blandat', 'alla tabeller']];
   const tabeller = v => v === '2-5' ? [2, 3, 4, 5] : v === '6-10' ? [6, 7, 8, 9, 10] : v === 'alla' ? [2, 3, 4, 5, 6, 7, 8, 9, 10] : [+v];
   function multTips(a, b) {
-    if (b === 2 || a === 2) return 'Gånger 2 är dubbelt så mycket.';
-    if (b === 10 || a === 10) return 'Gånger 10: lägg till en nolla.';
-    if (b === 5 || a === 5) { const x = a === 5 ? b : a; return `Gånger 5 är hälften av gånger 10. Vad är ${x} · 10?`; }
-    if (b === 9 || a === 9) { const x = a === 9 ? b : a; return `Gånger 9 = gånger 10 minus en gång: ${x} · 10 − ${x}.`; }
-    if (b === 4 || a === 4) { const x = a === 4 ? b : a; return `Gånger 4: dubbla två gånger. ${x} → ${2 * x} → ?`; }
-    if (b === 1 || a === 1) return 'Ett tal gånger 1 är talet självt.';
+    if (b === 2 || a === 2) return `${a === 2 ? b : a} · 2 är dubbelt så mycket som ${a === 2 ? b : a}.`;
+    if (b === 10 || a === 10) return 'Multiplikation med 10: lägg till en nolla.';
+    if (b === 5 || a === 5) { const x = a === 5 ? b : a; return `${x} · 5 är hälften av ${x} · 10. Vad är ${x} · 10?`; }
+    if (b === 9 || a === 9) { const x = a === 9 ? b : a; return `${x} · 9 är en grupp mindre än ${x} · 10. Räkna ${x} · 10 − ${x}.`; }
+    if (b === 4 || a === 4) { const x = a === 4 ? b : a; return `${x} · 4: dubbla två gånger. ${x} → ${2 * x} → ?`; }
+    if (b === 1 || a === 1) return 'Ett tal multiplicerat med 1 är talet självt.';
     return `${a} · ${b} = ${a} · ${b - 1} + ${a}. Vad är ${a} · ${b - 1}?`;
   }
   // ---------- Enheter (längd, volym, vikt) ----------
@@ -140,7 +140,7 @@
   function enhetOv(typ, ikon, namn, kort) {
     const E = ENH[typ].e;
     return {del: 'enhet', ikon, namn, kort, typ,
-      exempel: `Enhetstrappan: ${trappa(typ)}<br>Neråt i trappan räknar du gånger, uppåt räknar du delat med.`,
+      exempel: `Enhetstrappan: ${trappa(typ)}<br>Neråt i trappan multiplicerar du (·). Uppåt dividerar du (/).`,
       val: NIVA('välj rätt enhet', 'byt enhet', 'decimaltal och blandat'),
       gen(v) {
         if (v === '1') { const [t, u] = val(ENH[typ].saker); return {typ: 'val', q: t.replace('___', '<span class="lucka">?</span>'), alt: fyra(u, E.map(e => e[0])), ledtrad: `Tänk på hur stor saken är. ${trappa(typ)}`}; }
@@ -184,7 +184,7 @@
           {typ: 'tal', q: `100 − ${a} =`, svar: 100 - a, ledtrad: `Tänk: ${a} + ? = 100. Fyll först upp till ${a + 10 - a % 10}.`},
           {typ: 'tal', q: `${b} + ? = 1000`, svar: 1000 - b, ledtrad: `Tänk tiokamrater: ${b / 100} + ? = 10.`}]);
       }},
-    gangertabell: {del: 'rakna', ikon: '✖️', namn: 'Multiplikation', kort: 'Gångertabellen: välj tabell eller blandat',
+    gangertabell: {del: 'rakna', ikon: '✖️', namn: 'Multiplikation', kort: 'Multiplikationstabellen: välj tabell eller blandat',
       exempel: '<b>3 · 4 = 12</b>. Tre grupper med fyra i varje: 4 + 4 + 4 = 12.', valrubrik: 'Välj tabell', val: TABELL,
       lista(v) {  // tio olika uppgifter per runda
         const t = tabeller(v);
@@ -192,7 +192,7 @@
         return par.map(([a, n]) => { const [x, y] = Math.random() < .5 ? [a, n] : [n, a]; return {typ: 'tal', q: `${x} · ${y} =`, svar: x * y, ledtrad: multTips(x, y), fakta: `${x} · ${y} = ${x * y}`}; });
       }},
     division: {del: 'rakna', ikon: '➗', namn: 'Division', kort: 'Division som omvänd multiplikation',
-      exempel: '<b>12 / 4 = 3</b>, eftersom <b>4 · 3 = 12</b>.', valrubrik: 'Välj tabell', val: TABELL,
+      exempel: '<b>12 / 4 = 3</b> (12 dividerat med 4), eftersom <b>4 · 3 = 12</b>.', valrubrik: 'Välj tabell', val: TABELL,
       lista(v) {
         const t = tabeller(v);
         const par = t.length === 1 ? blanda([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map(n => [t[0], n]) : blanda(t.flatMap(a => [2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => [a, n]))).slice(0, RUNDA);
@@ -223,8 +223,8 @@
           {typ: 'tal', q: `${a * 10} · ${b * 10} =`, svar: a * b * 100, ledtrad: `Räkna ${a} · ${b} och lägg sedan till två nollor.`},
           {typ: 'tal', q: `${a * b * 100} / ${a * 10} =`, svar: b * 10, ledtrad: `Stryk en nolla i båda talen: ${a * b * 10} / ${a}.`},
           {typ: 'tal', q: `${p} + ${q} =`, svar: p + q, ledtrad: `Ta hundratalen först: ${p - p % 100} + ${q - q % 100} = ${p - p % 100 + q - q % 100}. Lägg sedan till ${p % 100} och ${q % 100}.`},
-          {typ: 'tal', q: `${sv(n)} · 10 =`, svar: n * 10, ledtrad: 'Gånger 10: varje siffra flyttar ett steg till vänster, så kommat hamnar ett steg längre åt höger.'},
-          {typ: 'tal', q: `${sv(n * 10)} / 10 =`, svar: n, ledtrad: 'Delat med 10: kommat flyttar ett steg åt vänster.'},
+          {typ: 'tal', q: `${sv(n)} · 10 =`, svar: n * 10, ledtrad: 'Multiplikation med 10: varje siffra flyttar ett steg åt vänster. Decimaltecknet (kommat) hamnar ett steg längre åt höger.'},
+          {typ: 'tal', q: `${sv(n * 10)} / 10 =`, svar: n, ledtrad: 'Division med 10: decimaltecknet (kommat) flyttar ett steg åt vänster.'},
           {typ: 'tal', q: `1000 − ${a * 100 + b * 10} =`, svar: 1000 - a * 100 - b * 10, ledtrad: `Tänk: ${a * 100 + b * 10} + ? = 1000. Fyll först upp till ${a * 100 + 100}.`}]);
       }},
     dubbelt: {del: 'rakna', ikon: '⚖️', namn: 'Dubbelt och hälften', kort: 'Dubbla och halvera snabbt',
@@ -239,7 +239,7 @@
 
     decimal: {del: 'rakna', ikon: '🔢', namn: 'Decimaltal', kort: 'Räkna med decimaltal i huvudet',
       exempel: '<b>2,5 + 1,8</b>: räkna i tiondelar. 25 + 18 = 43 tiondelar, alltså <b>4,3</b>.<br><b>4 · 0,3</b>: 4 · 3 = 12 tiondelar, alltså <b>1,2</b>.',
-      val: NIVA('plus och minus med tiondelar', 'gånger och delat med heltal', 'gånger och delat med 10, 100 och 1000'),
+      val: NIVA('addition och subtraktion med tiondelar', 'multiplikation och division med heltal', 'multiplikation och division med 10, 100 och 1000'),
       gen(v) {
         if (v === '1') {
           const a = r(11, 59), b = r(11, 39);
@@ -258,12 +258,12 @@
         }
         const x = r(11, 999) / 100, g = val([10, 100, 1000]);
         return Math.random() < .5
-          ? {typ: 'tal', q: `${sv(x)} · ${tus(g)} =`, svar: d1(x * g), ledtrad: `Gånger ${tus(g)}: talet blir ${tus(g)} gånger större. Kommat flyttar ${String(g).length - 1} steg åt höger.`}
-          : {typ: 'tal', q: `${sv(x)} / ${tus(g)} =`, svar: d1(x / g), ledtrad: `Delat med ${tus(g)}: talet blir ${tus(g)} gånger mindre. Kommat flyttar ${String(g).length - 1} steg åt vänster.`};
+          ? {typ: 'tal', q: `${sv(x)} · ${tus(g)} =`, svar: d1(x * g), ledtrad: `Multiplikation med ${tus(g)}: talet blir ${tus(g)} gånger större. Decimaltecknet flyttar ${String(g).length - 1} steg åt höger.`}
+          : {typ: 'tal', q: `${sv(x)} / ${tus(g)} =`, svar: d1(x / g), ledtrad: `Division med ${tus(g)}: talet blir ${tus(g)} gånger mindre. Decimaltecknet flyttar ${String(g).length - 1} steg åt vänster.`};
       }},
     overslag: {del: 'rakna', ikon: '🎯', namn: 'Överslagsräkning', kort: 'Ungefär hur mycket? Välj det rimliga svaret',
       exempel: 'Ungefär hur mycket är <b>49 · 21</b>?<br>Avrunda: 49 ≈ 50 och 21 ≈ 20. Räkna 50 · 20 = <b>1 000</b>.',
-      val: NIVA('plus och minus', 'gånger och delat', 'pengar och decimaltal'),
+      val: NIVA('addition och subtraktion', 'multiplikation och division', 'pengar och decimaltal'),
       gen(v) {
         const runt = x => { const e = Math.pow(10, Math.floor(Math.log10(x))); return Math.round(x / e) * e; };
         const alt = (ratt, ...fel) => fyra(tus(ratt), [tus(ratt * 10), tus(ratt / 10), ...fel.map(tus)].filter(x => !x.includes('.')));
@@ -288,7 +288,7 @@
       }},
 
     lasklockan: {del: 'tid', ikon: '🕒', namn: 'Läs klockan', kort: 'Titta på klockan och välj rätt tid',
-      exempel: 'Den <b>korta</b> visaren visar timmen. Den <b>långa</b> visaren visar minuterna.<br><b>Halv 8</b> betyder 7.30, halvvägs till 8.',
+      exempel: '<b>Timvisaren</b> (den korta visaren) visar timmen. <b>Minutvisaren</b> (den långa visaren) visar minuterna.<br><b>Halv 8</b> betyder 7.30, halvvägs till 8.',
       val: NIVA('hel och halv', 'kvart och fem minuter', 'på minuten'),
       gen(v) {
         const h = r(1, 12);
@@ -296,25 +296,25 @@
           const m = r(1, 59); if (m % 5 === 0) return this.gen(v);
           const d = (hh, mm) => `${h12(hh)}.${pad(fem(mm))}`;
           return {typ: 'val', q: 'Vad är klockan?', bild: klocka(h, m), alt: fyra(d(h, m), [d(h + 1, m), d(h - 1, m), d(h, 60 - m), d(h, m + 5), d(h, m - 5), d(Math.round(m / 5) || 12, h * 5)]),
-            ledtrad: `Den korta visaren har passerat ${h12(h)} men inte ${h12(h + 1)}. Räkna minuterna fem i taget: 5, 10, 15 …`};
+            ledtrad: `Timvisaren (den korta) har passerat ${h12(h)} men inte ${h12(h + 1)}. Räkna minuterna fem i taget: 5, 10, 15 …`};
         }
         const m = v === '1' ? val([0, 30]) : val([5, 10, 15, 20, 25, 35, 40, 45, 50, 55]);
         const k = v === '1' ? [fras(h + 1, m), fras(h - 1, 30 - m || 30), fras(h, 30 - m), fras(h + 1, 30 - m), fras(h - 1, m)]
           : [fras(h + 1, m), fras(h - 1, m), fras(h, fem(60 - m)), fras(h + 1, fem(60 - m)), fras(h, fem(m + 30))];
         return {typ: 'val', q: 'Vad är klockan?', bild: klocka(h, m), alt: fyra(fras(h, m), k),
-          ledtrad: m === 30 ? `Den långa visaren pekar på 6. Den korta är mellan ${h12(h)} och ${h12(h + 1)}. Halv betyder halvvägs till nästa timme.`
-            : m === 0 ? 'Den långa visaren pekar rakt upp på 12. Då är det hel timme.'
-            : m < 30 ? 'Den långa visaren är på högra sidan. Då säger vi ”över”.' : 'Den långa visaren är på vänstra sidan. Då säger vi ”i” (minuter kvar till nästa timme).'};
+          ledtrad: m === 30 ? `Minutvisaren (den långa) pekar på 6. Timvisaren (den korta) är mellan ${h12(h)} och ${h12(h + 1)}. Halv betyder halvvägs till nästa timme.`
+            : m === 0 ? 'Minutvisaren (den långa) pekar rakt upp på 12. Då är det hel timme.'
+            : m < 30 ? 'Minutvisaren (den långa) är på högra sidan. Då säger vi ”över”.' : 'Minutvisaren (den långa) är på vänstra sidan. Då säger vi ”i” (minuter kvar till nästa timme).'};
       }},
     stallklockan: {del: 'tid', ikon: '👆', namn: 'Ställ klockan', kort: 'Dra visarna till rätt tid',
-      exempel: 'Dra den <b>långa</b> visaren runt. Den korta visaren följer med.<br>Du kan också använda knapparna.',
+      exempel: 'Dra <b>minutvisaren</b> (den långa visaren) runt. <b>Timvisaren</b> (den korta) följer med.<br>Du kan också använda knapparna.',
       val: NIVA('hel och halv', 'kvart och fem minuter', 'digital tid, på minuten'),
       gen(v) {
         const h = r(1, 12);
-        if (v === '3') { const m = r(1, 59), hh = h === 12 ? 12 : val([h, h + 12]); return {typ: 'stall', q: `Ställ klockan på <b>${tt(hh, m)}</b>`, mal: (h % 12) * 60 + m, steg: 1, ledtrad: hh > 12 ? `${tt(hh, m)} är på eftermiddagen. Dra bort 12 timmar: det blir ${h12(hh)}.${pad(m)}.` : 'Ställ först den långa visaren på minuterna. Kolla sedan att den korta pekar på rätt timme.'}; }
+        if (v === '3') { const m = r(1, 59), hh = h === 12 ? 12 : val([h, h + 12]); return {typ: 'stall', q: `Ställ klockan på <b>${tt(hh, m)}</b>`, mal: (h % 12) * 60 + m, steg: 1, ledtrad: hh > 12 ? `${tt(hh, m)} är på eftermiddagen. Dra bort 12 timmar: det blir ${h12(hh)}.${pad(m)}.` : 'Ställ först minutvisaren (den långa) på minuterna. Kolla sedan att timvisaren (den korta) pekar på rätt timme.'}; }
         const m = v === '1' ? val([0, 30]) : val([5, 10, 15, 20, 25, 35, 40, 45, 50, 55]);
         return {typ: 'stall', q: `Ställ klockan på <b>${fras(h, m)}</b>`, mal: (h % 12) * 60 + m, steg: 5,
-          ledtrad: m === 30 ? `Halv ${h12(h + 1)} är 30 minuter innan ${h12(h + 1)}. Den långa visaren ska peka på 6.` : m === 0 ? 'Den långa visaren ska peka rakt upp på 12.' : m < 30 ? '”Över” betyder minuter efter hel timme. Den långa visaren hamnar på högra sidan.' : '”I” betyder minuter kvar till nästa timme. Den långa visaren hamnar på vänstra sidan.'};
+          ledtrad: m === 30 ? `Halv ${h12(h + 1)} är 30 minuter innan ${h12(h + 1)}. Minutvisaren (den långa) ska peka på 6.` : m === 0 ? 'Minutvisaren (den långa) ska peka rakt upp på 12.' : m < 30 ? '”Över” betyder minuter efter hel timme. Minutvisaren (den långa) hamnar på högra sidan.' : '”I” betyder minuter kvar till nästa timme. Minutvisaren (den långa) hamnar på vänstra sidan.'};
       }},
     digital: {del: 'tid', ikon: '📱', namn: 'Analog och digital tid', kort: 'Från ord till digital tid, och tillbaka',
       exempel: '<b>Kvart över 3 på eftermiddagen</b> skrivs <b>15:15</b>.<br>På eftermiddagen och kvällen lägger du till 12 på timmen.',
@@ -392,10 +392,10 @@
     el.innerHTML = delar.map(([d, rub, txt]) => `<div class="kapblock gt-del" id="del-${d}"><h2>${rub}</h2><p class="gt-txt">${txt}</p><div class="gt-typer">` +
       Object.entries(OV).filter(([, o]) => o.del === d).map(([k, o]) => `<a class="typ" href="#${k}"><span class="gt-ik" aria-hidden="true">${o.ikon}</span>${o.namn}<b>${o.kort}</b></a>`).join('') + '</div>' +
       (d === 'tid' ? `<details class="gt-ord"><summary>📖 Att läsa av klockan</summary><div class="gt-ordgrid">${KLOCKORD.map(([h, m, f, d]) => `<div>${klocka(h, m, 'liten')}<b>${f}</b><span>${d}</span></div>`).join('')}</div>
-        <ul><li><b>över</b> = minuter efter hel timme</li><li><b>i</b> = minuter kvar till nästa timme</li><li><b>halv 8</b> = halvvägs till 8, alltså 7.30</li>
+        <ul><li><b>timvisaren</b> = den korta visaren, <b>minutvisaren</b> = den långa visaren</li><li><b>över</b> = minuter efter hel timme</li><li><b>i</b> = minuter kvar till nästa timme</li><li><b>halv 8</b> = halvvägs till 8, alltså 7.30</li>
         <li><b>morgon</b> ca 05–10, <b>förmiddag</b> 10–12, <b>eftermiddag</b> 12–18, <b>kväll</b> 18–24</li><li><b>1 h</b> (timme) = 60 min, <b>1 min</b> (minut) = 60 s (sekunder), <b>1 dygn</b> = 24 h</li></ul></details>` : '') +
       (d === 'enhet' ? `<details class="gt-ord"><summary>📖 Enhetstrappan</summary><div class="gt-trappor"><p><b>Längd</b>${trappa('langd')}</p><p><b>Volym</b>${trappa('volym')}</p><p><b>Vikt</b>${trappa('vikt')}</p>
-        <ul><li>Från stor till liten enhet (neråt i trappan): räkna <b>gånger</b>.</li><li>Från liten till stor enhet (uppåt): räkna <b>delat med</b>.</li><li><b>1 dm³ = 1 l</b> och <b>1 cm³ = 1 ml</b></li></ul></div></details>` : '') + '</div>').join('') +
+        <ul><li>Från stor till liten enhet (neråt i trappan): <b>multiplicera</b> (·).</li><li>Från liten till stor enhet (uppåt): <b>dividera</b> (/).</li><li><b>1 dm³ = 1 l</b> och <b>1 cm³ = 1 ml</b></li></ul></div></details>` : '') + '</div>').join('') +
       (bara ? '<a class="knapp2 sek gt-tillbaka" href="#">← Alla övningar</a>' : '');
   }
   function valmeny(k) {
@@ -407,7 +407,7 @@
     el.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { location.hash = k + '/' + b.dataset.v; });
     if (o.rs) {  // först räknesätt, sedan nivå
       const niva = el.querySelector('.gt-niva'), h3 = el.querySelector('.gt-val h3');
-      h3.insertAdjacentHTML('beforebegin', `<h3>Välj räknesätt</h3><div class="gt-op">${Object.entries(RS_NAMN).map(([op, [n]]) => `<button type="button" data-op="${op}">${n}</button>`).join('')}</div>`);
+      h3.insertAdjacentHTML('beforebegin', `<h3>Välj räknesätt</h3><div class="gt-op">${Object.entries(RS_NAMN).map(([op, [n, , s]]) => `<button type="button" data-op="${op}">${n}${s ? ` <span aria-hidden="true">(${s})</span>` : ''}</button>`).join('')}</div>`);
       const visa = op => {
         el.querySelectorAll('[data-op]').forEach(b => b.classList.toggle('vald', b.dataset.op === op));
         niva.innerHTML = RS_NAMN[op][1].map((t, i) => `<button data-v="${op === 'bland' ? i + 1 : op + '-' + (i + 1)}"><b>Nivå ${i + 1}</b>${t}</button>`).join('');

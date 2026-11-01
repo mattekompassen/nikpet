@@ -56,7 +56,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
       return val([
         {q: `${br(a, b)} / ${br(c, d)} = ?<br><small>Svara i bråkform.</small>`, svar: fr(a * d, b * c), ledtrad: `Multiplicera med det inverterade talet: ${br(a, b)} · ${br(d, c)}.`},
         {q: `${n} / ${br(1, k)} = ?`, svar: n * k, ledtrad: `Hur många ${k}-delar går det på ${n}? Det är samma som ${n} · ${k}.`},
-        {q: `${br(a, b)} / ${k} = ?<br><small>Svara i bråkform.</small>`, svar: fr(a, b * k), ledtrad: `Att dela med ${k} är samma som att multiplicera med ${br(1, k)}.`}]);
+        {q: `${br(a, b)} / ${k} = ?<br><small>Svara i bråkform.</small>`, svar: fr(a, b * k), ledtrad: `Att dividera med ${k} är samma som att multiplicera med ${br(1, k)}.`}]);
     }},
     '1.5': {namn: 'Potenser', gen() {
       const b = r(2, 5), e = r(2, 4), c = r(2, 4), d = r(2, 3);
@@ -406,7 +406,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
       const x = r(1, 10), a = r(2, 6), b = r(1, 8), c = r(1, a - 1), d = (a - c) * x + a * b;
       return val([
         {q: `Lös ekvationen: ${a}(x + ${b}) = ${a * (x + b)}`, svar: x, ledtrad: `Multiplicera in ${a} eller dela båda leden med ${a}.`},
-        {q: `Lös ekvationen: ${a}(x − ${b}) = ${a * x}`, svar: x + b, ledtrad: `Dela båda leden med ${a} och addera sedan ${b}.`},
+        {q: `Lös ekvationen: ${a}(x − ${b}) = ${a * x}`, svar: x + b, ledtrad: `Dividera båda leden med ${a} och addera sedan ${b}.`},
         {q: `Lös ekvationen: ${a}(x + ${b}) = ${c === 1 ? '' : c}x + ${d}`, svar: x, ledtrad: `Multiplicera in: ${a}x + ${a * b} = ${c === 1 ? '' : c}x + ${d}. Samla sedan x.`}]);
     }},
     '4.8': {namn: 'Problemlösning med ekvationer', gen() {
@@ -470,7 +470,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     ['(x + 5)(x − 5) = ?', ['x² − 25', 'x² + 25', 'x² − 10x − 25', '2x'], 'Konjugatregeln: x² − 5².'],
     ['x³ · x⁴ = ?', ['x⁷', 'x¹²', '2x⁷', 'x'], 'Addera exponenterna: 3 + 4 = 7.'],
     ['5x − (2x − 3) = ?', ['3x + 3', '3x − 3', '7x − 3', '3x'], 'Minustecknet ändrar tecknen: 5x − 2x + 3.'],
-    ['Lös ekvationen 4(x + 2) = 20.', ['x = 3', 'x = 4,5', 'x = 5', 'x = 12'], 'Dela med 4: x + 2 = 5. x = 3.'],
+    ['Lös ekvationen 4(x + 2) = 20.', ['x = 3', 'x = 4,5', 'x = 5', 'x = 12'], 'Dividera båda leden med 4: x + 2 = 5. x = 3.'],
     ['Lös ekvationen 5x − 7 = 2x + 8.', ['x = 5', 'x = 1/3', 'x = 15', 'x = 3'], '3x = 15, alltså x = 5.'],
     ['Vad är 2a² om a = 3?', ['18', '36', '12', '9'], 'a² = 9 och 2 · 9 = 18.'],
     ['Talföljden är 5, 9, 13, 17 … Vilket uttryck ger talet på plats n?', ['4n + 1', 'n + 4', '5n', '4n + 5'], 'Talen ökar med 4. Plats 1: 4 · 1 + 1 = 5.'],
@@ -507,7 +507,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
         {q: `På hur många sätt kan ${n} personer ställa sig i en kö?`, svar: fak(n), ledtrad: `Första platsen har ${n} val, nästa ${n - 1} och så vidare.`},
         {q: `En kod har ${k} siffror. Varje siffra kan vara 0–9. Hur många olika koder finns det?`, svar: 10 ** k, ledtrad: `Varje siffra har 10 val: 10 · 10 …, ${k} gånger.`},
         {q: `I en klass med ${m} elever ska en ordförande och en sekreterare väljas. På hur många sätt kan det göras?`, svar: m * (m - 1), ledtrad: `Ordförande: ${m} val. Sekreterare: ${m - 1} val.`},
-        {q: `${m} personer hälsar på varandra en gång var. Hur många handskakningar blir det?`, svar: m * (m - 1) / 2, ledtrad: `Varje person hälsar på ${m - 1}. Dela med 2 eftersom varje handskakning räknas två gånger.`}]);
+        {q: `${m} personer hälsar på varandra en gång var. Hur många handskakningar blir det?`, svar: m * (m - 1) / 2, ledtrad: `Varje person hälsar på ${m - 1}. Dividera med 2 eftersom varje handskakning räknas två gånger.`}]);
     }},
     '5.4': {namn: 'Tabeller och diagram', gen() {
       const sporter = ['Fotboll', 'Basket', 'Simning', 'Dans'], tot = val([20, 25, 50]);
@@ -550,7 +550,7 @@ var TRANA_DATA = ({r, val, sv, tus, sgn, blanda}) => {
     [svg(160, 115, `${axlar}<rect x="42" y="45" width="18" height="50" fill="${M}"/><rect x="70" y="25" width="18" height="70" fill="${M}"/><rect x="98" y="60" width="18" height="35" fill="${M}"/><rect x="126" y="38" width="18" height="57" fill="${M}"/>`), 'stapeldiagram', 'Staplarnas höjd visar antalet. Det är ett stapeldiagram.', 'Vad heter diagrammet?'],
     [paj([45, 30, 25]), 'cirkeldiagram', 'Cirkeln är delad i sektorer som visar andelar. Det är ett cirkeldiagram.', 'Vad heter diagrammet?'],
     ['<table class="tab"><tr><th>Mål</th><td>0</td><td>1</td><td>2</td><td>3</td></tr><tr><th>Frekvens</th><td>4</td><td>7</td><td>5</td><td>2</td></tr></table>', 'frekvenstabell', 'Tabellen visar hur ofta varje värde förekommer. Det är en frekvenstabell.', 'Vad heter tabellen?'],
-    ['Krona 18 gånger av 40: &nbsp;<mark>45 %</mark>', 'relativ frekvens', 'Antal gånger delat med totala antalet är den relativa frekvensen.'],
+    ['Krona 18 gånger av 40: &nbsp;<mark>45 %</mark>', 'relativ frekvens', 'Frekvensen (antal gånger) dividerad med totala antalet är den relativa frekvensen.'],
   ],
   dra: [
     ['Alla möjliga utfall kallas ___.', 'utfallsrummet'],

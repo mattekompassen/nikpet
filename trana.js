@@ -73,7 +73,7 @@
       el.innerHTML = `<div class="kort-t"><div class="topp"><span>✏️ Fyll i svaret</span><span>Uppgift ${i} av ${fr.length} · ⭐ ${ratt}</span></div>
         <div class="bar"><i style="width:${(i - 1) / fr.length * 100}%"></i></div>
         <p class="fraga">${q.replace('___', '<span class="lucka">?</span>')}</p>
-        <form><input ${ord ? 'inputmode="text" autocapitalize="off"' : 'inputmode="decimal"'} autocomplete="off" spellcheck="false" aria-label="Ditt svar" placeholder="${ord ? 'Skriv ordet' : 'Ditt svar'}"><button>Svara</button></form>
+        <form><input ${ord ? 'inputmode="text" autocapitalize="off"' : 'inputmode="decimal"'} autocomplete="off" spellcheck="false" aria-label="Ditt svar" placeholder="${ord ? 'Skriv begreppet' : 'Ditt svar'}"><button>Svara</button></form>
         <p class="fb" aria-live="polite"></p></div>`;
       const inp = el.querySelector('input'), fb = el.querySelector('.fb'), lucka = el.querySelector('.lucka');
       inp.focus();
@@ -105,7 +105,7 @@
       if (i === fr.length) return slut(ratt, fr.length, exempel, ' på första försöket');
       const [ex, svar, forkl, fraga] = fr[i++]; let fel = 0;
       const alt = blanda([svar, ...andra(EX.map(e => e[1]), svar, 3)]);
-      el.innerHTML = `<div class="kort-t"><div class="topp"><span>🔍 Från exempel till ord</span><span>Uppgift ${i} av ${fr.length} · ⭐ ${ratt}</span></div>
+      el.innerHTML = `<div class="kort-t"><div class="topp"><span>🔍 Från exempel till begrepp</span><span>Uppgift ${i} av ${fr.length} · ⭐ ${ratt}</span></div>
         <div class="bar"><i style="width:${(i - 1) / fr.length * 100}%"></i></div>
         <div class="exempel">${ex}</div><p class="fraga liten">${fraga || 'Vad kallas det markerade?'}</p>
         <div class="alt">${alt.map(a => `<button class="mb">${a}</button>`).join('')}</div>
@@ -120,7 +120,7 @@
           fb.querySelector('button').onclick = visa; fb.querySelector('button').focus();
         } else {
           fel++; b.disabled = true; b.classList.add('fel', 'kvar');
-          fb.className = 'fb nej'; fb.textContent = 'Inte rätt ord. Försök igen!';
+          fb.className = 'fb nej'; fb.textContent = 'Inte rätt begrepp. Försök igen!';
         }
       });
     })();
@@ -131,10 +131,10 @@
       if (i === fr.length) return slut(ratt, fr.length, dra, ' på första försöket');
       const [q, svar] = fr[i++]; let fel = 0, drar = null, klar = false;
       const ord = blanda([svar, ...andra(DRA.map(d => d[1]), svar, 3)]);
-      el.innerHTML = `<div class="kort-t"><div class="topp"><span>🧲 Dra ordet till rätt lucka</span><span>Mening ${i} av ${fr.length} · ⭐ ${ratt}</span></div>
+      el.innerHTML = `<div class="kort-t"><div class="topp"><span>🧲 Dra begreppet till rätt lucka</span><span>Mening ${i} av ${fr.length} · ⭐ ${ratt}</span></div>
         <div class="bar"><i style="width:${(i - 1) / fr.length * 100}%"></i></div>
         <div class="fraga mening">${q.replace('___', '<span class="lucka drop"></span>')}</div>
-        <p class="hj">Dra ordet till luckan, eller tryck på ordet.</p>
+        <p class="hj">Dra begreppet till luckan, eller tryck på det.</p>
         <div class="ordbank">${ord.map(o => `<button class="ordk" draggable="true">${o}</button>`).join('')}</div>
         <p class="fb" aria-live="polite"></p></div>`;
       const lucka = el.querySelector('.drop'), fb = el.querySelector('.fb');
