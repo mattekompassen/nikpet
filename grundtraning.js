@@ -55,6 +55,43 @@
     return `<svg class="tioruta" viewBox="0 0 188 80" aria-hidden="true"><rect x="2" y="2" width="184" height="76" rx="10" class="tr-r"/>${s}</svg>`;
   }
 
+  // ---------- Positionssystemet ----------
+  const PN = {5: 'hundratusental', 4: 'tiotusental', 3: 'tusental', 2: 'hundratal', 1: 'tiotal', 0: 'ental', '-1': 'tiondel', '-2': 'hundradel', '-3': 'tusendel'};
+  const ppl = e => e < 0 ? PN[e] + 'ar' : PN[e];  // plural: tiotal, tiondelar
+  const pant = (n, e) => `${n} ${n === 1 ? PN[e] : ppl(e)}`;
+  const pplats = e => PN[e] + 'ssiffra';  // bokens ord: tiotalssiffra, tiondelssiffra
+  const PV = e => e >= 0 ? Math.pow(10, e) : d1(1 / Math.pow(10, -e));
+  function siffror(hel, dec) {  // olika siffror; första (om fler än en heltalssiffra) och sista decimalen är inte 0
+    for (;;) {
+      const s = blanda([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, hel + dec);
+      if ((hel === 1 || s[0]) && (!dec || s[s.length - 1])) return s.map((d, i) => ({s: d, e: hel - 1 - i}));
+    }
+  }
+  const skriv = (D, mark) => {  // talet som text, ev. med en markerad siffra
+    const t = d => d.e === mark ? `<mark>${d.s}</mark>` : String(d.s);
+    const hel = D.filter(d => d.e >= 0), dec = D.filter(d => d.e < 0);
+    const h = hel.map((d, i) => t(d) + ((hel.length - 1 - i) % 3 === 0 && i < hel.length - 1 ? ' ' : '')).join('');
+    return h + (dec.length ? ',' + dec.map(t).join('') : '');
+  };
+  const varde = D => d1(D.reduce((s, d) => s + d.s * PV(d.e), 0));
+  function postabell(D, mark) {  // positionstabell med en kolumn per plats
+    let th = '', td = '';
+    D.forEach(d => {
+      if (d.e === -1) { th += '<th class="k"></th>'; td += '<td class="k">,</td>'; }
+      th += `<th>${ppl(d.e).replace(/(tusen|hundra|tio)(tal|del)/, '$1&shy;$2')}</th>`; td += `<td${d.e === mark ? ' class="m"' : ''}>${d.s}</td>`;
+    });
+    return `<table class="gt-pos"><tr>${th}</tr><tr>${td}</tr></table>`;
+  }
+  const ORD1 = ['', 'ett', 'två', 'tre', 'fyra', 'fem', 'sex', 'sju', 'åtta', 'nio', 'tio', 'elva', 'tolv', 'tretton', 'fjorton', 'femton', 'sexton', 'sjutton', 'arton', 'nitton'];
+  const ORD10 = ['', '', 'tjugo', 'trettio', 'fyrtio', 'femtio', 'sextio', 'sjuttio', 'åttio', 'nittio'];
+  const ord100 = n => n < 20 ? ORD1[n] : ORD10[Math.floor(n / 10)] + ORD1[n % 10];
+  const ord1000 = n => (n >= 100 ? (n < 200 ? 'etthundra' : ORD1[Math.floor(n / 100)] + 'hundra') : '') + ord100(n % 100);
+  const ordTal = n => {  // som i boken: sjutusen tvåhundratolv, tre miljoner fyrahundratusen
+    const m = Math.floor(n / 1e6), t = Math.floor(n / 1000) % 1000, rest = n % 1000;
+    return [m ? (m === 1 ? 'en miljon' : ord1000(m) + ' miljoner') : '', t ? (t === 1 ? 'ettusen' : ord1000(t) + 'tusen') : '', ord1000(rest)].filter(x => x).join(' ');
+  };
+  const POSTIPS = 'Till vänster om decimaltecknet heter platserna något med "tal": ental, tiotal, hundratal, tusental (räkna från kommat åt vänster). Till höger heter de något med "del": tiondel, hundradel, tusendel.';
+
   // ---------- Övningarna ----------
   const NIVA = (a, b, c) => [['1', 'Nivå 1', a], ['2', 'Nivå 2', b], ['3', 'Nivå 3', c]];
   const tus = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
@@ -167,6 +204,152 @@
       }};
   }
   const OV = {
+    platsvarde: {del: 'position', ikon: '🏠', namn: 'Siffrans position', kort: 'Tiotalssiffra, tiondelssiffra …',
+      exempel: 'Den plats en siffra har i ett tal kallas <b>position</b>.<br>I talet <b>3 7<u>5</u>2</b> är 5 <b>tiotalssiffran</b>. I talet <b>4,<u>8</u>6</b> är 8 <b>tiondelssiffran</b>.',
+      val: NIVA('tal upp till 999', 'tal upp till 99 999', 'decimaltal'),
+      gen(v) {
+        const D = v === '1' ? siffror(3, 0) : v === '2' ? siffror(r(4, 5), 0) : siffror(r(1, 2), r(2, 3));
+        const ok = D.filter(d => d.s), d = val(ok), max = D[0].e, min = D[D.length - 1].e;
+        if (Math.random() < .55) {
+          const kand = []; for (let e = Math.min(max + 1, 5); e >= Math.max(min - 1, -3); e--) kand.push(pplats(e));
+          return {typ: 'val', q: `I talet <b class="gt-tal">${skriv(D, d.e)}</b>: vad kallas siffran <b>${d.s}</b>?`, alt: fyra(pplats(d.e), kand), ledtrad: POSTIPS};
+        }
+        const x = val(D);
+        return {typ: 'tal', q: `Vilken siffra är ${pplats(x.e)}n i <b class="gt-tal">${skriv(D)}</b>?`, svar: x.s, ledtrad: POSTIPS};
+      }},
+    siffransvarde: {del: 'position', ikon: '💎', namn: 'Siffrans värde', kort: 'Hur mycket är siffran värd?',
+      exempel: 'I talet <b>3 <u>7</u>42</b> är 7 hundratalssiffran. Den har <b>platsvärdet</b> 7 · 100 = <b>700</b>.<br>I talet <b>2,3<u>4</u></b> är 4 hundradelssiffran. Den har platsvärdet <b>0,04</b>.',
+      val: NIVA('tal upp till 9 999 (med positionstabell)', 'tal upp till 999 999', 'decimaltal'),
+      gen(v) {
+        const D = v === '1' ? siffror(r(3, 4), 0) : v === '2' ? siffror(r(5, 6), 0) : siffror(r(1, 3), r(2, 3));
+        const d = val(D.filter(x => x.s && (v !== '3' || x.e < 1 || Math.random() < .3)));
+        if (v !== '1' && Math.random() < .35) {  // som i boken: i vilket tal har siffran 4 värdet 400?
+          const andra = []; for (let i = 0; i < 40 && andra.length < 3; i++) {
+            const E = v === '2' ? siffror(r(4, 6), 0) : siffror(r(1, 2), r(2, 3)), y = E.find(z => z.s === d.s) || val(E.filter(z => z.s));
+            y.s = d.s; if (y.e !== d.e && !E.some(z => z !== y && z.s === d.s) && !andra.includes(skriv(E))) andra.push(skriv(E));
+          }
+          if (andra.length === 3) return {typ: 'val', q: `I vilket tal har siffran <b>${d.s}</b> värdet <b>${sv(d1(d.s * PV(d.e))).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0')}</b>?`, alt: [skriv(D), ...andra],
+            ledtrad: `Siffran ska stå som ${pplats(d.e)}. ` + POSTIPS};
+        }
+        return {typ: 'tal', q: `Vilket värde har siffran <b>${d.s}</b> i talet <b class="gt-tal">${skriv(D, d.e)}</b>?`, bild: v === '1' ? postabell(D, d.e) : '', svar: d1(d.s * PV(d.e)),
+          ledtrad: 'Ta reda på vilken position siffran har. Till exempel: 4 som tiotalssiffra har värdet 40 och 4 som tiondelssiffra har värdet 0,4.'};
+      }},
+    byggtal: {del: 'position', ikon: '🧱', namn: 'Utvecklad form', kort: 'Dela upp tal och bygg ihop dem igen',
+      exempel: 'Talet skrivet i <b>utvecklad form</b>:<br><b>4 327 = 4 000 + 300 + 20 + 7</b><br><b>74,32 = 70 + 4 + 0,3 + 0,02</b>',
+      val: NIVA('hundratal, tiotal och ental', 'tusental och växling', 'decimaltal: tiondelar och hundradelar'),
+      gen(v) {
+        if (Math.random() < .3) {  // skriv talet i utvecklad form (välj rätt)
+          const D = v === '1' ? siffror(3, 0) : v === '2' ? siffror(4, 0) : siffror(2, 2), U = E => E.filter(d => d.s).map(d => sv(d1(d.s * PV(d.e))).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0')).join(' + ');
+          const fel1 = U(D.map(d => ({s: d.s, e: d.e - 1}))), fel2 = D.filter(d => d.s).map(d => d.s).join(' + '),
+            fel3 = U(D.map((d, i) => ({s: d.s, e: i === D.length - 2 ? d.e - 1 : i === D.length - 1 ? d.e + 1 : d.e})));
+          return {typ: 'val', q: `Vilket är <b class="gt-tal">${skriv(D)}</b> i utvecklad form?`, alt: fyra(U(D), [fel1, fel2, fel3, U(D.map(d => ({s: d.s, e: d.e + 1})))]),
+            ledtrad: 'Varje siffra skrivs med sitt platsvärde. Till exempel: 4 327 = 4 000 + 300 + 20 + 7.'};
+        }
+        const termer = (P, blandat) => { const t = P.filter(([n]) => n).map(([n, e]) => pant(n, e)); return (blandat ? blanda(t) : t).join(' + ') + ' ='; };
+        if (v === '1') {
+          const h = r(1, 9), t = r(0, 9), e = r(t ? 0 : 1, 9), s = h * 100 + t * 10 + e;
+          return val([
+            {typ: 'tal', q: termer([[h, 2], [t, 1], [e, 0]]), svar: s, ledtrad: 'Skriv hundratalen först, sedan tiotalen och sist entalen. Saknas något? Skriv 0 på den platsen.'},
+            {typ: 'tal', q: [h * 100, t * 10, e].filter(x => x).join(' + ') + ' =', svar: s, ledtrad: 'Skriv hundratalen först, sedan tiotalen och sist entalen. Saknas något? Skriv 0 på den platsen.'}]);
+        }
+        if (v === '2') {
+          const P = [[r(1, 9), 3], [r(0, 9), 2], [r(0, 9), 1], [r(0, 9), 0]], s = P.reduce((a, [n, e]) => a + n * PV(e), 0), a = r(1, 8), b = r(11, 19), n = r(12, 99);
+          return val([
+            {typ: 'tal', q: termer(P, true), svar: s, ledtrad: 'Ordningen är blandad. Sortera: tusental, hundratal, tiotal, ental. Skriv 0 där det saknas.'},
+            {typ: 'tal', q: termer(P, true), svar: s, ledtrad: 'Ordningen är blandad. Sortera: tusental, hundratal, tiotal, ental. Skriv 0 där det saknas.'},
+            {typ: 'tal', q: `${pant(a, 2)} + ${pant(b, 1)} =`, svar: a * 100 + b * 10, ledtrad: `10 tiotal = 1 hundratal. ${b} tiotal = 1 hundratal och ${b - 10} tiotal.`},
+            {typ: 'tal', q: `${pant(n, 1)} =`, svar: n * 10, ledtrad: `Ett tiotal är 10. Räkna ${n} · 10.`},
+            {typ: 'tal', q: `${pant(n, 2)} =`, svar: n * 100, ledtrad: `Ett hundratal är 100. Räkna ${n} · 100.`}]);
+        }
+        const e = r(0, 9), t = r(1, 9), h = r(0, 9), n = r(11, 39), m = r(5, 250), B = [[r(1, 9), 1], [r(0, 9), 0], [t, -1], [r(1, 9), -2]];
+        return val([
+          {typ: 'tal', q: termer([[e, 0], [t, -1], [h, -2]]), svar: d1(e + t / 10 + h / 100), ledtrad: 'Entalen står före kommat. Efter kommat kommer tiondelar och sedan hundradelar.'},
+          {typ: 'tal', q: termer(B, true), svar: d1(B.reduce((s, [k, x]) => s + k * PV(x), 0)), ledtrad: 'Ordningen är blandad. Sortera: tiotal, ental, tiondelar, hundradelar. Skriv 0 där det saknas.'},
+          {typ: 'tal', q: [e, t / 10, h / 100].filter(x => x).map(sv).join(' + ') + ' =', svar: d1(e + t / 10 + h / 100), ledtrad: '0,1 är en tiondel och 0,01 är en hundradel. Ställ upp talen så att kommatecknen hamnar under varandra.'},
+          {typ: 'tal', q: `${pant(n, -1)} =`, svar: d1(n / 10), ledtrad: '10 tiondelar = 1 ental.'},
+          {typ: 'tal', q: `${pant(m, -2)} =`, svar: d1(m / 100), ledtrad: '100 hundradelar = 1 ental och 10 hundradelar = 1 tiondel.'}]);
+      }},
+    talord: {del: 'position', ikon: '✍️', namn: 'Från ord till siffror', kort: 'Skriv talet med siffror',
+      exempel: '<b>sjutusen tvåhundratolv</b> = <b>7 212</b><br><b>tolvtusen femton</b> = <b>12 015</b>. Inga hundratal och inga tiotal: skriv 0 där.',
+      val: NIVA('tal upp till 9 999', 'tal upp till 999 999', 'miljoner'),
+      gen(v) {
+        const noll = () => val([0, 0, r(1, 9)]);
+        if (v === '1') { const n = r(1, 9) * 1000 + noll() * 100 + r(0, 9) * 10 + r(0, 9); return {typ: 'tal', q: `Skriv med siffror: <b>${ordTal(n)}</b>`, svar: n, ledtrad: 'Skriv tusentalen först, sedan hundratal, tiotal och ental. Skriv 0 där det saknas.'}; }
+        if (v === '2') { const n = r(10, 999) * 1000 + noll() * 100 + noll() * 10 + r(0, 9); return {typ: 'tal', q: `Skriv med siffror: <b>${ordTal(n)}</b>`, svar: n, ledtrad: 'Ordet "tusen" delar talet i två delar. Efter tusentalen ska det alltid komma tre siffror: hundratal, tiotal och ental. Skriv 0 där det saknas.'}; }
+        if (Math.random() < .3) return val([['en halv miljon', 500000], ['en kvarts miljon', 250000], ['en och en halv miljon', 1500000], ['tre fjärdedels miljon', 750000], ['en miljard', 1e9]].map(([q, svar]) => ({typ: 'tal', q: `Skriv med siffror: <b>${q}</b>`, svar, ledtrad: 'En miljon = 1 000 000 (tusen tusen). En miljard = 1 000 000 000 (tusen miljoner).'})));
+        const n = r(1, 99) * 1e6 + val([0, r(1, 999)]) * 1000 + val([0, r(1, 999)]);
+        return {typ: 'tal', q: `Skriv med siffror: <b>${ordTal(n)}</b>`, svar: n, ledtrad: 'En miljon = 1 000 000. Efter miljonerna kommer tre siffror för tusentalen och tre siffror för resten. Skriv 0 där det saknas.'};
+      }},
+    hurmanga: {del: 'position', ikon: '🔟', namn: 'Hur många tiotal?', kort: 'Räkna i tiotal, hundratal, tiondelar och hundradelar',
+      exempel: '<b>70</b> är <b>7 tiotal</b>. <b>340</b> är sammanlagt <b>34 tiotal</b>.<br><b>0,7</b> är <b>7 tiondelar</b>. <b>0,25</b> är <b>25 hundradelar</b>.',
+      val: NIVA('hela tiotal, hundratal och tusental', 'hur många tiotal eller hundratal sammanlagt', 'tiondelar, hundradelar och tusendelar'),
+      gen(v) {
+        const a = r(2, 9);
+        if (v === '1') { const e = val([1, 1, 2, 2, 3]); return {typ: 'tal', q: `Hur många ${ppl(e)} är ${tus(a * PV(e))}?`, svar: a, ledtrad: `Ett ${PN[e]} är ${tus(PV(e))}. Hur många ${tus(PV(e))} får plats i ${tus(a * PV(e))}?`}; }
+        if (v === '2') {
+          const n = val([r(12, 99), r(101, 999)]), m = r(12, 99);
+          return val([
+            {typ: 'tal', q: `Hur många tiotal finns det sammanlagt i ${tus(n * 10)}?`, svar: n, ledtrad: `Ett tiotal är 10. Räkna ${tus(n * 10)} / 10.`},
+            {typ: 'tal', q: `Hur många hundratal finns det sammanlagt i ${tus(m * 100)}?`, svar: m, ledtrad: `Ett hundratal är 100. Räkna ${tus(m * 100)} / 100.`},
+            {typ: 'tal', q: `Hur många tiotal är 1${' '}000?`, svar: 100, ledtrad: '10 tiotal = 1 hundratal och 10 hundratal = 1 tusental.'}]);
+        }
+        const b = r(11, 59), c = r(5, 99), x = r(1, 9);
+        return val([
+          {typ: 'tal', q: `Hur många tiondelar är ${sv(a / 10)}?`, svar: a, ledtrad: 'En tiondel är 0,1. Hur många 0,1 får plats?'},
+          {typ: 'tal', q: `Hur många tiondelar är ${sv(b / 10)}?`, svar: b, ledtrad: '1 ental = 10 tiondelar. Räkna entalen som tiondelar och lägg till resten.'},
+          {typ: 'tal', q: `Hur många hundradelar är ${sv(c / 100)}?`, svar: c, ledtrad: 'En hundradel är 0,01. Läs siffrorna efter kommat.'},
+          {typ: 'tal', q: `Hur många hundradelar är ${sv(x / 10)}?`, svar: x * 10, ledtrad: '1 tiondel = 10 hundradelar.'},
+          {typ: 'tal', q: `Hur många tusendelar är ${sv(c / 1000)}?`, svar: c, ledtrad: 'En tusendel är 0,001. Tre siffror efter kommat är tusendelar.'}]);
+      }},
+    jamfor: {del: 'position', ikon: '🔍', namn: 'Störst och minst', kort: 'Jämför tal och decimaltal',
+      exempel: 'Vilket är störst, <b>0,5</b> eller <b>0,45</b>?<br>0,5 = 0,50, alltså 50 hundradelar. 0,45 är 45 hundradelar. <b>0,5 är störst</b>.',
+      val: NIVA('heltal med samma siffror', 'decimaltal', 'decimaltal: mellan och lika med'),
+      gen(v) {
+        if (v === '1') {
+          let D; do D = blanda(siffror(4, 0).map(d => d.s)); while (!D[0]);
+          const tal4 = new Set(); while (tal4.size < 4) { const p = blanda(D); if (p[0]) tal4.add(+p.join('')); }
+          const T = [...tal4].sort((a, b) => b - a), stor = Math.random() < .5;
+          return {typ: 'val', q: `Vilket tal är <b>${stor ? 'störst' : 'minst'}</b>?`, alt: (stor ? T : T.reverse()).map(tus), ledtrad: 'Jämför siffrorna från vänster. Den största platsen avgör först: tusentalen, sedan hundratalen och så vidare.'};
+        }
+        const k = val([0, 0, r(1, 9)]), a = r(2, 8);
+        if (v === '2') {
+          const T = [k + a / 10, k + ((a - 1) * 10 + r(a + 1, 9)) / 100, k + ((a - 1) * 100 + r(10, 99)) / 1000, k + r(1, 9) / 100].map(d1), stor = Math.random() < .6;
+          if (new Set(T.map(sv)).size < 4) return this.gen(v);
+          return {typ: 'val', q: `Vilket tal är <b>${stor ? 'störst' : 'minst'}</b>?`, alt: (stor ? T : [T[3], T[0], T[1], T[2]]).map(sv),
+            ledtrad: 'Ett längre decimaltal är inte alltid större. Jämför tiondelarna först, sedan hundradelarna. Du kan skriva nollor i slutet: 0,5 = 0,50.'};
+        }
+        if (Math.random() < .65) {
+          const ratt = d1(k + (a * 10 + r(1, 9)) / 100);
+          return {typ: 'val', q: `Vilket tal ligger mellan <b>${sv(d1(k + a / 10))}</b> och <b>${sv(d1(k + (a + 1) / 10))}</b>?`,
+            alt: fyra(sv(ratt), [sv(d1(k + ((a + 1) * 10 + r(1, 9)) / 100)), sv(d1(k + ((a - 1) * 10 + r(1, 9)) / 100)), sv(d1(k + (a * 10 + 5) / 1000)), sv(d1(k + (a + 2) / 10))]),
+            ledtrad: `Skriv talen med hundradelar: ${sv(d1(k + a / 10))}0 och ${sv(d1(k + (a + 1) / 10))}0. Vilket tal ligger mellan dem?`};
+        }
+        const x = r(1, 9);
+        return {typ: 'val', q: `Vilket tal är lika mycket som <b>${sv(d1(k + x / 10))}</b>?`, alt: [`${sv(d1(k + x / 10))}0`, sv(d1(k + x / 100)), sv(d1(k + x / 1000)), sv(d1(k * 10 + x))],
+          ledtrad: 'En nolla i slutet av ett decimaltal ändrar inte värdet. En nolla direkt efter kommat flyttar siffrorna till mindre platser.'};
+      }},
+    mermindre: {del: 'position', ikon: '↕️', namn: 'Mer och mindre', kort: 'Ett ental, tiotal, hundratal eller en tiondel mer eller mindre',
+      exempel: '<b>3 452 + 100 = 3 552</b>. Bara hundratalssiffran ändras.<br><b>2 990 + 10 = 3 000</b>. 10 tiotal blir 1 hundratal, och 10 hundratal blir 1 tusental.',
+      val: NIVA('utan växling', 'med växling', 'decimaltal'),
+      gen(v) {
+        const plus = Math.random() < .55;
+        if (v === '1' || v === '2') {
+          const hel = v === '1' ? 3 : 4, e = r(0, v === '1' ? 2 : 3), D = []; 
+          for (let i = hel - 1; i >= 0; i--) D.push(i === hel - 1 ? r(1, 9) : r(0, 9));
+          const ix = hel - 1 - e;
+          if (v === '1') D[ix] = plus ? r(ix ? 0 : 1, 8) : r(ix ? 1 : 2, 9);
+          else { if (!plus && ix === 0) return this.gen(v); D[ix] = plus ? 9 : 0; if (ix && Math.random() < .4) D[ix - 1] = plus ? 9 : 0; D[0] = Math.max(D[0], 1); }
+          const n = +D.join(''), s = PV(e), svar = plus ? n + s : n - s;
+          if (svar <= 0 || (!plus && v === '2' && n - s < 10)) return this.gen(v);
+          return {typ: 'tal', q: `${tus(n)} ${plus ? '+' : '−'} ${tus(s)} =`, svar,
+            ledtrad: v === '1' ? `${plus ? 'Ett' : 'Ta bort ett'} ${PN[e]}${plus ? ' mer' : ''}: bara ${pplats(e)}n ändras.` : plus ? `10 ${ppl(e)} blir 1 ${PN[e + 1] || 'tusental'}. Växla och fortsätt åt vänster.` : `Du måste växla: ta 1 från platsen till vänster. 1 ${PN[e + 1]} = 10 ${ppl(e)}.`};
+        }
+        const e = val([-1, -1, -2, -2, -3]), s = PV(e);
+        const n = d1(r(0, 9) + (e === -1 ? val([r(1, 9), 9]) / 10 : e === -2 ? val([r(1, 99), r(9, 9) * 10 + 9, r(1, 9) * 10]) / 100 : val([r(1, 999), 99 + r(0, 9) * 100]) / 1000));
+        const svar = d1(plus ? n + s : n - s);
+        if (svar <= 0) return this.gen(v);
+        return {typ: 'tal', q: `${sv(n)} ${plus ? '+' : '−'} ${sv(s)} =`, svar, ledtrad: `${sv(s)} är en ${PN[e]}. ${plus ? 'Lägg till' : 'Ta bort'} en ${PN[e]}. 10 ${ppl(e)} = 1 ${PN[e + 1]}.`};
+      }},
     tiokamrater: {del: 'rakna', ikon: '🔟', namn: 'Tiokamrater och hundrakamrater', kort: 'Fyll upp till 10, 100 och 1000',
       exempel: '<b>7 + 3 = 10</b>. 7 och 3 är tiokamrater.<br><b>60 + 40 = 100</b>. 60 och 40 är hundrakamrater.',
       val: NIVA('upp till 10', 'tiotal upp till 100', 'upp till 100 och 1000'),
@@ -385,12 +568,15 @@
   };
 
   // ---------- Visning ----------
-  const DELAR = [['rakna', 'Huvudräkning', 'Räkna i huvudet. Du får 10 uppgifter med nya tal varje gång.'], ['tid', 'Klockan och tid', 'Läs klockan, ställ visarna och räkna med tid.'], ['enhet', 'Enheter', 'Längd, volym, vikt och tid. Välj rätt enhet och byt mellan enheter.']];
+  const DELAR = [['position', 'Positionssystemet', 'Förstå ental, tiotal, hundratal, tusental och decimalernas platsvärde.'], ['rakna', 'Huvudräkning', 'Räkna i huvudet. Du får 10 uppgifter med nya tal varje gång.'], ['tid', 'Klockan och tid', 'Läs klockan, ställ visarna och räkna med tid.'], ['enhet', 'Enheter', 'Längd, volym, vikt och tid. Välj rätt enhet och byt mellan enheter.']];
   const KLOCKORD = [[7, 0, 'klockan 7', '7.00'], [7, 30, 'halv 8', '7.30'], [7, 15, 'kvart över 7', '7.15'], [7, 45, 'kvart i 8', '7.45'], [7, 5, 'fem över 7', '7.05'], [7, 55, 'fem i 8', '7.55']];
   function meny(bara) {  // bara = 'tid' m.fl.: visa bara den delen (genväg från startsidan)
     const delar = bara ? DELAR.filter(x => x[0] === bara) : DELAR;
     el.innerHTML = delar.map(([d, rub, txt]) => `<div class="kapblock gt-del" id="del-${d}"><h2>${rub}</h2><p class="gt-txt">${txt}</p><div class="gt-typer">` +
       Object.entries(OV).filter(([, o]) => o.del === d).map(([k, o]) => `<a class="typ" href="#${k}"><span class="gt-ik" aria-hidden="true">${o.ikon}</span>${o.namn}<b>${o.kort}</b></a>`).join('') + '</div>' +
+      (d === 'position' ? `<details class="gt-ord"><summary>📖 Positionstabellen</summary><div class="gt-trappor">${postabell([3, 7, 5, 2, 4, 8, 6].map((s, i) => ({s, e: 3 - i})))}
+        <ul><li>Talet ovan är <b>3 752,486</b>. Siffrans <b>position</b> avgör siffrans <b>platsvärde</b>: 7 har värdet 700 och 8 har värdet 0,08.</li><li>Varje plats är <b>10 gånger större</b> än platsen till höger.</li><li><b>10 ental = 1 tiotal</b>, 10 tiotal = 1 hundratal, 10 hundratal = 1 tusental.</li>
+        <li><b>10 tiondelar = 1 ental</b>, 10 hundradelar = 1 tiondel, 10 tusendelar = 1 hundradel.</li><li>Decimaltecknet (<b>kommat</b>) står mellan entalen och tiondelarna. Till vänster om kommat heter platserna något med <b>tal</b>, till höger något med <b>del</b>.</li><li>Ett tal skrivet med sina platsvärden är skrivet i <b>utvecklad form</b>: 4 327 = 4 000 + 300 + 20 + 7.</li><li><b>Nollan</b> håller en plats tom: 305 = 3 hundratal, 0 tiotal och 5 ental.</li></ul></div></details>` : '') +
       (d === 'tid' ? `<details class="gt-ord"><summary>📖 Att läsa av klockan</summary><div class="gt-ordgrid">${KLOCKORD.map(([h, m, f, d]) => `<div>${klocka(h, m, 'liten')}<b>${f}</b><span>${d}</span></div>`).join('')}</div>
         <ul><li><b>timvisaren</b> = den korta visaren, <b>minutvisaren</b> = den långa visaren</li><li><b>över</b> = minuter efter hel timme</li><li><b>i</b> = minuter kvar till nästa timme</li><li><b>halv 8</b> = halvvägs till 8, alltså 7.30</li>
         <li><b>morgon</b> ca 05–10, <b>förmiddag</b> 10–12, <b>eftermiddag</b> 12–18, <b>kväll</b> 18–24</li><li><b>1 h</b> (timme) = 60 min, <b>1 min</b> (minut) = 60 s (sekunder), <b>1 dygn</b> = 24 h</li></ul></details>` : '') +
@@ -531,7 +717,7 @@
     else meny(DELAR.some(x => 'del-' + x[0] === k) ? k.slice(4) : '');
     if (k) el.scrollIntoView({block: 'start', behavior: 'smooth'});
   }
-  window.GT_TEST = {OV, fras, del, tt, ENH};  // för automatiska tester
+  window.GT_TEST = {OV, fras, del, tt, ENH, ordTal};  // för automatiska tester
   window.addEventListener('hashchange', route);
   route();
 })();
