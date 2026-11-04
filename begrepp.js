@@ -398,7 +398,6 @@
   <div class="bg-kitt"><h3 class="bg-del" id="bg-resonera">🔗 Resonemangsord <small>Ord som hjälper dig att förstå uppgifter och förklara hur du tänker</small></h3>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}${MSRUTA}</div>
 </div>
-  <a class="bt-lank" href="begrepp-test.html"><span aria-hidden="true">🏁</span><span><b>Testa dig</b> Kolla vad du kan om begreppen. 10 frågor och resultat på slutet.</span><span class="bt-pil">Testa dig →</span></a>
   <p class="bg-saknar">💬 Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>
 </div>
 <div id="bg-steg2" hidden>
@@ -455,7 +454,13 @@
   const q = new URLSearchParams(location.search);
   // ?flik=mat / ?flik=kitt: visa bara den delen (genvägar från startsidan)
   const bara = {mat: '.bg-kitt', kitt: '.bg-matte'}[q.get('flik')];
-  if (bara) { $(bara).hidden = true; ['.bg-sok', '.bt-lank', '.bg-rub'].forEach(x => $(x).style.display = 'none'); setTimeout(() => el.scrollIntoView({block: 'start'}), 50); }
+  if (bara) {
+    $(bara).hidden = true; ['.bg-rub'].forEach(x => $(x).style.display = 'none'); el.querySelectorAll('.bt-lank').forEach(x => x.style.display = 'none');
+    // Sökrutan längst ner på Mattebegrepp- och Resonemangsord-sidan (Nikola 2026-11-04)
+    $('#bg-steg2').insertAdjacentHTML('afterend', '<h3 class="bg-del bg-sokrub">🔍 Sök ett ord <small>Hittar du inte ordet? Sök bland alla begrepp och resonemangsord.</small></h3>');
+    $('.bg-sokrub').after($('.bg-sok'));
+    setTimeout(() => el.scrollIntoView({block: 'start'}), 50);
+  }
   if (q.get('flik') === 'sok') setTimeout(() => { sokruta.scrollIntoView({block: 'center'}); sokruta.focus(); }, 50);
   window.BG_ANTAL = ORD.length;
 })();
