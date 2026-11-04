@@ -1,8 +1,10 @@
 // Begreppsquiz i klassrummet (begrepp-quiz.html). Frågor per kapitel i QUIZ_DATA.
+// Nyckel 'åk-kapitel-quiz', t.ex. '7-1-1' = åk 7, kapitel 1, Quiz 1. Två quiz per kapitel.
+// Kapitlens namn kommer från lankar.json (QUIZ_KAP, skrivs in av begrepp_quiz.py).
 // Rätt svar står alltid först i 'a'; ordningen blandas när quizet startar.
 // 'ord' = bokens begrepp (BG_BOK) vars förklaring visas efter svaret.
 var QUIZ_DATA = {
-  '7-1': { titel: 'Åk 7 · Kapitel 1 Tal', fragor: [
+  '7-1-1': { fragor: [
     { q: 'Vilket tal är ett primtal?', a: ['13', '9', '15', '21'], ord: 'Primtal' },
     { q: 'Vad kallas talen 0, 1, 2, 3, 4, …?', a: ['Naturliga tal', 'Negativa tal', 'Udda tal', 'Blandad form'], ord: 'Naturliga tal' },
     { q: 'Vilket tal är ett udda tal?', a: ['–7', '14', '0', '–20'], ord: 'Udda tal' },
@@ -28,7 +30,9 @@ var QUIZ_DATA = {
   var rot = document.getElementById('kq');
   if (!rot) return;
   var FARG = [['A', 'kq-r'], ['B', 'kq-b'], ['C', 'kq-g'], ['D', 'kq-gr']];
-  var inst = { kap: '7-1', tid: 20, ljud: true };
+  var inst = { kap: null, ak: 7, tid: 20, ljud: true };
+  var KAP = window.QUIZ_KAP || {};
+  var AKF = { 7: '#3E8A32', 8: '#1A86B0', 9: '#8A4A78' };
   var spel, timer, ac;
 
   function besk(ord) {
@@ -52,10 +56,35 @@ var QUIZ_DATA = {
     }).join('') + '</div></div>';
   }
 
+  function titel(id) {
+    var p = id.split('-'), namn = ((KAP[p[0]] || []).filter(function (k) { return k[0] === p[1]; })[0] || [])[1] || '';
+    return 'Åk ' + p[0] + ' · Kapitel ' + p[1] + (namn ? ' ' + namn : '') + ' · Quiz ' + p[2];
+  }
+
+  // Välj årskurs, kapitel och quiz
+  function valj() {
+    clearInterval(timer);
+    var flikar = [7, 8, 9].map(function (a) {
+      return '<button type="button" data-ak="' + a + '" class="' + (a === inst.ak ? 'on' : '') + '" style="--f:' + AKF[a] + '">Åk ' + a + '</button>';
+    }).join('');
+    var kap = (KAP[inst.ak] || []).map(function (k) {
+      var q = [1, 2].map(function (n) {
+        var id = inst.ak + '-' + k[0] + '-' + n, d = QUIZ_DATA[id];
+        return d ? '<button type="button" class="kq-qk" data-id="' + id + '">Quiz ' + n + ' <small>' + d.fragor.length + ' frågor</small></button>'
+          : '<span class="kq-qk kq-snart">Quiz ' + n + ' <small>Kommer snart</small></span>';
+      }).join('');
+      return '<div class="kq-kaprad" style="--f:' + AKF[inst.ak] + '"><span class="kq-knr">' + k[0] + '</span><b>Kapitel ' + k[0] + '<small>' + k[1] + '</small></b><div class="kq-qs">' + q + '</div></div>';
+    }).join('');
+    rot.innerHTML = '<div class="kq-valj"><div class="kq-vh"><div class="kq-logo kq-logo-s">?</div><div><h2>Mattequiz</h2><p>Välj årskurs och kapitel. Varje kapitel har två quiz om begreppen.</p></div></div>'
+      + '<div class="kq-flikar">' + flikar + '</div><div class="kq-kaplista">' + kap + '</div></div>';
+    rot.querySelectorAll('[data-ak]').forEach(function (b) { b.onclick = function () { inst.ak = +b.dataset.ak; valj(); }; });
+    rot.querySelectorAll('[data-id]').forEach(function (b) { b.onclick = function () { inst.kap = b.dataset.id; start(); rot.scrollIntoView({ block: 'start' }); }; });
+  }
+
   function start() {
     clearInterval(timer);
     var d = QUIZ_DATA[inst.kap];
-    rot.innerHTML = '<div class="kq-start"><div class="kq-logo">?</div><h2>Begreppsquiz</h2><p class="kq-kap">' + d.titel + ' · ' + d.fragor.length + ' frågor</p>'
+    rot.innerHTML = '<div class="kq-start"><button type="button" class="kq-bak">← Välj ett annat quiz</button><div class="kq-logo">?</div><h2>Mattequiz</h2><p class="kq-kap">' + titel(inst.kap) + ' · ' + d.fragor.length + ' frågor</p>'
       + val('Tid per fråga', [[10, '10 s'], [20, '20 s'], [30, '30 s'], [0, 'Ingen tid']], inst.tid)
       + val('Ljud', [[1, 'På'], [0, 'Av']], inst.ljud ? 1 : 0)
       + '<button type="button" class="kq-go">Starta quizet ▶</button>'
@@ -69,6 +98,7 @@ var QUIZ_DATA = {
         };
       });
     });
+    rot.querySelector('.kq-bak').onclick = valj;
     rot.querySelector('.kq-go').onclick = function () {
       spel = { fragor: blanda(d.fragor), i: 0, poang: 0, ratt: 0, svit: 0 };
       fraga();
@@ -136,10 +166,11 @@ var QUIZ_DATA = {
   function slut() {
     var n = spel.fragor.length, h;
     h = '<h2>Bra jobbat!</h2><p class="kq-stor">' + spel.poang + ' poäng</p><p class="kq-kap">' + spel.ratt + ' av ' + n + ' rätt</p>';
-    rot.innerHTML = '<div class="kq-start kq-slutet">' + h + '<div class="kq-knappar"><button type="button" class="kq-go kq-igen">Spela igen ↻</button><button type="button" class="kq-go kq-ny">Ändra inställningar</button></div></div>';
+    rot.innerHTML = '<div class="kq-start kq-slutet">' + h + '<div class="kq-knappar"><button type="button" class="kq-go kq-igen">Spela igen ↻</button><button type="button" class="kq-go kq-ny">Ändra inställningar</button><button type="button" class="kq-go kq-ny kq-annat">Välj ett annat quiz</button></div></div>';
     pip(523, .2); setTimeout(function () { pip(659, .2); }, 150); setTimeout(function () { pip(784, .35); }, 300);
     rot.querySelector('.kq-igen').onclick = function () { spel = { fragor: blanda(QUIZ_DATA[inst.kap].fragor), i: 0, poang: 0, ratt: 0, svit: 0 }; fraga(); };
     rot.querySelector('.kq-ny').onclick = start;
+    rot.querySelector('.kq-annat').onclick = valj;
   }
 
   function helskarm() {
@@ -149,5 +180,8 @@ var QUIZ_DATA = {
     else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
   }
 
-  start();
+  // ?ak=8 öppnar årskursen, ?quiz=7-1-1 startar ett quiz direkt
+  var u = new URLSearchParams(location.search);
+  if (KAP[u.get('ak')]) inst.ak = +u.get('ak');
+  if (QUIZ_DATA[u.get('quiz')]) { inst.kap = u.get('quiz'); inst.ak = +inst.kap.split('-')[0]; start(); } else valj();
 })();
