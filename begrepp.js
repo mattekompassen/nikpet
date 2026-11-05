@@ -92,11 +92,13 @@
   let FLIK = 'ova', TYP = '', sokruta = null;
 
   // ---------- Begreppskort ----------
+  // Ord med bindestreck (t.ex. y-axel) hålls ihop på en rad
+  const helord = t => esc(t).replace(/\S*-\S*/g, m => `<span style="white-space:nowrap">${m}</span>`);
   const kort = o => {
     const c = OM[o.om];
     return `<div class="bk" tabindex="0" role="button" aria-label="${esc(o.ord)}, vänd kortet" style="--o:${c[2]};--od:${c[3]}"><div class="bk-in">
-<div class="bk-fram"><h3${o.ord.length > 13 ? ' class="lang"' : ''}>${esc(o.ord)}</h3></div>
-<div class="bk-bak"><div class="bk-topp"><h4>${esc(o.ord)}</h4>${hogt(o.ord)}</div>${o.bild ? `<div class="bk-bild"><span>${o.bild}</span></div>` : ''}<div class="bk-text">${o.forklHtml}</div></div></div></div>`;
+<div class="bk-fram"><h3${o.ord.length > 13 ? ' class="lang"' : ''}>${helord(o.ord)}</h3></div>
+<div class="bk-bak"><div class="bk-topp"><h4>${helord(o.ord)}</h4>${hogt(o.ord)}</div>${o.bild ? `<div class="bk-bild"><span>${o.bild}</span></div>` : ''}<div class="bk-text">${o.forklHtml}</div></div></div></div>`;
   };
   function kortlista(lista, mal) {
     const t = $('#bg-traff');
@@ -115,6 +117,17 @@
     }
     (mal || $('#bg-kortlista')).innerHTML = h || (F.sok && !mal ? `<p class="bg-tom">Inget ord hittades för ”${esc(sokruta.value.trim())}”. Prova en kortare del av ordet.</p>` : '<p class="bg-tom">Inga ord matchar. Prova ett annat filter.</p>');
   }
+  // Ord på korten avstavas aldrig: är ett ord för långt för kortet krymps texten tills det får plats
+  const anpassa = () => el.querySelectorAll('.bk h3, .bk h4').forEach(h => {
+    h.style.removeProperty('font-size');
+    let f = parseFloat(getComputedStyle(h).fontSize);
+    while (h.scrollWidth > h.clientWidth + 1 && f > 9) { f -= 0.5; h.style.setProperty('font-size', f + 'px', 'important'); }
+  });
+  let vantar = 0;
+  const snart = () => { if (!vantar) vantar = requestAnimationFrame(() => { vantar = 0; anpassa(); }); };
+  new MutationObserver(snart).observe(el, {childList: true, subtree: true});
+  addEventListener('resize', snart);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(snart);
   el.addEventListener('click', e => { const k = e.target.closest('.bk'); if (k) k.classList.toggle('vand'); });
   el.addEventListener('keydown', e => { const k = e.target.closest('.bk'); if (k && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); k.classList.toggle('vand'); } });
 
@@ -213,8 +226,8 @@
       ? `<p class="kk-v"><b>I vardagen:</b> ${esc(k.vardag)}</p><p class="kk-m"><b>I matten:</b> ${esc(k.matte)}</p>`
       : `<p>${esc(k.forkl)}</p><p class="kk-ex"><b>Exempel:</b> ${exHtml(k)}</p>${bok}`;
     return `<div class="bk kw" tabindex="0" role="button" aria-label="${esc(k.ord)}, vänd kortet" style="--o:${g[2]};--od:${g[3]}"><div class="bk-in">
-<div class="bk-fram"><h3>${esc(k.ord)}</h3></div>
-<div class="bk-bak"><div class="bk-topp"><h4>${esc(k.ord)}</h4>${hogt(k.ord)}</div>${bak}</div></div></div>`;
+<div class="bk-fram"><h3>${helord(k.ord)}</h3></div>
+<div class="bk-bak"><div class="bk-topp"><h4>${helord(k.ord)}</h4>${hogt(k.ord)}</div>${bak}</div></div></div>`;
   };
   const kyta = () => $('#bg-yta');
   const khuvud = (rub, fr) => `<div class="bg-ovhuvud"><h3>${rub}</h3><span class="bg-poang">Rätt: ${KP.r} av ${KP.n}</span></div>${fr ? `<p class="bg-fraga">${fr}</p>` : ''}`;
