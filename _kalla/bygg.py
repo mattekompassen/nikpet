@@ -314,9 +314,9 @@ document.getElementById('lasform').addEventListener('submit',function(e){{
 OVP_KALLA = '/mnt/project-files/np-ovningsprov-{n}'
 OVP_ANTAL = 6
 # Genomgångs-PPT per NP-träning och delprov (Drive-fil-id). Länken krypteras som facit (Nikola 2026-10-26).
-OVP_GENOMGANG = {-1: {  # NP-träning 1 gjordes om 2026-11-05: gamla genomgångar passar inte, nya id:n läggs in under 1
-                 'A': '1v4YLV9uegaxjY3W0qWaUBHlqx8ktgON-', 'B': '1Ll1fHV4BblXh2QJL_C5pjnEdK-tkGYcH',
-                     'C': '1mUHTGpJxgiVx_rk8oc8g1LNlZYyv7TV2', 'D': '1EONjAuV6oq72Gk3mb-d6303PNMS6WaEl'},
+OVP_GENOMGANG = {1: {  # NP-träning 1 i full längd, nya genomgångar 2026-11-05
+                 'A': '1NVmcQIwYB9m0PM0BVGeoB_pJluR5-mDg', 'B': '18EmS66moy-phfphmaXlpW2MTZ1egStge',
+                     'C': '11D74rqte627qx6W3rcj2JRj_ZpPHeSb6', 'D': '1wjv3bghKfNotEMefYLKJQuCRIoraQnAy'},
                  2: {'A': '1Wscy6MEIspbaPqWi3YONhxVHuxlyMssc', 'B': '1OB0NbkqrFTJ_r5BGERtufPNQqm1FCifJ',
                      'C': '1ZLavvKtrsyUk8JF9glk1w0gafnVF6GkZ', 'D': '1GlSiJRfDaA-8Fv-7Pmhes5BnOUxizzzm'},
                  3: {'A': '1ticed-TIXpSX695vLviMjVcvZkIpSDYr', 'B': '1X8UjGESfgknv_r-iToY5x1BP7cEacNsm',
