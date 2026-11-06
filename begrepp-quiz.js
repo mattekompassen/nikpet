@@ -1,5 +1,5 @@
-// Begreppsquiz i klassrummet (begrepp-quiz.html). Frågor per kapitel i QUIZ_DATA.
-// Nyckel 'åk-kapitel-quiz', t.ex. '7-1-1' = åk 7, kapitel 1, Quiz 1. Två quiz per kapitel.
+// Begreppsquiz i klassrummet (begrepp-quiz.html). Frågor per område i QUIZ_DATA.
+// Nyckel 'åk-kapitel-quiz', t.ex. '7-1-1' = åk 7, kapitel 1, Quiz 1. Visas som Nivå 1–3 (7/8/9) och område, utan kapitelnummer.
 // Kapitlens namn kommer från lankar.json (QUIZ_KAP, skrivs in av begrepp_quiz.py).
 // Rätt svar står alltid först i 'a'. Frågor och svar blandas med ett fast frö (quizets id),
 // så att ett quiz alltid ser exakt likadant ut: eleverna kan tävla mot varandra (Nikola 2026-11-06).
@@ -202,6 +202,363 @@ var QUIZ_DATA = {
     {"typ": "sf", "q": "Summan av alla relativa frekvenser är 100 %.", "svar": true, "ord": "Relativ frekvens"},
     {"typ": "ordning", "q": "Klicka på de relativa frekvenserna från minst till störst", "a": ["2 av 20", "1 av 4", "40 %", "0,6"], "ord": "Relativ frekvens"},
     {"q": "En klass undersöker elevernas favoritfrukt. Vad kallas favoritfrukt i undersökningen?", "a": ["En variabel", "En frekvens", "En median", "Ett lägesmått"], "ord": "Variabel"}
+  ] },
+  '8-1-1': { fragor: [
+    {"q": "Vilket tal är skrivet i bråkform?", "a": ["<span class=\"fr\"><i>7</i><i>9</i></span>", "0,7", "7", "1<span class=\"fr\"><i>2</i><i>9</i></span>"], "ord": "Bråkform"},
+    {"q": "Skriv <span class=\"fr\"><i>7</i><i>4</i></span> i blandad form.", "a": ["1<span class=\"fr\"><i>3</i><i>4</i></span>", "1<span class=\"fr\"><i>4</i><i>7</i></span>", "7<span class=\"fr\"><i>1</i><i>4</i></span>", "1,74"], "ord": "Blandad form"},
+    {"q": "Skriv 2<span class=\"fr\"><i>1</i><i>3</i></span> i bråkform.", "a": ["<span class=\"fr\"><i>7</i><i>3</i></span>", "<span class=\"fr\"><i>5</i><i>3</i></span>", "<span class=\"fr\"><i>6</i><i>3</i></span>", "<span class=\"fr\"><i>3</i><i>7</i></span>"], "ord": "Blandad form"},
+    {"typ": "sf", "q": "2<span class=\"fr\"><i>1</i><i>2</i></span> är skrivet i blandad form.", "svar": true, "ord": "Blandad form"},
+    {"q": "Hur skrivs <span class=\"fr\"><i>3</i><i>8</i></span> i decimalform?", "a": ["0,375", "0,38", "3,8", "0,83"], "ord": "Decimalform"},
+    {"typ": "ordning", "q": "Klicka på talen från minst till störst", "a": ["0,3", "<span class=\"fr\"><i>1</i><i>3</i></span>", "0,35", "<span class=\"fr\"><i>2</i><i>5</i></span>"], "ord": "Decimalform"},
+    {"q": "När man förlänger ett bråk …", "a": ["multiplicerar man täljare och nämnare med samma tal", "dividerar man täljare och nämnare med samma tal", "adderar man samma tal till täljare och nämnare", "multiplicerar man bara täljaren"], "ord": "Förlängning"},
+    {"q": "Förläng <span class=\"fr\"><i>3</i><i>5</i></span> så att nämnaren blir 20.", "a": ["<span class=\"fr\"><i>12</i><i>20</i></span>", "<span class=\"fr\"><i>3</i><i>20</i></span>", "<span class=\"fr\"><i>15</i><i>20</i></span>", "<span class=\"fr\"><i>8</i><i>20</i></span>"], "ord": "Förlängning"},
+    {"typ": "sf", "q": "<span class=\"fr\"><i>2</i><i>3</i></span> och <span class=\"fr\"><i>8</i><i>12</i></span> har samma värde.", "svar": true, "ord": "Förlängning"},
+    {"q": "Förkorta <span class=\"fr\"><i>15</i><i>25</i></span> så långt det går.", "a": ["<span class=\"fr\"><i>3</i><i>5</i></span>", "<span class=\"fr\"><i>5</i><i>15</i></span>", "<span class=\"fr\"><i>1</i><i>5</i></span>", "<span class=\"fr\"><i>3</i><i>4</i></span>"], "ord": "Förkortning"},
+    {"typ": "sf", "q": "När man förkortar ett bråk blir värdet mindre.", "svar": false, "ord": "Förkortning"},
+    {"q": "Vilket bråk är skrivet i enklaste form?", "a": ["<span class=\"fr\"><i>7</i><i>12</i></span>", "<span class=\"fr\"><i>6</i><i>12</i></span>", "<span class=\"fr\"><i>9</i><i>12</i></span>", "<span class=\"fr\"><i>10</i><i>12</i></span>"], "ord": "Enklaste form"},
+    {"q": "Vilken är minsta gemensamma nämnaren (MGN) till <span class=\"fr\"><i>1</i><i>3</i></span> och <span class=\"fr\"><i>1</i><i>4</i></span>?", "a": ["12", "7", "24", "4"], "ord": "Minsta gemensam nämnare (MGN)"},
+    {"q": "Vilken är MGN till <span class=\"fr\"><i>1</i><i>6</i></span> och <span class=\"fr\"><i>1</i><i>4</i></span>?", "a": ["12", "24", "10", "6"], "ord": "Minsta gemensam nämnare (MGN)"},
+    {"q": "<span class=\"fr\"><i>1</i><i>3</i></span> + <span class=\"fr\"><i>1</i><i>4</i></span> = ?", "a": ["<span class=\"fr\"><i>7</i><i>12</i></span>", "<span class=\"fr\"><i>2</i><i>7</i></span>", "<span class=\"fr\"><i>2</i><i>12</i></span>", "<span class=\"fr\"><i>1</i><i>7</i></span>"], "ord": "Minsta gemensam nämnare (MGN)"},
+    {"typ": "ordning", "q": "Räkna ut <span class=\"fr\"><i>1</i><i>2</i></span> + <span class=\"fr\"><i>1</i><i>3</i></span>.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["Hitta MGN: 6", "Förläng: <span class=\"fr\"><i>3</i><i>6</i></span> + <span class=\"fr\"><i>2</i><i>6</i></span>", "Addera täljarna: 3 + 2", "Svaret är <span class=\"fr\"><i>5</i><i>6</i></span>"], "ord": "Minsta gemensam nämnare (MGN)"}
+  ] },
+  '8-1-2': { fragor: [
+    {"q": "Vad betyder 2<sup>3</sup>?", "a": ["2 · 2 · 2", "2 · 3", "3 · 3", "2 + 2 + 2"], "ord": "Potens"},
+    {"q": "Vad är värdet av 3<sup>2</sup>?", "a": ["9", "6", "5", "8"], "ord": "Potens"},
+    {"q": "Vad är värdet av 2<sup>5</sup>?", "a": ["32", "10", "25", "16"], "ord": "Potens"},
+    {"typ": "sf", "q": "4<sup>2</sup> = 8", "svar": false, "ord": "Potens"},
+    {"typ": "ordning", "q": "Klicka på potenserna från minst till störst värde", "a": ["2<sup>3</sup>", "3<sup>2</sup>", "2<sup>4</sup>", "5<sup>2</sup>"], "ord": "Potens"},
+    {"q": "I potensen 5<sup>3</sup>, vilket tal är basen?", "a": ["5", "3", "15", "125"], "ord": "Bas"},
+    {"q": "I potensen 5<sup>3</sup>, vilket tal är exponenten?", "a": ["3", "5", "15", "125"], "ord": "Exponent"},
+    {"typ": "sf", "q": "Exponenten talar om hur många gånger basen multipliceras med sig själv.", "svar": true, "ord": "Exponent"},
+    {"q": "Hur skrivs 10 · 10 · 10 · 10 som tiopotens?", "a": ["10<sup>4</sup>", "10<sup>3</sup>", "10 · 4", "4<sup>10</sup>"], "ord": "Tiopotens"},
+    {"q": "Vad är 10<sup>6</sup>?", "a": ["1 000 000", "100 000", "60", "10 000 000"], "ord": "Tiopotens"},
+    {"q": "Hur många nollor har 10<sup>5</sup> skrivet som vanligt tal?", "a": ["5", "4", "6", "10"], "ord": "Tiopotens"},
+    {"q": "Hur skrivs 3 000 000 i grundpotensform?", "a": ["3 · 10<sup>6</sup>", "3 · 10<sup>5</sup>", "30 · 10<sup>5</sup>", "3<sup>6</sup>"], "ord": "Grundpotensform"},
+    {"q": "Vilket tal är skrivet i grundpotensform?", "a": ["4,5 · 10<sup>3</sup>", "45 · 10<sup>2</sup>", "0,45 · 10<sup>4</sup>", "4,5 + 10<sup>3</sup>"], "ord": "Grundpotensform"},
+    {"typ": "sf", "q": "I grundpotensform ska talet framför tiopotensen vara mellan 1 och 10.", "svar": true, "ord": "Grundpotensform"},
+    {"q": "Skriv 2,7 · 10<sup>4</sup> som vanligt tal.", "a": ["27 000", "2 700", "270 000", "2,7000"], "ord": "Grundpotensform"},
+    {"typ": "ordning", "q": "Klicka på talen från minst till störst", "a": ["9 · 10<sup>2</sup>", "1,5 · 10<sup>3</sup>", "4 · 10<sup>3</sup>", "2 · 10<sup>4</sup>"], "ord": "Grundpotensform"}
+  ] },
+  '8-2-1': { fragor: [
+    {"q": "I en klass med 20 elever har 5 glasögon. Hur stor andel har glasögon?", "a": ["25 %", "5 %", "20 %", "15 %"], "ord": "Andel"},
+    {"q": "Det är 12 pojkar och 18 flickor i en klubb. Vad är det hela?", "a": ["30 personer", "12 pojkar", "18 flickor", "6 personer"], "ord": "Det hela"},
+    {"q": "Det är 12 pojkar och 18 flickor i en klubb. Hur stor andel är pojkar?", "a": ["40 %", "12 %", "60 %", "30 %"], "ord": "Andel"},
+    {"typ": "sf", "q": "Delen är alltid mindre än eller lika med det hela.", "svar": true, "ord": "Del"},
+    {"typ": "ordning", "q": "Klicka på andelarna från minst till störst", "a": ["3 av 50", "1 av 10", "4 av 25", "1 av 5"], "ord": "Andel"},
+    {"typ": "sf", "q": "<span class=\"fr\"><i>1</i><i>4</i></span> = 0,25 = 25 %", "svar": true, "ord": "Bråkform"},
+    {"q": "Hur skrivs 30 % i decimalform?", "a": ["0,3", "3,0", "0,03", "30,0"], "ord": "Decimalform"},
+    {"q": "Hur skrivs <span class=\"fr\"><i>7</i><i>20</i></span> i decimalform?", "a": ["0,35", "0,72", "7,2", "0,7"], "ord": "Decimalform"},
+    {"q": "Hur skrivs 0,07 i procentform?", "a": ["7 %", "70 %", "0,7 %", "0,07 %"], "ord": "Procentform"},
+    {"q": "Hur skrivs <span class=\"fr\"><i>3</i><i>5</i></span> i procentform?", "a": ["60 %", "35 %", "3,5 %", "53 %"], "ord": "Procentform"},
+    {"typ": "sf", "q": "Procent betyder tiondel.", "svar": false, "ord": "Procentform"},
+    {"q": "Vad är 20 % av 150 kr?", "a": ["30 kr", "20 kr", "15 kr", "130 kr"], "ord": "Procentform"},
+    {"q": "Vad är 5 % av 400?", "a": ["20", "5", "80", "200"], "ord": "Procentform"},
+    {"q": "En jacka kostar 800 kr och sänks med 25 %. Hur mycket sänks priset?", "a": ["200 kr", "25 kr", "600 kr", "250 kr"], "ord": "Procentform"},
+    {"typ": "ordning", "q": "Klicka på talen från minst till störst", "a": ["0,15", "<span class=\"fr\"><i>1</i><i>5</i></span>", "25 %", "<span class=\"fr\"><i>3</i><i>10</i></span>"], "ord": "Procentform"}
+  ] },
+  '8-2-2': { fragor: [
+    {"q": "Avrunda 3,46 till en decimal.", "a": ["3,5", "3,4", "3,46", "4"], "ord": "Avrundning"},
+    {"q": "Avrunda 2 748 till hundratal.", "a": ["2 700", "2 800", "2 750", "3 000"], "ord": "Avrundning"},
+    {"q": "Ett pris är 98,60 kr. Avrunda till hela kronor.", "a": ["99 kr", "98 kr", "100 kr", "98,6 kr"], "ord": "Avrundning"},
+    {"typ": "sf", "q": "7,25 avrundat till ett heltal blir 8.", "svar": false, "ord": "Avrundning"},
+    {"q": "Vad kallas pengarna som man sätter in på ett sparkonto eller lånar?", "a": ["Kapital", "Ränta", "Räntesats", "Procentenhet"], "ord": "Kapital"},
+    {"q": "Vad kallas det man betalar för att få låna pengar?", "a": ["Ränta", "Kapital", "Räntesats", "Avrundning"], "ord": "Ränta"},
+    {"q": "Vad kallas den andel av kapitalet som är räntan på ett år?", "a": ["Räntesats", "Ränta", "Kapital", "Procentenhet"], "ord": "Räntesats"},
+    {"typ": "sf", "q": "Räntesatsen anges oftast i procentform.", "svar": true, "ord": "Räntesats"},
+    {"q": "Du sätter in 2 000 kr. Räntesatsen är 3 %. Hur stor är räntan efter ett år?", "a": ["60 kr", "3 kr", "600 kr", "2 060 kr"], "ord": "Ränta"},
+    {"q": "Du lånar 10 000 kr med räntesatsen 5 %. Hur mycket ränta betalar du på ett år?", "a": ["500 kr", "50 kr", "5 000 kr", "10 500 kr"], "ord": "Ränta"},
+    {"typ": "ordning", "q": "Klicka på räntorna för ett år från minst till störst", "a": ["1 % av 1 000 kr", "2 % av 1 000 kr", "5 % av 1 000 kr", "4 % av 2 000 kr"], "ord": "Ränta"},
+    {"typ": "ordning", "q": "Räkna ut räntan på 4 000 kr med räntesatsen 2 % för ett år.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["Kapitalet är 4 000 kr", "2 % = 0,02", "4 000 · 0,02", "Räntan är 80 kr"], "ord": "Ränta"},
+    {"q": "Räntan höjs från 2 % till 5 %. Hur mycket har den höjts?", "a": ["3 procentenheter", "3 %", "150 procentenheter", "7 procentenheter"], "ord": "Procentenhet"},
+    {"q": "Ett parti fick 25 % av rösterna förra året och 20 % i år. Vad har hänt?", "a": ["Det har minskat med 5 procentenheter", "Det har ökat med 5 procentenheter", "Det har minskat med 20 procentenheter", "Det är oförändrat"], "ord": "Procentenhet"},
+    {"typ": "sf", "q": "Procentenheter används för att jämföra två andelar som anges i procent.", "svar": true, "ord": "Procentenhet"}
+  ] },
+  '8-3-1': { fragor: [
+    {"q": "En sträcka tvärs över en cirkel genom medelpunkten kallas …", "a": ["diameter", "radie", "omkrets", "diagonal"], "ord": "Diameter"},
+    {"q": "Diametern i en cirkel är 12 cm. Hur lång är radien?", "a": ["6 cm", "24 cm", "12 cm", "3 cm"], "ord": "Radie"},
+    {"typ": "sf", "q": "Alla punkter på en cirkel ligger lika långt från medelpunkten.", "svar": true, "ord": "Cirkel / Medelpunkt"},
+    {"q": "Hur beräknar man omkretsen av en cirkel?", "a": ["π · diametern", "π · radien", "radien · radien", "2 · diametern"], "ord": "Omkrets"},
+    {"q": "En cirkel har diametern 10 cm. Ungefär hur stor är omkretsen? (π ≈ 3,14)", "a": ["31,4 cm", "314 cm", "15,7 cm", "78,5 cm"], "ord": "Omkrets"},
+    {"q": "Hur beräknar man arean av en cirkel?", "a": ["π · <i>r</i> · <i>r</i>", "π · <i>d</i>", "2 · π · <i>r</i>", "<i>r</i> · <i>r</i>"], "ord": "Area"},
+    {"q": "Hur beräknar man arean av en triangel?", "a": ["(basen · höjden) / 2", "basen · höjden", "basen + höjden", "(basen + höjden) / 2"], "ord": "Area"},
+    {"q": "En triangel har basen 8 cm och höjden 5 cm. Hur stor är arean?", "a": ["20 cm²", "40 cm²", "13 cm²", "26 cm²"], "ord": "Triangel"},
+    {"q": "En parallellogram har basen 6 cm och höjden 4 cm. Hur stor är arean?", "a": ["24 cm²", "12 cm²", "20 cm²", "10 cm²"], "ord": "Parallellogram"},
+    {"typ": "ordning", "q": "Klicka på areorna från minst till störst", "a": ["Kvadrat med sidan 3 cm", "Rektangel med sidorna 2 cm och 5 cm", "Triangel med basen 6 cm och höjden 4 cm", "Kvadrat med sidan 4 cm"], "ord": "Area"},
+    {"typ": "sf", "q": "En rektangel är en parallellogram där alla vinklar är räta.", "svar": true, "ord": "Rektangel"},
+    {"typ": "sf", "q": "Alla parallellogrammer är rektanglar.", "svar": false, "ord": "Parallellogram"},
+    {"typ": "sf", "q": "En kvadrat är en romb där alla vinklar är räta.", "svar": true, "ord": "Kvadrat"},
+    {"q": "Vilken figur är en parallellogram där alla sidor är lika långa?", "a": ["Romb", "Rektangel", "Triangel", "Cirkel"], "ord": "Romb"},
+    {"q": "Vad kallas en polygon med sex hörn?", "a": ["Sexhörning", "Femhörning", "Fyrhörning", "Åttahörning"], "ord": "Polygon"},
+    {"typ": "ordning", "q": "Klicka på figurerna från minst till flest hörn", "a": ["Triangel", "Romb", "Femhörning", "Sexhörning"], "ord": "Polygon"}
+  ] },
+  '8-3-2': { fragor: [
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Y3-image14.jpg\" alt=\"\"><small>Alla sidoytor är kvadrater. Vad heter kroppen?</small>", "a": ["Kub", "Prisma", "Pyramid", "Cylinder"], "ord": "Kub"},
+    {"q": "Vad kallas en kropp där alla sidoytor är rektanglar?", "a": ["Rätblock", "Pyramid", "Kon", "Klot"], "ord": "Rätblock"},
+    {"typ": "sf", "q": "En kub är ett rätblock.", "svar": true, "ord": "Kub"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Y3-image20.jpg\" alt=\"\"><small>Vad heter kroppen?</small>", "a": ["Kon", "Pyramid", "Cylinder", "Klot"], "ord": "Kon"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Y3-image22.jpg\" alt=\"\"><small>Vad heter kroppen?</small>", "a": ["Klot", "Cirkel", "Cylinder", "Kon"], "ord": "Klot"},
+    {"q": "Vilken kropp har en polygon som basyta och trianglar som sidoytor med en gemensam spets?", "a": ["Pyramid", "Prisma", "Kon", "Rätblock"], "ord": "Pyramid"},
+    {"typ": "sf", "q": "Ett prisma har två parallella och identiska sidoytor.", "svar": true, "ord": "Prisma"},
+    {"q": "Vad kallas den rundade ytan på en cylinder eller en kon?", "a": ["Mantelyta", "Basyta", "Begränsningsarea", "Diagonal"], "ord": "Mantelyta"},
+    {"q": "Vad kallas ytan som en kropp ofta står på?", "a": ["Basyta", "Mantelyta", "Begränsningsarea", "Volym"], "ord": "Basyta"},
+    {"q": "Ett rätblock är 5 cm långt, 3 cm brett och 2 cm högt. Hur stor är volymen?", "a": ["30 cm³", "10 cm³", "31 cm³", "30 cm²"], "ord": "Volym"},
+    {"q": "Hur räknar man ut volymen av ett prisma eller en cylinder?", "a": ["Basytans area · höjden", "Basytans area · höjden / 3", "Omkretsen · höjden", "Basytans area + höjden"], "ord": "Volym"},
+    {"q": "Hur räknar man ut volymen av en pyramid eller en kon?", "a": ["Basytans area · höjden / 3", "Basytans area · höjden", "Basytans area · 3", "Höjden / 3"], "ord": "Pyramid"},
+    {"typ": "sf", "q": "Volymen berättar hur stor arean är runt om en kropp.", "svar": false, "ord": "Volym"},
+    {"typ": "ordning", "q": "Klicka på volymerna från minst till störst", "a": ["500 cm³", "1 dm³", "2 liter", "1 m³"], "ord": "Volym"},
+    {"q": "Vad kallas den sammanlagda arean av alla ytor runt en kropp?", "a": ["Begränsningsarea", "Volym", "Mantelyta", "Basyta"], "ord": "Begränsningsarea"},
+    {"q": "En kub har sidan 2 cm. Hur stor är begränsningsarean?", "a": ["24 cm²", "8 cm²", "12 cm²", "16 cm²"], "ord": "Begränsningsarea"},
+    {"typ": "ordning", "q": "En cylinder har radien 2 cm och höjden 5 cm. Räkna ut volymen.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["Basytan är en cirkel med radien 2 cm", "Basytans area ≈ 3,14 · 2 · 2 ≈ 12,6 cm²", "Multiplicera med höjden 5 cm", "Volymen ≈ 63 cm³"], "ord": "Cylinder / Mantelyta"}
+  ] },
+  '8-4-1': { fragor: [
+    {"q": "Vilket är ett algebraiskt uttryck?", "a": ["3<i>x</i> + 7", "3 + 7", "3<i>x</i> + 7 = 10", "10"], "ord": "Algebraiskt uttryck"},
+    {"q": "Vad är värdet av 5<i>x</i> – 3 om <i>x</i> = 4?", "a": ["17", "23", "2", "53"], "ord": "Algebraiskt uttryck"},
+    {"typ": "ordning", "q": "Klicka på uttrycken från minst till störst värde när <i>x</i> = 3", "a": ["<i>x</i> – 5", "2<i>x</i> – 3", "<i>x</i> + 4", "3<i>x</i>"], "ord": "Algebraiskt uttryck"},
+    {"typ": "sf", "q": "En variabel kan anta olika värden.", "svar": true, "ord": "Variabel"},
+    {"q": "Lisa har <i>x</i> kr och Omar har dubbelt så mycket. Vilket uttryck visar hur mycket de har tillsammans?", "a": ["3<i>x</i>", "2<i>x</i>", "<i>x</i> + 2", "<i>x</i><sup>2</sup>"], "ord": "Variabel"},
+    {"q": "Vad kallas svaret vid subtraktion?", "a": ["Differens", "Summa", "Produkt", "Kvot"], "ord": "Differens"},
+    {"q": "3, 8, 13, 18, …<br><small>Vad är differensen mellan talen?</small>", "a": ["5", "3", "8", "10"], "ord": "Differens"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Y4-image2.jpg\" alt=\"\"><small>Figurerna har 1, 3, 5 och 7 rutor. Hur många rutor har figur 5?</small>", "a": ["9", "8", "10", "11"], "ord": "Mönster"},
+    {"q": "4, 7, 10, 13, …<br><small>Vilket uttryck ger tal nummer <i>n</i>?</small>", "a": ["3<i>n</i> + 1", "<i>n</i> + 3", "4<i>n</i>", "3<i>n</i> + 4"], "ord": "Mönster"},
+    {"q": "Förenkla 3<i>x</i> + 5 + 2<i>x</i> – 1.", "a": ["5<i>x</i> + 4", "5<i>x</i> + 6", "9<i>x</i>", "6<i>x</i> + 4"], "ord": "Förenkling"},
+    {"q": "Förenkla 4<i>a</i> – <i>a</i> + 2<i>b</i>.", "a": ["3<i>a</i> + 2<i>b</i>", "5<i>a</i> + 2<i>b</i>", "5<i>a</i><i>b</i>", "3<i>a</i> + <i>b</i>"], "ord": "Förenkling"},
+    {"typ": "sf", "q": "3<i>x</i> + 2<i>y</i> kan förenklas till 5<i>x</i><i>y</i>.", "svar": false, "ord": "Förenkling"},
+    {"q": "Vad är 10 – (2 + 3)?", "a": ["5", "11", "15", "9"], "ord": "Parentes"},
+    {"q": "Multiplicera in: 3(<i>x</i> + 4)", "a": ["3<i>x</i> + 12", "3<i>x</i> + 4", "<i>x</i> + 12", "7<i>x</i>"], "ord": "Parentes"},
+    {"q": "Förenkla 5<i>x</i> – (2<i>x</i> – 3).", "a": ["3<i>x</i> + 3", "3<i>x</i> – 3", "7<i>x</i> – 3", "3<i>x</i>"], "ord": "Parentes"},
+    {"typ": "sf", "q": "Det som står inom parentes räknas ut först.", "svar": true, "ord": "Parentes"},
+    {"typ": "ordning", "q": "Förenkla 2(<i>x</i> + 3) + <i>x</i>.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["Multiplicera in: 2<i>x</i> + 6 + <i>x</i>", "Samla <i>x</i>-termerna: 2<i>x</i> + <i>x</i> = 3<i>x</i>", "Konstanten är 6", "Svaret är 3<i>x</i> + 6"], "ord": "Förenkling"}
+  ] },
+  '8-4-2': { fragor: [
+    {"q": "Vad är <i>x</i><sup>2</sup> om <i>x</i> = 5?", "a": ["25", "10", "7", "52"], "ord": "Potens"},
+    {"typ": "sf", "q": "<i>x</i> · <i>x</i> · <i>x</i> = <i>x</i><sup>3</sup>", "svar": true, "ord": "Potens"},
+    {"q": "Vad är 2<sup>3</sup> + 3<sup>2</sup>?", "a": ["17", "12", "13", "36"], "ord": "Potens"},
+    {"q": "Vilken är basen i <i>a</i><sup>4</sup>?", "a": ["<i>a</i>", "4", "4<i>a</i>", "Det finns ingen bas"], "ord": "Bas"},
+    {"q": "Vilken är exponenten i <i>a</i><sup>4</sup>?", "a": ["4", "<i>a</i>", "4<i>a</i>", "Det finns ingen exponent"], "ord": "Exponent"},
+    {"q": "Vad är en ekvation?", "a": ["En likhet där något tal är obekant", "Ett uttryck utan likhetstecken", "Ett tal i bråkform", "En talföljd"], "ord": "Ekvation"},
+    {"q": "Lös ekvationen 3<i>x</i> + 4 = 19.", "a": ["<i>x</i> = 5", "<i>x</i> = 7", "<i>x</i> = 15", "<i>x</i> = 6"], "ord": "Ekvation"},
+    {"q": "Lös ekvationen 5<i>x</i> = 2<i>x</i> + 12.", "a": ["<i>x</i> = 4", "<i>x</i> = 12", "<i>x</i> = 2", "<i>x</i> = 6"], "ord": "Ekvation"},
+    {"typ": "ordning", "q": "Klicka på ekvationerna från minst till störst lösning", "a": ["<i>x</i> + 5 = 6", "3<i>x</i> = 9", "2<i>x</i> – 1 = 9", "<i>x</i> / 2 = 4"], "ord": "Ekvation"},
+    {"q": "Vad innebär balansmetoden?", "a": ["Man gör samma beräkning i båda leden", "Man gissar och prövar", "Man byter plats på leden", "Man räknar bara i vänster led"], "ord": "Balansmetoden"},
+    {"q": "Lös ekvationen 2<i>x</i> – 7 = 11.", "a": ["<i>x</i> = 9", "<i>x</i> = 2", "<i>x</i> = 4", "<i>x</i> = 18"], "ord": "Balansmetoden"},
+    {"typ": "sf", "q": "Med balansmetoden får man dividera bara vänster led med 4.", "svar": false, "ord": "Balansmetoden"},
+    {"typ": "ordning", "q": "Lös 4<i>x</i> + 3 = 23 med balansmetoden.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["4<i>x</i> + 3 = 23", "Subtrahera 3 i båda leden: 4<i>x</i> = 20", "Dividera båda leden med 4", "<i>x</i> = 5"], "ord": "Balansmetoden"},
+    {"q": "Vad kallas <i>x</i> i ekvationen <i>x</i> + 9 = 15?", "a": ["Ett obekant tal", "En exponent", "En bas", "En differens"], "ord": "Obekant tal"},
+    {"q": "<i>x</i> – 2 = 10 + 72<br><small>Vad står i höger led?</small>", "a": ["10 + 72", "<i>x</i> – 2", "<i>x</i>", "="], "ord": "Vänster led och höger led"},
+    {"typ": "sf", "q": "V.L. betyder vänster led och H.L. betyder höger led.", "svar": true, "ord": "Vänster led och höger led"}
+  ] },
+  '8-5-1': { fragor: [
+    {"q": "Hur många utfall finns när man snurrar ett lyckohjul med 8 lika stora fält?", "a": ["8", "1", "4", "16"], "ord": "Utfall"},
+    {"q": "Vilket är ett slumpmässigt försök?", "a": ["Att dra en lott", "Att räkna ut 5 · 4", "Att mäta sin längd", "Att läsa ett schema"], "ord": "Slumpmässigt försök"},
+    {"q": "Vad är sannolikheten att få en udda siffra med en vanlig tärning?", "a": ["<span class=\"fr\"><i>1</i><i>2</i></span>", "<span class=\"fr\"><i>1</i><i>6</i></span>", "<span class=\"fr\"><i>1</i><i>3</i></span>", "<span class=\"fr\"><i>2</i><i>3</i></span>"], "ord": "Sannolikhet"},
+    {"q": "En påse har 2 röda, 3 blå och 5 gröna kulor. Vad är sannolikheten att ta en blå?", "a": ["<span class=\"fr\"><i>3</i><i>10</i></span>", "<span class=\"fr\"><i>3</i><i>7</i></span>", "<span class=\"fr\"><i>1</i><i>3</i></span>", "<span class=\"fr\"><i>3</i><i>5</i></span>"], "ord": "Sannolikhet"},
+    {"typ": "sf", "q": "Sannolikheten för en händelse är alltid mellan 0 och 1.", "svar": true, "ord": "Sannolikhet"},
+    {"typ": "ordning", "q": "Klicka på händelserna från minst till mest sannolik", "a": ["Få två sexor med två tärningar", "Få en sexa med en tärning", "Få krona när man singlar slant", "Få ett tal mindre än 6 med en tärning"], "ord": "Sannolikhet"},
+    {"q": "I vilket försök är sannolikhetsfördelningen likformig?", "a": ["Kasta en vanlig tärning", "Ta en kula ur en påse med 3 röda och 1 gul", "Snurra ett hjul där ett fält är dubbelt så stort som de andra", "Gissa om det regnar i morgon"], "ord": "Likformig sannolikhetsfördelning"},
+    {"typ": "sf", "q": "Om man tar en kula ur en påse med 3 röda och 1 gul är sannolikhetsfördelningen olikformig.", "svar": true, "ord": "Olikformig sannolikhetsfördelning"},
+    {"q": "Du singlar slant två gånger. Vilket påstående stämmer?", "a": ["Kasten är oberoende händelser", "Kasten är beroende händelser", "Andra kastet blir alltid tvärtom", "Sannolikheten för krona ökar efter en klave"], "ord": "Oberoende händelser"},
+    {"typ": "sf", "q": "Om man lägger tillbaka kulan innan nästa dragning är dragningarna oberoende.", "svar": true, "ord": "Oberoende händelser"},
+    {"q": "Du drar två kort ur en kortlek utan att lägga tillbaka det första. Vad kallas det?", "a": ["Beroende händelser", "Oberoende händelser", "Likformig sannolikhetsfördelning", "Ett utfall"], "ord": "Beroende händelser"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Y5-image8.jpg\" alt=\"\"><small>Vad kallas bilden?</small>", "a": ["Träddiagram", "Stapeldiagram", "Linjediagram", "Koordinatsystem"], "ord": "Träddiagram"},
+    {"q": "Du singlar slant två gånger. Vad är sannolikheten att få krona båda gångerna?", "a": ["<span class=\"fr\"><i>1</i><i>4</i></span>", "<span class=\"fr\"><i>1</i><i>2</i></span>", "<span class=\"fr\"><i>1</i><i>3</i></span>", "<span class=\"fr\"><i>3</i><i>4</i></span>"], "ord": "Träddiagram"},
+    {"q": "En påse har en röd och en blå kula. Du drar en, lägger tillbaka den och drar igen. Hur många kombinationer finns?", "a": ["4", "2", "3", "1"], "ord": "Träddiagram"},
+    {"typ": "ordning", "q": "Räkna ut sannolikheten att få krona två gånger när du singlar slant två gånger.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["Krona första gången: <span class=\"fr\"><i>1</i><i>2</i></span>", "Krona andra gången: <span class=\"fr\"><i>1</i><i>2</i></span>", "Multiplicera: <span class=\"fr\"><i>1</i><i>2</i></span> · <span class=\"fr\"><i>1</i><i>2</i></span>", "Sannolikheten är <span class=\"fr\"><i>1</i><i>4</i></span>"], "ord": "Träddiagram"}
+  ] },
+  '8-5-2': { fragor: [
+    {"q": "Vad är medelvärdet av 3, 7, 8 och 10?", "a": ["7", "8", "28", "7,5"], "ord": "Medelvärde"},
+    {"typ": "ordning", "q": "Klicka på lägesmåtten för 2, 2, 3, 7 och 11 från minst till störst", "a": ["Typvärdet", "Medianen", "Medelvärdet", "Det största värdet"], "ord": "Medelvärde"},
+    {"q": "Vad är medianen av 4, 12, 7, 9 och 3?", "a": ["7", "9", "12", "35"], "ord": "Median"},
+    {"q": "Vad är medianen av 1, 3, 5 och 9?", "a": ["4", "3", "5", "4,5"], "ord": "Median"},
+    {"typ": "sf", "q": "Medianen påverkas mindre än medelvärdet av ett enda mycket högt värde.", "svar": true, "ord": "Median"},
+    {"typ": "ordning", "q": "Räkna ut medianen av 8, 3, 5 och 10.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["Sortera: 3, 5, 8, 10", "De mittersta talen är 5 och 8", "Räkna ut (5 + 8) / 2", "Medianen är 6,5"], "ord": "Median"},
+    {"q": "Vad är typvärdet av 6, 2, 6, 8, 2, 6?", "a": ["6", "2", "8", "5"], "ord": "Typvärde"},
+    {"q": "Vad är variationsbredden av 4, 9, 15, 2 och 11?", "a": ["13", "15", "2", "41"], "ord": "Variationsbredd"},
+    {"typ": "sf", "q": "Variationsbredden är ett lägesmått.", "svar": false, "ord": "Variationsbredd"},
+    {"q": "Skostorlekar: 38, 39, 39, 40, 39, 41<br><small>Vad är frekvensen för 39?</small>", "a": ["3", "39", "6", "1"], "ord": "Frekvens"},
+    {"q": "Av 40 elever cyklar 10 till skolan. Vad är den relativa frekvensen för att cykla?", "a": ["25 %", "10 %", "40 %", "4 %"], "ord": "Relativ frekvens"},
+    {"typ": "sf", "q": "Summan av alla relativa frekvenser är 100 %.", "svar": true, "ord": "Relativ frekvens"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Y5-image17.jpg\" alt=\"\"><small>Vad heter diagrammet?</small>", "a": ["Stolpdiagram", "Stapeldiagram", "Linjediagram", "Cirkeldiagram"], "ord": "Stolpdiagram"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Y5-image18.jpg\" alt=\"\"><small>Vad heter diagrammet?</small>", "a": ["Stapeldiagram", "Stolpdiagram", "Linjediagram", "Cirkeldiagram"], "ord": "Stapeldiagram"},
+    {"q": "Vilket diagram passar bäst för att visa hur befolkningen har förändrats under 100 år?", "a": ["Linjediagram", "Cirkeldiagram", "Stapeldiagram", "Stolpdiagram"], "ord": "Linjediagram"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Y5-image20.jpg\" alt=\"\"><small>Hur stor andel av metallen är zink?</small>", "a": ["35 %", "50 %", "15 %", "65 %"], "ord": "Cirkeldiagram"}
+  ] },
+  '9-1-1': { fragor: [
+    {"q": "Vilket tal är ett naturligt tal?", "a": ["0", "–1", "0,5", "<span class=\"fr\"><i>1</i><i>2</i></span>"], "ord": "Naturliga tal"},
+    {"q": "Vilka tal är hela tal?", "a": ["De naturliga talen och de negativa heltalen", "Bara de positiva talen", "Alla tal i bråkform", "Alla tal med decimaler"], "ord": "Hela tal"},
+    {"typ": "sf", "q": "–5 är ett helt tal.", "svar": true, "ord": "Hela tal"},
+    {"q": "Vilket tal är rationellt men inte ett helt tal?", "a": ["0,75", "–3", "√<span class=\"rot\">2</span>", "π"], "ord": "Rationella tal"},
+    {"q": "Vilket tal är ett stambråk?", "a": ["<span class=\"fr\"><i>1</i><i>7</i></span>", "<span class=\"fr\"><i>2</i><i>7</i></span>", "<span class=\"fr\"><i>7</i><i>1</i></span>", "<span class=\"fr\"><i>3</i><i>4</i></span>"], "ord": "Stambråk"},
+    {"q": "Vilket tal har en periodisk decimalutveckling?", "a": ["<span class=\"fr\"><i>1</i><i>3</i></span> = 0,333…", "0,25", "√<span class=\"rot\">2</span> = 1,414 213…", "π = 3,141 59…"], "ord": "Periodisk decimalutveckling"},
+    {"q": "0,272727…<br><small>Vilka siffror upprepas?</small>", "a": ["27", "2", "7", "272"], "ord": "Periodisk decimalutveckling"},
+    {"q": "Vilket tal är irrationellt?", "a": ["π", "0,5", "<span class=\"fr\"><i>2</i><i>3</i></span>", "–4"], "ord": "Irrationella tal"},
+    {"typ": "sf", "q": "<span class=\"fr\"><i>1</i><i>3</i></span> är ett irrationellt tal.", "svar": false, "ord": "Irrationella tal"},
+    {"q": "Vad kallas alla tal som kan visas på en tallinje?", "a": ["Reella tal", "Naturliga tal", "Hela tal", "Stambråk"], "ord": "Reella tal"},
+    {"typ": "sf", "q": "Alla rationella och irrationella tal är reella tal.", "svar": true, "ord": "Reella tal"},
+    {"typ": "ordning", "q": "Klicka på talmängderna från den minsta till den största", "a": ["Naturliga tal", "Hela tal", "Rationella tal", "Reella tal"], "ord": "Reella tal"},
+    {"typ": "ordning", "q": "Klicka på talen från minst till störst", "a": ["–2", "–<span class=\"fr\"><i>1</i><i>2</i></span>", "√<span class=\"rot\">2</span>", "π"], "ord": "Reella tal"},
+    {"q": "Vilket är det motsatta talet till 7?", "a": ["–7", "<span class=\"fr\"><i>1</i><i>7</i></span>", "0,7", "7"], "ord": "Motsatta tal"},
+    {"q": "Vad blir summan av två motsatta tal?", "a": ["0", "1", "Dubbla talet", "–1"], "ord": "Motsatta tal"}
+  ] },
+  '9-1-2': { fragor: [
+    {"q": "Förkorta <span class=\"fr\"><i>18</i><i>24</i></span> så långt det går.", "a": ["<span class=\"fr\"><i>3</i><i>4</i></span>", "<span class=\"fr\"><i>9</i><i>12</i></span>", "<span class=\"fr\"><i>6</i><i>8</i></span>", "<span class=\"fr\"><i>2</i><i>3</i></span>"], "ord": "Förkortning"},
+    {"q": "Förläng <span class=\"fr\"><i>5</i><i>6</i></span> så att nämnaren blir 18.", "a": ["<span class=\"fr\"><i>15</i><i>18</i></span>", "<span class=\"fr\"><i>5</i><i>18</i></span>", "<span class=\"fr\"><i>11</i><i>18</i></span>", "<span class=\"fr\"><i>10</i><i>18</i></span>"], "ord": "Förlängning"},
+    {"typ": "sf", "q": "<span class=\"fr\"><i>6</i><i>9</i></span> är skrivet i enklaste form.", "svar": false, "ord": "Enklaste form"},
+    {"q": "Vilken är minsta gemensamma nämnaren till <span class=\"fr\"><i>1</i><i>6</i></span> och <span class=\"fr\"><i>1</i><i>8</i></span>?", "a": ["24", "48", "14", "12"], "ord": "Minsta gemensam nämnare"},
+    {"q": "<span class=\"fr\"><i>5</i><i>6</i></span> – <span class=\"fr\"><i>3</i><i>8</i></span> = ?", "a": ["<span class=\"fr\"><i>11</i><i>24</i></span>", "<span class=\"fr\"><i>2</i><i>14</i></span>", "<span class=\"fr\"><i>1</i><i>24</i></span>", "<span class=\"fr\"><i>8</i><i>24</i></span>"], "ord": "Minsta gemensam nämnare"},
+    {"q": "Vad är (–2)<sup>3</sup>?", "a": ["–8", "8", "–6", "6"], "ord": "Potens / Bas / Exponent"},
+    {"q": "I potensen 7<sup>4</sup>, vad kallas 7?", "a": ["Basen", "Exponenten", "Tiopotensen", "Kvadratroten"], "ord": "Potens / Bas / Exponent"},
+    {"q": "Vad är 10<sup>–2</sup>?", "a": ["0,01", "–100", "0,001", "–0,01"], "ord": "Tiopotens"},
+    {"q": "Hur skrivs 0,0005 i grundpotensform?", "a": ["5 · 10<sup>–4</sup>", "5 · 10<sup>4</sup>", "0,5 · 10<sup>–3</sup>", "5 · 10<sup>–5</sup>"], "ord": "Grundpotensform"},
+    {"typ": "ordning", "q": "Klicka på talen från minst till störst", "a": ["3 · 10<sup>–2</sup>", "5 · 10<sup>–1</sup>", "2 · 10<sup>1</sup>", "1,5 · 10<sup>2</sup>"], "ord": "Grundpotensform"},
+    {"q": "Vad är √<span class=\"rot\">49</span>?", "a": ["7", "24,5", "49", "14"], "ord": "Kvadratrot"},
+    {"q": "Mellan vilka heltal ligger √<span class=\"rot\">30</span>?", "a": ["5 och 6", "4 och 5", "6 och 7", "15 och 16"], "ord": "Kvadratrot"},
+    {"typ": "sf", "q": "√<span class=\"rot\">16</span> = 8", "svar": false, "ord": "Kvadratrot"},
+    {"typ": "ordning", "q": "Klicka på talen från minst till störst", "a": ["√<span class=\"rot\">10</span>", "4", "2<sup>3</sup>", "3<sup>2</sup>"], "ord": "Kvadratrot"},
+    {"q": "Kvadrera 6.", "a": ["36", "12", "3", "66"], "ord": "Kvadrera"},
+    {"typ": "sf", "q": "Att kvadrera ett tal betyder att multiplicera talet med sig självt.", "svar": true, "ord": "Kvadrera"}
+  ] },
+  '9-2-1': { fragor: [
+    {"q": "Andelen ökar från 30 % till 36 %. Hur många procent är ökningen?", "a": ["20 %", "6 %", "36 %", "16 %"], "ord": "Procent"},
+    {"q": "Andelen ökar från 30 % till 36 %. Hur många procentenheter är ökningen?", "a": ["6 procentenheter", "20 procentenheter", "36 procentenheter", "3 procentenheter"], "ord": "Procentenhet"},
+    {"q": "Vad betyder promille?", "a": ["Tusendel", "Hundradel", "Tiondel", "Miljondel"], "ord": "Promille"},
+    {"q": "Hur skrivs 0,004 i promille?", "a": ["4 ‰", "0,4 ‰", "40 ‰", "4 %"], "ord": "Promille"},
+    {"typ": "sf", "q": "5 ‰ = 0,5 %", "svar": true, "ord": "Promille"},
+    {"q": "Ett pris höjs med 20 %. Vad är förändringsfaktorn?", "a": ["1,2", "0,2", "0,8", "20"], "ord": "Förändringsfaktor"},
+    {"q": "Ett pris sänks med 15 %. Vad är förändringsfaktorn?", "a": ["0,85", "1,15", "0,15", "85"], "ord": "Förändringsfaktor"},
+    {"q": "En jacka kostar 600 kr och sänks med 30 %. Vad är det nya priset?", "a": ["420 kr", "180 kr", "570 kr", "780 kr"], "ord": "Förändringsfaktor"},
+    {"typ": "sf", "q": "En förändringsfaktor som är större än 1 betyder en ökning.", "svar": true, "ord": "Förändringsfaktor"},
+    {"typ": "ordning", "q": "Klicka på förändringsfaktorerna från störst minskning till störst ökning", "a": ["0,7", "0,95", "1,05", "1,3"], "ord": "Förändringsfaktor"},
+    {"q": "Vad är en funktion?", "a": ["Ett samband där något beror av något annat", "En punkt i ett koordinatsystem", "Ett tal i procentform", "En kvadratrot"], "ord": "Funktion"},
+    {"q": "<i>y</i> = 3<i>x</i> + 2<br><small>Vad blir <i>y</i> när <i>x</i> = 5?</small>", "a": ["17", "15", "10", "32"], "ord": "Funktion"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Z2-image11.jpg\" alt=\"\"><small>Vad kallas tabellen?</small>", "a": ["Värdetabell", "Frekvenstabell", "Träddiagram", "Graf"], "ord": "Värdetabell"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Z2-image11.jpg\" alt=\"\"><small>Mönstret fortsätter. Vilket värde får <i>y</i> när <i>x</i> = 4?</small>", "a": ["7", "6", "8", "5"], "ord": "Värdetabell"},
+    {"q": "En taxiresa kostar mer ju längre man åker. Vilken är den oberoende variabeln?", "a": ["Sträckan", "Priset", "Taxin", "Föraren"], "ord": "Oberoende variabel"},
+    {"typ": "sf", "q": "Den beroende variabeln påverkar den oberoende variabeln.", "svar": false, "ord": "Beroende variabel"}
+  ] },
+  '9-2-2': { fragor: [
+    {"q": "Vilka koordinater har origo?", "a": ["(0, 0)", "(1, 1)", "(0, 1)", "(1, 0)"], "ord": "Koordinatsystem / Koordinataxlar / x-axel och y-axel / Koordinat / Origo"},
+    {"q": "Vilken koordinataxel är lodrät?", "a": ["<i>y</i>-axeln", "<i>x</i>-axeln", "Båda", "Ingen av dem"], "ord": "Koordinatsystem / Koordinataxlar / x-axel och y-axel / Koordinat / Origo"},
+    {"q": "Hur ser grafen till en linjär funktion ut?", "a": ["En rät linje", "En cirkel", "En böjd kurva", "En enda punkt"], "ord": "Linjär funktion"},
+    {"q": "Vilken funktion är linjär?", "a": ["<i>y</i> = 4<i>x</i> – 1", "<i>y</i> = <i>x</i><sup>2</sup>", "<i>y</i> = 2<sup><i>x</i></sup>", "<i>y</i> = <i>x</i><sup>3</sup> + 1"], "ord": "Linjär funktion"},
+    {"typ": "ordning", "q": "Klicka på <i>x</i>-värdena från lägst till högst <i>y</i>-värde för linjen <i>y</i> = 2<i>x</i> + 1", "a": ["<i>x</i> = –2", "<i>x</i> = 0", "<i>x</i> = 1", "<i>x</i> = 3"], "ord": "Linjär funktion"},
+    {"q": "Vad är <i>k</i>-värdet i <i>y</i> = 3<i>x</i> + 5?", "a": ["3", "5", "8", "15"], "ord": "k-värde / Riktningskoefficient"},
+    {"q": "En linje går genom punkterna (0, 1) och (2, 7). Vad är <i>k</i>-värdet?", "a": ["3", "6", "2", "7"], "ord": "k-värde / Riktningskoefficient"},
+    {"typ": "sf", "q": "Om <i>k</i>-värdet är negativt lutar linjen nedåt från vänster till höger.", "svar": true, "ord": "k-värde / Riktningskoefficient"},
+    {"typ": "ordning", "q": "Klicka på linjerna från minst till störst lutning", "a": ["<i>y</i> = –2<i>x</i> + 1", "<i>y</i> = 3", "<i>y</i> = <i>x</i> + 5", "<i>y</i> = 4<i>x</i>"], "ord": "k-värde / Riktningskoefficient"},
+    {"q": "Vad är <i>m</i>-värdet i <i>y</i> = 3<i>x</i> + 5?", "a": ["5", "3", "8", "0"], "ord": "m-värde"},
+    {"q": "Var skär linjen <i>y</i> = 2<i>x</i> – 4 <i>y</i>-axeln?", "a": ["(0, –4)", "(0, 2)", "(–4, 0)", "(2, 0)"], "ord": "m-värde"},
+    {"q": "Vad kallas en punkt där två linjer korsar varandra?", "a": ["Skärningspunkt", "Origo", "Medelpunkt", "Vinkelspets"], "ord": "Skärningspunkt"},
+    {"q": "<i>y</i> = 5<i>x</i> + 2<br><small>Vilka är konstanterna?</small>", "a": ["5 och 2", "<i>x</i> och <i>y</i>", "Bara <i>y</i>", "5<i>x</i>"], "ord": "Konstant"},
+    {"typ": "sf", "q": "Motsatsen till en konstant är en variabel.", "svar": true, "ord": "Konstant"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Z2-image13.jpg\" alt=\"\"><small>Grafen visar kostnaden. Vad kostar 2 timmar?</small>", "a": ["500 kr", "250 kr", "750 kr", "1 000 kr"], "ord": "Graf"},
+    {"q": "Vilken funktion är en proportionalitet?", "a": ["<i>y</i> = 4<i>x</i>", "<i>y</i> = 4<i>x</i> + 1", "<i>y</i> = <i>x</i> + 4", "<i>y</i> = 4"], "ord": "Proportionalitet"},
+    {"typ": "sf", "q": "Grafen till en proportionalitet går genom origo.", "svar": true, "ord": "Proportionalitet"}
+  ] },
+  '9-3-1': { fragor: [
+    {"q": "Vad är värdet av 3<i>a</i> – <i>b</i> om <i>a</i> = 4 och <i>b</i> = –2?", "a": ["14", "10", "–14", "8"], "ord": "Variabel"},
+    {"typ": "ordning", "q": "Klicka på uttrycken från minst till störst värde när <i>x</i> = –2", "a": ["3<i>x</i>", "<i>x</i> – 1", "<i>x</i><sup>2</sup>", "<i>x</i><sup>2</sup> + 5"], "ord": "Variabel"},
+    {"q": "Vad är värdet av <i>x</i><sup>2</sup> – 2<i>x</i> om <i>x</i> = 5?", "a": ["15", "5", "20", "35"], "ord": "Algebraiskt uttryck"},
+    {"q": "Multiplicera in: <i>x</i>(<i>x</i> + 4)", "a": ["<i>x</i><sup>2</sup> + 4<i>x</i>", "2<i>x</i> + 4", "<i>x</i><sup>2</sup> + 4", "5<i>x</i>"], "ord": "Algebraiskt uttryck"},
+    {"q": "2, 5, 8, 11, …<br><small>Vilket uttryck beskriver tal nummer <i>n</i>?</small>", "a": ["3<i>n</i> – 1", "<i>n</i> + 3", "2<i>n</i> + 3", "3<i>n</i> + 2"], "ord": "Mönster"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Z3-image2.jpg\" alt=\"\"><small>Figurerna har 1, 3, 5 och 7 rutor. Hur många rutor har figur 10?</small>", "a": ["19", "20", "21", "17"], "ord": "Mönster"},
+    {"q": "Förenkla 4<i>x</i> + 3<i>y</i> – <i>x</i> + 2<i>y</i>.", "a": ["3<i>x</i> + 5<i>y</i>", "5<i>x</i> + 5<i>y</i>", "8<i>x</i><i>y</i>", "3<i>x</i> + <i>y</i>"], "ord": "Förenkling"},
+    {"q": "Förenkla 2(<i>x</i> + 3) – (<i>x</i> – 1).", "a": ["<i>x</i> + 7", "<i>x</i> + 5", "3<i>x</i> + 7", "<i>x</i> + 2"], "ord": "Förenkling"},
+    {"typ": "sf", "q": "2<i>x</i> · 3<i>x</i> = 6<i>x</i><sup>2</sup>", "svar": true, "ord": "Förenkling"},
+    {"typ": "sf", "q": "<i>a</i> + <i>a</i> = <i>a</i><sup>2</sup>", "svar": false, "ord": "Förenkling"},
+    {"typ": "ordning", "q": "Förenkla 3(<i>x</i> + 2) – 2<i>x</i>.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["Multiplicera in: 3<i>x</i> + 6 – 2<i>x</i>", "Samla <i>x</i>-termerna: 3<i>x</i> – 2<i>x</i> = <i>x</i>", "Konstanten är 6", "Svaret är <i>x</i> + 6"], "ord": "Förenkling"},
+    {"q": "Förenkla <span class=\"fr\"><i>6<i>x</i></i><i>3</i></span>.", "a": ["2<i>x</i>", "3<i>x</i>", "6<i>x</i>", "<span class=\"fr\"><i><i>x</i></i><i>2</i></span>"], "ord": "Enklaste form"},
+    {"q": "Skriv <span class=\"fr\"><i>4<i>a</i><i>b</i></i><i>8<i>a</i></i></span> i enklaste form.", "a": ["<span class=\"fr\"><i><i>b</i></i><i>2</i></span>", "<span class=\"fr\"><i><i>a</i><i>b</i></i><i>2</i></span>", "<span class=\"fr\"><i>1</i><i>2<i>a</i></i></span>", "2<i>b</i>"], "ord": "Enklaste form"},
+    {"q": "Förhållandet mellan pojkar och flickor är 2 : 3. Det är 12 pojkar. Hur många flickor är det?", "a": ["18", "8", "15", "24"], "ord": "Proportion"},
+    {"q": "Saft blandas med vatten i förhållandet 1 : 4. Hur mycket vatten behövs till 3 dl saft?", "a": ["12 dl", "4 dl", "7 dl", "0,75 dl"], "ord": "Proportion"},
+    {"typ": "sf", "q": "2 : 5 och 4 : 10 är samma proportion.", "svar": true, "ord": "Proportion"}
+  ] },
+  '9-3-2': { fragor: [
+    {"q": "Lös ekvationen 5<i>x</i> – 3 = 2<i>x</i> + 9.", "a": ["<i>x</i> = 4", "<i>x</i> = 2", "<i>x</i> = 12", "<i>x</i> = 6"], "ord": "Ekvation"},
+    {"q": "Lös ekvationen 3(<i>x</i> – 2) = 12.", "a": ["<i>x</i> = 6", "<i>x</i> = 2", "<i>x</i> = 4", "<i>x</i> = 5"], "ord": "Ekvation"},
+    {"q": "Vad kallas <i>y</i> i ekvationen 2<i>y</i> + 1 = 11?", "a": ["Ett obekant tal", "En konstant", "En exponent", "En differens"], "ord": "Obekant tal"},
+    {"q": "3<i>x</i> + 5 = 20<br><small>Vad står i vänster led?</small>", "a": ["3<i>x</i> + 5", "20", "5", "="], "ord": "Vänster led och höger led"},
+    {"q": "Lös ekvationen <span class=\"fr\"><i><i>x</i></i><i>4</i></span> = 5.", "a": ["<i>x</i> = 20", "<i>x</i> = 1,25", "<i>x</i> = 9", "<i>x</i> = 1"], "ord": "Balansmetoden"},
+    {"typ": "sf", "q": "Med balansmetoden gör man alltid samma beräkning i båda leden.", "svar": true, "ord": "Balansmetoden"},
+    {"typ": "ordning", "q": "Lös 7<i>x</i> – 4 = 3<i>x</i> + 8.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["Subtrahera 3<i>x</i>: 4<i>x</i> – 4 = 8", "Addera 4: 4<i>x</i> = 12", "Dividera med 4", "<i>x</i> = 3"], "ord": "Balansmetoden"},
+    {"q": "Pröva! Vilket värde är en lösning till <i>x</i><sup>2</sup> = 2<i>x</i> + 3?", "a": ["<i>x</i> = 3", "<i>x</i> = 1", "<i>x</i> = 2", "<i>x</i> = 4"], "ord": "Prövning"},
+    {"typ": "sf", "q": "<i>x</i> = 2 är en lösning till 4<i>x</i> – 1 = 9.", "svar": false, "ord": "Prövning"},
+    {"q": "Vad är ett ekvationssystem?", "a": ["Två eller flera ekvationer med två eller flera obekanta", "En ekvation med en obekant", "Ett uttryck utan likhetstecken", "En värdetabell"], "ord": "Ekvationssystem / Grafisk metod"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Z3-image9.jpg\" alt=\"\"><small>Linjerna är <i>y</i> = 2<i>x</i> – 3 och <i>y</i> = 9 – <i>x</i>. Vad är lösningen till ekvationssystemet?</small>", "a": ["<i>x</i> = 4, <i>y</i> = 5", "<i>x</i> = 2, <i>y</i> = 1", "<i>x</i> = 6, <i>y</i> = 3", "<i>x</i> = 0, <i>y</i> = –3"], "ord": "Ekvationssystem / Grafisk metod"},
+    {"typ": "sf", "q": "Man kan lösa ett ekvationssystem grafiskt genom att hitta linjernas skärningspunkt.", "svar": true, "ord": "Ekvationssystem / Grafisk metod"},
+    {"q": "Vad kallas det när man löser ett ekvationssystem genom att räkna i stället för att rita?", "a": ["Algebraisk metod", "Grafisk metod", "Prövning", "Avrundning"], "ord": "Algebraisk metod"},
+    {"q": "Vad gör man i ersättningsmetoden?", "a": ["Man ersätter en obekant med ett uttryck från den andra ekvationen", "Man ritar två linjer", "Man gissar och prövar", "Man kvadrerar båda leden"], "ord": "Ersättningsmetoden"},
+    {"q": "<i>y</i> = 2<i>x</i> och <i>x</i> + <i>y</i> = 9<br><small>Lös med ersättningsmetoden. Vad är <i>x</i>?</small>", "a": ["<i>x</i> = 3", "<i>x</i> = 6", "<i>x</i> = 9", "<i>x</i> = 4,5"], "ord": "Ersättningsmetoden"},
+    {"typ": "ordning", "q": "Lös <i>y</i> = <i>x</i> + 1 och 2<i>x</i> + <i>y</i> = 10 med ersättningsmetoden.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["Ersätt <i>y</i>: 2<i>x</i> + (<i>x</i> + 1) = 10", "3<i>x</i> + 1 = 10", "<i>x</i> = 3", "<i>y</i> = 3 + 1 = 4"], "ord": "Ersättningsmetoden"}
+  ] },
+  '9-4-1': { fragor: [
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Z4-image2.jpg\" alt=\"\"><small>Vad har hänt med triangeln?</small>", "a": ["Den har speglats i <i>y</i>-axeln", "Den har roterats ett halvt varv", "Den har förstorats", "Den har flyttats uppåt"], "ord": "Spegling"},
+    {"typ": "sf", "q": "Vid en spegling hamnar bilden lika långt från symmetrilinjen, men på andra sidan.", "svar": true, "ord": "Spegling"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Z4-image3.jpg\" alt=\"\"><small>Vad kallas de röda linjerna?</small>", "a": ["Symmetrilinjer", "Diagonaler", "Radier", "Skärningspunkter"], "ord": "Spegelsymmetri / Symmetrilinje"},
+    {"q": "Hur många symmetrilinjer har en kvadrat?", "a": ["4", "2", "1", "8"], "ord": "Spegelsymmetri / Symmetrilinje"},
+    {"typ": "ordning", "q": "Klicka på figurerna från minst till flest symmetrilinjer", "a": ["Bokstaven F", "Bokstaven A", "En rektangel", "En kvadrat"], "ord": "Spegelsymmetri / Symmetrilinje"},
+    {"q": "Vilken bokstav har rotationssymmetri (ett halvt varv)?", "a": ["S", "A", "E", "T"], "ord": "Rotationssymmetri"},
+    {"typ": "sf", "q": "En liksidig triangel har rotationssymmetri.", "svar": true, "ord": "Rotationssymmetri"},
+    {"q": "Vad betyder det att två figurer är kongruenta?", "a": ["De har samma form och samma storlek", "De har samma form men olika storlek", "De har samma area men olika form", "De har bara samma omkrets"], "ord": "Likformighet / Kongruens"},
+    {"q": "Två trianglar är likformiga. Vad gäller alltid?", "a": ["Motsvarande vinklar är lika stora", "Alla sidor är lika långa", "Areorna är lika stora", "De är kongruenta"], "ord": "Likformighet / Kongruens"},
+    {"typ": "sf", "q": "Likformiga figurer är alltid lika stora.", "svar": false, "ord": "Likformighet / Kongruens"},
+    {"q": "En triangel har sidorna 3, 4 och 5 cm. En likformig triangel har den kortaste sidan 6 cm. Hur lång är den längsta sidan?", "a": ["10 cm", "8 cm", "6 cm", "15 cm"], "ord": "Likformighet / Kongruens"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Z4-image12.jpg\" alt=\"\"><small>DE är parallell med BC. Vad säger topptriangelsatsen?</small>", "a": ["Triangeln ADE är likformig med triangeln ABC", "Triangeln ADE är kongruent med triangeln ABC", "DE är lika lång som BC", "Vinkeln A är rät"], "ord": "Topptriangelsatsen"},
+    {"q": "<span class=\"fr\"><i><i>x</i></i><i>5</i></span> = <span class=\"fr\"><i>3</i><i>2</i></span><br><small>Vilken ekvation får du med korsmultiplikation?</small>", "a": ["2<i>x</i> = 15", "5<i>x</i> = 6", "<i>x</i> = 30", "2<i>x</i> = 8"], "ord": "Korsmultiplikation"},
+    {"q": "Lös ekvationen <span class=\"fr\"><i><i>x</i></i><i>6</i></span> = <span class=\"fr\"><i>4</i><i>3</i></span> med korsmultiplikation.", "a": ["<i>x</i> = 8", "<i>x</i> = 2", "<i>x</i> = 4,5", "<i>x</i> = 24"], "ord": "Korsmultiplikation"},
+    {"typ": "ordning", "q": "Lös <span class=\"fr\"><i><i>x</i></i><i>4</i></span> = <span class=\"fr\"><i>9</i><i>6</i></span>.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["Korsmultiplicera: 6<i>x</i> = 4 · 9", "6<i>x</i> = 36", "Dividera båda leden med 6", "<i>x</i> = 6"], "ord": "Korsmultiplikation"}
+  ] },
+  '9-4-2': { fragor: [
+    {"q": "Längdskalan är 1 : 50. Hur lång är 3 cm på ritningen i verkligheten?", "a": ["150 cm", "53 cm", "16,7 cm", "1,5 cm"], "ord": "Längdskala"},
+    {"q": "En sträcka är 4 cm på kartan och 2 km i verkligheten. Vilken är längdskalan?", "a": ["1 : 50 000", "1 : 500", "1 : 2 000", "4 : 2"], "ord": "Längdskala"},
+    {"typ": "ordning", "q": "Klicka på längdskalorna från störst förminskning till störst förstoring", "a": ["1 : 100", "1 : 4", "3 : 1", "10 : 1"], "ord": "Längdskala"},
+    {"q": "Längdskalan är 1 : 3. Vad blir areaskalan?", "a": ["1 : 9", "1 : 3", "1 : 6", "1 : 27"], "ord": "Areaskala"},
+    {"typ": "sf", "q": "Om längdskalan är 1 : 10 är areaskalan 1 : 100.", "svar": true, "ord": "Areaskala"},
+    {"q": "Längdskalan är 2 : 1. Vad blir volymskalan?", "a": ["8 : 1", "4 : 1", "2 : 1", "6 : 1"], "ord": "Volymskala"},
+    {"q": "En modell byggs i längdskalan 1 : 10. Verklighetens volym är 1 000 dm³. Vad är modellens volym?", "a": ["1 dm³", "100 dm³", "10 dm³", "0,1 dm³"], "ord": "Volymskala"},
+    {"q": "Vad kallas den längsta sidan i en rätvinklig triangel?", "a": ["Hypotenusa", "Katet", "Diagonal", "Höjd"], "ord": "Hypotenusa"},
+    {"typ": "sf", "q": "Hypotenusan ligger mitt emot den räta vinkeln.", "svar": true, "ord": "Hypotenusa"},
+    {"q": "Vad kallas de två kortare sidorna i en rätvinklig triangel?", "a": ["Kateter", "Hypotenusor", "Diagonaler", "Radier"], "ord": "Katet"},
+    {"q": "Vilket samband är Pythagoras sats? (<i>a</i> och <i>b</i> är kateter, <i>c</i> är hypotenusa)", "a": ["<i>a</i><sup>2</sup> + <i>b</i><sup>2</sup> = <i>c</i><sup>2</sup>", "<i>a</i> + <i>b</i> = <i>c</i>", "<i>a</i><sup>2</sup> + <i>c</i><sup>2</sup> = <i>b</i><sup>2</sup>", "<i>a</i> · <i>b</i> = <i>c</i>"], "ord": "Pythagoras sats / Andragradsekvation"},
+    {"q": "<img class=\"kq-bild\" src=\"bilder/begrepp/Z4-image20.jpg\" alt=\"\"><small>Kateterna är 3 cm och 4 cm. Hur lång är hypotenusan <i>c</i>?</small>", "a": ["5 cm", "7 cm", "25 cm", "12 cm"], "ord": "Pythagoras sats / Andragradsekvation"},
+    {"q": "Kateterna är 6 cm och 8 cm. Hur lång är hypotenusan?", "a": ["10 cm", "14 cm", "100 cm", "48 cm"], "ord": "Pythagoras sats / Andragradsekvation"},
+    {"q": "Hypotenusan är 13 cm och ena kateten är 5 cm. Hur lång är den andra kateten?", "a": ["12 cm", "8 cm", "18 cm", "144 cm"], "ord": "Pythagoras sats / Andragradsekvation"},
+    {"typ": "sf", "q": "En triangel med sidorna 5 cm, 6 cm och 8 cm är rätvinklig.", "svar": false, "ord": "Pythagoras sats / Andragradsekvation"},
+    {"q": "Lös andragradsekvationen <i>x</i><sup>2</sup> = 49 när <i>x</i> &gt; 0.", "a": ["<i>x</i> = 7", "<i>x</i> = 24,5", "<i>x</i> = 49", "<i>x</i> = 14"], "ord": "Pythagoras sats / Andragradsekvation"},
+    {"typ": "ordning", "q": "Kateterna är 5 cm och 12 cm. Räkna ut hypotenusan.<br><small>Klicka på stegen i rätt ordning.</small>", "a": ["5<sup>2</sup> + 12<sup>2</sup> = <i>c</i><sup>2</sup>", "25 + 144 = <i>c</i><sup>2</sup>", "<i>c</i><sup>2</sup> = 169", "<i>c</i> = 13 cm"], "ord": "Pythagoras sats / Andragradsekvation"}
+  ] },
+  '9-5-1': { fragor: [
+    {"q": "Fem elever fick 4, 7, 7, 9 och 13 poäng. Vad är medelvärdet?", "a": ["8", "7", "9", "9,5"], "ord": "Medelvärde"},
+    {"q": "Vad är medianen av talen 3, 9, 4, 12 och 6?", "a": ["6", "4", "9", "6,8"], "ord": "Median"},
+    {"q": "Vad är medianen av talen 2, 5, 8 och 10?", "a": ["6,5", "5", "8", "6,25"], "ord": "Median"},
+    {"q": "Vad är typvärdet av talen 5, 3, 5, 8, 3, 5 och 2?", "a": ["5", "3", "8", "4,4"], "ord": "Typvärde"},
+    {"q": "Under en dag var temperaturen som lägst –4 °C och som högst 9 °C. Vad är variationsbredden?", "a": ["13 °C", "5 °C", "9 °C", "2,5 °C"], "ord": "Variationsbredd"},
+    {"typ": "sf", "q": "Medelvärde, median och typvärde är lägesmått.", "svar": true, "ord": "Lägesmått", "forkl": "Ett lägesmått beskriver var mitten eller tyngdpunkten i ett statistiskt material ligger. Medelvärde, median och typvärde är lägesmått."},
+    {"typ": "sf", "q": "Variationsbredd är ett lägesmått.", "svar": false, "ord": "Variationsbredd"},
+    {"q": "Vilket lägesmått påverkas mest av ett enda mycket högt värde?", "a": ["Medelvärdet", "Medianen", "Typvärdet", "Inget av dem"], "ord": "Medelvärde"},
+    {"q": "20 elever svarade på en enkät och 5 av dem valde fotboll. Vad är den relativa frekvensen för fotboll?", "a": ["25 %", "5 %", "20 %", "15 %"], "ord": "Relativ frekvens"},
+    {"q": "I en enkät svarade 8 elever ”katt”. Vad kallas talet 8?", "a": ["Frekvensen för katt", "Relativa frekvensen för katt", "Medianen", "Variationsbredden"], "ord": "Frekvens"},
+    {"q": "I ett cirkeldiagram är 25 % av cirkeln blå. Hur stor är medelpunktsvinkeln för den blå delen?", "a": ["90°", "25°", "45°", "120°"], "ord": "Cirkeldiagram"},
+    {"q": "Du vill visa hur din längd har förändrats från 7 till 15 års ålder. Vilket diagram passar bäst?", "a": ["Linjediagram", "Cirkeldiagram", "Stapeldiagram", "Träddiagram"], "ord": "Linjediagram"},
+    {"q": "Du vill jämföra hur många elever som valt äpple, banan och päron. Vilket diagram passar bäst?", "a": ["Stapeldiagram", "Linjediagram", "Träddiagram", "Koordinatsystem"], "ord": "Stapeldiagram"},
+    {"typ": "ordning", "q": "Klicka på stegen i rätt ordning för att hitta medianen.", "a": ["Skriv talen i storleksordning", "Räkna hur många tal det finns", "Hitta talet i mitten", "Finns två tal i mitten: ta medelvärdet av dem"], "ord": "Median"},
+    {"q": "Medelvärdet av fyra tal är 6. Tre av talen är 4, 5 och 7. Vilket är det fjärde talet?", "a": ["8", "6", "2", "10"], "ord": "Medelvärde"}
+  ] },
+  '9-5-2': { fragor: [
+    {"q": "Du kastar två mynt. Hur många möjliga utfall finns det?", "a": ["4", "2", "3", "8"], "ord": "Utfall"},
+    {"q": "Du kastar en vanlig tärning. Vad är sannolikheten att få minst 5?", "a": ["<span class=\"fr\"><i>1</i><i>3</i></span>", "<span class=\"fr\"><i>1</i><i>6</i></span>", "<span class=\"fr\"><i>5</i><i>6</i></span>", "<span class=\"fr\"><i>1</i><i>2</i></span>"], "ord": "Sannolikhet"},
+    {"typ": "sf", "q": "En sannolikhet kan vara större än 1.", "svar": false, "ord": "Sannolikhet"},
+    {"q": "Vilket av talen kan INTE vara en sannolikhet?", "a": ["1,2", "0", "0,75", "100 %"], "ord": "Sannolikhet"},
+    {"q": "Sannolikheten att det regnar i morgon är 0,3. Vad är sannolikheten att det inte regnar?", "a": ["0,7", "0,3", "1,3", "0,03"], "ord": "Sannolikhet"},
+    {"typ": "sf", "q": "Att dra en lott är ett slumpmässigt försök.", "svar": true, "ord": "Slumpmässigt försök"},
+    {"q": "Vilket försök har en likformig sannolikhetsfördelning?", "a": ["Kasta en vanlig tärning", "Dra en kula ur en påse med 3 röda och 1 blå", "Snurra ett lyckohjul med olika stora fält", "Gissa om det snöar en dag i juli"], "ord": "Likformig sannolikhetsfördelning"},
+    {"typ": "sf", "q": "En påse har 5 röda och 1 grön kula. Att dra en kula ur påsen har en olikformig sannolikhetsfördelning.", "svar": true, "ord": "Olikformig sannolikhetsfördelning"},
+    {"q": "Du kastar ett mynt två gånger. Vad kallas de två kasten?", "a": ["Oberoende händelser", "Beroende händelser", "Omöjliga händelser", "Säkra händelser"], "ord": "Oberoende händelser"},
+    {"q": "Du kastar ett mynt två gånger. Vad är sannolikheten att få krona båda gångerna?", "a": ["<span class=\"fr\"><i>1</i><i>4</i></span>", "<span class=\"fr\"><i>1</i><i>2</i></span>", "<span class=\"fr\"><i>3</i><i>4</i></span>", "<span class=\"fr\"><i>1</i><i>8</i></span>"], "ord": "Oberoende händelser"},
+    {"q": "Du drar två kort ur en kortlek utan att lägga tillbaka det första. Vad kallas dragningarna?", "a": ["Beroende händelser", "Oberoende händelser", "Omöjliga händelser", "Säkra händelser"], "ord": "Beroende händelser"},
+    {"q": "En påse har 3 röda och 2 blå kulor. Du tar två kulor utan att lägga tillbaka. Vad är sannolikheten att båda är röda?", "a": ["<span class=\"fr\"><i>3</i><i>10</i></span>", "<span class=\"fr\"><i>9</i><i>25</i></span>", "<span class=\"fr\"><i>3</i><i>5</i></span>", "<span class=\"fr\"><i>1</i><i>2</i></span>"], "ord": "Beroende händelser"},
+    {"q": "Hur räknar man ut sannolikheten längs en gren i ett träddiagram?", "a": ["Man multiplicerar sannolikheterna", "Man adderar sannolikheterna", "Man subtraherar sannolikheterna", "Man dividerar sannolikheterna"], "ord": "Träddiagram"},
+    {"q": "Du kastar en vanlig tärning 600 gånger. Ungefär hur många sexor kan du vänta dig?", "a": ["100", "60", "6", "300"], "ord": "Sannolikhet"},
+    {"typ": "ordning", "q": "Klicka på händelserna från minst till mest sannolik.", "a": ["Få 7 med en vanlig tärning", "Få en sexa med en tärning", "Få krona med ett mynt", "Få ett tal under 7 med en tärning"], "ord": "Sannolikhet"}
   ] }
 };
 
@@ -211,11 +568,22 @@ var QUIZ_DATA = {
   var FARG = [['A', 'kq-r'], ['B', 'kq-b'], ['C', 'kq-g'], ['D', 'kq-gr']];
   var inst = { kap: null, ak: 7, tid: 20, ljud: true };
   var KAP = window.QUIZ_KAP || {};
-  var AKF = { 7: '#3E8A32', 8: '#1A86B0', 9: '#8A4A78' };
+  // Nivåfärger (Nikola 2026-11-06: inte böckernas/årskursernas färger).
+  var AKF = { 7: '#2A9D8F', 8: '#2A9D8F', 9: '#2A9D8F' };  // Nikola valde B: turkos på alla nivåer
+  var AKBG = { 7: '#23505A', 8: '#1F3657', 9: '#1C1E3A' };  // egen bakgrund per nivå, mörkare ju högre nivå
+  function bakgrund() { rot.style.setProperty('--kqbg', AKBG[inst.ak] || '#1F2A44'); }
+  var STJARNOR = true;  // 1–3 stjärnor på nivåflikarna
+  // Nycklarna 7/8/9 visas som Nivå 1/2/3 (Nikola 2026-11-06)
+  var NIVA = { 7: 1, 8: 2, 9: 3 };
+  var QUIZ_NAMN = { '9-5-1': 'Statistik', '9-5-2': 'Sannolikhet' };
+  var SYMB = function (namn) {
+    return /^Tal/.test(namn) ? '123' : /Algebra/.test(namn) ? '<i>x</i>' : /Geometri/.test(namn) ? '△' : /Samband/.test(namn) ? '↗' : /Statistik|Sannolikhet/.test(namn) ? '%' : '?';
+  };
   var spel, timer, ac;
 
   function besk(ord) {
-    var b = (window.BG_BOK || []).filter(function (x) { return x.ord === ord; })[0];
+    var d = (inst.kap || '').split('-'), alla = (window.BG_BOK || []).filter(function (x) { return x.ord === ord; });
+    var b = alla.filter(function (x) { return String(x.ak) === d[0] && String(x.kap) === d[1]; })[0] || alla[0];
     return b ? b.besk.replace(/\n/g, ' ') : '';
   }
   // Fast blandning: samma frö ger alltid samma ordning
@@ -244,30 +612,36 @@ var QUIZ_DATA = {
 
   function titel(id) {
     var p = id.split('-'), namn = ((KAP[p[0]] || []).filter(function (k) { return k[0] === p[1]; })[0] || [])[1] || '';
-    return 'Åk ' + p[0] + ' · Kapitel ' + p[1] + (namn ? ' ' + namn : '') + ' · Quiz ' + p[2];
+    return 'Nivå ' + NIVA[p[0]] + (namn ? ' · ' + namn : '') + ' · ' + (QUIZ_NAMN[id] || 'Quiz ' + p[2]);
   }
 
-  // Välj årskurs, kapitel och quiz
+  // Välj nivå, område och quiz
   function valj() {
     clearInterval(timer);
+    bakgrund();
     var flikar = [7, 8, 9].map(function (a) {
-      return '<button type="button" data-ak="' + a + '" class="' + (a === inst.ak ? 'on' : '') + '" style="--f:' + AKF[a] + '">Åk ' + a + '</button>';
+      return '<button type="button" data-ak="' + a + '" class="' + (a === inst.ak ? 'on' : '') + '" style="--f:' + AKF[a] + '">Nivå ' + NIVA[a] + (STJARNOR ? ' <span class="kq-stj">' + '★★★'.slice(0, NIVA[a]) + '</span>' : '') + '</button>';
     }).join('');
-    var kap = (KAP[inst.ak] || []).map(function (k) {
+    // Samma ordning på alla nivåer, som åk 7: Tal, Algebra, Geometri, Samband, Statistik/sannolikhet
+    var ORDN = [/^Tal/, /Algebra/, /Geometri/, /Samband/, /Statistik|Sannolikhet/];
+    var rang = function (k) { for (var i = 0; i < ORDN.length; i++) if (ORDN[i].test(k[1])) return i; return 9; };
+    var kap = (KAP[inst.ak] || []).slice().sort(function (x, y) { return rang(x) - rang(y); }).map(function (k) {
       var q = [1, 2].map(function (n) {
         var id = inst.ak + '-' + k[0] + '-' + n, d = QUIZ_DATA[id];
-        return d ? '<button type="button" class="kq-qk" data-id="' + id + '">Quiz ' + n + ' <small>' + d.fragor.length + ' frågor</small></button>'
+        return d ? '<button type="button" class="kq-qk" data-id="' + id + '">' + (QUIZ_NAMN[id] || 'Quiz ' + n) + ' <small>' + d.fragor.length + ' frågor</small></button>'
           : '<span class="kq-qk kq-snart">Quiz ' + n + ' <small>Kommer snart</small></span>';
       }).join('');
-      return '<div class="kq-kaprad" style="--f:' + AKF[inst.ak] + '"><span class="kq-knr">' + k[0] + '</span><b>Kapitel ' + k[0] + '<small>' + k[1] + '</small></b><div class="kq-qs">' + q + '</div></div>';
+      return '<div class="kq-kaprad" style="--f:' + AKF[inst.ak] + '"><span class="kq-knr">' + SYMB(k[1]) + '</span><b>' + k[1] + '</b><div class="kq-qs">' + q + '</div></div>';
     }).join('');
-    rot.innerHTML = '<div class="kq-valj"><div class="kq-vh"><div class="kq-logo kq-logo-s">?</div><div><h2>Mattequiz</h2><p>Välj årskurs och kapitel. Varje kapitel har två quiz om begreppen.</p></div></div>'
+    rot.innerHTML = '<div class="kq-valj"><div class="kq-vh"><div class="kq-logo kq-logo-s">?</div><div><h2>Mattequiz</h2><p>Välj nivå och område. Nivå 1 är grundläggande begrepp och nivå 3 de mest utmanande. Varje område har två quiz.</p></div></div>'
       + '<div class="kq-flikar">' + flikar + '</div><div class="kq-kaplista">' + kap + '</div></div>';
     rot.querySelectorAll('[data-ak]').forEach(function (b) { b.onclick = function () { inst.ak = +b.dataset.ak; valj(); }; });
     rot.querySelectorAll('[data-id]').forEach(function (b) { b.onclick = function () { inst.kap = b.dataset.id; start(); rot.scrollIntoView({ block: 'start' }); }; });
   }
 
   function start() {
+    if (inst.kap) inst.ak = +inst.kap.split('-')[0];
+    bakgrund();
     clearInterval(timer);
     var d = QUIZ_DATA[inst.kap];
     rot.innerHTML = '<div class="kq-start"><button type="button" class="kq-bak">← Välj ett annat quiz</button><div class="kq-logo">?</div><h2>Mattequiz</h2><p class="kq-kap">' + titel(inst.kap) + ' · ' + d.fragor.length + ' frågor</p>'
@@ -405,5 +779,7 @@ var QUIZ_DATA = {
   // ?ak=8 öppnar årskursen, ?quiz=7-1-1 startar ett quiz direkt
   var u = new URLSearchParams(location.search);
   if (KAP[u.get('ak')]) inst.ak = +u.get('ak');
+  var nv = { 1: 7, 2: 8, 3: 9 }[u.get('niva')];
+  if (nv) inst.ak = nv;
   if (QUIZ_DATA[u.get('quiz')]) { inst.kap = u.get('quiz'); inst.ak = +inst.kap.split('-')[0]; start(); } else valj();
 })();
