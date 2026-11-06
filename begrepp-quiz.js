@@ -1,7 +1,8 @@
 // Begreppsquiz i klassrummet (begrepp-quiz.html). Frågor per kapitel i QUIZ_DATA.
 // Nyckel 'åk-kapitel-quiz', t.ex. '7-1-1' = åk 7, kapitel 1, Quiz 1. Två quiz per kapitel.
 // Kapitlens namn kommer från lankar.json (QUIZ_KAP, skrivs in av begrepp_quiz.py).
-// Rätt svar står alltid först i 'a'; ordningen blandas när quizet startar.
+// Rätt svar står alltid först i 'a'. Frågor och svar blandas med ett fast frö (quizets id),
+// så att ett quiz alltid ser exakt likadant ut: eleverna kan tävla mot varandra (Nikola 2026-11-06).
 // 'ord' = bokens begrepp (BG_BOK) vars förklaring visas efter svaret.
 var QUIZ_DATA = {
   // Åk 7 kap 1: Quiz 1 = tal och talmängder, Quiz 2 = räknesätt, skrivsätt och avrundning (olika begrepp)
@@ -45,6 +46,43 @@ var QUIZ_DATA = {
     { typ: 'sf', q: 'Ett närmevärde är ett exakt värde.', svar: false, ord: 'Närmevärde' },
     { q: '4,7 + 9,2 ≈ 5 + 9 = 14<br><small>Vad kallas det här sättet att räkna?</small>', a: ['Överslagsräkning', 'Utvecklad form', 'Positionssystemet', 'Division'], ord: 'Överslagsräkning' },
     { q: 'Vilket överslag passar bäst för 19,8 + 30,1?', a: ['20 + 30 = 50', '19 + 30 = 49', '20 + 31 = 51', '10 + 30 = 40'], ord: 'Överslagsräkning' }
+  ] },
+  '7-2-1': { fragor: [
+    { q: 'Vilket är ett algebraiskt uttryck?', a: ['2<i>a</i> + 50', '25 + 50', '2<i>a</i> + 50 = 60', '75'], ord: 'Algebraiskt uttryck' },
+    { typ: 'sf', q: '5<i>x</i> + 10<i>y</i> är ett algebraiskt uttryck.', svar: true, ord: 'Algebraiskt uttryck' },
+    { q: 'Vad är värdet av uttrycket 3<i>x</i> + 2 om <i>x</i> = 4?', a: ['14', '9', '34', '12'], ord: 'Algebraiskt uttryck' },
+    { q: 'Lisa är <i>x</i> år. Hennes bror är 3 år äldre.<br><small>Vilket uttryck visar broderns ålder?</small>', a: ['<i>x</i> + 3', '3<i>x</i>', '<i>x</i> – 3', '3'], ord: 'Algebraiskt uttryck' },
+    { typ: 'ordning', q: 'Klicka på uttrycken från minst till störst värde när <i>a</i> = 2', a: ['<i>a</i> – 1', '<i>a</i> + 2', '3<i>a</i>', '<i>a</i> · <i>a</i> + 4'], ord: 'Variabel' },
+    { q: 'I uttrycket 2<i>a</i> + 50, vad är <i>a</i>?', a: ['En variabel', 'En talföljd', 'En ekvation', 'Ett led'], ord: 'Variabel' },
+    { typ: 'sf', q: 'En variabel kan bara ha ett enda värde.', svar: false, ord: 'Variabel' },
+    { q: 'Vilka är variablerna i uttrycket 5<i>x</i> + 10<i>y</i>?', a: ['<i>x</i> och <i>y</i>', '5 och 10', '5<i>x</i> och 10<i>y</i>', 'Bara <i>x</i>'], ord: 'Variabel' },
+    { q: '3, 7, 11, 15, …<br><small>Vilket tal kommer sedan?</small>', a: ['19', '18', '20', '30'], ord: 'Mönster / Talföljd' },
+    { q: '2, 4, 8, 16, …<br><small>Hur förändras talföljden?</small>', a: ['Talet dubblas varje gång', 'Talet ökar med 2 varje gång', 'Talet ökar med 4 varje gång', 'Talet halveras varje gång'], ord: 'Mönster / Talföljd' },
+    { typ: 'ordning', q: 'Klicka på talen så att talföljden minskar med 5 varje gång', a: ['30', '25', '20', '15'], ord: 'Mönster / Talföljd' },
+    { typ: 'sf', q: 'I en talföljd förändras talen på ett bestämt sätt.', svar: true, ord: 'Mönster / Talföljd' },
+    { q: 'Figur 1 har 4 stickor, figur 2 har 7 stickor och figur 3 har 10 stickor.<br><small>Hur många stickor har figur 4?</small>', a: ['13', '14', '12', '11'], ord: 'Mönster / Talföljd' },
+    { q: 'En vinkel är dubbelt så stor som en annan. Vi kallar den mindre vinkeln för <i>y</i>.<br><small>Vad kallas det vi gör?</small>', a: ['Ett antagande', 'En prövning', 'En talföljd', 'Ett led'], ord: 'Antagande' },
+    { q: 'Vi antar att den mindre vinkeln är <i>y</i>. Den större är dubbelt så stor.<br><small>Hur stor är den större vinkeln?</small>', a: ['2<i>y</i>', '<i>y</i> + 2', '<i>y</i>', '<i>y</i> – 2'], ord: 'Antagande' },
+    { typ: 'sf', q: 'När man gör ett antagande kan man kalla ett obekant tal för <i>x</i>.', svar: true, ord: 'Antagande' }
+  ] },
+  '7-2-2': { fragor: [
+    { q: 'Vilket är en ekvation?', a: ['<i>x</i> – 2 = 10', '<i>x</i> – 2', '12 – 2', '<i>x</i> + <i>y</i>'], ord: 'Ekvation' },
+    { typ: 'sf', q: '3<i>x</i> + 5 är en ekvation.', svar: false, ord: 'Ekvation' },
+    { q: 'Lös ekvationen <i>x</i> + 7 = 12.', a: ['<i>x</i> = 5', '<i>x</i> = 19', '<i>x</i> = 7', '<i>x</i> = 12'], ord: 'Ekvation' },
+    { q: 'Lös ekvationen 4<i>x</i> = 20.', a: ['<i>x</i> = 5', '<i>x</i> = 16', '<i>x</i> = 24', '<i>x</i> = 80'], ord: 'Ekvation' },
+    { typ: 'ordning', q: 'Klicka på ekvationerna från minst till störst lösning', a: ['<i>x</i> + 3 = 5', '2<i>x</i> = 8', '<i>x</i> – 1 = 5', '<i>x</i> / 2 = 5'], ord: 'Ekvation' },
+    { q: '4<i>x</i> + 1 = 36 – <i>x</i><br><small>Vad kallas 4<i>x</i> + 1?</small>', a: ['Vänster led', 'Höger led', 'Obekant tal', 'Variabel'], ord: 'Vänster och höger led' },
+    { q: '15 = 2<i>y</i> + 3<br><small>Vad står i höger led?</small>', a: ['2<i>y</i> + 3', '15', '<i>y</i>', '='], ord: 'Vänster och höger led' },
+    { typ: 'sf', q: 'V.L. är en förkortning för vänster led.', svar: true, ord: 'Vänster och höger led' },
+    { q: 'Är <i>x</i> = 4 en lösning till 2<i>x</i> = 8? Man sätter in 4 i stället för <i>x</i>.<br><small>Vad kallas det?</small>', a: ['Prövning', 'Antagande', 'Avrundning', 'Talföljd'], ord: 'Prövning' },
+    { q: '3<i>x</i> – 2 = 10<br><small>Pröva! Vilket värde på <i>x</i> är lösningen?</small>', a: ['<i>x</i> = 4', '<i>x</i> = 3', '<i>x</i> = 5', '<i>x</i> = 12'], ord: 'Prövning' },
+    { typ: 'sf', q: '<i>x</i> = 6 är en lösning till ekvationen <i>x</i> + 6 = 10.', svar: false, ord: 'Prövning' },
+    { typ: 'ordning', q: 'Pröva om <i>x</i> = 3 är en lösning till 2<i>x</i> + 1 = 7.<br><small>Klicka på stegen i rätt ordning.</small>', a: ['Sätt in 3 i stället för <i>x</i>', 'Räkna: 2 · 3 + 1', 'Vänster led blir 7', 'V.L. = H.L., så <i>x</i> = 3 är en lösning'], ord: 'Prövning' },
+    { q: 'Vilket tecken används i en likhet?', a: ['=', '&lt;', '&gt;', '≈'], ord: 'Likhet' },
+    { typ: 'sf', q: 'En ekvation är ett exempel på en likhet.', svar: true, ord: 'Likhet' },
+    { q: 'Vilken likhet stämmer?', a: ['3 · 4 = 2 · 6', '3 + 4 = 2 + 6', '10 – 4 = 4', '12 / 3 = 3'], ord: 'Likhet' },
+    { q: '<i>x</i> – 2 = 10<br><small>Vad är <i>x</i>?</small>', a: ['Ett obekant tal', 'Ett led', 'En likhet', 'Ett närmevärde'], ord: 'Obekant tal' },
+    { q: '52 = <i>y</i> – 48<br><small>Vilket är det obekanta talet?</small>', a: ['<i>y</i>', '52', '48', '–'], ord: 'Obekant tal' }
   ] }
 };
 
@@ -61,7 +99,14 @@ var QUIZ_DATA = {
     var b = (window.BG_BOK || []).filter(function (x) { return x.ord === ord; })[0];
     return b ? b.besk.replace(/\n/g, ' ') : '';
   }
-  function blanda(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  // Fast blandning: samma frö ger alltid samma ordning
+  function slump(fro) {
+    var h = 1779033703;
+    for (var i = 0; i < fro.length; i++) { h = Math.imul(h ^ fro.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19; }
+    return function () { h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; };
+  }
+  function blanda(a, fro) { var r = slump(fro); a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function nytt() { return { fragor: blanda(QUIZ_DATA[inst.kap].fragor, inst.kap), i: 0, poang: 0, ratt: 0, svit: 0 }; }
   function pip(f, d) {
     if (!inst.ljud) return;
     try {
@@ -122,7 +167,7 @@ var QUIZ_DATA = {
     });
     rot.querySelector('.kq-bak').onclick = valj;
     rot.querySelector('.kq-go').onclick = function () {
-      spel = { fragor: blanda(d.fragor), i: 0, poang: 0, ratt: 0, svit: 0 };
+      spel = nytt();
       fraga();
     };
   }
@@ -139,11 +184,14 @@ var QUIZ_DATA = {
     var f = spel.fragor[spel.i], typ = f.typ || 'val';
     var alt, kvar = inst.tid, t0 = Date.now(), klar = false, foljd = [];
     if (typ === 'sf') alt = [{ t: '✔ Sant', r: f.svar === true }, { t: '✘ Falskt', r: f.svar === false }];
-    else if (typ === 'ordning') alt = blanda(f.a.map(function (t, i) { return { t: t, n: i }; }));
-    else alt = blanda(f.a.map(function (t, i) { return { t: t, r: i === 0 }; }));
+    else if (typ === 'ordning') {
+      alt = blanda(f.a.map(function (t, i) { return { t: t, n: i }; }), inst.kap + f.q + f.a.join());
+      if (alt.every(function (x, i) { return x.n === i; })) alt.push(alt.shift());  // aldrig redan i rätt ordning
+    }
+    else alt = blanda(f.a.map(function (t, i) { return { t: t, r: i === 0 }; }), inst.kap + f.q + f.a.join());
     var etikett = { sf: 'Sant eller falskt?', ordning: 'Sätt i ordning' }[typ];
     var farg = typ === 'sf' ? [['', 'kq-b'], ['', 'kq-r']] : FARG;
-    rot.innerHTML = huvud() + '<div class="kq-fraga"><div class="kq-q">' + (etikett ? '<span class="kq-typ">' + etikett + '</span>' : '') + f.q + '</div>'
+    rot.innerHTML = huvud() + '<div class="kq-fraga"><div class="kq-q">' + (etikett ? '<span class="kq-typ">' + etikett + '</span>' : '') + '<div>' + f.q + '</div></div>'
       + (inst.tid ? '<div class="kq-klocka"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="kq-bg"/><circle cx="22" cy="22" r="19" class="kq-fg"/></svg><span>' + kvar + '</span></div>' : '')
       + '</div>' + (typ === 'ordning' ? '<div class="kq-foljd">' + f.a.map(function (_, i) { return '<span class="kq-plats">' + (i + 1) + '</span>'; }).join('') + '</div>' : '')
       + '<div class="kq-svar' + (typ === 'sf' ? ' kq-sf' : '') + '">' + alt.map(function (x, i) {
@@ -223,7 +271,7 @@ var QUIZ_DATA = {
     h = '<h2>Bra jobbat!</h2><p class="kq-stor">' + spel.poang + ' poäng</p><p class="kq-kap">' + spel.ratt + ' av ' + n + ' rätt</p>';
     rot.innerHTML = '<div class="kq-start kq-slutet">' + h + '<div class="kq-knappar"><button type="button" class="kq-go kq-igen">Spela igen ↻</button><button type="button" class="kq-go kq-ny">Ändra inställningar</button><button type="button" class="kq-go kq-ny kq-annat">Välj ett annat quiz</button></div></div>';
     pip(523, .2); setTimeout(function () { pip(659, .2); }, 150); setTimeout(function () { pip(784, .35); }, 300);
-    rot.querySelector('.kq-igen').onclick = function () { spel = { fragor: blanda(QUIZ_DATA[inst.kap].fragor), i: 0, poang: 0, ratt: 0, svit: 0 }; fraga(); };
+    rot.querySelector('.kq-igen').onclick = function () { spel = nytt(); fraga(); };
     rot.querySelector('.kq-ny').onclick = start;
     rot.querySelector('.kq-annat').onclick = valj;
   }
