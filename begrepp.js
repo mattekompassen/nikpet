@@ -371,6 +371,15 @@
         VAL_T[id] = {namn: `Nivå ${n}: ${namn}`, pool: () => kapOrd(ak, kap)};
         delar += `<button type="button" class="bt-ruta" data-t="${id}" style="--o:${c[2]};--od:${c[3]};--ol:${LJ(c[2])}"><span class="bg-rsym">${sym(c[4])}</span><span><b>${esc(namn)}</b><small>${kapOrd(ak, kap).length} begrepp</small></span></button>`;
       }
+      // Nivå 3 saknar statistikkapitel: egen ruta med statistik- och sannolikhetsbegreppen från nivå 1–2 (Nikola 2026-11-07)
+      if (ak === 9 && !kaps.some(kap => omrade(KAPNAMN[ak + ':' + kap]) === 'sta')) {
+        // Samma begrepp som Mattequiz nivå 3 (Statistik + Sannolikhet, quiz 9-5-1 och 9-5-2)
+        const QORD = ['Medelvärde', 'Median', 'Typvärde', 'Variationsbredd', 'Frekvens', 'Relativ frekvens', 'Cirkeldiagram', 'Linjediagram', 'Stapeldiagram',
+          'Utfall', 'Sannolikhet', 'Slumpmässigt försök', 'Likformig sannolikhetsfördelning', 'Olikformig sannolikhetsfördelning', 'Oberoende händelser', 'Beroende händelser', 'Träddiagram'];
+        const c = OM.sta, pool = () => ORD.filter(o => OKF(o) && QORD.includes(o.ord) && o.ak.includes(Math.max(...ORD.filter(x => x.ord === o.ord).flatMap(x => x.ak))));
+        VAL_T['9:sta'] = {namn: 'Nivå 3: Statistik och sannolikhet', pool};
+        delar += `<button type="button" class="bt-ruta" data-t="9:sta" style="--o:${c[2]};--od:${c[3]};--ol:${LJ(c[2])}"><span class="bg-rsym">${sym(c[4])}</span><span><b>Statistik och sannolikhet</b><small>${new Set(pool().map(o => o.ord)).size} begrepp</small></span></button>`;
+      }
       VAL_T['ak' + ak] = {namn: `Hela nivå ${n}`, pool: () => kapOrd(ak)};
       delar += `<button type="button" class="bt-ruta hela" data-t="ak${ak}"><span class="bg-rsym">${n}</span><span><small>Blandat</small><b>Hela nivå ${n}</b><small>${kapOrd(ak).length} begrepp</small></span></button></div>`;
     }
