@@ -570,7 +570,7 @@ var QUIZ_DATA = {
   var KAP = window.QUIZ_KAP || {};
   // Nivåfärger (Nikola 2026-11-06: inte böckernas/årskursernas färger).
   // Nikola 2026-11-07: en blå skala per nivå. Nivå 1 klarblå, nivå 2 kungsblå, nivå 3 petrolblå.
-  var AKBG = { 7: '#1573B1', 8: '#15408B', 9: '#065A6C' };   // bakgrund (skalans rubrikfärg)
+  var AKBG = { 7: '#1F2A44', 8: '#1F2A44', 9: '#1F2A44' };   // quizet: samma lugna mörkblå på alla nivåer (Nikola 2026-11-07)
   var AKF = { 7: '#B8D9E9', 8: '#92B9D6', 9: '#7FBBC6' };    // rutornas kant och symbolcirklar
   var AKL = { 7: '#E6F3FA', 8: '#C7DEF0', 9: '#D1EEF2' };    // vald nivåflik
   // Områdets färg ur Organic-skalan (2026-11-07)
@@ -620,11 +620,19 @@ var QUIZ_DATA = {
   }
 
   // Välj nivå, område och quiz
+  // Områdesfärger som på Testa dig (Organic): [huvudfärg, mörk text, ljus bakgrund]
+  var OMRL = function (n) {
+    return /^Tal/.test(n) ? ['#7597BC', '#35577A', '#E8F2FA'] : /Algebra/.test(n) ? ['#818B72', '#4C5940', '#EAF4EA'] : /Geometri/.test(n) ? ['#CA8871', '#8A4532', '#FDEBE7']
+      : /Samband/.test(n) ? ['#D8A964', '#75541C', '#FFF6E3'] : ['#A29BBF', '#4F4880', '#EFEAF9'];
+  };
+  var TARN = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.2" fill="currentColor"/><circle cx="15" cy="15" r="1.2" fill="currentColor"/><circle cx="15" cy="9" r="1.2" fill="currentColor"/><circle cx="9" cy="15" r="1.2" fill="currentColor"/></svg>';
+  // Välj nivå, område och quiz – ljus vy med samma upplägg som Testa dig (Nikola 2026-11-07)
   function valj() {
     clearInterval(timer);
     bakgrund();
+    rot.classList.add('kq-ljus');
     var flikar = [7, 8, 9].map(function (a) {
-      return '<button type="button" data-ak="' + a + '" class="' + (a === inst.ak ? 'on' : '') + '" style="--f:' + AKF[a] + '">Nivå ' + NIVA[a] + (STJARNOR ? ' <span class="kq-stj">' + '★★★'.slice(0, NIVA[a]) + '</span>' : '') + '</button>';
+      return '<button type="button" data-ak="' + a + '" class="kq-lflik' + (a === inst.ak ? ' on' : '') + '">Nivå ' + NIVA[a] + '<span>' + '★★★'.slice(0, NIVA[a]) + '</span></button>';
     }).join('');
     // Samma ordning på alla nivåer, som åk 7: Tal, Algebra, Geometri, Samband, Statistik/sannolikhet
     var ORDN = [/^Tal/, /Algebra/, /Geometri/, /Samband/, /Statistik|Sannolikhet/];
@@ -632,18 +640,20 @@ var QUIZ_DATA = {
     var kap = (KAP[inst.ak] || []).slice().sort(function (x, y) { return rang(x) - rang(y); }).map(function (k) {
       var q = [1, 2].map(function (n) {
         var id = inst.ak + '-' + k[0] + '-' + n, d = QUIZ_DATA[id];
-        return d ? '<button type="button" class="kq-qk" data-id="' + id + '">' + (QUIZ_NAMN[id] || 'Quiz ' + n) + ' <small>' + d.fragor.length + ' frågor</small></button>'
-          : '<span class="kq-qk kq-snart">Quiz ' + n + ' <small>Kommer snart</small></span>';
+        return d ? '<button type="button" data-id="' + id + '">' + (QUIZ_NAMN[id] || 'Quiz ' + n) + '<small>' + d.fragor.length + ' frågor</small></button>'
+          : '<span class="kq-lsnart">Quiz ' + n + '<small>Kommer snart</small></span>';
       }).join('');
-      return '<div class="kq-kaprad"><span class="kq-knr">' + SYMB(k[1]) + '</span><b>' + k[1] + '</b><div class="kq-qs">' + q + '</div></div>';
+      var c = OMRL(k[1]), sy = /Statistik|Sannolikhet/.test(k[1]) ? TARN : SYMB(k[1]);
+      return '<div class="kq-lruta" style="--o:' + c[0] + ';--od:' + c[1] + ';--ol:' + c[2] + '"><div class="kq-lt"><span class="kq-lsym">' + sy + '</span><b>' + k[1] + '</b></div><div class="kq-lknappar">' + q + '</div></div>';
     }).join('');
-    rot.innerHTML = '<div class="kq-valj"><div class="kq-vh"><div class="kq-logo kq-logo-s">?</div><div><h2>Mattequiz</h2><p>Välj nivå och område. Nivå 1 är grundläggande begrepp och nivå 3 de mest utmanande. Varje område har två quiz.</p></div></div>'
-      + '<div class="kq-flikar">' + flikar + '</div><div class="kq-kaplista">' + kap + '</div></div>';
+    rot.innerHTML = '<h2 class="kq-lh">Vad vill du tävla om?</h2><p class="kq-lintro">Välj nivå och område. Nivå 1 är grundläggande begrepp och nivå 3 de mest utmanande. Varje område har två quiz.</p>'
+      + '<div class="kq-lflikar">' + flikar + '</div><div class="kq-lval">' + kap + '</div>';
     rot.querySelectorAll('[data-ak]').forEach(function (b) { b.onclick = function () { inst.ak = +b.dataset.ak; valj(); }; });
     rot.querySelectorAll('[data-id]').forEach(function (b) { b.onclick = function () { inst.kap = b.dataset.id; start(); rot.scrollIntoView({ block: 'start' }); }; });
   }
 
   function start() {
+    rot.classList.remove('kq-ljus');
     if (inst.kap) inst.ak = +inst.kap.split('-')[0];
     bakgrund();
     clearInterval(timer);
