@@ -569,9 +569,13 @@ var QUIZ_DATA = {
   var inst = { kap: null, ak: 7, tid: 20, ljud: true };
   var KAP = window.QUIZ_KAP || {};
   // Nivåfärger (Nikola 2026-11-06: inte böckernas/årskursernas färger).
-  var AKF = { 7: '#2A9D8F', 8: '#2A9D8F', 9: '#2A9D8F' };  // Nikola valde B: turkos på alla nivåer
-  var AKBG = { 7: '#23505A', 8: '#1F3657', 9: '#1C1E3A' };  // egen bakgrund per nivå, mörkare ju högre nivå
-  function bakgrund() { rot.style.setProperty('--kqbg', AKBG[inst.ak] || '#1F2A44'); }
+  // Nikola 2026-11-07: en blå skala per nivå. Nivå 1 klarblå, nivå 2 kungsblå, nivå 3 petrolblå.
+  var AKBG = { 7: '#1573B1', 8: '#15408B', 9: '#065A6C' };   // bakgrund (skalans rubrikfärg)
+  var AKF = { 7: '#B8D9E9', 8: '#92B9D6', 9: '#7FBBC6' };    // rutornas kant och symbolcirklar
+  var AKL = { 7: '#E6F3FA', 8: '#C7DEF0', 9: '#D1EEF2' };    // vald nivåflik
+  // Områdets färg ur Organic-skalan (2026-11-07)
+  var OMRF = function (n) { return /^Tal/.test(n) ? '#4F77A3' : /Algebra/.test(n) ? '#6B7A5A' : /Geometri/.test(n) ? '#B8664F' : /Samband/.test(n) ? '#B88A45' : /Statistik|Sannolikhet/.test(n) ? '#7D76A0' : '#4F8A93'; };
+  function bakgrund() { var st = rot.style; st.setProperty('--kqbg', AKBG[inst.ak] || '#1F2A44'); st.setProperty('--kqf', AKF[inst.ak]); st.setProperty('--kql', AKL[inst.ak]); }
   var STJARNOR = true;  // 1–3 stjärnor på nivåflikarna
   // Nycklarna 7/8/9 visas som Nivå 1/2/3 (Nikola 2026-11-06)
   var NIVA = { 7: 1, 8: 2, 9: 3 };
@@ -631,7 +635,7 @@ var QUIZ_DATA = {
         return d ? '<button type="button" class="kq-qk" data-id="' + id + '">' + (QUIZ_NAMN[id] || 'Quiz ' + n) + ' <small>' + d.fragor.length + ' frågor</small></button>'
           : '<span class="kq-qk kq-snart">Quiz ' + n + ' <small>Kommer snart</small></span>';
       }).join('');
-      return '<div class="kq-kaprad" style="--f:' + AKF[inst.ak] + '"><span class="kq-knr">' + SYMB(k[1]) + '</span><b>' + k[1] + '</b><div class="kq-qs">' + q + '</div></div>';
+      return '<div class="kq-kaprad"><span class="kq-knr">' + SYMB(k[1]) + '</span><b>' + k[1] + '</b><div class="kq-qs">' + q + '</div></div>';
     }).join('');
     rot.innerHTML = '<div class="kq-valj"><div class="kq-vh"><div class="kq-logo kq-logo-s">?</div><div><h2>Mattequiz</h2><p>Välj nivå och område. Nivå 1 är grundläggande begrepp och nivå 3 de mest utmanande. Varje område har två quiz.</p></div></div>'
       + '<div class="kq-flikar">' + flikar + '</div><div class="kq-kaplista">' + kap + '</div></div>';

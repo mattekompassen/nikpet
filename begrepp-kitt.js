@@ -2,10 +2,10 @@
 // sok = ordets former (reguljärt uttryck utan ordgränser); bokens meningar hämtas automatiskt ur BG_BOK.
 // ex: ordet inom [ ] är luckan i övningen "Vilket ord passar?".
 window.BG_KITT_GRUPPER = [
-  ['upg', 'Uppgiftsord', '#D5E3F0', '#1E4A73', '📝', 'Ord som talar om vad du ska göra i en uppgift.'],
-  ['forkl', 'Sambandsord', '#D3E9E4', '#1E5A50', '🔗', 'Ord som visar hur saker hänger ihop: varför något är som det är.'],
-  ['jmf', 'Jämförelseord', '#E6E0F2', '#46337A', '⚖️', 'Ord som visar hur saker skiljer sig åt eller ändras.'],
-  ['fler', 'Ord med flera betydelser', '#E9E4D6', '#5A4A22', '🔀', 'Ord som betyder en sak i vardagen och något annat i matten.']];
+  ['upg', 'Uppgiftsord', '#7CABB4', '#36666E', '📝', 'Ord som talar om vad du ska göra i en uppgift.'],
+  ['forkl', 'Sambandsord', '#9DB5A6', '#46604F', '🔗', 'Ord som visar hur saker hänger ihop: varför något är som det är.'],
+  ['jmf', 'Jämförelseord', '#B5A6B9', '#5E4D62', '⚖️', 'Ord som visar hur saker skiljer sig åt eller ändras.'],
+  ['fler', 'Ord med flera betydelser', '#C4AE97', '#65503B', '🔀', 'Ord som betyder en sak i vardagen och något annat i matten.']];
 window.BG_KITT = [
   // ---------- Förklara och visa ----------
   {g: 'forkl', ord: 'betyder', sok: 'betyder|betyda|betydelse\\w*', forkl: 'Säger vad något är eller står för.', ex: 'Tecknet < [betyder] ”är mindre än”.'},
