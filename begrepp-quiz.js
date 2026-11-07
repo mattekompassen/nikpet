@@ -626,6 +626,21 @@ var QUIZ_DATA = {
       : /Samband/.test(n) ? ['#D8A964', '#75541C', '#FFF6E3'] : ['#A29BBF', '#4F4880', '#EFEAF9'];
   };
   var TARN = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.2" fill="currentColor"/><circle cx="15" cy="15" r="1.2" fill="currentColor"/><circle cx="15" cy="9" r="1.2" fill="currentColor"/><circle cx="9" cy="15" r="1.2" fill="currentColor"/></svg>';
+  // Egna ikoner per nivå och område, så att nivåerna känns olika (Nikola 2026-11-07)
+  var NIK_SVG = function (d, fyll) { return '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
+  var NIK = {
+    tal: ['123', '½', '√<i style="border-top:2px solid;padding:0 2px;margin-left:-1px">x</i>'],
+    alg: ['<i>x</i>', '2<i>x</i>', '<i>x</i>²'],
+    geo: [NIK_SVG('<path d="M12 4 20.5 19h-17z"/>'), NIK_SVG('<path d="M5 8l7-4 7 4v8l-7 4-7-4z"/><path d="M5 8l7 4 7-4M12 12v8"/>'), NIK_SVG('<path d="M5 19V6l14 13z"/><path d="M5 15h4v4"/>')],
+    sam: [NIK_SVG('<path d="M5 19 19 5"/><path d="M9 5h10v10"/>'), '%', NIK_SVG('<path d="M4 4v16h16"/><path d="M6.5 17 19 7"/>')],
+    sta: [NIK_SVG('<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.1" fill="currentColor"/><circle cx="15" cy="15" r="1.1" fill="currentColor"/><circle cx="15" cy="9" r="1.1" fill="currentColor"/><circle cx="9" cy="15" r="1.1" fill="currentColor"/>'),
+          NIK_SVG('<path d="M3.5 20h17"/><path d="M6.5 20v-6M10.5 20V8M14.5 20v-9M18.5 20V5" stroke-width="3"/>'),
+          NIK_SVG('<path d="M5 12l7-5.5M5 12l7 5.5M12 6.5l7-3M12 6.5l7 3M12 17.5l7-3M12 17.5l7 3"/><circle cx="4.5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="6.5" r="1.4" fill="currentColor"/><circle cx="12" cy="17.5" r="1.4" fill="currentColor"/>')]
+  };
+  var nivaIkon = function (ak, namn) {
+    var o = /Algebra/.test(namn) ? 'alg' : /Geometri/.test(namn) ? 'geo' : /Samband|Procent/.test(namn) ? 'sam' : /Statistik|Sannolik/.test(namn) ? 'sta' : 'tal';
+    return NIK[o][Math.max(0, Math.min(2, ak - 7))];
+  };
   // Välj nivå, område och quiz – ljus vy med samma upplägg som Testa dig (Nikola 2026-11-07)
   function valj() {
     clearInterval(timer);
@@ -643,7 +658,7 @@ var QUIZ_DATA = {
         return d ? '<button type="button" data-id="' + id + '">' + (QUIZ_NAMN[id] || 'Quiz ' + n) + '<small>' + d.fragor.length + ' frågor</small></button>'
           : '<span class="kq-lsnart">Quiz ' + n + '<small>Kommer snart</small></span>';
       }).join('');
-      var c = OMRL(k[1]), sy = /Statistik|Sannolikhet/.test(k[1]) ? TARN : SYMB(k[1]);
+      var c = OMRL(k[1]), sy = nivaIkon(inst.ak, k[1]);
       return '<div class="kq-lruta" style="--o:' + c[0] + ';--od:' + c[1] + ';--ol:' + c[2] + '"><div class="kq-lt"><span class="kq-lsym">' + sy + '</span><b>' + k[1] + '</b></div><div class="kq-lknappar">' + q + '</div></div>';
     }).join('');
     rot.innerHTML = '<div class="kapblock kq-lblock"><h2>Vad vill du tävla om?</h2><p class="kq-lintro">Välj nivå och område. Nivå 1 är grundläggande begrepp och nivå 3 de mest utmanande. Varje område har två quiz.</p>'

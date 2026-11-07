@@ -354,6 +354,21 @@
     // Vad kan man testa? Nivå 1–3 per område, resonemangsord och allt blandat
     const kapOrd = (ak, kap) => ORD.filter(o => OKF(o) && o.kaps.some(x => kap ? x === ak + ':' + kap : x.startsWith(ak + ':')));
     const VAL_T = {};
+  // Egna ikoner per nivå och område, så att nivåerna känns olika (Nikola 2026-11-07)
+      var NIK_SVG = function (d, fyll) { return '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
+    var NIK = {
+      tal: ['123', '½', '√<i style="border-top:2px solid;padding:0 2px;margin-left:-1px">x</i>'],
+      alg: ['<i>x</i>', '2<i>x</i>', '<i>x</i>²'],
+      geo: [NIK_SVG('<path d="M12 4 20.5 19h-17z"/>'), NIK_SVG('<path d="M5 8l7-4 7 4v8l-7 4-7-4z"/><path d="M5 8l7 4 7-4M12 12v8"/>'), NIK_SVG('<path d="M5 19V6l14 13z"/><path d="M5 15h4v4"/>')],
+      sam: [NIK_SVG('<path d="M5 19 19 5"/><path d="M9 5h10v10"/>'), '%', NIK_SVG('<path d="M4 4v16h16"/><path d="M6.5 17 19 7"/>')],
+      sta: [NIK_SVG('<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.1" fill="currentColor"/><circle cx="15" cy="15" r="1.1" fill="currentColor"/><circle cx="15" cy="9" r="1.1" fill="currentColor"/><circle cx="9" cy="15" r="1.1" fill="currentColor"/>'),
+            NIK_SVG('<path d="M3.5 20h17"/><path d="M6.5 20v-6M10.5 20V8M14.5 20v-9M18.5 20V5" stroke-width="3"/>'),
+            NIK_SVG('<path d="M5 12l7-5.5M5 12l7 5.5M12 6.5l7-3M12 6.5l7 3M12 17.5l7-3M12 17.5l7 3"/><circle cx="4.5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="6.5" r="1.4" fill="currentColor"/><circle cx="12" cy="17.5" r="1.4" fill="currentColor"/>')]
+    };
+    var nivaIkon = function (ak, namn) {
+      var o = /Algebra/.test(namn) ? 'alg' : /Geometri/.test(namn) ? 'geo' : /Samband|Procent/.test(namn) ? 'sam' : /Statistik|Sannolik/.test(namn) ? 'sta' : 'tal';
+      return NIK[o][Math.max(0, Math.min(2, ak - 7))];
+    };
     // Nivå 1–3 (åk 7–9 i datan) och områden i samma ordning som åk 7, utan kapitel (Nikola 2026-11-07)
     const NIVA = {7: 1, 8: 2, 9: 3}, RANG = ['tal', 'alg', 'geo', 'sam', 'sta'];
     const OMRNAMN = {tal: 'Tal', alg: 'Algebra', geo: 'Geometri', sam: 'Samband och förändring', sta: 'Statistik och sannolikhet'};
@@ -369,7 +384,7 @@
       for (const kap of kaps) {
         const id = ak + ':' + kap, om = omrade(KAPNAMN[id]), c = OM[om], namn = OMRNAMN[om];
         VAL_T[id] = {namn: `Nivå ${n}: ${namn}`, pool: () => kapOrd(ak, kap)};
-        delar += `<button type="button" class="bt-ruta" data-t="${id}" style="--o:${c[2]};--od:${c[3]};--ol:${LJ(c[2])}"><span class="bg-rsym">${sym(c[4])}</span><span><b>${esc(namn)}</b><small>${kapOrd(ak, kap).length} begrepp</small></span></button>`;
+        delar += `<button type="button" class="bt-ruta" data-t="${id}" style="--o:${c[2]};--od:${c[3]};--ol:${LJ(c[2])}"><span class="bg-rsym">${nivaIkon(ak, namn)}</span><span><b>${esc(namn)}</b><small>${kapOrd(ak, kap).length} begrepp</small></span></button>`;
       }
       // Nivå 3 saknar statistikkapitel: egen ruta med statistik- och sannolikhetsbegreppen från nivå 1–2 (Nikola 2026-11-07)
       if (ak === 9 && !kaps.some(kap => omrade(KAPNAMN[ak + ':' + kap]) === 'sta')) {
@@ -378,7 +393,7 @@
           'Utfall', 'Sannolikhet', 'Slumpmässigt försök', 'Likformig sannolikhetsfördelning', 'Olikformig sannolikhetsfördelning', 'Oberoende händelser', 'Beroende händelser', 'Träddiagram'];
         const c = OM.sta, pool = () => ORD.filter(o => OKF(o) && QORD.includes(o.ord) && o.ak.includes(Math.max(...ORD.filter(x => x.ord === o.ord).flatMap(x => x.ak))));
         VAL_T['9:sta'] = {namn: 'Nivå 3: Statistik och sannolikhet', pool};
-        delar += `<button type="button" class="bt-ruta" data-t="9:sta" style="--o:${c[2]};--od:${c[3]};--ol:${LJ(c[2])}"><span class="bg-rsym">${sym(c[4])}</span><span><b>Statistik och sannolikhet</b><small>${new Set(pool().map(o => o.ord)).size} begrepp</small></span></button>`;
+        delar += `<button type="button" class="bt-ruta" data-t="9:sta" style="--o:${c[2]};--od:${c[3]};--ol:${LJ(c[2])}"><span class="bg-rsym">${nivaIkon(9, 'Statistik')}</span><span><b>Statistik och sannolikhet</b><small>${new Set(pool().map(o => o.ord)).size} begrepp</small></span></button>`;
       }
       VAL_T['ak' + ak] = {namn: `Hela nivå ${n}`, pool: () => kapOrd(ak)};
       delar += `<button type="button" class="bt-ruta hela" data-t="ak${ak}"><span class="bg-rsym">${n}</span><span><small>Blandat</small><b>Hela nivå ${n}</b><small>${kapOrd(ak).length} begrepp</small></span></button></div>`;
