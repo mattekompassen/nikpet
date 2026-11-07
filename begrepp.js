@@ -357,7 +357,7 @@
     // Nivå 1–3 (åk 7–9 i datan) och områden i samma ordning som åk 7, utan kapitel (Nikola 2026-11-07)
     const NIVA = {7: 1, 8: 2, 9: 3}, RANG = ['tal', 'alg', 'geo', 'sam', 'sta'];
     const OMRNAMN = {tal: 'Tal', alg: 'Algebra', geo: 'Geometri', sam: 'Samband och förändring', sta: 'Statistik och sannolikhet'};
-    let h = '<h2 class="bg-rub">Vad vill du testa?</h2><p class="bt-intro">Välj nivå och område. Nivå 1 är grundläggande begrepp och nivå 3 de mest utmanande. Du får ' + ANTAL + ' frågor och ser i slutet vilka ord du kan öva mer på.</p>';
+    let h = '<div class="kapblock bg-block"><h2>Vad vill du testa?</h2><p class="bg-btxt">Välj nivå och område. Nivå 1 är grundläggande begrepp och nivå 3 de mest utmanande. Du får ' + ANTAL + ' frågor och ser i slutet vilka ord du kan öva mer på.</p>';
     let flikar = '', delar = '';
     for (const ak of [7, 8, 9]) {
       const kaps = Object.keys(KAPNAMN).filter(x => x.startsWith(ak + ':') && kapOrd(ak, +x.split(':')[1]).length).map(x => +x.split(':')[1])
@@ -383,7 +383,7 @@
       VAL_T['ak' + ak] = {namn: `Hela nivå ${n}`, pool: () => kapOrd(ak)};
       delar += `<button type="button" class="bt-ruta hela" data-t="ak${ak}"><span class="bg-rsym">${n}</span><span><small>Blandat</small><b>Hela nivå ${n}</b><small>${kapOrd(ak).length} begrepp</small></span></button></div>`;
     }
-    h += `<div class="bt-flikar">${flikar}</div>${delar}`;
+    h += `<div class="bt-flikar">${flikar}</div>${delar}</div>`;
     VAL_T.kitt = {namn: 'Resonemangsord', kitt: true, pool: () => KO.filter(k => k.g !== 'fler' || (k.ms && k.vs))};
     VAL_T.alla = {namn: 'Alla begrepp blandat', pool: () => ORD.filter(OKF)};
     // Meningsstarter: exemplet visas med början bortplockad, eleven väljer rätt meningsstart
@@ -397,9 +397,9 @@
       return {rub: 'Vilken meningsstart passar?', q: esc(m.t).replace('_', '<span class="bg-lucka">?</span>'), lang: true, alt: alt.map(x => esc(x.ord)), ratt: alt.indexOf(m), facit: {ord: m.ord, txt: msFacit(m)}};
     }
     VAL_T.ms = {namn: 'Meningsstarter', ms: true, pool: () => MS};
-    h += `<h3 class="bg-del">Mer</h3><div class="bt-val"><button type="button" class="bt-ruta" data-t="kitt" style="--o:#7CABB4;--od:#36666E;--ol:#E6F6F4"><span class="bg-rsym">${ik('lank')}</span><span><small>Resonemangsord</small><b>Ord som hjälper dig att resonera</b><small>${VAL_T.kitt.pool().length} ord</small></span></button>`
+    h += `<div class="kapblock bg-block"><h2>Mer att testa</h2><p class="bg-btxt">Resonemangsord, meningsstarter och alla begrepp blandat.</p><div class="bt-val"><button type="button" class="bt-ruta" data-t="kitt" style="--o:#7CABB4;--od:#36666E;--ol:#E6F6F4"><span class="bg-rsym">${ik('lank')}</span><span><small>Resonemangsord</small><b>Ord som hjälper dig att resonera</b><small>${VAL_T.kitt.pool().length} ord</small></span></button>`
       + `<button type="button" class="bt-ruta" data-t="ms" style="--o:#DE9C8F;--od:#8C4A3C;--ol:#FFECE4"><span class="bg-rsym">${ik('prat')}</span><span><small>Meningsstarter</small><b>Så kan du börja en mening</b><small>${VAL_T.ms.pool().length} meningsstarter</small></span></button>`
-      + `<button type="button" class="bt-ruta hela allab" data-t="alla"><span class="bg-rsym">${ik('stjarna')}</span><span><small>Utmaning</small><b>Alla begrepp blandat</b><small>${VAL_T.alla.pool().length} begrepp</small></span></button></div>`;
+      + `<button type="button" class="bt-ruta hela allab" data-t="alla"><span class="bg-rsym">${ik('stjarna')}</span><span><small>Utmaning</small><b>Alla begrepp blandat</b><small>${VAL_T.alla.pool().length} begrepp</small></span></button></div></div>`;
     const startsida = h;
     let T = null;
     let nivaVald = {1: 7, 2: 8, 3: 9}[new URLSearchParams(location.search).get('niva')] || 7;

@@ -646,8 +646,8 @@ var QUIZ_DATA = {
       var c = OMRL(k[1]), sy = /Statistik|Sannolikhet/.test(k[1]) ? TARN : SYMB(k[1]);
       return '<div class="kq-lruta" style="--o:' + c[0] + ';--od:' + c[1] + ';--ol:' + c[2] + '"><div class="kq-lt"><span class="kq-lsym">' + sy + '</span><b>' + k[1] + '</b></div><div class="kq-lknappar">' + q + '</div></div>';
     }).join('');
-    rot.innerHTML = '<h2 class="kq-lh">Vad vill du tävla om?</h2><p class="kq-lintro">Välj nivå och område. Nivå 1 är grundläggande begrepp och nivå 3 de mest utmanande. Varje område har två quiz.</p>'
-      + '<div class="kq-lflikar">' + flikar + '</div><div class="kq-lval">' + kap + '</div>';
+    rot.innerHTML = '<div class="kapblock kq-lblock"><h2>Vad vill du tävla om?</h2><p class="kq-lintro">Välj nivå och område. Nivå 1 är grundläggande begrepp och nivå 3 de mest utmanande. Varje område har två quiz.</p>'
+      + '<div class="kq-lflikar">' + flikar + '</div><div class="kq-lval">' + kap + '</div></div>';
     rot.querySelectorAll('[data-ak]').forEach(function (b) { b.onclick = function () { inst.ak = +b.dataset.ak; valj(); }; });
     rot.querySelectorAll('[data-id]').forEach(function (b) { b.onclick = function () { inst.kap = b.dataset.id; start(); rot.scrollIntoView({ block: 'start' }); }; });
   }
