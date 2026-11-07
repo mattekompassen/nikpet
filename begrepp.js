@@ -44,6 +44,20 @@
   const EMOJI = {'📐': 'vinkel', '🔗': 'lank', '📝': 'penna', '⚖️': 'vag', '🔀': 'pilar', '💬': 'prat', '🔍': 'sok', '🃏': 'kort', '🎯': 'mal', '★': 'stjarna', '⚄': 'tarning', '🎲': 'tarning', '🏠': 'hus', '🔊': 'hogt', '📊': 'stapel', '🧠': 'tanke', '🛠️': 'bock', '💡': 'lampa', '🔧': 'rätta'};
   const ik = n => `<svg class="ik" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IKON[n]}</svg>`;
   const sym = s => EMOJI[s] ? ik(EMOJI[s]) : s;
+  // Färgade versioner i ikoncirklarna (som startsidan): mörk kontur + färger
+  const FIK = {
+    lank: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" stroke="#5B8DB8" stroke-width="2.4"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" stroke="#E07A5F" stroke-width="2.4"/>',
+    penna: '<path d="M4 20h4L19 9l-4-4L4 16z" fill="#E9B949"/><path d="M15 5l4 4 1.2-1.2a1.6 1.6 0 0 0 0-2.3L18.5 3.8a1.6 1.6 0 0 0-2.3 0z" fill="#E07A5F"/><path d="M4 16l4 4"/>',
+    vag: '<path d="M12 4v16M8 20h8M5 7h14"/><path d="M5 7l-2.6 6h5.2z" fill="#E9B949"/><path d="M19 7l-2.6 6h5.2z" fill="#E07A5F"/><circle cx="12" cy="4" r="1.5" fill="#5B8DB8"/>',
+    pilar: '<path d="M3 7h4c4.5 0 5.5 10 10 10h3M17.5 14.5 20 17l-2.5 2.5" stroke="#5B8DB8" stroke-width="2.2"/><path d="M3 17h4c1.6 0 2.6-1.3 3.4-3M13.6 10c.8-1.7 1.8-3 3.4-3h3M17.5 4.5 20 7l-2.5 2.5" stroke="#E07A5F" stroke-width="2.2"/>',
+    prat: '<path d="M4 5.5h16v10.5H10l-5 4v-4H4z" fill="#fff"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01" stroke="#E07A5F" stroke-width="2.8"/>',
+    mal: '<circle cx="12" cy="12" r="8.5" fill="#E07A5F"/><circle cx="12" cy="12" r="5" fill="#fff"/><circle cx="12" cy="12" r="2" fill="#E07A5F"/>',
+    stjarna: '<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="#E9B949"/>',
+    tarning: '<rect x="4" y="4" width="16" height="16" rx="3.5" fill="#fff"/><path d="M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01" stroke="#E07A5F" stroke-width="3"/>',
+    triangel: '<path d="M12 3.5 21 19.5H3z" fill="#E9B949"/>'};
+  const ikf = n => FIK[n] ? `<svg class="ik" viewBox="0 0 24 24" fill="none" stroke="#2E3A46" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${FIK[n]}</svg>` : ik(n);
+  const SYMF = {'½': '<svg viewBox="4 0 16 24" width="24" height="34"><text x="12" y="10.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#D9583B" font-family="Inter,sans-serif">1</text><path d="M7 12.6h10" stroke="#2E3A46" stroke-width="1.8" stroke-linecap="round"/><text x="12" y="23" text-anchor="middle" font-size="11.5" font-weight="800" fill="#3D78B5" font-family="Inter,sans-serif">2</text></svg>', 'x': '<i style="color:#D9583B;font-size:1.25em">x</i>', '%': '<span style="color:#D9583B">%</span>'};
+  const symf = s => s === '△' ? ikf('triangel') : SYMF[s] ? SYMF[s] : EMOJI[s] ? ikf(EMOJI[s]) : s;
   // Organic-skalan: huvudfärg -> ljus bakgrundsfärg (ur Nikolas bild)
   const LJUS = {'#7597BC': '#E8F2FA', '#818B72': '#EAF4EA', '#CA8871': '#FDEBE7', '#D8A964': '#FFF6E3', '#A29BBF': '#EFEAF9', '#7CABB4': '#E6F6F4',
                 '#9DB5A6': '#EDF7F0', '#B5A6B9': '#F3EEF5', '#C4AE97': '#F9EFE3', '#DE9C8F': '#FFECE4', '#C0A993': '#F7EFE4', '#CC97A1': '#FCEEF1'};
@@ -355,17 +369,21 @@
     const kapOrd = (ak, kap) => ORD.filter(o => OKF(o) && o.kaps.some(x => kap ? x === ak + ':' + kap : x.startsWith(ak + ':')));
     const VAL_T = {};
   // Egna ikoner per nivå och område, så att nivåerna känns olika (Nikola 2026-11-07)
-      var NIK_SVG = function (d, fyll) { return '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
-    var NIK = {
-      tal: ['123', '½', '√<i style="border-top:2px solid;padding:0 2px;margin-left:-1px">x</i>'],
-      alg: ['<i>x</i>', '2<i>x</i>', '<i>x</i>²'],
-      geo: [NIK_SVG('<path d="M12 4 20.5 19h-17z"/>'), NIK_SVG('<path d="M5 8l7-4 7 4v8l-7 4-7-4z"/><path d="M5 8l7 4 7-4M12 12v8"/>'), NIK_SVG('<path d="M5 19V6l14 13z"/><path d="M5 15h4v4"/>')],
-      sam: [NIK_SVG('<path d="M5 19 19 5"/><path d="M9 5h10v10"/>'), '%', NIK_SVG('<path d="M4 4v16h16"/><path d="M6.5 17 19 7"/>')],
-      sta: [NIK_SVG('<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.1" fill="currentColor"/><circle cx="15" cy="15" r="1.1" fill="currentColor"/><circle cx="15" cy="9" r="1.1" fill="currentColor"/><circle cx="9" cy="15" r="1.1" fill="currentColor"/>'),
-            NIK_SVG('<path d="M3.5 20h17"/><path d="M6.5 20v-6M10.5 20V8M14.5 20v-9M18.5 20V5" stroke-width="3"/>'),
-            NIK_SVG('<path d="M5 12l7-5.5M5 12l7 5.5M12 6.5l7-3M12 6.5l7 3M12 17.5l7-3M12 17.5l7 3"/><circle cx="4.5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="6.5" r="1.4" fill="currentColor"/><circle cx="12" cy="17.5" r="1.4" fill="currentColor"/>')]
-    };
-    var nivaIkon = function (ak, namn) {
+      var NIK_SVG = function (d) { return '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#2E3A46" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
+      // Färgade som startsidans ikoner: mörk kontur, gul/röd/blå/grön fyllning (Nikola 2026-11-07)
+      var NIK = {
+        tal: ['<span style="color:#D9583B">1</span><span style="color:#3D78B5">2</span><span style="color:#4F8F3F">3</span>', '<svg viewBox="4 0 16 24" width="24" height="34"><text x="12" y="10.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#D9583B" font-family="Inter,sans-serif">1</text><path d="M7 12.6h10" stroke="#2E3A46" stroke-width="1.8" stroke-linecap="round"/><text x="12" y="23" text-anchor="middle" font-size="11.5" font-weight="800" fill="#3D78B5" font-family="Inter,sans-serif">2</text></svg>', '<span style="color:#3D78B5">10</span><sup style="color:#D9583B;font-size:.6em">3</sup>'],
+        alg: ['<i style="color:#D9583B;font-size:1.25em">x</i>', '<span style="color:#3D78B5">2</span><i style="color:#D9583B;font-size:1.25em">x</i>', '<i style="color:#D9583B;font-size:1.25em">x</i><span style="color:#3D78B5">²</span>'],
+        geo: [NIK_SVG('<path d="M12 3.5 21 19.5H3z" fill="#E9B949"/>'),
+              NIK_SVG('<path d="M4.5 8 12 4l7.5 4L12 12z" fill="#E9B949"/><path d="M4.5 8 12 12v8.5L4.5 16.5z" fill="#5B8DB8"/><path d="M19.5 8 12 12v8.5l7.5-4z" fill="#fff"/>'),
+              NIK_SVG('<path d="M4.5 19.5v-15l15 15z" fill="#5B8DB8"/><path d="M4.5 15.5h4v4" fill="#fff"/>')],
+        sam: [NIK_SVG('<path d="M5 19 18 6" stroke="#E07A5F" stroke-width="2.6"/><path d="M9.5 5H19v9.5" stroke="#E07A5F" stroke-width="2.6"/>'), '<span style="color:#D9583B">%</span>',
+              NIK_SVG('<path d="M4 3.5v16.5h16.5"/><path d="M6.5 17 19 6.5" stroke="#E07A5F" stroke-width="2.4"/><circle cx="10" cy="14" r="1.8" fill="#E9B949"/><circle cx="15.5" cy="9.5" r="1.8" fill="#E9B949"/>')],
+        sta: [NIK_SVG('<rect x="3.5" y="3.5" width="17" height="17" rx="3.5" fill="#fff"/><circle cx="8.5" cy="8.5" r="1.6" fill="#E07A5F" stroke="none"/><circle cx="15.5" cy="15.5" r="1.6" fill="#E07A5F" stroke="none"/><circle cx="15.5" cy="8.5" r="1.6" fill="#E07A5F" stroke="none"/><circle cx="8.5" cy="15.5" r="1.6" fill="#E07A5F" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="#E07A5F" stroke="none"/>'),
+              NIK_SVG('<rect x="4" y="12" width="3.4" height="8" fill="#5B8DB8"/><rect x="8.6" y="6" width="3.4" height="14" fill="#E9B949"/><rect x="13.2" y="9" width="3.4" height="11" fill="#E07A5F"/><rect x="17.8" y="4" width="3.4" height="16" fill="#6F9F5A"/><path d="M2.5 20.5h19.5"/>'),
+              NIK_SVG('<path d="M5 12l7-5.5M5 12l7 5.5M12 6.5l7-3M12 6.5l7 3M12 17.5l7-3M12 17.5l7 3"/><circle cx="4.5" cy="12" r="2.2" fill="#E9B949"/><circle cx="12" cy="6.5" r="2" fill="#5B8DB8"/><circle cx="12" cy="17.5" r="2" fill="#E07A5F"/><circle cx="19.5" cy="3.5" r="1.4" fill="#fff"/><circle cx="19.5" cy="9.5" r="1.4" fill="#fff"/><circle cx="19.5" cy="14.5" r="1.4" fill="#fff"/><circle cx="19.5" cy="20.5" r="1.4" fill="#fff"/>')]
+      };
+      var nivaIkon = function (ak, namn) {
       var o = /Algebra/.test(namn) ? 'alg' : /Geometri/.test(namn) ? 'geo' : /Samband|Procent/.test(namn) ? 'sam' : /Statistik|Sannolik/.test(namn) ? 'sta' : 'tal';
       return NIK[o][Math.max(0, Math.min(2, ak - 7))];
     };
@@ -412,9 +430,9 @@
       return {rub: 'Vilken meningsstart passar?', q: esc(m.t).replace('_', '<span class="bg-lucka">?</span>'), lang: true, alt: alt.map(x => esc(x.ord)), ratt: alt.indexOf(m), facit: {ord: m.ord, txt: msFacit(m)}};
     }
     VAL_T.ms = {namn: 'Meningsstarter', ms: true, pool: () => MS};
-    h += `<div class="kapblock bg-block"><h2>Mer att testa</h2><p class="bg-btxt">Resonemangsord, meningsstarter och alla begrepp blandat.</p><div class="bt-val"><button type="button" class="bt-ruta" data-t="kitt" style="--o:#7CABB4;--od:#36666E;--ol:#E6F6F4"><span class="bg-rsym">${ik('lank')}</span><span><small>Resonemangsord</small><b>Ord som hjälper dig att resonera</b><small>${VAL_T.kitt.pool().length} ord</small></span></button>`
-      + `<button type="button" class="bt-ruta" data-t="ms" style="--o:#DE9C8F;--od:#8C4A3C;--ol:#FFECE4"><span class="bg-rsym">${ik('prat')}</span><span><small>Meningsstarter</small><b>Så kan du börja en mening</b><small>${VAL_T.ms.pool().length} meningsstarter</small></span></button>`
-      + `<button type="button" class="bt-ruta hela allab" data-t="alla"><span class="bg-rsym">${ik('stjarna')}</span><span><small>Utmaning</small><b>Alla begrepp blandat</b><small>${VAL_T.alla.pool().length} begrepp</small></span></button></div></div>`;
+    h += `<div class="kapblock bg-block"><h2>Mer att testa</h2><p class="bg-btxt">Resonemangsord, meningsstarter och alla begrepp blandat.</p><div class="bt-val"><button type="button" class="bt-ruta" data-t="kitt" style="--o:#7CABB4;--od:#36666E;--ol:#E6F6F4"><span class="bg-rsym">${ikf('lank')}</span><span><small>Resonemangsord</small><b>Ord som hjälper dig att resonera</b><small>${VAL_T.kitt.pool().length} ord</small></span></button>`
+      + `<button type="button" class="bt-ruta" data-t="ms" style="--o:#DE9C8F;--od:#8C4A3C;--ol:#FFECE4"><span class="bg-rsym">${ikf('prat')}</span><span><small>Meningsstarter</small><b>Så kan du börja en mening</b><small>${VAL_T.ms.pool().length} meningsstarter</small></span></button>`
+      + `<button type="button" class="bt-ruta hela allab" data-t="alla"><span class="bg-rsym">${ikf('stjarna')}</span><span><small>Utmaning</small><b>Alla begrepp blandat</b><small>${VAL_T.alla.pool().length} begrepp</small></span></button></div></div>`;
     const startsida = h;
     let T = null;
     let nivaVald = {1: 7, 2: 8, 3: 9}[new URLSearchParams(location.search).get('niva')] || 7;
@@ -468,15 +486,15 @@
   }
   const VALEN = [...OMR.map(o => ({typ: 'om', id: o[0], namn: o[1], ljus: o[2], mork: o[3], sym: o[4], antal: ORD.filter(x => x.om === o[0]).length})),
                  ...KG.map(g => ({typ: 'kg', id: g[0], namn: g[1], ljus: g[2], mork: g[3], sym: g[4], txt: g[5], antal: KO.filter(k => k.g === g[0]).length}))];
-  const ruta = v => `<button type="button" class="bg-ruta" data-val="${v.typ}:${v.id}" style="--o:${v.ljus};--od:${v.mork};--ol:${LJ(v.ljus)}"><span class="bg-rsym">${sym(v.sym)}</span><b>${esc(v.namn)}</b><small>${v.antal} ord</small></button>`;
+  const ruta = v => `<button type="button" class="bg-ruta" data-val="${v.typ}:${v.id}" style="--o:${v.ljus};--od:${v.mork};--ol:${LJ(v.ljus)}"><span class="bg-rsym">${symf(v.sym)}</span><b>${esc(v.namn)}</b><small>${v.antal} ord</small></button>`;
   const MSINNEHALL = (window.BG_MENINGAR || []).length ? `<div class="ms-grid">${window.BG_MENINGAR.map(([ik, rub, l]) => `<div class="ms-kort"><h4><span aria-hidden="true">${sym(ik)}</span> ${esc(rub)}</h4><ul>${l.map(([b, e]) => `<li><b>${esc(b)}</b><span>${esc(e)}</span></li>`).join('')}</ul></div>`).join('')}</div>
     ${window.BG_MODELL ? `<div class="ms-modell"><div class="ms-mod"><h4>${ik('trappa')} Så bygger du ett resonemang</h4><p class="ms-pil">${window.BG_MODELL.steg.map(s => `<span>${esc(s[0])}</span>`).join('<i>→</i>')}</p><p class="ms-upg"><b>Exempel:</b> ${esc(window.BG_MODELL.uppgift)}</p><ol>${window.BG_MODELL.steg.map(s => `<li><b>${esc(s[0])}:</b> ${esc(s[1])}</li>`).join('')}</ol></div>
     <div class="ms-chk"><h4>${ik('bock')} Checklista innan du lämnar in</h4><ul>${window.BG_MODELL.check.map(c => `<li>${esc(c)}</li>`).join('')}</ul></div></div>` : ''}` : '';
   const MSANTAL = (window.BG_MENINGAR || []).reduce((n, g) => n + g[2].length, 0);
-  const MSRUTA = MSANTAL ? `<button type="button" class="bg-ruta" data-ms="1" style="--o:#DE9C8F;--od:#8C4A3C;--ol:#FFECE4"><span class="bg-rsym">${ik('prat')}</span><b>Så kan du börja en mening</b><small>${MSANTAL} meningsstarter</small></button>` : '';
+  const MSRUTA = MSANTAL ? `<button type="button" class="bg-ruta" data-ms="1" style="--o:#DE9C8F;--od:#8C4A3C;--ol:#FFECE4"><span class="bg-rsym">${ikf('prat')}</span><b>Så kan du börja en mening</b><small>${MSANTAL} meningsstarter</small></button>` : '';
   // Testa dig och Mattequiz som egna delar på sidan, nivå 1–3 (Nikola 2026-11-07, som Matematikverkstad)
   const LANK = (href, symb, namn, txt) => `<a class="bg-ruta bg-lankruta" href="${href}" style="--o:#B7D3D7;--od:#2F5459;--ol:#E6F2F3"><span class="bg-rsym">${symb}</span><b>${namn}</b><small>${txt}</small></a>`;
-  const NIVALANK = (bas, txt) => [1, 2, 3].map(n => LANK(bas + n, '<span class="bg-stj">' + '★★★'.slice(0, n) + '</span>', 'Nivå ' + n, txt)).join('');
+  const NIVALANK = (bas, txt) => [1, 2, 3].map(n => LANK(bas + n, (n === 3 ? '<span class="bg-stj bg-stj3">★<br>★★</span>' : '<span class="bg-stj bg-stj' + n + '">' + '★★★'.slice(0, n) + '</span>'), 'Nivå ' + n, txt)).join('');
   el.innerHTML = `
 <label class="bg-sok"><span aria-hidden="true">${ik('sok')}</span><input type="search" placeholder="Sök ord" aria-label="Sök ett ord"></label>
 <div id="bg-steg1">
@@ -485,7 +503,7 @@
   <div class="kapblock bg-block bg-kitt" id="bg-resonera"><h2><span class="bg-dik">${ik('lank')}</span>Resonemangsord</h2><p class="bg-btxt">Ord som hjälper dig att förstå uppgifter och förklara hur du tänker.</p>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}${MSRUTA}</div></div>
   <div class="kapblock bg-block bg-testa" id="testa-dig"><h2><span class="bg-dik">${ik('mal')}</span>Testa dig</h2><p class="bg-btxt">Kolla vad du kan. Du får 10 frågor och ser i slutet vilka ord du kan öva mer på.</p>
-  <div class="bg-val">${NIVALANK('begrepp-test.html?niva=', 'Testa begreppen')}${LANK('begrepp-test.html?t=kitt', ik('lank'), 'Resonemangsord', 'Testa orden')}${LANK('begrepp-test.html?t=alla', ik('stjarna'), 'Alla begrepp blandat', 'Utmaning')}</div></div>
+  <div class="bg-val">${NIVALANK('begrepp-test.html?niva=', 'Testa begreppen')}${LANK('begrepp-test.html?t=kitt', ikf('lank'), 'Resonemangsord', 'Testa orden')}${LANK('begrepp-test.html?t=alla', ikf('stjarna'), 'Alla begrepp blandat', 'Utmaning')}</div></div>
   <div class="kapblock bg-block bg-quiz" id="mattequiz"><h2><span class="bg-dik">${ik('stjarna')}</span>Mattequiz</h2><p class="bg-btxt">Tävla om begreppen! Starta samma quiz, svara snabbt och jämför era poäng: en mot en, i par eller i lag.</p>
   <div class="bg-val">${NIVALANK('begrepp-quiz.html?niva=', 'Två quiz per område')}</div></div>
   <p class="bg-saknar">${ik('prat')} Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>

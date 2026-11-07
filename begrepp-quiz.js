@@ -627,15 +627,19 @@ var QUIZ_DATA = {
   };
   var TARN = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.2" fill="currentColor"/><circle cx="15" cy="15" r="1.2" fill="currentColor"/><circle cx="15" cy="9" r="1.2" fill="currentColor"/><circle cx="9" cy="15" r="1.2" fill="currentColor"/></svg>';
   // Egna ikoner per nivå och område, så att nivåerna känns olika (Nikola 2026-11-07)
-  var NIK_SVG = function (d, fyll) { return '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
+  var NIK_SVG = function (d) { return '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#2E3A46" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
+  // Färgade som startsidans ikoner: mörk kontur, gul/röd/blå/grön fyllning (Nikola 2026-11-07)
   var NIK = {
-    tal: ['123', '½', '√<i style="border-top:2px solid;padding:0 2px;margin-left:-1px">x</i>'],
-    alg: ['<i>x</i>', '2<i>x</i>', '<i>x</i>²'],
-    geo: [NIK_SVG('<path d="M12 4 20.5 19h-17z"/>'), NIK_SVG('<path d="M5 8l7-4 7 4v8l-7 4-7-4z"/><path d="M5 8l7 4 7-4M12 12v8"/>'), NIK_SVG('<path d="M5 19V6l14 13z"/><path d="M5 15h4v4"/>')],
-    sam: [NIK_SVG('<path d="M5 19 19 5"/><path d="M9 5h10v10"/>'), '%', NIK_SVG('<path d="M4 4v16h16"/><path d="M6.5 17 19 7"/>')],
-    sta: [NIK_SVG('<rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.1" fill="currentColor"/><circle cx="15" cy="15" r="1.1" fill="currentColor"/><circle cx="15" cy="9" r="1.1" fill="currentColor"/><circle cx="9" cy="15" r="1.1" fill="currentColor"/>'),
-          NIK_SVG('<path d="M3.5 20h17"/><path d="M6.5 20v-6M10.5 20V8M14.5 20v-9M18.5 20V5" stroke-width="3"/>'),
-          NIK_SVG('<path d="M5 12l7-5.5M5 12l7 5.5M12 6.5l7-3M12 6.5l7 3M12 17.5l7-3M12 17.5l7 3"/><circle cx="4.5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="6.5" r="1.4" fill="currentColor"/><circle cx="12" cy="17.5" r="1.4" fill="currentColor"/>')]
+    tal: ['<span style="color:#D9583B">1</span><span style="color:#3D78B5">2</span><span style="color:#4F8F3F">3</span>', '<svg viewBox="4 0 16 24" width="24" height="34"><text x="12" y="10.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#D9583B" font-family="Inter,sans-serif">1</text><path d="M7 12.6h10" stroke="#2E3A46" stroke-width="1.8" stroke-linecap="round"/><text x="12" y="23" text-anchor="middle" font-size="11.5" font-weight="800" fill="#3D78B5" font-family="Inter,sans-serif">2</text></svg>', '<span style="color:#3D78B5">10</span><sup style="color:#D9583B;font-size:.6em">3</sup>'],
+    alg: ['<i style="color:#D9583B;font-size:1.25em">x</i>', '<span style="color:#3D78B5">2</span><i style="color:#D9583B;font-size:1.25em">x</i>', '<i style="color:#D9583B;font-size:1.25em">x</i><span style="color:#3D78B5">²</span>'],
+    geo: [NIK_SVG('<path d="M12 3.5 21 19.5H3z" fill="#E9B949"/>'),
+          NIK_SVG('<path d="M4.5 8 12 4l7.5 4L12 12z" fill="#E9B949"/><path d="M4.5 8 12 12v8.5L4.5 16.5z" fill="#5B8DB8"/><path d="M19.5 8 12 12v8.5l7.5-4z" fill="#fff"/>'),
+          NIK_SVG('<path d="M4.5 19.5v-15l15 15z" fill="#5B8DB8"/><path d="M4.5 15.5h4v4" fill="#fff"/>')],
+    sam: [NIK_SVG('<path d="M5 19 18 6" stroke="#E07A5F" stroke-width="2.6"/><path d="M9.5 5H19v9.5" stroke="#E07A5F" stroke-width="2.6"/>'), '<span style="color:#D9583B">%</span>',
+          NIK_SVG('<path d="M4 3.5v16.5h16.5"/><path d="M6.5 17 19 6.5" stroke="#E07A5F" stroke-width="2.4"/><circle cx="10" cy="14" r="1.8" fill="#E9B949"/><circle cx="15.5" cy="9.5" r="1.8" fill="#E9B949"/>')],
+    sta: [NIK_SVG('<rect x="3.5" y="3.5" width="17" height="17" rx="3.5" fill="#fff"/><circle cx="8.5" cy="8.5" r="1.6" fill="#E07A5F" stroke="none"/><circle cx="15.5" cy="15.5" r="1.6" fill="#E07A5F" stroke="none"/><circle cx="15.5" cy="8.5" r="1.6" fill="#E07A5F" stroke="none"/><circle cx="8.5" cy="15.5" r="1.6" fill="#E07A5F" stroke="none"/><circle cx="12" cy="12" r="1.6" fill="#E07A5F" stroke="none"/>'),
+          NIK_SVG('<rect x="4" y="12" width="3.4" height="8" fill="#5B8DB8"/><rect x="8.6" y="6" width="3.4" height="14" fill="#E9B949"/><rect x="13.2" y="9" width="3.4" height="11" fill="#E07A5F"/><rect x="17.8" y="4" width="3.4" height="16" fill="#6F9F5A"/><path d="M2.5 20.5h19.5"/>'),
+          NIK_SVG('<path d="M5 12l7-5.5M5 12l7 5.5M12 6.5l7-3M12 6.5l7 3M12 17.5l7-3M12 17.5l7 3"/><circle cx="4.5" cy="12" r="2.2" fill="#E9B949"/><circle cx="12" cy="6.5" r="2" fill="#5B8DB8"/><circle cx="12" cy="17.5" r="2" fill="#E07A5F"/><circle cx="19.5" cy="3.5" r="1.4" fill="#fff"/><circle cx="19.5" cy="9.5" r="1.4" fill="#fff"/><circle cx="19.5" cy="14.5" r="1.4" fill="#fff"/><circle cx="19.5" cy="20.5" r="1.4" fill="#fff"/>')]
   };
   var nivaIkon = function (ak, namn) {
     var o = /Algebra/.test(namn) ? 'alg' : /Geometri/.test(namn) ? 'geo' : /Samband|Procent/.test(namn) ? 'sam' : /Statistik|Sannolik/.test(namn) ? 'sta' : 'tal';
