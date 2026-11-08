@@ -506,7 +506,6 @@
   <div class="bg-val">${NIVALANK('begrepp-test.html?niva=', 'Testa begreppen')}${LANK('begrepp-test.html?t=kitt', ikf('lank'), 'Resonemangsord', 'Testa orden')}${LANK('begrepp-test.html?t=alla', ikf('stjarna'), 'Alla begrepp blandat', 'Utmaning')}</div></div>
   <div class="kapblock bg-block bg-quiz" id="mattequiz"><h2><span class="bg-dik">${ik('stjarna')}</span>Mattequiz</h2><p class="bg-btxt">Tävla om begreppen! Starta samma quiz, svara snabbt och jämför era poäng: en mot en, i par eller i lag.</p>
   <div class="bg-val">${NIVALANK('begrepp-quiz.html?niva=', 'Två quiz per område')}</div></div>
-  <p class="bg-saknar">${ik('prat')} Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.</p>
 </div>
 <div id="bg-steg2" hidden>
   <div class="bg-bar"><button type="button" class="bg-tillbaka">← Byt ord</button><span class="bg-var"></span>
@@ -552,7 +551,7 @@
     steg(3);
     const n = o => norm(o.ord), a = ORD.filter(o => n(o).startsWith(q)), b = ORD.filter(o => !a.includes(o) && n(o).includes(q)), c = ORD.filter(o => !a.includes(o) && !b.includes(o) && norm(o.forkl).includes(q));
     const om = [...a, ...b, ...c], ko = KO.filter(k => n(k).includes(q));
-    $('#bg-traff').textContent = om.length + ko.length ? `${om.length + ko.length} ord hittades för ”${sokruta.value.trim()}”. Klicka på ett kort för att vända det.` : `Inget ord hittades för ”${sokruta.value.trim()}”. Prova en kortare del av ordet. Saknar du ett ord, eller förstår du inte en förklaring? Fråga din lärare.`;
+    $('#bg-traff').textContent = om.length + ko.length ? `${om.length + ko.length} ord hittades för ”${sokruta.value.trim()}”. Klicka på ett kort för att vända det.` : `Inget ord hittades för ”${sokruta.value.trim()}”. Prova en kortare del av ordet.`;
     const lista = $('#bg-soklista'); lista.innerHTML = '';
     if (om.length) { kortlista(om, lista); }
     if (ko.length) lista.insertAdjacentHTML('beforeend', kittsektion(ko, ['', 'Resonemangsord', '#7CABB4', '#36666E', '🔗', '']));
