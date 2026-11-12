@@ -945,7 +945,7 @@ def bygg():
     sida('pisa-traning.html', 'PISA-träning', '', _pc, f"""
 {panel(_pc, 'PISA-träning', 'Vardagsnära uppgifter i flera steg, som i den internationella PISA-undersökningen.', '', [('Startsida', 'index.html'), ('Nationella prov', 'nationella-prov.html'), ('PISA-träning', None)])}
 <main><section><div class="wrap">{NP_PANEL}{pisa.sida()}
-<a class="knapp" href="nationella-prov.html">← Tillbaka till Nationella prov</a></div></section></main>""")
+<a class="knapp" href="index.html" onclick="if(history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
     for js in ('trana.js', 'trana-ak7.js', 'trana-ak8.js', 'trana-ak9.js'):
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), js), UT)
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
