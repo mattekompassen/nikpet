@@ -5,10 +5,10 @@
 import html, json
 
 OMRADEN = [  # nyckel, namn, beskrivning, färg
-    ('kvantitet', 'Tal och kvantitet', 'Räkna med pengar, procent, enheter och stora och små tal.', '#B8891F'),
-    ('forandring', 'Förändring och samband', 'Grafer, tabeller och formler som visar hur något ändras.', '#3E7C59'),
-    ('rum', 'Rum och form', 'Area, volym, skala, ritningar och former i verkligheten.', '#5B6FB0'),
-    ('data', 'Osäkerhet och data', 'Diagram, statistik, slump och sannolikhet.', '#A0526E'),
+    ('kvantitet', 'Tal', 'Räkna med pengar, procent, enheter och stora och små tal.', '#B8891F'),
+    ('forandring', 'Samband och förändring', 'Grafer, tabeller och formler som visar hur något ändras.', '#3E7C59'),
+    ('rum', 'Geometri', 'Area, volym, skala, ritningar och former i verkligheten.', '#5B6FB0'),
+    ('data', 'Sannolikhet och statistik', 'Diagram, statistik, slump och sannolikhet.', '#A0526E'),
 ]
 
 def _graf_cykel():
