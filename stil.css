@@ -148,7 +148,7 @@ a.knapp2{text-decoration:none;display:inline-block}
 
 /* --- Bokomslagens färger (förslag) --- */
 body{background:#F4F3EF}
-main.hem{background:radial-gradient(600px 420px at -5% 20%,#58A73E22,transparent 70%),radial-gradient(520px 420px at 105% 15%,#8A4A7822,transparent 70%),radial-gradient(500px 300px at 50% 0%,#1A86B014,transparent 70%)}
+main.hem{background:radial-gradient(600px 420px at -5% 20%,#58A73E22,transparent 70%),radial-gradient(520px 420px at 105% 15%,#D9483B1C,transparent 70%),radial-gradient(500px 300px at 50% 0%,#1A86B014,transparent 70%)}
 header{background:#FBFAF7;border-bottom:1px solid #E6E3DC}.rand{display:none}
 header .wrap{padding-top:14px;padding-bottom:14px}
 .logo{font-family:Inter,sans-serif;font-weight:600;font-size:24px;color:#1E2B3A}.logo img{width:50px;height:50px;background:none;box-shadow:none}.logo small{font-weight:500}
@@ -159,7 +159,7 @@ nav a.on{color:#1E2B3A;font-weight:700;background:none!important}
 .topprubrik img{width:96px}.topprubrik h1{font-family:Inter,sans-serif;font-weight:800;font-size:clamp(38px,5.4vw,64px);letter-spacing:-1.5px;margin:0;color:#14202E;line-height:1}
 .topprubrik p{margin:8px 0 0;font-size:21px;color:#3B4A5A;text-align:left}
 .topprubrik div{text-align:left}
-.kkrad{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.kkrad{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}.kkrad.fyra{grid-template-columns:repeat(2,1fr)}@media (max-width:800px){.kkrad.fyra{grid-template-columns:1fr}}.ak2.bred .nr b{font-size:50px;letter-spacing:-1px;white-space:nowrap;padding:28px 0 14px}.ak2.bred .nr small{font-size:15px}
 .kk{display:block;border-radius:22px;overflow:hidden;text-decoration:none;box-shadow:0 10px 30px #1E2B3A1f;transition:transform .15s}.kk:hover{transform:translateY(-5px)}
 .kk .topp{height:210px;position:relative;overflow:hidden}
 .motiv-k{position:absolute;inset:14px 18px;width:calc(100% - 36px);height:calc(100% - 28px);opacity:.95}
