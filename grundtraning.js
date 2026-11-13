@@ -568,12 +568,13 @@
   };
 
   // ---------- Visning ----------
+  if (window.MK_IK2) Object.entries(OV).forEach(([k, o]) => { o.ikonBild = `<img src="bilder/ikoner/gt-${k}.png" alt="">`; o.ikon = `<img class="gt-ikm" src="bilder/ikoner/gt-${k}.png" alt="">`; });  // enhetliga ikoner (enhetliga_ikoner.py)
   const DELAR = [['position', 'Positionssystemet', 'Förstå ental, tiotal, hundratal, tusental och decimalernas platsvärde.'], ['rakna', 'Huvudräkning', 'Räkna i huvudet. Du får 10 uppgifter med nya tal varje gång.'], ['tid', 'Klockan och tid', 'Läs klockan, ställ visarna och räkna med tid.'], ['enhet', 'Enheter', 'Längd, volym, vikt och tid. Välj rätt enhet och byt mellan enheter.']];
   const KLOCKORD = [[7, 0, 'klockan 7', '7.00'], [7, 30, 'halv 8', '7.30'], [7, 15, 'kvart över 7', '7.15'], [7, 45, 'kvart i 8', '7.45'], [7, 5, 'fem över 7', '7.05'], [7, 55, 'fem i 8', '7.55']];
   function meny(bara) {  // bara = 'tid' m.fl.: visa bara den delen (genväg från startsidan)
     const delar = bara ? DELAR.filter(x => x[0] === bara) : DELAR;
     el.innerHTML = delar.map(([d, rub, txt]) => `<div class="kapblock gt-del" id="del-${d}"><h2>${rub}</h2><p class="gt-txt">${txt}</p><div class="gt-typer">` +
-      Object.entries(OV).filter(([, o]) => o.del === d).map(([k, o]) => `<a class="typ" href="#${k}"><span class="gt-ik" aria-hidden="true">${o.ikon}</span>${o.namn}<b>${o.kort}</b></a>`).join('') + '</div>' +
+      Object.entries(OV).filter(([, o]) => o.del === d).map(([k, o]) => `<a class="typ" href="#${k}"><span class="gt-ik${o.ikonBild ? ' gt-ikb' : ''}" aria-hidden="true">${o.ikonBild || o.ikon}</span>${o.namn}<b>${o.kort}</b></a>`).join('') + '</div>' +
       (d === 'position' ? `<details class="gt-ord"><summary>📖 Positionstabellen</summary><div class="gt-trappor">${postabell([3, 7, 5, 2, 4, 8, 6].map((s, i) => ({s, e: 3 - i})))}
         <ul><li>Talet ovan är <b>3 752,486</b>. Siffrans <b>position</b> avgör siffrans <b>platsvärde</b>: 7 har värdet 700 och 8 har värdet 0,08.</li><li>Varje plats är <b>10 gånger större</b> än platsen till höger.</li><li><b>10 ental = 1 tiotal</b>, 10 tiotal = 1 hundratal, 10 hundratal = 1 tusental.</li>
         <li><b>10 tiondelar = 1 ental</b>, 10 hundradelar = 1 tiondel, 10 tusendelar = 1 hundradel.</li><li>Decimaltecknet (<b>kommat</b>) står mellan entalen och tiondelarna. Till vänster om kommat heter platserna något med <b>tal</b>, till höger något med <b>del</b>.</li><li>Ett tal skrivet med sina platsvärden är skrivet i <b>utvecklad form</b>: 4 327 = 4 000 + 300 + 20 + 7.</li><li><b>Nollan</b> håller en plats tom: 305 = 3 hundratal, 0 tiotal och 5 ental.</li></ul></div></details>` : '') +
