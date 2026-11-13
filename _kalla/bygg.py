@@ -327,19 +327,19 @@ document.getElementById('lasform').addEventListener('submit',function(e){{
 OVP_KALLA = '/mnt/project-files/np-ovningsprov-{n}'
 OVP_ANTAL = 6
 # Genomgångs-PPT per NP-träning och delprov (Drive-fil-id). Länken krypteras som facit (Nikola 2026-10-26).
-OVP_GENOMGANG = {1: {  # NP-träning 1 i full längd, nya genomgångar 2026-11-05
-                 'A': '1NVmcQIwYB9m0PM0BVGeoB_pJluR5-mDg', 'B': '18EmS66moy-phfphmaXlpW2MTZ1egStge',
-                     'C': '11D74rqte627qx6W3rcj2JRj_ZpPHeSb6', 'D': '1wjv3bghKfNotEMefYLKJQuCRIoraQnAy'},
-                 2: {'A': '1Wscy6MEIspbaPqWi3YONhxVHuxlyMssc', 'B': '1OB0NbkqrFTJ_r5BGERtufPNQqm1FCifJ',
-                     'C': '1ZLavvKtrsyUk8JF9glk1w0gafnVF6GkZ', 'D': '1GlSiJRfDaA-8Fv-7Pmhes5BnOUxizzzm'},
-                 3: {'A': '1ticed-TIXpSX695vLviMjVcvZkIpSDYr', 'B': '1X8UjGESfgknv_r-iToY5x1BP7cEacNsm',
-                     'C': '1VLEJwo_ytzcmHdAhZjXN3YgHUMeqMgQX', 'D': '10xC1t_iLWbW3Ybs047WRTvWhpkbLvMbr'},
-                 4: {'A': '1T_K28Qvwrn1JeIQHJXjsoVPoFUWWtZsF', 'B': '1tZuk5XZm2cOSA_4jatDVBZPlpCTLbvXv',
-                     'C': '1Rv0_OAuYc9AvOGKkYaFVgEbxXXVCArIp', 'D': '1-1PRauLSsm5ghtunNUz0143PiKgnojCu'},
-                 5: {'A': '15gsodCARfYx75rEMhxaXvU-i--0HMsGH', 'B': '1WE23izOlBKpLL_tEq0fhX-g601ggNyMF',
-                     'C': '1ZxR7AMVq0OmmSMZt_QVbimSMOM55jYwR', 'D': '1QWn25D47Nvt6x03fudQDcIedbJZMIB79'},
-                 6: {'A': '1EPowIs12jvYuYFp-PNsy05ec8QDDncwq', 'B': '1e1IDEkx4kz0R1zPoRaSqDLEepJUEX6N2',
-                     'C': '174EAZgEIIJWbJJ46IAyvef0kTNcOr5fT', 'D': '1E9xZm2bz6HGAMssRAvXWDy3EJssQAyv1'}}
+OVP_GENOMGANG = {  # Nya NP-träning 1–6 skrivna från kursplanen, genomgångar 2026-11-13
+    1: {'A': '1BPspoPDdO0FSgs2f72NHVgWIEKtgmKGR', 'B': '1migWXG5Np29_UvANLdORnrQpzmxowUf9',
+        'C': '1hUtJZNvH3xlyjToJasKXUO_qgy8og5NE', 'D': '1p5NMdXPakt1qB1kZLQxfkrHJaJk8EkGD'},
+    2: {'A': '1jUff89cE1SMK8TR738j1AdiTjLyZ4uVr', 'B': '1KKJgpb9DYblG4Da-uxVHkTD8PTcNd1FC',
+        'C': '1riffmmaKS4VKaaOVKhkVIMtOOtV6wZ1k', 'D': '19GjY3hsq9TFw5igwT1NaoIQIEzNIj8cW'},
+    3: {'A': '1fxifctCv9_QigHeh0SieQRBmfqU6kb2t', 'B': '1AVyafnUj0Qla2C1hbfTG-uEAyVqsAqHK',
+        'C': '1F74m60kz7DzIlpkL6EQ0Y6asUf-IKFPR', 'D': '1TngWiXtuH6KOcLbHyveRiAu3YQO0cnGn'},
+    4: {'A': '1jb4d7aApkyeuW9xqKZcHraamqFoAk3c4', 'B': '1CFC1ibhFyK6c_mJcGoXR5vMP6JWsDFEv',
+        'C': '1XQcCPprJUcvdtiQzacd2zdjgJli6nGH-', 'D': '1jb33J-0MNetUYF_x6jXybiwuDrjsWQqi'},
+    5: {'A': '1_NWQ0wnyjWtcKICbnkguiWel7eo-A-LP', 'B': '1TvEJuA0zD70flUtEBB_W5naatm-X6sBN',
+        'C': '1Zvu2jBzWexmny8IReJLrab8lNzH4LNEk', 'D': '1FAxsa167RGcJ3aUJmueUngoCq1vpAdt1'},
+    6: {'A': '1YaprW-X4CuE8kngDvlmB2PfukqwJ4q9R', 'B': '11MN1bEr-LK6M-nMTKY_kmgfc3KXJR4p_',
+        'C': '1GiRujY_-dtBK0tO87UABILBBwe03IUEn', 'D': '18lktHG2YNlV4zT9nASnv919SAiMpy29e'}}
 OVP_DELPROV = [('A', '40 min', 'utan räknare', 'bara svar'), ('B', '80 min', 'utan räknare', 'visa lösningen'),
                ('C', '40 min', 'med räknare', 'bara svar'), ('D', '80 min', 'med räknare', 'visa lösningen')]
 
@@ -757,6 +757,31 @@ NP_CSS = """
 @media (max-width:1000px){.npdelad{grid-template-columns:1fr}}
 @media (max-width:760px){.npruta{flex-wrap:wrap;padding:20px}.npruta .npik{display:none}.npruta .npkn{flex-direction:row;width:100%}.npruta .npkn a{flex:1}}
 """
+
+# Fem nedersta startrutorna i egna färger efter Nikolas bild (förslag 2026-11-13): NP lila, PISA turkos, Verkstad blå, Blockmodellen aprikos, Begrepp indigo
+FEM_FARGER = os.environ.get('MK_FEM', '1') == '1'  # publicerat 2026-11-13, bara NP och PISA (Nikola)
+FEM_PAL = {  # bg1, bg2, ram, kortram, ikonbakgrund, mörk (knapp/etikett), prick
+    'np':    ('#F5EFFA', '#E8DCF3', '#CBB5E0', '#DCCDEB', '#F1E8F8', '#5E3592', '#A57FCB'),
+    'pisa':  ('#EAF7F5', '#D5EFEA', '#9ED6CD', '#BFE3DD', '#E1F3F0', '#0E7268', '#3FB3A6'),
+    'verk':  ('#EBF3FB', '#D9E7F5', '#AAC6E3', '#C4D7EC', '#E0ECF8', '#1D5A86', '#5C9AD0'),
+    'block': ('#FEF6E8', '#FBE5C2', '#EBC487', '#F2D9AE', '#FCEBCD', '#975A10', '#E9A23B'),
+    'begr':  ('#EFF1F8', '#DFE3F1', '#B5BEDB', '#CDD3E8', '#E5E8F4', '#3A4A7E', '#7B88B8'),
+}
+FEM_AKTIVA = ('np', 'pisa')  # Nikola 2026-11-13: ändra bara NP och PISA; övriga sparade i FEM_PAL
+def _fem_css():
+    c = ''
+    for k, (b1, b2, ram, kram, ik, mo, pr) in ((k, FEM_PAL[k]) for k in FEM_AKTIVA):
+        sel = '.npruta.pisar' if k == 'pisa' else f'.fv-{k}.fv-{k}'
+        c += (f'{sel}{{position:relative;background:linear-gradient(110deg,{b1},{b2})!important;border-color:{ram}!important}}'
+              f'{sel}::after{{content:"";position:absolute;top:16px;right:18px;width:30px;height:24px;pointer-events:none;background:radial-gradient(circle at 5px 5px,{pr} 4.5px,transparent 5px),radial-gradient(circle at 23px 17px,{pr} 4.5px,transparent 5px);opacity:.75}}'
+              f'{sel} .npik,{sel} .gik,{sel} .npdag{{border-color:{ram}!important;background:#fff!important}}'
+              f'{sel} .npet{{color:{mo}}}{sel} .npdag b{{color:{mo}}}'
+              f'{sel} .npkn a{{background:{mo}!important;color:#fff!important;box-shadow:none!important}}{sel} .npkn a+a{{background:#fff!important;color:{mo}!important;box-shadow:inset 0 0 0 2px {mo}!important}}'
+              + (f'{sel} .npik svg{{stroke:{mo}}}{sel} .npik svg circle{{fill:{ik}}}' if k == 'pisa' else '') +
+              f'{sel} .g a{{border-color:{kram}!important}}{sel} .g a:hover{{border-color:{mo}!important}}{sel} .g i{{background:{ik}!important;border-color:{ram}!important}}'
+              f'{sel} .h a.rub b{{color:{mo}}}{sel} .h small{{color:#2F3D4B}}')
+    return c
+FEM_CSS = _fem_css()
 def STARTSIDA_HTML(rad, gtlank, fik):
     sm = [('prov', 'bedomning.html', 'Hur bedöms du?'), ('boj', 'hjalp.html', 'Så får du hjälp i matte'), ('prata', 'amnesord.html', 'Ämnesord på olika språk')]
     smal = ''.join(f'<a href="{h}"><span class="rik" style="background:{mix(SIDFARG[h]["main"], "#FFFFFF", .6)}">{fik(i)}</span>{t}</a>' for i, h, t in sm)
@@ -774,7 +799,10 @@ def STARTSIDA_HTML(rad, gtlank, fik):
         np_ = '<div class="npdelad">' + np_.replace('</section><script>', '</section>' + pisa_ + '</div><script>', 1)
     import blockmodell as bm
     bml = bm.startlank() if VISA_BLOCKMODELL else ''
-    return f'<style>{NP_CSS}</style>{np_}{gtlank}{bml}<div class="smalrad" role="navigation" aria-label="Mer information">{smal}</div>'
+    if FEM_FARGER:
+        bml = bml.replace('<section class="gtC plC">', '<section class="gtC plC fv-block">', 1)
+        np_ = np_.replace('<section class="npruta">', '<section class="npruta fv-np">', 1)
+    return f'<style>{NP_CSS}{FEM_CSS if FEM_FARGER else ""}</style>{np_}{gtlank}{bml}<div class="smalrad" role="navigation" aria-label="Mer information">{smal}</div>'
 ORG['indigo'] = ('#9AA5B1', '#2E3A46', '#EEF1F4')  # neutral gråblå (Nikola 2026-10-24)
 GT_FARG = farger('indigo')
 
@@ -838,6 +866,8 @@ def bygg():
     gtlank = gt.startlank(GT_FARG, mix) if VISA_GRUNDTRANING else ''
     import begrepp as bgr
     gtlank += bgr.startlank() if VISA_BEGREPP else ''
+    if FEM_FARGER:  # klassnamn för färgerna per ruta
+        gtlank = gtlank.replace('<section class="gtC"><div class="h"><span class="gik">', '<section class="gtC fv-verk"><div class="h"><span class="gik">', 1).replace('<section class="gtC"><div class="h"><span class="gik" style="background:#fff">', '<section class="gtC fv-begr"><div class="h"><span class="gik" style="background:#fff">', 1)
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
 <main class="hem"><div class="wrap"><section class="topprubrik"><img src="bilder/kompass-matte.png" alt=""><div><h1>Mattekompassen</h1><p>Din väg genom matematiken i årskurs 7–9</p></div></section>
 <h2 class="sr">Välj din årskurs</h2>{SMA_CSS if SMA_RUTOR else ''}<div class="kkrad{' fyra' if FYRA_RUTOR else ''}{' sma' if SMA_RUTOR else ''}">{kort}</div>
@@ -858,7 +888,7 @@ def bygg():
             grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3{" rad4" if len(rutor) == 4 else ""}">{t}</div></div>'
         sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Årskurs {k}', 'Lär dig nytt, träna mer och kolla vad du kan.',
              RUBRIK[k], [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="nrc" style="color:{c["ink"]}" aria-hidden="true">{k}</div>')
-             + f'<main><div class="wrap">{grupper}<p style="margin:34px 0 10px;text-align:center"><a class="knapp pil" href="index.html" onclick="if(history.length>1){{history.back();return false}}" aria-label="Tillbaka" title="Tillbaka">←</a></p></div></main>')
+             + f'<main><div class="wrap">{grupper}<p style="margin:34px 0 10px;text-align:center"><a class="knapp pil" href="index.html" onclick="var r=document.referrer,b=this.href.match(/.*[/]/)[0];if(r.indexOf(b)==0&&r.match(/[^#]*/)[0]!=location.href.match(/[^#]*/)[0]&&history.length>1){{history.back();return false}}" aria-label="Tillbaka" title="Tillbaka">←</a></p></div></main>')
         if k in TRANA_AR:
             sti = [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), ('Interaktiva övningar', 'ak%d/trana.html' % k)]
             hero = lambda t, p, sti=sti: panel(c, t, p, f'Åk {k} · {RUBRIK[k]}', sti, f'<img class="bild" src="../bilder/ak{k}/16_Interaktiva_ovningar.png" alt="">', '../')
@@ -900,7 +930,7 @@ def bygg():
         sida(fil, t, {'bedomning.html': 'Bedömning', 'hjalp.html': 'Så får du hjälp', 'nationella-prov.html': 'Nationella prov', 'np-traning.html': 'NP-träning'}.get(fil, ''), c, f"""
 {panel(c, t, text, '', [('Startsida', 'index.html'), (t, None)])}
 <main><section><div class="wrap">{NP_PANEL if fil in ('nationella-prov.html', 'np-traning.html', 'amnesord.html') else ''}{byt_farger(extra(fil), FARGBYTE_NP if fil in ('nationella-prov.html', 'np-traning.html') else FARGBYTE_HJALP if fil == 'hjalp.html' else None)}
-<a class="knapp" href="index.html" onclick="if(history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
+<a class="knapp" href="index.html" onclick="var r=document.referrer,b=this.href.match(/.*[/]/)[0];if(r.indexOf(b)==0&&r.match(/[^#]*/)[0]!=location.href.match(/[^#]*/)[0]&&history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
     # Gemensam sida om problemlösning (länkas från årskursernas problemlösningssidor)
     arl = ''.join(f'<a href="ak{k}/problemlosning.html" style="background:{AR[k]["ink"]}">Åk {k}<small>{RUBRIK[k]} · problemlösning per kapitel</small></a>' for k in AR)
     sida('problemlosning.html', 'Problemlösning', '', NEUTRAL, f"""
@@ -914,7 +944,7 @@ def bygg():
 <div class="strat"><div><h3>Rita en bild</h3><p>En skiss gör problemet tydligare och visar vad du vet och vad du söker.</p></div><div><h3>Gör en tabell</h3><p>Ordna informationen i en tabell så att du ser samband och mönster.</p></div><div><h3>Leta efter mönster</h3><p>Undersök några fall och se vad som upprepas. Använd mönstret för att hitta svaret.</p></div><div><h3>Gissa och pröva</h3><p>Gör en rimlig gissning, testa den och förbättra den tills den stämmer.</p></div><div><h3>Arbeta baklänges</h3><p>Börja i slutet. Vad måste ha hänt innan? Räkna dig tillbaka till starten.</p></div><div><h3>Förenkla problemet</h3><p>Prova med mindre eller enklare tal först. Använd sedan samma idé på det riktiga problemet.</p></div><div><h3>Ställ upp en ekvation</h3><p>Kalla det okända för x, skriv en ekvation och lös den.</p></div><div><h3>Kontrollera svaret</h3><p>Är svaret rimligt? Svarar du på frågan? Pröva svaret i problemet.</p></div></div>
 <h2>Välj årskurs</h2>
 <div class="arlank">{arl}</div>
-<a class="knapp" href="index.html" onclick="if(history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
+<a class="knapp" href="index.html" onclick="var r=document.referrer,b=this.href.match(/.*[/]/)[0];if(r.indexOf(b)==0&&r.match(/[^#]*/)[0]!=location.href.match(/[^#]*/)[0]&&history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
     if VISA_GRUNDTRANING:
         sida('grundtraning.html', 'Matematikverkstad', 'Matematikverkstad', GT_FARG, gt.kropp(panel, GT_FARG))
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'grundtraning.js'), UT)
@@ -945,7 +975,7 @@ def bygg():
     sida('pisa-traning.html', 'PISA-träning', '', _pc, f"""
 {panel(_pc, 'PISA-träning', 'Vardagsnära uppgifter i flera steg, som i den internationella PISA-undersökningen.', '', [('Startsida', 'index.html'), ('Nationella prov', 'nationella-prov.html'), ('PISA-träning', None)])}
 <main><section><div class="wrap">{NP_PANEL}{pisa.sida()}
-<a class="knapp" href="index.html" onclick="if(history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
+<a class="knapp" href="index.html" onclick="var r=document.referrer,b=this.href.match(/.*[/]/)[0];if(r.indexOf(b)==0&&r.match(/[^#]*/)[0]!=location.href.match(/[^#]*/)[0]&&history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
     for js in ('trana.js', 'trana-ak7.js', 'trana-ak8.js', 'trana-ak9.js'):
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), js), UT)
     open(os.path.join(UT, '.nojekyll'), 'w').write('')

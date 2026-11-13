@@ -23,7 +23,7 @@ CSS = """
 .bk.vand .bk-in{transform:rotateY(180deg)}
 .bk-fram,.bk-bak{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;padding:14px 16px;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden}
 .bk-bak{background:color-mix(in srgb,var(--o) 35%,#fff);border:2px solid color-mix(in srgb,var(--o) 80%,var(--od));transform:rotateY(180deg)}
-.bk-topp{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.bk-topp{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px}
 .bk-om{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--od)}
 .bk-om i{font-style:normal;width:22px;height:22px;border-radius:7px;background:var(--o);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px;letter-spacing:0}
 .bk h3{font-size:23px;margin:6px 0 4px;color:#292A28}
@@ -37,9 +37,9 @@ CSS = """
 .bk-tips{font-size:12px;font-weight:700;color:var(--od);background:color-mix(in srgb,var(--o) 16%,#fff);padding:3px 9px;border-radius:999px}
 /* Framsida: bara ordet (Nikola 2026-10-25). Baksida: bild, förklaring och exempel */
 .bk-fram{background:var(--o);background-image:radial-gradient(#ffffff80 1.5px,transparent 1.7px);background-size:14px 14px;border:2px solid color-mix(in srgb,var(--o) 80%,var(--od));align-items:center;justify-content:center;text-align:center}
-.bk-fram h3{font-size:30px;margin:0;color:var(--od);background:#fff;padding:14px 18px;border-radius:16px;box-shadow:0 4px 12px color-mix(in srgb,var(--o) 30%,transparent);max-width:100%;box-sizing:border-box;hyphens:auto;overflow-wrap:break-word}
+.bk-fram h3{font-size:30px;margin:0;color:var(--od);background:#fff;padding:14px 18px;border-radius:16px;box-shadow:0 4px 12px color-mix(in srgb,var(--o) 30%,transparent);max-width:100%;box-sizing:border-box;hyphens:manual;overflow-wrap:normal;word-break:normal}
 .bk:hover .bk-fram{border-color:var(--od)}
-.bk-fram h3.lang{font-size:21px}.bk-bak{gap:4px}.bk-bak h4{margin:0;min-width:0;hyphens:auto;overflow-wrap:anywhere;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px;color:var(--od)}
+.bk-fram h3.lang{font-size:21px}.bk-bak{gap:4px}.bk-bak h4{margin:0;min-width:0;hyphens:manual;overflow-wrap:normal;word-break:normal;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px;color:var(--od)}
 .bk-bak .bk-bild{flex:0 1 auto;font-size:21px;background:#fff;border-radius:12px;padding:6px;min-height:46px}
 .bk-bak .bk-bild .fig{max-height:70px}
 .bk-bak p{font-size:15px!important;line-height:1.4!important;margin:2px 0 0!important}.bk-bak .bk-ex{font-size:13px!important;color:#4A4A45}
@@ -78,12 +78,13 @@ CSS = """
 .bg-tomruta{background:#fff;border:2px dashed var(--l);border-radius:24px;padding:30px;text-align:center;max-width:560px;margin:10px auto 30px}.bg-tomruta span{font-size:44px}.bg-tomruta h3{margin:6px 0}
 .bg-pik{width:120px;height:120px;flex:none;border-radius:30px;background:#fff;box-shadow:inset 0 0 0 2px var(--l);display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:14px;box-sizing:border-box}
 .bg-pik i{border-radius:10px;display:flex;align-items:center;justify-content:center;color:#2E3A46;font-style:normal;font-weight:800;font-size:18px}
-@media (max-width:640px){.bg-alt{grid-template-columns:1fr}.bg-pik{display:none}.bg-filter{padding:10px 12px;gap:8px}.bg-grupp{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.bg-grupp>span{display:none}.bg-grupp button{white-space:nowrap;font-size:14px;padding:6px 12px}.bg-flikar{flex-wrap:nowrap;gap:6px}.bg-flikar button{font-size:14px;padding:9px 8px;flex:1 1 auto;justify-content:center;white-space:nowrap}.bg-flikar .em{display:none}.bg-kortrad{grid-template-columns:1fr 1fr;gap:10px}.bk{height:235px}.bk-fram h3{font-size:18px!important;padding:10px!important}.bk-bak{padding:10px!important}.bk-bak .bk-bild{font-size:15px}.bk-bak .bk-bild .fig{max-height:50px}.bk-bak p{font-size:13px!important}.bk-bak h4{font-size:15px;overflow-wrap:anywhere}.bk-bild.tom{font-size:36px}.bk-bild small{font-size:.75em}.bg-hogt{width:26px;height:26px;font-size:12px}.bk-ak{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bk-tips{font-size:11px;white-space:nowrap;padding:2px 7px}.bk h3{font-size:18px;hyphens:auto;overflow-wrap:anywhere}.bk-om{display:none}.bk-bild .fig{max-height:80px}.bk-bak p{font-size:14px}}
+@media (max-width:640px){.bg-alt{grid-template-columns:1fr}.bg-pik{display:none}.bg-filter{padding:10px 12px;gap:8px}.bg-grupp{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.bg-grupp>span{display:none}.bg-grupp button{white-space:nowrap;font-size:14px;padding:6px 12px}.bg-flikar{flex-wrap:nowrap;gap:6px}.bg-flikar button{font-size:14px;padding:9px 8px;flex:1 1 auto;justify-content:center;white-space:nowrap}.bg-flikar .em{display:none}.bg-kortrad{grid-template-columns:1fr 1fr;gap:10px}.bk{height:235px}.bk-fram{padding:10px 8px!important}.bk-fram h3{font-size:18px!important;padding:10px 7px!important}.bk-bak{padding:10px!important}.bk-bak .bk-bild{font-size:15px}.bk-bak .bk-bild .fig{max-height:50px}.bk-bak p{font-size:13px!important}.bk-bak h4{font-size:15px}.bk-bild.tom{font-size:36px}.bk-bild small{font-size:.75em}.bg-hogt{width:26px;height:26px;font-size:12px}.bk-ak{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bk-tips{font-size:11px;white-space:nowrap;padding:2px 7px}.bk h3{font-size:18px}.bk-om{display:none}.bk-bild .fig{max-height:80px}.bk-bak p{font-size:14px}}
 #bg [hidden]{display:none!important}
 .bg-saknar{margin:26px 0 0;padding:14px 18px;background:#fff;border:2px dashed var(--l);border-radius:16px;font-size:16px;color:#3B4A5A;max-width:620px}
 .bg-rub{font-size:28px;margin:22px 0 4px}
-.bg-del{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;font-size:21px;margin:22px 0 12px;color:var(--ink)}.bg-del small{font-family:Inter,sans-serif;font-size:15px;font-weight:500;color:#5F6368}
+.bg-sokrub{margin-top:34px!important}.bg-del{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;font-size:21px;margin:22px 0 12px;color:var(--ink)}.bg-del small{font-family:Inter,sans-serif;font-size:15px;font-weight:500;color:#5F6368}
 .bg-val{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.bg-sok+#bg-steg1{margin-top:18px}.bg-block h2{display:flex;align-items:center;gap:10px}.bg-block .bg-dik{display:inline-flex}.bg-btxt{margin:-6px 0 16px;color:#4A433C;font-size:16px}.bg-block[hidden]{display:none}.bg-lankruta{text-decoration:none}.bg-stj1{font-size:22px!important}.bg-stj2{font-size:17px!important}.bg-stj3{display:inline-block;text-align:center;line-height:.9;font-size:15px!important;margin-top:1px}.bg-stj{font-size:14px;letter-spacing:-1px;color:#E9A21F;-webkit-text-stroke:.6px #8A5E14}
 .bg-ruta{font:inherit;text-align:left;cursor:pointer;background:var(--o);border:2px solid color-mix(in srgb,var(--o) 70%,var(--od));border-radius:22px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;color:var(--od);transition:transform .15s,box-shadow .15s;min-height:128px}
 .bg-ruta:hover{transform:translateY(-3px);box-shadow:0 8px 18px #0002}
 .bg-rsym{width:44px;height:44px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;margin-bottom:6px}
@@ -110,9 +111,10 @@ CSS = """
 .kk-fr{font-size:16px;font-weight:500;color:#4A4F55}
 .bg-alt.kk-lang{max-width:820px}.bg-alt.kk-lang button{font-size:16px;font-weight:600;text-align:left;line-height:1.4}
 .bt-lank{display:flex;align-items:center;gap:14px;background:var(--ink);color:#fff;text-decoration:none;border-radius:20px;padding:14px 20px;margin:20px 0 4px;font-size:16px;line-height:1.4}
-.bt-lank>span:first-child{font-size:30px}.bt-lank b{font-size:19px;margin-right:6px}.bt-lank .bt-pil{margin-left:auto;background:#fff;color:var(--ink);font-weight:700;border-radius:999px;padding:8px 16px;white-space:nowrap}
+.bt-lank>span:first-child{font-size:30px}.bt-quiz{background:#1F2A44;margin-top:10px}.bt-qik{display:grid;grid-template-columns:1fr 1fr;gap:2px;flex:none}.bt-qik i{font-style:normal;font-weight:800;font-size:12px;width:18px;height:18px;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff}.bt-lank b{font-size:19px;margin-right:6px}.bt-lank .bt-pil{margin-left:auto;background:#fff;color:var(--ink);font-weight:700;border-radius:999px;padding:8px 16px;white-space:nowrap}
 .bt-intro{font-size:17px;color:#3B4A5A;margin:0 0 6px;max-width:760px}
 .bt-val{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.bt-flikar{display:flex;gap:8px;margin:18px 0 14px}.bt-flik{flex:1;font:inherit;font-weight:800;font-size:18px;cursor:pointer;background:#fff;color:#2F5459;border:1.5px solid #B9D2D5;border-radius:14px;padding:10px 8px;line-height:1.15}.bt-flik span{display:block;font-size:13px;letter-spacing:2px;color:#D8A964;margin-top:2px}.bt-flik.on{background:#4F8A93;border-color:#2F5459;color:#fff}.bt-flik.on span{color:#fff}.bt-niva[hidden]{display:none}
 .bt-ruta{font:inherit;text-align:left;cursor:pointer;background:color-mix(in srgb,var(--o) 42%,#F6F1E8);border:1.5px solid color-mix(in srgb,var(--o) 55%,#C9BFAE);border-radius:18px;padding:12px 14px;display:flex;gap:12px;align-items:center;color:var(--od);transition:transform .15s,box-shadow .15s}
 .bt-ruta:hover{transform:translateY(-2px);box-shadow:0 6px 14px #0002}.bt-ruta .bg-rsym{margin:0;flex:none;background:#FFFCF6;color:color-mix(in srgb,var(--od) 80%,#6B6258);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--o) 50%,#D8CFC0)}.bt-ruta b{color:color-mix(in srgb,var(--od) 82%,#4A4238)}.bt-ruta small{color:color-mix(in srgb,var(--od) 60%,#6B6258)}.bt-ruta>span:last-child{display:flex;flex-direction:column;gap:1px}
 .bt-ruta b{font-size:17px;line-height:1.25}.bt-ruta small{font-size:13px;font-weight:600;opacity:.85}
@@ -130,11 +132,39 @@ CSS = """
 .bt-sek{font:inherit;font-weight:700;font-size:17px;padding:12px 18px;border-radius:14px;border:2px solid var(--l);background:#fff;color:var(--ink);cursor:pointer;text-decoration:none}
 @media (max-width:640px){.bt-lank{flex-wrap:wrap}.bt-lank .bt-pil{margin-left:0}.bt-val{grid-template-columns:1fr}.bt-kort{padding:16px}}
 @media (max-width:640px){.bg-flikar{flex-wrap:wrap}.bg-flikar button{flex:1 1 40%}.kk-typer{grid-template-columns:1fr}.bg-kortrad.kk-rad{grid-template-columns:1fr}.bk.kw{height:240px}.kk-intro{font-size:16px}}
+/* Organic-färgskalan (Nikola 2026-11-07): ljus bakgrund ur skalan, tunn ram i områdets färg, egna linjeikoner */
+.ik{width:1em;height:1em;vertical-align:-.15em;flex:none}
+.bg-ruta,.bt-ruta{background:var(--ol);border:1.5px solid color-mix(in srgb,var(--o) 55%,#fff);color:var(--od)}
+.bg-ruta:hover,.bt-ruta:hover{border-color:var(--o);box-shadow:0 6px 14px color-mix(in srgb,var(--o) 22%,transparent)}
+.bg-ruta b,.bt-ruta b{color:var(--od)}.bg-ruta small,.bt-ruta small{color:color-mix(in srgb,var(--od) 78%,#fff);opacity:1}
+.bg-rsym,.bt-ruta .bg-rsym{background:#fff;color:var(--od);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--o) 45%,#fff);font-size:21px}
+.bg-rsym .ik{width:24px;height:24px}.bg-rsym i{font-family:Georgia,serif;font-weight:700}
+.bt-ruta.hela{--o:#C0A993;--od:#5E4A36;--ol:#F7EFE4;background:var(--ol);border-color:color-mix(in srgb,var(--o) 55%,#fff)}.bt-ruta.hela .bg-rsym{background:#fff}
+.bt-ruta.allab{--o:#CC97A1;--od:#7E4D57;--ol:#FCEEF1}
+/* Samma layout som Matematikverkstad (Nikola 2026-11-07): grå delar, vita kort, ikon i färgad cirkel */
+.bg-block{background:#EFF1F3;border-color:#D6DCE2}.bg-block h2 .bg-dik{display:none}.bg-block .bg-val{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.bg-block .bg-ruta{background:#fff;border:0;box-shadow:inset 0 0 0 2px #D6DCE2;border-radius:16px;padding:18px 20px;color:var(--ink);gap:2px;min-height:0}.bg-block .bg-ruta:hover{box-shadow:inset 0 0 0 2px var(--o)}.bg-block .bg-rsym{width:52px;height:52px;border-radius:50%;background:var(--ol);box-shadow:none;color:var(--od);margin-bottom:12px}.bg-block .bg-ruta b{color:#2B2F36;font-size:17px}.bg-block .bg-ruta small{color:#4A433C;font-size:13px;font-weight:600}@media (max-width:640px){.bg-block .bg-val{grid-template-columns:1fr 1fr}.bg-block .bg-ruta{padding:14px}}
+.bg-block .bt-val{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.bg-block .bt-ruta,.bg-block .bt-ruta.hela{background:#fff;border:0;box-shadow:inset 0 0 0 2px #D6DCE2;border-radius:16px;padding:18px 20px;flex-direction:column;align-items:flex-start;gap:12px}.bg-block .bt-ruta:hover{transform:none;box-shadow:inset 0 0 0 2px var(--o)}.bg-block .bt-ruta .bg-rsym,.bg-block .bt-ruta.hela .bg-rsym{width:52px;height:52px;border-radius:50%;background:var(--ol);box-shadow:none;color:var(--od);margin:0}.bg-block .bt-ruta b{color:#2B2F36;font-size:17px}.bg-block .bt-ruta small{color:#4A433C;font-size:13px;font-weight:600}.bg-block .bt-flikar{margin-top:6px}@media (max-width:640px){.bg-block .bt-val{grid-template-columns:1fr 1fr}.bg-block .bt-ruta{padding:14px}}
+/* Tunn ram och mättare cirkel runt ikonerna, som på startsidan (Nikola 2026-11-07) */.bg-block .bg-rsym,.bg-block .bt-ruta .bg-rsym,.bg-block .bt-ruta.hela .bg-rsym{background:#DCE8F2;box-shadow:inset 0 0 0 1.5px #9FB6CB;color:#2E3A46}.bg-block .bg-rsym .ik{width:30px;height:30px}
+
+.bg-prick{background:var(--ol,#fff);color:var(--od,#2E3A46);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--o,#999) 50%,#fff)}.bg-var .bg-prick{color:var(--od,#2E3A46)}
+.bg-prick .ik{width:22px;height:22px}.bg-var .bg-prick .ik{width:19px;height:19px}
+.bk-fram{background-color:var(--ol);background-image:radial-gradient(color-mix(in srgb,var(--o) 28%,transparent) 1.4px,transparent 1.6px);border:1.5px solid color-mix(in srgb,var(--o) 55%,#fff)}
+.bk:hover .bk-fram{border-color:var(--o)}
+.bk-fram h3{box-shadow:0 0 0 1.5px color-mix(in srgb,var(--o) 30%,#fff),0 3px 8px color-mix(in srgb,var(--o) 15%,transparent)}
+.bk-bak{background:var(--ol);border:1.5px solid color-mix(in srgb,var(--o) 55%,#fff)}
+.bk.kw mark{background:color-mix(in srgb,var(--o) 35%,#fff)}
+.bg-hogt{display:inline-flex;align-items:center;justify-content:center;color:var(--od);background:#fff;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--o) 45%,#fff)}.bg-hogt:hover{background:var(--ol)}.bg-hogt .ik{width:17px;height:17px}
+.bg-dik{display:inline-flex;align-self:center;color:var(--ink)}.bg-dik .ik{width:24px;height:24px}
+.bg-sok>span{display:inline-flex;color:#5F6368}.bg-sok .ik{width:20px;height:20px}.bg-saknar .ik{width:19px;height:19px;color:var(--ink)}
+.bg-lage .ik,.bg-alt .ik{width:18px;height:18px}.ms-kort h4 .ik{width:19px;height:19px;color:var(--ink)}
+.ms-ova{background:#FFECE4;border-color:#EDC6BC;color:#8C4A3C}.ms-ova>span:first-child{display:inline-flex}.ms-ova>span:first-child .ik{width:30px;height:30px}.ms-ova small{color:#7A4A3E}.ms-ovapil,.ms-ovaknapp{background:#8C4A3C}.ms-ovaknapp .ik{width:15px;height:15px}
+.bt-stor{color:var(--ink);line-height:1}.bt-stor .ik{width:56px;height:56px;stroke-width:1.5}.ms-modell h4 .ik{width:19px;height:19px;color:var(--ink)}
+.ms-mod{background:#FFF6E3;border-color:#EBD8B2}.ms-pil span{border-color:#D8A964}.ms-pil i{color:#75541C}.ms-chk{background:#EAF4EA;border-color:#CCD8C4}.ms-chk li::before{color:#4C5940}
 """
 
-def ikon():
-    return ('<div class="bg-pik" aria-hidden="true"><i style="background:#A7CBEA">½</i><i style="background:#B7E3C6">x</i>'
-            '<i style="background:#F7B1B1">△</i><i style="background:#C7B8F9">%</i></div>')
+def ikon():  # Organic-skalan (2026-11-07): ljus bakgrund, tunn ram, symbol i mörk nyans
+    r = [('½', '#E8F2FA', '#B9CDE2', '#35577A'), ('x', '#EAF4EA', '#C6CDBB', '#4C5940'), ('△', '#FDEBE7', '#E8C2B4', '#8A4532'), ('%', '#FFF6E3', '#EDD3A8', '#75541C')]
+    return '<div class="bg-pik" aria-hidden="true">' + ''.join(f'<i style="background:{b};box-shadow:inset 0 0 0 1.5px {k};color:{t}">{s}</i>' for s, b, k, t in r) + '</div>'
 
 def _ver(f):  # ny version -> webbläsaren hämtar ny fil i stället för en gammal sparad
     import hashlib, os
@@ -143,22 +173,23 @@ def _ver(f):  # ny version -> webbläsaren hämtar ny fil i stället för en gam
 def kropp(panel, c, rot='', test=False):
     data = ''.join(f'<script src="{rot}trana-ak{k}.js"></script><script>(window.BG_DATA=window.BG_DATA||{{}})[{k}]=TRANA_DATA</script>' for k in (7, 8, 9))
     if test:  # begrepp-test.html: Testa dig
-        top = panel(c, 'Testa dina begrepp', 'Kolla vad du kan. Välj ett kapitel och svara på 10 frågor om begreppen.', '',
+        top = panel(c, 'Testa dina begrepp', 'Kolla vad du kan. Välj nivå och område och svara på 10 frågor om begreppen.', '',
                     [('Startsida', 'index.html'), ('Matematiska begrepp', 'begrepp.html'), ('Testa dig', None)], ikon())
-        mitt = '<div id="bg" data-test="1"></div><a class="knapp" href="index.html" onclick="if(history.length>1){history.back();return false}">← Tillbaka</a>'
+        mitt = '<div id="bg" data-test="1"></div><a class="knapp" href="index.html" onclick="var r=document.referrer,b=this.href.match(/.*[/]/)[0];if(r.indexOf(b)==0&&r.match(/[^#]*/)[0]!=location.href.match(/[^#]*/)[0]&&history.length>1){history.back();return false}">← Tillbaka</a>'
     else:
-        top = panel(c, 'Matematiska begrepp', 'Lär dig mattebegrepp och resonemangsord. Vänd korten och öva på orden.', '',
+        top = panel(c, 'Matematiska begrepp', 'Lär dig mattebegrepp och resonemangsord, testa dig själv och tävla i Mattequiz.', '',
                     [('Startsida', 'index.html'), ('Matematiska begrepp', None)], ikon())
-        mitt = '<div id="bg"></div><a class="knapp" href="index.html" onclick="if(history.length>1){history.back();return false}">← Tillbaka</a>'
+        mitt = '<div id="bg"></div><a class="knapp" href="index.html" onclick="var r=document.referrer,b=this.href.match(/.*[/]/)[0];if(r.indexOf(b)==0&&r.match(/[^#]*/)[0]!=location.href.match(/[^#]*/)[0]&&history.length>1){history.back();return false}">← Tillbaka</a>'
     return (top
             + f'<main><section><div class="wrap">{mitt}</div></section></main>'
             + f'<style>.panel{{background:var(--vl)!important;box-shadow:inset 0 0 0 2px var(--l)}}.panel .sti,.panel .sti a{{color:#5F6368}}.panel h1{{color:var(--ink)}}.panel p{{color:#3B4A5A}}{CSS}</style>'
             + data + ''.join(f'<script src="{rot}{f}?v={_ver(f)}"></script>' for f in ('begrepp-bok.js', 'begrepp-skolverket.js', 'begrepp-kitt.js', 'begrepp.js')))
 
 def startlank():
-    del3 = [('📐', 'Mattebegrepp', 'Tal, algebra, geometri …'), ('🔗', 'Resonemangsord', 'Eftersom, jämför, motivera …'), ('🔍', 'Sök ett ord', 'Hitta ett ord du undrar över'), ('🏁', 'Testa dig', 'Kolla vad du kan om begreppen')]
-    lank = {'Mattebegrepp': 'begrepp.html?flik=mat', 'Resonemangsord': 'begrepp.html?flik=kitt', 'Sök ett ord': 'begrepp.html?flik=sok', 'Testa dig': 'begrepp-test.html'}
-    g = ''.join(f'<a href="{lank[t]}"><i style="background:#E3E8F4">{e}</i><span><b>{t}</b><small>{s}</small></span></a>' for e, t, s in del3)
-    return (f'<section class="gtC" style="background:#E3E8F4;box-shadow:inset 0 0 0 2px #B9C4DE"><div class="h"><span class="gik" style="background:#fff">{ikon().replace("bg-pik", "bg-pik mini")}</span>'
-            f'<div><a class="rub" href="begrepp.html"><b>Matematiska begrepp</b></a><small>Mattebegrepp och resonemangsord. För alla årskurser.</small></div></div><div class="g g4">{g}</div></section>'
-            '<style>.bg-saknas{margin:14px 4px 0;font-size:15px;color:#3B4A5A}.bg-pik.mini{width:58px;height:58px;border-radius:14px;padding:6px;gap:3px;display:grid;grid-template-columns:1fr 1fr;box-shadow:none}.gtC .g.g4{grid-template-columns:repeat(4,1fr)}@media (max-width:1000px){.gtC .g.g4{grid-template-columns:1fr 1fr}}@media (max-width:640px){.gtC .g.g4{grid-template-columns:1fr}}.bg-pik.mini i{border-radius:5px;font-size:11px;color:#2E3A46;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800}</style>')
+    del3 = [('📐', 'Mattebegrepp', 'Tal, algebra, geometri …'), ('🔗', 'Resonemangsord', 'Eftersom, jämför, motivera …'), ('🏁', 'Testa dig', 'Kolla vad du kan om begreppen'), ('❓', 'Mattequiz', 'Tävla en mot en eller i lag')]
+    lank = {'Mattebegrepp': 'begrepp.html?flik=mat', 'Resonemangsord': 'begrepp.html?flik=kitt', 'Sök ett ord': 'begrepp.html?flik=sok', 'Testa dig': 'begrepp-test.html', 'Mattequiz': 'begrepp-quiz.html'}
+    FIK = {'Mattebegrepp': '<path d="M3 21V3l18 18z" fill="#E9B949" stroke="#2E3A46"/><path d="M7.4 16.6v-5.2l5.2 5.2z" fill="#fff" stroke="#2E3A46"/><path d="M3 7h2.4M3 10.5h1.6M3 14h2.4M10 21v-2.4M13.5 21v-1.6M17 21v-2.4" stroke="#E07A5F" stroke-width="1.4"/>', 'Resonemangsord': '<rect x="1.8" y="8.2" width="12" height="7.6" rx="3.8" transform="rotate(-35 7.8 12)" fill="none" stroke="#5B8DB8" stroke-width="3.2"/><rect x="1.8" y="8.2" width="12" height="7.6" rx="3.8" transform="rotate(-35 7.8 12)" fill="none" stroke="#2E3A46" stroke-width="1"/><rect x="10.2" y="8.2" width="12" height="7.6" rx="3.8" transform="rotate(-35 16.2 12)" fill="none" stroke="#E07A5F" stroke-width="3.2"/><rect x="10.2" y="8.2" width="12" height="7.6" rx="3.8" transform="rotate(-35 16.2 12)" fill="none" stroke="#2E3A46" stroke-width="1"/>', 'Sök ett ord': '<path d="M14.6 14.6l6.2 6.2" stroke="#2E3A46" stroke-width="4.4"/><path d="M14.6 14.6l6.2 6.2" stroke="#E07A5F" stroke-width="2.4"/><circle cx="9.5" cy="9.5" r="7" fill="#CFE6F5" stroke="#2E3A46"/><circle cx="9.5" cy="9.5" r="5" fill="#fff" stroke="#5B8DB8" stroke-width="1.4"/><path d="M6.6 8.2a3.2 3.2 0 0 1 2.4-2.2" stroke="#5B8DB8" stroke-width="1.4"/>', 'Testa dig': '<path d="M5 21.5V3" stroke="#2E3A46" stroke-width="2.2"/><circle cx="5" cy="2.8" r="1.4" fill="#E9B949" stroke="#2E3A46" stroke-width="1"/><path d="M5 4h14v10H5z" fill="#fff" stroke="#2E3A46"/><path d="M5 4h3.5v3.33H5zM12 4h3.5v3.33H12zM8.5 7.33H12v3.33H8.5zM15.5 7.33H19v3.33h-3.5zM5 10.67h3.5V14H5zM12 10.67h3.5V14H12z" fill="#3E9A3A"/><path d="M5 4h14v10H5z" fill="none" stroke="#2E3A46"/>', 'Mattequiz': '<rect x="2" y="2" width="9.5" height="9.5" rx="2.4" fill="#C2553D" stroke="#2E3A46" stroke-width="1"/><text x="6.75" y="9.6" text-anchor="middle" font-size="6.4" font-weight="800" font-family="Inter,sans-serif" fill="#fff" stroke="none">A</text><rect x="13" y="2" width="9.5" height="9.5" rx="2.4" fill="#1A6F99" stroke="#2E3A46" stroke-width="1"/><text x="17.75" y="9.6" text-anchor="middle" font-size="6.4" font-weight="800" font-family="Inter,sans-serif" fill="#fff" stroke="none">B</text><rect x="2" y="13" width="9.5" height="9.5" rx="2.4" fill="#E9B949" stroke="#2E3A46" stroke-width="1"/><text x="6.75" y="20.6" text-anchor="middle" font-size="6.4" font-weight="800" font-family="Inter,sans-serif" fill="#1F2A44" stroke="none">C</text><rect x="13" y="13" width="9.5" height="9.5" rx="2.4" fill="#3E8A32" stroke="#2E3A46" stroke-width="1"/><text x="17.75" y="20.6" text-anchor="middle" font-size="6.4" font-weight="800" font-family="Inter,sans-serif" fill="#fff" stroke="none">D</text>'}
+    g = ''.join(f'<a href="{lank[t]}"><i style="background:#E3E8F4"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{FIK[t]}</svg></i><span><b>{t}</b><small>{s}</small></span></a>' for e, t, s in del3)
+    return (f'<section class="gtC"><div class="h"><span class="gik" style="background:#fff">{ikon().replace("bg-pik", "bg-pik mini")}</span>'
+            f'<div><a class="rub" href="begrepp.html"><b>Matematiska begrepp</b></a><small>Mattebegrepp och resonemangsord.</small></div></div><div class="g g4">{g}</div></section>'
+            '<style>.bg-saknas{margin:14px 4px 0;font-size:15px;color:#3B4A5A}.bg-pik.mini{width:58px;height:58px;border-radius:14px;padding:6px;gap:3px;display:grid;grid-template-columns:1fr 1fr;box-shadow:none}.gtC .g.g4{grid-template-columns:repeat(4,1fr)}.gtC .g.g5b{grid-template-columns:repeat(5,minmax(0,1fr))}.gtC .g.g5b b{font-size:16px}@media (max-width:1100px){.gtC .g.g5b{grid-template-columns:1fr 1fr}.gtC .g.g5b a:last-child{grid-column:1/-1}}@media (max-width:1000px){.gtC .g.g4{grid-template-columns:1fr 1fr}}@media (max-width:640px){.gtC .g.g4{grid-template-columns:1fr}}.bg-pik.mini i{border-radius:5px;font-size:11px;color:#2E3A46;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800}</style>')
