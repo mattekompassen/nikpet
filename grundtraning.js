@@ -582,14 +582,14 @@
         <li><b>morgon</b> ca 05–10, <b>förmiddag</b> 10–12, <b>eftermiddag</b> 12–18, <b>kväll</b> 18–24</li><li><b>1 h</b> (timme) = 60 min, <b>1 min</b> (minut) = 60 s (sekunder), <b>1 dygn</b> = 24 h</li></ul></details>` : '') +
       (d === 'enhet' ? `<details class="gt-ord"><summary>📖 Enhetstrappan</summary><div class="gt-trappor"><p><b>Längd</b>${trappa('langd')}</p><p><b>Volym</b>${trappa('volym')}</p><p><b>Vikt</b>${trappa('vikt')}</p>
         <ul><li>Från stor till liten enhet (neråt i trappan): <b>multiplicera</b> (·).</li><li>Från liten till stor enhet (uppåt): <b>dividera</b> (/).</li><li><b>1 dm³ = 1 l</b> och <b>1 cm³ = 1 ml</b></li></ul></div></details>` : '') + '</div>').join('') +
-      (bara ? '<a class="knapp2 sek gt-tillbaka" href="#">← Alla övningar</a>' : '');
+      '';
   }
   function valmeny(k) {
     const o = OV[k];
     el.innerHTML = `<div class="kort-t gt-val"><div class="topp"><span>${o.ikon} ${o.namn}</span></div>
       <div class="gt-ex"><span aria-hidden="true">💡</span><div><b>Så gör du</b><p>${o.exempel}</p></div></div>
       <h3>${o.valrubrik || 'Välj nivå'}</h3><div class="valj gt-niva">${o.val.map(([v, n, p]) => `<button data-v="${v}">${n ? `<b>${n}</b>` : ''}${p || ''}</button>`).join('')}</div>
-      <a class="knapp2 sek gt-tillbaka" href="#">← Alla övningar</a></div>`;
+</div>`;
     el.querySelectorAll('[data-v]').forEach(b => b.onclick = () => { location.hash = k + '/' + b.dataset.v; });
     if (o.rs) {  // först räknesätt, sedan nivå
       const niva = el.querySelector('.gt-niva'), h3 = el.querySelector('.gt-val h3');
@@ -707,7 +707,7 @@
     const k = location.hash.slice(1).split('/')[0];
     el.innerHTML = `<div class="kort-t klar"><p class="fraga">${m}</p><p>Du fick ${ratt} av ${n} rätt på första försöket.</p>
       ${missar.length ? `<div class="gt-missar"><b>Öva lite till på:</b><ul>${missar.map(x => `<li>${x}</li>`).join('')}</ul></div>` : ''}
-      <button class="knapp2" data-a="om">Träna igen</button> <a class="knapp2 sek" href="#${k}">Byt nivå</a> <a class="knapp2 sek" href="#">Alla övningar</a></div>`;
+      <button class="knapp2" data-a="om">Träna igen</button> <a class="knapp2 sek" href="#${k}">Byt nivå</a></div>`;
     el.querySelector('[data-a=om]').onclick = () => start(k, V);
   }
   function route() {
@@ -719,5 +719,10 @@
   }
   window.GT_TEST = {OV, fras, del, tt, ENH, ordTal};  // för automatiska tester
   window.addEventListener('hashchange', route);
+  // Tillbaka: har man bytt vy på sidan går knappen ett steg bakåt här
+  let steg = 0;
+  window.addEventListener('hashchange', () => { steg++; });
+  const tb = document.querySelector('main a.knapp');
+  if (tb) { const org = tb.onclick; tb.onclick = function (e) { if (steg > 0) { steg -= 2; history.back(); return false; } return org ? org.call(this, e) : true; }; }
   route();
 })();
