@@ -55,9 +55,16 @@
     stjarna: '<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="#E9B949"/>',
     tarning: '<rect x="4" y="4" width="16" height="16" rx="3.5" fill="#fff"/><path d="M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01" stroke="#E07A5F" stroke-width="3"/>',
     triangel: '<path d="M12 3.5 21 19.5H3z" fill="#E9B949"/>'};
-  const ikf = n => FIK[n] ? `<svg class="ik" viewBox="0 0 24 24" fill="none" stroke="#2E3A46" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${FIK[n]}</svg>` : ik(n);
+  const ikf0 = n => FIK[n] ? `<svg class="ik" viewBox="0 0 24 24" fill="none" stroke="#2E3A46" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${FIK[n]}</svg>` : ik(n);
   const SYMF = {'½': '<svg viewBox="4 0 16 24" width="24" height="34"><text x="12" y="10.6" text-anchor="middle" font-size="11.5" font-weight="800" fill="#D9583B" font-family="Inter,sans-serif">1</text><path d="M7 12.6h10" stroke="#2E3A46" stroke-width="1.8" stroke-linecap="round"/><text x="12" y="23" text-anchor="middle" font-size="11.5" font-weight="800" fill="#3D78B5" font-family="Inter,sans-serif">2</text></svg>', 'x': '<i style="color:#D9583B;font-size:1.25em">x</i>', '%': '<span style="color:#D9583B">%</span>'};
-  const symf = s => s === '△' ? ikf('triangel') : SYMF[s] ? SYMF[s] : EMOJI[s] ? ikf(EMOJI[s]) : s;
+  // Enhetliga ikoner (2026-11-13): bilder i årskurssidornas stil när window.MK_IK2 är satt (enhetliga_ikoner.py)
+  const IKB = n => `<img class="bg-ikb" src="${window.MK_IKR || ''}bilder/ikoner/bg-${n}.png" alt="">`;
+  const IKF2 = {penna: 'penna', lank: 'lank', vag: 'vag', pilar: 'pilar', prat: 'prat', stjarna: 'alla', tarning: 'sta', triangel: 'geo'};
+  const SYM2 = {'½': 'tal', 'x': 'alg', '△': 'geo', '%': 'sam', '⚄': 'sta'};
+  const ikf = n => window.MK_IK2 && IKF2[n] ? IKB(IKF2[n]) : ikf0(n);
+  const symf0 = s => s === '△' ? ikf('triangel') : SYMF[s] ? SYMF[s] : EMOJI[s] ? ikf(EMOJI[s]) : s;
+  const symf = s => window.MK_IK2 && (SYM2[s] || IKF2[EMOJI[s]]) ? IKB(SYM2[s] || IKF2[EMOJI[s]]) : symf0(s);
+  const DIK = (n, f) => window.MK_IK2 ? `<img class="bg-dikb" src="${window.MK_IKR || ''}bilder/ikoner/${n}.png" alt="">` : f;
   // Organic-skalan: huvudfärg -> ljus bakgrundsfärg (ur Nikolas bild)
   const LJUS = {'#7597BC': '#E8F2FA', '#818B72': '#EAF4EA', '#CA8871': '#FDEBE7', '#D8A964': '#FFF6E3', '#A29BBF': '#EFEAF9', '#7CABB4': '#E6F6F4',
                 '#9DB5A6': '#EDF7F0', '#B5A6B9': '#F3EEF5', '#C4AE97': '#F9EFE3', '#DE9C8F': '#FFECE4', '#C0A993': '#F7EFE4', '#CC97A1': '#FCEEF1'};
@@ -385,7 +392,7 @@
       };
       var nivaIkon = function (ak, namn) {
       var o = /Algebra/.test(namn) ? 'alg' : /Geometri/.test(namn) ? 'geo' : /Samband|Procent/.test(namn) ? 'sam' : /Statistik|Sannolik/.test(namn) ? 'sta' : 'tal';
-      return NIK[o][Math.max(0, Math.min(2, ak - 7))];
+      return window.MK_IK2 ? IKB(o) : NIK[o][Math.max(0, Math.min(2, ak - 7))];
     };
     // Nivå 1–3 (åk 7–9 i datan) och områden i samma ordning som åk 7, utan kapitel (Nikola 2026-11-07)
     const NIVA = {7: 1, 8: 2, 9: 3}, RANG = ['tal', 'alg', 'geo', 'sam', 'sta'];
@@ -414,7 +421,7 @@
         delar += `<button type="button" class="bt-ruta" data-t="9:sta" style="--o:${c[2]};--od:${c[3]};--ol:${LJ(c[2])}"><span class="bg-rsym">${nivaIkon(9, 'Statistik')}</span><span><b>Statistik och sannolikhet</b><small>${new Set(pool().map(o => o.ord)).size} begrepp</small></span></button>`;
       }
       VAL_T['ak' + ak] = {namn: `Hela nivå ${n}`, pool: () => kapOrd(ak)};
-      delar += `<button type="button" class="bt-ruta hela" data-t="ak${ak}"><span class="bg-rsym">${n}</span><span><small>Blandat</small><b>Hela nivå ${n}</b><small>${kapOrd(ak).length} begrepp</small></span></button></div>`;
+      delar += `<button type="button" class="bt-ruta hela" data-t="ak${ak}"><span class="bg-rsym">${window.MK_IK2 ? IKB('niva' + n) : n}</span><span><small>Blandat</small><b>Hela nivå ${n}</b><small>${kapOrd(ak).length} begrepp</small></span></button></div>`;
     }
     h += `<div class="bt-flikar">${flikar}</div>${delar}</div>`;
     VAL_T.kitt = {namn: 'Resonemangsord', kitt: true, pool: () => KO.filter(k => k.g !== 'fler' || (k.ms && k.vs))};
@@ -494,17 +501,17 @@
   const MSRUTA = MSANTAL ? `<button type="button" class="bg-ruta" data-ms="1" style="--o:#DE9C8F;--od:#8C4A3C;--ol:#FFECE4"><span class="bg-rsym">${ikf('prat')}</span><b>Så kan du börja en mening</b><small>${MSANTAL} meningsstarter</small></button>` : '';
   // Testa dig och Mattequiz som egna delar på sidan, nivå 1–3 (Nikola 2026-11-07, som Matematikverkstad)
   const LANK = (href, symb, namn, txt) => `<a class="bg-ruta bg-lankruta" href="${href}" style="--o:#B7D3D7;--od:#2F5459;--ol:#E6F2F3"><span class="bg-rsym">${symb}</span><b>${namn}</b><small>${txt}</small></a>`;
-  const NIVALANK = (bas, txt) => [1, 2, 3].map(n => LANK(bas + n, (n === 3 ? '<span class="bg-stj bg-stj3">★<br>★★</span>' : '<span class="bg-stj bg-stj' + n + '">' + '★★★'.slice(0, n) + '</span>'), 'Nivå ' + n, txt)).join('');
+  const NIVALANK = (bas, txt) => [1, 2, 3].map(n => LANK(bas + n, window.MK_IK2 ? IKB('niva' + n) : (n === 3 ? '<span class="bg-stj bg-stj3">★<br>★★</span>' : '<span class="bg-stj bg-stj' + n + '">' + '★★★'.slice(0, n) + '</span>'), 'Nivå ' + n, txt)).join('');
   el.innerHTML = `
 <label class="bg-sok"><span aria-hidden="true">${ik('sok')}</span><input type="search" placeholder="Sök ord" aria-label="Sök ett ord"></label>
 <div id="bg-steg1">
-  <div class="kapblock bg-block bg-matte" id="mattebegrepp"><h2><span class="bg-dik">${ik('vinkel')}</span>Mattebegrepp</h2><p class="bg-btxt">Ord som används i matematiken, till exempel nämnare, ekvation och omkrets. Välj ett område, vänd korten och öva.</p>
+  <div class="kapblock bg-block bg-matte" id="mattebegrepp"><h2><span class="bg-dik">${DIK('mattebegrepp', ik('vinkel'))}</span>Mattebegrepp</h2><p class="bg-btxt">Ord som används i matematiken, till exempel nämnare, ekvation och omkrets. Välj ett område, vänd korten och öva.</p>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'om').map(ruta).join('')}</div></div>
-  <div class="kapblock bg-block bg-kitt" id="bg-resonera"><h2><span class="bg-dik">${ik('lank')}</span>Resonemangsord</h2><p class="bg-btxt">Ord som hjälper dig att förstå uppgifter och förklara hur du tänker.</p>
+  <div class="kapblock bg-block bg-kitt" id="bg-resonera"><h2><span class="bg-dik">${DIK('resonemang', ik('lank'))}</span>Resonemangsord</h2><p class="bg-btxt">Ord som hjälper dig att förstå uppgifter och förklara hur du tänker.</p>
   <div class="bg-val">${VALEN.filter(v => v.typ === 'kg').map(ruta).join('')}${MSRUTA}</div></div>
-  <div class="kapblock bg-block bg-testa" id="testa-dig"><h2><span class="bg-dik">${ik('mal')}</span>Testa dig</h2><p class="bg-btxt">Kolla vad du kan. Du får 10 frågor och ser i slutet vilka ord du kan öva mer på.</p>
+  <div class="kapblock bg-block bg-testa" id="testa-dig"><h2><span class="bg-dik">${DIK('testadig', ik('mal'))}</span>Testa dig</h2><p class="bg-btxt">Kolla vad du kan. Du får 10 frågor och ser i slutet vilka ord du kan öva mer på.</p>
   <div class="bg-val">${NIVALANK('begrepp-test.html?niva=', 'Testa begreppen')}${LANK('begrepp-test.html?t=kitt', ikf('lank'), 'Resonemangsord', 'Testa orden')}${LANK('begrepp-test.html?t=alla', ikf('stjarna'), 'Alla begrepp blandat', 'Utmaning')}</div></div>
-  <div class="kapblock bg-block bg-quiz" id="mattequiz"><h2><span class="bg-dik">${ik('stjarna')}</span>Mattequiz</h2><p class="bg-btxt">Tävla om begreppen! Starta samma quiz, svara snabbt och jämför era poäng: en mot en, i par eller i lag.</p>
+  <div class="kapblock bg-block bg-quiz" id="mattequiz"><h2><span class="bg-dik">${DIK('quiz', ik('stjarna'))}</span>Mattequiz</h2><p class="bg-btxt">Tävla om begreppen! Starta samma quiz, svara snabbt och jämför era poäng: en mot en, i par eller i lag.</p>
   <div class="bg-val">${NIVALANK('begrepp-quiz.html?niva=', 'Två quiz per område')}</div></div>
 </div>
 <div id="bg-steg2" hidden>

@@ -662,7 +662,7 @@ var QUIZ_DATA = {
         return d ? '<button type="button" data-id="' + id + '">' + (QUIZ_NAMN[id] || 'Quiz ' + n) + '<small>' + d.fragor.length + ' frågor</small></button>'
           : '<span class="kq-lsnart">Quiz ' + n + '<small>Kommer snart</small></span>';
       }).join('');
-      var c = OMRL(k[1]), sy = nivaIkon(inst.ak, k[1]);
+      var c = OMRL(k[1]), sy = window.MK_IK2 ? '<img class="bg-ikb" src="' + (window.MK_IKR || '') + 'bilder/ikoner/bg-' + (/Algebra/.test(k[1]) ? 'alg' : /Geometri/.test(k[1]) ? 'geo' : /Samband|Procent/.test(k[1]) ? 'sam' : /Statistik|Sannolik/.test(k[1]) ? 'sta' : 'tal') + '.png" alt="">' : nivaIkon(inst.ak, k[1]);
       return '<div class="kq-lruta" style="--o:' + c[0] + ';--od:' + c[1] + ';--ol:' + c[2] + '"><div class="kq-lt"><span class="kq-lsym">' + sy + '</span><b>' + k[1] + '</b></div><div class="kq-lknappar">' + q + '</div></div>';
     }).join('');
     rot.innerHTML = '<div class="kapblock kq-lblock"><h2>Vad vill du tävla om?</h2><p class="kq-lintro">Välj nivå och område. Nivå 1 är grundläggande begrepp och nivå 3 de mest utmanande. Varje område har två quiz.</p>'
