@@ -4,7 +4,8 @@ import os, html, json, shutil
 UT = os.environ.get('MK_UT', '/mnt/project-files/webbplats')
 # Fyra årskursrutor på startsidan (2026-11-12). Förhandsbygge: MK_FYRA=1 MK_UT=annan mapp
 FYRA_RUTOR = os.environ.get('MK_FYRA', '1') == '1'  # publicerat 2026-11-12
-FJARDE = dict(namn='Redo för högstadiet', href='redo-for-hogstadiet.html', lista=('Tal och räknesätt', 'Bråk, decimaltal och procent', 'Geometri och mätning', 'Repetera i din egen takt'))
+# 2026-11-13: 'Redo för högstadiet' heter Högstadiets grunder (elever i åk 7–9 som ännu inte når godkänt; gamla adressen omdirigeras)
+FJARDE = dict(namn='Högstadiets grunder', href='hogstadiets-grunder.html', gammal='redo-for-hogstadiet.html', lista=('Tal och räknesätt', 'Bråk, decimaltal och procent', 'Geometri och mätning', 'Träna i din egen takt'))
 from kortikoner import IKONER as KORTIKON
 SMA_RUTOR = os.environ.get('MK_SMA', '1') == '1'  # fyra mindre årskursrutor på en rad (förslag 2026-11-12)
 REDO_KLAR = os.environ.get('MK_REDO', '1') == '1'  # Redo för högstadiet (redo.py, ak6.json); sätt '1' som standard för att publicera
@@ -449,8 +450,10 @@ def allamenu(rot=''):
     for k in (7, 8, 9):
         l = f'<a class="ar" href="{rot}ak{k}.html">Årskurs {k}</a>' + ''.join(f'<a href="{rot}ak{k}/{sl}.html">{html.escape(rt)}</a>' for _, _, rutor in GRUPPER for _, sl, rt, _ in rutor)
         kol += f'<div><h3><i style="background:{AR[k]["main"]}"></i>Åk {k}</h3>{l}</div>'
-    gem = [('Startsida', 'index.html'), ('Nationella prov', 'nationella-prov.html'), ('NP-träning', 'np-traning.html'), ('Matematikverkstad', 'grundtraning.html'), ('Matematiska begrepp', 'begrepp.html'), ('Testa dina begrepp', 'begrepp-test.html')] + ([('Mattequiz', 'begrepp-quiz.html')] if VISA_QUIZ else []) + [
-           ('Problemlösning med blockmodellen', 'blockmodellen.html'), ('Blockmodellen – blandade uppgifter', 'blockmodellen-blandade.html'), ('Blockmodellen – mellanstadiet', 'blockmodellen-mellanstadiet.html'), ('Blockmodellen – högstadiet', 'blockmodellen-hogstadiet.html'), ('Bedömning', 'bedomning.html'), ('Så får du hjälp', 'hjalp.html'), ('Ämnesord på olika språk', 'amnesord.html')]
+    np_ = [('Nationella prov åk 6', 'nationella-prov-ak6.html'), ('NP-träning åk 6', 'np-traning-ak6.html'), ('Nationella prov åk 9', 'nationella-prov.html'), ('NP-träning åk 9', 'np-traning.html')] if TRE_NYA else [('Nationella prov', 'nationella-prov.html'), ('NP-träning', 'np-traning.html')]
+    vag = [(FJARDE['namn'], FJARDE['href']), ('Redo för högstadiet?', 'redo-hogstadiet-mellanstadiet.html'), ('Nyfiken på gymnasiets matematik?', 'gymnasiets-matematik.html')] if TRE_NYA else []
+    gem = [('Startsida', 'index.html')] + vag + np_ + ([('PISA-träning', 'pisa-traning.html')] if VISA_PISA else []) + [('Matematikverkstad', 'grundtraning.html'), ('Matematiska begrepp', 'begrepp.html'), ('Testa dina begrepp', 'begrepp-test.html')] + ([('Mattequiz', 'begrepp-quiz.html')] if VISA_QUIZ else []) + [
+           ('Problemlösning med blockmodellen', 'blockmodellen.html'), ('Blockmodellen – blandade uppgifter', 'blockmodellen-blandade.html'), ('Blockmodellen – mellanstadiet', 'blockmodellen-mellanstadiet.html'), ('Blockmodellen – högstadiet', 'blockmodellen-hogstadiet.html'), ('Bedömning', 'bedomning.html'), ('Så får du hjälp', 'hjalp.html'), ('Ämnesord på olika språk', 'amnesord.html')]  # Alla sidor-menyn ordnad 2026-11-13
     kol += '<div><h3><i style="background:#1E2B3A"></i>För alla</h3>' + ''.join(f'<a href="{rot}{h}">{t}</a>' for t, h in gem) + '</div>'
     return ('<details class="am"><summary aria-label="Alla sidor"><span class="ham" aria-hidden="true"><i></i><i></i><i></i></span>Alla sidor</summary>'
             f'<div class="am-panel">{kol}</div></details>'
@@ -524,6 +527,8 @@ def panel(c, titel, text='', etikett='', sti=None, vanster='', rot=''):
             + (f'<div class="etikett">{etikett}</div>' if etikett else '') + (f'<p>{text}</p>' if text else '') + '</div></section></div>')
 
 def sida(fil, titel, aktiv, c, kropp, rot=''):
+    import tema_sidor; c, kropp = tema_sidor.tillampa(fil, c, kropp, mix)  # startsidans färger på undersidorna (MK_TEMASIDOR)
+    import enhetliga_ikoner; kropp = enhetliga_ikoner.tillampa(fil, kropp, rot)  # ikoner i årskurssidornas stil (MK_IKONER)
     meny = ''
     for n, h in MENY:
         on = n == aktiv
@@ -567,7 +572,8 @@ def innehall(k, s, t):
         return f'<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>'
     drive = lambda i: f'https://drive.google.com/file/d/{i}/view'
     ut = []
-    for nr, namn in d['kapitel']:
+    kapitel = d['kapitel'] + ([['1–4', 'Blandade uppgifter']] if s == 'laxor' and '1–4' in d.get('laxor', {}) else [])
+    for nr, namn in kapitel:
         filer = extra_upg.get(nr, []) + (d.get(s, {}).get(nr) or [])
         if filer or tp.get(nr) or mal.get(nr) or sm.get(nr):
             if lek:
@@ -585,8 +591,20 @@ def innehall(k, s, t):
                     lank += '<div class="rad">' + (f'<a href="{drive(li)}" target="_blank" rel="noopener">{namnet}</a>' if li else f'<span>{namnet}</span>')
                     lank += (f'<a class="mal" href="{drive(ui)}" target="_blank" rel="noopener">Uppgifter</a>' if ui else '')
                     lank += (f'<a class="mal" href="{drive(mi)}" target="_blank" rel="noopener">Mål</a>' if mi else '') + '</div>'
+            elif s == 'laxor':  # Hjärngympa hemma: en rad per läxa med Facit-knapp (Nikola 2026-11-14)
+                fac = d.get('laxorfacit', {}).get(nr) or []
+                lank = ''.join(f'<div class="rad"><a href="{drive(i)}" target="_blank" rel="noopener">{html.escape(a)}</a>'
+                               + (f'<a class="mal" href="{drive(fac[j][1])}" target="_blank" rel="noopener">Facit</a>' if j < len(fac) else '') + '</div>'
+                               for j, (a, i) in enumerate(filer))
             else:
-                lank = ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener"><b>{html.escape(a.split(' ',1)[0])}</b>{html.escape(a.split(' ',1)[1])}</a>' for a, i in filer)
+                fac = d.get({'test': 'testfacit', 'repetition': 'repetitionsfacit', 'diagnos': 'diagnosfacit'}.get(s, ''), {}).get(nr) or []
+                lank = ''
+                for a, i in filer:
+                    namnet = f'<b>{html.escape(a.split(" ",1)[0])}</b>{html.escape(a.split(" ",1)[1])}'
+                    if fac and (a, i) in [tuple(x) for x in extra_upg.get(nr, [])]:  # Facit-knapp bredvid uppgifterna (Nikola 2026-11-13)
+                        lank += f'<div class="rad"><a href="{drive(i)}" target="_blank" rel="noopener">{namnet}</a>' + ''.join(f'<a class="mal" href="{drive(fi)}" target="_blank" rel="noopener">Facit</a>' for _, fi in fac) + '</div>'
+                    else:
+                        lank += f'<a href="{drive(i)}" target="_blank" rel="noopener">{namnet}</a>'
             lank += ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener">{html.escape(a)}</a>' for a, i in sm.get(nr, []))
             if lek:  # Planering (hette Tidsplan och arbetsgång) sist i varje kapitel
                 lank += ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener">Planering</a>' for a, i in tp.get(nr, [])) or '<span class="snart">Planering<small>kommer snart</small></span>'
@@ -645,10 +663,13 @@ def extra(fil):
     if fil == 'nationella-prov.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import np as npsida
         import pisa
-        return npsida.sida() + (pisa.LANK if VISA_PISA else '') + '</div>'
+        return npsida.sida() + '</div>'  # PISA-länken borttagen 2026-11-13 (Nikola), PISA nås från startsidan
     if fil == 'np-traning.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import np as npsida
         return npsida.CSS + '<div class="np">' + ovningsprov_sida(9, 'ak9/', npsida.OVP_INTRO) + '</div>'
+    if fil in ('nationella-prov-ak6.html', 'np-traning-ak6.html'):
+        import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import np6
+        return np6.sida() if fil == 'nationella-prov-ak6.html' else np6.traning()
     if fil == 'hjalp.html':
         import sys; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); import hjalp
         return hjalp.sida()
@@ -692,6 +713,12 @@ if UTMANA:
     for _rub, _g, _rutor in GRUPPER:
         if _rub == UTMANA: _rutor.append(UTMANA_RUTA)
     MATERIAL.append(UTMANA_RUTA[:3])
+# Ny ruta för läxor i Lär dig, efter Trygg start (Nikola 2026-11-14). MK_LAXA: '0' = av; MK_LAXNAMN = rutans namn. Innehåll kommer senare.
+LAXA = os.environ.get('MK_LAXA', '1') == '1'  # publicerad 2026-11-14, namn valt av Nikola
+LAXA_RUTA = ('20_Laxor', 'laxor', os.environ.get('MK_LAXNAMN', 'Hjärngympa hemma'), 'Uppgifter att göra hemma, i din egen takt.')
+if LAXA:
+    GRUPPER[0][2].append(LAXA_RUTA)
+    MATERIAL.append(LAXA_RUTA[:3])
 # Ny ruta Nå toppen i Kolla vad du kan (Nikola 2026-10-27): extra svåra uppgifter. None = av
 TOPPEN = os.environ.get('MK_TOPPEN') or True  # publicerad 2026-10-27
 TOPPEN_RUTA = ('19_Na_toppen', 'na-toppen', 'Nå toppen', 'Våga mer! Extra svåra uppgifter för dig som vill testa hur långt du kan nå.')
@@ -704,7 +731,8 @@ ORG['stalbla'] = ('#5B8DB8', '#1F4466', '#E6EEF5')  # Nationella prov: stålblå
 ORG['blaviolett'] = ('#6F86BC', '#2B3A6B', '#E9EDF6')  # Ämnesord: blåviolett (2026-10-25)
 ORG['himmel2'] = ('#5FA8D3', '#1B4F72', '#E6F3FA')  # Bedömning: himmelsblå (2026-10-25)
 ORG['petrol'] = ('#4F9BA8', '#1E5560', '#E4F3F5')  # Hjälp: petrolblå (2026-10-25)
-SIDFARG = {'bedomning.html': farger('himmel2'), 'hjalp.html': farger('petrol'), 'nationella-prov.html': farger('stalbla'), 'np-traning.html': farger('stalbla'), 'amnesord.html': farger('blaviolett')}
+SIDFARG = {'bedomning.html': farger('himmel2'), 'hjalp.html': farger('petrol'), 'nationella-prov.html': farger('stalbla'), 'np-traning.html': farger('stalbla'), 'amnesord.html': farger('blaviolett'),
+           'nationella-prov-ak6.html': farger('stalbla'), 'np-traning-ak6.html': farger('stalbla')}  # NP åk 6 (np6.py) som åk 9
 # En nyans ljusare rubrikruta och knappar på de fyra sidorna (Nikola 2026-10-24)
 for _c in SIDFARG.values(): _c['hero'] = mix(_c['main'], '#FFFFFF', .3); _c['knapp'] = mix(_c['ink'], _c['main'], .3)
 # Gamla färger i innehållet (bedomning.py, hjalp.py, np.py) -> vintagefärger
@@ -767,7 +795,22 @@ FEM_PAL = {  # bg1, bg2, ram, kortram, ikonbakgrund, mörk (knapp/etikett), pric
     'block': ('#FEF6E8', '#FBE5C2', '#EBC487', '#F2D9AE', '#FCEBCD', '#975A10', '#E9A23B'),
     'begr':  ('#EFF1F8', '#DFE3F1', '#B5BEDB', '#CDD3E8', '#E5E8F4', '#3A4A7E', '#7B88B8'),
 }
-FEM_AKTIVA = ('np', 'pisa')  # Nikola 2026-11-13: ändra bara NP och PISA; övriga sparade i FEM_PAL
+FEM_AKTIVA = tuple(os.environ.get('MK_FEM_AKTIVA', 'np,pisa,verk,begr,block').split(','))  # Nikola 2026-11-13: ändra bara NP och PISA; övriga sparade i FEM_PAL
+if os.environ.get('MK_FEM_VAR') == 'B':  # förslag B 2026-11-13: verkstad salviagrön, begrepp korallrosa, blockmodell sandgul
+    FEM_PAL.update({
+        'verk':  ('#EFF6EE', '#DDEBDA', '#AFCDA8', '#C9DEC4', '#E3F0E0', '#2F6B3A', '#7FB36F'),
+        'begr':  ('#FCF0EE', '#F6DDD8', '#E5B2A8', '#EFCDC6', '#F9E4E0', '#9A3D2E', '#E08A78'),
+        'block': ('#FDF8EA', '#F7EBC6', '#E3CD8A', '#EEDDAE', '#FAEFCF', '#7D5D0A', '#D9B23E'),
+    })
+_FEM_BLOCK = {  # alternativ till aprikos för Blockmodellen (Nikola ogillade gult 2026-11-13)
+    'korall': ('#FCF0EE', '#F6DDD8', '#E5B2A8', '#EFCDC6', '#F9E4E0', '#9A3D2E', '#E08A78'),
+    'gron':   ('#EFF6EE', '#DDEBDA', '#AFCDA8', '#C9DEC4', '#E3F0E0', '#2F6B3A', '#7FB36F'),
+}
+FEM_PAL['block'] = _FEM_BLOCK[os.environ.get('MK_FEM_BLOCK', 'gron')]  # Nikola valde A2 (grön) 2026-11-13
+# Tre nya startsidesrutor (nya_rutor.py, 2026-11-13): Redo för högstadiet?, Nyfiken på gymnasiets matematik?, NP åk 6. Förhandsbygge: MK_TRE=1 [MK_TRE_VAR=B]
+TRE_NYA = os.environ.get('MK_TRE', '1') == '1'  # publicerat 2026-11-13, förslag B (Nikola)
+import nya_rutor as NYR
+if TRE_NYA: FEM_PAL.update(NYR.PAL); FEM_AKTIVA += ('mell', 'gymn', 'np6')
 def _fem_css():
     c = ''
     for k, (b1, b2, ram, kram, ik, mo, pr) in ((k, FEM_PAL[k]) for k in FEM_AKTIVA):
@@ -786,7 +829,7 @@ def STARTSIDA_HTML(rad, gtlank, fik):
     sm = [('prov', 'bedomning.html', 'Hur bedöms du?'), ('boj', 'hjalp.html', 'Så får du hjälp i matte'), ('prata', 'amnesord.html', 'Ämnesord på olika språk')]
     smal = ''.join(f'<a href="{h}"><span class="rik" style="background:{mix(SIDFARG[h]["main"], "#FFFFFF", .6)}">{fik(i)}</span>{t}</a>' for i, h, t in sm)
     np_ = (f'<section class="npruta"><div class="npik">{fik("medalj").replace("width=\"32\" height=\"32\"", "width=\"44\" height=\"44\"")}</div>'
-           '<div class="nptxt"><div class="npet">Åk 9 · 12 och 14 maj 2027</div><h2>Nationella prov i matematik</h2><p>Så går provet till, och så tränar du inför det med NP-träning.</p></div>'
+           '<div class="nptxt"><h2>Nationella prov i matematik</h2><p>Så går provet till, och så tränar du inför det med NP-träning.</p></div>'
            '<div class="npdag" aria-live="polite"><b id="npdagar">–</b><small>dagar kvar</small></div>'
            '<div class="npkn"><a href="nationella-prov.html">Om provet →</a><a href="np-traning.html">NP-träning</a></div></section>'
            '<script>(function(){var d=Math.ceil((new Date(2027,4,12)-new Date())/864e5),e=document.getElementById("npdagar");if(e)e.textContent=d>0?d:"0"})()</script>')
@@ -794,15 +837,20 @@ def STARTSIDA_HTML(rad, gtlank, fik):
         glob = ('<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1F4466" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9" fill="#CFE0EE"/>'
                 '<path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg>')
         pisa_ = (f'<section class="npruta pisar"><div class="npik">{glob}</div>'
-                 '<div class="nptxt"><div class="npet">Åk 7–9 · Internationellt</div><h2>PISA-träning</h2><p>Vardagsnära uppgifter i flera steg. Rätta direkt.</p>'
+                 '<div class="nptxt"><h2>PISA-träning</h2><p>Vardagsnära uppgifter i flera steg. Rätta direkt.</p>'
                  '<div class="npkn" style="margin-top:12px;flex-direction:row"><a href="pisa-traning.html">Börja träna →</a></div></div></section>')
-        np_ = '<div class="npdelad">' + np_.replace('</section><script>', '</section>' + pisa_ + '</div><script>', 1)
+        if TRE_NYA:  # NP åk 9 + NP åk 6 + PISA (Nikola 2026-11-13)
+            np_ = np_.replace('<h2>Nationella prov i matematik</h2>', '<h2>Nationella prov i matematik åk 9</h2>', 1)
+            pisa_ = NYR.np6_ruta() + pisa_
+        np_ = f'<div class="npdelad{" tre" if TRE_NYA else ""}">' + np_.replace('</section><script>', '</section>' + pisa_ + '</div><script>', 1)
+    if TRE_NYA and NYR.NPLANG:  # en lång ruta: NP åk 6, NP åk 9, PISA (förslag 2026-11-13)
+        np_ = NYR.np_lang(NYR.NPLANG)
     import blockmodell as bm
     bml = bm.startlank() if VISA_BLOCKMODELL else ''
     if FEM_FARGER:
         bml = bml.replace('<section class="gtC plC">', '<section class="gtC plC fv-block">', 1)
         np_ = np_.replace('<section class="npruta">', '<section class="npruta fv-np">', 1)
-    return f'<style>{NP_CSS}{FEM_CSS if FEM_FARGER else ""}</style>{np_}{gtlank}{bml}<div class="smalrad" role="navigation" aria-label="Mer information">{smal}</div>'
+    return f'<style>{NP_CSS}{FEM_CSS if FEM_FARGER else ""}{NYR.CSS if TRE_NYA else ""}</style>{np_}{gtlank}{bml}<div class="smalrad" role="navigation" aria-label="Mer information">{smal}</div>'
 ORG['indigo'] = ('#9AA5B1', '#2E3A46', '#EEF1F4')  # neutral gråblå (Nikola 2026-10-24)
 GT_FARG = farger('indigo')
 
@@ -830,7 +878,7 @@ def bygg():
     if FYRA_RUTOR:
         # Fyra rutor (Nikola 2026-11-12): fjärde rutan (mellanstadiet) först, rubriker utan Matematik X/Y/Z, neutral nyans tills vidare
         KF = {7: AR[7], 8: AR[8], 9: farger('rod')}
-        specar = [(FJARDE['href'], '4–6', 'Mellanstadiet', FJARDE['namn'], FJARDE['lista'], FJARDE['namn'], dict(farger('gulorange'), gaa='#F2B630', gaatxt='#3D2A04'))] + [
+        specar = ([] if NYR.VAGLANG else [(FJARDE['href'], '7–9', 'Alla årskurser', FJARDE['namn'], FJARDE['lista'], FJARDE['namn'], dict(farger('gulorange'), gaa='#F2B630', gaatxt='#3D2A04'))]) + [
             (f'ak{k}.html', str(k), f'Åk {k}', f'Åk {k}' if SMA_RUTOR else RUBRIK[k], LISTA[k], f'Åk {k}', KF[k]) for k in AR]
         if os.environ.get('MK_ORGANIC') == '1':
             # Test 2026-11-12: Nikolas fyra 'Organic'-skalor (ljusast → mörkast), ink = mörkaste nyansen mörkad för läsbar text
@@ -840,14 +888,14 @@ def bygg():
                   7: _org(('#E6EFE6', '#C9D9C8', '#93B49A', '#5F7F62'), '#3F5A42'),
                   8: _org(('#E8F2F7', '#CFE1ED', '#9DBED1', '#5E8AA6'), '#355C75'),
                   9: _org(('#FCEBE8', '#F6C9C3', '#E58F84', '#C6625B'), '#8E3A33')}
-            specar = [sp[:6] + (OP[0 if i == 0 else int(sp[1])],) for i, sp in enumerate(specar)]
+            specar = [sp[:6] + (OP[0 if sp[0] == FJARDE['href'] else int(sp[1])],) for sp in specar]
     else:
         specar = [(f'ak{k}.html', str(k), f'Åk {k}', RUBRIK[k], ('Planering', 'Lektioner', 'Problemlösning', 'Repetitionsuppgifter'), f'Åk {k}', c) for k, c in AR.items()]
     kort = ''.join(f"""<a class="ak2{' bred' if len(nr) > 1 else ''}" href="{href}" style="--m:{c.get('bock', c['main'])};--d:{c['ink']};border-color:{c.get('ram', mix(c['main'], '#FFFFFF', .45))};background:linear-gradient(135deg,{c.get('bg1', mix(c['main'], '#FFFFFF', .9))},{c.get('bg2', mix(c['main'], '#FFFFFF', .7))})">
 <span class="blob b1" style="background:{c.get('blob1', mix(c['main'], '#FFFFFF', .6))}"></span><span class="blob b2" style="background:{c.get('blob2', mix(c['main'], '#FFFFFF', .78))}"></span>
 <span class="prick p1"></span><span class="prick p2"></span>
 <div class="inne"><div class="nr"><span class="sol"></span><b style="color:{c['ink']}">{nr}</b><small style="color:{c['ink']}">{liten}</small></div>
-<div class="lista"><h3 style="color:{c['ink']}">{KORTIKON.get(href, '') if SMA_RUTOR else ''}<span>{rub}</span></h3><ul>{''.join(f'<li>{BOCK}{t}</li>' for t in lista)}</ul><em style="color:{c['ink']}">och mycket mer!</em></div></div>
+<div class="lista"><h3 style="color:{c['ink']}">{KORTIKON.get(href, '') if SMA_RUTOR else ''}<span>{rub}</span></h3>{f'<span class="ord" style="color:{c["ink"]}">{RUBRIK[int(nr)]}</span>' if NYR.VAGLANG and nr.isdigit() else ''}<ul>{''.join(f'<li>{BOCK}{t}</li>' for t in lista)}</ul><em style="color:{c['ink']}">och mycket mer!</em></div></div>
 <span class="gaa" style="background:{c.get('gaa', c['ink'])};color:{c.get('gaatxt', '#fff')}">{'Gå dit' if SMA_RUTOR else 'Gå till ' + gaa} →</span></a>""" for href, nr, liten, rub, lista, gaa, c in specar)
     rad = [('prov', 'bedomning.html', 'Bedömning', 'Mål, kriterier och vad som krävs för de olika betygsstegen.'),
            ('boj', 'hjalp.html', 'Så får du hjälp', 'Stöd, tips och resurser du kan använda.'),
@@ -870,15 +918,17 @@ def bygg():
         gtlank = gtlank.replace('<section class="gtC"><div class="h"><span class="gik">', '<section class="gtC fv-verk"><div class="h"><span class="gik">', 1).replace('<section class="gtC"><div class="h"><span class="gik" style="background:#fff">', '<section class="gtC fv-begr"><div class="h"><span class="gik" style="background:#fff">', 1)
     sida('index.html', 'Startsida', 'Startsida', NEUTRAL, f"""
 <main class="hem"><div class="wrap"><section class="topprubrik"><img src="bilder/kompass-matte.png" alt=""><div><h1>Mattekompassen</h1><p>Din väg genom matematiken i årskurs 7–9</p></div></section>
-<h2 class="sr">Välj din årskurs</h2>{SMA_CSS if SMA_RUTOR else ''}<div class="kkrad{' fyra' if FYRA_RUTOR else ''}{' sma' if SMA_RUTOR else ''}">{kort}</div>
+<h2 class="sr">Välj din årskurs</h2>{SMA_CSS if SMA_RUTOR else ''}<div class="kkrad{' fyra' if FYRA_RUTOR else ''}{' sma' if SMA_RUTOR else ''}{' utan4' if NYR.VAGLANG else ''}">{kort}</div>{(NYR.vag_lang() if NYR.VAGLANG else NYR.vagar()) if TRE_NYA else ''}
 {STARTSIDA_HTML(rad, gtlank, fik) if STARTSIDA_NP else f'<div class="infor">{rad}</div>{gtlank}'}</div></main>""")
+    if TRE_NYA: NYR.bygg(sida, panel, mix)
     if FYRA_RUTOR:
         _bc = farger('gulorange')
         if REDO_KLAR:
             import redo; _bc = dict(_bc, knapp=_bc['ink']); redo.bygg(sida, panel, _bc, FJARDE['href'])
+            open(os.path.join(UT, FJARDE['gammal']), 'w', encoding='utf-8').write(f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={FJARDE["href"]}"><link rel="canonical" href="{FJARDE["href"]}"><title>{FJARDE["namn"]}</title><p><a href="{FJARDE["href"]}">{FJARDE["namn"]}</a></p>')
         else:
-            sida(FJARDE['href'], FJARDE['namn'], '', _bc, panel(_bc, FJARDE['namn'], 'Repetera mellanstadiets matematik i din egen takt.', 'Mellanstadiet', [('Startsida', 'index.html'), (FJARDE['namn'], None)]) +
-             '<main><div class="wrap"><div class="ruta"><h3>Sidan kommer snart</h3><p style="margin:0">Här kommer du att kunna repetera mellanstadiets matematik.</p></div></div></main>')
+            sida(FJARDE['href'], FJARDE['namn'], '', _bc, panel(_bc, FJARDE['namn'], 'Stärk grunderna i matematiken och nå godkänt, i din egen takt.', 'Åk 7–9', [('Startsida', 'index.html'), (FJARDE['namn'], None)]) +
+             '<main><div class="wrap"><div class="ruta"><h3>Sidan kommer snart</h3><p style="margin:0">Här kommer du att kunna träna grunderna i matematiken.</p></div></div></main>')
     # Årskurssidor och undersidor
     for k, c in AR.items():
         grupper = ''
@@ -925,11 +975,13 @@ def bygg():
                          ('bedomning.html', 'Hur bedöms du?', 'Vad bedöms i matematik, och hur visar du vad du kan?'),
                          ('hjalp.html', 'Så får du hjälp i matte', 'Så gör vi för att alla ska lära sig matte.'),
                          ('nationella-prov.html', 'Allt om nationella provet', 'Så går provet i matematik till i åk 9: datum, delprov, vad du får ha med dig och tips.'),
-                         ('np-traning.html', 'NP-träning', 'Sex träningsprov inför det nationella provet i åk 9.')]:
+                         ('np-traning.html', 'NP-träning', 'Sex träningsprov inför det nationella provet i åk 9.')] + ([
+                         ('nationella-prov-ak6.html', 'Allt om nationella provet åk 6', 'Så går provet i matematik till i åk 6: datum, delprov, vad du får ha med dig och tips.'),
+                         ('np-traning-ak6.html', 'NP-träning åk 6', 'Träningsprov inför det nationella provet i åk 6.')] if TRE_NYA else []):
         c = SIDFARG[fil]
         sida(fil, t, {'bedomning.html': 'Bedömning', 'hjalp.html': 'Så får du hjälp', 'nationella-prov.html': 'Nationella prov', 'np-traning.html': 'NP-träning'}.get(fil, ''), c, f"""
 {panel(c, t, text, '', [('Startsida', 'index.html'), (t, None)])}
-<main><section><div class="wrap">{NP_PANEL if fil in ('nationella-prov.html', 'np-traning.html', 'amnesord.html') else ''}{byt_farger(extra(fil), FARGBYTE_NP if fil in ('nationella-prov.html', 'np-traning.html') else FARGBYTE_HJALP if fil == 'hjalp.html' else None)}
+<main><section><div class="wrap">{NP_PANEL if fil in ('nationella-prov.html', 'np-traning.html', 'amnesord.html', 'nationella-prov-ak6.html', 'np-traning-ak6.html') else ''}{byt_farger(extra(fil), FARGBYTE_NP if fil in ('nationella-prov.html', 'np-traning.html', 'nationella-prov-ak6.html', 'np-traning-ak6.html') else FARGBYTE_HJALP if fil == 'hjalp.html' else None)}
 <a class="knapp" href="index.html" onclick="var r=document.referrer,b=this.href.match(/.*[/]/)[0];if(r.indexOf(b)==0&&r.match(/[^#]*/)[0]!=location.href.match(/[^#]*/)[0]&&history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
     # Gemensam sida om problemlösning (länkas från årskursernas problemlösningssidor)
     arl = ''.join(f'<a href="ak{k}/problemlosning.html" style="background:{AR[k]["ink"]}">Åk {k}<small>{RUBRIK[k]} · problemlösning per kapitel</small></a>' for k in AR)
