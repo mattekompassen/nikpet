@@ -554,6 +554,7 @@ def sida(fil, titel, aktiv, c, kropp, rot=''):
     open(p, 'w').write(doc)
 
 TRANA_AR = (7, 8, 9)
+TRANA_IK = os.environ.get('MK_TRANA_IK', '1') == '1'  # nya ikoner + ljusare rutor på akN/trana.html, publicerat 2026-11-14
 TRANA_FARG = {}  # färgerna kommer nu från årskursens variabler
 
 def innehall(k, s, t):
@@ -947,13 +948,20 @@ def bygg():
                      ('trana-dra.html', '🧲', 'Dra begreppet', 'Begrepp i mening'),
                      ('trana-begrepp.html', '🧩', 'Matcha begrepp', 'Hela kapitlet'),
                      ('trana-quiz.html', '❓', 'Quiz', 'Flervalsfrågor')]
+            if TRANA_IK:  # lugna ikoner i årskursens färg + ljusare rutor (Nikola 2026-11-14); PNG från ikoner/ovriga/gen.py
+                typer = [(h, f'<img class="tik" src="../bilder/ikoner/tr{k}-{n}.png" alt="">', t, p) for (h, e, t, p), n in zip(typer, ('rakna', 'exempel', 'dra', 'matcha', 'quiz'))]
+                trana_css = (f'<style>.typer .typ{{background:{mix(c["main"], "#FFFFFF", .93)};color:{c["ink"]};box-shadow:inset 0 0 0 2px {mix(c["main"], "#FFFFFF", .6)};padding:18px 20px 20px}}'
+                             f'.typer .typ b{{color:{mix(c["ink"], c["main"], .35)}}}.typer .typ:hover{{box-shadow:inset 0 0 0 2px {c["main"]}}}'
+                             '.typ img.tik{width:64px;height:64px;display:block;margin:0 0 10px;filter:drop-shadow(0 1px 2px rgba(30,43,58,.12))}</style>')
+            else:
+                trana_css = ''
             snart = []
             kapitel = ''.join(f'<div class="kapblock" id="kap{nr}"><h2>Kapitel {nr} <span style="font-weight:500;opacity:.7">{html.escape(namn)}</span></h2><div class="typer">'
-                              + ''.join(f'<a class="typ" href="{h}?kap={nr}"><b>{p}</b>{e} {t}</a>' for h, e, t, p in typer) + '</div></div>'
+                              + ''.join(f'<a class="typ" href="{h}?kap={nr}">' + (f'{e}<b>{p}</b>{t}' if TRANA_IK else f'<b>{p}</b>{e} {t}') + '</a>' for h, e, t, p in typer) + '</div></div>'
                               for nr, namn in LANKAR[str(k)]['kapitel'])
             tillbaka = '<a class="knapp" href="trana.html">← Alla övningar</a>'
             sida(f'ak{k}/trana.html', f'Interaktiva övningar – åk {k}', f'Åk {k}', c, hero('Interaktiva övningar', 'Klicka, dra och få svar direkt. Välj kapitel och typ av övning.', sti[:2] + [('Interaktiva övningar', None)]) + f"""
-<main><section><div class="wrap">{kapitel}
+{trana_css}<main><section><div class="wrap">{kapitel}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
             for fil, lage, t, p in [('trana-rakna.html', 'rakna', 'Räkneträning', 'Korta övningar med nya tal varje gång.'),
                                     ('trana-exempel.html', 'exempel', 'Från exempel till begrepp', 'Titta på exemplet och välj rätt begrepp.'),
