@@ -453,7 +453,7 @@ def allamenu(rot=''):
     np_ = [('Nationella prov åk 6', 'nationella-prov-ak6.html'), ('NP-träning åk 6', 'np-traning-ak6.html'), ('Nationella prov åk 9', 'nationella-prov.html'), ('NP-träning åk 9', 'np-traning.html')] if TRE_NYA else [('Nationella prov', 'nationella-prov.html'), ('NP-träning', 'np-traning.html')]
     vag = [(FJARDE['namn'], FJARDE['href']), ('Redo för högstadiet?', 'redo-hogstadiet-mellanstadiet.html'), ('Nyfiken på gymnasiets matematik?', 'gymnasiets-matematik.html')] if TRE_NYA else []
     gem = [('Startsida', 'index.html')] + vag + np_ + ([('PISA-träning', 'pisa-traning.html')] if VISA_PISA else []) + [('Matematikverkstad', 'grundtraning.html'), ('Matematiska begrepp', 'begrepp.html'), ('Testa dina begrepp', 'begrepp-test.html')] + ([('Mattequiz', 'begrepp-quiz.html')] if VISA_QUIZ else []) + [
-           ('Problemlösning med blockmodellen', 'blockmodellen.html'), ('Blockmodellen – blandade uppgifter', 'blockmodellen-blandade.html'), ('Blockmodellen – mellanstadiet', 'blockmodellen-mellanstadiet.html'), ('Blockmodellen – högstadiet', 'blockmodellen-hogstadiet.html'), ('Bedömning', 'bedomning.html'), ('Så får du hjälp', 'hjalp.html'), ('Ämnesord på olika språk', 'amnesord.html')]  # Alla sidor-menyn ordnad 2026-11-13
+           ('Problemlösning med blockmodellen', 'blockmodellen.html'), ('Blockmodellen – blandade uppgifter', 'blockmodellen-blandade.html'), ('Blockmodellen – mellanstadiet', 'blockmodellen-mellanstadiet.html'), ('Blockmodellen – högstadiet', 'blockmodellen-hogstadiet.html'), ('Bedömning', 'bedomning.html'), ('Så får du hjälp', 'hjalp.html'), ('Ämnesord på olika språk', 'amnesord.html'), ('Prov', 'prov.html')]  # Alla sidor-menyn ordnad 2026-11-13; Prov (lösenord) 2026-11-15
     kol += '<div><h3><i style="background:#1E2B3A"></i>För alla</h3>' + ''.join(f'<a href="{rot}{h}">{t}</a>' for t, h in gem) + '</div>'
     return ('<details class="am"><summary aria-label="Alla sidor"><span class="ham" aria-hidden="true"><i></i><i></i><i></i></span>Alla sidor</summary>'
             f'<div class="am-panel">{kol}</div></details>'
@@ -592,7 +592,7 @@ def innehall(k, s, t):
                     lank += '<div class="rad">' + (f'<a href="{drive(li)}" target="_blank" rel="noopener">{namnet}</a>' if li else f'<span>{namnet}</span>')
                     lank += (f'<a class="mal" href="{drive(ui)}" target="_blank" rel="noopener">Uppgifter</a>' if ui else '')
                     lank += (f'<a class="mal" href="{drive(mi)}" target="_blank" rel="noopener">Mål</a>' if mi else '') + '</div>'
-            elif s == 'laxor':  # Hjärngympa hemma: en rad per läxa med Facit-knapp (Nikola 2026-11-14)
+            elif s == 'laxor':  # Träna vidare hemma (hette Hjärngympa hemma): en rad per läxa med Facit-knapp (Nikola 2026-11-14)
                 fac = d.get('laxorfacit', {}).get(nr) or []
                 lank = ''.join(f'<div class="rad"><a href="{drive(i)}" target="_blank" rel="noopener">{html.escape(a)}</a>'
                                + (f'<a class="mal" href="{drive(fac[j][1])}" target="_blank" rel="noopener">Facit</a>' if j < len(fac) else '') + '</div>'
@@ -716,7 +716,7 @@ if UTMANA:
     MATERIAL.append(UTMANA_RUTA[:3])
 # Ny ruta för läxor i Lär dig, efter Trygg start (Nikola 2026-11-14). MK_LAXA: '0' = av; MK_LAXNAMN = rutans namn. Innehåll kommer senare.
 LAXA = os.environ.get('MK_LAXA', '1') == '1'  # publicerad 2026-11-14, namn valt av Nikola
-LAXA_RUTA = ('20_Laxor', 'laxor', os.environ.get('MK_LAXNAMN', 'Hjärngympa hemma'), 'Uppgifter att göra hemma, i din egen takt.')
+LAXA_RUTA = ('20_Laxor', 'laxor', os.environ.get('MK_LAXNAMN', 'Träna vidare hemma'), 'Uppgifter att göra hemma, i din egen takt.')
 if LAXA:
     GRUPPER[0][2].append(LAXA_RUTA)
     MATERIAL.append(LAXA_RUTA[:3])
@@ -1036,6 +1036,8 @@ def bygg():
 {panel(_pc, 'PISA-träning', 'Vardagsnära uppgifter i flera steg, som i den internationella PISA-undersökningen.', '', [('Startsida', 'index.html'), ('Nationella prov', 'nationella-prov.html'), ('PISA-träning', None)])}
 <main><section><div class="wrap">{NP_PANEL}{pisa.sida()}
 <a class="knapp" href="index.html" onclick="var r=document.referrer,b=this.href.match(/.*[/]/)[0];if(r.indexOf(b)==0&&r.match(/[^#]*/)[0]!=location.href.match(/[^#]*/)[0]&&history.length>1){{history.back();return false}}">← Tillbaka</a></div></section></main>""")
+    import prov  # lösenordsskyddad provsida, bara via Alla sidor (Nikola 2026-11-15)
+    sida('prov.html', 'Prov', '', farger('indigo'), prov.kropp(AR))
     for js in ('trana.js', 'trana-ak7.js', 'trana-ak8.js', 'trana-ak9.js'):
         shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), js), UT)
     open(os.path.join(UT, '.nojekyll'), 'w').write('')
