@@ -145,6 +145,7 @@ p.sub{color:#4A4E52;font-size:17px;margin:0 0 22px}
 .lankar a:hover{border-color:var(--mid)}
 .lankar .rad{display:flex;gap:6px}.lankar .rad>a:first-child,.lankar .rad>span{flex:1;display:block;background:var(--w);border:1.5px solid var(--l);border-radius:12px;padding:11px 14px;color:var(--ink);font-weight:600}.lankar .rad>span{opacity:.75}.lankar .rad b{color:var(--mid);margin-right:6px}
 .lankar .snart{display:block;border:1.5px dashed var(--l);border-radius:12px;padding:11px 14px;color:var(--ink);font-weight:600;opacity:.65}.lankar .snart small{font-weight:500;margin-left:6px}
+.lankar a.pl{background:color-mix(in srgb,var(--tram) 70%,#fff);border-color:var(--tram)}.lankar a.pl:hover{border-color:var(--ink)}.lankar .snart.pl{background:color-mix(in srgb,var(--tram) 30%,#fff);border-color:var(--tram)}
 .lankar:has(a.mal){grid-template-columns:repeat(auto-fill,minmax(min(420px,100%),1fr))}.lankar .rad{min-width:0}.lankar .rad>a:first-child{min-width:0}.lankar a.mal{flex:none;display:flex;align-items:center;background:var(--ink);border-color:var(--ink);color:#fff;font-size:14px;padding:0 12px;white-space:nowrap}@media (max-width:520px){.lankar a.mal{font-size:13px;padding:0 9px}}.lankar a.mal:hover{opacity:.85}
 .ovgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(330px,100%),1fr));gap:16px;max-width:1150px}
 .ovkort{background:var(--vl);border:2px solid var(--l);border-radius:22px;padding:18px 18px 10px}
@@ -607,8 +608,10 @@ def innehall(k, s, t):
                     else:
                         lank += f'<a href="{drive(i)}" target="_blank" rel="noopener">{namnet}</a>'
             lank += ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener">{html.escape(a)}</a>' for a, i in sm.get(nr, []))
-            if lek:  # Planering (hette Tidsplan och arbetsgång) sist i varje kapitel
-                lank += ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener">Planering</a>' for a, i in tp.get(nr, [])) or '<span class="snart">Planering<small>kommer snart</small></span>'
+            if lek:  # Planeringsknappar sist i varje kapitel, en nyans mörkare (Nikola 2026-11-15): Tidsplan och arbetsgång (hette Planering) + Pedagogisk planering (lärar-/elevversion)
+                for nyckel, namnet in (('tidsplan-och-arbetsgang', 'Tidsplan och arbetsgång'), ('pedagogisk-planering', 'Pedagogisk planering'), ('pedagogisk-planering-elev', 'Pedagogisk planering – elevversion')):
+                    fl = d.get(nyckel, {}).get(nr, [])
+                    lank += ''.join(f'<a class="pl" href="{drive(i)}" target="_blank" rel="noopener">{namnet}</a>' for a, i in fl) or f'<span class="snart pl">{namnet}<small>kommer snart</small></span>'
             ut.append(f'<details class="kap"><summary><span>Kapitel {nr}<small>{html.escape(namn)}</small></span></summary><div class="lankar">{lank}</div></details>')
         else:
             ut.append(f'<details class="kap tom"><summary><span>Kapitel {nr}<small>{html.escape(namn)} · kommer snart</small></span></summary></details>')
