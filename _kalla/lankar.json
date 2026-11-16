@@ -1968,6 +1968,10 @@
    [
     "4",
     "Geometri"
+   ],
+   [
+    "5",
+    "Sannolikhet och statistik"
    ]
   ],
   "problemlosning": {
@@ -2096,6 +2100,12 @@
      "Genomgång av testet",
      "1NmDgUIfqq_6v-ULxl-JHWHNqGzjQ6nDV"
     ]
+   ],
+   "5": [
+    [
+     "Genomgång av testet",
+     "1UJJtVYfCQo7274g93_GWQ9fm24tk898p"
+    ]
    ]
   },
   "repetition": {
@@ -2121,6 +2131,12 @@
     [
      "Genomgång av repetitionen",
      "15iyyY5uB7Yr0QSdGpI-lVZeWNu1WYbAs"
+    ]
+   ],
+   "5": [
+    [
+     "Genomgång av repetitionen",
+     "1Ql3_zK2O1bvE9uLN4W2B4IdXXtpUhBoU"
     ]
    ]
   },
@@ -2224,6 +2240,44 @@
      "4.5 Pythagoras sats",
      "1QmsMFwkWKB8KCfcAb39yl5EGaDxlMLqV"
     ]
+   ],
+   "5": [
+    [
+     "5.1 Sannolikhet och träddiagram",
+     "1eaa0yJzwDQCxSYYfg3NJWu7DNjRDEk1E"
+    ],
+    [
+     "5.2 Komplementhändelser och minst en",
+     "1BJF_VTup-5vu6baX6X1f8ax435mIPGQk"
+    ],
+    [
+     "5.3 Sannolikhet ur statistik",
+     "19NM2QwOdg4GnYlvY3QNZ0hCOEUF5Q8l1"
+    ],
+    [
+     "5.4 Permutationer och fakultet",
+     "1-BT_TGZ2czIlf2N0jDC05vUmnzF3mSlv"
+    ],
+    [
+     "5.5 Histogram och klassindelning",
+     "1I1_3M4AtbnAC7o3Wj51FFpHLmS_2yF5N"
+    ],
+    [
+     "5.6 Stam-blad-diagram",
+     "1mBfa_qaw2YG_IvwzPI_ETspB_poUcUOO"
+    ],
+    [
+     "5.7 Kvartiler och lådagram",
+     "1mvVQl6rtn5_epsi7nmQ0sJaxGG84aC1i"
+    ],
+    [
+     "5.8 Spel, odds och simulering",
+     "1YPb2oTEQpR_c7UJC0ElykVD55aW--s_S"
+    ],
+    [
+     "5.9 Fördjupning standardavvikelse och normalfördelning",
+     "11uoP4wiUdbftcxXfcVgkhl-lR0Mx75hP"
+    ]
    ]
   },
   "testuppgifter": {
@@ -2249,6 +2303,12 @@
     [
      "Uppgifter till testet",
      "1LnuZz9CCzjiYorDOIAyMYl0HPTXznJ5e"
+    ]
+   ],
+   "5": [
+    [
+     "Uppgifter till testet",
+     "1ajTAezJQQbVd9YaTOLVyN4GNZFv1bC9V"
     ]
    ]
   },
@@ -2276,6 +2336,12 @@
      "Uppgifter till repetitionen",
      "1AK-0ACQLeG90YI137RLcmUyXniKjxhgC"
     ]
+   ],
+   "5": [
+    [
+     "Uppgifter till repetitionen",
+     "1dVu9dZ78_Hohhrm86XlkpOh1vF24NyHz"
+    ]
    ]
   },
   "diagnosuppgifter": {
@@ -2301,6 +2367,12 @@
     [
      "Uppgifter till diagnosen",
      "1cxbGMWOLBIq091EmMTf2K2wdjXzE8lk2"
+    ]
+   ],
+   "5": [
+    [
+     "Uppgifter till diagnosen",
+     "1nzlV5N927ycgYZeAj2Pay2TGH6a-V_Sf"
     ]
    ]
   },
@@ -2430,6 +2502,12 @@
      "Genomgång av diagnosen",
      "1s1CWl2GiRe_2t4WZJenaYAsWEZa1POGp"
     ]
+   ],
+   "5": [
+    [
+     "Genomgång av diagnosen",
+     "1tLF8S9yvgj6maHl8nYrg3oWbkniq8I9f"
+    ]
    ]
   },
   "ovningsprov": {
@@ -2514,6 +2592,12 @@
      "Facit",
      "14lD2dW8UM8BMVgzU-ML9Un_U0ULLRY21"
     ]
+   ],
+   "5": [
+    [
+     "Facit",
+     "1JxspJOFWsgpTrIxFURiWRkzej0GMKWst"
+    ]
    ]
   },
   "repetitionsfacit": {
@@ -2540,6 +2624,12 @@
      "Facit",
      "1i_sMpEOrCY47AGgtx3sY9mDgRafZrS17"
     ]
+   ],
+   "5": [
+    [
+     "Facit",
+     "1EHSftiImuB3JN2DAjZQqsvBYppbblVCh"
+    ]
    ]
   },
   "testfacit": {
@@ -2565,6 +2655,12 @@
     [
      "Facit",
      "10HAp4_41_SIzMTK10brNuXah55MvykY4"
+    ]
+   ],
+   "5": [
+    [
+     "Facit",
+     "1sMSSOTtdBNHXM4QRoWM_nuP6uAYH7PeL"
     ]
    ]
   },

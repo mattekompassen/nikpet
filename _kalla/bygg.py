@@ -574,7 +574,9 @@ def innehall(k, s, t):
         return f'<div class="ruta"><h3>Materialet kommer snart</h3><p style="margin:0">Här lägger läraren upp {t.lower()} för åk {k}.</p></div>'
     drive = lambda i: f'https://drive.google.com/file/d/{i}/view'
     ut = []
-    kapitel = d['kapitel'] + ([['1–4', 'Blandade uppgifter']] if s == 'laxor' and '1–4' in d.get('laxor', {}) else [])
+    kapitel = list(d['kapitel'])
+    if s == 'laxor' and '1–4' in d.get('laxor', {}):  # Blandade uppgifter kap 1–4 direkt efter kapitel 4 (åk 9 har kap 5 sedan 2026-11-16)
+        kapitel.insert(next((j + 1 for j, (n, _) in enumerate(kapitel) if n == '4'), len(kapitel)), ['1–4', 'Blandade uppgifter'])
     for nr, namn in kapitel:
         filer = extra_upg.get(nr, []) + (d.get(s, {}).get(nr) or [])
         if filer or tp.get(nr) or mal.get(nr) or sm.get(nr):
@@ -609,7 +611,7 @@ def innehall(k, s, t):
                         lank += f'<a href="{drive(i)}" target="_blank" rel="noopener">{namnet}</a>'
             lank += ''.join(f'<a href="{drive(i)}" target="_blank" rel="noopener">{html.escape(a)}</a>' for a, i in sm.get(nr, []))
             if lek:  # Planeringsknappar sist i varje kapitel, en nyans mörkare (Nikola 2026-11-15): Tidsplan och arbetsgång (hette Planering) + Pedagogisk planering (lärar-/elevversion)
-                for nyckel, namnet in (('tidsplan-och-arbetsgang', 'Tidsplan och arbetsgång'), ('pedagogisk-planering', 'Pedagogisk planering'), ('pedagogisk-planering-elev', 'Pedagogisk planering – elevversion')):
+                for nyckel, namnet in (('tidsplan-och-arbetsgang', 'Tidsplan och arbetsgång'), ('pedagogisk-planering', 'Pedagogisk planering')):
                     fl = d.get(nyckel, {}).get(nr, [])
                     lank += ''.join(f'<a class="pl" href="{drive(i)}" target="_blank" rel="noopener">{namnet}</a>' for a, i in fl) or f'<span class="snart pl">{namnet}<small>kommer snart</small></span>'
             ut.append(f'<details class="kap"><summary><span>Kapitel {nr}<small>{html.escape(namn)}</small></span></summary><div class="lankar">{lank}</div></details>')
@@ -961,7 +963,8 @@ def bygg():
             snart = []
             kapitel = ''.join(f'<div class="kapblock" id="kap{nr}"><h2>Kapitel {nr} <span style="font-weight:500;opacity:.7">{html.escape(namn)}</span></h2><div class="typer">'
                               + ''.join(f'<a class="typ" href="{h}?kap={nr}">' + (f'{e}<b>{p}</b>{t}' if TRANA_IK else f'<b>{p}</b>{e} {t}') + '</a>' for h, e, t, p in typer) + '</div></div>'
-                              for nr, namn in LANKAR[str(k)]['kapitel'])
+                              for nr, namn in LANKAR[str(k)]['kapitel']
+                              if f"'{nr}." in open(os.path.join(os.path.dirname(os.path.abspath(__file__)), f'trana-ak{k}.js'), encoding='utf-8').read())  # bara kapitel med övningsdata (åk 9 kap 5 saknar, 2026-11-16)
             tillbaka = '<a class="knapp" href="trana.html">← Alla övningar</a>'
             sida(f'ak{k}/trana.html', f'Interaktiva övningar – åk {k}', f'Åk {k}', c, hero('Interaktiva övningar', 'Klicka, dra och få svar direkt. Välj kapitel och typ av övning.', sti[:2] + [('Interaktiva övningar', None)]) + f"""
 {trana_css}<main><section><div class="wrap">{kapitel}
