@@ -653,14 +653,14 @@ def utmana_sida(k, s='utmana-dig'):
             os.makedirs(os.path.join(UT, f'ak{k}', s), exist_ok=True)
             sti = f'{s}/kapitel-{nr}'
             shutil.copy(os.path.join(mapp, upg), os.path.join(UT, f'ak{k}', sti + '.pdf'))
-            open(os.path.join(UT, f'ak{k}', sti + '-facit.bin'), 'wb').write(krypterad_fil(open(os.path.join(mapp, fac), 'rb').read()))
+            shutil.copy(os.path.join(mapp, fac), os.path.join(UT, f'ak{k}', sti + '-facit.pdf'))  # facit öppet sedan 2026-11-16 (Nikola: lösenord bara på prov)
             rad = (f'<div class="ovrad"><a class="upg" href="{sti}.pdf" target="_blank" rel="noopener"><span class="bok">{nr}</span><span>{'Test' if s == 'na-toppen' else 'Uppgifter'}<small>{'PDF · 15 uppgifter' if s == 'na-toppen' else 'PDF · räkna i rutorna'}</small></span></a>'
-                   f'<a class="facit" href="#facit" data-fil="{sti}-facit.bin" data-namn="{html.escape(fac)}">🔒 Facit</a></div>')
+                   f'<a class="facit" href="{sti}-facit.pdf" target="_blank" rel="noopener">Facit</a></div>')
         else:
             rad = '<p style="margin:0 0 10px;opacity:.7">Kommer snart</p>'
         kort += f'<div class="ovkort"><h3>Kapitel {nr} <span style="font-weight:500;opacity:.7">{html.escape(namn)}</span></h3>{rad}</div>'
     intro = '<p class="ingress" style="max-width:860px;margin:0 0 18px">' + ('Ett test med 15 kluriga uppgifter från hela kapitlet, i samma stil som Utmana dig. Gör testet själv först och rätta sedan med facit. Där finns också förklaringar.' if s == 'na-toppen' else 'Extra kluriga uppgifter för dig som vill ta nästa steg. Varje sida hör till ett avsnitt i kapitlet. Räkna själv först och rätta sedan med facit. Där finns också förklaringar.') + '</p>'
-    return intro + f'<div class="ovgrid">{kort}</div>' + (facit_las('Klicka på Facit vid det kapitel du vill rätta.') if finns else '')
+    return intro + f'<div class="ovgrid">{kort}</div>' 
 
 def extra(fil):
     if fil == 'bedomning.html':
@@ -940,7 +940,7 @@ def bygg():
         grupper = ''
         for n, (rub, g, rutor) in enumerate(GRUPPER, 1):
             t = ''.join(f'<a class="t" href="ak{k}/{s}.html"><img src="bilder/ak{k}/{f}.png" alt=""><span class="pil" aria-hidden="true">→</span><h3>{rt}</h3><p>{p}</p>'
-                        + ('<span class="las-ikon">🔒 Lösenord</span>' if s == 'lektioner' else f'<span class="tagg">{ETIKETT[s]}</span>' if s in ETIKETT else '') + '</a>' for f, s, rt, p in rutor)
+                        + (f'<span class="tagg">{ETIKETT[s]}</span>' if s in ETIKETT else '') + '</a>' for f, s, rt, p in rutor)
             grupper += f'<div class="grupp"><div><div class="nr">0{n}</div><h2>{rub}</h2><p class="g">{g}</p></div><div class="rad3{" rad4" if len(rutor) == 4 else ""}">{t}</div></div>'
         sida(f'ak{k}.html', f'Åk {k}', f'Åk {k}', c, panel(c, f'Årskurs {k}', 'Lär dig nytt, träna mer och kolla vad du kan.',
              RUBRIK[k], [('Startsida', 'index.html'), (f'Åk {k}', None)], f'<div class="nrc" style="color:{c["ink"]}" aria-hidden="true">{k}</div>')
@@ -982,7 +982,7 @@ def bygg():
         for f, s, t in MATERIAL:
             sida(f'ak{k}/{s}.html', f'{t} – åk {k}', f'Åk {k}', c, f"""
 {panel(c, t, '', f'Åk {k} · {RUBRIK[k]}', [('Startsida', 'index.html'), (f'Åk {k}', f'ak{k}.html'), (t, None)], f'<img class="bild" src="../bilder/ak{k}/{f}.png" alt="">', '../')}
-<main><section><div class="wrap">{'<a class="ovlank" href="../problemlosning.html"><span class="ovik" aria-hidden="true">💡</span><span class="ovtxt"><b>Så arbetar vi med problemlösning</b>Läs om de tre nivåerna och strategier som hjälper dig när du fastnar.</span><span class="ovknapp">Nivåer och strategier →</span></a>' if s == 'problemlosning' else ''}{krypterad(innehall(k, s, t)) if s == 'lektioner' else utmana_sida(k, s) if s in ('utmana-dig', 'na-toppen') else innehall(k, s, t)}
+<main><section><div class="wrap">{'<a class="ovlank" href="../problemlosning.html"><span class="ovik" aria-hidden="true">💡</span><span class="ovtxt"><b>Så arbetar vi med problemlösning</b>Läs om de tre nivåerna och strategier som hjälper dig när du fastnar.</span><span class="ovknapp">Nivåer och strategier →</span></a>' if s == 'problemlosning' else ''}{innehall(k, s, t) if s == 'lektioner' else utmana_sida(k, s) if s in ('utmana-dig', 'na-toppen') else innehall(k, s, t)}
 <a class="knapp" href="../ak{k}.html">← Tillbaka till åk {k}</a></div></section></main>""", rot='../')
     # Ämnesord och Bedömning (länkas från rutorna på startsidan, inte från menyn)
     for fil, t, text in [('amnesord.html', 'Ämnesord på olika språk', 'Viktiga matteord på svenska och ditt språk. Välj ditt språk nedan.'),
