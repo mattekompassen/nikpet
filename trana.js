@@ -9,7 +9,7 @@
 
 
   const tal = s => {
-    s = String(s).trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
+    s = String(s).replace(/[٠-٩]/g, c => c.charCodeAt(0) - 0x660).replace(/[۰-۹]/g, c => c.charCodeAt(0) - 0x6F0).replace(/[٫،，]/g, ',').replace(/．/g, '.').trim().replace(/\s/g, '').replace(',', '.').replace('−', '-');
     if (/^-?\d+\/\d+$/.test(s)) { const [a, b] = s.split('/'); return +b ? a / b : NaN; }
     return s === '' ? NaN : Number(s);
   };

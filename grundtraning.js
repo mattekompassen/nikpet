@@ -15,7 +15,7 @@
   const pad = n => String(n).padStart(2, '0');
   const tt = (h, m) => pad(((h % 24) + 24) % 24) + ':' + pad(m);
   const h12 = h => ((h % 12) + 12) % 12 || 12;
-  const tal = s => { s = String(s).trim().replace(/\s/g, '').replace(',', '.').replace('−', '-'); return s === '' ? NaN : Number(s); };
+  const tal = s => { s = String(s).replace(/[٠-٩]/g, c => c.charCodeAt(0) - 0x660).replace(/[۰-۹]/g, c => c.charCodeAt(0) - 0x6F0).replace(/[٫،，]/g, ',').replace(/．/g, '.').trim().replace(/\s/g, '').replace(',', '.').replace('−', '-'); return s === '' ? NaN : Number(s); };
   const BRA = ['Rätt! 🎉', 'Snyggt! ✅', 'Precis! 👏', 'Helt rätt! 💪'];
   const RUNDA = 10;
 
