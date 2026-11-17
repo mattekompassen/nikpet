@@ -10,7 +10,7 @@
   const gen = n => /[sxz]$/i.test(n) ? n : n + 's';
   const F = (a, b) => `<span class="bmf"><span>${a}</span><span>${b}</span></span>`;
   const blanda = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-  const tal = n => { const s = String(n); return n >= 10000 ? s.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : s; };
+  const tal = n => { const s = String(n); return n >= 1000 ? s.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : s; };
   const nrm = s => String(s).replace(/[٠-٩]/g, c => c.charCodeAt(0) - 0x660).replace(/[۰-۹]/g, c => c.charCodeAt(0) - 0x6F0)
     .replace(/[٫،，]/g, ',').replace(/．/g, '.').trim().replace(/\s/g, '').replace(',', '.').replace('−', '-').replace(/(kr|st|sidor|km|dl|elever)$/i, '');
   const RANG = (a, b) => { const r = []; for (let i = a; i <= b; i++) r.push(i); return r; };
@@ -234,7 +234,9 @@
   try { const o = sessionStorage.getItem('bmova-omr'); if (o && OMR.some(x => x[0] == o)) omr = o; } catch (e) {}
   const h = new URLSearchParams(location.search).get('omr'); if (h && OMR.some(x => x[0] == h)) omr = h;
 
-  rot.innerHTML = `<div class="bmo-omr" role="group" aria-label="Välj område">${OMR.map(([k, t]) => `<button type="button" data-o="${k}">${t}</button>`).join('')}</div>
+  const LEK = window.BM_LEKTIONER_FN && BM_LEKTIONER_FN({ R, P, F, tal, EN_DEL, RANG, gen })[new URLSearchParams(location.search).get('l') || '1'];
+  let lnr = 0;
+  rot.innerHTML = (LEK ? `<div class="bmo-lek"><h2>${LEK.titel}</h2><div class="bmo-prog"></div></div>` : `<div class="bmo-omr" role="group" aria-label="Välj område">${OMR.map(([k, t]) => `<button type="button" data-o="${k}">${t}</button>`).join('')}</div>`) + `
   <article class="bmo-uppg"><div class="bmo-tag"></div><p class="bmo-text"></p><p class="bmo-fraga"></p></article>
   <div class="bmo-modell"><div class="bmo-svg"></div><div class="bmo-rakna"></div></div>
   <div class="bmo-steg"></div>`;
@@ -245,11 +247,15 @@
     rot.querySelectorAll('.bmo-omr button').forEach(b => b.classList.toggle('on', b.dataset.o == omr));
     let lista = TYPER.filter(t => omr == 'alla' || t.omr == omr);
     if (lista.length > 1) lista = lista.filter(t => t.id != senaste);
-    const T = P(lista); senaste = T.id; U = T.gor(); U.typ = T;
-    st = { rader: U.rader.map(r => ({ n: r.n, f: r.f, b: [{ t: '', s: '' }], x: null })), kl: [], hog: null, r: [] };
+    let T;
+    if (LEK) { T = { id: 'l' + lnr, omr: LEK.omr, namn: 'Uppgift ' + (lnr + 1) }; U = LEK.uppg[lnr](); }
+    else { T = P(lista); senaste = T.id; U = T.gor(); }
+    U.typ = T;
+    st = { rader: U.rader.map(r => ({ n: r.n, f: r.f, b: Array.from({ length: r.b || 1 }, () => ({ t: '', s: '', w: 1 })), x: null })), kl: [], hog: null, r: [] };
     (U.start || []).forEach(gor);
     ix = 0; fel = 0; rattDirekt = 0; U.klara = [];
-    $('.bmo-tag').textContent = OMR.find(o => o[0] == T.omr)[1] + ' · ' + T.namn;
+    $('.bmo-tag').textContent = LEK ? `Uppgift ${lnr + 1}` : OMR.find(o => o[0] == T.omr)[1] + ' · ' + T.namn;
+    if (LEK) $('.bmo-prog').innerHTML = LEK.uppg.map((_, i) => `<span class="${i < lnr ? 'klar' : i == lnr ? 'nu' : ''}">${i + 1}</span>`).join('');
     $('.bmo-text').innerHTML = U.text; $('.bmo-fraga').innerHTML = U.fraga;
     starta();
   }
@@ -261,28 +267,35 @@
     else if (e.e == 'stil') rader.forEach(r => { for (let i = e.fr; i <= e.ti; i++) r.b[i].s = e.s; });
     else if (e.e == 'kl') { st.kl = st.kl.filter(k => k.id != e.id); st.kl.push(e); }
     else if (e.e == 'hog') st.hog = e.t;
-    else if (e.e == 'x') rader[0].x = { t: e.t, s: '', w: e.w || .5 };
+    else if (e.e == 'x') rader[0].x = e.t == null ? null : { t: e.t, s: '', w: e.w || .5 };
     else if (e.e == 'xs') rader[0].x.s = e.s;
     else if (e.e == 'r') st.r.push(e.h);
+    else if (e.e == 'dela') rader.forEach(r => { const a = e.fr, b = e.ti, w = r.b.slice(a, b + 1).reduce((x, y) => x + (y.w || 1), 0);
+      r.b.splice(a, b - a + 1, ...Array.from({ length: e.n }, () => ({ t: '', s: '', w: w / e.n }))); });
+    else if (e.e == 'antal') rader.forEach(r => { r.b = Array.from({ length: e.n }, (_, i) => r.b[i] || { t: '', s: '', w: 1 }); });
+    else if (e.e == 'lagg') rader.forEach(r => { for (let i = 0; i < e.n; i++) r.b.push({ t: e.t || '', s: e.s || '', w: e.w || 1 }); });
+    else if (e.e == 'minus') rader[0].x = e.t == null ? null : { t: e.t, s: '', w: e.w || .4, minus: true };
   }
 
   // ---------- Ritning ----------
   function rita() {
     const box = $('.bmo-svg'), W = Math.max(280, box.clientWidth || 600), smal = W < 520;
     const L = smal ? 64 : 92, Rm = st.hog != null ? (smal ? 54 : 70) : 10, bw = W - L - Rm;
-    const enh = Math.max(...st.rader.map(r => r.b.length + (r.x ? r.x.w : 0)));
+    const sw0 = r => r.b.reduce((a, b) => a + (b.w || 1), 0);
+    const enh = Math.max(...st.rader.map(r => sw0(r) + (r.x && !r.x.minus ? r.x.w : 0)));
     const uw = bw / enh, rh = smal ? 40 : 46;
     const s = U.steg[ix], klick = s && s.typ == 'markera' ? s.rad : -1;
     let y = 8, o = '';
     st.rader.forEach((r, ri) => {
-      if (st.kl.some(k => k.rad == ri && k.pos == 'o')) y += 30;
+      const nv = pos => Math.max(0, ...st.kl.filter(k => k.rad == ri && k.pos == pos).map(k => k.niva || 1));
+      y += 30 * nv('o');
       r.y = y; y += rh;
-      if (st.kl.some(k => k.rad == ri && k.pos == 'u')) y += 32;
+      y += 32 * nv('u');
       y += 12;
     });
     const H = y;
-    const bx = (r, i) => L + (i == 'x' ? r.b.length : i) * uw;
-    const bwid = (r, i) => i == 'x' ? r.x.w * uw : uw;
+    const bx = (r, i) => i == 'x' ? (r.x.minus ? L + (sw0(r) - r.x.w) * uw : L + sw0(r) * uw) : L + r.b.slice(0, i).reduce((a, b) => a + (b.w || 1), 0) * uw;
+    const bwid = (r, i) => i == 'x' ? r.x.w * uw : (r.b[i].w || 1) * uw;
     const txt = (x, y, t, fs, f, anch, w) => `<text x="${x}" y="${y}" font-size="${fs}" font-weight="${w || 700}" fill="${f || INK}" text-anchor="${anch || 'middle'}" dominant-baseline="middle">${t}</text>`;
     const passa = (t, w) => { const fs = Math.min(smal ? 14 : 16, (w - 6) / (String(t).length * .58)); return fs < 8 ? 0 : fs; };
     st.rader.forEach((r, ri) => {
@@ -295,23 +308,27 @@
         let fill = fill0, stroke = INK, sw = 1.6, dash = '';
         if (b.s == 'stryk') { fill = 'url(#bmh)'; stroke = KOR; dash = ' stroke-dasharray="5 3"'; }
         if (b.s == 'kand') { stroke = GRON; sw = 2.6; }
+        if (b.s && b.s.startsWith('f:')) fill = FARG[b.s.slice(2)];
+        if (b.s == 'ny') { fill = '#FBEFD3'; stroke = '#B8860B'; dash = ' stroke-dasharray="5 3"'; }
+        if (b.minus && !b.s) { fill = '#fff'; stroke = KOR; dash = ' stroke-dasharray="4 3"'; }
+        if (b.minus && b.s == 'fylld') { fill = '#FBEFD3'; stroke = '#B8860B'; dash = ' stroke-dasharray="5 3"'; }
         if (valt) { fill = '#F6D77A'; stroke = '#B8860B'; sw = 3; }
         let g = `<rect x="${x + .8}" y="${r.y}" width="${w - 1.6}" height="${rh}" rx="3" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"${dash}/>`;
         const fs = b.t ? passa(b.t, w) : 0;
-        if (fs) g += txt(x + w / 2, r.y + rh / 2 + 1, b.t, fs, b.s == 'stryk' ? '#8A4A3C' : INK, 'middle', /%/.test(b.t) ? 600 : 800);
+        if (fs) g += txt(x + w / 2, r.y + rh / 2 + 1, b.t, fs, b.s == 'stryk' || (b.minus && !b.s) ? '#8A4A3C' : INK, 'middle', /%/.test(b.t) || /^[a-zåäö]/.test(b.t) ? 600 : 800);
         if (ri == klick) g = `<g class="bmo-k" data-i="${i}" role="button" tabindex="0" aria-label="Block ${i == 'x' ? 'extra' : i + 1}">${g}</g>`;
         return g;
       };
       r.b.forEach((b, i) => { o += block(i, b, FARG[r.f]); });
-      if (r.x) o += block('x', r.x, '#F7D3C8');
+      if (r.x) o += block('x', r.x, r.x.minus ? '#fff' : '#F7D3C8');
     });
     // klamrar
     st.kl.forEach(k => {
       const r = st.rader[k.rad], fr = k.fr == null ? 0 : k.fr, ti = k.ti == null ? (r.x ? 'x' : r.b.length - 1) : k.ti;
       const x1 = bx(r, fr) + 2, x2 = bx(r, ti) + bwid(r, ti) - 2, m = (x1 + x2) / 2, q = k.t.startsWith('?');
-      const f = q ? KOR : (k.id == 'bok' || k.id == 'tr' || k.id == 'rab') ? '#8A4A3C' : GRON;
-      if (k.pos == 'o') { const yy = r.y - 4; o += `<path d="M${x1} ${yy}v-7H${x2}v7M${m} ${yy - 7}v-5" fill="none" stroke="${INK}" stroke-width="1.5"/>` + txt(m, yy - 20, k.t, smal ? 14 : 16, f, 'middle', 800); }
-      else { const yy = r.y + rh + 4; o += `<path d="M${x1} ${yy}v7H${x2}v-7M${m} ${yy + 7}v5" fill="none" stroke="${INK}" stroke-width="1.5"/>` + txt(m, yy + 22, k.t, smal ? 14 : 16, f, 'middle', 800); }
+      const f = q ? KOR : (k.id == 'bok' || k.id == 'tr' || k.id == 'rab' || k.rod) ? '#8A4A3C' : GRON, lv = ((k.niva || 1) - 1) * 31;
+      if (k.pos == 'o') { const yy = r.y - 4 - lv; o += `<path d="M${x1} ${yy}v-7H${x2}v7M${m} ${yy - 7}v-5" fill="none" stroke="${INK}" stroke-width="1.5"/>` + txt(m, yy - 20, k.t, smal ? 14 : 16, f, 'middle', 800); }
+      else { const yy = r.y + rh + 4 + lv; o += `<path d="M${x1} ${yy}v7H${x2}v-7M${m} ${yy + 7}v5" fill="none" stroke="${INK}" stroke-width="1.5"/>` + txt(m, yy + 22, k.t, smal ? 14 : 16, f, 'middle', 800); }
     });
     if (st.hog != null) {
       const y1 = st.rader[0].y + 2, y2 = st.rader[st.rader.length - 1].y + rh - 2, x = L + bw + 6, m = (y1 + y2) / 2;
@@ -402,10 +419,11 @@
       <div class="bmo-koll"><b>Kontrollera:</b> ${U.koll} ✔</div>
       <div class="bmo-slut"><span class="bmo-stj" aria-label="${stj} av 3 stjärnor">${'★'.repeat(stj)}<i>${'★'.repeat(3 - stj)}</i></span>
       <span>Rätt direkt på ${rattDirekt} av ${n} steg.</span>
-      <button type="button" class="bmo-ny">Ny uppgift →</button></div>`;
-    $('.bmo-ny').onclick = () => { ny(); rot.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+      <button type="button" class="bmo-ny">${!LEK ? 'Ny uppgift →' : lnr < LEK.uppg.length - 1 ? `Nästa uppgift (${lnr + 2} av ${LEK.uppg.length}) →` : 'Börja om med nya tal ↻'}</button></div>`;
+    if (LEK && lnr == LEK.uppg.length - 1) $('.bmo-slut').insertAdjacentHTML('afterend', `<p class="bmo-allt">Bra jobbat! Du har löst alla ${LEK.uppg.length} uppgifterna. <a href="blockmodellen-blandade.html">Tillbaka till Blandade uppgifter</a></p>`);
+    $('.bmo-ny').onclick = () => { if (LEK) lnr = (lnr + 1) % LEK.uppg.length; ny(); rot.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
     const sv = $('.bmo-svar'); if (sv.getBoundingClientRect().top > innerHeight - 100) sv.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
-  window.BMOVA_TYPER = TYPER; window.BMOVA_NU = () => ({ U, ix, st });  // för test
+  window.BMOVA_TYPER = TYPER; window.BMOVA_NU = () => ({ U, ix, st, lnr });  // för test
   ny();
 })();
