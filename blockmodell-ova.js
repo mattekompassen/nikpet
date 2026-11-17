@@ -12,7 +12,7 @@
   const blanda = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const tal = n => { const s = String(n); return n >= 1000 ? s.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : s; };
   const nrm = s => String(s).replace(/[٠-٩]/g, c => c.charCodeAt(0) - 0x660).replace(/[۰-۹]/g, c => c.charCodeAt(0) - 0x6F0)
-    .replace(/[٫،，]/g, ',').replace(/．/g, '.').trim().replace(/\s/g, '').replace(',', '.').replace('−', '-').replace(/(kr|st|sidor|km|dl|elever)$/i, '');
+    .replace(/[٫،，]/g, ',').replace(/．/g, '.').trim().replace(/\s/g, '').replace(',', '.').replace('−', '-').replace(/(kr|kronor|st|sidor|km|dl|elever|%|liter|l|m³|m3|kg|år|medlemmar|barn|pennor)$/i, '');
   const RANG = (a, b) => { const r = []; for (let i = a; i <= b; i++) r.push(i); return r; };
 
   // Vanliga steg
@@ -263,7 +263,7 @@
   // ---------- Effekter ----------
   function gor(e) {
     const rader = e.rad === '*' ? st.rader : [st.rader[e.rad]];
-    if (e.e == 'fyll') rader.forEach(r => { const a = e.fr || 0, b = e.ti == null ? r.b.length - 1 : e.ti; for (let i = a; i <= b; i++) r.b[i].t = e.t; });
+    if (e.e == 'fyll') rader.forEach(r => { const a = e.fr || 0, b = e.ti == null ? r.b.length - 1 : e.ti; for (let i = a; i <= b; i++) if (!(e.ti == null && r.b[i].s == 'stryk' && r.b[i].w != 1)) r.b[i].t = e.t; });
     else if (e.e == 'stil') rader.forEach(r => { for (let i = e.fr; i <= e.ti; i++) r.b[i].s = e.s; });
     else if (e.e == 'kl') { st.kl = st.kl.filter(k => k.id != e.id); st.kl.push(e); }
     else if (e.e == 'hog') st.hog = e.t;
@@ -280,7 +280,7 @@
   // ---------- Ritning ----------
   function rita() {
     const box = $('.bmo-svg'), W = Math.max(280, box.clientWidth || 600), smal = W < 520;
-    const L = smal ? 64 : 92, Rm = st.hog != null ? (smal ? 54 : 70) : 10, bw = W - L - Rm;
+    const L = smal ? 64 : 92, Rm = st.hog != null ? Math.max(smal ? 54 : 70, 22 + String(st.hog).length * (smal ? 8.6 : 9.8)) : 10, bw = W - L - Rm;
     const sw0 = r => r.b.reduce((a, b) => a + (b.w || 1), 0);
     const enh = Math.max(...st.rader.map(r => sw0(r) + (r.x && !r.x.minus ? r.x.w : 0)));
     const uw = bw / enh, rh = smal ? 40 : 46;
@@ -309,6 +309,7 @@
         if (b.s == 'stryk') { fill = 'url(#bmh)'; stroke = KOR; dash = ' stroke-dasharray="5 3"'; }
         if (b.s == 'kand') { stroke = GRON; sw = 2.6; }
         if (b.s && b.s.startsWith('f:')) fill = FARG[b.s.slice(2)];
+        if (b.s == 'x') fill = '#F7D3C8';
         if (b.s == 'ny') { fill = '#FBEFD3'; stroke = '#B8860B'; dash = ' stroke-dasharray="5 3"'; }
         if (b.minus && !b.s) { fill = '#fff'; stroke = KOR; dash = ' stroke-dasharray="4 3"'; }
         if (b.minus && b.s == 'fylld') { fill = '#FBEFD3'; stroke = '#B8860B'; dash = ' stroke-dasharray="5 3"'; }
@@ -325,7 +326,7 @@
     // klamrar
     st.kl.forEach(k => {
       const r = st.rader[k.rad], fr = k.fr == null ? 0 : k.fr, ti = k.ti == null ? (r.x ? 'x' : r.b.length - 1) : k.ti;
-      const x1 = bx(r, fr) + 2, x2 = bx(r, ti) + bwid(r, ti) - 2, m = (x1 + x2) / 2, q = k.t.startsWith('?');
+      const x1 = bx(r, fr) + 2, x2 = bx(r, ti) + bwid(r, ti) - 2, m = (x1 + x2) / 2, q = String(k.t).startsWith('?');
       const f = q ? KOR : (k.id == 'bok' || k.id == 'tr' || k.id == 'rab' || k.rod) ? '#8A4A3C' : GRON, lv = ((k.niva || 1) - 1) * 31;
       if (k.pos == 'o') { const yy = r.y - 4 - lv; o += `<path d="M${x1} ${yy}v-7H${x2}v7M${m} ${yy - 7}v-5" fill="none" stroke="${INK}" stroke-width="1.5"/>` + txt(m, yy - 20, k.t, smal ? 14 : 16, f, 'middle', 800); }
       else { const yy = r.y + rh + 4 + lv; o += `<path d="M${x1} ${yy}v7H${x2}v-7M${m} ${yy + 7}v5" fill="none" stroke="${INK}" stroke-width="1.5"/>` + txt(m, yy + 22, k.t, smal ? 14 : 16, f, 'middle', 800); }
