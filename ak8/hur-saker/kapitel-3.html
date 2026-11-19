@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="../../bilder/kompass-liten.png"><title>Hur säker är jag? Åk 8 · Kapitel 3 Geometri</title>
+<style>
+:root{--g:#0F5F82;--gm:#1A86B0;--gl:#D3E9F3;--gvl:#EEF6FA;--rod:#E07A5F;--gul:#E9B949;--txt:#292A28;--gra:#5F6368;--bg:#F4F3EF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Carlito,Calibri,'Segoe UI',Arial,sans-serif;font-size:17px;line-height:1.4}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,var(--gm),var(--g));color:#fff;border-radius:18px;padding:22px 24px;margin-bottom:16px}
+header small{opacity:.85;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;font-size:13px}
+header h1{margin:4px 0 6px;font-size:30px}
+header p{margin:0;opacity:.95}
+.steg{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.steg span{background:#fff;border:1.5px solid var(--gl);border-radius:99px;padding:5px 14px;font-size:14px;color:var(--gra)}
+.steg span.akt{background:var(--g);border-color:var(--g);color:#fff;font-weight:bold}
+.kort{background:#fff;border:1.5px solid var(--gl);border-left:7px solid var(--gm);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.kort h2{margin:0 0 8px;font-size:20px;color:var(--g)}
+.kort h2 b{background:var(--g);color:#fff;border-radius:6px;padding:0 8px;margin-right:8px}
+.mrad{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--gvl);flex-wrap:wrap}
+.mrad:first-of-type{border-top:0}
+.mrad .t{flex:1 1 260px}
+.knappar{display:flex;gap:6px;flex-wrap:wrap}
+.knappar button{border:1.5px solid var(--gl);background:#fff;border-radius:10px;padding:6px 10px;font:inherit;font-size:15px;cursor:pointer;color:var(--txt)}
+.knappar button:hover{border-color:var(--gm)}
+.knappar button.val[data-v="2"]{background:var(--g);border-color:var(--g);color:#fff}
+.knappar button.val[data-v="1"]{background:#E9B949;border-color:#C6962A;color:#292A28}
+.knappar button.val[data-v="0"]{background:#E07A5F;border-color:#B95E44;color:#fff}
+.fraga{padding:10px 0;border-top:1px solid var(--gvl)}
+.fraga:first-of-type{border-top:0}
+.fraga .q{font-weight:bold;margin-bottom:6px}
+.fraga .q i{font-weight:normal;color:var(--gra);font-size:14px;display:block}
+.alt{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px}
+.alt label{display:flex;gap:8px;align-items:center;border:1.5px solid var(--gl);border-radius:10px;padding:7px 10px;cursor:pointer;background:#fff}
+.alt label:hover{border-color:var(--gm)}
+.alt input{accent-color:var(--g);width:18px;height:18px}
+.alt label.ratt{border-color:#3B8B3B;background:#EAF5E6}
+.alt label.ratt::after{content:"✔";margin-left:auto;color:#3B8B3B;font-weight:bold}
+.alt label.fel::after{content:"✘";margin-left:auto;color:#C0392B;font-weight:bold}
+.alt label.fel{border-color:#C0392B;background:#FCEDE8}
+.fork{margin-top:6px;background:#FFF6DE;border-left:4px solid var(--gul);border-radius:8px;padding:6px 10px;font-size:15px;display:none}
+.visa .fork{display:block}
+.huvudknapp{display:block;margin:6px auto 22px;background:var(--g);color:#fff;border:0;border-radius:12px;padding:12px 26px;font:inherit;font-weight:bold;font-size:18px;cursor:pointer}
+.huvudknapp:disabled{background:#AEB3B0;cursor:not-allowed}
+.info{text-align:center;color:var(--gra);font-size:15px;margin-top:-8px;margin-bottom:18px}
+.dold{display:none}
+.summa{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.summa div{background:#fff;border:1.5px solid var(--gl);border-radius:14px;padding:12px;text-align:center}
+.summa b{display:block;font-size:30px;color:var(--g)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{padding:7px 6px;border-top:1px solid var(--gvl);text-align:left;vertical-align:top}
+th{font-size:13px;text-transform:uppercase;color:var(--gra);letter-spacing:.03em}
+.etk{display:inline-block;border-radius:99px;padding:1px 9px;font-size:13px;font-weight:bold;white-space:nowrap}
+.e2{background:var(--gl);color:var(--g)}.e1{background:#FBEBC0;color:#7A5A10}.e0{background:#FADAD0;color:#8C3A22}
+.rek a{color:var(--g);font-weight:bold}
+.rek{margin-top:8px;background:var(--gvl);border-radius:10px;padding:8px 12px;font-size:15px}
+.rek b{color:var(--g)}
+.tillbaka{display:inline-block;margin:0 0 10px;color:var(--g);font-weight:bold;text-decoration:none;font-size:15px}
+footer a{color:var(--gra)}
+footer{text-align:center;color:var(--gra);font-size:13px;padding:10px 0 24px}
+.br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.86em;line-height:1.08;margin:0 .12em}.br>span:first-child{border-bottom:1.2px solid currentColor;padding:0 .18em}
+.bild{margin:6px 0 8px;overflow-x:auto}.bild table{width:auto;border:1.5px solid var(--gl)}.bild td,.bild th{border:1px solid var(--gl);text-align:center;padding:4px 12px}
+@media (max-width:520px){table{font-size:13.5px}td,th{padding:6px 3px}header h1{font-size:24px}.knappar button{padding:6px 8px;font-size:14px}}
+body{font-family:Inter,system-ui,sans-serif;font-size:16px}h1,h2{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.3px}</style></head><body><div class="wrap">
+<a class="tillbaka" href="../hur-saker.html">← Hur säker är jag? Alla kapitel</a><header><small>Åk 8 · Kapitel 3 Geometri</small><h1>Hur säker är jag?</h1>
+<p>Först skattar du hur säker du är på varje mål. Sedan svarar du på en fråga per mål. Till sist ser du om din känsla stämde och vad du ska träna mer på. Inget sparas.</p></header>
+<div class="steg"><span id="s1" class="akt">1 Skatta dig själv</span><span id="s2">2 Kontrollfrågor</span><span id="s3">3 Resultat</span></div>
+
+<section id="del1"></section>
+<button class="huvudknapp" id="till2" disabled>Gå vidare till frågorna</button>
+<p class="info" id="kvar"></p>
+
+<section id="del2" class="dold"></section>
+<button class="huvudknapp dold" id="ratta">Rätta</button>
+
+<section id="del3" class="dold"></section>
+<button class="huvudknapp dold" id="om">Börja om</button>
+<footer><a href="../hur-saker.html">← Alla kapitel</a> · <a href="../../index.html">Mattekompassen</a></footer>
+</div>
+<script>
+const DATA = [{"nr": "3.1", "namn": "Omkrets och area", "mal": [{"mal": "Förklara skillnaden mellan omkrets och area", "q": "Vad är skillnaden mellan omkrets och area?", "alt": ["Omkrets är längden runt figuren, area är ytan inuti", "Omkrets mäts i cm², area i cm", "Det är samma sak", "Area är längden runt figuren"], "fork": "Omkretsen mäts i längdenheter (cm), arean i areaenheter (cm²).", "bild": ""}, {"mal": "Beräkna omkretsen av en polygon och en cirkel", "q": "En cirkel har diametern 20 cm. Ungefär hur stor är omkretsen?", "alt": ["63 cm", "31 cm", "314 cm", "126 cm"], "fork": "O = π · d ≈ 3,14 · 20 ≈ 63 cm.", "bild": ""}, {"mal": "Beräkna arean av parallellogram, triangel och parallelltrapets", "q": "En parallelltrapets har de parallella sidorna 4 cm och 8 cm och höjden 5 cm. Vad är arean?", "alt": ["30 cm²", "60 cm²", "160 cm²", "17 cm²"], "fork": "A = <span class=\"br\"><span>(4 + 8) · 5</span><span>2</span></span> = 30 cm². Glöm inte att dela med 2.", "bild": ""}], "tb": "https://drive.google.com/file/d/1TdizdY3LZgCeEaZnPnLt_v2nZhDfNDL-/view", "lek": "https://drive.google.com/file/d/1eQW-v9_BwTwzTSY29_r-FAsM3fWhp3L_/view", "ts": "https://drive.google.com/file/d/1DWBIss_R4xP6h8UvK74uLFwMz7Onq_vJ/view"}, {"nr": "3.2", "namn": "Cirkelns area", "mal": [{"mal": "Förklara varför cirkelns area är π · r²", "q": "Varför är cirkelns area π · r<sup>2</sup>?", "alt": ["Cirkeln kan klippas i bitar och läggas om till nästan en rektangel med sidorna π · r och r", "För att omkretsen är π · r", "Det är bara en regel utan förklaring", "För att arean är diametern gånger 2"], "fork": "Halva omkretsen är π · r. Rektangeln får sidorna π · r och r, och arean blir π · r · r.", "bild": ""}, {"mal": "Beräkna arean av en cirkel när radien eller diametern är känd", "q": "En cirkel har radien 6 cm. Ungefär hur stor är arean?", "alt": ["113 cm²", "38 cm²", "36 cm²", "19 cm²"], "fork": "A = π · 6<sup>2</sup> ≈ 3,14 · 36 ≈ 113 cm². 38 cm² är omkretsen.", "bild": ""}, {"mal": "Beräkna arean av en halvcirkel och en kvartscirkel", "q": "En halvcirkel har radien 2 m. Ungefär hur stor är arean?", "alt": ["6,3 m²", "12,6 m²", "3,1 m²", "6,3 m"], "fork": "Hel cirkel: 3,14 · 2<sup>2</sup> ≈ 12,6 m². Halvcirkel: 12,6 / 2 ≈ 6,3 m².", "bild": ""}], "tb": "https://drive.google.com/file/d/1_pUwhxhk2ah_SI7V-LsXflj-jWbnhjXx/view", "lek": "https://drive.google.com/file/d/1ZPN-6EzgOBTkJfc2RBihddxGs3-SG4mP/view", "ts": "https://drive.google.com/file/d/1PBoVOiKOQzg3YnrsZD418PnfiKrXpDT2/view"}, {"nr": "3.3", "namn": "Volym och begränsningsarea", "mal": [{"mal": "Känna igen och namnge geometriska kroppar", "q": "Hur många sidoytor har ett rätblock?", "alt": ["6", "4", "8", "12"], "fork": "Ett rätblock har 6 ytor (tre par), 8 hörn och 12 kanter.", "bild": ""}, {"mal": "Beräkna volymen av ett rätblock med V = B · h", "q": "Ett rätblock har basytan 20 cm² och höjden 7 cm. Vad är volymen?", "alt": ["140 cm³", "27 cm³", "140 cm²", "47 cm³"], "fork": "V = B · h = 20 · 7 = 140 cm³.", "bild": ""}, {"mal": "Beräkna begränsningsarean av ett rätblock", "q": "Vad är begränsningsarea?", "alt": ["Summan av arean av alla ytor som begränsar kroppen", "Volymen gånger 2", "Arean av basytan", "Längden av alla kanter"], "fork": "Tänk dig att du vecklar ut kroppen och räknar ihop arean av alla ytor.", "bild": ""}], "tb": "https://drive.google.com/file/d/16VFvgGKGRMn0InyU3lyn2satGVCwmEAu/view", "lek": "https://drive.google.com/file/d/1Gx6FTPJL9mJDCnwy-BmQsXazBmKs2Luf/view", "ts": "https://drive.google.com/file/d/1Leey34UoQxvEkMZq_Y5UmHxbVYSNIf0v/view"}, {"nr": "3.4", "namn": "Enheter för volym", "mal": [{"mal": "Skriva om volymer mellan m³, dm³, cm³ och mm³", "q": "Hur många cm³ är 1 dm³?", "alt": ["1 000", "100", "10", "10 000"], "fork": "En kub med sidan 1 dm = 10 cm har volymen 10 · 10 · 10 = 1 000 cm³.", "bild": ""}, {"mal": "Använda att 1 dm³ = 1 liter och 1 cm³ = 1 ml", "q": "En flaska rymmer 1,5 liter. Hur många dm³ är det?", "alt": ["1,5 dm³", "15 dm³", "150 dm³", "1 500 dm³"], "fork": "1 liter = 1 dm³.", "bild": ""}], "tb": "https://drive.google.com/file/d/1NqL6kr8b2tCGphC9jtWEltzgoo70_2pn/view", "lek": "https://drive.google.com/file/d/1hjoRmHNHSzo3CkRF4zUC8dwIe8du-O7G/view", "ts": "https://drive.google.com/file/d/1h2A5aau5m35EN5HL6zWnH6FmP6slpwKH/view"}, {"nr": "3.5", "namn": "Prisma och pyramid", "mal": [{"mal": "Känna igen prismor och pyramider och deras basyta", "q": "Vad kännetecknar ett prisma?", "alt": ["Två likadana parallella basytor", "En basyta och en spets", "Bara buktiga ytor", "Inga kanter"], "fork": "Ett prisma har samma tvärsnitt hela vägen. En pyramid har en basyta och en spets.", "bild": ""}, {"mal": "Beräkna volymen av ett prisma och en pyramid", "q": "Ett prisma och en pyramid har samma basyta och samma höjd. Hur förhåller sig volymerna?", "alt": ["Pyramidens volym är en tredjedel av prismats", "De är lika stora", "Pyramidens volym är hälften av prismats", "Pyramidens volym är tre gånger större"], "fork": "Prisma: V = B · h. Pyramid: V = <span class=\"br\"><span>B · h</span><span>3</span></span>.", "bild": ""}], "tb": "https://drive.google.com/file/d/1Lvs91XlkY-pnYK9d6pRW-8OdmMzxm3Jy/view", "lek": "https://drive.google.com/file/d/1983Wr2Fp_eKcnyzdkcc9rflxuLeuZdNR/view", "ts": "https://drive.google.com/file/d/1hTXGamF2EhGb48fGX1p63GJE4-5Vnb12/view"}, {"nr": "3.6", "namn": "Cylinder, kon och klot", "mal": [{"mal": "Känna igen cylinder, kon och klot", "q": "Vilken kropp har två cirkelformade basytor och en buktig mantelyta?", "alt": ["cylinder", "kon", "klot", "pyramid"], "fork": "En kon har en cirkelformad basyta och en spets. Ett klot har ingen basyta.", "bild": ""}, {"mal": "Beräkna volym och begränsningsarea av en cylinder", "q": "En cylinder har basytan 50 cm² och höjden 8 cm. Vad är volymen?", "alt": ["400 cm³", "58 cm³", "133 cm³", "400 cm²"], "fork": "V = B · h = 50 · 8 = 400 cm³.", "bild": ""}, {"mal": "Beräkna volymen av en kon och ett klot", "q": "En kon och en cylinder har samma basyta och höjd. Konens volym är 40 cm³. Vad är cylinderns volym?", "alt": ["120 cm³", "40 cm³", "80 cm³", "13 cm³"], "fork": "Konens volym är en tredjedel av cylinderns, så cylindern rymmer 3 · 40 = 120 cm³.", "bild": ""}], "tb": "https://drive.google.com/file/d/1o-YOyEnR9-BlxRiub04KhWeLkaRF1IrV/view", "lek": "https://drive.google.com/file/d/1-Oaqwm2jkF1wEyYl_H7Od0gUs_QTdWn4/view", "ts": "https://drive.google.com/file/d/1DdxWQt2IeiaHnT9yfn-ZYOkMUWOBXhjU/view"}];
+const SK = ["Osäker", "Ganska säker", "Säker"];
+const skatt = {}, svar = {}, ordning = {};
+const id = (a, m) => a + "-" + m;
+const tot = DATA.reduce((s, a) => s + a.mal.length, 0);
+function blanda(n) { const r = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; } return r; }
+
+function del1() {
+  document.getElementById("del1").innerHTML = DATA.map(a => `<div class="kort"><h2><b>${a.nr}</b>${a.namn}</h2>` +
+    a.mal.map((m, i) => `<div class="mrad"><div class="t">Jag kan ${m.mal.charAt(0).toLowerCase() + m.mal.slice(1)}.</div>
+      <div class="knappar" data-k="${id(a.nr, i)}">${[2, 1, 0].map(v => `<button data-v="${v}">${SK[v]}</button>`).join("")}</div></div>`).join("") + `</div>`).join("");
+  document.querySelectorAll(".knappar").forEach(k => k.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    k.querySelectorAll("button").forEach(x => x.classList.remove("val")); b.classList.add("val");
+    skatt[k.dataset.k] = +b.dataset.v; kollaDel1();
+  }));
+  kollaDel1();
+}
+function kollaDel1() {
+  const n = Object.keys(skatt).length;
+  document.getElementById("till2").disabled = n < tot;
+  document.getElementById("kvar").textContent = n < tot ? `Du har skattat ${n} av ${tot} mål.` : "Bra! Nu kan du gå vidare.";
+}
+function del2() {
+  document.getElementById("del2").innerHTML = DATA.map(a => `<div class="kort"><h2><b>${a.nr}</b>${a.namn}</h2>` +
+    a.mal.map((m, i) => { const k = id(a.nr, i); ordning[k] = blanda(m.alt.length);
+      return `<div class="fraga" id="f-${k}"><div class="q">${m.q}<i>Mål: ${m.mal}</i></div>${m.bild ? `<div class="bild">${m.bild}</div>` : ""}
+      <div class="alt">${ordning[k].map(j => `<label data-j="${j}"><input type="radio" name="${k}" value="${j}"><span>${m.alt[j]}</span></label>`).join("")}</div>
+      <div class="fork">${m.fork}</div></div>`; }).join("") + `</div>`).join("");
+  document.querySelectorAll("#del2 input").forEach(inp => inp.addEventListener("change", () => { svar[inp.name] = +inp.value; }));
+}
+function kommentar(s, r) {
+  if (r && s === 2) return "Du kan det, och du visste det. Bra koll!";
+  if (r) return "Rätt! Du kan mer än du trodde.";
+  if (s === 2) return "Här trodde du att du kunde. Läs förklaringen och titta på lektionen igen.";
+  if (s === 1) return "Du var lite osäker, och det här behöver du öva mer på.";
+  return "Du kände rätt: det här behöver du öva mer på.";
+}
+const UTMANA = "../utmana-dig/kapitel-3.pdf";
+const lnk = (u, t) => u ? `<a href="${u}" target="_blank" rel="noopener">${t}</a>` : `<b>${t}</b>`;
+function rek(a, ratt) {
+  if (ratt === a.mal.length) return `<b>Tips:</b> Du klarade allt i ${a.nr}. Prova ${lnk(UTMANA, "Utmana dig")} för kapitel ${String(a.nr).split(".")[0]}.`;
+  if (ratt === a.mal.length - 1) return `<b>Tips:</b> Läs förklaringen till frågan du missade och gör ${lnk(a.tb, "Tillbakablick " + a.nr)}.`;
+  return `<b>Tips:</b> Titta på ${lnk(a.lek, "lektionen " + a.nr + " " + a.namn)} igen och träna med ${lnk(a.ts, "Trygg start " + a.nr)}.`;
+}
+function ratta() {
+  const obes = DATA.flatMap(a => a.mal.map((m, i) => id(a.nr, i))).filter(k => !(k in svar));
+  if (obes.length && !confirmFri(obes.length)) return;
+  let rattTot = 0, stamde = 0, merAn = 0, trodde = 0;
+  let html = "";
+  DATA.forEach(a => {
+    let ratt = 0, rader = "";
+    a.mal.forEach((m, i) => {
+      const k = id(a.nr, i), r = svar[k] === 0, s = skatt[k];
+      if (r) { ratt++; rattTot++; }
+      if ((r && s === 2) || (!r && s === 0)) stamde++;
+      if (r && s < 2) merAn++;
+      if (!r && s === 2) trodde++;
+      rader += `<tr><td>${m.mal}</td><td><span class="etk e${s}">${SK[s]}</span></td><td>${r ? "✔ Rätt" : "✘ Fel"}</td><td>${kommentar(s, r)}</td></tr>`;
+      const f = document.getElementById("f-" + k); f.classList.add("visa");
+      f.querySelectorAll("label").forEach(l => { const j = +l.dataset.j; if (j === 0) l.classList.add("ratt"); else if (svar[k] === j) l.classList.add("fel"); });
+      f.querySelectorAll("input").forEach(x => x.disabled = true);
+    });
+    html += `<div class="kort"><h2><b>${a.nr}</b>${a.namn} · ${ratt} av ${a.mal.length} rätt</h2>
+      <table><tr><th>Mål</th><th>Din känsla</th><th>Svar</th><th>Kommentar</th></tr>${rader}</table><div class="rek">${rek(a, ratt)}</div></div>`;
+  });
+  document.getElementById("del3").innerHTML = `<div class="summa">
+    <div><b>${rattTot} / ${tot}</b>rätt svar</div><div><b>${stamde}</b>gånger stämde din känsla</div>
+    <div><b>${merAn}</b>gånger kunde du mer än du trodde</div><div><b>${trodde}</b>gånger trodde du att du kunde</div></div>
+    <p class="info" style="margin-top:0">Rätt och fel syns också vid frågorna längre ned, med en förklaring.</p>` + html;
+  visa(3);
+}
+function confirmFri(n) {
+  const el = document.getElementById("kvarFr");
+  if (el) { el.remove(); return true; }
+  const p = document.createElement("p"); p.id = "kvarFr"; p.className = "info";
+  p.textContent = `Du har ${n} fråga(or) kvar. Tryck på Rätta en gång till om du vill rätta ändå.`;
+  document.getElementById("ratta").after(p); return false;
+}
+function visa(n) {
+  ["s1", "s2", "s3"].forEach((s, i) => document.getElementById(s).classList.toggle("akt", i === n - 1));
+  document.getElementById("del1").classList.toggle("dold", n !== 1);
+  document.getElementById("till2").classList.toggle("dold", n !== 1);
+  document.getElementById("kvar").classList.toggle("dold", n !== 1);
+  document.getElementById("del2").classList.toggle("dold", n === 1);
+  document.getElementById("ratta").classList.toggle("dold", n !== 2);
+  document.getElementById("del3").classList.toggle("dold", n !== 3);
+  document.getElementById("om").classList.toggle("dold", n !== 3);
+  const fr = document.getElementById("kvarFr"); if (fr && n !== 2) fr.remove();
+  if (n === 3) document.getElementById("del2").before(document.getElementById("del3"));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+document.getElementById("till2").onclick = () => { del2(); visa(2); };
+document.getElementById("ratta").onclick = ratta;
+document.getElementById("om").onclick = () => { location.reload(); };
+del1();
+</script></body></html>

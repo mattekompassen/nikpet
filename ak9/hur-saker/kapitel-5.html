@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="../../bilder/kompass-liten.png"><title>Hur säker är jag? Åk 9 · Kapitel 5 Sannolikhet och statistik</title>
+<style>
+:root{--g:#8C2219;--gm:#D9483B;--gl:#F6D5D0;--gvl:#FCF0EE;--rod:#E07A5F;--gul:#E9B949;--txt:#292A28;--gra:#5F6368;--bg:#F4F3EF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Carlito,Calibri,'Segoe UI',Arial,sans-serif;font-size:17px;line-height:1.4}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,var(--gm),var(--g));color:#fff;border-radius:18px;padding:22px 24px;margin-bottom:16px}
+header small{opacity:.85;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;font-size:13px}
+header h1{margin:4px 0 6px;font-size:30px}
+header p{margin:0;opacity:.95}
+.steg{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.steg span{background:#fff;border:1.5px solid var(--gl);border-radius:99px;padding:5px 14px;font-size:14px;color:var(--gra)}
+.steg span.akt{background:var(--g);border-color:var(--g);color:#fff;font-weight:bold}
+.kort{background:#fff;border:1.5px solid var(--gl);border-left:7px solid var(--gm);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.kort h2{margin:0 0 8px;font-size:20px;color:var(--g)}
+.kort h2 b{background:var(--g);color:#fff;border-radius:6px;padding:0 8px;margin-right:8px}
+.mrad{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--gvl);flex-wrap:wrap}
+.mrad:first-of-type{border-top:0}
+.mrad .t{flex:1 1 260px}
+.knappar{display:flex;gap:6px;flex-wrap:wrap}
+.knappar button{border:1.5px solid var(--gl);background:#fff;border-radius:10px;padding:6px 10px;font:inherit;font-size:15px;cursor:pointer;color:var(--txt)}
+.knappar button:hover{border-color:var(--gm)}
+.knappar button.val[data-v="2"]{background:var(--g);border-color:var(--g);color:#fff}
+.knappar button.val[data-v="1"]{background:#E9B949;border-color:#C6962A;color:#292A28}
+.knappar button.val[data-v="0"]{background:#E07A5F;border-color:#B95E44;color:#fff}
+.fraga{padding:10px 0;border-top:1px solid var(--gvl)}
+.fraga:first-of-type{border-top:0}
+.fraga .q{font-weight:bold;margin-bottom:6px}
+.fraga .q i{font-weight:normal;color:var(--gra);font-size:14px;display:block}
+.alt{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px}
+.alt label{display:flex;gap:8px;align-items:center;border:1.5px solid var(--gl);border-radius:10px;padding:7px 10px;cursor:pointer;background:#fff}
+.alt label:hover{border-color:var(--gm)}
+.alt input{accent-color:var(--g);width:18px;height:18px}
+.alt label.ratt{border-color:#3B8B3B;background:#EAF5E6}
+.alt label.ratt::after{content:"✔";margin-left:auto;color:#3B8B3B;font-weight:bold}
+.alt label.fel::after{content:"✘";margin-left:auto;color:#C0392B;font-weight:bold}
+.alt label.fel{border-color:#C0392B;background:#FCEDE8}
+.fork{margin-top:6px;background:#FFF6DE;border-left:4px solid var(--gul);border-radius:8px;padding:6px 10px;font-size:15px;display:none}
+.visa .fork{display:block}
+.huvudknapp{display:block;margin:6px auto 22px;background:var(--g);color:#fff;border:0;border-radius:12px;padding:12px 26px;font:inherit;font-weight:bold;font-size:18px;cursor:pointer}
+.huvudknapp:disabled{background:#AEB3B0;cursor:not-allowed}
+.info{text-align:center;color:var(--gra);font-size:15px;margin-top:-8px;margin-bottom:18px}
+.dold{display:none}
+.summa{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.summa div{background:#fff;border:1.5px solid var(--gl);border-radius:14px;padding:12px;text-align:center}
+.summa b{display:block;font-size:30px;color:var(--g)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{padding:7px 6px;border-top:1px solid var(--gvl);text-align:left;vertical-align:top}
+th{font-size:13px;text-transform:uppercase;color:var(--gra);letter-spacing:.03em}
+.etk{display:inline-block;border-radius:99px;padding:1px 9px;font-size:13px;font-weight:bold;white-space:nowrap}
+.e2{background:var(--gl);color:var(--g)}.e1{background:#FBEBC0;color:#7A5A10}.e0{background:#FADAD0;color:#8C3A22}
+.rek a{color:var(--g);font-weight:bold}
+.rek{margin-top:8px;background:var(--gvl);border-radius:10px;padding:8px 12px;font-size:15px}
+.rek b{color:var(--g)}
+.tillbaka{display:inline-block;margin:0 0 10px;color:var(--g);font-weight:bold;text-decoration:none;font-size:15px}
+footer a{color:var(--gra)}
+footer{text-align:center;color:var(--gra);font-size:13px;padding:10px 0 24px}
+.br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.86em;line-height:1.08;margin:0 .12em}.br>span:first-child{border-bottom:1.2px solid currentColor;padding:0 .18em}
+.bild{margin:6px 0 8px;overflow-x:auto}.bild table{width:auto;border:1.5px solid var(--gl)}.bild td,.bild th{border:1px solid var(--gl);text-align:center;padding:4px 12px}
+@media (max-width:520px){table{font-size:13.5px}td,th{padding:6px 3px}header h1{font-size:24px}.knappar button{padding:6px 8px;font-size:14px}}
+body{font-family:Inter,system-ui,sans-serif;font-size:16px}h1,h2{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.3px}</style></head><body><div class="wrap">
+<a class="tillbaka" href="../hur-saker.html">← Hur säker är jag? Alla kapitel</a><header><small>Åk 9 · Kapitel 5 Sannolikhet och statistik</small><h1>Hur säker är jag?</h1>
+<p>Först skattar du hur säker du är på varje mål. Sedan svarar du på en fråga per mål. Till sist ser du om din känsla stämde och vad du ska träna mer på. Inget sparas.</p></header>
+<div class="steg"><span id="s1" class="akt">1 Skatta dig själv</span><span id="s2">2 Kontrollfrågor</span><span id="s3">3 Resultat</span></div>
+
+<section id="del1"></section>
+<button class="huvudknapp" id="till2" disabled>Gå vidare till frågorna</button>
+<p class="info" id="kvar"></p>
+
+<section id="del2" class="dold"></section>
+<button class="huvudknapp dold" id="ratta">Rätta</button>
+
+<section id="del3" class="dold"></section>
+<button class="huvudknapp dold" id="om">Börja om</button>
+<footer><a href="../hur-saker.html">← Alla kapitel</a> · <a href="../../index.html">Mattekompassen</a></footer>
+</div>
+<script>
+const DATA = [{"nr": "5.1", "namn": "Sannolikhet och träddiagram", "mal": [{"mal": "Räkna ut sannolikheten för en händelse i bråkform, decimalform och procentform", "q": "En lapp dras bland 12 lappar. 3 av dem är vinster. Hur stor är sannolikheten för vinst?", "alt": ["25 %", "3 %", "12 %", "33 %"], "fork": "<span class=\"br\"><span>3</span><span>12</span></span> = <span class=\"br\"><span>1</span><span>4</span></span> = 25 %.", "bild": ""}, {"mal": "Rita ett träddiagram för två händelser", "q": "Du ritar ett träddiagram för två slantsinglingar. Hur många vägar finns det?", "alt": ["4", "2", "3", "8"], "fork": "KK, KG, GK och GG: 2 · 2 = 4 vägar.", "bild": ""}, {"mal": "Multiplicera längs grenarna och addera olika vägar", "q": "P(A) = 0,6 i varje försök och försöken är oberoende. Hur stor är sannolikheten att A händer två gånger?", "alt": ["0,36", "1,2", "0,6", "0,12"], "fork": "Multiplicera längs grenen: 0,6 · 0,6 = 0,36.", "bild": ""}], "tb": "https://drive.google.com/file/d/1eaa0yJzwDQCxSYYfg3NJWu7DNjRDEk1E/view", "lek": "https://drive.google.com/file/d/12Hf60XCyUN_l5d_a1d7jiCF69-yqzGE5/view", "ts": ""}, {"nr": "5.2", "namn": "Komplementhändelser och minst en", "mal": [{"mal": "Förklara vad en komplementhändelse är", "q": "Vad är komplementhändelsen till 'minst en sexa'?", "alt": ["ingen sexa", "bara sexor", "exakt en sexa", "minst två sexor"], "fork": "Komplementhändelsen är allt annat som kan hända. Motsatsen till 'minst en' är 'ingen'.", "bild": ""}, {"mal": "Räkna ut sannolikheten för att något inte händer", "q": "P(vinna) = 0,15. Hur stor är sannolikheten att inte vinna?", "alt": ["0,85", "0,15", "1,15", "0,5"], "fork": "P(A) + P(inte A) = 1. 1 − 0,15 = 0,85.", "bild": ""}, {"mal": "Räkna ut sannolikheten för ”minst en” med hjälp av ”ingen”", "q": "Sannolikheten att en lampa fungerar är 0,9. Två lampor tänds oberoende av varandra. Hur stor är sannolikheten att minst en är trasig?", "alt": ["0,19", "0,1", "0,2", "0,81"], "fork": "P(båda fungerar) = 0,9 · 0,9 = 0,81. P(minst en trasig) = 1 − 0,81 = 0,19.", "bild": ""}], "tb": "https://drive.google.com/file/d/1BJF_VTup-5vu6baX6X1f8ax435mIPGQk/view", "lek": "https://drive.google.com/file/d/1c-ZNtQMPnKYLn2VDvrzuqgIjPB3B_1ka/view", "ts": ""}, {"nr": "5.3", "namn": "Sannolikhet ur statistik", "mal": [{"mal": "Förklara skillnaden mellan teoretisk och statistisk sannolikhet", "q": "Vilken sannolikhet måste uppskattas med hjälp av statistik?", "alt": ["att ett häftstift landar med spetsen uppåt", "att en tärning visar en sexa", "att en slant visar krona", "att dra en hjärter ur en kortlek"], "fork": "De andra har lika sannolika utfall och kan räknas ut teoretiskt.", "bild": ""}, {"mal": "Uppskatta en sannolikhet med hjälp av relativ frekvens", "q": "En basketspelare har satt 45 av 60 straffkast. Uppskatta sannolikheten att hon sätter nästa.", "alt": ["0,75", "0,45", "0,6", "0,25"], "fork": "Relativ frekvens: <span class=\"br\"><span>45</span><span>60</span></span> = 0,75.", "bild": ""}, {"mal": "Räkna ut ett förväntat antal", "q": "Sannolikheten för vinst är 0,05. Ungefär hur många vinster kan man vänta sig på 300 lotter?", "alt": ["15", "5", "30", "60"], "fork": "Förväntat antal = sannolikhet · antal försök = 0,05 · 300 = 15.", "bild": ""}], "tb": "https://drive.google.com/file/d/19NM2QwOdg4GnYlvY3QNZ0hCOEUF5Q8l1/view", "lek": "https://drive.google.com/file/d/1oycIt5wEaEuZl50dFIF71llYxv1fz8dM/view", "ts": ""}, {"nr": "5.4", "namn": "Permutationer och fakultet", "mal": [{"mal": "Använda multiplikationsprincipen för att räkna ut antal sätt", "q": "En kod består av en bokstav (A, B eller C) följd av en siffra (0–9). Hur många koder finns det?", "alt": ["30", "13", "39", "10"], "fork": "Multiplikationsprincipen: 3 · 10 = 30.", "bild": ""}, {"mal": "Räkna ut på hur många sätt saker kan ordnas", "q": "På hur många sätt kan 4 personer stå i en kö?", "alt": ["24", "16", "10", "4"], "fork": "4 · 3 · 2 · 1 = 24.", "bild": ""}, {"mal": "Räkna med fakultet, till exempel 5!", "q": "Vad är 5!?", "alt": ["120", "25", "15", "5"], "fork": "5! (5 fakultet) = 5 · 4 · 3 · 2 · 1 = 120.", "bild": ""}], "tb": "https://drive.google.com/file/d/1-BT_TGZ2czIlf2N0jDC05vUmnzF3mSlv/view", "lek": "https://drive.google.com/file/d/1zf_VjHt5S7uhTXgH9O4wpZIR4Zu2hEh8/view", "ts": ""}, {"nr": "5.5", "namn": "Histogram och klassindelning", "mal": [{"mal": "Dela in mätvärden i klasser", "q": "Vad är klassbredden för klasserna 10–19, 20–29 och 30–39?", "alt": ["10", "9", "20", "3"], "fork": "Varje klass rymmer 10 värden: 10, 11, …, 19.", "bild": ""}, {"mal": "Göra en frekvenstabell med klasser", "q": "Vikterna 41, 47, 52, 55, 58 och 63 kg delas in i klasserna 40–49, 50–59 och 60–69. Vad är frekvensen för 50–59?", "alt": ["3", "2", "1", "6"], "fork": "52, 55 och 58 hör till klassen 50–59.", "bild": ""}, {"mal": "Rita och tolka ett histogram", "q": "Hur skiljer sig ett histogram från ett vanligt stapeldiagram?", "alt": ["Staplarna står tätt ihop eftersom klasserna fortsätter i varandra", "Histogram har inga axlar", "Histogram visar bara procent", "Det finns ingen skillnad"], "fork": "I ett histogram visar x-axeln en skala som är indelad i klasser, därför finns inga mellanrum.", "bild": ""}], "tb": "https://drive.google.com/file/d/1I1_3M4AtbnAC7o3Wj51FFpHLmS_2yF5N/view", "lek": "https://drive.google.com/file/d/1N47UorhOBR7imXb3E0nHERBqIb7Oyh91/view", "ts": ""}, {"nr": "5.6", "namn": "Stam-blad-diagram", "mal": [{"mal": "Rita ett stam-blad-diagram", "q": "Stam-blad-diagrammet visar 9 värden. Vilket värde betyder '6 | 3'?", "alt": ["63", "6,3", "9", "36"], "fork": "Stammen är tiotalet och bladet entalet: 6 | 3 = 63.", "bild": "<table class=\"mt\"><tr><th>Stam</th><th>Blad</th></tr><tr><td>5</td><td style=\"text-align:left\">2 4 4 9</td></tr><tr><td>6</td><td style=\"text-align:left\">0 3 8</td></tr><tr><td>7</td><td style=\"text-align:left\">1 5</td></tr></table>"}, {"mal": "Läsa av median, typvärde och variationsbredd i ett stam-blad-diagram", "q": "Använd diagrammet ovan. Vad är medianen?", "alt": ["60", "59", "63", "54"], "fork": "Värdena i ordning: 52, 54, 54, 59, 60, 63, 68, 71, 75. Det mittersta (nr 5) är 60.", "bild": ""}, {"mal": "Räkna ut medelvärdet från ett stam-blad-diagram", "q": "Använd diagrammet ovan. Summan av värdena är 556. Vad är medelvärdet, avrundat till heltal?", "alt": ["62", "56", "60", "69"], "fork": "<span class=\"br\"><span>556</span><span>9</span></span> ≈ 61,8 ≈ 62.", "bild": ""}], "tb": "https://drive.google.com/file/d/1mBfa_qaw2YG_IvwzPI_ETspB_poUcUOO/view", "lek": "https://drive.google.com/file/d/1zItCZVE0fq4Iq12IFLNyVMhI1ZUVmGZE/view", "ts": ""}, {"nr": "5.7", "namn": "Kvartiler och lådagram", "mal": [{"mal": "Hitta nedre och övre kvartil", "q": "Värdena är 1, 3, 5, 7, 9, 11, 13, 15. Vad är nedre kvartilen?", "alt": ["4", "5", "3", "8"], "fork": "Nedre halvan är 1, 3, 5, 7. Medianen av den: <span class=\"br\"><span>3 + 5</span><span>2</span></span> = 4.", "bild": ""}, {"mal": "Räkna ut kvartilavståndet", "q": "Nedre kvartilen är 12 och övre kvartilen är 20. Vad är kvartilavståndet?", "alt": ["8", "32", "16", "4"], "fork": "Kvartilavstånd = övre kvartil − nedre kvartil = 20 − 12 = 8.", "bild": ""}, {"mal": "Rita och läsa av ett lådagram", "q": "Vad visar lådan i ett lådagram?", "alt": ["De mittersta 50 % av värdena, från nedre till övre kvartil", "Alla värden", "Medelvärdet", "De 25 % största värdena"], "fork": "Lådan går från nedre till övre kvartil och strecket i lådan är medianen.", "bild": ""}], "tb": "https://drive.google.com/file/d/1mvVQl6rtn5_epsi7nmQ0sJaxGG84aC1i/view", "lek": "https://drive.google.com/file/d/1xrQm0xTRz4HQsYjo2D4WW1_-Cb_7wmxb/view", "ts": ""}, {"nr": "5.8", "namn": "Spel, odds och simulering", "mal": [{"mal": "Avgöra om ett spel är rättvist", "q": "När är ett spel rättvist?", "alt": ["När den förväntade vinsten är lika stor som insatsen", "När alla får vinna någon gång", "När insatsen är låg", "När vinsten är stor"], "fork": "Om man spelar många gånger går man varken plus eller minus i ett rättvist spel.", "bild": ""}, {"mal": "Räkna ut förväntad vinst i ett spel eller lotteri", "q": "En lott kostar 10 kr. Sannolikheten att vinna 100 kr är 0,05. Vad är den förväntade vinsten per lott?", "alt": ["5 kr", "10 kr", "100 kr", "0,5 kr"], "fork": "0,05 · 100 = 5 kr. Lotten kostar 10 kr, så spelet är inte rättvist.", "bild": ""}, {"mal": "Förklara vad odds och spelodds betyder", "q": "Spelodds 2,5. Du satsar 20 kr och vinner. Hur mycket får du tillbaka?", "alt": ["50 kr", "22,50 kr", "25 kr", "8 kr"], "fork": "Utbetalning = insats · odds = 20 · 2,5 = 50 kr.", "bild": ""}], "tb": "https://drive.google.com/file/d/1YPb2oTEQpR_c7UJC0ElykVD55aW--s_S/view", "lek": "https://drive.google.com/file/d/1ifVHP_qb6jo1QIPdGvv4oPJoYiPsl0E-/view", "ts": ""}, {"nr": "5.9", "namn": "Fördjupning: standardavvikelse och normalfördelning", "mal": [{"mal": "Räkna ut avvikelser från medelvärdet", "q": "Medelvärdet är 20. Vad är avvikelsen för värdet 26?", "alt": ["6", "26", "−6", "46"], "fork": "Avvikelse = värde − medelvärde = 26 − 20 = 6.", "bild": ""}, {"mal": "Jämföra spridning med hjälp av standardavvikelse", "q": "Två lag har samma medelvärde. Lag A har standardavvikelsen 2 och lag B 9. Vad betyder det?", "alt": ["Lag B:s värden är mer utspridda", "Lag A har högre värden", "Lag B har högre medelvärde", "Lagen är lika jämna"], "fork": "Standardavvikelsen är ett spridningsmått. Ju större den är, desto mer sprids värdena.", "bild": ""}, {"mal": "Använda 68 %- och 95 %-regeln för en normalfördelning", "q": "En normalfördelning har medelvärdet 100 och standardavvikelsen 15. Ungefär hur stor andel ligger mellan 85 och 115?", "alt": ["68 %", "95 %", "50 %", "15 %"], "fork": "85 och 115 är en standardavvikelse från medelvärdet. Där finns ungefär 68 %.", "bild": ""}], "tb": "https://drive.google.com/file/d/11uoP4wiUdbftcxXfcVgkhl-lR0Mx75hP/view", "lek": "https://drive.google.com/file/d/1nJAv-xdZWqaFGvnrBV8xI2B9i9-iFR5W/view", "ts": ""}];
+const SK = ["Osäker", "Ganska säker", "Säker"];
+const skatt = {}, svar = {}, ordning = {};
+const id = (a, m) => a + "-" + m;
+const tot = DATA.reduce((s, a) => s + a.mal.length, 0);
+function blanda(n) { const r = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; } return r; }
+
+function del1() {
+  document.getElementById("del1").innerHTML = DATA.map(a => `<div class="kort"><h2><b>${a.nr}</b>${a.namn}</h2>` +
+    a.mal.map((m, i) => `<div class="mrad"><div class="t">Jag kan ${m.mal.charAt(0).toLowerCase() + m.mal.slice(1)}.</div>
+      <div class="knappar" data-k="${id(a.nr, i)}">${[2, 1, 0].map(v => `<button data-v="${v}">${SK[v]}</button>`).join("")}</div></div>`).join("") + `</div>`).join("");
+  document.querySelectorAll(".knappar").forEach(k => k.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    k.querySelectorAll("button").forEach(x => x.classList.remove("val")); b.classList.add("val");
+    skatt[k.dataset.k] = +b.dataset.v; kollaDel1();
+  }));
+  kollaDel1();
+}
+function kollaDel1() {
+  const n = Object.keys(skatt).length;
+  document.getElementById("till2").disabled = n < tot;
+  document.getElementById("kvar").textContent = n < tot ? `Du har skattat ${n} av ${tot} mål.` : "Bra! Nu kan du gå vidare.";
+}
+function del2() {
+  document.getElementById("del2").innerHTML = DATA.map(a => `<div class="kort"><h2><b>${a.nr}</b>${a.namn}</h2>` +
+    a.mal.map((m, i) => { const k = id(a.nr, i); ordning[k] = blanda(m.alt.length);
+      return `<div class="fraga" id="f-${k}"><div class="q">${m.q}<i>Mål: ${m.mal}</i></div>${m.bild ? `<div class="bild">${m.bild}</div>` : ""}
+      <div class="alt">${ordning[k].map(j => `<label data-j="${j}"><input type="radio" name="${k}" value="${j}"><span>${m.alt[j]}</span></label>`).join("")}</div>
+      <div class="fork">${m.fork}</div></div>`; }).join("") + `</div>`).join("");
+  document.querySelectorAll("#del2 input").forEach(inp => inp.addEventListener("change", () => { svar[inp.name] = +inp.value; }));
+}
+function kommentar(s, r) {
+  if (r && s === 2) return "Du kan det, och du visste det. Bra koll!";
+  if (r) return "Rätt! Du kan mer än du trodde.";
+  if (s === 2) return "Här trodde du att du kunde. Läs förklaringen och titta på lektionen igen.";
+  if (s === 1) return "Du var lite osäker, och det här behöver du öva mer på.";
+  return "Du kände rätt: det här behöver du öva mer på.";
+}
+const UTMANA = "";
+const lnk = (u, t) => u ? `<a href="${u}" target="_blank" rel="noopener">${t}</a>` : `<b>${t}</b>`;
+function rek(a, ratt) {
+  if (ratt === a.mal.length) return `<b>Tips:</b> Du klarade allt i ${a.nr}. Prova ${lnk(UTMANA, "Utmana dig")} för kapitel ${String(a.nr).split(".")[0]}.`;
+  if (ratt === a.mal.length - 1) return `<b>Tips:</b> Läs förklaringen till frågan du missade och gör ${lnk(a.tb, "Tillbakablick " + a.nr)}.`;
+  return `<b>Tips:</b> Titta på ${lnk(a.lek, "lektionen " + a.nr + " " + a.namn)} igen och träna med ${lnk(a.ts, "Trygg start " + a.nr)}.`;
+}
+function ratta() {
+  const obes = DATA.flatMap(a => a.mal.map((m, i) => id(a.nr, i))).filter(k => !(k in svar));
+  if (obes.length && !confirmFri(obes.length)) return;
+  let rattTot = 0, stamde = 0, merAn = 0, trodde = 0;
+  let html = "";
+  DATA.forEach(a => {
+    let ratt = 0, rader = "";
+    a.mal.forEach((m, i) => {
+      const k = id(a.nr, i), r = svar[k] === 0, s = skatt[k];
+      if (r) { ratt++; rattTot++; }
+      if ((r && s === 2) || (!r && s === 0)) stamde++;
+      if (r && s < 2) merAn++;
+      if (!r && s === 2) trodde++;
+      rader += `<tr><td>${m.mal}</td><td><span class="etk e${s}">${SK[s]}</span></td><td>${r ? "✔ Rätt" : "✘ Fel"}</td><td>${kommentar(s, r)}</td></tr>`;
+      const f = document.getElementById("f-" + k); f.classList.add("visa");
+      f.querySelectorAll("label").forEach(l => { const j = +l.dataset.j; if (j === 0) l.classList.add("ratt"); else if (svar[k] === j) l.classList.add("fel"); });
+      f.querySelectorAll("input").forEach(x => x.disabled = true);
+    });
+    html += `<div class="kort"><h2><b>${a.nr}</b>${a.namn} · ${ratt} av ${a.mal.length} rätt</h2>
+      <table><tr><th>Mål</th><th>Din känsla</th><th>Svar</th><th>Kommentar</th></tr>${rader}</table><div class="rek">${rek(a, ratt)}</div></div>`;
+  });
+  document.getElementById("del3").innerHTML = `<div class="summa">
+    <div><b>${rattTot} / ${tot}</b>rätt svar</div><div><b>${stamde}</b>gånger stämde din känsla</div>
+    <div><b>${merAn}</b>gånger kunde du mer än du trodde</div><div><b>${trodde}</b>gånger trodde du att du kunde</div></div>
+    <p class="info" style="margin-top:0">Rätt och fel syns också vid frågorna längre ned, med en förklaring.</p>` + html;
+  visa(3);
+}
+function confirmFri(n) {
+  const el = document.getElementById("kvarFr");
+  if (el) { el.remove(); return true; }
+  const p = document.createElement("p"); p.id = "kvarFr"; p.className = "info";
+  p.textContent = `Du har ${n} fråga(or) kvar. Tryck på Rätta en gång till om du vill rätta ändå.`;
+  document.getElementById("ratta").after(p); return false;
+}
+function visa(n) {
+  ["s1", "s2", "s3"].forEach((s, i) => document.getElementById(s).classList.toggle("akt", i === n - 1));
+  document.getElementById("del1").classList.toggle("dold", n !== 1);
+  document.getElementById("till2").classList.toggle("dold", n !== 1);
+  document.getElementById("kvar").classList.toggle("dold", n !== 1);
+  document.getElementById("del2").classList.toggle("dold", n === 1);
+  document.getElementById("ratta").classList.toggle("dold", n !== 2);
+  document.getElementById("del3").classList.toggle("dold", n !== 3);
+  document.getElementById("om").classList.toggle("dold", n !== 3);
+  const fr = document.getElementById("kvarFr"); if (fr && n !== 2) fr.remove();
+  if (n === 3) document.getElementById("del2").before(document.getElementById("del3"));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+document.getElementById("till2").onclick = () => { del2(); visa(2); };
+document.getElementById("ratta").onclick = ratta;
+document.getElementById("om").onclick = () => { location.reload(); };
+del1();
+</script></body></html>
