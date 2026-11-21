@@ -22,6 +22,8 @@
 
   /* --- nya tal --- */
   function nyttTal() {
+    if (S.typ === 'mul') return nyMul();
+    if (S.typ === 'div') return nyDiv();
     for (var f = 0; f < 3000; f++) {
       var a, b, da = 0, db = 0;
       if (S.typ === 'add') {
@@ -57,10 +59,231 @@
   }
   function ledande(c) { if (c <= P.dec) return false; for (var i = c; i < P.W; i++) if (P.r[i]) return false; return true; }
 
+  /* ===== multiplikation och kort division (2026-11-21) ===== */
+  function F(r, c) { return U.f[r + ':' + c] || ''; }
+  function satt(r, c, v) { U.f[r + ':' + c] = v; }
+  function inCell(r, c, small, extra) {
+    var k = r + ':' + c, v = U.f[k] || '', sel = U.sel && U.sel.r === r && U.sel.c === c;
+    var kl = (small ? 'up-car up-sm' : 'up-ans') + (sel ? ' sel' : '') + (U.m[k] ? ' ' + U.m[k] : '') + (skakas === k ? ' skak' : '') + (extra || '');
+    return cell('<span>' + v + '</span>', kl, ' data-r="' + r + '" data-c="' + c + '" role="button"');
+  }
+  function felSkak(r, c) { U.fel++; U.felKol++; skakas = r + ':' + c; U.msgTyp = 'fel'; }
+  function hl(k) { return U.hl[k] ? ' akt' : ''; }
+
+  /* --- multiplikation --- */
+  function nyMul() {
+    for (var f = 0; f < 3000; f++) {
+      var a, b, da = 0;
+      if (S.niva === 1) { a = talMed(2); b = rnd(2, 9); if (minMul(a, b) < 1) continue; }
+      else if (S.niva === 2) { a = talMed(3); b = rnd(3, 9); if (minMul(a, b) < 2) continue; }
+      else if (S.niva === 3) { a = talMed(rnd(2, 3)); b = rnd(12, 59); if (b % 10 === 0 || (String(a).length === 3 && b > 39)) continue; }
+      else { da = rnd(1, 2); a = rnd(Math.pow(10, da) + 1, (da === 1 ? 999 : 999)); b = rnd(3, 9); if (a % 10 === 0 || minMul(a, b) < 1) continue; }
+      return byggMul(a, da, b);
+    }
+  }
+  function minMul(a, b) { var s = String(a), k = 0, n = 0; for (var i = 0; i < s.length; i++) { var p = dig(s, i) * b + k; k = Math.floor(p / 10); if (k && i < s.length - 1) n++; } return n; }
+  function byggMul(a, da, b) {
+    var sa = siffror(a, da), bs = String(b), rv = a * b, sr = siffror(rv, da);
+    var P = { md: 'mul', dec: da, A: [], Bd: [], la: sa.length, rows: bs.length, W: sr.length, r: [], pp: [], ppLen: [], kr: [], ks: [0] };
+    for (var i = 0; i < P.la; i++) P.A[i] = dig(sa, i);
+    for (var j = 0; j < P.rows; j++) P.Bd[j] = dig(bs, j);
+    for (j = 0; j < P.rows; j++) {
+      var k = 0, row = []; P.kr[j] = [0];
+      for (i = 0; i < P.la; i++) { var p = P.A[i] * P.Bd[j] + k; row[i + j] = p % 10; k = Math.floor(p / 10); P.kr[j][i + 1] = k; }
+      if (k) row[P.la + j] = k;
+      P.pp[j] = row; P.ppLen[j] = row.length;
+    }
+    for (var c = 0; c < P.W; c++) P.r[c] = dig(sr, c);
+    if (P.rows > 1) for (c = 0; c < P.W; c++) { var s = (P.pp[0][c] || 0) + (c >= 1 ? (P.pp[1][c] || 0) : 0) + P.ks[c]; P.ks[c + 1] = Math.floor(s / 10); }
+    P.titel = txt(a, da) + ' · ' + b; P.svar = txt(rv, da);
+    P.rk = function (j) { return P.rows === 1 ? 'res' : 'p' + j; };
+    return P;
+  }
+  function mulStart() { U.ph = 'rad'; U.j = 0; U.i = 0; if (S.lage === 'steg') mulSteg(); else { U.sel = { r: P.rk(0), c: 0 }; U.msg = 'Börja längst till höger. Skriv minnessiffror i de små rutorna om du vill.'; U.msgTyp = ''; } }
+  function mulSteg() {
+    U.felKol = 0; U.hl = {};
+    if (U.ph === 'rad') {
+      var j = U.j, i = U.i, b = P.Bd[j], rk = P.rk(j);
+      if (i < P.la) {
+        var k = P.kr[j][i];
+        U.hl['a:' + i] = 1; U.hl['b:' + j] = 1;
+        U.msg = 'Räkna <b>' + P.A[i] + ' · ' + b + '</b>' + (k ? ' och lägg till minnessiffran <b>' + k + '</b>' : '') + '.';
+        U.sel = { r: rk, c: i + j }; U.msgTyp = ''; return;
+      }
+      if (P.ppLen[j] > P.la + j && !F(rk, P.la + j)) { U.msg = 'Minnessiffran <b>' + P.kr[j][P.la] + '</b> ska också ner. Skriv den längst till vänster i raden.'; U.sel = { r: rk, c: P.la + j }; U.msgTyp = ''; return; }
+      if (j + 1 < P.rows) {
+        U.j++; U.i = 0; for (var x in U.f) if (/^mc:/.test(x)) delete U.f[x];
+        mulSteg(); U.msg = 'Första raden är klar! Nu räknar du med tiotalssiffran <b>' + P.Bd[1] + '</b>. Den grå nollan står där eftersom du räknar med tiotal. ' + U.msg; U.msgTyp = 'ok'; return;
+      }
+      if (P.rows === 1) return klar();
+      U.ph = 'sum'; U.c = 0;
+    }
+    var c = U.c; if (c >= P.W) return klar();
+    var d = [], kk = P.ks[c]; if (P.pp[0][c] !== undefined) d.push(P.pp[0][c]); if (c >= 1 && P.pp[1][c] !== undefined) d.push(P.pp[1][c]); else if (c === 0) d.push(0);
+    U.hl['sum:' + c] = 1;
+    U.msg = (c === 0 ? 'Nu adderar du raderna. ' : '') + (d.length + (kk ? 1 : 0) === 1 ? 'Flytta ner <b>' + (d[0] !== undefined ? d[0] : kk) + '</b> till svaret.' : 'Räkna <b>' + d.concat(kk ? [kk] : []).join(' + ') + '</b>.');
+    U.sel = { r: 'res', c: c }; U.msgTyp = '';
+  }
+  function mulSiffra(d) {
+    var s = U.sel, k;
+    if (s.r === 'mc') {
+      k = P.kr[U.j][s.c];
+      if (d === k) { satt('mc', s.c, String(d)); U.i = s.c; mulSteg(); U.msg = 'Bra! ' + U.msg; } else { felSkak('mc', s.c); U.msg = 'Skriv tiotalet, <b>' + k + '</b>, som minnessiffra.'; }
+      return;
+    }
+    if (s.r === 'sc') {
+      if (d === P.ks[s.c]) { satt('sc', s.c, String(d)); U.c = s.c; mulSteg(); U.msg = 'Bra! ' + U.msg; } else { felSkak('sc', s.c); U.msg = 'Skriv <b>' + P.ks[s.c] + '</b> som minnessiffra.'; }
+      return;
+    }
+    if (U.ph === 'rad') {
+      var j = U.j, i = U.i, rk = P.rk(j);
+      if (i >= P.la) { var e0 = P.kr[j][P.la]; if (d === e0) { satt(rk, s.c, String(d)); U.m[rk + ':' + s.c] = 'ok'; mulSteg(); if (!U.klar) U.msg = 'Rätt! ' + U.msg; } else { felSkak(rk, s.c); U.msg = 'Minnessiffran var <b>' + e0 + '</b>. Skriv den här.'; } return; }
+      k = P.kr[j][i]; var p = P.A[i] * P.Bd[j] + k, e = p % 10, kut = Math.floor(p / 10), ex = P.A[i] + ' · ' + P.Bd[j] + (k ? ' + ' + k : '');
+      if (d === e) {
+        satt(rk, s.c, String(d)); U.m[rk + ':' + s.c] = 'ok';
+        if (kut && i + 1 < P.la) { U.sel = { r: 'mc', c: i + 1 }; U.msgTyp = 'ok'; U.msg = 'Rätt! ' + ex + ' = ' + p + '. Skriv <b>' + kut + ':an</b> som minnessiffra i den lilla rutan ovanför nästa siffra.'; return; }
+        U.i = i + 1; mulSteg(); if (!U.klar) U.msg = 'Rätt! ' + U.msg; return;
+      }
+      felSkak(rk, s.c);
+      if (p >= 10 && d === kut) U.msg = 'Svaret är ' + p + '. I rutan skriver du bara den sista siffran, <b>' + e + '</b>.' + (i + 1 < P.la ? ' ' + kut + ':an blir minnessiffra.' : '');
+      else if (k && d === (p - k) % 10) U.msg = 'Glöm inte minnessiffran ' + k + '! Räkna <b>' + ex + '</b>.';
+      else if (U.felKol >= 2) U.msg = ex + ' = ' + p + '. Skriv <b>' + e + '</b>.';
+      else U.msg = 'Inte riktigt. Räkna igen: <b>' + ex + '</b>.';
+      return;
+    }
+    var c = U.c, dd = [], kk = P.ks[c]; if (P.pp[0][c] !== undefined) dd.push(P.pp[0][c]); if (c >= 1 && P.pp[1][c] !== undefined) dd.push(P.pp[1][c]);
+    var sum = dd.reduce(function (x, y) { return x + y; }, 0) + kk, e2 = sum % 10, ex2 = dd.concat(kk ? [kk] : []).join(' + ') || '0';
+    if (d === e2) {
+      satt('res', c, String(d)); U.m['res:' + c] = 'ok';
+      if (P.ks[c + 1] && c + 1 < P.W) { U.sel = { r: 'sc', c: c + 1 }; U.msgTyp = 'ok'; U.msg = 'Rätt! ' + ex2 + ' = ' + sum + '. Skriv <b>' + P.ks[c + 1] + ':an</b> som minnessiffra i den lilla rutan.'; return; }
+      U.c = c + 1; mulSteg(); if (!U.klar) U.msg = 'Rätt! ' + U.msg; return;
+    }
+    felSkak('res', c);
+    U.msg = U.felKol >= 2 ? ex2 + ' = ' + sum + '. Skriv <b>' + e2 + '</b>.' : (sum >= 10 && d === Math.floor(sum / 10) ? 'Svaret är ' + sum + '. Skriv bara den sista siffran.' : 'Inte riktigt. Räkna igen: <b>' + ex2 + '</b>.');
+  }
+  function mulKontroll() {
+    var lista = [];
+    if (P.rows > 1) for (var j = 0; j < 2; j++) for (var c = j; c < P.ppLen[j]; c++) lista.push(['p' + j, c, P.pp[j][c]]);
+    for (c = 0; c < P.W; c++) lista.push(['res', c, P.r[c]]);
+    return lista;
+  }
+  function mulForklara(r, c) {
+    if (r === 'res' && P.rows > 1) { var d = [P.pp[0][c], c >= 1 ? P.pp[1][c] : 0].filter(function (x) { return x !== undefined; }), k = P.ks[c], s = d.reduce(function (x, y) { return x + y; }, 0) + k; return 'Kolla svaret: ' + d.concat(k ? [k] : []).join(' + ') + ' = ' + s + '.'; }
+    var j = r === 'res' ? 0 : +r[1], i = c - j;
+    if (i >= P.la) return 'Längst till vänster i raden ska minnessiffran ' + P.kr[j][P.la] + ' stå.';
+    var k2 = P.kr[j][i], p = P.A[i] * P.Bd[j] + k2;
+    return 'Kolla ' + P.A[i] + ' · ' + P.Bd[j] + (k2 ? ' + minnessiffran ' + k2 : '') + ' = ' + p + '. Skriv ' + (p % 10) + (p >= 10 && i + 1 < P.la ? ' och ' + Math.floor(p / 10) + ' som minnessiffra.' : '.');
+  }
+  function mulGrid() {
+    var n = P.W + 1 + (P.dec ? 1 : 0), g = '<div class="up-grid" style="--n:' + n + '">';
+    var self = S.lage === 'sjalv';
+    g += rad(function (c) { return c >= 1 && c < P.la ? inCell('mc', c, true) : cell('', 'up-tom up-sm'); }, '', 'up-minne');
+    g += rad(function (c) { return c < P.la ? cell(String(P.A[c]), 'up-d' + hl('a:' + c)) : cell('', 'up-tom'); }, '', 'komma');
+    g += rad(function (c) { return c < P.rows ? cell(String(P.Bd[c]), 'up-d' + hl('b:' + c)) : cell('', 'up-tom'); }, '·', 'up-linje');
+    if (P.rows > 1) {
+      if (self || U.ph === 'sum' || U.klar) g += rad(function (c) { return c >= 1 && c < P.W ? inCell('sc', c, true) : cell('', 'up-tom up-sm'); }, '', 'up-minne');
+      for (var j = 0; j < 2; j++) g += rad((function (j) { return function (c) {
+        if (c < j) return cell('0', 'up-d up-pad' + hl('sum:' + c));
+        if (c >= P.ppLen[j]) return cell('', 'up-tom' + hl('sum:' + c));
+        return inCell('p' + j, c, false, hl('sum:' + c));
+      }; })(j), j === 1 ? '+' : '', j === 1 ? 'up-linje' : '');
+    }
+    g += rad(function (c) { return inCell('res', c, false); }, '', 'komma up-svar');
+    return g + '</div>';
+  }
+
+  /* --- kort division --- */
+  function nyDiv() {
+    for (var f = 0; f < 3000; f++) {
+      var D, d = rnd(2, 9), dd = 0;
+      if (S.niva === 1) { d = rnd(2, 5); D = talMed(2); if (D % d || +String(D)[0] < d) continue; }
+      else if (S.niva === 2) { d = rnd(3, 9); D = talMed(3); if (D % d || +String(D)[0] < d || /0/.test(String(D / d))) continue; }
+      else if (S.niva === 3) { d = rnd(3, 9); D = talMed(rnd(3, 4)); if (D % d) continue; var q = String(D / d); if (!(+String(D)[0] < d) && !/0/.test(q.slice(0, -1))) continue; if (Math.random() < .5 && !/0/.test(q)) continue; }
+      else { d = [2, 4, 5, 8, 2, 4, 5][rnd(0, 6)]; dd = Math.random() < .4 ? 1 : 0; D = dd ? rnd(11, 199) : rnd(5, 99); if (dd && D % 10 === 0) continue; var sk = D * 100; if (sk % d || D % d === 0 || (dd === 0 && D * 10 % d === 0 && Math.random() < .3)) continue; }
+      return byggDiv(D, dd, d);
+    }
+  }
+  function byggDiv(D, dd, d) {
+    var dq = dd; while ((D * Math.pow(10, dq - dd)) % d) dq++;
+    var s = siffror(D * Math.pow(10, dq - dd), dq), nInt = s.length - dq;
+    var P = { md: 'div', d: d, dg: [], n: s.length, nInt: nInt, dec: dq, padFran: s.length - (dq - dd), q: [], rin: [0], lead: 0 };
+    var r = 0;
+    for (var t = 0; t < P.n; t++) { P.dg[t] = +s[t]; var cur = r * 10 + P.dg[t]; P.q[t] = Math.floor(cur / d); r = cur % d; P.rin[t + 1] = r; }
+    while (P.lead < P.nInt - 1 && P.q[P.lead] === 0) P.lead++;
+    P.titel = txt(D, dd) + ' / ' + d; P.svar = txt(D * Math.pow(10, dq - dd) / d, dq);
+    return P;
+  }
+  function divCur(t) { return P.rin[t] * 10 + P.dg[t]; }
+  function divStart() { U.t = 0; if (S.lage === 'steg') divSteg(); else { U.sel = { r: 'q', c: P.lead }; U.msg = 'Börja längst till vänster. Skriv det som blir kvar som en liten siffra framför nästa siffra.'; U.msgTyp = ''; } }
+  function divSteg() {
+    U.felKol = 0; U.hl = {};
+    var t = U.t, pre = '';
+    if (t >= P.n) return klar();
+    while (t < P.lead) { pre += '<b>' + P.d + '</b> går inte i <b>' + divCur(t) + '</b>. Då tar du med nästa siffra också. '; satt('rest', t + 1, String(P.rin[t + 1])); U.m['rest:' + (t + 1)] = 'ok'; t++; }
+    U.t = t;
+    if (t === P.nInt && P.dec) pre += 'Nu passerar du kommat. Kommat kommer med upp i svaret. ' + (t >= P.padFran ? 'De grå nollorna kan du lägga till efter kommat. ' : '');
+    else if (t >= P.padFran && t > P.nInt) pre += 'Lägg till en nolla till. ';
+    U.hl['d:' + t] = 1;
+    U.msg = pre + 'Hur många gånger går <b>' + P.d + '</b> i <b>' + divCur(t) + '</b>?';
+    U.sel = { r: 'q', c: t }; U.msgTyp = '';
+  }
+  function divSiffra(x) {
+    var s = U.sel;
+    if (s.r === 'rest') {
+      var er = P.rin[s.c];
+      if (x === er) { satt('rest', s.c, String(x)); U.m['rest:' + s.c] = 'ok'; U.t = s.c; divSteg(); U.msg = 'Bra! ' + U.msg; } else { felSkak('rest', s.c); U.msg = 'Det blev <b>' + er + '</b> kvar. Skriv ' + er + ' i den lilla rutan.'; }
+      return;
+    }
+    var t = U.t, cur = divCur(t), q = P.q[t], r = cur - q * P.d;
+    if (x === q) {
+      satt('q', t, String(x)); U.m['q:' + t] = 'ok';
+      var ex = q + ' · ' + P.d + ' = ' + q * P.d;
+      if (t + 1 >= P.n) return klar();
+      if (r) { U.sel = { r: 'rest', c: t + 1 }; U.hl = {}; U.hl['d:' + (t + 1)] = 1; U.msgTyp = 'ok'; U.msg = 'Rätt! ' + ex + '. Det blir <b>' + cur + ' − ' + q * P.d + ' = ' + r + '</b> kvar. Skriv ' + r + ' som liten siffra framför nästa siffra.'; return; }
+      U.t = t + 1; divSteg(); U.msg = 'Rätt! ' + ex + ', inget blir kvar. ' + U.msg; return;
+    }
+    felSkak('q', t);
+    if (x * P.d > cur) U.msg = x + ' · ' + P.d + ' = ' + x * P.d + '. Det är mer än ' + cur + '. Prova ett mindre tal.';
+    else if (U.felKol >= 2) U.msg = P.d + ' går <b>' + q + '</b> gånger i ' + cur + ', eftersom ' + q + ' · ' + P.d + ' = ' + q * P.d + '.';
+    else U.msg = x + ' · ' + P.d + ' = ' + x * P.d + '. Då blir ' + (cur - x * P.d) + ' kvar, och det är mer än ' + P.d + '. ' + P.d + ' går fler gånger.';
+  }
+  function divKontroll() { var l = []; for (var t = 0; t < P.n; t++) l.push(['q', t, P.q[t], t < P.lead]); return l; }
+  function divForklara(r, t) { var cur = divCur(t), q = P.q[t]; return 'Kolla siffran ovanför ' + P.dg[t] + ': ' + P.d + ' går ' + q + ' gånger i ' + cur + (P.rin[t] ? ' (med ' + P.rin[t] + ' kvar från förut)' : '') + '. ' + q + ' · ' + P.d + ' = ' + q * P.d + (cur - q * P.d ? ', och ' + (cur - q * P.d) + ' blir kvar.' : '.'); }
+  function divGrid() {
+    var g = '<div class="up-grid up-div">', komma = function (t) { return P.dec && t === P.nInt - 1; };
+    var r1 = cell('', 'up-tom') + cell('', 'up-tom up-dstol0');
+    for (var t = 0; t < P.n; t++) { r1 += inCell('q', t, false, (U.klar && t < P.lead ? ' up-tomsvar' : '')); if (komma(t)) r1 += '<div class="up-c up-km">,</div>'; }
+    var r2 = cell(String(P.d), 'up-d up-dd') + cell(')', 'up-dstol');
+    for (t = 0; t < P.n; t++) {
+      var pad = t >= P.padFran, rest = t >= 1 && !(U.klar && !F('rest', t)) ? '<i class="up-rest' + (U.sel && U.sel.r === 'rest' && U.sel.c === t ? ' sel' : '') + (U.m['rest:' + t] ? ' ' + U.m['rest:' + t] : '') + (skakas === 'rest:' + t ? ' skak' : '') + '" data-r="rest" data-c="' + t + '" role="button">' + F('rest', t) + '</i>' : '';
+      r2 += cell(rest + '<span class="up-dv">' + P.dg[t] + '</span>', 'up-d up-ddv' + (pad ? ' up-pad' : '') + hl('d:' + t));
+      if (komma(t)) r2 += '<div class="up-c up-km up-ddv">,</div>';
+    }
+    return g + '<div class="up-rad">' + r1 + '</div><div class="up-rad">' + r2 + '</div></div>';
+  }
+  /* gemensamt för mul/div */
+  function mdStart() { U.f = {}; U.m = {}; U.hl = {}; (P.md === 'mul' ? mulStart : divStart)(); }
+  function mdKontroll() { return P.md === 'mul' ? mulKontroll() : divKontroll(); }
+  function mdRatta() {
+    var forst = null, antal = 0;
+    mdKontroll().forEach(function (x) { var k = x[0] + ':' + x[1], u = U.f[k] || '', ok = u === String(x[2]) || (x[3] && (u === '' || u === '0')); U.m[k] = ok ? 'ok' : 'fel'; if (!ok) { antal++; if (!forst || P.md === 'mul') { if (!forst) forst = x; } } });
+    if (!forst) { klar(); return rita(); }
+    U.fel++;
+    U.msg = (antal === 1 ? 'Nästan! En ruta är fel. ' : 'Det blev fel i ' + antal + ' rutor. ') + (P.md === 'mul' ? mulForklara(forst[0], forst[1]) : divForklara(forst[0], forst[1])) + ' Ändra och tryck Rätta igen.';
+    U.msgTyp = 'fel'; U.sel = { r: forst[0], c: forst[1] }; rita();
+  }
+  function mdFyll() { mdKontroll().forEach(function (x) { var k = x[0] + ':' + x[1]; if (!x[3]) U.f[k] = String(x[2]); U.m[k] = 'ok'; }); U.hl = {}; }
+  function mdSjalvSiffra(d) {
+    var s = U.sel; satt(s.r, s.c, String(d)); U.m[s.r + ':' + s.c] = '';
+    if (s.r === 'q') { if (s.c + 1 < P.n) U.sel = { r: 'q', c: s.c + 1 }; }
+    else if (s.r === 'res' || s.r === 'p0' || s.r === 'p1') { var max = s.r === 'res' ? P.W : P.ppLen[+s.r[1]]; if (s.c + 1 < max) U.sel = { r: s.r, c: s.c + 1 }; }
+  }
+
   /* --- tillstånd --- */
   var P, U, runda = [], nr = 0;
   function nyUppgift() {
     P = nyttTal();
+    if (P.md) { U = { f: {}, m: {}, hl: {}, sel: null, fel: 0, felKol: 0, klar: false, msg: '', msgTyp: '' }; mdStart(); rita(); return; }
     U = { ans: [], car: [], tv: P.A.map(function (d) { return d || 0; }), hist: [], sel: null, mark: [], cur: 0, fel: 0, felKol: 0, klar: false, mal: null, msg: '', msgTyp: '', okKol: [] };
     if (U.tv.length > P.W) U.tv.length = P.W;
     if (S.lage === 'steg') steg(); else { U.sel = { r: 'ans', c: 0 }; U.msg = P.add ? 'Börja längst till höger. Skriv minnessiffror i de små rutorna.' : 'Börja längst till höger. Tryck på en siffra i det övre talet för att växla.'; U.msgTyp = ''; }
@@ -162,6 +385,7 @@
     return r;
   }
   function ratta() {
+    if (P.md) return mdRatta();
     var forst = -1;
     for (var c = 0; c < P.W; c++) {
       var u = U.ans[c] || '', ok = u === String(P.r[c]) || (ledande(c) && (u === '' || u === '0'));
@@ -175,7 +399,7 @@
   }
   function klar(extra) {
     U.klar = true; U.sel = null; U.mal = null;
-    for (var c = 0; c < P.W; c++) { if (!U.ans[c] && !ledande(c)) U.ans[c] = String(P.r[c]); U.mark[c] = 'ok'; }
+    if (P.md) mdFyll(); else for (var c = 0; c < P.W; c++) { if (!U.ans[c] && !ledande(c)) U.ans[c] = String(P.r[c]); U.mark[c] = 'ok'; }
     runda[nr] = U.fel ? 'halv' : 'hel';
     U.msg = (extra ? extra + ' ' : '') + '<b>Rätt! ' + P.titel + ' = ' + P.svar + '</b>' + (U.fel ? '' : ' Helt utan fel!');
     U.msgTyp = 'klar';
@@ -184,6 +408,7 @@
   /* --- inmatning --- */
   function siffra(d) {
     if (!P || U.klar || !U.sel) { if (!U.klar && S.lage === 'steg' && U.mal !== null) meddela(U.msg, 'vx'); return; }
+    if (P.md) { if (S.lage === 'steg') (P.md === 'mul' ? mulSiffra : divSiffra)(d); else mdSjalvSiffra(d); rita(); return; }
     if (S.lage === 'steg') { stegSiffra(d); rita(); return; }
     var c = U.sel.c;
     if (U.sel.r === 'car') { U.car[c] = String(d); U.sel = { r: 'ans', c: c }; }
@@ -192,6 +417,7 @@
   }
   function sudda() {
     if (!U.sel || U.klar || S.lage === 'steg') return;
+    if (P.md) { satt(U.sel.r, U.sel.c, ''); U.m[U.sel.r + ':' + U.sel.c] = ''; return rita(); }
     var c = U.sel.c; if (U.sel.r === 'car') U.car[c] = ''; else { U.ans[c] = ''; U.mark[c] = ''; }
     rita();
   }
@@ -214,7 +440,7 @@
     var h = '';
     // val
     h += '<div class="up-val"><div class="up-grp" role="group" aria-label="Räknesätt">' +
-      [['add', 'Addition +'], ['sub', 'Subtraktion −']].map(function (x) { return '<button data-typ="' + x[0] + '" class="' + (S.typ === x[0] ? 'on' : '') + '">' + x[1] + '</button>'; }).join('') + '</div>' +
+      [['add', 'Addition +'], ['sub', 'Subtraktion −'], ['mul', 'Multiplikation ·'], ['div', 'Division /']].map(function (x) { return '<button data-typ="' + x[0] + '" class="' + (S.typ === x[0] ? 'on' : '') + '">' + x[1] + '</button>'; }).join('') + '</div>' +
       '<div class="up-grp" role="group" aria-label="Nivå">' + [1, 2, 3, 4].map(function (n) { return '<button data-niva="' + n + '" class="' + (S.niva === n ? 'on' : '') + '">' + NIVA[n] + '</button>'; }).join('') + '</div>' +
       '<div class="up-grp up-lage" role="group" aria-label="Hjälp">' + [['steg', 'Steg för steg'], ['sjalv', 'Själv']].map(function (x) { return '<button data-lage="' + x[0] + '" class="' + (S.lage === x[0] ? 'on' : '') + '">' + x[1] + '</button>'; }).join('') + '</div></div>';
     if (nr >= ANTAL) { rita_slut(h); return; }
@@ -224,6 +450,7 @@
     h += '<p class="up-fraga">Räkna med uppställning: <b>' + P.titel + '</b></p>';
     // rutnät
     var g = '<div class="up-grid' + (S.lage === 'steg' && !U.klar ? ' steg' : '') + '" style="--n:' + (P.W + 1 + (P.dec ? 1 : 0)) + '">';
+    if (P.md) g = (P.md === 'mul' ? mulGrid() : divGrid()) + '<!--';
     if (P.add) {
       g += rad(function (c) {
         if (c === 0) return cell('', 'up-tom up-sm');
@@ -232,7 +459,7 @@
       }, '', 'up-minne');
       g += rad(function (c) { return siffCell(P.A[c], P.Apad[c]); }, '', 'komma');
       g += rad(function (c) { return siffCell(P.B[c], P.Bpad[c]); }, '+', 'komma up-linje');
-    } else {
+    } else if (!P.md) {
       g += rad(function (c) { var ch = U.tv[c] !== (P.A[c] || 0); return cell(ch ? '<span>' + U.tv[c] + '</span>' : '', 'up-not up-sm'); }, '', 'up-minne');
       g += rad(function (c) {
         if (P.A[c] === null) return cell('', 'up-tom');
@@ -241,12 +468,13 @@
       }, '', 'komma');
       g += rad(function (c) { return siffCell(P.B[c], P.Bpad[c]); }, '−', 'komma up-linje');
     }
-    g += rad(function (c) {
+    if (!P.md) g += rad(function (c) {
       var v = U.ans[c] || '', kl = 'up-ans' + (U.sel && U.sel.r === 'ans' && U.sel.c === c ? ' sel' : '') + (U.mark[c] ? ' ' + U.mark[c] : '') + (U.okKol[c] && S.lage === 'steg' ? ' ok' : '') + (skakas === 'ans' + c ? ' skak' : '') + (U.klar && ledande(c) ? ' up-tomsvar' : '');
       return cell('<span>' + v + '</span>', kl, ' data-r="ans" data-c="' + c + '" role="button" aria-label="Svar, ' + namn(c, P.dec) + '"');
     }, '', 'komma up-svar');
     // markera aktuell kolumn i steg-läget
     g += '</div>';
+    if (P.md) g = g.split('<!--')[0];
     h += '<div class="up-yta">' + g + '</div>';
     h += '<div class="up-msg ' + U.msgTyp + '" aria-live="polite">' + U.msg + '</div>';
     if (U.klar) h += '<div class="up-knappar"><button class="up-nasta" data-g="nasta">' + (nr + 1 < ANTAL ? 'Nästa tal →' : 'Se resultatet →') + '</button></div>';
@@ -254,19 +482,21 @@
       h += '<div class="up-pad-wrap"><div class="up-tangent">' + [1, 2, 3, 4, 5, 6, 7, 8, 9].map(function (d) { return '<button data-d="' + d + '">' + d + '</button>'; }).join('') +
         (S.lage === 'sjalv' ? '<button data-g="sudda" class="up-gra" aria-label="Sudda">⌫</button>' : '<span></span>') + '<button data-d="0">0</button>' +
         (S.lage === 'sjalv' ? '<button data-g="ratta" class="up-ratta">Rätta</button>' : '<span></span>') + '</div>' +
-        (!P.add && S.lage === 'sjalv' && U.hist.length ? '<button class="up-angra" data-g="angra">↶ Ångra växling</button>' : '') + '</div>';
+        (S.typ === 'sub' && S.lage === 'sjalv' && U.hist.length ? '<button class="up-angra" data-g="angra">↶ Ångra växling</button>' : '') + '</div>';
     }
     h += '</div>';
     h += hjalp();
     R.innerHTML = h;
     // aktuell kolumn
-    if (S.lage === 'steg' && !U.klar && U.cur < P.W) {
+    if (!P.md && S.lage === 'steg' && !U.klar && U.cur < P.W) {
       var kol = U.cur;
       R.querySelectorAll('.up-rad').forEach(function (rd) { var cs = rd.querySelectorAll('.up-c:not(.up-km):not(.up-tk)'); var el = cs[P.W - 1 - kol]; if (el) el.classList.add('akt'); });
     }
     skakas = null;
   }
   function hjalp() {
+    if (S.typ === 'mul') return '<details class="up-hj"><summary>Så gör du</summary><ol><li>Börja längst till höger. Multiplicera siffran i det undre talet med varje siffra i det övre talet, en i taget.</li><li>Blir det 10 eller mer? Skriv den sista siffran och sätt tiotalet som <b>minnessiffra</b> ovanför nästa siffra. Lägg till minnessiffran efter nästa multiplikation.</li><li>Har det undre talet två siffror? Gör en rad för varje siffra. Den andra raden börjar med en nolla, eftersom du räknar med tiotal. Addera sedan raderna.</li><li>Decimaltal: räkna som om kommat inte fanns. Svaret får lika många decimaler som talet.</li></ol></details>';
+    if (S.typ === 'div') return '<details class="up-hj"><summary>Så gör du</summary><ol><li>Börja längst till vänster. Hur många gånger går talet du delar med i siffran? Skriv svaret ovanför siffran.</li><li>Det som blir kvar skriver du som en liten siffra framför nästa siffra. Då blir det ett nytt tal, till exempel 1 och 2 blir 12.</li><li>Går det inte en enda gång? Skriv 0 ovanför (eller ingenting om det är först i talet).</li><li>Blir det något kvar på slutet? Sätt ett komma och lägg till nollor. Kommat kommer med upp i svaret.</li></ol></details>';
     return '<details class="up-hj"><summary>Så gör du</summary>' + (S.typ === 'add'
       ? '<ol><li>Börja alltid längst till höger, med entalen.</li><li>Räkna ihop siffrorna i kolumnen.</li><li>Blir det 10 eller mer? Skriv den sista siffran i svaret. Skriv 1:an som <b>minnessiffra</b> i den lilla rutan ovanför nästa kolumn.</li><li>Räkna med minnessiffran i nästa kolumn.</li><li>Decimaltal: kommatecknen står under varandra. Grå nollor fyller ut så att talen har lika många decimaler.</li></ol>'
       : '<ol><li>Börja alltid längst till höger, med entalen.</li><li>Räkna den övre siffran minus den undre.</li><li>Är den övre siffran mindre? Då måste du <b>växla</b>. Tryck på siffran till vänster i det övre talet. Den blir 1 mindre, och din siffra får 10 till.</li><li>Står det 0 till vänster? Växla först från siffran längre till vänster.</li><li>Decimaltal: kommatecknen står under varandra. Grå nollor fyller ut så att talen har lika många decimaler.</li></ol>') + '</details>';
@@ -294,8 +524,9 @@
     if (g === 'igen') return nyRunda();
     if (b.dataset.r && !U.klar) {
       var c = +b.dataset.c;
-      if (b.dataset.r === 'top') return vaxla(c);
+      if (b.dataset.r === 'top' && !P.md) return vaxla(c);
       if (S.lage === 'sjalv') { U.sel = { r: b.dataset.r, c: c }; rita(); }
+      else if (P.md) return;
     }
   });
   var AR = '٠١٢٣٤٥٦٧٨٩', FA = '۰۱۲۳۴۵۶۷۸۹';
@@ -305,8 +536,8 @@
     if (/^[0-9]$/.test(k)) { e.preventDefault(); return siffra(+k); }
     if (k === 'Backspace') { e.preventDefault(); return sudda(); }
     if (k === 'Enter') { if (U.klar) { e.preventDefault(); nr++; if (nr < ANTAL) nyUppgift(); else rita(); } else if (S.lage === 'sjalv') { e.preventDefault(); ratta(); } return; }
-    if (S.lage === 'sjalv' && U.sel && (k === 'ArrowLeft' || k === 'ArrowRight')) { e.preventDefault(); var c = U.sel.c + (k === 'ArrowLeft' ? 1 : -1); if (c >= 0 && c < P.W) { U.sel = { r: 'ans', c: c }; rita(); } }
+    if (!P.md && S.lage === 'sjalv' && U.sel && (k === 'ArrowLeft' || k === 'ArrowRight')) { e.preventDefault(); var c = U.sel.c + (k === 'ArrowLeft' ? 1 : -1); if (c >= 0 && c < P.W) { U.sel = { r: 'ans', c: c }; rita(); } }
   });
   nyRunda();
-  window.__upst = { P: function () { return P; }, U: function () { return U; }, S: S };
+  window.__upst = { P: function () { return P; }, U: function () { return U; }, S: S, K: function () { return P && P.md ? mdKontroll() : []; } };
 })();
