@@ -4,7 +4,7 @@
   var R = document.getElementById('upst'); if (!R) return;
   var PLATS = ['entalen', 'tiotalen', 'hundratalen', 'tusentalen', 'tiotusentalen', 'hundratusentalen'];
   var NIVA = { 1: 'Lätt', 2: 'Mellan', 3: 'Svår', 4: 'Decimaltal' };
-  var ANTAL = 5;
+  var ANTAL = 5, vald = false;
   var S = { typ: 'add', niva: 1, lage: 'steg' };
   try { var sp = JSON.parse(sessionStorage.getItem('upst') || '{}'); if (sp.typ) S = Object.assign(S, sp); } catch (e) {}
   function spara() { try { sessionStorage.setItem('upst', JSON.stringify({ typ: S.typ, niva: S.niva, lage: S.lage })); } catch (e) {} }
@@ -438,11 +438,8 @@
   function siffCell(d, pad, c, r) { return d === null ? cell('', 'up-tom') : cell(String(d), 'up-d' + (pad ? ' up-pad' : '')); }
   function rita() {
     var h = '';
-    // val
-    h += '<div class="up-val"><div class="up-grp" role="group" aria-label="Räknesätt">' +
-      [['add', 'Addition +'], ['sub', 'Subtraktion −'], ['mul', 'Multiplikation ·'], ['div', 'Division /']].map(function (x) { return '<button data-typ="' + x[0] + '" class="' + (S.typ === x[0] ? 'on' : '') + '">' + x[1] + '</button>'; }).join('') + '</div>' +
-      '<div class="up-grp" role="group" aria-label="Nivå">' + [1, 2, 3, 4].map(function (n) { return '<button data-niva="' + n + '" class="' + (S.niva === n ? 'on' : '') + '">' + NIVA[n] + '</button>'; }).join('') + '</div>' +
-      '<div class="up-grp up-lage" role="group" aria-label="Hjälp">' + [['steg', 'Steg för steg'], ['sjalv', 'Själv']].map(function (x) { return '<button data-lage="' + x[0] + '" class="' + (S.lage === x[0] ? 'on' : '') + '">' + x[1] + '</button>'; }).join('') + '</div></div>';
+    if (!vald) return rita_start();
+    h += valRad();
     if (nr >= ANTAL) { rita_slut(h); return; }
     // progress
     h += '<div class="up-kort"><div class="up-topp"><span class="up-uppg">Tal ' + (nr + 1) + ' av ' + ANTAL + '</span><span class="up-prog">' +
@@ -501,22 +498,38 @@
       ? '<ol><li>Börja alltid längst till höger, med entalen.</li><li>Räkna ihop siffrorna i kolumnen.</li><li>Blir det 10 eller mer? Skriv den sista siffran i svaret. Skriv 1:an som <b>minnessiffra</b> i den lilla rutan ovanför nästa kolumn.</li><li>Räkna med minnessiffran i nästa kolumn.</li><li>Decimaltal: kommatecknen står under varandra. Grå nollor fyller ut så att talen har lika många decimaler.</li></ol>'
       : '<ol><li>Börja alltid längst till höger, med entalen.</li><li>Räkna den övre siffran minus den undre.</li><li>Är den övre siffran mindre? Då måste du <b>växla</b>. Tryck på siffran till vänster i det övre talet. Den blir 1 mindre, och din siffra får 10 till.</li><li>Står det 0 till vänster? Växla först från siffran längre till vänster.</li><li>Decimaltal: kommatecknen står under varandra. Grå nollor fyller ut så att talen har lika många decimaler.</li></ol>') + '</details>';
   }
+  var SATT = [['add', '+', 'Addition'], ['sub', '−', 'Subtraktion'], ['mul', '·', 'Multiplikation'], ['div', '÷', 'Division']];
+  function rita_start() {
+    R.innerHTML = '<div class="v-box"><span class="v-et">1. Välj räknesätt</span><div class="v-satt" role="group" aria-label="Räknesätt">' +
+      SATT.map(function (x) { return '<button data-typ="' + x[0] + '" class="' + (S.typ === x[0] ? 'on' : '') + '" aria-pressed="' + (S.typ === x[0]) + '"><b aria-hidden="true">' + x[1] + '</b><span>' + x[2] + '</span></button>'; }).join('') + '</div>' +
+      '<div class="v-tva"><div><span class="v-et">2. Välj nivå</span><div class="v-seg" role="group" aria-label="Nivå">' +
+      [1, 2, 3, 4].map(function (n) { return '<button data-niva="' + n + '" class="' + (S.niva === n ? 'on' : '') + '" aria-pressed="' + (S.niva === n) + '">' + (n === 4 ? 'Decimal&shy;tal' : NIVA[n]) + '</button>'; }).join('') + '</div></div>' +
+      '<div><span class="v-et">3. Hur vill du räkna?</span><div class="v-seg" role="group" aria-label="Hjälp">' +
+      [['steg', 'Steg för steg', 'Du får hjälp'], ['sjalv', 'Själv', 'Utan hjälp']].map(function (x) { return '<button data-lage="' + x[0] + '" class="' + (S.lage === x[0] ? 'on' : '') + '" aria-pressed="' + (S.lage === x[0]) + '">' + x[1] + '<small>' + x[2] + '</small></button>'; }).join('') + '</div></div></div>' +
+      '<div class="v-start"><button data-g="borja">Börja räkna →</button></div></div>';
+  }
+  function valRad() {
+    var t = SATT.filter(function (x) { return x[0] === S.typ; })[0];
+    return '<div class="v-bar"><span class="v-chip"><b>' + t[1] + ' ' + t[2] + '</b> · ' + NIVA[S.niva] + ' · ' + (S.lage === 'steg' ? 'Steg för steg' : 'Själv') + '</span><button class="v-byt" data-g="byt">Byt övning</button></div>';
+  }
   function rita_slut(h) {
     var hela = runda.filter(function (x) { return x === 'hel'; }).length;
     h += '<div class="up-kort up-slut"><h2>Bra jobbat!</h2><p>Du har räknat ' + ANTAL + ' tal. <b>' + hela + '</b> av dem blev rätt direkt, utan fel.</p><div class="up-stj">' +
       runda.map(function (x) { return x === 'hel' ? '★' : '<i>★</i>'; }).join('') + '</div>' +
       '<p>' + (hela === ANTAL ? (S.niva < 4 ? 'Prova en svårare nivå, eller prova att räkna <b>Själv</b>.' : 'Snyggt! Prova att räkna <b>Själv</b> utan hjälp.') : 'Träna en runda till, så blir det lättare.') + '</p>' +
-      '<div class="up-knappar"><button class="up-nasta" data-g="igen">Spela igen</button></div></div>';
+      '<div class="up-knappar"><button class="v-byt" data-g="byt">Byt övning</button><button class="up-nasta" data-g="igen">Spela igen</button></div></div>';
     R.innerHTML = h;
   }
 
   R.addEventListener('click', function (e) {
     var b = e.target.closest('button,[data-r]'); if (!b) return;
-    if (b.dataset.typ) { S.typ = b.dataset.typ; spara(); return nyRunda(); }
-    if (b.dataset.niva) { S.niva = +b.dataset.niva; spara(); return nyRunda(); }
-    if (b.dataset.lage) { S.lage = b.dataset.lage; spara(); return nyRunda(); }
+    if (b.dataset.typ) { S.typ = b.dataset.typ; spara(); return rita_start(); }
+    if (b.dataset.niva) { S.niva = +b.dataset.niva; spara(); return rita_start(); }
+    if (b.dataset.lage) { S.lage = b.dataset.lage; spara(); return rita_start(); }
     if (b.dataset.d !== undefined) return siffra(+b.dataset.d);
     var g = b.dataset.g;
+    if (g === 'borja') { vald = true; nyRunda(); R.scrollIntoView({ block: 'start', behavior: 'smooth' }); return; }
+    if (g === 'byt') { vald = false; rita_start(); return; }
     if (g === 'sudda') return sudda();
     if (g === 'ratta') return ratta();
     if (g === 'angra') return angra();
@@ -531,13 +544,13 @@
   });
   var AR = '٠١٢٣٤٥٦٧٨٩', FA = '۰۱۲۳۴۵۶۷۸۹';
   document.addEventListener('keydown', function (e) {
-    if (e.ctrlKey || e.metaKey || e.altKey || !P || nr >= ANTAL) return;
+    if (e.ctrlKey || e.metaKey || e.altKey || !vald || !P || nr >= ANTAL) return;
     var k = e.key, i = AR.indexOf(k); if (i < 0) i = FA.indexOf(k); if (i >= 0) k = String(i);
     if (/^[0-9]$/.test(k)) { e.preventDefault(); return siffra(+k); }
     if (k === 'Backspace') { e.preventDefault(); return sudda(); }
     if (k === 'Enter') { if (U.klar) { e.preventDefault(); nr++; if (nr < ANTAL) nyUppgift(); else rita(); } else if (S.lage === 'sjalv') { e.preventDefault(); ratta(); } return; }
     if (!P.md && S.lage === 'sjalv' && U.sel && (k === 'ArrowLeft' || k === 'ArrowRight')) { e.preventDefault(); var c = U.sel.c + (k === 'ArrowLeft' ? 1 : -1); if (c >= 0 && c < P.W) { U.sel = { r: 'ans', c: c }; rita(); } }
   });
-  nyRunda();
+  rita_start();
   window.__upst = { P: function () { return P; }, U: function () { return U; }, S: S, K: function () { return P && P.md ? mdKontroll() : []; } };
 })();
