@@ -569,11 +569,33 @@
 
   // ---------- Visning ----------
   if (window.MK_IK2) Object.entries(OV).forEach(([k, o]) => { o.ikonBild = `<img src="bilder/ikoner/gt-${k}.png" alt="">`; o.ikon = `<img class="gt-ikm" src="bilder/ikoner/gt-${k}.png" alt="">`; });  // enhetliga ikoner (enhetliga_ikoner.py)
-  const DELAR = [['position', 'Positionssystemet', 'Förstå ental, tiotal, hundratal, tusental och decimalernas platsvärde.'], ['rakna', 'Huvudräkning', 'Räkna i huvudet. Du får 10 uppgifter med nya tal varje gång.'], ['tid', 'Klockan och tid', 'Läs klockan, ställ visarna och räkna med tid.'], ['enhet', 'Enheter', 'Längd, volym, vikt och tid. Välj rätt enhet och byt mellan enheter.']];
+  const DELAR = [['position', 'Positionssystemet', 'Förstå ental, tiotal, hundratal, tusental och decimalernas platsvärde.'], ['rakna', 'Huvudräkning', 'Räkna i huvudet. Du får 10 uppgifter med nya tal varje gång.'], ['tid', 'Klocka och tid', 'Läs klockan, ställ visarna och räkna med tid.'], ['enhet', 'Enheter', 'Längd, volym, vikt och tid. Välj rätt enhet och byt mellan enheter.']];
   const KLOCKORD = [[7, 0, 'klockan 7', '7.00'], [7, 30, 'halv 8', '7.30'], [7, 15, 'kvart över 7', '7.15'], [7, 45, 'kvart i 8', '7.45'], [7, 5, 'fem över 7', '7.05'], [7, 55, 'fem i 8', '7.55']];
-  function meny(bara) {  // bara = 'tid' m.fl.: visa bara den delen (genväg från startsidan)
-    const delar = bara ? DELAR.filter(x => x[0] === bara) : DELAR;
-    el.innerHTML = delar.map(([d, rub, txt]) => `<div class="kapblock gt-del" id="del-${d}"><h2>${rub}</h2><p class="gt-txt">${txt}</p><div class="gt-typer">` +
+  // Startvy (2026-11-22): fyra rutor, en per del, som leder till #del-<del>
+  const DELIK = {position: 'position', rakna: 'huvud', tid: 'klocka', enhet: 'enheter'};
+  const DELEMO = {position: '🔢', rakna: '🧠', tid: '🕒', enhet: '📏'};
+  if (!document.getElementById('gt-start-css')) document.head.insertAdjacentHTML('beforeend', `<style id="gt-start-css">
+.gt-start{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1150px}
+.gt-start a{display:flex;gap:20px;align-items:center;background:#fff;color:var(--ink);border-radius:20px;padding:24px 26px;text-decoration:none;box-shadow:inset 0 0 0 2px var(--l),0 4px 12px #1E2B3A12;transition:transform .15s,box-shadow .15s}
+.gt-start a:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 2px var(--mid),0 8px 18px #1E2B3A1C}
+.gt-start .gs-ik{width:96px;height:96px;flex:none;display:flex;align-items:center;justify-content:center;font-size:46px;border-radius:50%;background:var(--vl)}
+.gt-start .gs-ik.b{background:none;border-radius:0}.gt-start .gs-ik img{width:100%;height:100%;display:block;filter:drop-shadow(0 1px 2px rgba(30,43,58,.12))}
+.gt-start b{display:block;font-family:Fraunces,Georgia,serif;font-size:26px;line-height:1.2}.gt-start small{display:block;margin-top:6px;font-size:16px;line-height:1.45;color:#4A433C}
+.gt-start em{display:inline-block;margin-top:12px;font-style:normal;font-weight:800;font-size:15px;color:#fff;background:var(--ink);border-radius:999px;padding:6px 14px}
+.gt-allad{display:inline-block;margin:0 0 14px;font-weight:700;color:var(--ink)}
+@media (max-width:800px){.gt-start{grid-template-columns:1fr;gap:12px}.gt-start a{padding:16px 18px;gap:14px}.gt-start .gs-ik{width:68px;height:68px;font-size:34px}.gt-start b{font-size:21px}.gt-start small{font-size:15px}.gt-start em{margin-top:8px}}
+</style>`);
+  function startvy() {
+    el.innerHTML = '<div class="gt-start">' + DELAR.map(([d, rub, txt]) => {
+      const n = Object.values(OV).filter(o => o.del === d).length;
+      const ik = window.MK_IK2 ? `<span class="gs-ik b" aria-hidden="true"><img src="bilder/ikoner/${DELIK[d]}.png" alt=""></span>` : `<span class="gs-ik" aria-hidden="true">${DELEMO[d]}</span>`;
+      return `<a href="#del-${d}">${ik}<span><b>${rub}</b><small>${txt}</small><em>${n} övningar →</em></span></a>`;
+    }).join('') + '</div>';
+  }
+  function meny(bara) {  // bara = 'tid' m.fl.: visa bara den delen
+    if (!bara) return startvy();
+    const delar = DELAR.filter(x => x[0] === bara);
+    el.innerHTML = `<a class="gt-allad" href="#alla">← Alla områden</a>` + delar.map(([d, rub, txt]) => `<div class="kapblock gt-del" id="del-${d}"><h2>${rub}</h2><p class="gt-txt">${txt}</p><div class="gt-typer">` +
       Object.entries(OV).filter(([, o]) => o.del === d).map(([k, o]) => `<a class="typ" href="#${k}"><span class="gt-ik${o.ikonBild ? ' gt-ikb' : ''}" aria-hidden="true">${o.ikonBild || o.ikon}</span>${o.namn}<b>${o.kort}</b></a>`).join('') + '</div>' +
       (d === 'position' ? `<details class="gt-ord"><summary>📖 Positionstabellen</summary><div class="gt-trappor">${postabell([3, 7, 5, 2, 4, 8, 6].map((s, i) => ({s, e: 3 - i})))}
         <ul><li>Talet ovan är <b>3 752,486</b>. Siffrans <b>position</b> avgör siffrans <b>platsvärde</b>: 7 har värdet 700 och 8 har värdet 0,08.</li><li>Varje plats är <b>10 gånger större</b> än platsen till höger.</li><li><b>10 ental = 1 tiotal</b>, 10 tiotal = 1 hundratal, 10 hundratal = 1 tusental.</li>
