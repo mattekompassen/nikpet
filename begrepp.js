@@ -575,6 +575,40 @@
     $('.bg-sokrub').after($('.bg-sok'));
     setTimeout(() => el.scrollIntoView({block: 'start'}), 50);
   }
+  // Startvy med fyra rutor (Nikola 2026-11-22, som Matematikverkstad): #mattebegrepp, #bg-resonera, #testa-dig, #mattequiz visar bara den delen
+  if (!bara) {
+    const DELAR = [['mattebegrepp', 'mattebegrepp', 'vinkel', 'Mattebegrepp', 'Ord som används i matematiken, till exempel nämnare, ekvation och omkrets.', ORD.length + ' begrepp'],
+      ['bg-resonera', 'resonemang', 'lank', 'Resonemangsord', 'Ord som hjälper dig att förstå uppgifter och förklara hur du tänker.', KO.length + ' ord'],
+      ['testa-dig', 'testadig', 'mal', 'Testa dig', 'Kolla vad du kan. 10 frågor, och i slutet ser du vilka ord du kan öva mer på.', 'Nivå 1–3'],
+      ['mattequiz', 'quiz', 'stjarna', 'Mattequiz', 'Tävla om begreppen: en mot en, i par eller i lag.', 'Nivå 1–3']];
+    if (!document.getElementById('bg-start-css')) document.head.insertAdjacentHTML('beforeend', `<style id="bg-start-css">
+.bg-start{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1150px;margin:0 0 8px}
+.bg-start a{display:flex;gap:20px;align-items:center;background:#fff;color:var(--ink);border-radius:20px;padding:24px 26px;text-decoration:none;box-shadow:inset 0 0 0 2px var(--l),0 4px 12px #1E2B3A12;transition:transform .15s,box-shadow .15s}
+.bg-start a:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 2px var(--mid),0 8px 18px #1E2B3A1C}
+.bg-start .bs-ik{width:96px;height:96px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--vl);color:var(--ink)}.bg-start .bs-ik .ik{width:48px;height:48px}
+.bg-start .bs-ik.b{background:none;border-radius:0}.bg-start .bs-ik img{width:100%;height:100%;display:block;filter:drop-shadow(0 1px 2px rgba(30,43,58,.12))}
+.bg-start b{display:block;font-family:Fraunces,Georgia,serif;font-size:26px;line-height:1.2}.bg-start small{display:block;margin-top:6px;font-size:16px;line-height:1.45;color:#4A433C}
+.bg-start em{display:inline-block;margin-top:12px;font-style:normal;font-weight:800;font-size:15px;color:#fff;background:var(--ink);border-radius:999px;padding:6px 14px}
+.bg-allad{display:inline-block;margin:0 0 14px;font-weight:700;color:var(--ink)}
+@media (max-width:800px){.bg-start{grid-template-columns:1fr;gap:12px}.bg-start a{padding:16px 18px;gap:14px}.bg-start .bs-ik{width:68px;height:68px}.bg-start b{font-size:21px}.bg-start small{font-size:15px}.bg-start em{margin-top:8px}}
+</style>`);
+    $('#bg-steg1').insertAdjacentHTML('afterbegin', '<div class="bg-start">' + DELAR.map(([id, png, sy, rub, txt, n]) =>
+      `<a href="#${id}">${window.MK_IK2 ? `<span class="bs-ik b" aria-hidden="true"><img src="${window.MK_IKR || ''}bilder/ikoner/${png}.png" alt=""></span>` : `<span class="bs-ik" aria-hidden="true">${ik(sy)}</span>`}<span><b>${rub}</b><small>${txt}</small><em>${n} →</em></span></a>`).join('') + '</div><a class="bg-allad" href="#alla" hidden>← Alla områden</a>');
+    $('#bg-steg2').insertAdjacentHTML('afterend', '<h3 class="bg-del bg-sokrub"><span class="bg-dik">' + ik('sok') + '</span>Sök ett ord <small>Sök bland alla begrepp och resonemangsord.</small></h3>');
+    $('.bg-sokrub').after($('.bg-sok'));
+    let forsta = true;
+    const delvy = () => {
+      const h = decodeURIComponent(location.hash.slice(1)), d = DELAR.some(x => x[0] === h) ? h : '';
+      VAL = null; if (sokruta.value) { sokruta.value = ''; F.sok = ''; } steg(1);
+      $('.bg-start').hidden = !!d; $('.bg-allad').hidden = !d;
+      DELAR.forEach(([id]) => { document.getElementById(id).hidden = id !== d; });
+      $('.bg-sokrub').hidden = $('.bg-sok').hidden = d === 'testa-dig' || d === 'mattequiz';
+      if (!forsta || d) el.scrollIntoView({block: 'start'});
+      forsta = false;
+    };
+    window.addEventListener('hashchange', delvy);
+    delvy();
+  }
   if (q.get('flik') === 'sok') setTimeout(() => { sokruta.scrollIntoView({block: 'center'}); sokruta.focus(); }, 50);
   window.BG_ANTAL = ORD.length;
 })();
