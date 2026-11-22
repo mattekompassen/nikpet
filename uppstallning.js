@@ -274,7 +274,7 @@
   }
   function mdFyll() { mdKontroll().forEach(function (x) { var k = x[0] + ':' + x[1]; if (!x[3]) U.f[k] = String(x[2]); U.m[k] = 'ok'; }); U.hl = {}; }
   function mdSjalvSiffra(d) {
-    var s = U.sel; satt(s.r, s.c, String(d)); U.m[s.r + ':' + s.c] = '';
+    var s = U.sel; satt(s.r, s.c, String(d)); U.m[s.r + ':' + s.c] = ''; (U.skr = U.skr || []).push({ r: s.r, c: s.c });
     if (s.r === 'q') { if (s.c + 1 < P.n) U.sel = { r: 'q', c: s.c + 1 }; }
     else if (s.r === 'res' || s.r === 'p0' || s.r === 'p1') { var max = s.r === 'res' ? P.W : P.ppLen[+s.r[1]]; if (s.c + 1 < max) U.sel = { r: s.r, c: s.c + 1 }; }
   }
@@ -411,12 +411,17 @@
     if (P.md) { if (S.lage === 'steg') (P.md === 'mul' ? mulSiffra : divSiffra)(d); else mdSjalvSiffra(d); rita(); return; }
     if (S.lage === 'steg') { stegSiffra(d); rita(); return; }
     var c = U.sel.c;
+    (U.skr = U.skr || []).push({ r: U.sel.r, c: c });
     if (U.sel.r === 'car') { U.car[c] = String(d); U.sel = { r: 'ans', c: c }; }
     else { U.ans[c] = String(d); U.mark[c] = ''; if (c + 1 < P.W) U.sel = { r: 'ans', c: c + 1 }; }
     rita();
   }
   function sudda() {
     if (!U.sel || U.klar || S.lage === 'steg') return;
+    // Som backsteg: är den markerade rutan tom, gå tillbaka till den senast skrivna siffran och sudda den.
+    var varde = function (x) { return P.md ? F(x.r, x.c) : (x.r === 'car' ? U.car[x.c] : U.ans[x.c]); };
+    var skr = U.skr || [];
+    if (!varde(U.sel)) { while (skr.length && !varde(skr[skr.length - 1])) skr.pop(); if (skr.length) U.sel = skr.pop(); }
     if (P.md) { satt(U.sel.r, U.sel.c, ''); U.m[U.sel.r + ':' + U.sel.c] = ''; return rita(); }
     var c = U.sel.c; if (U.sel.r === 'car') U.car[c] = ''; else { U.ans[c] = ''; U.mark[c] = ''; }
     rita();
