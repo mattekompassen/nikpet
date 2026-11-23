@@ -43,7 +43,7 @@
         svar: `${A} har ${k * u} ${sak}.`, koll: `${k * u} + ${u} = ${S} och ${k * u} är ${k} gånger så mycket som ${u}.` };
     } },
     { id: 'n2', omr: 'nat', namn: 'Fler än', gor() {
-      const [A, B] = namn(2), u = R(8, 60), d = R(3, 30), S = 2 * u + d;
+      const [A, B] = namn(2), u = 5 * R(5, 25), d = 5 * R(1, 10), S = 2 * u + d;  // 55–300 kr (2026-11-23)
       return { text: `${A} och ${B} har tillsammans ${S} kr. ${A} har ${d} kr mer än ${B}.`, fraga: `Hur mycket pengar har ${A}?`,
         rader: [{ n: A, f: 'g' }, { n: B, f: 'b' }],
         steg: [LAS(`Hur mycket pengar ${A} har`, [`Hur mycket pengar de har tillsammans`, `Hur mycket pengar ${B} har`]),
@@ -61,7 +61,7 @@
         svar: `${A} har ${u + d} kr.`, koll: `${u + d} + ${u} = ${S} och ${u + d} − ${u} = ${d}.` };
     } },
     { id: 'n3', omr: 'nat', namn: 'Gånger så många och skillnad', gor() {
-      const [A, B] = namn(2), k = R(3, 6), u = R(5, 30), d = (k - 1) * u;
+      const [A, B] = namn(2), k = R(2, 5), u = R(2, 6), d = (k - 1) * u;  // rimligt antal varv (2026-11-23)
       return { text: `${A} har sprungit ${k} gånger så många varv som ${B}. ${A} har sprungit ${d} varv fler än ${B}.`, fraga: `Hur många varv har ${B} sprungit?`,
         rader: [{ n: A, f: 'g' }, { n: B, f: 'b' }],
         steg: [LAS(`Hur många varv ${B} har sprungit`, [`Hur många varv ${A} har sprungit`, `Hur många varv de har sprungit tillsammans`]),
@@ -76,9 +76,9 @@
     } },
     // BRÅK
     { id: 'b1', omr: 'brak', namn: 'Del av det hela', gor() {
-      const [a, b] = P([[1, 3], [2, 3], [1, 4], [3, 4], [2, 5], [3, 5], [4, 5], [5, 6], [3, 8]]), [A] = namn(1), u = R(4, 25);
-      const ctx = P([{ sak: 'Boken', text: `${A} har läst ${F(a, b)} av en bok. Det är ${a * u} sidor.`, fraga: 'Hur många sidor har boken?', enh: ' sidor', vad: 'Hur många sidor boken har', fel: [`Hur många sidor ${A} har läst`, 'Hur många sidor som är kvar'], del: 'läst' },
-        { sak: 'Vägen', text: `${A} har cyklat ${F(a, b)} av vägen till stranden. Det är ${a * u} km.`, fraga: 'Hur lång är vägen till stranden?', enh: ' km', vad: 'Hur lång hela vägen är', fel: [`Hur långt ${A} har cyklat`, 'Hur långt det är kvar'], del: 'cyklat' }]);
+      const [a, b] = P([[1, 3], [2, 3], [1, 4], [3, 4], [2, 5], [3, 5], [4, 5], [5, 6], [3, 8]]), [A] = namn(1), bok = Math.random() < .5, u = bok ? R(Math.ceil(120 / b), Math.floor(480 / b)) : R(Math.ceil(4 / b), Math.floor(24 / b));  // rimlig bok/väg (2026-11-23)
+      const ctx = ([{ sak: 'Boken', text: `${A} har läst ${F(a, b)} av en bok. Det är ${a * u} sidor.`, fraga: 'Hur många sidor har boken?', enh: ' sidor', vad: 'Hur många sidor boken har', fel: [`Hur många sidor ${A} har läst`, 'Hur många sidor som är kvar'], del: 'läst' },
+        { sak: 'Vägen', text: `${A} har cyklat ${F(a, b)} av vägen till stranden. Det är ${a * u} km.`, fraga: 'Hur lång är vägen till stranden?', enh: ' km', vad: 'Hur lång hela vägen är', fel: [`Hur långt ${A} har cyklat`, 'Hur långt det är kvar'], del: 'cyklat' }])[bok ? 0 : 1];
       return { text: ctx.text, fraga: ctx.fraga, rader: [{ n: ctx.sak, f: 'g' }], start: [{ e: 'kl', id: 'q', rad: 0, t: '?', pos: 'o' }],
         steg: [LAS(ctx.vad, ctx.fel),
           { typ: 'delar', rub: 'Hur delar vi blocket?', q: `Blocket är det hela. Hur många lika stora delar ska det ha?`, rader: [{ rad: 0, n: b }], tips: `Nämnaren i ${F(a, b)} är ${b}.`, klar: `Blocket delas i ${b} delar.` },
@@ -128,7 +128,7 @@
     } },
     // FÖRHÅLLANDE
     { id: 'f1', omr: 'forh', namn: 'Dela i ett förhållande', gor() {
-      const [p, q] = P([[1, 2], [2, 3], [3, 4], [1, 3], [2, 5], [3, 5], [1, 4], [4, 5], [3, 2], [5, 3]]), u = R(3, 20), S = (p + q) * u;
+      const [p, q] = P([[1, 2], [2, 3], [3, 4], [1, 3], [2, 5], [3, 5], [1, 4], [4, 5], [3, 2], [5, 3]]), u = R(1, 3), S = (p + q) * u;  // högst 27 äpplen / dl (2026-11-23)
       const c = P([{ a: 'Röda', b: 'Gröna', text: `I en skål finns röda och gröna äpplen i förhållandet ${p}:${q}. Det finns ${S} äpplen i skålen.`, fraga: 'Hur många gröna äpplen finns det?', sak: 'gröna äpplen', vad: 'Hur många gröna äpplen det finns', fel: ['Hur många röda äpplen det finns', 'Hur många äpplen det finns'] },
         { a: 'Saft', b: 'Vatten', text: `Saft och vatten blandas i förhållandet ${p}:${q}. Det blir ${S} dl blandning.`, fraga: 'Hur mycket vatten används?', sak: 'dl vatten', enh: ' dl', vad: 'Hur mycket vatten som används', fel: ['Hur mycket saft som används', 'Hur mycket blandning det blir'] }]);
       const e = c.enh || '';
@@ -174,7 +174,7 @@
     } },
     // PROCENT
     { id: 'p1', omr: 'proc', namn: 'Procent av det hela', gor() {
-      const [pct, n, k] = P([[10, 10, 1], [20, 5, 1], [25, 4, 1], [50, 2, 1], [40, 5, 2], [60, 5, 3], [75, 4, 3], [30, 10, 3]]), u = R(4, 40);
+      const [pct, n, k] = P([[10, 10, 1], [20, 5, 1], [25, 4, 1], [50, 2, 1], [40, 5, 2], [60, 5, 3], [75, 4, 3], [30, 10, 3]]), u = R(Math.ceil(200 / n), Math.floor(800 / n));  // skola med 200–800 elever (2026-11-23)
       return { text: `${pct} % av eleverna på en skola cyklar till skolan. Det är ${k * u} elever.`, fraga: 'Hur många elever går på skolan?',
         rader: [{ n: 'Alla elever', f: 'g' }], start: [{ e: 'kl', id: 'q', rad: 0, t: '? (100 %)', pos: 'o' }],
         steg: [LAS('Hur många elever som går på skolan', ['Hur många elever som cyklar', 'Hur många elever som inte cyklar']),
@@ -191,7 +191,7 @@
     { id: 'p2', omr: 'proc', namn: 'Rabatt', gor() {
       const BEST = { 'En jacka': 'Jackan', 'Ett par skor': 'Skorna', 'Ett spel': 'Spelet', 'En cykelhjälm': 'Cykelhjälmen' };
       const [pct, n, k] = P([[20, 5, 1], [25, 4, 1], [10, 10, 1], [40, 5, 2], [30, 10, 3], [50, 2, 1]]), sak = P(['En jacka', 'Ett par skor', 'Ett spel', 'En cykelhjälm']);
-      const u = n == 10 ? 10 * R(3, 30) : 5 * R(4, 40), Rp = (n - k) * u, ord = null;
+      const u = 10 * R(Math.ceil(20 / n), Math.floor(150 / n)), Rp = (n - k) * u, ord = null;
       return { text: `${sak} är rabatterad med ${pct} %. Nu kostar ${sak.startsWith('Ett par') ? 'de' : 'den'} ${Rp} kr.`, fraga: `Vad kostade ${BEST[sak].toLowerCase()} före rabatten?`,
         rader: [{ n: 'Ordinarie pris', f: 'y' }], start: [{ e: 'kl', id: 'q', rad: 0, t: '? (100 %)', pos: 'o' }],
         steg: [LAS('Priset före rabatten', ['Hur stor rabatten är i kronor', 'Priset efter rabatten']),

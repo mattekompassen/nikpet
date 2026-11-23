@@ -41,7 +41,7 @@ window.BM_LEKTIONER_FN = function (H) {
       text: K => `På en bio är en tredjedel av besökarna barn. En fjärdedel av de vuxna är pensionärer och ${K} vuxna är inte pensionärer.`, fraga: 'Hur många besökare är det totalt?',
       q3: 'En fjärdedel av de vuxna är pensionärer. I hur många lika stora delar delar vi de vuxnas block?', q4: K => `${K} vuxna är inte pensionärer. Klicka på de delarna.`,
       svar: t => `Det är ${t} besökare på bion.`, koll: (t, v, u) => `En tredjedel av ${t} är ${t - v} barn. ${t} − ${t - v} = ${v} vuxna. En fjärdedel av ${v} är ${u}. ${v} − ${u} = ${v - u}.` }),
-    () => camping({ titel: 'Klassen', p1: 2, p2: 4, u: [3, 12], hel: 'Elever', alla: 'elever', allaB: 'eleverna', a: 'flickor', b: 'pojkar', c: 'glas.', ord1: 'Hälften', ord2: 'En fjärdedel',
+    () => camping({ titel: 'Klassen', p1: 2, p2: 4, u: [3, 4], hel: 'Elever', alla: 'elever', allaB: 'eleverna', a: 'flickor', b: 'pojkar', c: 'glas.', ord1: 'Hälften', ord2: 'En fjärdedel',
       text: K => `I en klass är hälften av eleverna flickor. En fjärdedel av pojkarna har glasögon och ${K} pojkar har inte glasögon.`, fraga: 'Hur många elever går i klassen?',
       q3: 'En fjärdedel av pojkarna har glasögon. I hur många lika stora delar delar vi pojkarnas block?', q4: K => `${K} pojkar har inte glasögon. Klicka på de delarna.`,
       svar: t => `Det går ${t} elever i klassen.`, koll: (t, v, u) => `Hälften av ${t} är ${v} pojkar. En fjärdedel av ${v} är ${u} med glasögon. ${v} − ${u} = ${v - u}.` })] };
@@ -113,7 +113,7 @@ window.BM_LEKTIONER_FN = function (H) {
       svar: svar[2], koll: c.koll(u, d, S) };
   }
   L[4] = { titel: 'Ryggsäcksproblemet', omr: 'nat', uppg: [
-    () => rygg({ titel: 'Ryggsäckarna', A: 'Mira', B: 'Oskar', C: 'Tova', k: 2, bas: 2, tecken: 1, u: [4, 12], d: [1, 5], enh: ' kg',
+    () => rygg({ titel: 'Ryggsäckarna', A: 'Mira', B: 'Oskar', C: 'Tova', k: 2, bas: 2, tecken: 1, u: [2, 5], d: [1, 4], enh: ' kg',
       text: (d, S) => `Mira, Oskar och Tova har varsin ryggsäck. Oskars väger dubbelt så mycket som Miras. Tovas ryggsäck väger ${d} kg mer än Oskars. Tillsammans väger de ${S} kg.`,
       fraga: 'Hur mycket väger den tyngsta ryggsäcken?', las: ['Hur mycket den tyngsta ryggsäcken väger', 'Hur mycket Miras ryggsäck väger', 'Hur mycket alla ryggsäckar väger'],
       qB: 'Oskars ryggsäck väger dubbelt så mycket som Miras.', qC: d => `Tovas ryggsäck väger ${d} kg mer än Oskars.`,
@@ -163,7 +163,7 @@ window.BM_LEKTIONER_FN = function (H) {
       ord1: 'En fjärdedel', q2: 'av veckopengen går till godis.', ord2: 'fem sjättedelar', q4: 'går till badhuset.', tips4: 'Vi behöver sjättedelar av resten. Resten är 3 delar, och 3 · 2 = 6 små delar.',
       q5: 'Var är badhuset?', svar: t => `Tildas veckopeng är ${t} kr.`,
       koll: (t, st, s) => `En fjärdedel av ${t} kr är ${st} kr (godis). Kvar ${t - st} kr. Badhuset ${5 * s} kr och ${s} kr sparar hon: ${st} + ${5 * s} + ${s} = ${t}.` }),
-    () => vecko({ titel: 'Shoppingen', hel: 'Pengarna', b: 3, k: 2, m: 10, s: [20, 90], enh: ' kr', a: 'tröja', c: 'skor',
+    () => vecko({ titel: 'Shoppingen', hel: 'Pengarna', b: 3, k: 2, m: 10, s: [50, 150], enh: ' kr', a: 'tröja', c: 'skor',
       text: s => `Lina använder en tredjedel av sina pengar till en tröja. Tre fjärdedelar av det som är kvar använder hon till skor. Sedan har hon ${s} kr kvar.`,
       fraga: 'Hur mycket pengar hade Lina från början?', las: ['Hur mycket pengar Lina hade från början', 'Hur mycket tröjan kostade', 'Hur mycket skorna kostade'],
       ord1: 'En tredjedel', q2: 'av pengarna går till en tröja.', ord2: 'tre fjärdedelar', q4: 'går till skor.', tips4: 'Vi behöver fjärdedelar av resten. Resten är 2 delar, och 2 · 2 = 4 små delar.',
@@ -376,7 +376,7 @@ window.BM_LEKTIONER_FN = function (H) {
       svar: c.svar(start), koll: `${start} − ${sA} = ${u} och ${start} − ${sB} = ${start - sB}, som är ${c.k} · ${u}.` };
   }
   L[11] = { titel: 'Fickpengsproblemet', omr: 'nat', uppg: [
-    () => fick({ titel: 'Tröjan och boken', A: 'Ali', B: 'Bea', k: 4, m: 10, u: [30, 120], m2: 10, s: [20, 100], enh: ' kr',
+    () => fick({ titel: 'Tröjan och boken', A: 'Ali', B: 'Bea', k: 4, m: 10, u: [30, 120], m2: 10, s: [60, 150], enh: ' kr',
       text: (a, b) => `Ali och Bea har lika mycket pengar. Ali köper en tröja för ${a} kr. Bea köper en bok för ${b} kr. Nu har Bea 4 gånger så mycket kvar som Ali.`,
       fraga: 'Hur mycket pengar hade de från början?', las: ['Hur mycket pengar de hade från början', 'Hur mycket Ali har kvar', 'Vad tröjan kostade'],
       qvad: (a, b) => `Ali köpte för ${a} kr och Bea för ${b} kr.`, svar: x => `De hade ${x} kr var från början.` }),
@@ -418,7 +418,7 @@ window.BM_LEKTIONER_FN = function (H) {
       qn: 'Tanken är fylld till åttondelar. Hur många lika stora delar ska blocket ha?', tn: 'Nämnaren i åttondelar är 8.', qa: `Tanken var fylld till ${F(3, 8)}.`, ta: `${F(3, 8)} är 3 av 8 delar.`,
       qb: x => `Lina häller i ${x} liter. Nu är tanken fylld till ${F(7, 8)}.`, tb: `${F(7, 8)} är 7 delar. Det är 4 delar mer än 3.`, svar: x => `Tanken rymmer ${x} liter.`,
       koll: u => `${F(3, 8)} av ${8 * u} är ${3 * u}, och ${3 * u} + ${4 * u} = ${7 * u}, som är ${F(7, 8)} av ${8 * u}.` }),
-    () => tank({ titel: 'Hinken', hel: 'Hinken', n: 7, a: 2, b: 5, u: [2, 6], enh: ' liter', text: x => `En hink är fylld till ${F(2, 7)}. Leo häller i ${x} liter. Nu är hinken fylld till ${F(5, 7)}.`,
+    () => tank({ titel: 'Hinken', hel: 'Hinken', n: 7, a: 2, b: 5, u: [1, 2], enh: ' liter', text: x => `En hink är fylld till ${F(2, 7)}. Leo häller i ${x} liter. Nu är hinken fylld till ${F(5, 7)}.`,
       fraga: 'Hur mycket rymmer hinken?', las: ['Hur mycket hinken rymmer', 'Hur mycket Leo häller i', 'Hur mycket som fanns först'],
       qn: 'Hinken är fylld till sjundedelar. Hur många lika stora delar ska blocket ha?', tn: 'Nämnaren i sjundedelar är 7.', qa: `Hinken var fylld till ${F(2, 7)}.`, ta: `${F(2, 7)} är 2 av 7 delar.`,
       qb: x => `Leo häller i ${x} liter. Nu är hinken fylld till ${F(5, 7)}.`, tb: `${F(5, 7)} är 5 delar. Det är 3 delar mer än 2.`, svar: x => `Hinken rymmer ${x} liter.`,
@@ -510,7 +510,7 @@ window.BM_LEKTIONER_FN = function (H) {
       svar: c.svar(k * p), koll: `${k * p} % av ${N} är ${D}.` };
   }
   L[15] = { titel: 'Andelsproblemet', omr: 'proc', uppg: [
-    () => andel({ titel: 'Bussen', hel: 'Elever', n: 10, a: [2, 6], k: [1, 9], sak: 'elever', sak2: 'elever som åker buss', kort: 'åker buss', text: (N, D) => `I en klass går ${N} elever. ${D} av eleverna åker buss till skolan.`,
+    () => andel({ titel: 'Bussen', hel: 'Elever', n: 10, a: [2, 3], k: [1, 9], sak: 'elever', sak2: 'elever som åker buss', kort: 'åker buss', text: (N, D) => `I en klass går ${N} elever. ${D} av eleverna åker buss till skolan.`,
       fraga: 'Hur många procent av eleverna åker buss?', las: ['Hur många procent som åker buss', 'Hur många elever som åker buss', 'Hur många elever det är i klassen'], svar: p => `${p} % av eleverna åker buss.` }),
     () => andel({ titel: 'Matcherna', hel: 'Matcher', n: 5, a: [3, 8], k: [1, 4], sak: 'matcher', sak2: 'vunna matcher', kort: 'vinster', text: (N, D) => `Ett lag spelade ${N} matcher. Laget vann ${D} av matcherna.`,
       fraga: 'Hur många procent av matcherna vann laget?', las: ['Hur många procent av matcherna laget vann', 'Hur många matcher laget vann', 'Hur många matcher laget förlorade'], svar: p => `Laget vann ${p} % av matcherna.` }),
