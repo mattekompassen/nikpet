@@ -91,7 +91,7 @@
         svar: ctx.sak == 'Boken' ? `Boken har ${b * u} sidor.` : `Vägen till stranden är ${b * u} km.`, koll: `${F(1, b)} av ${b * u} är ${u}, och ${a} · ${u} = ${a * u}.` };
     } },
     { id: 'b2', omr: 'brak', namn: 'Del av resten', gor() {
-      const [a, b, m] = P([[1, 3, 2], [1, 5, 2], [3, 5, 2], [1, 4, 3], [1, 5, 4], [2, 5, 3], [1, 7, 2], [3, 7, 2]]), [A] = namn(1), u = 5 * R(2, 12);
+      const [a, b, m] = P([[1, 3, 2], [1, 5, 2], [3, 5, 2], [1, 4, 3], [1, 5, 4], [2, 5, 3], [1, 7, 2], [3, 7, 2]]), [A] = namn(1), u = 10 * R(Math.ceil(35 / b), Math.floor(120 / b));  // totalt ca 350–1200 kr, så att bok och tröja får rimliga priser (Nikola 2026-11-23)
       const rest = b - a, t = rest / m, kvar = rest - t, K = kvar * u;
       return { text: `${A} fick pengar på sin födelsedag. ${A} använde ${F(a, b)} av pengarna till en bok och ${F(1, m)} av resten till en tröja. Nu har ${A} ${K} kr kvar.`,
         fraga: `Hur mycket pengar fick ${A}?`, rader: [{ n: 'Pengarna', f: 'g' }], start: [{ e: 'kl', id: 'q', rad: 0, t: '?', pos: 'o' }],
