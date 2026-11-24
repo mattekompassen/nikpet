@@ -630,7 +630,7 @@
       ? '<ol><li>Börja alltid längst till höger, med entalen.</li><li>Räkna ihop siffrorna i kolumnen.</li><li>Blir det 10 eller mer? Skriv den sista siffran i svaret. Skriv 1:an som <b>minnessiffra</b> i den lilla rutan ovanför nästa kolumn.</li><li>Räkna med minnessiffran i nästa kolumn.</li><li>Decimaltal: kommatecknen står under varandra. Grå nollor fyller ut så att talen har lika många decimaler.</li></ol>'
       : '<ol><li>Börja alltid längst till höger, med entalen.</li><li>Räkna den övre siffran minus den undre.</li><li>Är den övre siffran mindre? Då måste du <b>växla</b>. Tryck på siffran till vänster i det övre talet. Den blir 1 mindre, och din siffra får 10 till.</li><li>Står det 0 till vänster? Växla först från siffran längre till vänster.</li><li>Decimaltal: kommatecknen står under varandra. Grå nollor fyller ut så att talen har lika många decimaler.</li></ol>') + '</details>';
   }
-  var METOD = [['kort', 'Kort division', 'Resten som liten siffra'], ['trappa', 'Trappan', 'Delaren till vänster'], ['stol', 'Liggande stolen', 'Delaren till höger']];
+  var METOD = [['kort', 'Kort division', 'Resten som liten siffra'], ['trappa', 'Trappan', 'Nämnaren till vänster'], ['stol', 'Liggande stolen', 'Nämnaren till höger']];
   var SATT = [['add', '+', 'Addition'], ['sub', '−', 'Subtraktion'], ['mul', '·', 'Multiplikation'], ['div', '÷', 'Division']];
   function rita_start() {
     R.innerHTML = '<div class="v-box"><span class="v-et">1. Välj räknesätt</span><div class="v-satt" role="group" aria-label="Räknesätt">' +
