@@ -130,7 +130,7 @@
     { id: 'f1', omr: 'forh', namn: 'Dela i ett förhållande', gor() {
       const [p, q] = P([[1, 2], [2, 3], [3, 4], [1, 3], [2, 5], [3, 5], [1, 4], [4, 5], [3, 2], [5, 3]]), u = R(1, 3), S = (p + q) * u;  // högst 27 äpplen / dl (2026-11-23)
       const c = P([{ a: 'Röda', b: 'Gröna', text: `I en skål finns röda och gröna äpplen i förhållandet ${p}:${q}. Det finns ${S} äpplen i skålen.`, fraga: 'Hur många gröna äpplen finns det?', sak: 'gröna äpplen', vad: 'Hur många gröna äpplen det finns', fel: ['Hur många röda äpplen det finns', 'Hur många äpplen det finns'] },
-        { a: 'Saft', b: 'Vatten', text: `Saft och vatten blandas i förhållandet ${p}:${q}. Det blir ${S} dl blandning.`, fraga: 'Hur mycket vatten används?', sak: 'dl vatten', enh: ' dl', vad: 'Hur mycket vatten som används', fel: ['Hur mycket saft som används', 'Hur mycket blandning det blir'] }]);
+        ...(p < q ? [{ a: 'Saft', b: 'Vatten', text: `Saft och vatten blandas i förhållandet ${p}:${q}. Det blir ${S} dl blandning.`, fraga: 'Hur mycket vatten används?', sak: 'dl vatten', enh: ' dl', vad: 'Hur mycket vatten som används', fel: ['Hur mycket saft som används', 'Hur mycket blandning det blir'] }] : [])]);  // aldrig mer saft än vatten (Nikola 2026-11-24)
       const e = c.enh || '';
       return { text: c.text, fraga: c.fraga, rader: [{ n: c.a, f: 'g' }, { n: c.b, f: 'b' }],
         steg: [LAS(c.vad, c.fel),
