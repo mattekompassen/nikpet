@@ -214,13 +214,14 @@
     return P;
   }
   function divCur(t) { return P.rin[t] * 10 + P.dg[t]; }
-  function divStart() { if (P.tr) return trStart(); U.t = 0; if (S.lage === 'steg') divSteg(); else { U.sel = { r: 'q', c: P.lead }; U.msg = 'Börja längst till vänster. Skriv det som blir kvar som en liten siffra framför nästa siffra.'; U.msgTyp = ''; } }
+  function divStart() { if (P.tr) return trStart(); U.t = 0; if (S.lage === 'steg') divSteg(); else { U.sel = { r: 'q', c: P.lead }; U.msg = 'Börja längst till vänster. Skriv svaret efter likhetstecknet. Det som blir över skriver du som en liten siffra ovanför, mellan siffrorna.'; U.msgTyp = ''; } }
   function divSteg() {
     U.felKol = 0; U.hl = {};
     var t = U.t, pre = '';
     if (t >= P.n) return klar();
-    while (t < P.lead) { pre += '<b>' + P.d + '</b> går inte i <b>' + divCur(t) + '</b>. Då tar du med nästa siffra också. '; satt('rest', t + 1, String(P.rin[t + 1])); U.m['rest:' + (t + 1)] = 'ok'; t++; }
+    while (t < P.lead) { pre += '<b>' + P.d + '</b> går inte i <b>' + divCur(t) + '</b>. Då tar du med nästa siffra också. '; t++; }
     U.t = t;
+    for (var k = 0; k < P.lead; k++) U.hl['d:' + k] = 1;
     if (t === P.nInt && P.dec) pre += 'Nu passerar du kommat. Kommat kommer med upp i svaret. ' + (t >= P.padFran ? 'De grå nollorna kan du lägga till efter kommat. ' : '');
     else if (t >= P.padFran && t > P.nInt) pre += 'Lägg till en nolla till. ';
     U.hl['d:' + t] = 1;
@@ -240,7 +241,7 @@
       satt('q', t, String(x)); U.m['q:' + t] = 'ok';
       var ex = q + ' · ' + P.d + ' = ' + q * P.d;
       if (t + 1 >= P.n) return klar();
-      if (r) { U.sel = { r: 'rest', c: t + 1 }; U.hl = {}; U.hl['d:' + (t + 1)] = 1; U.msgTyp = 'ok'; U.msg = 'Rätt! ' + ex + '. Det blir <b>' + cur + ' − ' + q * P.d + ' = ' + r + '</b> kvar. Skriv ' + r + ' som liten siffra framför nästa siffra.'; return; }
+      if (r) { U.sel = { r: 'rest', c: t + 1 }; U.hl = {}; U.hl['d:' + (t + 1)] = 1; U.msgTyp = 'ok'; U.msg = 'Rätt! ' + ex + '. Det blir <b>' + cur + ' − ' + q * P.d + ' = ' + r + '</b> kvar. Skriv ' + r + ':an som en liten siffra ovanför, mellan siffrorna.'; return; }
       U.t = t + 1; divSteg(); U.msg = 'Rätt! ' + ex + ', inget blir kvar. ' + U.msg; return;
     }
     felSkak('q', t);
@@ -249,20 +250,25 @@
     else U.msg = x + ' · ' + P.d + ' = ' + x * P.d + '. Då blir ' + (cur - x * P.d) + ' kvar, och det är mer än ' + P.d + '. ' + P.d + ' går fler gånger.';
   }
   function divKontroll() { var l = []; for (var t = 0; t < P.n; t++) l.push(['q', t, P.q[t], t < P.lead]); return l; }
-  function divForklara(r, t) { var cur = divCur(t), q = P.q[t]; return 'Kolla siffran ovanför ' + P.dg[t] + ': ' + P.d + ' går ' + q + ' gånger i ' + cur + (P.rin[t] ? ' (med ' + P.rin[t] + ' kvar från förut)' : '') + '. ' + q + ' · ' + P.d + ' = ' + q * P.d + (cur - q * P.d ? ', och ' + (cur - q * P.d) + ' blir kvar.' : '.'); }
+  function divForklara(r, t) { var cur = divCur(t), q = P.q[t]; return 'Kolla svarssiffran för ' + P.dg[t] + ':an: ' + P.d + ' går ' + q + ' gånger i ' + cur + (P.rin[t] ? ' (med ' + P.rin[t] + ' kvar från förut)' : '') + '. ' + q + ' · ' + P.d + ' = ' + q * P.d + (cur - q * P.d ? ', och ' + (cur - q * P.d) + ' blir kvar.' : '.'); }
   function divGrid() {
     if (P.tr) return trGrid();
-    var g = '<div class="up-grid up-div">', komma = function (t) { return P.dec && t === P.nInt - 1; };
-    var r1 = cell('', 'up-tom') + cell('', 'up-tom up-dstol0');
-    for (var t = 0; t < P.n; t++) { r1 += inCell('q', t, false, (U.klar && t < P.lead ? ' up-tomsvar' : '')); if (komma(t)) r1 += '<div class="up-c up-km">,</div>'; }
-    var r2 = cell(String(P.d), 'up-d up-dd') + cell(')', 'up-dstol');
-    for (t = 0; t < P.n; t++) {
-      var pad = t >= P.padFran, rest = t >= 1 && !(U.klar && !F('rest', t)) ? '<i class="up-rest' + (U.sel && U.sel.r === 'rest' && U.sel.c === t ? ' sel' : '') + (U.m['rest:' + t] ? ' ' + U.m['rest:' + t] : '') + (skakas === 'rest:' + t ? ' skak' : '') + '" data-r="rest" data-c="' + t + '" role="button">' + F('rest', t) + '</i>' : '';
-      r2 += cell(rest + '<span class="up-dv">' + P.dg[t] + '</span>', 'up-d up-ddv' + (pad ? ' up-pad' : '') + hl('d:' + t));
-      if (komma(t)) r2 += '<div class="up-c up-km up-ddv">,</div>';
+    // kort division i bråkform: täljaren över bråkstrecket, nämnaren under, "= svar" till höger
+    var komma = function (t) { return P.dec && t === P.nInt - 1; }, steg = S.lage === 'steg';
+    var anv = function (t) { return U.klar || (steg && U.m['q:' + Math.max(t, P.lead)] === 'ok'); };
+    var r0 = '', r1 = '', sv = '', nk = P.n + (P.dec ? .32 : 0), na = P.n - P.lead + (P.dec ? .32 : 0);
+    for (var t = 0; t < P.n; t++) {
+      var visaRest = t > P.lead && !(U.klar && !F('rest', t)) && !(steg && !F('rest', t) && !(U.sel && U.sel.r === 'rest' && U.sel.c === t));
+      var rest = visaRest ? '<i class="up-rest' + (U.sel && U.sel.r === 'rest' && U.sel.c === t ? ' sel' : '') + (U.m['rest:' + t] ? ' ' + U.m['rest:' + t] : '') + (skakas === 'rest:' + t ? ' skak' : '') + (anv(t) ? ' up-strk' : '') + '" data-r="rest" data-c="' + t + '" role="button" aria-label="Det som blev över">' + F('rest', t) + '</i>' : '';
+      r0 += '<div class="up-c up-kr">' + rest + '</div>';
+      r1 += cell(String(P.dg[t]), 'up-d up-kt' + (t >= P.padFran ? ' up-pad' : '') + (anv(t) ? ' up-strk' : '') + hl('d:' + t));
+      if (komma(t)) { r0 += '<div class="up-c up-km up-kr"></div>'; r1 += '<div class="up-c up-km up-kt">,</div>'; }
+      if (t >= P.lead) { sv += inCell('q', t, false); if (komma(t)) sv += '<div class="up-c up-km">,</div>'; }
     }
-    return g + '<div class="up-rad">' + r1 + '</div><div class="up-rad">' + r2 + '</div></div>';
+    return '<div class="up-kd" style="--kdn:' + (nk + na + 1.2) + '"><div class="up-kd-v"><div class="up-rad up-kd-rest">' + r0 + '</div><div class="up-rad up-kd-t">' + r1 + '</div>' +
+      '<div class="up-kd-n">' + P.d + '</div></div><div class="up-kd-h"><div class="up-c up-kd-lika">=</div>' + sv + '</div></div>';
   }
+
   /* ===== trappan (division med subtraktioner under, 2026-11-24) ===== */
   // P.tr = rader under talet: { typ: 'p' (produkt) | 'r' (rest), t, c: {kol: siffra}, ned: {kol: 1}, minus: kol, linje: [från, till] }
   function byggTrappa(P) {
@@ -388,7 +394,7 @@
     U.msg = (antal === 1 ? 'Nästan! En ruta är fel. ' : 'Det blev fel i ' + antal + ' rutor. ') + (P.md === 'mul' ? mulForklara(forst[0], forst[1]) : divForklara(forst[0], forst[1])) + ' Ändra och tryck Rätta igen.';
     U.msgTyp = 'fel'; U.sel = { r: forst[0], c: forst[1] }; rita();
   }
-  function mdFyll() { if (P.tr) trFyll(); mdKontroll().forEach(function (x) { var k = x[0] + ':' + x[1]; if (!x[3]) U.f[k] = String(x[2]); U.m[k] = 'ok'; }); U.hl = {}; }
+  function mdFyll() { if (P.tr) trFyll(); else if (P.md === 'div') for (var t = 1; t < P.n; t++) { var e = t > P.lead && P.rin[t] ? String(P.rin[t]) : ''; satt('rest', t, e); U.m['rest:' + t] = e ? 'ok' : ''; } mdKontroll().forEach(function (x) { var k = x[0] + ':' + x[1]; if (!x[3]) U.f[k] = String(x[2]); U.m[k] = 'ok'; }); U.hl = {}; }
   function mdSjalvSiffra(d) {
     var s = U.sel; satt(s.r, s.c, String(d)); U.m[s.r + ':' + s.c] = ''; (U.skr = U.skr || []).push({ r: s.r, c: s.c });
     if (s.r === 'q') { if (s.c + 1 < P.n) U.sel = { r: 'q', c: s.c + 1 }; }
@@ -616,7 +622,7 @@
   function hjalp() {
     if (S.typ === 'mul') return '<details class="up-hj"><summary>Så gör du</summary><ol><li>Börja längst till höger. Multiplicera siffran i det undre talet med varje siffra i det övre talet, en i taget.</li><li>Blir det 10 eller mer? Skriv den sista siffran och sätt tiotalet som <b>minnessiffra</b> ovanför nästa siffra. Lägg till minnessiffran efter nästa multiplikation.</li><li>Har det undre talet två siffror? Gör en rad för varje siffra. Den andra raden börjar med en nolla, eftersom du räknar med tiotal. Addera sedan raderna.</li><li>Decimaltal: räkna som om kommat inte fanns. Svaret får lika många decimaler som talet.</li></ol></details>';
     if (S.typ === 'div' && S.metod === 'trappa') return '<details class="up-hj"><summary>Så gör du</summary><ol><li>Börja längst till vänster. Hur många gånger går talet du delar med i siffran? Skriv svaret ovanför strecket.</li><li>Gångra: skriv svaret gånger talet du delar med under siffran.</li><li>Subtrahera. Det som blir kvar skriver du under strecket.</li><li>Flytta ner nästa siffra och skriv den bredvid. Börja om med det nya talet.</li><li>Går det inte en enda gång? Skriv 0 i svaret och flytta ner nästa siffra.</li><li>Blir det något kvar på slutet? Sätt ett komma och lägg till nollor. Kommat kommer med upp i svaret.</li></ol></details>';
-    if (S.typ === 'div') return '<details class="up-hj"><summary>Så gör du</summary><ol><li>Börja längst till vänster. Hur många gånger går talet du delar med i siffran? Skriv svaret ovanför siffran.</li><li>Det som blir kvar skriver du som en liten siffra framför nästa siffra. Då blir det ett nytt tal, till exempel 1 och 2 blir 12.</li><li>Går det inte en enda gång? Skriv 0 ovanför (eller ingenting om det är först i talet).</li><li>Blir det något kvar på slutet? Sätt ett komma och lägg till nollor. Kommat kommer med upp i svaret.</li></ol></details>';
+    if (S.typ === 'div') return '<details class="up-hj"><summary>Så gör du</summary><ol><li>Börja längst till vänster i talet ovanför strecket. Hur många gånger går talet under strecket i siffran? Skriv svaret efter likhetstecknet.</li><li>Det som blir över skriver du som en liten siffra ovanför, mellan siffrorna. Då blir det ett nytt tal, till exempel 2 och 6 blir 26.</li><li>Går det inte en enda gång? Ta med nästa siffra också. Mitt i talet skriver du 0 i svaret.</li><li>Blir det något över på slutet? Sätt ett komma och lägg till nollor. Kommat kommer med i svaret.</li></ol></details>';
     return '<details class="up-hj"><summary>Så gör du</summary>' + (S.typ === 'add'
       ? '<ol><li>Börja alltid längst till höger, med entalen.</li><li>Räkna ihop siffrorna i kolumnen.</li><li>Blir det 10 eller mer? Skriv den sista siffran i svaret. Skriv 1:an som <b>minnessiffra</b> i den lilla rutan ovanför nästa kolumn.</li><li>Räkna med minnessiffran i nästa kolumn.</li><li>Decimaltal: kommatecknen står under varandra. Grå nollor fyller ut så att talen har lika många decimaler.</li></ol>'
       : '<ol><li>Börja alltid längst till höger, med entalen.</li><li>Räkna den övre siffran minus den undre.</li><li>Är den övre siffran mindre? Då måste du <b>växla</b>. Tryck på siffran till vänster i det övre talet. Den blir 1 mindre, och din siffra får 10 till.</li><li>Står det 0 till vänster? Växla först från siffran längre till vänster.</li><li>Decimaltal: kommatecknen står under varandra. Grå nollor fyller ut så att talen har lika många decimaler.</li></ol>') + '</details>';
