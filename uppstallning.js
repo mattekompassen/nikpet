@@ -200,7 +200,7 @@
       else if (S.niva === 2) { d = rnd(3, 9); D = talMed(3); if (D % d || +String(D)[0] < d || /0/.test(String(D / d))) continue; }
       else if (S.niva === 3) { d = rnd(3, 9); D = talMed(rnd(3, 4)); if (D % d) continue; var q = String(D / d); if (!(+String(D)[0] < d) && !/0/.test(q.slice(0, -1))) continue; if (Math.random() < .5 && !/0/.test(q)) continue; }
       else { d = [2, 4, 5, 8, 2, 4, 5][rnd(0, 6)]; dd = Math.random() < .4 ? 1 : 0; D = dd ? rnd(11, 199) : rnd(5, 99); if (dd && D % 10 === 0) continue; var sk = D * 100; if (sk % d || D % d === 0 || (dd === 0 && D * 10 % d === 0 && Math.random() < .3)) continue; }
-      var Pd = byggDiv(D, dd, d); if (S.metod === 'trappa') { P = Pd; Pd.tr = byggTrappa(Pd); } return Pd;
+      var Pd = byggDiv(D, dd, d); if (S.metod === 'trappa' || S.metod === 'stol') { P = Pd; Pd.tr = byggTrappa(Pd); Pd.stol = S.metod === 'stol'; } return Pd;
     }
   }
   function byggDiv(D, dd, d) {
@@ -357,11 +357,13 @@
   function trFyll() { P.tr.forEach(function (rd, i) { Object.keys(rd.c).forEach(function (c) { U.f['tr' + i + ':' + c] = String(rd.c[c]); U.m['tr' + i + ':' + c] = 'ok'; }); }); }
   function trGrid() {
     var self = S.lage === 'sjalv', g = '<div class="up-grid up-div up-trappa">';
-    var kol = function (fn) { var h = ''; for (var k = -2; k < P.n; k++) { h += fn(k); if (P.dec && k === P.nInt - 1) h += fn('km'); } return h; };
+    var kol = function (fn) { var h = ''; for (var k = -2; k < P.n; k++) { h += fn(k); if (P.dec && k === P.nInt - 1) h += fn('km'); } if (P.stol) h += fn('stol'); return h; };
     var tom = function (x) { return cell(x || '', 'up-tom'); };
-    g += '<div class="up-rad">' + kol(function (k) { return k === 'km' ? '<div class="up-c up-km">,</div>' : k < 0 ? tom() : inCell('q', k, false, (U.klar && k < P.lead ? ' up-tomsvar' : '')); }) + '</div>';
+    g += '<div class="up-rad">' + kol(function (k) { return k === 'stol' ? cell('', 'up-tom up-stol0') : k === 'km' ? '<div class="up-c up-km">,</div>' : k < 0 ? tom() : inCell('q', k, false, (U.klar && k < P.lead ? ' up-tomsvar' : '')); }) + '</div>';
     g += '<div class="up-rad">' + kol(function (k) {
+      if (k === 'stol') return cell(String(P.d), 'up-d up-stolv');
       if (k === 'km') return '<div class="up-c up-km up-ddv">,</div>';
+      if (P.stol && k < 0) return tom();
       if (k === -2) return cell(String(P.d), 'up-d up-dd');
       if (k === -1) return cell(')', 'up-dstol');
       return cell(String(P.dg[k]), 'up-d up-ddv' + (k >= P.padFran ? ' up-pad' : '') + hl('d:' + k));
@@ -370,6 +372,7 @@
       var key = 'tr' + i, syns = self || U.klar || (U.sel && U.sel.r === key) || Object.keys(rd.c).some(function (c) { return F(key, c) !== ''; });
       if (!syns) return;
       g += '<div class="up-rad up-tr up-tr-' + rd.typ + '">' + kol(function (k) {
+        if (k === 'stol') return cell('', 'up-tom up-stol0');
         if (k === 'km') return '<div class="up-c up-km' + (rd.linje && P.nInt - 1 >= rd.linje[0] && P.nInt - 1 < rd.linje[1] ? ' up-trl' : '') + '"></div>';
         var lin = rd.linje && k >= rd.linje[0] && k <= rd.linje[1] ? ' up-trl' : '';
         if (rd.c[k] !== undefined) {
@@ -621,13 +624,13 @@
   }
   function hjalp() {
     if (S.typ === 'mul') return '<details class="up-hj"><summary>Så gör du</summary><ol><li>Börja längst till höger. Multiplicera siffran i det undre talet med varje siffra i det övre talet, en i taget.</li><li>Blir det 10 eller mer? Skriv den sista siffran och sätt tiotalet som <b>minnessiffra</b> ovanför nästa siffra. Lägg till minnessiffran efter nästa multiplikation.</li><li>Har det undre talet två siffror? Gör en rad för varje siffra. Den andra raden börjar med en nolla, eftersom du räknar med tiotal. Addera sedan raderna.</li><li>Decimaltal: räkna som om kommat inte fanns. Svaret får lika många decimaler som talet.</li></ol></details>';
-    if (S.typ === 'div' && S.metod === 'trappa') return '<details class="up-hj"><summary>Så gör du</summary><ol><li>Börja längst till vänster. Hur många gånger går talet du delar med i siffran? Skriv svaret ovanför strecket.</li><li>Gångra: skriv svaret gånger talet du delar med under siffran.</li><li>Subtrahera. Det som blir kvar skriver du under strecket.</li><li>Flytta ner nästa siffra och skriv den bredvid. Börja om med det nya talet.</li><li>Går det inte en enda gång? Skriv 0 i svaret och flytta ner nästa siffra.</li><li>Blir det något kvar på slutet? Sätt ett komma och lägg till nollor. Kommat kommer med upp i svaret.</li></ol></details>';
+    if (S.typ === 'div' && (S.metod === 'trappa' || S.metod === 'stol')) return '<details class="up-hj"><summary>Så gör du</summary><ol>' + (S.metod === 'stol' ? '<li>Talet du delar med står till höger om det lodräta strecket.</li>' : '') + '<li>Börja längst till vänster. Hur många gånger går talet du delar med i siffran? Skriv svaret ovanför strecket.</li><li>Gångra: skriv svaret gånger talet du delar med under siffran.</li><li>Subtrahera. Det som blir kvar skriver du under strecket.</li><li>Flytta ner nästa siffra och skriv den bredvid. Börja om med det nya talet.</li><li>Går det inte en enda gång? Skriv 0 i svaret och flytta ner nästa siffra.</li><li>Blir det något kvar på slutet? Sätt ett komma och lägg till nollor. Kommat kommer med upp i svaret.</li></ol></details>';
     if (S.typ === 'div') return '<details class="up-hj"><summary>Så gör du</summary><ol><li>Börja längst till vänster i talet ovanför strecket. Hur många gånger går talet under strecket i siffran? Skriv svaret efter likhetstecknet.</li><li>Det som blir över skriver du som en liten siffra ovanför, mellan siffrorna. Då blir det ett nytt tal, till exempel 2 och 6 blir 26.</li><li>Går det inte en enda gång? Ta med nästa siffra också. Mitt i talet skriver du 0 i svaret.</li><li>Blir det något över på slutet? Sätt ett komma och lägg till nollor. Kommat kommer med i svaret.</li></ol></details>';
     return '<details class="up-hj"><summary>Så gör du</summary>' + (S.typ === 'add'
       ? '<ol><li>Börja alltid längst till höger, med entalen.</li><li>Räkna ihop siffrorna i kolumnen.</li><li>Blir det 10 eller mer? Skriv den sista siffran i svaret. Skriv 1:an som <b>minnessiffra</b> i den lilla rutan ovanför nästa kolumn.</li><li>Räkna med minnessiffran i nästa kolumn.</li><li>Decimaltal: kommatecknen står under varandra. Grå nollor fyller ut så att talen har lika många decimaler.</li></ol>'
       : '<ol><li>Börja alltid längst till höger, med entalen.</li><li>Räkna den övre siffran minus den undre.</li><li>Är den övre siffran mindre? Då måste du <b>växla</b>. Tryck på siffran till vänster i det övre talet. Den blir 1 mindre, och din siffra får 10 till.</li><li>Står det 0 till vänster? Växla först från siffran längre till vänster.</li><li>Decimaltal: kommatecknen står under varandra. Grå nollor fyller ut så att talen har lika många decimaler.</li></ol>') + '</details>';
   }
-  var METOD = [['kort', 'Kort division', 'Resten som liten siffra'], ['trappa', 'Trappan', 'Subtrahera under talet']];
+  var METOD = [['kort', 'Kort division', 'Resten som liten siffra'], ['trappa', 'Trappan', 'Delaren till vänster'], ['stol', 'Liggande stolen', 'Delaren till höger']];
   var SATT = [['add', '+', 'Addition'], ['sub', '−', 'Subtraktion'], ['mul', '·', 'Multiplikation'], ['div', '÷', 'Division']];
   function rita_start() {
     R.innerHTML = '<div class="v-box"><span class="v-et">1. Välj räknesätt</span><div class="v-satt" role="group" aria-label="Räknesätt">' +
@@ -642,7 +645,7 @@
   }
   function valRad() {
     var t = SATT.filter(function (x) { return x[0] === S.typ; })[0];
-    return '<div class="v-bar"><span class="v-chip"><b>' + t[1] + ' ' + t[2] + '</b> · ' + NIVA[S.niva] + (S.typ === 'div' && S.metod === 'trappa' ? ' · Trappan' : '') + ' · ' + (S.lage === 'steg' ? 'Steg för steg' : 'Själv') + '</span><button class="v-byt" data-g="byt">Byt övning</button></div>';
+    return '<div class="v-bar"><span class="v-chip"><b>' + t[1] + ' ' + t[2] + '</b> · ' + NIVA[S.niva] + (S.typ === 'div' && S.metod !== 'kort' ? (S.metod === 'stol' ? ' · Liggande stolen' : ' · Trappan') : '') + ' · ' + (S.lage === 'steg' ? 'Steg för steg' : 'Själv') + '</span><button class="v-byt" data-g="byt">Byt övning</button></div>';
   }
   function rita_slut(h) {
     var hela = runda.filter(function (x) { return x === 'hel'; }).length;
