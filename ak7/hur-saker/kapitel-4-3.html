@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="../../bilder/kompass-liten.png"><link rel="apple-touch-icon" href="../../bilder/appikon/ikon-180.png"><link rel="manifest" href="../../manifest.webmanifest"><title>Hur säker är jag? 3 Åk 7 · Kapitel 4 Samband och förändring</title>
+<style>
+:root{--g:#2E6E28;--gm:#58A73E;--gl:#DCEFD5;--gvl:#F1F8EE;--rod:#E07A5F;--gul:#E9B949;--txt:#292A28;--gra:#5F6368;--bg:#F4F3EF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Carlito,Calibri,'Segoe UI',Arial,sans-serif;font-size:17px;line-height:1.4}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,var(--gm),var(--g));color:#fff;border-radius:18px;padding:22px 24px;margin-bottom:16px}
+header small{opacity:.85;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;font-size:13px}
+header h1{margin:4px 0 6px;font-size:30px}
+header p{margin:0;opacity:.95}
+.steg{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.steg span{background:#fff;border:1.5px solid var(--gl);border-radius:99px;padding:5px 14px;font-size:14px;color:var(--gra)}
+.steg span.akt{background:var(--g);border-color:var(--g);color:#fff;font-weight:bold}
+.kort{background:#fff;border:1.5px solid var(--gl);border-left:7px solid var(--gm);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.kort h2{margin:0 0 8px;font-size:20px;color:var(--g)}
+.kort h2 b{background:var(--g);color:#fff;border-radius:6px;padding:0 8px;margin-right:8px}
+.mrad{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--gvl);flex-wrap:wrap}
+.mrad:first-of-type{border-top:0}
+.mrad .t{flex:1 1 260px}
+.knappar{display:flex;gap:6px;flex-wrap:wrap}
+.knappar button{border:1.5px solid var(--gl);background:#fff;border-radius:10px;padding:6px 10px;font:inherit;font-size:15px;cursor:pointer;color:var(--txt)}
+.knappar button:hover{border-color:var(--gm)}
+.knappar button.val[data-v="2"]{background:var(--g);border-color:var(--g);color:#fff}
+.knappar button.val[data-v="1"]{background:#E9B949;border-color:#C6962A;color:#292A28}
+.knappar button.val[data-v="0"]{background:#E07A5F;border-color:#B95E44;color:#fff}
+.fraga{padding:10px 0;border-top:1px solid var(--gvl)}
+.fraga:first-of-type{border-top:0}
+.fraga .q{font-weight:bold;margin-bottom:6px}
+.fraga .q i{font-weight:normal;color:var(--gra);font-size:14px;display:block}
+.alt{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px}
+.alt label{display:flex;gap:8px;align-items:center;border:1.5px solid var(--gl);border-radius:10px;padding:7px 10px;cursor:pointer;background:#fff}
+.alt label:hover{border-color:var(--gm)}
+.alt input{accent-color:var(--g);width:18px;height:18px}
+.alt label.ratt{border-color:#3B8B3B;background:#EAF5E6}
+.alt label.ratt::after{content:"✔";margin-left:auto;color:#3B8B3B;font-weight:bold}
+.alt label.fel::after{content:"✘";margin-left:auto;color:#C0392B;font-weight:bold}
+.alt label.fel{border-color:#C0392B;background:#FCEDE8}
+.fork{margin-top:6px;background:#FFF6DE;border-left:4px solid var(--gul);border-radius:8px;padding:6px 10px;font-size:15px;display:none}
+.visa .fork{display:block}
+.huvudknapp{display:block;margin:6px auto 22px;background:var(--g);color:#fff;border:0;border-radius:12px;padding:12px 26px;font:inherit;font-weight:bold;font-size:18px;cursor:pointer}
+.huvudknapp:disabled{background:#AEB3B0;cursor:not-allowed}
+.info{text-align:center;color:var(--gra);font-size:15px;margin-top:-8px;margin-bottom:18px}
+.dold{display:none}
+.summa{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.summa div{background:#fff;border:1.5px solid var(--gl);border-radius:14px;padding:12px;text-align:center}
+.summa b{display:block;font-size:30px;color:var(--g)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{padding:7px 6px;border-top:1px solid var(--gvl);text-align:left;vertical-align:top}
+th{font-size:13px;text-transform:uppercase;color:var(--gra);letter-spacing:.03em}
+.etk{display:inline-block;border-radius:99px;padding:1px 9px;font-size:13px;font-weight:bold;white-space:nowrap}
+.e2{background:var(--gl);color:var(--g)}.e1{background:#FBEBC0;color:#7A5A10}.e0{background:#FADAD0;color:#8C3A22}
+.rek a{color:var(--g);font-weight:bold}
+.rek{margin-top:8px;background:var(--gvl);border-radius:10px;padding:8px 12px;font-size:15px}
+.rek b{color:var(--g)}
+.tillbaka{display:inline-block;margin:0 0 10px;color:var(--g);font-weight:bold;text-decoration:none;font-size:15px}
+footer a{color:var(--gra)}
+footer{text-align:center;color:var(--gra);font-size:13px;padding:10px 0 24px}
+.br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.86em;line-height:1.08;margin:0 .12em}.br>span:first-child{border-bottom:1.2px solid currentColor;padding:0 .18em}
+.bild{margin:6px 0 8px;overflow-x:auto}.bild table{width:auto;border:1.5px solid var(--gl)}.bild td,.bild th{border:1px solid var(--gl);text-align:center;padding:4px 12px}
+@media (max-width:520px){table{font-size:13.5px}td,th{padding:6px 3px}header h1{font-size:24px}.knappar button{padding:6px 8px;font-size:14px}}
+body{font-family:Inter,system-ui,sans-serif;font-size:16px}h1,h2{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.3px}</style></head><body><div class="wrap">
+<header><small>Åk 7 · Kapitel 4 Samband och förändring</small><h1>Hur säker är jag? 3</h1>
+<p><b>Utmaning!</b> Här är frågorna svårare än i 1 och 2. Först skattar du hur säker du är på varje mål. Sedan svarar du på en fråga per mål. Till sist ser du om din känsla stämde och vad du ska träna mer på. Inget sparas.</p></header>
+<div class="steg"><span id="s1" class="akt">1 Skatta dig själv</span><span id="s2">2 Kontrollfrågor</span><span id="s3">3 Resultat</span></div>
+
+<section id="del1"></section>
+<button class="huvudknapp" id="till2" disabled>Gå vidare till frågorna</button>
+<p class="info" id="kvar"></p>
+
+<section id="del2" class="dold"></section>
+<button class="huvudknapp dold" id="ratta">Rätta</button>
+
+<section id="del3" class="dold"></section>
+<button class="huvudknapp dold" id="om">Börja om</button>
+<footer>Mattekompassen</footer>
+</div>
+<script>
+const DATA = [{"nr": "4.1", "namn": "Proportionalitet", "mal": [{"mal": "Läsa av och pricka in punkter i ett koordinatsystem", "q": "Punkterna (1, 1), (5, 1) och (5, 4) är tre hörn i en rektangel. Vilket är det fjärde hörnet?", "alt": ["(1, 4)", "(4, 1)", "(4, 5)", "(5, 5)"], "fork": "Rita gärna. Det fjärde hörnet ligger rakt ovanför (1, 1) och på samma höjd som (5, 4): x = 1 och y = 4.", "bild": ""}, {"mal": "Förklara vad det betyder att två storheter är proportionella", "q": "Priset är proportionellt mot vikten. 3 kg kostar 54 kr. Vad kostar 5 kg?", "alt": ["90 kr", "56 kr", "72 kr", "108 kr"], "fork": "Proportionellt betyder samma pris per kilo: 54 / 3 = 18 kr/kg. 5 · 18 = 90 kr. 56 kr får man om man lägger till 2 i stället för att räkna per kilo.", "bild": ""}, {"mal": "Känna igen en proportionalitet i en tabell och i en graf", "q": "Grafen för en proportionalitet går genom punkten (4, 10). Vilken punkt ligger också på grafen?", "alt": ["(6, 15)", "(6, 12)", "(8, 14)", "(5, 11)"], "fork": "y ska vara 10 / 4 = 2,5 gånger x. 6 · 2,5 = 15. I (8, 14) och (5, 11) har man bara lagt till lika mycket på x och y.", "bild": ""}], "tb": "https://drive.google.com/file/d/1OXTUfNA4uF2m8fpPU0A9s7LKJc_eEzNc/view", "lek": "https://drive.google.com/file/d/1fK5iPPl6JjwbVVt3CUeAxvIPoxRBM-Zj/view", "ts": "https://drive.google.com/file/d/1lEuG0DlYCZ6-woTDRZzo5gLEXl_WDxQG/view"}, {"nr": "4.2", "namn": "Tid och rörelse", "mal": [{"mal": "Räkna om mellan tidsenheter", "q": "Hur många sekunder är 2,25 minuter?", "alt": ["135 s", "225 s", "145 s", "125 s"], "fork": "0,25 min = en kvarts minut = 15 s. 2 min = 120 s. 120 + 15 = 135 s.", "bild": ""}, {"mal": "Räkna ut klockslag och hur lång tid något tar", "q": "Ett nattåg går 22.47 och resan tar 3 h 38 min. När kommer tåget fram?", "alt": ["02.25", "01.85", "25.85", "01.25"], "fork": "22.47 + 3 h = 01.47. 01.47 + 13 min = 02.00, och 25 min till ger 02.25.", "bild": ""}, {"mal": "Läsa av och beskriva en graf som visar sträcka och tid", "q": "En graf visar avståndet från hemmet under en promenad. Den går först uppåt, sedan är den vågrät och till sist går den nedåt till 0. Vad betyder det?", "alt": ["Man går hemifrån, stannar en stund och går sedan hem igen", "Man går uppför en backe, sedan rakt fram och sedan nedför", "Man går allt snabbare", "Man står still hela tiden"], "fork": "Grafen är ingen bild av vägen. Den visar avståndet till hemmet. Vågrät betyder att avståndet inte ändras, alltså står man still.", "bild": ""}], "tb": "https://drive.google.com/file/d/1bOO1teMVLbHVoS5PVgUXeUfPM9jg8iF1/view", "lek": "https://drive.google.com/file/d/1FTeCc9_US524uZtXUCf8jVjliWXmiQ80/view", "ts": "https://drive.google.com/file/d/1aUB3UcXTESOtUJke0puMFGHLyjQhjVWG/view"}, {"nr": "4.3", "namn": "Sträcka, tid och hastighet", "mal": [{"mal": "Förklara vad medelhastighet är", "q": "Yusuf cyklar 10 km i 20 km/h och sedan 10 km till i 10 km/h. Vad är medelhastigheten för hela turen?", "alt": ["ungefär 13 km/h", "15 km/h", "30 km/h", "10 km/h"], "fork": "Tid: 10 / 20 = 0,5 h och 10 / 10 = 1 h. Totalt 20 km på 1,5 h: 20 / 1,5 ≈ 13,3 km/h. Han cyklar längre tid i den låga hastigheten, därför blir det inte 15 km/h.", "bild": ""}, {"mal": "Använda sambandet sträcka = hastighet · tid", "q": "Ljudet går ungefär 340 m/s. Du ser en blixt och hör åskan 6 sekunder senare. Ungefär hur långt bort slog blixten ned?", "alt": ["2 040 m", "57 m", "346 m", "20 400 m"], "fork": "s = v · t = 340 · 6 = 2 040 m, alltså cirka 2 km.", "bild": ""}, {"mal": "Räkna ut sträcka, hastighet eller tid när två av dem är kända", "q": "En bil kör 45 km på 36 minuter. Vad är medelhastigheten?", "alt": ["75 km/h", "1,25 km/h", "125 km/h", "81 km/h"], "fork": "36 min = <span class=\"br\"><span>36</span><span>60</span></span> h = 0,6 h. v = <span class=\"br\"><span>45</span><span>0,6</span></span> = 75 km/h. 45 / 36 = 1,25 km per minut.", "bild": ""}], "tb": "https://drive.google.com/file/d/11E2GL8EQBaSDzk5ASEfz9mcL89t3-gtM/view", "lek": "https://drive.google.com/file/d/1UUrVQvw938FQKL2tn1O9onpoJ2SnCY_J/view", "ts": "https://drive.google.com/file/d/1Q0t_m5eTg2BpTk0rQYM0RN66Tlai3PYt/view"}, {"nr": "4.4", "namn": "Andel i bråkform", "mal": [{"mal": "Förklara vad en andel är", "q": "I klass A är <span class=\"br\"><span>1</span><span>3</span></span> av eleverna tjejer. I klass B är <span class=\"br\"><span>1</span><span>2</span></span> tjejer. Är det säkert att det finns fler tjejer i klass B?", "alt": ["Nej, det beror på hur många elever klasserna har", "Ja, alltid", "Nej, det finns alltid fler i klass A", "Ja, om klasserna har mer än 20 elever"], "fork": "En andel säger inget om antalet. <span class=\"br\"><span>1</span><span>3</span></span> av 30 = 10 tjejer, men <span class=\"br\"><span>1</span><span>2</span></span> av 16 = 8 tjejer.", "bild": ""}, {"mal": "Skriva en andel i bråkform", "q": "I en påse finns röda, blå och gula kulor. <span class=\"br\"><span>2</span><span>5</span></span> av kulorna är röda. Det finns lika många blå som gula. Hur stor andel är gula?", "alt": ["<span class=\"br\"><span>3</span><span>10</span></span>", "<span class=\"br\"><span>3</span><span>5</span></span>", "<span class=\"br\"><span>1</span><span>5</span></span>", "<span class=\"br\"><span>1</span><span>3</span></span>"], "fork": "Blå och gula är tillsammans 1 − <span class=\"br\"><span>2</span><span>5</span></span> = <span class=\"br\"><span>3</span><span>5</span></span>. Hälften av <span class=\"br\"><span>3</span><span>5</span></span> är <span class=\"br\"><span>3</span><span>10</span></span>.", "bild": ""}, {"mal": "Förkorta ett bråk till enklaste form", "q": "Vilket bråk går INTE att förkorta?", "alt": ["<span class=\"br\"><span>21</span><span>50</span></span>", "<span class=\"br\"><span>51</span><span>68</span></span>", "<span class=\"br\"><span>39</span><span>65</span></span>", "<span class=\"br\"><span>57</span><span>76</span></span>"], "fork": "21 = 3 · 7 och 50 = 2 · 5 · 5 har ingen gemensam faktor. De andra går att förkorta med 17, 13 och 19: <span class=\"br\"><span>51</span><span>68</span></span> = <span class=\"br\"><span>3</span><span>4</span></span>, <span class=\"br\"><span>39</span><span>65</span></span> = <span class=\"br\"><span>3</span><span>5</span></span> och <span class=\"br\"><span>57</span><span>76</span></span> = <span class=\"br\"><span>3</span><span>4</span></span>.", "bild": ""}], "tb": "https://drive.google.com/file/d/1WaMoK6Rcy4Vt_2IXgYC81zR-Ai_3aDaF/view", "lek": "https://drive.google.com/file/d/1tI-GrD70QpSMr0ZIO7gbpVbmjAhMunTN/view", "ts": "https://drive.google.com/file/d/1Ye1pZM_1ErvkDCWKY2T4XYy6J41HcDdA/view"}, {"nr": "4.5", "namn": "Andel i procentform (I)", "mal": [{"mal": "Förklara vad procent betyder", "q": "I år kom 150 % av förra årets antal till skoldiscot. Vad betyder det?", "alt": ["Det kom en och en halv gång så många som förra året", "Det kom 150 personer", "Det går inte, mer än 100 % finns inte", "Det kom hälften så många"], "fork": "100 % är lika många som förra året. 150 % = 1,5, alltså hälften fler. Kom 200 förra året kom det 300 i år.", "bild": ""}, {"mal": "Skriva en andel i bråkform, decimalform och procentform", "q": "Vilket tal är lika med 0,5 %?", "alt": ["0,005", "0,05", "0,5", "<span class=\"br\"><span>1</span><span>2</span></span>"], "fork": "0,5 % = <span class=\"br\"><span>0,5</span><span>100</span></span> = 0,005. Det är en halv hundradel.", "bild": ""}, {"mal": "Räkna ut hur många procent en del är av det hela", "q": "På en skola går 480 elever. 156 av dem åker buss. Hur många procent är det?", "alt": ["32,5 %", "15,6 %", "3,1 %", "30,8 %"], "fork": "<span class=\"br\"><span>156</span><span>480</span></span> = 0,325 = 32,5 %.", "bild": ""}], "tb": "https://drive.google.com/file/d/1R2JN1OlFgtjHJdmjOTx6eV_Wi7uZLse3/view", "lek": "https://drive.google.com/file/d/1IwCF0bplXGNhTXCzpqfgWRcpUz1ixffO/view", "ts": "https://drive.google.com/file/d/1chxtZBROLZmyHNf4Z_pEEcM16syekRaq/view"}, {"nr": "4.6", "namn": "Andel i procentform (II)", "mal": [{"mal": "Räkna ut en andel i procent genom att dividera delen med det hela", "q": "Vilken beräkning visar hur många procent 0,8 kg är av 2,5 kg?", "alt": ["0,8 / 2,5 = 0,32 = 32 %", "2,5 / 0,8 ≈ 3,1, alltså 3,1 %", "0,8 · 2,5 = 2, alltså 2 %", "2,5 − 0,8 = 1,7, alltså 17 %"], "fork": "Andelen = <span class=\"br\"><span>delen</span><span>det hela</span></span> = <span class=\"br\"><span>0,8</span><span>2,5</span></span> = 0,32 = 32 %.", "bild": ""}, {"mal": "Avrunda till hela procent och tiondels procent", "q": "7 av 9 elever svarade ja. <span class=\"br\"><span>7</span><span>9</span></span> = 0,7777… Hur många procent är det, avrundat till tiondels procent?", "alt": ["77,8 %", "77,7 %", "78 %", "7,8 %"], "fork": "0,7777… = 77,77… %. Siffran efter tiondelen är 7, så vi avrundar uppåt: 77,8 %. 78 % är avrundat till hela procent.", "bild": ""}, {"mal": "Räkna ut med hur många procent något ökar eller sänks", "q": "Ett pris höjs från 250 kr till 340 kr. Med hur många procent höjs priset?", "alt": ["36 %", "26,5 %", "90 %", "136 %"], "fork": "Ökningen är 90 kr. Jämför med det gamla priset: <span class=\"br\"><span>90</span><span>250</span></span> = 0,36 = 36 %. 26,5 % får man om man jämför med det nya priset.", "bild": ""}], "tb": "https://drive.google.com/file/d/1sZSgwor4HBmEn1mg02xSh9OqExcKdVEg/view", "lek": "https://drive.google.com/file/d/1etPG0djB63aFOEVpzPRVZbHb1fdoS4Y5/view", "ts": "https://drive.google.com/file/d/1Hc2stf14JdYTTFpc-QPcBiPWD5gOdLW6/view"}, {"nr": "4.7", "namn": "Hur stor är delen?", "mal": [{"mal": "Räkna ut delen när andelen är ett bråk, ett decimaltal eller i procent", "q": "Hur mycket är 0,35 % av 20 000 kr?", "alt": ["70 kr", "7 000 kr", "700 kr", "7 kr"], "fork": "1 % av 20 000 = 200 kr. 0,35 % = 0,35 · 200 = 70 kr. 7 000 kr är 35 %.", "bild": ""}, {"mal": "Välja ett smart sätt att räkna, till exempel via 10 % eller 1 %", "q": "Vilket är ett smart sätt att räkna ut 75 % av 48?", "alt": ["Ta en fjärdedel, 12, och dra bort den från 48: 36", "75 % är tre halvor: 48 · 1,5 = 72", "Ta hälften och lägg till 75: 24 + 75 = 99", "48 / 0,75 = 64"], "fork": "75 % = <span class=\"br\"><span>3</span><span>4</span></span> = det hela minus en fjärdedel. 48 − 12 = 36.", "bild": ""}], "tb": "https://drive.google.com/file/d/1pjs1B_fvROwYeDo3dFFUTefQyqGgEGrd/view", "lek": "https://drive.google.com/file/d/1nyVplHd3qxEfSS5ElALVpQJkgO-EkUGa/view", "ts": "https://drive.google.com/file/d/1vVG5uQQ6ZGdis6TnEKLK0oRxn8kJe1oG/view"}];
+const SK = ["Osäker", "Ganska säker", "Säker"];
+const skatt = {}, svar = {}, ordning = {};
+const id = (a, m) => a + "-" + m;
+const tot = DATA.reduce((s, a) => s + a.mal.length, 0);
+function blanda(n) { const r = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; } return r; }
+
+function del1() {
+  document.getElementById("del1").innerHTML = DATA.map(a => `<div class="kort"><h2><b>${a.nr}</b>${a.namn}</h2>` +
+    a.mal.map((m, i) => `<div class="mrad"><div class="t">Jag kan ${m.mal.charAt(0).toLowerCase() + m.mal.slice(1)}.</div>
+      <div class="knappar" data-k="${id(a.nr, i)}">${[2, 1, 0].map(v => `<button data-v="${v}">${SK[v]}</button>`).join("")}</div></div>`).join("") + `</div>`).join("");
+  document.querySelectorAll(".knappar").forEach(k => k.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    k.querySelectorAll("button").forEach(x => x.classList.remove("val")); b.classList.add("val");
+    skatt[k.dataset.k] = +b.dataset.v; kollaDel1();
+  }));
+  kollaDel1();
+}
+function kollaDel1() {
+  const n = Object.keys(skatt).length;
+  document.getElementById("till2").disabled = n < tot;
+  document.getElementById("kvar").textContent = n < tot ? `Du har skattat ${n} av ${tot} mål.` : "Bra! Nu kan du gå vidare.";
+}
+function del2() {
+  document.getElementById("del2").innerHTML = DATA.map(a => `<div class="kort"><h2><b>${a.nr}</b>${a.namn}</h2>` +
+    a.mal.map((m, i) => { const k = id(a.nr, i); ordning[k] = blanda(m.alt.length);
+      return `<div class="fraga" id="f-${k}"><div class="q">${m.q}<i>Mål: ${m.mal}</i></div>${m.bild ? `<div class="bild">${m.bild}</div>` : ""}
+      <div class="alt">${ordning[k].map(j => `<label data-j="${j}"><input type="radio" name="${k}" value="${j}"><span>${m.alt[j]}</span></label>`).join("")}</div>
+      <div class="fork">${m.fork}</div></div>`; }).join("") + `</div>`).join("");
+  document.querySelectorAll("#del2 input").forEach(inp => inp.addEventListener("change", () => { svar[inp.name] = +inp.value; }));
+}
+function kommentar(s, r) {
+  if (r && s === 2) return "Stark! Du klarar även svåra frågor på det här.";
+  if (r) return "Rätt på en svår fråga! Du kan mer än du trodde.";
+  if (s === 2) return "En klurig fråga. Läs förklaringen och se var det tog stopp.";
+  return "En svår fråga. Läs förklaringen och prova igen om några dagar.";
+}
+const UTMANA = "../utmana-dig/kapitel-4.pdf";
+const lnk = (u, t) => u ? `<a href="${u}" target="_blank" rel="noopener">${t}</a>` : `<b>${t}</b>`;
+function rek(a, ratt) {
+  const kap = String(a.nr).split(".")[0];
+  if (ratt === a.mal.length) return `<b>Tips:</b> Imponerande! Testa ${lnk("../na-toppen/kapitel-" + kap + ".pdf", "Nå toppen")} för kapitel ${kap}.`;
+  return `<b>Tips:</b> Läs förklaringarna nedan. Träna sedan med ${lnk(UTMANA, "Utmana dig")} för kapitel ${kap}.`;
+}
+function ratta() {
+  const obes = DATA.flatMap(a => a.mal.map((m, i) => id(a.nr, i))).filter(k => !(k in svar));
+  if (obes.length && !confirmFri(obes.length)) return;
+  let rattTot = 0, stamde = 0, merAn = 0, trodde = 0;
+  let html = "";
+  DATA.forEach(a => {
+    let ratt = 0, rader = "";
+    a.mal.forEach((m, i) => {
+      const k = id(a.nr, i), r = svar[k] === 0, s = skatt[k];
+      if (r) { ratt++; rattTot++; }
+      if ((r && s === 2) || (!r && s === 0)) stamde++;
+      if (r && s < 2) merAn++;
+      if (!r && s === 2) trodde++;
+      rader += `<tr><td>${m.mal}</td><td><span class="etk e${s}">${SK[s]}</span></td><td>${r ? "✔ Rätt" : "✘ Fel"}</td><td>${kommentar(s, r)}</td></tr>`;
+      const f = document.getElementById("f-" + k); f.classList.add("visa");
+      f.querySelectorAll("label").forEach(l => { const j = +l.dataset.j; if (j === 0) l.classList.add("ratt"); else if (svar[k] === j) l.classList.add("fel"); });
+      f.querySelectorAll("input").forEach(x => x.disabled = true);
+    });
+    html += `<div class="kort"><h2><b>${a.nr}</b>${a.namn} · ${ratt} av ${a.mal.length} rätt</h2>
+      <table><tr><th>Mål</th><th>Din känsla</th><th>Svar</th><th>Kommentar</th></tr>${rader}</table><div class="rek">${rek(a, ratt)}</div></div>`;
+  });
+  document.getElementById("del3").innerHTML = `<div class="summa">
+    <div><b>${rattTot} / ${tot}</b>rätt svar</div><div><b>${stamde}</b>gånger stämde din känsla</div>
+    <div><b>${merAn}</b>gånger kunde du mer än du trodde</div><div><b>${trodde}</b>gånger trodde du att du kunde</div></div>
+    <p class="info" style="margin-top:0">Rätt och fel syns också vid frågorna längre ned, med en förklaring.</p>` + html;
+  visa(3);
+}
+function confirmFri(n) {
+  const el = document.getElementById("kvarFr");
+  if (el) { el.remove(); return true; }
+  const p = document.createElement("p"); p.id = "kvarFr"; p.className = "info";
+  p.textContent = `Du har ${n} fråga(or) kvar. Tryck på Rätta en gång till om du vill rätta ändå.`;
+  document.getElementById("ratta").after(p); return false;
+}
+function visa(n) {
+  ["s1", "s2", "s3"].forEach((s, i) => document.getElementById(s).classList.toggle("akt", i === n - 1));
+  document.getElementById("del1").classList.toggle("dold", n !== 1);
+  document.getElementById("till2").classList.toggle("dold", n !== 1);
+  document.getElementById("kvar").classList.toggle("dold", n !== 1);
+  document.getElementById("del2").classList.toggle("dold", n === 1);
+  document.getElementById("ratta").classList.toggle("dold", n !== 2);
+  document.getElementById("del3").classList.toggle("dold", n !== 3);
+  document.getElementById("om").classList.toggle("dold", n !== 3);
+  const fr = document.getElementById("kvarFr"); if (fr && n !== 2) fr.remove();
+  if (n === 3) document.getElementById("del2").before(document.getElementById("del3"));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+document.getElementById("till2").onclick = () => { del2(); visa(2); };
+document.getElementById("ratta").onclick = ratta;
+document.getElementById("om").onclick = () => { location.reload(); };
+del1();
+</script></body></html>

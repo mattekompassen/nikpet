@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="../../bilder/kompass-liten.png"><link rel="apple-touch-icon" href="../../bilder/appikon/ikon-180.png"><link rel="manifest" href="../../manifest.webmanifest"><title>Hur säker är jag? 3 Åk 7 · Kapitel 1 Taluppfattning och tals användning</title>
+<style>
+:root{--g:#2E6E28;--gm:#58A73E;--gl:#DCEFD5;--gvl:#F1F8EE;--rod:#E07A5F;--gul:#E9B949;--txt:#292A28;--gra:#5F6368;--bg:#F4F3EF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Carlito,Calibri,'Segoe UI',Arial,sans-serif;font-size:17px;line-height:1.4}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,var(--gm),var(--g));color:#fff;border-radius:18px;padding:22px 24px;margin-bottom:16px}
+header small{opacity:.85;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;font-size:13px}
+header h1{margin:4px 0 6px;font-size:30px}
+header p{margin:0;opacity:.95}
+.steg{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.steg span{background:#fff;border:1.5px solid var(--gl);border-radius:99px;padding:5px 14px;font-size:14px;color:var(--gra)}
+.steg span.akt{background:var(--g);border-color:var(--g);color:#fff;font-weight:bold}
+.kort{background:#fff;border:1.5px solid var(--gl);border-left:7px solid var(--gm);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.kort h2{margin:0 0 8px;font-size:20px;color:var(--g)}
+.kort h2 b{background:var(--g);color:#fff;border-radius:6px;padding:0 8px;margin-right:8px}
+.mrad{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--gvl);flex-wrap:wrap}
+.mrad:first-of-type{border-top:0}
+.mrad .t{flex:1 1 260px}
+.knappar{display:flex;gap:6px;flex-wrap:wrap}
+.knappar button{border:1.5px solid var(--gl);background:#fff;border-radius:10px;padding:6px 10px;font:inherit;font-size:15px;cursor:pointer;color:var(--txt)}
+.knappar button:hover{border-color:var(--gm)}
+.knappar button.val[data-v="2"]{background:var(--g);border-color:var(--g);color:#fff}
+.knappar button.val[data-v="1"]{background:#E9B949;border-color:#C6962A;color:#292A28}
+.knappar button.val[data-v="0"]{background:#E07A5F;border-color:#B95E44;color:#fff}
+.fraga{padding:10px 0;border-top:1px solid var(--gvl)}
+.fraga:first-of-type{border-top:0}
+.fraga .q{font-weight:bold;margin-bottom:6px}
+.fraga .q i{font-weight:normal;color:var(--gra);font-size:14px;display:block}
+.alt{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px}
+.alt label{display:flex;gap:8px;align-items:center;border:1.5px solid var(--gl);border-radius:10px;padding:7px 10px;cursor:pointer;background:#fff}
+.alt label:hover{border-color:var(--gm)}
+.alt input{accent-color:var(--g);width:18px;height:18px}
+.alt label.ratt{border-color:#3B8B3B;background:#EAF5E6}
+.alt label.ratt::after{content:"✔";margin-left:auto;color:#3B8B3B;font-weight:bold}
+.alt label.fel::after{content:"✘";margin-left:auto;color:#C0392B;font-weight:bold}
+.alt label.fel{border-color:#C0392B;background:#FCEDE8}
+.fork{margin-top:6px;background:#FFF6DE;border-left:4px solid var(--gul);border-radius:8px;padding:6px 10px;font-size:15px;display:none}
+.visa .fork{display:block}
+.huvudknapp{display:block;margin:6px auto 22px;background:var(--g);color:#fff;border:0;border-radius:12px;padding:12px 26px;font:inherit;font-weight:bold;font-size:18px;cursor:pointer}
+.huvudknapp:disabled{background:#AEB3B0;cursor:not-allowed}
+.info{text-align:center;color:var(--gra);font-size:15px;margin-top:-8px;margin-bottom:18px}
+.dold{display:none}
+.summa{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.summa div{background:#fff;border:1.5px solid var(--gl);border-radius:14px;padding:12px;text-align:center}
+.summa b{display:block;font-size:30px;color:var(--g)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{padding:7px 6px;border-top:1px solid var(--gvl);text-align:left;vertical-align:top}
+th{font-size:13px;text-transform:uppercase;color:var(--gra);letter-spacing:.03em}
+.etk{display:inline-block;border-radius:99px;padding:1px 9px;font-size:13px;font-weight:bold;white-space:nowrap}
+.e2{background:var(--gl);color:var(--g)}.e1{background:#FBEBC0;color:#7A5A10}.e0{background:#FADAD0;color:#8C3A22}
+.rek a{color:var(--g);font-weight:bold}
+.rek{margin-top:8px;background:var(--gvl);border-radius:10px;padding:8px 12px;font-size:15px}
+.rek b{color:var(--g)}
+.tillbaka{display:inline-block;margin:0 0 10px;color:var(--g);font-weight:bold;text-decoration:none;font-size:15px}
+footer a{color:var(--gra)}
+footer{text-align:center;color:var(--gra);font-size:13px;padding:10px 0 24px}
+.br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.86em;line-height:1.08;margin:0 .12em}.br>span:first-child{border-bottom:1.2px solid currentColor;padding:0 .18em}
+.bild{margin:6px 0 8px;overflow-x:auto}.bild table{width:auto;border:1.5px solid var(--gl)}.bild td,.bild th{border:1px solid var(--gl);text-align:center;padding:4px 12px}
+@media (max-width:520px){table{font-size:13.5px}td,th{padding:6px 3px}header h1{font-size:24px}.knappar button{padding:6px 8px;font-size:14px}}
+body{font-family:Inter,system-ui,sans-serif;font-size:16px}h1,h2{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.3px}</style></head><body><div class="wrap">
+<header><small>Åk 7 · Kapitel 1 Taluppfattning och tals användning</small><h1>Hur säker är jag? 3</h1>
+<p><b>Utmaning!</b> Här är frågorna svårare än i 1 och 2. Först skattar du hur säker du är på varje mål. Sedan svarar du på en fråga per mål. Till sist ser du om din känsla stämde och vad du ska träna mer på. Inget sparas.</p></header>
+<div class="steg"><span id="s1" class="akt">1 Skatta dig själv</span><span id="s2">2 Kontrollfrågor</span><span id="s3">3 Resultat</span></div>
+
+<section id="del1"></section>
+<button class="huvudknapp" id="till2" disabled>Gå vidare till frågorna</button>
+<p class="info" id="kvar"></p>
+
+<section id="del2" class="dold"></section>
+<button class="huvudknapp dold" id="ratta">Rätta</button>
+
+<section id="del3" class="dold"></section>
+<button class="huvudknapp dold" id="om">Börja om</button>
+<footer>Mattekompassen</footer>
+</div>
+<script>
+const DATA = [{"nr": "1.1", "namn": "Naturliga tal", "mal": [{"mal": "Förklara skillnaden mellan siffra och tal och skriva tal i utvecklad form", "q": "Hur många tiotal finns det sammanlagt i talet 3 482?", "alt": ["348", "8", "80", "34"], "fork": "Siffran 8 står på tiotalsplatsen, men talet innehåller fler tiotal än så: 3 482 = 348 tiotal och 2 ental. Siffra och tal är inte samma sak.", "bild": ""}, {"mal": "Avgöra om ett tal är ett primtal eller ett sammansatt tal och primtalsfaktorisera med faktorträd", "q": "1 260 = 2 · 2 · 3 · 3 · 5 · 7. Vilket tal går INTE jämnt upp i 1 260?", "alt": ["8", "12", "45", "63"], "fork": "8 = 2 · 2 · 2 behöver tre tvåor, men 1 260 har bara två. 12 = 2 · 2 · 3, 45 = 3 · 3 · 5 och 63 = 3 · 3 · 7 finns alla bland faktorerna.", "bild": ""}, {"mal": "Använda delbarhetsreglerna för 2, 3, 4 och 5", "q": "Vilken siffra ska stå i rutan för att talet 52▢4 ska vara delbart med både 3 och 4?", "alt": ["4", "1", "7", "2"], "fork": "Delbart med 4: talet ▢4 ska vara delbart med 4, då är ▢ jämn. Delbart med 3: 5 + 2 + ▢ + 4 = 11 + ▢ ska vara delbart med 3, då är ▢ = 1, 4 eller 7. Bara 4 klarar båda: 5 244.", "bild": ""}], "tb": "https://drive.google.com/file/d/1qcLxRf37dqDfi8YBiUku3pmfoo6LkeHq/view", "lek": "https://drive.google.com/file/d/1dFnKIGxlt9O7Xk7Tb03dkdBIkY7gWJnQ/view", "ts": "https://drive.google.com/file/d/160JwZSrMwtquCfdx_1ULMTDW1SSEYkAw/view"}, {"nr": "1.2", "namn": "Numeriska uttryck", "mal": [{"mal": "Använda orden term, summa, differens, faktor, produkt och kvot", "q": "Differensen mellan två tal är 6 och produkten av dem är 40. Vad är summan av talen?", "alt": ["14", "46", "10", "24"], "fork": "Prova par med produkten 40: 1 och 40, 2 och 20, 4 och 10, 5 och 8. Bara 10 − 4 = 6. Summan är 10 + 4 = 14.", "bild": ""}, {"mal": "Beräkna uttryck med prioriteringsreglerna och förklara vad en parentes gör", "q": "Var ska parentesen stå för att det ska bli 4?", "alt": ["24 − 4 · (3 + 2)", "(24 − 4) · 3 + 2", "24 − (4 · 3 + 2)", "(24 − 4 · 3) + 2"], "fork": "24 − 4 · 5 = 24 − 20 = 4. De andra blir 62, 10 och 14.", "bild": ""}, {"mal": "Teckna ett uttryck till en vardagssituation", "q": "En vuxenbiljett kostar 85 kr och en barnbiljett 40 kr. En familj med 2 vuxna och några barn betalar 330 kr. Vilket uttryck ger antalet barn?", "alt": ["(330 − 2 · 85) / 40", "330 − 2 · 85 / 40", "(330 − 85) / 40 · 2", "330 / 40 − 2"], "fork": "Dra bort de vuxnas biljetter först, sedan delar man det som blir kvar med 40. Utan parentes räknas divisionen först. (330 − 170) / 40 = 160 / 40 = 4 barn.", "bild": ""}], "tb": "https://drive.google.com/file/d/1OqRoOhCIRRLJ0gBv3IIjVYWWWwh4Q0PE/view", "lek": "https://drive.google.com/file/d/1qbGlKDmNHRrB6UdD-YUceqStqUQrIIBi/view", "ts": "https://drive.google.com/file/d/1HGcenxtMrqAEmH-1JHXQOHF7FUqD_0kh/view"}, {"nr": "1.3", "namn": "Hela tal", "mal": [{"mal": "Förklara vad negativa tal och hela tal är", "q": "Hur många hela tal finns det mellan −4,5 och 3,2?", "alt": ["8", "7", "6", "9"], "fork": "Talen är −4, −3, −2, −1, 0, 1, 2 och 3. Glöm inte nollan.", "bild": ""}, {"mal": "Placera och jämföra hela tal på en tallinje med &lt; och &gt;", "q": "Vilket tal ligger mitt emellan −14 och 6 på tallinjen?", "alt": ["−4", "−10", "4", "−8"], "fork": "Avståndet är 6 − (−14) = 20. Halva avståndet är 10. −14 + 10 = −4.", "bild": ""}, {"mal": "Addera och subtrahera med negativa tal, till exempel i temperaturuppgifter", "q": "Natten var −13 °C. På dagen var det 21 grader varmare. På kvällen var det 17 grader kallare än på dagen. Vilken temperatur var det på kvällen?", "alt": ["−9 °C", "9 °C", "−25 °C", "−1 °C"], "fork": "Dagen: −13 + 21 = 8 °C. Kvällen: 8 − 17 = −9 °C.", "bild": ""}], "tb": "https://drive.google.com/file/d/1Ssfvx2TKirNg9A0_TgIyFNUxwZMbxUKG/view", "lek": "https://drive.google.com/file/d/1d6LyYt77uTF73awVf9MHUPSXCE4IJZFy/view", "ts": "https://drive.google.com/file/d/1EXWzOyRH2FbloXPKgN71rqWE37JwXF4A/view"}, {"nr": "1.4", "namn": "Rationella tal", "mal": [{"mal": "Växla mellan bråkform och decimalform", "q": "Vilket tal är störst?", "alt": ["<span class=\"br\"><span>5</span><span>8</span></span>", "0,62", "<span class=\"br\"><span>3</span><span>5</span></span>", "0,6"], "fork": "Gör om till decimalform: <span class=\"br\"><span>5</span><span>8</span></span> = 0,625 och <span class=\"br\"><span>3</span><span>5</span></span> = 0,6. 0,625 &gt; 0,62 &gt; 0,6.", "bild": ""}, {"mal": "Ange värdet av siffror i decimaltal och skriva dem i utvecklad form", "q": "Vilket tal är 3 · 10 + 4 · 0,1 + 5 · 0,001?", "alt": ["30,405", "34,005", "30,45", "3,4005"], "fork": "3 tiotal, 0 ental, 4 tiondelar, 0 hundradelar och 5 tusendelar: 30,405.", "bild": ""}, {"mal": "Förklara vad ett rationellt tal är", "q": "Hur många rationella tal finns det mellan 0,1 och 0,2?", "alt": ["Oändligt många", "9", "1", "Inga"], "fork": "Mellan två bråk eller decimaltal finns alltid fler: 0,15, 0,151, 0,1511 och så vidare. Det tar aldrig slut.", "bild": ""}], "tb": "https://drive.google.com/file/d/1GCT7RiQ_uxnV9BebleoOdrNQn11ShXh5/view", "lek": "https://drive.google.com/file/d/1whLYMlm8Zylf3O9l0F-CtNNegFpmHsym/view", "ts": "https://drive.google.com/file/d/178mP1Q0z56bAh7T3toyHYuzjfSetewF3/view"}, {"nr": "1.5", "namn": "Räkna med bråk", "mal": [{"mal": "Skriva tal i bråkform i blandad form och tvärtom", "q": "Vilket tal är störst?", "alt": ["<span class=\"br\"><span>17</span><span>5</span></span>", "3 <span class=\"br\"><span>1</span><span>3</span></span>", "<span class=\"br\"><span>13</span><span>4</span></span>", "3 <span class=\"br\"><span>3</span><span>10</span></span>"], "fork": "<span class=\"br\"><span>17</span><span>5</span></span> = 3 <span class=\"br\"><span>2</span><span>5</span></span> = 3,4. 3 <span class=\"br\"><span>1</span><span>3</span></span> ≈ 3,33. <span class=\"br\"><span>13</span><span>4</span></span> = 3,25. 3 <span class=\"br\"><span>3</span><span>10</span></span> = 3,3.", "bild": ""}, {"mal": "Addera och subtrahera bråk med samma nämnare", "q": "Beräkna 4 − 1 <span class=\"br\"><span>5</span><span>7</span></span> − 1 <span class=\"br\"><span>3</span><span>7</span></span>", "alt": ["<span class=\"br\"><span>6</span><span>7</span></span>", "1 <span class=\"br\"><span>1</span><span>7</span></span>", "2 <span class=\"br\"><span>1</span><span>7</span></span>", "<span class=\"br\"><span>8</span><span>7</span></span>"], "fork": "Hela: 4 − 1 − 1 = 2. Delar: <span class=\"br\"><span>5</span><span>7</span></span> + <span class=\"br\"><span>3</span><span>7</span></span> = <span class=\"br\"><span>8</span><span>7</span></span> = 1 <span class=\"br\"><span>1</span><span>7</span></span>. 2 − 1 <span class=\"br\"><span>1</span><span>7</span></span> = <span class=\"br\"><span>6</span><span>7</span></span>.", "bild": ""}, {"mal": "Visa bråkberäkningar med bilder", "q": "En rektangel är delad i 12 lika stora rutor. <span class=\"br\"><span>5</span><span>12</span></span> av rektangeln är blå och <span class=\"br\"><span>1</span><span>4</span></span> är röd. Resten är vit. Hur stor del är vit? Rita gärna.", "alt": ["<span class=\"br\"><span>1</span><span>3</span></span>", "<span class=\"br\"><span>1</span><span>2</span></span>", "<span class=\"br\"><span>7</span><span>12</span></span>", "<span class=\"br\"><span>4</span><span>16</span></span>"], "fork": "<span class=\"br\"><span>1</span><span>4</span></span> av 12 rutor är 3 rutor. Blå + röd = 5 + 3 = 8 rutor. Vitt: 4 rutor = <span class=\"br\"><span>4</span><span>12</span></span> = <span class=\"br\"><span>1</span><span>3</span></span>.", "bild": ""}], "tb": "https://drive.google.com/file/d/1q8MlAZuxEMfzHVD-iA0s0cfKD-eCMe1w/view", "lek": "https://drive.google.com/file/d/1mSCTxAxVp8XUU50yEJYxMuBa58eAf6b_/view", "ts": "https://drive.google.com/file/d/1MFXmwcHupgKtWP6F97tmdo5BCU9AjKrW/view"}, {"nr": "1.6", "namn": "Multiplikation och division", "mal": [{"mal": "Multiplicera och dividera med 10, 100 och 1 000 och förklara vad som händer med platsvärdet", "q": "Vilket tal ska stå i rutan? 0,036 · ▢ = 36", "alt": ["1 000", "100", "10 000", "10"], "fork": "Siffrorna ska flytta tre steg åt vänster: 0,036 → 0,36 → 3,6 → 36. Det är gånger 1 000.", "bild": ""}, {"mal": "Räkna smart med stora och små tal genom att göra om faktorerna", "q": "Vilket är ett smart sätt att räkna 125 · 48?", "alt": ["125 · 8 · 6 = 1 000 · 6 = 6 000", "125 · 50 − 2 = 6 248", "100 · 48 + 25 = 4 825", "125 · 4 · 8 = 4 000"], "fork": "48 = 8 · 6 och 125 · 8 = 1 000. Därför blir 125 · 48 = 6 000.", "bild": ""}, {"mal": "Avgöra om en produkt blir större eller mindre än en faktor", "q": "Talet a ligger mellan 0 och 1. Vilket påstående stämmer alltid?", "alt": ["50 · a är mindre än 50", "50 / a är mindre än 50", "50 · a är större än 50", "50 / a är lika med 50"], "fork": "Att multiplicera med ett tal mindre än 1 ger mindre än 50, till exempel 50 · 0,5 = 25. Att dividera med ett sådant tal ger mer än 50: 50 / 0,5 = 100.", "bild": ""}], "tb": "https://drive.google.com/file/d/1UARpxIOZA6pX7B3jiKQANEkbr_S-tZMZ/view", "lek": "https://drive.google.com/file/d/1Zbej8FnuZ50zlgtay_02FPwhqOEe2atQ/view", "ts": "https://drive.google.com/file/d/19BcYfzvTKZQeO0zeyGibfLt5QsXRne2F/view"}, {"nr": "1.7", "namn": "Division med stora och små tal", "mal": [{"mal": "Förenkla divisioner genom att förkorta", "q": "Vilken kvot är INTE lika med 25?", "alt": ["<span class=\"br\"><span>1 250</span><span>5</span></span>", "<span class=\"br\"><span>7 500</span><span>300</span></span>", "<span class=\"br\"><span>450</span><span>18</span></span>", "<span class=\"br\"><span>2,5</span><span>0,1</span></span>"], "fork": "<span class=\"br\"><span>1 250</span><span>5</span></span> = 250. De andra: <span class=\"br\"><span>7 500</span><span>300</span></span> = <span class=\"br\"><span>75</span><span>3</span></span> = 25, <span class=\"br\"><span>450</span><span>18</span></span> = 25 och <span class=\"br\"><span>2,5</span><span>0,1</span></span> = <span class=\"br\"><span>25</span><span>1</span></span> = 25.", "bild": ""}, {"mal": "Dividera med decimaltal genom att förlänga", "q": "Beräkna <span class=\"br\"><span>0,48</span><span>0,012</span></span>", "alt": ["40", "4", "400", "0,4"], "fork": "Förläng med 1 000 så att nämnaren blir ett heltal: <span class=\"br\"><span>480</span><span>12</span></span> = 40.", "bild": ""}, {"mal": "Förklara varför kvoten inte ändras", "q": "Ines säger: ”<span class=\"br\"><span>18</span><span>6</span></span> = 3, så <span class=\"br\"><span>180</span><span>60</span></span> = 30.” Vad stämmer?", "alt": ["Fel. Både täljare och nämnare är 10 gånger större, så <span class=\"br\"><span>180</span><span>60</span></span> = 3", "Rätt", "Fel. <span class=\"br\"><span>180</span><span>60</span></span> = 300", "Fel. <span class=\"br\"><span>180</span><span>60</span></span> = 0,3"], "fork": "När både täljare och nämnare multipliceras med samma tal ändras inte kvoten. 60 får plats 3 gånger i 180.", "bild": ""}], "tb": "https://drive.google.com/file/d/1jbzpegeS4z4E4g4mQ-YivuRPX1exEMY9/view", "lek": "https://drive.google.com/file/d/1cGrzPJULXQassihEZqw-2mOSB8YU9BKA/view", "ts": "https://drive.google.com/file/d/19FSb4SiHAGA2d_ViPH2TUNwNK4CzjXP0/view"}, {"nr": "1.8", "namn": "Avrundning och överslagsräkning", "mal": [{"mal": "Avrunda till heltal, tiondelar, hundradelar, tiotal och hundratal", "q": "Vilket tal blir 4,7 när man avrundar till tiondelar?", "alt": ["4,749", "4,75", "4,64", "4,61"], "fork": "4,749: hundradelssiffran är 4, så vi avrundar nedåt till 4,7. 4,75 blir 4,8, och 4,64 och 4,61 blir 4,6.", "bild": ""}, {"mal": "Göra överslag för att uppskatta ett svar", "q": "Vilket överslag passar bäst för 0,48 · 812?", "alt": ["Hälften av 800, alltså 400", "0 · 800 = 0", "1 · 800 = 800", "0,5 · 900 = 450"], "fork": "0,48 är nästan 0,5, alltså nästan hälften. 812 ≈ 800. Rätt svar är 389,76.", "bild": ""}, {"mal": "Använda överslag för att bedöma om ett svar är rimligt", "q": "Malik räknar 7,9 / 0,42 på miniräknaren och får 1,88. Är svaret rimligt?", "alt": ["Nej, 8 / 0,4 = 20, så svaret ska vara ungefär 19", "Ja, det ser rätt ut", "Nej, svaret ska vara ungefär 3", "Nej, svaret ska vara ungefär 0,2"], "fork": "Överslag: <span class=\"br\"><span>8</span><span>0,4</span></span> = <span class=\"br\"><span>80</span><span>4</span></span> = 20. Att dividera med ett tal mindre än 1 ger ett större svar. Rätt svar är cirka 18,8.", "bild": ""}], "tb": "https://drive.google.com/file/d/1ZjyfYzCSDlDLspjAjLShKft1vVotzJTF/view", "lek": "https://drive.google.com/file/d/1xdbb5PFsGb8ry4Qzm0bPf0DnSAqdOx2s/view", "ts": "https://drive.google.com/file/d/1UkT-my_7ioVpzqeP5sJO4BWIeycnz4Ep/view"}];
+const SK = ["Osäker", "Ganska säker", "Säker"];
+const skatt = {}, svar = {}, ordning = {};
+const id = (a, m) => a + "-" + m;
+const tot = DATA.reduce((s, a) => s + a.mal.length, 0);
+function blanda(n) { const r = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; } return r; }
+
+function del1() {
+  document.getElementById("del1").innerHTML = DATA.map(a => `<div class="kort"><h2><b>${a.nr}</b>${a.namn}</h2>` +
+    a.mal.map((m, i) => `<div class="mrad"><div class="t">Jag kan ${m.mal.charAt(0).toLowerCase() + m.mal.slice(1)}.</div>
+      <div class="knappar" data-k="${id(a.nr, i)}">${[2, 1, 0].map(v => `<button data-v="${v}">${SK[v]}</button>`).join("")}</div></div>`).join("") + `</div>`).join("");
+  document.querySelectorAll(".knappar").forEach(k => k.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    k.querySelectorAll("button").forEach(x => x.classList.remove("val")); b.classList.add("val");
+    skatt[k.dataset.k] = +b.dataset.v; kollaDel1();
+  }));
+  kollaDel1();
+}
+function kollaDel1() {
+  const n = Object.keys(skatt).length;
+  document.getElementById("till2").disabled = n < tot;
+  document.getElementById("kvar").textContent = n < tot ? `Du har skattat ${n} av ${tot} mål.` : "Bra! Nu kan du gå vidare.";
+}
+function del2() {
+  document.getElementById("del2").innerHTML = DATA.map(a => `<div class="kort"><h2><b>${a.nr}</b>${a.namn}</h2>` +
+    a.mal.map((m, i) => { const k = id(a.nr, i); ordning[k] = blanda(m.alt.length);
+      return `<div class="fraga" id="f-${k}"><div class="q">${m.q}<i>Mål: ${m.mal}</i></div>${m.bild ? `<div class="bild">${m.bild}</div>` : ""}
+      <div class="alt">${ordning[k].map(j => `<label data-j="${j}"><input type="radio" name="${k}" value="${j}"><span>${m.alt[j]}</span></label>`).join("")}</div>
+      <div class="fork">${m.fork}</div></div>`; }).join("") + `</div>`).join("");
+  document.querySelectorAll("#del2 input").forEach(inp => inp.addEventListener("change", () => { svar[inp.name] = +inp.value; }));
+}
+function kommentar(s, r) {
+  if (r && s === 2) return "Stark! Du klarar även svåra frågor på det här.";
+  if (r) return "Rätt på en svår fråga! Du kan mer än du trodde.";
+  if (s === 2) return "En klurig fråga. Läs förklaringen och se var det tog stopp.";
+  return "En svår fråga. Läs förklaringen och prova igen om några dagar.";
+}
+const UTMANA = "../utmana-dig/kapitel-1.pdf";
+const lnk = (u, t) => u ? `<a href="${u}" target="_blank" rel="noopener">${t}</a>` : `<b>${t}</b>`;
+function rek(a, ratt) {
+  const kap = String(a.nr).split(".")[0];
+  if (ratt === a.mal.length) return `<b>Tips:</b> Imponerande! Testa ${lnk("../na-toppen/kapitel-" + kap + ".pdf", "Nå toppen")} för kapitel ${kap}.`;
+  return `<b>Tips:</b> Läs förklaringarna nedan. Träna sedan med ${lnk(UTMANA, "Utmana dig")} för kapitel ${kap}.`;
+}
+function ratta() {
+  const obes = DATA.flatMap(a => a.mal.map((m, i) => id(a.nr, i))).filter(k => !(k in svar));
+  if (obes.length && !confirmFri(obes.length)) return;
+  let rattTot = 0, stamde = 0, merAn = 0, trodde = 0;
+  let html = "";
+  DATA.forEach(a => {
+    let ratt = 0, rader = "";
+    a.mal.forEach((m, i) => {
+      const k = id(a.nr, i), r = svar[k] === 0, s = skatt[k];
+      if (r) { ratt++; rattTot++; }
+      if ((r && s === 2) || (!r && s === 0)) stamde++;
+      if (r && s < 2) merAn++;
+      if (!r && s === 2) trodde++;
+      rader += `<tr><td>${m.mal}</td><td><span class="etk e${s}">${SK[s]}</span></td><td>${r ? "✔ Rätt" : "✘ Fel"}</td><td>${kommentar(s, r)}</td></tr>`;
+      const f = document.getElementById("f-" + k); f.classList.add("visa");
+      f.querySelectorAll("label").forEach(l => { const j = +l.dataset.j; if (j === 0) l.classList.add("ratt"); else if (svar[k] === j) l.classList.add("fel"); });
+      f.querySelectorAll("input").forEach(x => x.disabled = true);
+    });
+    html += `<div class="kort"><h2><b>${a.nr}</b>${a.namn} · ${ratt} av ${a.mal.length} rätt</h2>
+      <table><tr><th>Mål</th><th>Din känsla</th><th>Svar</th><th>Kommentar</th></tr>${rader}</table><div class="rek">${rek(a, ratt)}</div></div>`;
+  });
+  document.getElementById("del3").innerHTML = `<div class="summa">
+    <div><b>${rattTot} / ${tot}</b>rätt svar</div><div><b>${stamde}</b>gånger stämde din känsla</div>
+    <div><b>${merAn}</b>gånger kunde du mer än du trodde</div><div><b>${trodde}</b>gånger trodde du att du kunde</div></div>
+    <p class="info" style="margin-top:0">Rätt och fel syns också vid frågorna längre ned, med en förklaring.</p>` + html;
+  visa(3);
+}
+function confirmFri(n) {
+  const el = document.getElementById("kvarFr");
+  if (el) { el.remove(); return true; }
+  const p = document.createElement("p"); p.id = "kvarFr"; p.className = "info";
+  p.textContent = `Du har ${n} fråga(or) kvar. Tryck på Rätta en gång till om du vill rätta ändå.`;
+  document.getElementById("ratta").after(p); return false;
+}
+function visa(n) {
+  ["s1", "s2", "s3"].forEach((s, i) => document.getElementById(s).classList.toggle("akt", i === n - 1));
+  document.getElementById("del1").classList.toggle("dold", n !== 1);
+  document.getElementById("till2").classList.toggle("dold", n !== 1);
+  document.getElementById("kvar").classList.toggle("dold", n !== 1);
+  document.getElementById("del2").classList.toggle("dold", n === 1);
+  document.getElementById("ratta").classList.toggle("dold", n !== 2);
+  document.getElementById("del3").classList.toggle("dold", n !== 3);
+  document.getElementById("om").classList.toggle("dold", n !== 3);
+  const fr = document.getElementById("kvarFr"); if (fr && n !== 2) fr.remove();
+  if (n === 3) document.getElementById("del2").before(document.getElementById("del3"));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+document.getElementById("till2").onclick = () => { del2(); visa(2); };
+document.getElementById("ratta").onclick = ratta;
+document.getElementById("om").onclick = () => { location.reload(); };
+del1();
+</script></body></html>
