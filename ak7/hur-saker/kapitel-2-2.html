@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="icon" href="../../bilder/kompass-liten.png"><link rel="apple-touch-icon" href="../../bilder/appikon/ikon-180.png"><link rel="manifest" href="../../manifest.webmanifest"><title>Hur säker är jag? 2 Åk 7 · Kapitel 2 Algebra</title>
+<style>
+:root{--g:#2E6E28;--gm:#58A73E;--gl:#DCEFD5;--gvl:#F1F8EE;--rod:#E07A5F;--gul:#E9B949;--txt:#292A28;--gra:#5F6368;--bg:#F4F3EF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:Carlito,Calibri,'Segoe UI',Arial,sans-serif;font-size:17px;line-height:1.4}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,var(--gm),var(--g));color:#fff;border-radius:18px;padding:22px 24px;margin-bottom:16px}
+header small{opacity:.85;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;font-size:13px}
+header h1{margin:4px 0 6px;font-size:30px}
+header p{margin:0;opacity:.95}
+.steg{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}
+.steg span{background:#fff;border:1.5px solid var(--gl);border-radius:99px;padding:5px 14px;font-size:14px;color:var(--gra)}
+.steg span.akt{background:var(--g);border-color:var(--g);color:#fff;font-weight:bold}
+.kort{background:#fff;border:1.5px solid var(--gl);border-left:7px solid var(--gm);border-radius:14px;padding:14px 16px;margin-bottom:14px}
+.kort h2{margin:0 0 8px;font-size:20px;color:var(--g)}
+.kort h2 b{background:var(--g);color:#fff;border-radius:6px;padding:0 8px;margin-right:8px}
+.mrad{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--gvl);flex-wrap:wrap}
+.mrad:first-of-type{border-top:0}
+.mrad .t{flex:1 1 260px}
+.knappar{display:flex;gap:6px;flex-wrap:wrap}
+.knappar button{border:1.5px solid var(--gl);background:#fff;border-radius:10px;padding:6px 10px;font:inherit;font-size:15px;cursor:pointer;color:var(--txt)}
+.knappar button:hover{border-color:var(--gm)}
+.knappar button.val[data-v="2"]{background:var(--g);border-color:var(--g);color:#fff}
+.knappar button.val[data-v="1"]{background:#E9B949;border-color:#C6962A;color:#292A28}
+.knappar button.val[data-v="0"]{background:#E07A5F;border-color:#B95E44;color:#fff}
+.fraga{padding:10px 0;border-top:1px solid var(--gvl)}
+.fraga:first-of-type{border-top:0}
+.fraga .q{font-weight:bold;margin-bottom:6px}
+.fraga .q i{font-weight:normal;color:var(--gra);font-size:14px;display:block}
+.alt{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:6px}
+.alt label{display:flex;gap:8px;align-items:center;border:1.5px solid var(--gl);border-radius:10px;padding:7px 10px;cursor:pointer;background:#fff}
+.alt label:hover{border-color:var(--gm)}
+.alt input{accent-color:var(--g);width:18px;height:18px}
+.alt label.ratt{border-color:#3B8B3B;background:#EAF5E6}
+.alt label.ratt::after{content:"✔";margin-left:auto;color:#3B8B3B;font-weight:bold}
+.alt label.fel::after{content:"✘";margin-left:auto;color:#C0392B;font-weight:bold}
+.alt label.fel{border-color:#C0392B;background:#FCEDE8}
+.fork{margin-top:6px;background:#FFF6DE;border-left:4px solid var(--gul);border-radius:8px;padding:6px 10px;font-size:15px;display:none}
+.visa .fork{display:block}
+.huvudknapp{display:block;margin:6px auto 22px;background:var(--g);color:#fff;border:0;border-radius:12px;padding:12px 26px;font:inherit;font-weight:bold;font-size:18px;cursor:pointer}
+.huvudknapp:disabled{background:#AEB3B0;cursor:not-allowed}
+.info{text-align:center;color:var(--gra);font-size:15px;margin-top:-8px;margin-bottom:18px}
+.dold{display:none}
+.summa{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.summa div{background:#fff;border:1.5px solid var(--gl);border-radius:14px;padding:12px;text-align:center}
+.summa b{display:block;font-size:30px;color:var(--g)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+td,th{padding:7px 6px;border-top:1px solid var(--gvl);text-align:left;vertical-align:top}
+th{font-size:13px;text-transform:uppercase;color:var(--gra);letter-spacing:.03em}
+.etk{display:inline-block;border-radius:99px;padding:1px 9px;font-size:13px;font-weight:bold;white-space:nowrap}
+.e2{background:var(--gl);color:var(--g)}.e1{background:#FBEBC0;color:#7A5A10}.e0{background:#FADAD0;color:#8C3A22}
+.rek a{color:var(--g);font-weight:bold}
+.rek{margin-top:8px;background:var(--gvl);border-radius:10px;padding:8px 12px;font-size:15px}
+.rek b{color:var(--g)}
+.tillbaka{display:inline-block;margin:0 0 10px;color:var(--g);font-weight:bold;text-decoration:none;font-size:15px}
+footer a{color:var(--gra)}
+footer{text-align:center;color:var(--gra);font-size:13px;padding:10px 0 24px}
+.br{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.86em;line-height:1.08;margin:0 .12em}.br>span:first-child{border-bottom:1.2px solid currentColor;padding:0 .18em}
+.bild{margin:6px 0 8px;overflow-x:auto}.bild table{width:auto;border:1.5px solid var(--gl)}.bild td,.bild th{border:1px solid var(--gl);text-align:center;padding:4px 12px}
+@media (max-width:520px){table{font-size:13.5px}td,th{padding:6px 3px}header h1{font-size:24px}.knappar button{padding:6px 8px;font-size:14px}}
+body{font-family:Inter,system-ui,sans-serif;font-size:16px}h1,h2{font-family:Inter,sans-serif;font-weight:800;letter-spacing:-.3px}</style></head><body><div class="wrap">
+<header><small>Åk 7 · Kapitel 2 Algebra</small><h1>Hur säker är jag? 2</h1>
+<p>Först skattar du hur säker du är på varje mål. Sedan svarar du på en fråga per mål. Till sist ser du om din känsla stämde och vad du ska träna mer på. Inget sparas.</p></header>
+<div class="steg"><span id="s1" class="akt">1 Skatta dig själv</span><span id="s2">2 Kontrollfrågor</span><span id="s3">3 Resultat</span></div>
+
+<section id="del1"></section>
+<button class="huvudknapp" id="till2" disabled>Gå vidare till frågorna</button>
+<p class="info" id="kvar"></p>
+
+<section id="del2" class="dold"></section>
+<button class="huvudknapp dold" id="ratta">Rätta</button>
+
+<section id="del3" class="dold"></section>
+<button class="huvudknapp dold" id="om">Börja om</button>
+<footer>Mattekompassen</footer>
+</div>
+<script>
+const DATA = [{"nr": "2.1", "namn": "Algebraiska uttryck", "mal": [{"mal": "Förklara vad en variabel och ett algebraiskt uttryck är", "q": "Vad är en variabel?", "alt": ["En bokstav som står för ett tal som kan variera", "En förkortning av ett ord, t.ex. b för banan", "Alltid talet 1", "Ett tecken för multiplikation"], "fork": "I uttrycket 3b + 5 står b för ett tal, till exempel priset för en banan, inte för själva bananen.", "bild": ""}, {"mal": "Teckna ett uttryck från en text eller en bild", "q": "Juni är x år. Hennes bror är 4 år yngre. Vilket uttryck visar broderns ålder?", "alt": ["x − 4", "4 − x", "x + 4", "4x"], "fork": "Yngre betyder färre år: man tar bort 4 från Junis ålder. Om Juni är 13 år är brodern 13 − 4 = 9 år.", "bild": ""}, {"mal": "Beräkna ett uttrycks värde när du vet vad variabeln är", "q": "Vad är värdet av 4y om y = 7?", "alt": ["28", "47", "11", "74"], "fork": "4y betyder 4 · y. 4 · 7 = 28. Man skriver inte in 7 bredvid 4.", "bild": ""}], "tb": "https://drive.google.com/file/d/1g1PMztTX_M-7rdMk-R-A7SKxCA7Jy5Sb/view", "lek": "https://drive.google.com/file/d/1dbnNo0khYzJr9bOdYJIVLqSqXCeKUoVz/view", "ts": "https://drive.google.com/file/d/1xp3VRysM2oNRNd_bTzsCYnv2BQk4bFcu/view"}, {"nr": "2.2", "namn": "Mönster", "mal": [{"mal": "Beskriva ett mönster som en talföljd", "q": "Vilken beskrivning passar talföljden 50, 45, 40, 35, …?", "alt": ["Talen minskar med 5 varje gång", "Talen ökar med 5 varje gång", "Talen halveras varje gång", "Talen minskar med 10 varje gång"], "fork": "50 − 5 = 45, 45 − 5 = 40 och så vidare. Differensen är −5.", "bild": ""}, {"mal": "Hitta differensen och fortsätta en talföljd", "q": "Vilket tal fattas? 3, 7, __, 15, 19", "alt": ["11", "10", "12", "13"], "fork": "Differensen är 4: 3 + 4 = 7, 7 + 4 = 11, 11 + 4 = 15.", "bild": ""}, {"mal": "Räkna ut talen i en talföljd med ett uttryck", "q": "Antalet plattor i figur n är 2n + 3. Leyla säger att figur 5 har 28 plattor. Vad stämmer?", "alt": ["Fel. 2 · 5 + 3 = 13", "Rätt", "Fel. Det blir 10", "Fel. Det blir 25"], "fork": "2n betyder 2 · n. Med n = 5: 2 · 5 + 3 = 10 + 3 = 13. Leyla skrev 2n som ”25” och la till 3.", "bild": ""}], "tb": "https://drive.google.com/file/d/1ExNHHKgDHtTSc8nkP1zhC_D2kQAKIdlZ/view", "lek": "https://drive.google.com/file/d/1LoJZg71F9ggzGpagxeihcl58oJHfzec9/view", "ts": "https://drive.google.com/file/d/1rjnHhlju_s5eB4xUGdXEOhX1TSk-O5d2/view"}, {"nr": "2.3", "namn": "Förenkling av uttryck", "mal": [{"mal": "Förklara vad en term är", "q": "Vilka är termerna i uttrycket 5a − 3 + a?", "alt": ["5a, −3 och a", "5a och 3a", "5, a, 3 och a", "5a − 3 och a"], "fork": "Termerna skiljs åt av + och −. Minustecknet hör till termen efter: 5a, −3 och a.", "bild": ""}, {"mal": "Förenkla uttryck genom att lägga ihop termer av samma sort", "q": "Siri förenklar 3x + 2 till 5x. Vad stämmer?", "alt": ["Fel. 3x och 2 är inte av samma sort, så uttrycket kan inte förenklas", "Rätt", "Fel. Det blir 6x", "Fel. Det blir 5"], "fork": "Man kan bara lägga ihop termer av samma sort: x-termer med x-termer och tal med tal. 3x + 2 är redan så enkelt det går.", "bild": ""}, {"mal": "Ta med plus- eller minustecknet när du flyttar en term", "q": "Förenkla 10 − 3y + 4 − y", "alt": ["14 − 4y", "14 − 2y", "6 − 4y", "14 + 4y"], "fork": "Tal: 10 + 4 = 14. y-termer: −3y − y = −4y. Ta med tecknet framför varje term.", "bild": ""}], "tb": "https://drive.google.com/file/d/1fvSirX5KhvCb3vGGfEAoVuDN-QBrs2Y9/view", "lek": "https://drive.google.com/file/d/1OlmP6UqD5vMVwjOCtKviKquJ9Oy7m3lo/view", "ts": "https://drive.google.com/file/d/1lG6Y9Nlr8b90K-IXe_ozMt7Ra24A1QIT/view"}, {"nr": "2.4", "namn": "Ekvationer", "mal": [{"mal": "Förklara vad en ekvation, ett obekant tal, vänster led och höger led är", "q": "Vilket av dessa är en ekvation?", "alt": ["2x + 1 = 9", "2x + 1", "2 · 4 + 1", "x + x"], "fork": "En ekvation har ett likhetstecken och ett obekant tal. 2x + 1 är ett uttryck, inte en ekvation.", "bild": ""}, {"mal": "Lösa en ekvation med balansmetoden", "q": "Vera löser 2x + 6 = 20. Hennes första steg är 2x = 26. Vad stämmer?", "alt": ["Fel. Hon ska subtrahera 6 i båda leden: 2x = 14", "Rätt", "Fel. Första steget ska vara x + 6 = 10", "Fel. Hon ska addera 6 bara i vänster led"], "fork": "För att få bort +6 subtraherar man 6 i båda leden: 2x = 14, och sedan x = 7. Vera adderade 6 i höger led i stället.", "bild": ""}, {"mal": "Göra en prövning för att se om lösningen stämmer", "q": "Vilket värde på x är lösningen till 3x − 4 = 11? Pröva!", "alt": ["x = 5", "x = 3", "x = 7", "x = 4"], "fork": "Pröva: 3 · 5 − 4 = 15 − 4 = 11. Det stämmer. Med x = 7 blir det 17.", "bild": ""}], "tb": "https://drive.google.com/file/d/1pJlk4J2VlYKE5WRIdk5bqvboU4_n-mNu/view", "lek": "https://drive.google.com/file/d/162ib7Lvpt3IunPEOwDzb28bREQ36uv4Q/view", "ts": "https://drive.google.com/file/d/1BZ_AAOs6MCsdiU0pnE0YjJD0XxdOthwT/view"}, {"nr": "2.5", "namn": "Problemlösning med ekvation", "mal": [{"mal": "Göra ett antagande och teckna en ekvation från en text", "q": "Oskar och Dalia har tillsammans 90 kr. Oskar har 20 kr mer än Dalia. Antag att Dalia har x kr. Vilken ekvation stämmer?", "alt": ["x + (x + 20) = 90", "x + 20 = 90", "2x = 90 + 20", "x + 20x = 90"], "fork": "Dalia har x kr och Oskar har x + 20 kr. Tillsammans: x + x + 20 = 90.", "bild": ""}, {"mal": "Lösa ekvationen och pröva lösningen", "q": "Lös ekvationen x + x + 20 = 90. Hur mycket har Dalia?", "alt": ["35 kr", "45 kr", "55 kr", "70 kr"], "fork": "2x + 20 = 90, 2x = 70, x = 35. Pröva: Dalia 35 kr och Oskar 55 kr, 35 + 55 = 90.", "bild": ""}, {"mal": "Svara med hel mening på frågan i problemet", "q": "Ekvationen gav x = 35. Frågan var: Hur mycket pengar har Oskar? Vilket svar är rätt?", "alt": ["Oskar har 55 kr.", "Oskar har 35 kr.", "x = 35", "Oskar har 90 kr."], "fork": "x var Dalias pengar. Läs frågan igen: den gäller Oskar, som har 35 + 20 = 55 kr. Svara med hel mening på det som frågas.", "bild": ""}], "tb": "https://drive.google.com/file/d/17Q3tpjRK5ki3EgQD2doC0ZwJxDHMbMTt/view", "lek": "https://drive.google.com/file/d/1vkdDCBhhC6OBsh-CUvaLxuXg3NiEET6Z/view", "ts": "https://drive.google.com/file/d/1RziSKaNdZE7AUO8g79duZU8Zw6O-8NcH/view"}, {"nr": "2.6", "namn": "Ekvationer med obekanta i båda leden", "mal": [{"mal": "Lösa ekvationer med obekanta i båda leden", "q": "Lös ekvationen 6x − 5 = 4x + 9", "alt": ["x = 7", "x = 2", "x = 1,4", "x = 0,4"], "fork": "Ta bort 4x i båda leden: 2x − 5 = 9. Addera 5: 2x = 14. x = 7. Pröva: 6 · 7 − 5 = 37 och 4 · 7 + 9 = 37.", "bild": ""}, {"mal": "Välja i vilket led du tar bort x-termen", "q": "Love ska lösa 2x + 15 = 5x + 3 och tar bort 5x i båda leden. Vad händer?", "alt": ["Det fungerar, men x-termen blir negativ (−3x). Det är enklare att ta bort 2x", "Det går inte att göra så", "Då försvinner alla x", "Då blir svaret fel"], "fork": "Båda sätten ger x = 4. Tar man bort den minsta x-termen (2x) blir x-termen positiv: 15 = 3x + 3.", "bild": ""}, {"mal": "Teckna och lösa en ekvation från en bild", "q": "Vågen väger jämnt. Varje påse innehåller lika många kulor. Hur många kulor finns i en påse?", "alt": ["5", "7", "10", "3"], "fork": "4p + 2 = 2p + 12. Ta bort 2 påsar på varje sida: 2p + 2 = 12. Ta bort 2 kulor: 2p = 10. p = 5.", "bild": "<svg viewBox=\"0 0 420 170\" width=\"100%\" style=\"max-width:420px\" role=\"img\" aria-label=\"Våg: vänster 4 påsar och 2 kulor, höger 2 påsar och 12 kulor\"><polygon points=\"210,160 196,130 224,130\" fill=\"#8A8F8C\"/><line x1=\"40\" y1=\"120\" x2=\"380\" y2=\"120\" stroke=\"#5F6368\" stroke-width=\"5\" stroke-linecap=\"round\"/><line x1=\"20\" y1=\"120\" x2=\"190\" y2=\"120\" stroke=\"#5F6368\" stroke-width=\"3\"/><line x1=\"230\" y1=\"120\" x2=\"400\" y2=\"120\" stroke=\"#5F6368\" stroke-width=\"3\"/><path d=\"M26,110 q0,-26 6,-30 h16 q6,4 6,30 z\" fill=\"#E9B949\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><path d=\"M32,80 l8,-6 l8,6\" fill=\"none\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><path d=\"M60,110 q0,-26 6,-30 h16 q6,4 6,30 z\" fill=\"#E9B949\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><path d=\"M66,80 l8,-6 l8,6\" fill=\"none\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><path d=\"M94,110 q0,-26 6,-30 h16 q6,4 6,30 z\" fill=\"#E9B949\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><path d=\"M100,80 l8,-6 l8,6\" fill=\"none\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><path d=\"M128,110 q0,-26 6,-30 h16 q6,4 6,30 z\" fill=\"#E9B949\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><path d=\"M134,80 l8,-6 l8,6\" fill=\"none\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><circle cx=\"170\" cy=\"104\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"181\" cy=\"104\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><path d=\"M236,110 q0,-26 6,-30 h16 q6,4 6,30 z\" fill=\"#E9B949\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><path d=\"M242,80 l8,-6 l8,6\" fill=\"none\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><path d=\"M270,110 q0,-26 6,-30 h16 q6,4 6,30 z\" fill=\"#E9B949\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><path d=\"M276,80 l8,-6 l8,6\" fill=\"none\" stroke=\"#8A6410\" stroke-width=\"1.5\"/><circle cx=\"310\" cy=\"104\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"321\" cy=\"104\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"332\" cy=\"104\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"343\" cy=\"104\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"354\" cy=\"104\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"365\" cy=\"104\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"310\" cy=\"93\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"321\" cy=\"93\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"332\" cy=\"93\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"343\" cy=\"93\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"354\" cy=\"93\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/><circle cx=\"365\" cy=\"93\" r=\"4.6\" fill=\"#E07A5F\" stroke=\"#9C4A33\" stroke-width=\"1\"/></svg>"}], "tb": "https://drive.google.com/file/d/1HRbkObCarpRLxt7k57afIrZFSea65B6x/view", "lek": "https://drive.google.com/file/d/1rJh0q99U6MXsLTLAHq3UzU0m-Kj4VIGc/view", "ts": "https://drive.google.com/file/d/155FW3UQC_unHWMo7NnksbfETa74SHB2o/view"}];
+const SK = ["Osäker", "Ganska säker", "Säker"];
+const skatt = {}, svar = {}, ordning = {};
+const id = (a, m) => a + "-" + m;
+const tot = DATA.reduce((s, a) => s + a.mal.length, 0);
+function blanda(n) { const r = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; } return r; }
+
+function del1() {
+  document.getElementById("del1").innerHTML = DATA.map(a => `<div class="kort"><h2><b>${a.nr}</b>${a.namn}</h2>` +
+    a.mal.map((m, i) => `<div class="mrad"><div class="t">Jag kan ${m.mal.charAt(0).toLowerCase() + m.mal.slice(1)}.</div>
+      <div class="knappar" data-k="${id(a.nr, i)}">${[2, 1, 0].map(v => `<button data-v="${v}">${SK[v]}</button>`).join("")}</div></div>`).join("") + `</div>`).join("");
+  document.querySelectorAll(".knappar").forEach(k => k.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    k.querySelectorAll("button").forEach(x => x.classList.remove("val")); b.classList.add("val");
+    skatt[k.dataset.k] = +b.dataset.v; kollaDel1();
+  }));
+  kollaDel1();
+}
+function kollaDel1() {
+  const n = Object.keys(skatt).length;
+  document.getElementById("till2").disabled = n < tot;
+  document.getElementById("kvar").textContent = n < tot ? `Du har skattat ${n} av ${tot} mål.` : "Bra! Nu kan du gå vidare.";
+}
+function del2() {
+  document.getElementById("del2").innerHTML = DATA.map(a => `<div class="kort"><h2><b>${a.nr}</b>${a.namn}</h2>` +
+    a.mal.map((m, i) => { const k = id(a.nr, i); ordning[k] = blanda(m.alt.length);
+      return `<div class="fraga" id="f-${k}"><div class="q">${m.q}<i>Mål: ${m.mal}</i></div>${m.bild ? `<div class="bild">${m.bild}</div>` : ""}
+      <div class="alt">${ordning[k].map(j => `<label data-j="${j}"><input type="radio" name="${k}" value="${j}"><span>${m.alt[j]}</span></label>`).join("")}</div>
+      <div class="fork">${m.fork}</div></div>`; }).join("") + `</div>`).join("");
+  document.querySelectorAll("#del2 input").forEach(inp => inp.addEventListener("change", () => { svar[inp.name] = +inp.value; }));
+}
+function kommentar(s, r) {
+  if (r && s === 2) return "Du kan det, och du visste det. Bra koll!";
+  if (r) return "Rätt! Du kan mer än du trodde.";
+  if (s === 2) return "Här trodde du att du kunde. Läs förklaringen och titta på lektionen igen.";
+  if (s === 1) return "Du var lite osäker, och det här behöver du öva mer på.";
+  return "Du kände rätt: det här behöver du öva mer på.";
+}
+const UTMANA = "../utmana-dig/kapitel-2.pdf";
+const lnk = (u, t) => u ? `<a href="${u}" target="_blank" rel="noopener">${t}</a>` : `<b>${t}</b>`;
+function rek(a, ratt) {
+  if (ratt === a.mal.length) return `<b>Tips:</b> Du klarade allt i ${a.nr}. Prova ${lnk(UTMANA, "Utmana dig")} för kapitel ${String(a.nr).split(".")[0]}.`;
+  if (ratt === a.mal.length - 1) return `<b>Tips:</b> Läs förklaringen till frågan du missade och gör ${lnk(a.tb, "Tillbakablick " + a.nr)}.`;
+  return `<b>Tips:</b> Titta på ${lnk(a.lek, "lektionen " + a.nr + " " + a.namn)} igen och träna med ${lnk(a.ts, "Trygg start " + a.nr)}.`;
+}
+function ratta() {
+  const obes = DATA.flatMap(a => a.mal.map((m, i) => id(a.nr, i))).filter(k => !(k in svar));
+  if (obes.length && !confirmFri(obes.length)) return;
+  let rattTot = 0, stamde = 0, merAn = 0, trodde = 0;
+  let html = "";
+  DATA.forEach(a => {
+    let ratt = 0, rader = "";
+    a.mal.forEach((m, i) => {
+      const k = id(a.nr, i), r = svar[k] === 0, s = skatt[k];
+      if (r) { ratt++; rattTot++; }
+      if ((r && s === 2) || (!r && s === 0)) stamde++;
+      if (r && s < 2) merAn++;
+      if (!r && s === 2) trodde++;
+      rader += `<tr><td>${m.mal}</td><td><span class="etk e${s}">${SK[s]}</span></td><td>${r ? "✔ Rätt" : "✘ Fel"}</td><td>${kommentar(s, r)}</td></tr>`;
+      const f = document.getElementById("f-" + k); f.classList.add("visa");
+      f.querySelectorAll("label").forEach(l => { const j = +l.dataset.j; if (j === 0) l.classList.add("ratt"); else if (svar[k] === j) l.classList.add("fel"); });
+      f.querySelectorAll("input").forEach(x => x.disabled = true);
+    });
+    html += `<div class="kort"><h2><b>${a.nr}</b>${a.namn} · ${ratt} av ${a.mal.length} rätt</h2>
+      <table><tr><th>Mål</th><th>Din känsla</th><th>Svar</th><th>Kommentar</th></tr>${rader}</table><div class="rek">${rek(a, ratt)}</div></div>`;
+  });
+  document.getElementById("del3").innerHTML = `<div class="summa">
+    <div><b>${rattTot} / ${tot}</b>rätt svar</div><div><b>${stamde}</b>gånger stämde din känsla</div>
+    <div><b>${merAn}</b>gånger kunde du mer än du trodde</div><div><b>${trodde}</b>gånger trodde du att du kunde</div></div>
+    <p class="info" style="margin-top:0">Rätt och fel syns också vid frågorna längre ned, med en förklaring.</p>` + html;
+  visa(3);
+}
+function confirmFri(n) {
+  const el = document.getElementById("kvarFr");
+  if (el) { el.remove(); return true; }
+  const p = document.createElement("p"); p.id = "kvarFr"; p.className = "info";
+  p.textContent = `Du har ${n} fråga(or) kvar. Tryck på Rätta en gång till om du vill rätta ändå.`;
+  document.getElementById("ratta").after(p); return false;
+}
+function visa(n) {
+  ["s1", "s2", "s3"].forEach((s, i) => document.getElementById(s).classList.toggle("akt", i === n - 1));
+  document.getElementById("del1").classList.toggle("dold", n !== 1);
+  document.getElementById("till2").classList.toggle("dold", n !== 1);
+  document.getElementById("kvar").classList.toggle("dold", n !== 1);
+  document.getElementById("del2").classList.toggle("dold", n === 1);
+  document.getElementById("ratta").classList.toggle("dold", n !== 2);
+  document.getElementById("del3").classList.toggle("dold", n !== 3);
+  document.getElementById("om").classList.toggle("dold", n !== 3);
+  const fr = document.getElementById("kvarFr"); if (fr && n !== 2) fr.remove();
+  if (n === 3) document.getElementById("del2").before(document.getElementById("del3"));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+document.getElementById("till2").onclick = () => { del2(); visa(2); };
+document.getElementById("ratta").onclick = ratta;
+document.getElementById("om").onclick = () => { location.reload(); };
+del1();
+</script></body></html>
